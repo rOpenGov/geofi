@@ -1,7 +1,7 @@
 Package: gisfi
 Type: Package
 Title: Finland GIS data R Tools
-Version: 0.9.01
+Version: 0.9.02
 Date: 2014-01-03
 Author: Leo Lahti, Juuso Parkkinen, Joona Lehtomaki
 Maintainer: Leo Lahti <louhos@googlegroups.com>
@@ -20,3 +20,8 @@ LazyLoad: yes
 Collate:
     'TODO.R'
     'helsinki.R'
+    'gadm.R'
+    'landsurveyfinland.R'
+    'maps.R'
+    'visualization.R'
+    'plot3d.R'

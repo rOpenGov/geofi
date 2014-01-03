@@ -1,0 +1,4 @@
+export(GetDistrictBoundariesHelsinki)
+export(GetElectionDistrictsHelsinki)
+importFrom(rgdal,ogrListLayers)
+importFrom(rgdal,readOGR)

@@ -1,0 +1,22 @@
+Package: gisfi
+Type: Package
+Title: Finland GIS data R Tools
+Version: 0.9.01
+Date: 2014-01-03
+Author: Leo Lahti, Juuso Parkkinen, Joona Lehtomaki
+Maintainer: Leo Lahti <louhos@googlegroups.com>
+Description: Helsinki R Tools
+License: BSD_2_clause + file LICENSE
+Depends:
+    R (>= 3.0.1),
+    methods,
+    rjson,
+    rgdal,
+    RCurl
+Imports:
+    sorvi
+URL: http://ropengov.github.com/gisfi
+LazyLoad: yes
+Collate:
+    'TODO.R'
+    'helsinki.R'

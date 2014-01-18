@@ -1,0 +1,33 @@
+### Ohjeita R-kielelle paikkatiedon hakuun [Google Maps API](http://code.google.com/apis/maps/index.html)-palvelusta. 
+
+Staattinen kartta esimerkiksi visualisoinnin taustalle:
+
+```{r Googlemaps-API, message=FALSE, eval=FALSE}
+# sorvi installation: http://louhos.github.com/sorvi/asennus.html
+library(sorvi)
+
+# Define coordinates
+Helsinki.center <- c(lon = 24.93, lat = 60.20)
+
+# Get the map
+HelsinkiMap <- GetStaticmapGoogleMaps(center = Helsinki.center, zoom = 11, maptype="Map", scale=1)
+```
+
+
+Geokoodi halutulle paikalle:
+
+```{r Googlemaps-geocode, message=FALSE}
+geocode <- GetGeocodeGoogleMaps("Mannerheimintie 10, 00100, FI")
+geocode
+```
+
+
+### Versiotiedot
+
+Tämä esimerkki on toteutettu seuraavin versiotiedoin:
+ 
+```{r versiotiedot}
+sessionInfo()
+```
+
+

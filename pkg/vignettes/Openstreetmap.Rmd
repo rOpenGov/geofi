@@ -1,0 +1,63 @@
+Retrieving geographical location information in R using [OpenStreetMap Nominatim API](http://wiki.openstreetmap.org/wiki/Nominatim)
+
+### Geocode for a given location
+
+```{r osm-geokoodi, message=FALSE}
+# http://louhos.github.com/sorvi/asennus.html
+library(sorvi)
+
+geocode <- GetGeocodeOpenStreetMap("Eduskuntatalo")
+
+geocode
+```
+
+### Coordinate transformation from xy to WGS84
+
+
+```{r coordinate-transformation, message=FALSE, eval=FALSE}
+xy2lonlat <- function (x, y) project(with(d, cbind(x, y)), "+proj=utm +zone=35 ellps=WGS84", inv=T)
+
+wgs84.coordinates <- xy2lonlat()
+```
+
+
+### Check the location of your IP address and plot on OpenStreetMap
+
+```{r iplocation, results='asis', comment=NA}
+# Define your IP
+# Use this to check on your own computer
+# x <- system("ifconfig", intern=TRUE) # use ipconfig in Windows
+# ip <- gsub(".*? ([[:digit:]])", "\\1", x[grep("IPv4", x)])
+#curl icanhazip.com
+#curl -s 'http://checkip.dyndns.org' | sed 's/.*Current IP Address: \([0-9\.]*\).*/\1/g'
+#host -t a dartsclink.com | sed 's/.*has address //'
+#curl curlmyip.com
+#curl ifconfig.me # this has a lot of different alternatives too, such as ifconfig.me/host
+#ip <- "137.224.252.10"
+
+# Check your IP (requires curl)
+system("curl icanhazip.com")
+ip <- system("curl icanhazip.com", intern = TRUE)
+
+# Check IP location
+iploc <- ip_location(ip)
+
+# OpenStreetMap Leaflet
+# require(devtools); install_github('rCharts', 'ramnathv')
+library(rCharts)
+map <- Leaflet$new()
+map$setView(iploc, zoom = 17)
+map$marker(iploc, bindPopup = "<p> rOpenGov was here! </p>")
+#map$print("nvd3Hist")
+print(map)
+```
+
+
+
+### Version information
+
+```{r versiotiedot}
+sessionInfo()
+```
+
+

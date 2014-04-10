@@ -4,3 +4,4 @@ inst/extras/*.Rcheck
 *.tar.gz
 *~
 .RData
+.Rproj.user

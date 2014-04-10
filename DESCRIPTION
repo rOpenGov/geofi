@@ -1,11 +1,11 @@
-Package: gisfi
+Package: fingis
 Type: Package
 Title: Finland GIS data R Tools
-Version: 0.9.02
-Date: 2014-01-03
-Author: Leo Lahti, Juuso Parkkinen, Joona Lehtomaki
-Maintainer: Leo Lahti <louhos@googlegroups.com>
-Description: Helsinki R Tools
+Version: 0.9.03
+Date: 2014-04-10
+Author: Juuso Parkkinen, Leo Lahti, , Joona Lehtomaki
+Maintainer: Juuso Parkkinen <louhos@googlegroups.com>
+Description: Finland GIS tools
 License: BSD_2_clause + file LICENSE
 Depends:
     R (>= 3.0.1),
@@ -15,7 +15,7 @@ Depends:
     RCurl
 Imports:
     sorvi
-URL: http://ropengov.github.com/gisfi
+URL: http://ropengov.github.com/fingis
 LazyLoad: yes
 Collate:
     'TODO.R'

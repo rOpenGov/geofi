@@ -1,10 +1,10 @@
 ### Overview
 
-  [helsinki](http://ropengov.github.com/helsinki) is a Helsinki open
+  [fingis](http://ropengov.github.com/fingis) is a Finland open GIS
   data toolkit for [R](http://www.r-project.org) providing tools to
-  access, analyze and visualize Helsinki data resources. For details,
+  access, analyze and visualize spatial data from Finland. For details,
   see the project homepage:
-  [http://ropengov.github.com/helsinki](http://ropengov.github.com/helsinki)
+  [http://ropengov.github.com/fingis](http://ropengov.github.com/fingis)
 
 
 ### Contact

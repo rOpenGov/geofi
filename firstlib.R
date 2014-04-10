@@ -1,6 +1,6 @@
 # This file is a part of rOpenGov (http://ropengov.github.io)
 
-# Copyright (C) 2010-2013 Leo Lahti, Juuso Parkkinen and Joona Lehtomaki <ropengov.github.com>. 
+# Copyright (C) 2010-2014 Leo Lahti, Juuso Parkkinen and Joona Lehtomaki <ropengov.github.com>. 
 # All rights reserved.
 
 # This program is open source software; you can redistribute it and/or modify 
@@ -19,6 +19,6 @@
   # Sys.setlocale(locale = "UTF-8")
   # Sys.setlocale(locale = "WINDOWS-1252")
 
-  packageStartupMessage("gisfi R package: tools for open GIS data for Finland. This R package is part of rOpenGov <ropengov.github.io>. Copyright (C) 2010-2013 Leo Lahti, Juuso Parkkinen and Joona Lehtomaki. This is free software. You are free to use, modify and redistribute it under the FreeBSD license.")
+  packageStartupMessage("fingis R package: tools for open GIS data for Finland. This R package is part of rOpenGov <ropengov.github.io>. Copyright (C) 2010-2014 Leo Lahti, Juuso Parkkinen and Joona Lehtomaki. This is free software. You are free to use, modify and redistribute it under the FreeBSD license.")
 
 }

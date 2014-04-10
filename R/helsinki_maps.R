@@ -10,7 +10,9 @@
 #'
 #' The data (C) 2011 Helsingin kaupunkimittausosasto.
 #' 
-#' @param map  A string. Specify the name of the Helsinki District Boundary data set to retrieve. Available options: c("kunta", "pienalue", "suuralue", "tilastoalue")
+#' @param map.type  A string. Specify the name of the Helsinki District Boundary data set to retrieve. Available options: c("kunta", "pienalue", "pienalue_piste",
+#' "suuralue", "suuralue_piste", "tilastoalue", "tilastoalue_piste")
+#' @param data.dir A string. Specify a temporary folder for storing downloaded data.
 #'
 #' @return a shape object (from SpatialPolygonsDataFrame class)
 #' @importFrom rgdal readOGR

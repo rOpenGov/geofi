@@ -5,10 +5,14 @@
 get_Helsinki_district_boundaries(map.type = NULL, data.dir = tempdir())
 }
 \arguments{
-  \item{map}{A string. Specify the name of the Helsinki
-  District Boundary data set to retrieve. Available
-  options: c("kunta", "pienalue", "suuralue",
-  "tilastoalue")}
+  \item{map.type}{A string. Specify the name of the
+  Helsinki District Boundary data set to retrieve.
+  Available options: c("kunta", "pienalue",
+  "pienalue_piste", "suuralue", "suuralue_piste",
+  "tilastoalue", "tilastoalue_piste")}
+
+  \item{data.dir}{A string. Specify a temporary folder for
+  storing downloaded data.}
 }
 \value{
 a shape object (from SpatialPolygonsDataFrame class)

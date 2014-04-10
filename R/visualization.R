@@ -10,6 +10,31 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of 
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+#' Get blank ggplot2 theme for plotting maps
+#'
+#' @return theme_map A ggplot2 theme object
+#' @importFrom ggplot2 theme_bw
+#' @importFrom ggplot2 element_blank
+#' @export
+#' 
+#' @references See citation("fingis")
+#' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
+#' @examples # get_theme_map(); 
+get_theme_map <- function() {
+  
+  theme_map <- ggplot2::theme_bw()
+  theme_map$panel.background <- ggplot2::element_blank()
+  theme_map$panel.grid.major <- ggplot2::element_blank()
+  theme_map$panel.grid.minor <- ggplot2::element_blank()
+  theme_map$axis.ticks <- ggplot2::element_blank()
+  theme_map$axis.text.x <- ggplot2::element_blank()
+  theme_map$axis.text.y <- ggplot2::element_blank()
+  theme_map$axis.title.x <- ggplot2::element_blank()
+  theme_map$axis.title.y <- ggplot2::element_blank()
+  
+  return(theme_map)  
+}
+
 
 #' Retrieve shape objects by their file names.
 #'  

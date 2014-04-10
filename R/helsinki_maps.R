@@ -19,7 +19,7 @@
 #' @note This function replaces sorvi::GetHRIaluejakokartat; The data is now retrieved directly from HKK.
 #' @details Also aluejako_alueet_ja_pisteet file is available in the original HKK zip file. This contains all maps in a single list of shape objects and is thus redundant. We have ignored this for simplicity.
 #' @references
-#' See citation("helsinki") 
+#' See citation("fingis") 
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
 #' @examples # sp <- get_Helsinki_district_boundaries("suuralue"); 
 #'           # spplot(sp, "Name")

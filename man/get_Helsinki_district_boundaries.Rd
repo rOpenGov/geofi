@@ -40,6 +40,6 @@ Juuso Parkkinen, Joona Lehtomaki and Leo Lahti
 \email{louhos@googlegroups.com}
 }
 \references{
-See citation("helsinki")
+See citation("fingis")
 }
 

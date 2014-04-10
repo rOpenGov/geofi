@@ -9,7 +9,6 @@ Description: Finland GIS tools for R
 License: BSD_2_clause + file LICENSE
 Depends:
     R (>= 3.0.1),
-    methods,
     rjson,
     rgdal,
     RCurl

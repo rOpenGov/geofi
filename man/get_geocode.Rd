@@ -1,23 +1,28 @@
 \name{get_geocode}
 \alias{get_geocode}
-\title{Get geo code from Google Map}
+\title{Get geocode for given query}
 \usage{
-get_geocode(query, service)
+get_geocode(query, service = "okf")
 }
 \arguments{
   \item{query}{Either a street address, e.g.
   'Mannerheimintie 100, Helsinki' or place, e.g.
   'Eduskuntatalo'}
 
-  \item{service}{Geocoding service to use, one of
+  \item{service}{Geocoding service to use, one of 'okf',
   'openstreetmap' or 'google'}
 }
 \value{
-vector of coordinates (lat, lon)
+list Coordinates (lat, long) of first output, and the raw
+output list
 }
 \description{
-Get gecode for given street address from Google Maps API
-See Terms and Conditions from
+Get gecode for given query from one of the geocoding
+services: OKF.fi Geocoding API Test Console:
+http://data.okf.fi/console/ OpenStreetMap Nominatim (usage
+policy:
+http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
+Google Maps API See Terms and Conditions from
 http://code.google.com/apis/maps/documentation/geocoding/
 }
 \examples{

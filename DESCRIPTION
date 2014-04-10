@@ -11,7 +11,6 @@ Depends:
     R (>= 3.0.1),
     rgdal,
     ggplot2,
-    XML,
     rjson,
     RCurl
 URL: http://ropengov.github.com/fingis

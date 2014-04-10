@@ -2,8 +2,7 @@
 \alias{ConvertGADMResolution}
 \title{Convert GADM map resolution identifiers between strings and integers}
 \usage{
-  ConvertGADMResolution(resolution,
-    output.type = "integer")
+ConvertGADMResolution(resolution, output.type = "integer")
 }
 \arguments{
   \item{resolution}{string or integer specifying the
@@ -16,21 +15,21 @@
   Returns:}
 }
 \value{
-  integer or string
+integer or string
 }
 \description{
-  "Maa" (0 / Country); "Laani" (1 / Province); "Maakunta"
-  (2 / Region); "Seutukunta" (3 / Sub-Region); "Kunta" (4 /
-  Municipality)
+"Maa" (0 / Country); "Laani" (1 / Province); "Maakunta" (2
+/ Region); "Seutukunta" (3 / Sub-Region); "Kunta" (4 /
+Municipality)
 }
 \details{
-  Arguments:
+Arguments:
 }
 \author{
-  Leo Lahti \email{louhos@googlegroups.com}
+Leo Lahti \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \keyword{utilities}
 

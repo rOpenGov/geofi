@@ -2,7 +2,7 @@
 \alias{LoadMML}
 \title{LoadMML}
 \usage{
-  LoadMML(map.id, data.id, verbose = TRUE)
+LoadMML(map.id, data.id, verbose = TRUE)
 }
 \arguments{
   \item{map.id}{data ID. See details.}
@@ -14,24 +14,24 @@
   Return:}
 }
 \value{
-  url connection
+url connection
 }
 \description{
-  Arguments:
+Arguments:
 }
 \details{
-  See help(MML). To browse for RData options, see
-  https://github.com/avoindata/mml/tree/master/rdata or in
-  R: list_mml_datasets()
+See help(MML). To browse for RData options, see
+https://github.com/avoindata/mml/tree/master/rdata or in R:
+list_mml_datasets()
 }
 \examples{
 # datasets <- list_mml_datasets(); map.id = names(datasets)[[1]]; data.id <- datasets[[map.id]][[1]]; sp <- LoadMML(map.id, data.id)
 }
 \author{
-  Leo Lahti \email{louhos@googlegroups.com}
+Leo Lahti \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \keyword{utilities}
 

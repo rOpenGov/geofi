@@ -2,7 +2,7 @@
 \alias{GetRegionalMapsHelsinki}
 \title{Retrieve HKK Seutukartta data}
 \usage{
-  GetRegionalMapsHelsinki(map)
+GetRegionalMapsHelsinki(map)
 }
 \arguments{
   \item{map}{A string. Specify the name of the HKK data set
@@ -23,26 +23,26 @@
   "a_tu_suu", "l_jasema", "m_asalue", "N_KOS_S"}
 }
 \value{
-  Shape object (from SpatialPolygonsDataFrame class)
+Shape object (from SpatialPolygonsDataFrame class)
 }
 \description{
-  Retrieves Seutukartta data from Helsinki Real Estate
-  Department (Helsingin kaupungin kiinteistovirasto, HKK)
-  through the HKK website
-  http://kartta.hel.fi/avoindata/index.html
+Retrieves Seutukartta data from Helsinki Real Estate
+Department (Helsingin kaupungin kiinteistovirasto, HKK)
+through the HKK website
+http://kartta.hel.fi/avoindata/index.html
 }
 \details{
-  For licensing information and other details, see
-  http://kartta.hel.fi/avoindata/aineistot/Seutukartan%20avoimen%20datan%20lisenssi_1_11_2011.pdf
+For licensing information and other details, see
+http://kartta.hel.fi/avoindata/aineistot/Seutukartan%20avoimen%20datan%20lisenssi_1_11_2011.pdf
 }
 \examples{
 # tab <- GetRegionalMapsHelsinki("m_rantav")
 }
 \author{
-  Joona Lehtomaki and Leo Lahti
-  \email{louhos@googlegroups.com}
+Joona Lehtomaki and Leo Lahti
+\email{louhos@googlegroups.com}
 }
 \references{
-  See citation("helsinki")
+See citation("helsinki")
 }
 

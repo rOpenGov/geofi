@@ -3,11 +3,10 @@
 \title{Visualize the specified fields of a shape object on using
 1- or 2-way color scale.}
 \usage{
-  PlotShape(sp, varname, type = "oneway", ncol = 10,
-    at = NULL, palette = NULL, main = NULL,
-    colorkey = TRUE, lwd = 0.4, border.col = "black",
-    col.regions = NULL, min.color = "white",
-    max.color = "red", plot = TRUE)
+PlotShape(sp, varname, type = "oneway", ncol = 10, at = NULL,
+  palette = NULL, main = NULL, colorkey = TRUE, lwd = 0.4,
+  border.col = "black", col.regions = NULL, min.color = "white",
+  max.color = "red", plot = TRUE)
 }
 \arguments{
   \item{sp}{Shape object}
@@ -48,32 +47,31 @@
   \item{plot}{Plot the image TRUE/FALSE}
 }
 \value{
-  ggplot2 object
+ggplot2 object
 }
 \description{
-  This function is used for fast investigation of shape
-  objects; standard visualization choices are made
-  automatically; fast and easy-to-use but does not
-  necessarily provide optimal visualization.
+This function is used for fast investigation of shape
+objects; standard visualization choices are made
+automatically; fast and easy-to-use but does not
+necessarily provide optimal visualization.
 }
 \details{
-  Visualization types include: oneway/sequential (color
-  scale ranges from white to dark red, or custom color
-  given with the palette argument);
-  twoway/bipolar/diverging (color scale ranges from dark
-  blue through white to dark red; or custom colors);
-  discrete/qualitative (discrete color scale; the colors
-  are used to visually separate regions); and "custom"
-  (specify colors with the col.regions argument)
+Visualization types include: oneway/sequential (color scale
+ranges from white to dark red, or custom color given with
+the palette argument); twoway/bipolar/diverging (color
+scale ranges from dark blue through white to dark red; or
+custom colors); discrete/qualitative (discrete color scale;
+the colors are used to visually separate regions); and
+"custom" (specify colors with the col.regions argument)
 }
 \examples{
 # PlotShape(sp, varname)
 }
 \author{
-  Leo Lahti \email{louhos@googlegroups.com}
+Leo Lahti \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \keyword{utilities}
 

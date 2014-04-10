@@ -2,7 +2,7 @@
 \alias{natural.colors}
 \title{natural.colors: map colors}
 \usage{
-  natural.colors(...)
+natural.colors(...)
 }
 \arguments{
   \item{...}{Arguments to be passed.
@@ -10,19 +10,19 @@
   Returns:}
 }
 \value{
-  colorlut
+colorlut
 }
 \description{
-  Arguments:
+Arguments:
 }
 \examples{
 #
 }
 \author{
-  Janne Aukia. Contact: \email{louhos@googlegroups.com}
+Janne Aukia. Contact: \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \keyword{utilities}
 

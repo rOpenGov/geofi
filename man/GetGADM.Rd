@@ -2,8 +2,8 @@
 \alias{GetGADM}
 \title{Get map data in GADM format}
 \usage{
-  GetGADM(map = "FIN_adm", resolution = 4,
-    url = "http://gadm.org/data/rda/")
+GetGADM(map = "FIN_adm", resolution = 4,
+  url = "http://gadm.org/data/rda/")
 }
 \arguments{
   \item{map}{Map identifier. When the full GADM-URL has the
@@ -25,24 +25,24 @@
   Returns:}
 }
 \value{
-  GADM object
+GADM object
 }
 \description{
-  Args:
+Args:
 }
 \note{
-  Suomen osalta kuntatiedot (FIN_adm4) nayttaa olevan
-  paivittamatta uusimpaan. Suositellaan MML:n karttoja, ks.
-  help(MML).
+Suomen osalta kuntatiedot (FIN_adm4) nayttaa olevan
+paivittamatta uusimpaan. Suositellaan MML:n karttoja, ks.
+help(MML).
 }
 \examples{
 # Suomen kunnat: gadm <- get.gadm(map = "FIN_adm", resolution = 4)
 }
 \author{
-  Leo Lahti \email{louhos@googlegroups.com}
+Leo Lahti \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \keyword{utilities}
 

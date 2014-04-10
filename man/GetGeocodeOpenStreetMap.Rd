@@ -2,7 +2,7 @@
 \alias{GetGeocodeOpenStreetMap}
 \title{Get geo code from OpenStreetMap}
 \usage{
-  GetGeocodeOpenStreetMap(query)
+GetGeocodeOpenStreetMap(query)
 }
 \arguments{
   \item{query}{Either a street address, e.g.
@@ -10,13 +10,13 @@
   'Eduskuntatalo'}
 }
 \value{
-  coordinates (lat, lon)
+coordinates (lat, lon)
 }
 \description{
-  Get gecode for given plave from OpenStreetMap Nominatim
-  See http://wiki.openstreetmap.org/wiki/Nominatim
+Get gecode for given plave from OpenStreetMap Nominatim See
+http://wiki.openstreetmap.org/wiki/Nominatim
 }
 \author{
-  Juuso Parkkinen \email{louhos@googlegroups.com}
+Juuso Parkkinen \email{louhos@googlegroups.com}
 }
 

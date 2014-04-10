@@ -2,7 +2,7 @@
 \alias{NormalizeValues}
 \title{NormalizeValues: normalize coordinate values (auxiliary function)}
 \usage{
-  NormalizeValues(mat)
+NormalizeValues(mat)
 }
 \arguments{
   \item{mat}{data matrix
@@ -10,19 +10,19 @@
   Returns:}
 }
 \value{
-  normalized data matrix
+normalized data matrix
 }
 \description{
-  Arguments:
+Arguments:
 }
 \examples{
 #
 }
 \author{
-  Janne Aukia. Contact: \email{louhos@googlegroups.com}
+Janne Aukia. Contact: \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \keyword{utilities}
 

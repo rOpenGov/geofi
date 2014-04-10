@@ -4,8 +4,8 @@
 region (maakunta), or province (laani)
 for given GADM map coordinates,}
 \usage{
-  ConvertGADMPosition2Region(coordinates, map = "FIN_adm",
-    resolution = "Kunta")
+ConvertGADMPosition2Region(coordinates, map = "FIN_adm",
+  resolution = "Kunta")
 }
 \arguments{
   \item{coordinates}{matrix with columns named 'x' and 'y'.
@@ -30,17 +30,17 @@ for given GADM map coordinates,}
   Returns:}
 }
 \value{
-  A data frame with coordinates, region, province, and
-  municipality information
+A data frame with coordinates, region, province, and
+municipality information
 }
 \description{
-  Arguments:
+Arguments:
 }
 \author{
-  Leo Lahti \email{louhos@googlegroups.com}
+Leo Lahti \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \keyword{utilities}
 

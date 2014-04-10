@@ -2,7 +2,7 @@
 \alias{PlotSurface}
 \title{PlotSurface: visualize 3D surface}
 \usage{
-  PlotSurface(mat, colorlut = NULL)
+PlotSurface(mat, colorlut = NULL)
 }
 \arguments{
   \item{mat}{data matrix describing the surface}
@@ -12,19 +12,19 @@
   Returns:}
 }
 \value{
-  Used for side effects. Return: NULL
+Used for side effects. Return: NULL
 }
 \description{
-  Arguments:
+Arguments:
 }
 \examples{
 #
 }
 \author{
-  Janne Aukia. Contact: \email{louhos@googlegroups.com}
+Janne Aukia. Contact: \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \keyword{utilities}
 

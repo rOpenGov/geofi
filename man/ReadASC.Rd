@@ -4,7 +4,7 @@
 Routines for 3D landscape visualization
 contributed by Janne Aukia 2013}
 \usage{
-  ReadASC(filename)
+ReadASC(filename)
 }
 \arguments{
   \item{filename}{Input file name
@@ -12,22 +12,22 @@ contributed by Janne Aukia 2013}
   Returns:}
 }
 \value{
-  data matrix
+data matrix
 }
 \description{
-  Arguments:
+Arguments:
 }
 \examples{
 #
 }
 \author{
-  Janne Aukia. Contact: \email{louhos@googlegroups.com}
+Janne Aukia. Contact: \email{louhos@googlegroups.com}
 }
 \references{
-  See citation("sorvi")
+See citation("sorvi")
 }
 \seealso{
-  ReadXYZ
+ReadXYZ
 }
 \keyword{utilities}
 

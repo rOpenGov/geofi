@@ -1,25 +1,25 @@
 #' Brief summary of the helsinki package
 #'
 #' \tabular{ll}{
-#' Package: \tab helsinki\cr
+#' Package: \tab fingis\cr
 #' Type: \tab Package\cr
 #' Version: \tab See sessionInfo() or DESCRIPTION file\cr
-#' Date: \tab 2013\cr
+#' Date: \tab 2014\cr
 #' License: \tab FreeBSD\cr
 #' LazyLoad: \tab yes\cr
 #' }
 #'
 #' R Tools for helsinki API
 #'
-#' @name helsinki-package
-#' @aliases helsinki
+#' @name fingis-package
+#' @aliases fingis
 #' @docType package
-#' @title R Tools for helsinki API
+#' @title Finland GIS tools for R
 #'
-#' @author Leo Lahti, Juuso Parkkinen and Joona Lehtomaki \email{louhos@@googlegroups.com}
+#' @author Juuso Parkkinen, Leo Lahti and Joona Lehtomaki \email{louhos@@googlegroups.com}
 #' @references
-#' See citation("helsinki")
-#' \url{http://ropengov.github.com/helsinki}
-#' @examples # library(helsinki)
+#' See citation("fingis")
+#' \url{http://ropengov.github.com/fingis}
+#' @examples # library(fingis)
 #' @keywords package
 NULL

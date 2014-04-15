@@ -50,7 +50,19 @@ GetRegionalMapsHelsinki <- function( map ) {
   
   # Specify the file name
   f <- file.path(data.dir, paste(map, ".TAB", sep = ""))
-    
+  
+  # This works!
+#   data.dir <- "/Users/juusoparkkinen/Downloads/Seutukartta/"
+#   files <- dir(data.dir, pattern=".TAB")
+#   for (fi in seq(files)) {      
+#     f <- file.path(data.dir, files[fi])
+#     l1 <- rgdal::ogrListLayers(f)
+# #    temp <- rgdal::readOGR(f, layer=l1)
+#     # This helped to read the few files with scandinavian characters
+#     temp <- rgdal::readOGR(f, layer=l1, encoding="ISO-8859-1", use_iconv=TRUE)
+#   }
+
+  
   # Read map layers
   layers <- rgdal::ogrListLayers(f)
 
@@ -112,7 +124,18 @@ GetHelsinkiPiirijako <- function( which.data ) {
 
   # Specify the file name
   f <- file.path(data.dir, paste(map, ".TAB", sep = ""))
-    
+  
+#   data.dir <- "/Users/juusoparkkinen/Downloads/Helsingin_piirijako_2013//"
+#   files <- dir(data.dir, pattern=".tab")
+#   for (fi in seq(files)) {      
+#     f <- file.path(data.dir, files[fi])
+#     l1 <- rgdal::ogrListLayers(f)
+#     temp <- rgdal::readOGR(f, layer=l1)
+# #     # This helped to read the few files with scandinavian characters
+# #     temp <- rgdal::readOGR(f, layer=l1, encoding="ISO-8859-1", use_iconv=TRUE)
+#   }
+  
+  
   # Read map layers
   layers <- rgdal::ogrListLayers(f)
 

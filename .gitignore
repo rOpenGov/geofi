@@ -6,3 +6,4 @@ inst/extras/*.Rcheck
 .RData
 .Rproj.user
 .Rhistory
+TEMPDIR/*

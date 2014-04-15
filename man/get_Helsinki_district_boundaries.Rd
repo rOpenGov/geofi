@@ -21,7 +21,7 @@ a shape object (from SpatialPolygonsDataFrame class)
 Retrieves District Boundaries data (Aluejakorajat,
 Aanestysalueet) from Helsinki Real Estate Department
 (Helsingin kaupungin kiinteistovirasto, HKK) through the
-HKK website http://kartta.hel.fi/avoindata/index.html
+HKK website http://ptp.hel.fi/avoindata/index.html
 }
 \details{
 The data (C) 2011 Helsingin kaupunkimittausosasto.

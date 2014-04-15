@@ -1,3 +1,14 @@
+#   ## TODO: create a separate function for this
+#   ## Process into data.frame for ggplot2 
+#   sp.points <- ggplot2::fortify(sp, region="Name") # Get point data
+#   sp.points$group <- sub(".1", "", sp.points$group) # Regex to joinable format
+#   df <- merge(sp.points, sp@data, by.x="group", by.y = "Name") # Put everything together
+#   df <- df[order(df$order),] # sort DF so that polygons come out in the right order
+#   df$Name <- df$group
+#   df$group <- df$id.x <- df$id <- df$id.y <- NULL    
+
+
+
 # This file is a part of the sorvi program (http://louhos.github.com/sorvi/)
 
 # Copyright (C) 2010-2013 Louhos <louhos.github.com>. All rights reserved.

@@ -1,8 +1,8 @@
-\name{GetRegionalMapsHelsinki}
-\alias{GetRegionalMapsHelsinki}
+\name{get_Helsinki_Seutukartta}
+\alias{get_Helsinki_Seutukartta}
 \title{Retrieve HKK Seutukartta data}
 \usage{
-GetRegionalMapsHelsinki(map)
+get_Helsinki_Seutukartta(map.type = NULL, data.dir = tempdir())
 }
 \arguments{
   \item{map}{A string. Specify the name of the HKK data set
@@ -36,13 +36,13 @@ For licensing information and other details, see
 http://kartta.hel.fi/avoindata/aineistot/Seutukartan%20avoimen%20datan%20lisenssi_1_11_2011.pdf
 }
 \examples{
-# tab <- GetRegionalMapsHelsinki("m_rantav")
+# tab <- get_Helsinki_Seutukartta("m_rantav")
 }
 \author{
-Joona Lehtomaki and Leo Lahti
+Juuso Parkkinen, Joona Lehtomaki and Leo Lahti
 \email{louhos@googlegroups.com}
 }
 \references{
-See citation("helsinki")
+See citation("fingis")
 }
 

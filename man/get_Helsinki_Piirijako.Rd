@@ -5,12 +5,15 @@
 get_Helsinki_Piirijako(map.type = NULL, data.dir = tempdir())
 }
 \arguments{
-  \item{map}{A string. Specify the name of the HKK data set
-  to retrieve. Options: "ALUEJAKO_KUNTA",
+  \item{map.type}{A string. Specify the name of the HKK
+  data set to retrieve. Options: "ALUEJAKO_KUNTA",
   "ALUEJAKO_OSAALUE_TUNNUS", "ALUEJAKO_OSAALUE",
   "ALUEJAKO_PERUSPIIRI_TUNNUS", "ALUEJAKO_PERUSPIIRI",
   "ALUEJAKO_PIENALUE_TUNNUS", "ALUEJAKO_PIENALUE",
   "ALUEJAKO_SUURPIIRI_TUNNUS", "ALUEJAKO_SUURPIIRI"}
+
+  \item{data.dir}{A string. Specify a temporary folder for
+  storing downloaded data.}
 }
 \value{
 Shape object (from SpatialPolygonsDataFrame class)

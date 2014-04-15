@@ -5,12 +5,12 @@
 get_Helsinki_Seutukartta(map.type = NULL, data.dir = tempdir())
 }
 \arguments{
-  \item{map}{A string. Specify the name of the HKK data set
-  to retrieve. Options: "A_es_pie", "a_hy_suu", "a_ki_pie",
-  "a_nu_til", "a_tu_til", "l_jrata", " m_jarvet",
-  "N_MERI_R", "A_es_suu", "a_hy_til", "a_ki_suu",
-  "a_pkspie", "a_va_kos", "l_kiitor", "m_joet", "
-  N_MERI_S", "a_es_til", "a_ja_pie", "a_ki_til",
+  \item{map.type}{A string. Specify the name of the HKK
+  data set to retrieve. Options: "A_es_pie", "a_hy_suu",
+  "a_ki_pie", "a_nu_til", "a_tu_til", "l_jrata", "
+  m_jarvet", "N_MERI_R", "A_es_suu", "a_hy_til",
+  "a_ki_suu", "a_pkspie", "a_va_kos", "l_kiitor", "m_joet",
+  " N_MERI_S", "a_es_til", "a_ja_pie", "a_ki_til",
   "a_pkstil", "a_va_suu", "l_metras", "m_meri", "
   N_PAIK_R", "a_hk_osa", "a_ja_til", "a_kunta", "
   a_pksuur", "a_vi_pie", "l_metror", "m_rantav",
@@ -21,6 +21,9 @@ get_Helsinki_Seutukartta(map.type = NULL, data.dir = tempdir())
   "a_ke_pie", "a_nu_pie", "a_tu_pie", "Copyrig", "
   Maankay2", "N_KOS_R", "a_hy_pie", "a_ke_til", "a_nu_suu",
   "a_tu_suu", "l_jasema", "m_asalue", "N_KOS_S"}
+
+  \item{data.dir}{A string. Specify a temporary folder for
+  storing downloaded data.}
 }
 \value{
 Shape object (from SpatialPolygonsDataFrame class)

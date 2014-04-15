@@ -71,6 +71,10 @@ head(df)
 PlotShape(sp, "Name")
 ```
 
+### 3D surface plot
+
+Get example from here: Add https://github.com/louhos/takomo/blob/master/MML/mml-example.R
+
 ### Minor districts (Pienalue)
 
 ```{r hkk-pienalue, message=FALSE}

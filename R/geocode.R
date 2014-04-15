@@ -78,73 +78,9 @@ get_geocode <- function(query, service="okf") {
                   lon=res.list$results[[1]]$geometry$location$lng,
                   raw.list=res.list)
     }
-    
-#     u <- paste('http://maps.google.com/maps/api/geocode/xml?sensor=false&address=', query)
-#     doc <- XML::xmlTreeParse(u, useInternal=TRUE)
-#     lat <- sapply(XML::getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lat"), function(el) XML::xmlValue(el))
-#     lon <- sapply(XML::getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lng"), function(el) XML::xmlValue(el))
-#    res <- c("lat"=lat, "lon"=lon)
-#     if (length(res)==0)
-#       stop("No geocode found")
-    
+        
   } else {
     stop("Invalid geocode service given")
   }
   return(res)
 }
-
-
-## TO BE DELETED, included in get_geocode()
-
-# ---------------------------------------------------------
-
-# #' Get geo code from Google Map
-# #'
-# #' Get gecode for given street address from Google Maps API
-# #' See Terms and Conditions from http://code.google.com/apis/maps/documentation/geocoding/
-# #'
-# #' @param str Street address, e.g. 'Mannerheimintie, 00100, FI'
-# #'
-# #' @return coordinates (lat, lon)
-# #' 
-# #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-# #' @export
-# GetGeocodeGoogleMaps <- function(str) {
-# 
-#   .InstallMarginal("XML")
-# 
-#   u <- paste('http://maps.google.com/maps/api/geocode/xml?sensor=false&address=',str)
-#   doc <- XML::xmlTreeParse(u, useInternal=TRUE)
-#   lat <- sapply(XML::getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lat"), function(el) XML::xmlValue(el))
-#   lon <- sapply(XML::getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lng"), function(el) XML::xmlValue(el))
-#   return(c(lat,lon))
-# }
-# 
-# 
-# #' Get geo code from OpenStreetMap
-# #'
-# #' Get gecode for given plave from OpenStreetMap Nominatim
-# #' See http://wiki.openstreetmap.org/wiki/Nominatim
-# #'
-# #' @param query Either a street address, e.g. 'Mannerheimintie+100,Helsinki' or place, e.g. 'Eduskuntatalo'
-# #'
-# #' @return coordinates (lat, lon)
-# #' 
-# #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-# #' @export
-# GetGeocodeOpenStreetMap <- function(query) {
-#   
-#   .InstallMarginal("RCurl")
-#   .InstallMarginal("rjson")
-# 
-#   u <- paste("http://nominatim.openstreetmap.org/search?q=",query,"&format=json", sep="")
-#   val <- RCurl::getURI(u)
-#   res <- rjson::fromJSON(val)
-#   if (length(res)>0)
-#     return(as.numeric(c(res[[1]]$lat, res[[1]]$lon)))
-#   else # Geocode not found
-#     return(NULL)
-# }
-
-
-

@@ -1,8 +1,8 @@
 Package: fingis
 Type: Package
 Title: Finland GIS tools for R
-Version: 0.9.04
-Date: 2014-04-15
+Version: 0.9.05
+Date: 2014-04-22
 Author: Juuso Parkkinen, Leo Lahti, Joona Lehtomaki
 Maintainer: Juuso Parkkinen <louhos@googlegroups.com>
 Description: R tools for reading open geographical data in Finland.

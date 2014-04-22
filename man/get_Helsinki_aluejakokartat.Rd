@@ -1,8 +1,8 @@
-\name{get_Helsinki_district_boundaries}
-\alias{get_Helsinki_district_boundaries}
+\name{get_Helsinki_aluejakokartat}
+\alias{get_Helsinki_aluejakokartat}
 \title{Retrieve District Boundaries in Helsinki}
 \usage{
-get_Helsinki_district_boundaries(map.type = NULL, data.dir = tempdir())
+get_Helsinki_aluejakokartat(map.type = NULL, data.dir = tempdir())
 }
 \arguments{
   \item{map.type}{A string. Specify the name of the

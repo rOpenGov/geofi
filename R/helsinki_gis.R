@@ -1,5 +1,3 @@
-# ---------------------------------------------------------------------
-
 #' Retrieve District Boundaries in Helsinki
 #'
 #' Retrieves District Boundaries data (Aluejakorajat, Aanestysalueet)
@@ -28,7 +26,7 @@
 #' @examples # sp <- get_Helsinki_district_boundaries("suuralue"); 
 #'           # spplot(sp, "Name")
 
-get_Helsinki_district_boundaries <- function(map.type=NULL, data.dir = tempdir()) {
+get_Helsinki_aluejakokartat <- function(map.type=NULL, data.dir = tempdir()) {
   
   if (is.null(map.type)) {
     message("Available map types: kunta, pienalue, pienalue_piste, suuralue, suuralue_piste, tilastoalue, tilastoalue_piste, aanestysalue")
@@ -76,13 +74,7 @@ get_Helsinki_district_boundaries <- function(map.type=NULL, data.dir = tempdir()
   message("Reading filename ", filename)
   # TODO: fix warning about Z-dimension discarded
   sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = TRUE, drop_unsupported_fields=T, dropNULLGeometries=T, encoding="ISO-8859-1", use_iconv=TRUE)
-  sp@data$id <- rownames(sp@data) # Add IDs
-  
-#   # Fix encoding for aanestysalue
-#   if (map.type == "aanestysalue") {
-#     sp@data$TKNIMI <- factor(iconv(sp@data$TKNIMI, from="ISO-8859-1", to="UTF-8"))
-#     sp@data$Nimi <- factor(iconv(sp@data$Nimi, from="ISO-8859-1", to="UTF-8"))
-#   }
+#  sp@data$id <- rownames(sp@data) # Add IDs 
   
   message("\nData loaded successfully!")
   return(sp)

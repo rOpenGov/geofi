@@ -12,6 +12,7 @@ Depends:
     rgdal,
     ggplot2,
     rjson,
-    RCurl
+    RCurl,
+    XML
 URL: https://github.com/ropengov/fingis
 LazyLoad: yes

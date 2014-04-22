@@ -34,7 +34,7 @@
 
 list_mml_datasets <- function (...) {
 
-  .InstallMarginal("XML")
+#  .InstallMarginal("XML")
   url <- paste(LouhosStoragePath(), "mml/rdata/", sep = "")
 
   message(paste("Retrieving data set listing from ", url))

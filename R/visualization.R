@@ -39,7 +39,7 @@ sp2df <- function(sp, region) {
 #' 
 #' @references See citation("fingis")
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @examples get_theme_map(); 
+#' @examples theme_set(get_theme_map()); 
 get_theme_map <- function() {
   
   theme_map <- ggplot2::theme_bw()
@@ -47,10 +47,8 @@ get_theme_map <- function() {
   theme_map$panel.grid.major <- ggplot2::element_blank()
   theme_map$panel.grid.minor <- ggplot2::element_blank()
   theme_map$axis.ticks <- ggplot2::element_blank()
-  theme_map$axis.text.x <- ggplot2::element_blank()
-  theme_map$axis.text.y <- ggplot2::element_blank()
-  theme_map$axis.title.x <- ggplot2::element_blank()
-  theme_map$axis.title.y <- ggplot2::element_blank()
+  theme_map$axis.text <- ggplot2::element_blank()
+  theme_map$axis.title <- ggplot2::element_blank()
   
   return(theme_map)  
 }
@@ -91,9 +89,6 @@ get_theme_map <- function() {
 plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL, min.color = "white", max.color = "red", plot = TRUE) {
   
   # type = "oneway"; ncol = 10; at = NULL; palette = NULL; main = NULL; colorkey = TRUE; lwd = .4; border.col = "black"; col.regions = NULL
-  
-  # FIXME: check if we could here use standard palettes and avoid dependency
-#  .InstallMarginal("RColorBrewer")
   
   pic <- NULL
   
@@ -188,6 +183,7 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
       # Aims to find colors such that neighboring polygons have 
       # distinct colors
       cols <- generate_map_colours(sp) # Generate color indices
+      # FIXME: check if we could here use standard palettes and avoid dependency  
       col.regions <- RColorBrewer::brewer.pal(max(cols), "Paired")[cols]
       
     } else if ( is.null(col.regions) ) {

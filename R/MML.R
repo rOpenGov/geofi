@@ -138,7 +138,7 @@ get_MML <- function(map.id, data.id, verbose = TRUE) {
 #' @author Leo Lahti \email{louhos@@googlegroups.com} 
 #'
 #' @references \url{http://www.maanmittauslaitos.fi/aineistot-palvelut/latauspalvelut/avoimien-aineistojen-tiedostopalvelu}
-#' @usage sp <- LoadMML(data.id = "kunta4_p", resolution = "4_5_milj_shape_etrs-tm35fin") 
+#' @usage sp <- get_MML(data.id = "kunta4_p", resolution = "4_5_milj_shape_etrs-tm35fin") 
 #' @format list
 #' @keywords data
 NULL

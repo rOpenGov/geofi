@@ -20,7 +20,7 @@
 #' @export
 #' @seealso spChFIDs, spRbind
 #' @references
-#' See citation("sorvi") 
+#' See citation("fingis") 
 #' @author Joona Lehtomaki \email{louhos@@googlegroups.com}
 #' @note Not tested (at all)
 
@@ -93,7 +93,7 @@ merge_spatial <- function(sp.list, CRS=NA, FID=NA) {
 #' @export
 #' 
 #' @references
-#' See citation("sorvi") 
+#' See citation("fingis") 
 #' @author Joona Lehtomaki \email{louhos@@googlegroups.com}
 #' @examples #
 

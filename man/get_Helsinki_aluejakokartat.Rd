@@ -2,14 +2,13 @@
 \alias{get_Helsinki_aluejakokartat}
 \title{Retrieve District Boundaries in Helsinki}
 \usage{
-get_Helsinki_aluejakokartat(map.type = NULL, data.dir = tempdir())
+get_Helsinki_aluejakokartat(map.specifier = NULL, data.dir = tempdir())
 }
 \arguments{
-  \item{map.type}{A string. Specify the name of the
-  Helsinki District Boundary data set to retrieve.
-  Available options: c("kunta", "pienalue",
-  "pienalue_piste", "suuralue", "suuralue_piste",
-  "tilastoalue", "tilastoalue_piste")}
+  \item{map.specifier}{A string. Specify the name of the
+  Helsinki District Boundary data set to retrieve. Run
+  'get_Helsinki_aluejakokartat()' to see available
+  options.}
 
   \item{data.dir}{A string. Specify a temporary folder for
   storing downloaded data.}
@@ -25,19 +24,13 @@ HKK website http://ptp.hel.fi/avoindata/index.html
 }
 \details{
 The data (C) 2011 Helsingin kaupunkimittausosasto.
-
-Also aluejako_alueet_ja_pisteet file is available in the
-original HKK zip file. This contains all maps in a single
-list of shape objects and is thus redundant. We have
-ignored this for simplicity.
 }
 \note{
 This function replaces sorvi::GetHRIaluejakokartat; The
 data is now retrieved directly from HKK.
 }
 \examples{
-# sp <- get_Helsinki_district_boundaries("suuralue");
-          # spplot(sp, "Name")
+# sp <- get_Helsinki_district_boundaries(map.specifier="suuralue");
 }
 \author{
 Juuso Parkkinen, Joona Lehtomaki and Leo Lahti

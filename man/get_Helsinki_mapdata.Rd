@@ -1,6 +1,6 @@
 \name{get_Helsinki_mapdata}
 \alias{get_Helsinki_mapdata}
-\title{Retrieve spatial data from HKK}
+\title{Retrieve spatial data for Helsinki region}
 \usage{
 get_Helsinki_mapdata(map.type = NULL, map.specifier = NULL,
   data.dir = tempdir())
@@ -11,7 +11,7 @@ get_Helsinki_mapdata(map.type = NULL, map.specifier = NULL,
   'rakennusrekisteri'}
 
   \item{map.specifier}{A string. Specify the specific data
-  to retrieve. Run 'temp=get_Helsinki_mapdata()' to see
+  to retrieve. Run 'get_Helsinki_mapdata()' to see
   available options.}
 
   \item{data.dir}{A string. Specify a temporary folder for
@@ -21,10 +21,10 @@ get_Helsinki_mapdata(map.type = NULL, map.specifier = NULL,
 Shape object (from SpatialPolygonsDataFrame class)
 }
 \description{
-Retrieves Seutukartta data from Helsinki Real Estate
-Department (Helsingin kaupungin kiinteistovirasto, HKK)
-through the HKK website
-http://kartta.hel.fi/avoindata/index.html
+Retrieves spatial data for Helsinki region from Helsinki
+Real Estate Department (Helsingin kaupungin
+kiinteistovirasto, HKK) through the HKK website
+http://kartta.hel.fi/avoindata/index.html.
 }
 \details{
 For licensing information and other details, see

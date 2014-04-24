@@ -4,3 +4,8 @@
 # Travis scripts
 .travis.yml
 
+.gitignore
+inst/extras/.RData
+.git
+inst/extras/...Rcheck
+	  

@@ -1,7 +1,7 @@
 # This file is a part of the sorvi program (http://louhos.github.com/sorvi/)
 # in association with the rOpenGov project (ropengov.github.io)
 
-# Copyright (C) 2010-2013 Leo Lahti / Louhos <louhos.github.com>. 
+# Copyright (C) 2010-2014 Leo Lahti / Louhos <louhos.github.com>. 
 # All rights reserved.
 
 # This program is open source software; you can redistribute it and/or modify 
@@ -83,19 +83,20 @@ list_mml_datasets <- function (...) {
 }
 
 
-#' LoadMML
+#' get_MML
 #'
-#' Arguments:
 #' @param map.id data ID. See details.
 #' @param data.id data ID. See details.
 #' @param verbose verbose
-#'
-#' Return:
+#' 
 #' @return url connection
 #'
 #' @details See help(MML). To browse for RData options, see https://github.com/avoindata/mml/tree/master/rdata or in R: list_mml_datasets()
 #'
-#' @examples # datasets <- list_mml_datasets(); map.id = names(datasets)[[1]]; data.id <- datasets[[map.id]][[1]]; sp <- get_MML(map.id, data.id) 
+#' @examples # datasets <- list_mml_datasets(); 
+#'           # map.id = names(datasets)[[1]]; 
+#'           # data.id <- datasets[[map.id]][[1]]; 
+#'           # sp <- get_MML(map.id, data.id) 
 #'
 #' @export
 #' @references
@@ -138,7 +139,7 @@ get_MML <- function(map.id, data.id, verbose = TRUE) {
 #' @author Leo Lahti \email{louhos@@googlegroups.com} 
 #'
 #' @references \url{http://www.maanmittauslaitos.fi/aineistot-palvelut/latauspalvelut/avoimien-aineistojen-tiedostopalvelu}
-#' @usage sp <- get_MML(data.id = "kunta4_p", resolution = "4_5_milj_shape_etrs-tm35fin") 
+#' @usage sp <- get_MML(map.id = "4_5_milj_shape_etrs-tm35fin", data.id = "kunta4_p") 
 #' @format list
 #' @keywords data
 NULL

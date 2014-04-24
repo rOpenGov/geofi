@@ -1,6 +1,6 @@
 \name{get_MML}
 \alias{get_MML}
-\title{LoadMML}
+\title{get_MML}
 \usage{
 get_MML(map.id, data.id, verbose = TRUE)
 }
@@ -9,15 +9,13 @@ get_MML(map.id, data.id, verbose = TRUE)
 
   \item{data.id}{data ID. See details.}
 
-  \item{verbose}{verbose
-
-  Return:}
+  \item{verbose}{verbose}
 }
 \value{
 url connection
 }
 \description{
-Arguments:
+get_MML
 }
 \details{
 See help(MML). To browse for RData options, see
@@ -25,7 +23,10 @@ https://github.com/avoindata/mml/tree/master/rdata or in R:
 list_mml_datasets()
 }
 \examples{
-# datasets <- list_mml_datasets(); map.id = names(datasets)[[1]]; data.id <- datasets[[map.id]][[1]]; sp <- get_MML(map.id, data.id)
+# datasets <- list_mml_datasets();
+          # map.id = names(datasets)[[1]];
+          # data.id <- datasets[[map.id]][[1]];
+          # sp <- get_MML(map.id, data.id)
 }
 \author{
 Leo Lahti \email{louhos@googlegroups.com}

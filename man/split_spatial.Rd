@@ -31,6 +31,6 @@ information and geometries are coming from a common source.
 Joona Lehtomaki \email{louhos@googlegroups.com}
 }
 \references{
-See citation("sorvi")
+See citation("fingis")
 }
 

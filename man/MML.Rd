@@ -4,7 +4,7 @@
 \title{MML data documentation}
 \format{list}
 \usage{
-sp <- LoadMML(data.id = "kunta4_p", resolution = "4_5_milj_shape_etrs-tm35fin")
+sp <- get_MML(data.id = "kunta4_p", resolution = "4_5_milj_shape_etrs-tm35fin")
 }
 \description{
 The MML data set contains GIS (geographic) data obtained

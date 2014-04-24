@@ -40,7 +40,7 @@ Not tested (at all)
 Joona Lehtomaki \email{louhos@googlegroups.com}
 }
 \references{
-See citation("sorvi")
+See citation("fingis")
 }
 \seealso{
 spChFIDs, spRbind

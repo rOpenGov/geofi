@@ -11,7 +11,7 @@ theme_map A ggplot2 theme object
 Get blank ggplot2 theme for plotting maps
 }
 \examples{
-get_theme_map();
+theme_set(get_theme_map());
 }
 \author{
 Juuso Parkkinen \email{louhos@googlegroups.com}

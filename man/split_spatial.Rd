@@ -1,8 +1,8 @@
-\name{SplitSpatial}
-\alias{SplitSpatial}
+\name{split_spatial}
+\alias{split_spatial}
 \title{Split a Spatial*DataFrame object into a list of Spatial*DataFrames}
 \usage{
-SplitSpatial(sp.object, split.field)
+split_spatial(sp.object, split.field)
 }
 \arguments{
   \item{sp.object}{A Spatial*DataFrame object to be

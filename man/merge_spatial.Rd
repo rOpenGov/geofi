@@ -1,8 +1,8 @@
-\name{MergeSpatial}
-\alias{MergeSpatial}
+\name{merge_spatial}
+\alias{merge_spatial}
 \title{Merge a list of Spatial*DataFrame objects into one Spatial*DataFrame}
 \usage{
-MergeSpatial(sp.list, CRS = NA, FID = NA)
+merge_spatial(sp.list, CRS = NA, FID = NA)
 }
 \arguments{
   \item{sp.list}{A list of Spatial*DataFrame objects to be

@@ -1,5 +1,7 @@
 #' Transform data from sp to data frame for ggplot2
 #'
+#' @param sp A sp object to be transformed
+#' @param region A string specifying the region of interest
 #' @return A ggplot2 theme object
 #' @importFrom ggplot2 fortify
 #' @export
@@ -7,27 +9,25 @@
 #' @references See citation("fingis")
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @examples # sp2df(sp, region.name); 
-#' 
-sp2df <- function(sp, region.name) {
+
+sp2df <- function(sp, region) {
   
   message("TODO: study how general and/or necessary this function is!")
-  #  sp@data$id <- rownames(sp@data) # Add IDs 
-  
+  # Add IDs 
+  sp@data$id <- rownames(sp@data) 
   # Get point data
-  sp.points <- ggplot2::fortify(sp, region=region.name)
+  sp.points <- ggplot2::fortify(sp, region=region)
   # Regex to joinable format
   sp.points$group <- sub(".1", "", sp.points$group) 
   # Put everything together
-  df <- merge(sp.points, sp@data, by.x="group", by.y = "Name") 
+  df <- merge(sp.points, sp@data, by.x="group", by.y = region) 
   # sort DF so that polygons come out in the right order
   df <- df[order(df$order),] 
-  df[[region.name]] <- df$group
+  df[[region]] <- df$group
   df$group <- df$id.x <- df$id <- df$id.y <- NULL 
   
   return(df)  
 }
-
-
 
 
 #' Get blank ggplot2 theme for plotting maps
@@ -79,7 +79,11 @@ get_theme_map <- function() {
 #'
 #' @return A Trellis Plot Object
 #' @details Visualization types include: oneway/sequential (color scale ranges from white to dark red, or custom color given with the palette argument); twoway/bipolar/diverging (color scale ranges from dark blue through white to dark red; or custom colors); discrete/qualitative (discrete color scale; the colors are used to visually separate regions); and "custom" (specify colors with the col.regions argument)
+#' 
+#' @importFrom RColorBrewer brewer.pal
+#' @importFrom sp spplot
 #' @export
+#'
 #' @references See citation("fingis") 
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @examples # plot_shape(sp, varname) 
@@ -127,7 +131,7 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
       col.regions <- palette(ncol)
     }
     
-    q <- spplot(sp, varname,
+    q <- sp::spplot(sp, varname,
                 col.regions = col.regions,
                 main = main,
                 colorkey = colorkey,
@@ -167,7 +171,7 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
       col.regions <- palette(ncol)
     }
     
-    q <- spplot(sp, varname,
+    q <- sp::spplot(sp, varname,
                 col.regions = col.regions,
                 main = main,
                 colorkey = colorkey,
@@ -195,7 +199,7 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
     
     colorkey <- FALSE
     
-    pic <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col)
+    pic <- sp::spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col)
     
   } else if (type == "custom") {
     
@@ -211,7 +215,7 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
   }
   
   if (is.null(pic)) {
-    pic <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col, at = at)
+    pic <- sp::spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col, at = at)
   }
   
   if (plot) {	  
@@ -229,6 +233,7 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
 #' @param sp SpatialPolygonsDataFrame object
 #' @return Color index vector
 #' @references See citation("fingis") 
+#' @importFrom spdep poly2nb
 #' @export
 #' @author Modified from the code by Karl Ove Hufthammer from http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html; modifications by Leo Lahti
 #' @examples # col <- generate_map_colours(sp)    

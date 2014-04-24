@@ -1,25 +1,34 @@
-#   ## TODO: create a separate function for this
-#   ## Process into data.frame for ggplot2 
-#   sp.points <- ggplot2::fortify(sp, region="Name") # Get point data
-#   sp.points$group <- sub(".1", "", sp.points$group) # Regex to joinable format
-#   df <- merge(sp.points, sp@data, by.x="group", by.y = "Name") # Put everything together
-#   df <- df[order(df$order),] # sort DF so that polygons come out in the right order
-#   df$Name <- df$group
-#   df$group <- df$id.x <- df$id <- df$id.y <- NULL    
+#' Transform data from sp to data frame for ggplot2
+#'
+#' @return A ggplot2 theme object
+#' @importFrom ggplot2 fortify
+#' @export
+#' 
+#' @references See citation("fingis")
+#' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
+#' @examples # sp2df(sp, region.name); 
+#' 
+sp2df <- function(sp, region.name) {
+  
+  message("TODO: study how general and/or necessary this function is!")
+  #  sp@data$id <- rownames(sp@data) # Add IDs 
+  
+  # Get point data
+  sp.points <- ggplot2::fortify(sp, region=region.name)
+  # Regex to joinable format
+  sp.points$group <- sub(".1", "", sp.points$group) 
+  # Put everything together
+  df <- merge(sp.points, sp@data, by.x="group", by.y = "Name") 
+  # sort DF so that polygons come out in the right order
+  df <- df[order(df$order),] 
+  df[[region.name]] <- df$group
+  df$group <- df$id.x <- df$id <- df$id.y <- NULL 
+  
+  return(df)  
+}
 
 
 
-# This file is a part of the sorvi program (http://louhos.github.com/sorvi/)
-
-# Copyright (C) 2010-2013 Louhos <louhos.github.com>. All rights reserved.
-
-# This program is open source software; you can redistribute it and/or modify 
-# it under the terms of the FreeBSD License (keep this notice): 
-# http://en.wikipedia.org/wiki/BSD_licenses
-
-# This program is distributed in the hope that it will be useful, 
-# but WITHOUT ANY WARRANTY; without even the implied warranty of 
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 #' Get blank ggplot2 theme for plotting maps
 #'
@@ -30,7 +39,7 @@
 #' 
 #' @references See citation("fingis")
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @examples # get_theme_map(); 
+#' @examples get_theme_map(); 
 get_theme_map <- function() {
   
   theme_map <- ggplot2::theme_bw()
@@ -45,9 +54,6 @@ get_theme_map <- function() {
   
   return(theme_map)  
 }
-
-
-
 
 
 #' Visualize the specified fields of a shape object on using 
@@ -71,41 +77,39 @@ get_theme_map <- function() {
 #' @param max.color Color for maximum values in the color scale
 #' @param plot Plot the image TRUE/FALSE
 #'
-#' @return ggplot2 object
+#' @return A Trellis Plot Object
 #' @details Visualization types include: oneway/sequential (color scale ranges from white to dark red, or custom color given with the palette argument); twoway/bipolar/diverging (color scale ranges from dark blue through white to dark red; or custom colors); discrete/qualitative (discrete color scale; the colors are used to visually separate regions); and "custom" (specify colors with the col.regions argument)
 #' @export
-#' @autoImport
-#' @references
-#' See citation("sorvi") 
-#' @author Leo Lahti \email{louhos@@googlegroups.com}
-#' @examples # PlotShape(sp, varname) 
+#' @references See citation("fingis") 
+#' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
+#' @examples # plot_shape(sp, varname) 
 #' @keywords utilities
-PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL, min.color = "white", max.color = "red", plot = TRUE) {
-
+plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL, min.color = "white", max.color = "red", plot = TRUE) {
+  
   # type = "oneway"; ncol = 10; at = NULL; palette = NULL; main = NULL; colorkey = TRUE; lwd = .4; border.col = "black"; col.regions = NULL
-
+  
   # FIXME: check if we could here use standard palettes and avoid dependency
-  .InstallMarginal("RColorBrewer")
-
+#  .InstallMarginal("RColorBrewer")
+  
   pic <- NULL
-
+  
   if (is.null(main)) {
     main <- varname
   }
-
+  
   if (is.factor(sp[[varname]]) && (!type %in% c("discrete", "qualitative", "custom"))) {
     warning("Discrete/custom color scale required for factors; resetting color type")
     type <- "qualitative"
   }
-
+  
   if (type %in% c("oneway", "quantitative", "sequential")) {
     # Define color palette
     if (is.null(palette)) {
       palette <- colorRampPalette(c(min.color, max.color), space = "rgb")
     }
-
+    
     sp[[varname]] <- as.numeric(as.character(sp[[varname]]))
-
+    
     if (is.null(at)) { 
       mini <- min(sp[[varname]]) - 1
       maxi <- max(sp[[varname]]) + 1
@@ -114,109 +118,106 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
       # Override ncol if at is given
       ncol <- length(at)
     }
-
+    
     if (is.null(main)) {
       main <- varname
     }
-
+    
     if (is.null(col.regions)) {
       col.regions <- palette(ncol)
     }
-
+    
     q <- spplot(sp, varname,
-            col.regions = col.regions,
-	    main = main,
-	    colorkey = colorkey,
-	    lwd = lwd,
-	    col = border.col,
-	    at = at)
-           
-
+                col.regions = col.regions,
+                main = main,
+                colorkey = colorkey,
+                lwd = lwd,
+                col = border.col,
+                at = at)
+    
+    
   } else if (type %in% c("twoway", "bipolar", "diverging")) { 
-
+    
     # Plot palette around the data average
     # To highlight deviations in both directions
-
+    
     # Define color palette
     if (is.null(palette)) {
       palette <- colorRampPalette(c("blue", "white", "red"), space = "rgb")
     }
-
+    
     if (is.null(at)) { 
-
+      
       # Linear color palette around the average
       mini <- min(sp[[varname]])
       maxi <- max(sp[[varname]])
       at <- seq(mini - 1, maxi + 1, length = ncol) 
-
+      
     } else {
       # Override ncol if at is given
       ncol <- length(at)
     }
     # message(at)
-
+    
     if (is.null(main)) {
       main <- varname
     }
-
+    
     if (is.null(col.regions)) {
       col.regions <- palette(ncol)
     }
-
+    
     q <- spplot(sp, varname,
-            col.regions = col.regions,
-	    main = main,
-	    colorkey = colorkey,
-	    lwd = lwd,
-	    col = border.col,
-	    at = at)
-
+                col.regions = col.regions,
+                main = main,
+                colorkey = colorkey,
+                lwd = lwd,
+                col = border.col,
+                at = at)
+    
   } else if (type %in% c("qualitative", "discrete")) {
-
+    
     vars <- factor(sp[[varname]])
     sp[[varname]] <- vars
     
     if (is.null(col.regions) && length(sp[[varname]]) == length(levels(sp[[varname]]))) {
       # Aims to find colors such that neighboring polygons have 
       # distinct colors
-      cols <- sorvi::GenerateMapColours(sp) # Generate color indices
+      cols <- generate_map_colours(sp) # Generate color indices
       col.regions <- RColorBrewer::brewer.pal(max(cols), "Paired")[cols]
-
+      
     } else if ( is.null(col.regions) ) {
       
       # Use ncol colors, loop them to fill all regions    
       nlevels <- length(levels(vars))
-      col.regions <- rep(RColorBrewer::brewer.pal(ncol, "Paired"), ceiling(nlevels/ncol))[1:nlevels]
-
+      col.regions <- rep(RColorBrewer::brewer.pal(ncol, "Paired"), ceiling(nlevels/ncol))[1:nlevels]  
     }
-
+    
     colorkey <- FALSE
-
+    
     pic <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col)
-
+    
   } else if (type == "custom") {
-
+    
     # User-defined colors for each region  
     if (is.null(col.regions)) {  
       stop("Define region colors through the col.regions argument 
       		   in the custom mode!")
     }
-
   }
-
+  
   if (is.null(col.regions)) {
     col.regions <- palette(ncol)
   }
-
+  
   if (is.null(pic)) {
     pic <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col, at = at)
   }
-
-
+  
   if (plot) {	  
     print(pic)
   }
-
+  
   pic
 }
 
@@ -227,30 +228,29 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
 #'
 #' @param sp SpatialPolygonsDataFrame object
 #' @return Color index vector
-#' @references See citation("sorvi") 
+#' @references See citation("fingis") 
 #' @export
 #' @author Modified from the code by Karl Ove Hufthammer from http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html; modifications by Leo Lahti
-#' @examples # col <- GenerateMapColours(sp)    
+#' @examples # col <- generate_map_colours(sp)    
 #' @keywords utilities
 
-
-GenerateMapColours <- function(sp) {
-
+generate_map_colours <- function(sp) {
+  
   nb <- spdep::poly2nb(sp)   # Generate neighbours lists
-
+  
   n <- length(sp)            # Number of polygons
-
+  
   cols <- numeric(n)        # Initial colouring
-
+  
   cols[1] <- 1              # Let the first polygon have colour 1
-
+  
   cols1n <- 1:n             # Available colour indices
-
+  
   for(i in 2:n)
     cols[i] <- which.min(cols1n %in% cols[nb[[i]]])
-
+  
   cols
-
+  
 }
 
 

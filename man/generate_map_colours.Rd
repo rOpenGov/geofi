@@ -1,8 +1,8 @@
-\name{GenerateMapColours}
-\alias{GenerateMapColours}
+\name{generate_map_colours}
+\alias{generate_map_colours}
 \title{Generate color indices for shape object with the aim to color}
 \usage{
-GenerateMapColours(sp)
+generate_map_colours(sp)
 }
 \arguments{
   \item{sp}{SpatialPolygonsDataFrame object}
@@ -15,7 +15,7 @@ Generate color indices for shape object with the aim to
 color
 }
 \examples{
-# col <- GenerateMapColours(sp)
+# col <- generate_map_colours(sp)
 }
 \author{
 Modified from the code by Karl Ove Hufthammer from

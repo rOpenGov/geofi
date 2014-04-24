@@ -1,9 +1,9 @@
-\name{PlotShape}
-\alias{PlotShape}
+\name{plot_shape}
+\alias{plot_shape}
 \title{Visualize the specified fields of a shape object on using
 1- or 2-way color scale.}
 \usage{
-PlotShape(sp, varname, type = "oneway", ncol = 10, at = NULL,
+plot_shape(sp, varname, type = "oneway", ncol = 10, at = NULL,
   palette = NULL, main = NULL, colorkey = TRUE, lwd = 0.4,
   border.col = "black", col.regions = NULL, min.color = "white",
   max.color = "red", plot = TRUE)
@@ -47,7 +47,7 @@ PlotShape(sp, varname, type = "oneway", ncol = 10, at = NULL,
   \item{plot}{Plot the image TRUE/FALSE}
 }
 \value{
-ggplot2 object
+FIXME object
 }
 \description{
 This function is used for fast investigation of shape
@@ -65,13 +65,14 @@ the colors are used to visually separate regions); and
 "custom" (specify colors with the col.regions argument)
 }
 \examples{
-# PlotShape(sp, varname)
+# plot_shape(sp, varname)
 }
 \author{
-Leo Lahti \email{louhos@googlegroups.com}
+Leo Lahti and Juuso Parkkinen
+\email{louhos@googlegroups.com}
 }
 \references{
-See citation("sorvi")
+See citation("fingis")
 }
 \keyword{utilities}
 

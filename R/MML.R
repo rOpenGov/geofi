@@ -45,13 +45,14 @@ LouhosStoragePath <- function () {
 #' @return List of data sets
 #'
 #' @details Retrieves the list of currently available MML data sets in http://www.datavaalit.fi/storage/avoindata/mml/rdata/
-#'
-#' @examples # list_mml_datasets()
+#' @importFrom XML readHTMLTable
 #'
 #' @export
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
+#'@examples # list_mml_datasets()
+
 #' @keywords utilities
 
 

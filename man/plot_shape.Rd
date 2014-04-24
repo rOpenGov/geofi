@@ -47,7 +47,7 @@ plot_shape(sp, varname, type = "oneway", ncol = 10, at = NULL,
   \item{plot}{Plot the image TRUE/FALSE}
 }
 \value{
-FIXME object
+A Trellis Plot Object
 }
 \description{
 This function is used for fast investigation of shape

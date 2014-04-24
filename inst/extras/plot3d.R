@@ -1,3 +1,23 @@
+# https://github.com/louhos/takomo/blob/master/MML/mml-example.R
+# # Download example files
+# url.asc <- "https://github.com/louhos/takomo/raw/master/MML/data/L4133C.asc.gz"
+# destfile1 <- file.path(".", "asc.gz")
+# download.file(url=url.asc, destfile=destfile1, method="curl")
+# #url.xyz <- "https://github.com/louhos/takomo/raw/master/MML/data/L4133C.xyz.gz"
+# 
+# mat <- ReadASC(gzfile(destfile1))
+# mat <- ReadASC(gzfile("/Users/juusoparkkinen/Downloads//L4133C.asc.gz"))
+# 
+# PlotSurface(mat)
+# 
+# 
+# # mat <- ReadASC(gzfile("data/L4133C.asc.gz"))
+# # tsel <- NormalizeValues(mat[0:600,2400:3000])
+# # PlotSurface(tsel/4)
+
+
+
+
 #' ReadASC: read ASC file
 #' Routines for 3D landscape visualization
 #' contributed by Janne Aukia 2013
@@ -46,7 +66,7 @@ ReadASC <- function (filename) {
 
 ReadXYZ <- function(filename) {
 
-  .InstallMarginal("Matrix")
+#  .InstallMarginal("Matrix")
 
   dat <- read.table(filename)
   xp <- (dat$V1-min(dat$V1))/10
@@ -65,6 +85,7 @@ ReadXYZ <- function(filename) {
 #'
 #' Returns:
 #'   @return Used for side effects. Return: NULL
+#' @importFrom rgl surface3d
 #'
 #' @export
 #' @references
@@ -75,7 +96,7 @@ ReadXYZ <- function(filename) {
 
 PlotSurface <- function(mat, colorlut = NULL) {
   
-  .InstallMarginal("rgl")
+#  .InstallMarginal("rgl")
   
   if (is.null(colorlut)) {
     colorlut <- natural.colors()
@@ -120,6 +141,7 @@ natural.colors <- function(...) {
 #'
 #' Returns:
 #'   @return normalized data matrix
+#'@export   
 #'
 #' @references
 #' See citation("sorvi") 

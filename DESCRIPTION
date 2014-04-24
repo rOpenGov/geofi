@@ -16,7 +16,6 @@ Depends:
     rjson,
     RCurl,
     XML,
-    RColorBrewer,
-    rgl
+    RColorBrewer
 URL: https://github.com/ropengov/fingis
 LazyLoad: yes

@@ -8,10 +8,9 @@
 #'
 #' The data (C) 2011 Helsingin kaupunkimittausosasto.
 #' 
-#' @param map.type  A string. Specify the name of the
+#' @param map.specifier A string. Specify the name of the
 #' Helsinki District Boundary data set to retrieve.
-#' Available options: c("kunta", "pienalue", "pienalue_piste",
-#' "suuralue", "suuralue_piste", "tilastoalue", "tilastoalue_piste")
+#' Run 'get_Helsinki_aluejakokartat()' to see available options.
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
 #'
 #' @return a shape object (from SpatialPolygonsDataFrame class)
@@ -19,34 +18,34 @@
 #' @importFrom rgdal ogrListLayers
 #' @export
 #' @note This function replaces sorvi::GetHRIaluejakokartat; The data is now retrieved directly from HKK.
-#' @details Also aluejako_alueet_ja_pisteet file is available in the original HKK zip file. This contains all maps in a single list of shape objects and is thus redundant. We have ignored this for simplicity.
+
 #' @references
 #' See citation("fingis") 
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
-#' @examples # sp <- get_Helsinki_district_boundaries("suuralue"); 
-#'           # spplot(sp, "Name")
+#' @examples # sp <- get_Helsinki_district_boundaries(map.specifier="suuralue"); 
 
-get_Helsinki_aluejakokartat <- function(map.type=NULL, data.dir = tempdir()) {
+get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()) {
   
-  if (is.null(map.type)) {
-    message("Available map types: kunta, pienalue, pienalue_piste, suuralue, suuralue_piste, tilastoalue, tilastoalue_piste, aanestysalue")
-    stop("Please specify 'map.type'")
+  if (is.null(map.specifier)) {
+    message("Please specify 'map.specifier'!")
+    return(c("kunta", "pienalue", "pienalue_piste", "suuralue", "suuralue_piste", "tilastoalue", "tilastoalue_piste", "aanestysalue"))
   }
   
   # Create data.dir if it does not exist
   if (!file.exists(data.dir))
     dir.create(data.dir)
   
-  #  message(paste("Reading Helsinki Aluejakorajat data from ", "http://kartta.hel.fi/avoindata/aineistot/PKS_Kartta_Rajat_KML2011.zip", " (C) HKK 2011"))
-  
   ## Download data -----------------------------------
   
   # Define data to download
-  if (map.type %in% c("kunta", "pienalue", "pienalue_piste", "suuralue", "suuralue_piste", "tilastoalue", "tilastoalue_piste")) {
+  if (map.specifier %in% c("kunta", "pienalue", "pienalue_piste", "suuralue", "suuralue_piste", "tilastoalue", "tilastoalue_piste")) {
     zip.file <- "PKS_Kartta_Rajat_KML2011.zip"
-    message("Aluejakokartat (C) HKK 2011")
-  } else if (map.type == "aanestysalue") {
+    message("Helsinki region district boundaries (Paakaupunkiseudun aluejakokartat) (C) HKK 2011")
+    message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Kartta_avoindata_kayttoehdot_v02_3_2011.pdf'")
+  } else if (map.specifier == "aanestysalue") {
     zip.file <- "pk_seudun_aanestysalueet.zip"
+    message("Helsinki election district boundaries (Paakaupunkiseudun aanestysalueet) (C) HKK 2011")
+    message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Avoin%20lisenssi%20aanestysalueet.pdf'")
   }
   
   # Download data
@@ -59,34 +58,39 @@ get_Helsinki_aluejakokartat <- function(map.type=NULL, data.dir = tempdir()) {
     message("File ", local.zip, " already found, will not download!")
   }
   
-  ## Process data ------------------------------
+  ## Process data ----------------------------------------
   
   # Unzip the downloaded zip file
   utils::unzip(local.zip, exdir = data.dir)
   
   # Specify spatial data file to read
-  if (map.type %in% c("kunta", "pienalue", "suuralue", "tilastoalue")) {
-    filename <- file.path(data.dir, paste0("PKS_", map.type, ".kml"))
-  } else if (map.type == "aanestysalue") {
+  if (map.specifier %in% c("kunta", "pienalue", "suuralue", "tilastoalue")) {
+    filename <- file.path(data.dir, paste0("PKS_", map.specifier, ".kml"))
+  } else if (map.specifier == "aanestysalue") {
     filename <- file.path(data.dir, "PKS_aanestysalueet_kkj2.TAB")
   }
   
   # Read spatial data
   message("Reading filename ", filename)
-  # TODO: fix warning about Z-dimension discarded
-  sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = TRUE, drop_unsupported_fields=T, dropNULLGeometries=T, encoding="ISO-8859-1", use_iconv=TRUE)
-  #  sp@data$id <- rownames(sp@data) # Add IDs 
   
+  # TODO: fix warning about Z-dimension discarded
+  if (map.specifier %in% c("kunta", "pienalue", "suuralue", "tilastoalue")) {
+    sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = TRUE, drop_unsupported_fields=T, dropNULLGeometries=T)
+  } else if (map.specifier == "aanestysalue") {
+    sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = TRUE, drop_unsupported_fields=T, dropNULLGeometries=T, encoding="ISO-8859-1", use_iconv=TRUE)
+  }
   message("\nData loaded successfully!")
   return(sp)
 }
 
 
-#' Retrieve spatial data from HKK
+#' Retrieve spatial data for Helsinki region
 #'
-#' Retrieves Seutukartta data from Helsinki Real Estate Department (Helsingin 
-#' kaupungin kiinteistovirasto, HKK) through the HKK website
-#' http://kartta.hel.fi/avoindata/index.html
+#' Retrieves spatial data for Helsinki region from
+#' Helsinki Real Estate Department
+#' (Helsingin kaupungin kiinteistovirasto, HKK)
+#' through the HKK website
+#' http://kartta.hel.fi/avoindata/index.html.
 #'
 #' For licensing information and other details, see http://kartta.hel.fi/avoindata/aineistot/
 #'
@@ -114,14 +118,13 @@ get_Helsinki_mapdata <- function(map.type=NULL, map.specifier=NULL, data.dir = t
     return(list("seutukartta"=c("A_es_pie", "a_hy_suu", "a_ki_pie", "a_nu_til", "a_tu_til", "l_jrata", " m_jarvet", "N_MERI_R", "A_es_suu", "a_hy_til", "a_ki_suu", "a_pkspie", "a_va_kos", "l_kiitor", "m_joet", "  N_MERI_S", "a_es_til", "a_ja_pie", "a_ki_til", "a_pkstil", "a_va_suu", "l_metras", "m_meri", "  N_PAIK_R", "a_hk_osa", "a_ja_til", "a_kunta", " a_pksuur", "a_vi_pie", "l_metror", "m_rantav", "N_PAIK_S", "a_hk_per", "a_ka_pie", "a_ma_pie", "a_po_til", "a_vi_suu", "l_tiest2", "m_teolal", "a_hk_pie", "a_ka_til", "a_ma_til", "a_si_pie", "a_vi_til", "l_tiesto", "m_vihral", "a_hk_suu", "a_ke_pie", "a_nu_pie", "a_tu_pie", "Copyrig", " Maankay2", "N_KOS_R", "a_hy_pie", "a_ke_til", "a_nu_suu", "a_tu_suu", "l_jasema", "m_asalue", "N_KOS_S"),
                 "piirijako"=c("ALUEJAKO_KUNTA", "ALUEJAKO_OSAALUE_TUNNUS", "ALUEJAKO_OSAALUE", "ALUEJAKO_PERUSPIIRI_TUNNUS", "ALUEJAKO_PERUSPIIRI", "ALUEJAKO_PIENALUE_TUNNUS", "ALUEJAKO_PIENALUE", "ALUEJAKO_SUURPIIRI_TUNNUS", "ALUEJAKO_SUURPIIRI"),
                 "rakennusrekisteri"=c("20m2_hkikoord", "etrsgk25", "hkikoord", "wgs84")))
-    #    stop("Please specify 'map.type' and 'map.specifier'")
   }
   
   # Create data.dir if it does not exist
   if (!file.exists(data.dir))
     dir.create(data.dir)
   
-  ## Download data -----------------------------------
+  ## Download data -----------------------------------------------
   
   # Specify data to download
   if (map.type=="seutukartta") {
@@ -142,6 +145,7 @@ get_Helsinki_mapdata <- function(map.type=NULL, map.specifier=NULL, data.dir = t
     message("For metadata see file 'Metatieto_rakennukset.xls' in the zip file")
     message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Rakennusdata%20lisenssi_09_2012.pdf'")
     message("Warning! The zip file si really big and may cause problems for downloading!")
+    
   } else {
     stop("Invalid 'map.type'! Run 'temp=get_Helsinki_mapdata()' to list available options.")
   }
@@ -156,7 +160,7 @@ get_Helsinki_mapdata <- function(map.type=NULL, map.specifier=NULL, data.dir = t
     message("\nFile ", local.zip, " already found, will not download!")
   }
   
-  ## Process data ------------------------------
+  ## Process data ----------------------------------------
   
   # Unzip the downloaded zip file
   utils::unzip(local.zip, exdir = data.dir)
@@ -183,7 +187,6 @@ get_Helsinki_mapdata <- function(map.type=NULL, map.specifier=NULL, data.dir = t
   
   # Read spatial data
   sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = TRUE, drop_unsupported_fields=T, dropNULLGeometries=T, encoding="ISO-8859-1", use_iconv=TRUE)
-  #  sp@data$id <- rownames(sp@data) # Add IDs
   
   return(sp)
 }

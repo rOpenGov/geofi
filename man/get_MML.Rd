@@ -1,8 +1,8 @@
-\name{LoadMML}
-\alias{LoadMML}
+\name{get_MML}
+\alias{get_MML}
 \title{LoadMML}
 \usage{
-LoadMML(map.id, data.id, verbose = TRUE)
+get_MML(map.id, data.id, verbose = TRUE)
 }
 \arguments{
   \item{map.id}{data ID. See details.}
@@ -25,7 +25,7 @@ https://github.com/avoindata/mml/tree/master/rdata or in R:
 list_mml_datasets()
 }
 \examples{
-# datasets <- list_mml_datasets(); map.id = names(datasets)[[1]]; data.id <- datasets[[map.id]][[1]]; sp <- LoadMML(map.id, data.id)
+# datasets <- list_mml_datasets(); map.id = names(datasets)[[1]]; data.id <- datasets[[map.id]][[1]]; sp <- get_MML(map.id, data.id)
 }
 \author{
 Leo Lahti \email{louhos@googlegroups.com}

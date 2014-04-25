@@ -15,17 +15,23 @@ sp2df <- function(sp, region) {
   message("TODO: study how general and/or necessary this function is!")
   # Add IDs 
   sp@data$id <- rownames(sp@data) 
-  # Get point data
-  sp.points <- ggplot2::fortify(sp, region=region)
-  # Regex to joinable format
-  sp.points$group <- sub(".1", "", sp.points$group) 
-  # Put everything together
-  df <- merge(sp.points, sp@data, by.x="group", by.y = region) 
-  # sort DF so that polygons come out in the right order
-  df <- df[order(df$order),] 
-  df[[region]] <- df$group
-  df$group <- df$id.x <- df$id <- df$id.y <- NULL 
   
+  if (class(sp)=="SpatialPointsDataFrame") {
+    # Construct data frame manually, as ggplot::fortify can not handle SpatialPoints
+    df <- data.frame(long=sp@coords[,1], lat=sp@coords[,2], region=sp@data[region])
+    
+  } else {
+    # Get point data
+    sp.points <- ggplot2::fortify(sp, region=region)
+    # Regex to joinable format
+    sp.points$group <- sub(".1", "", sp.points$group) 
+    # Put everything together
+    df <- merge(sp.points, sp@data, by.x="group", by.y = region) 
+    # sort DF so that polygons come out in the right order
+    df <- df[order(df$order),] 
+    df[[region]] <- df$group
+    df$group <- df$id.x <- df$id <- df$id.y <- NULL 
+  }
   return(df)  
 }
 

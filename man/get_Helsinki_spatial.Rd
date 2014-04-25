@@ -1,8 +1,8 @@
-\name{get_Helsinki_mapdata}
-\alias{get_Helsinki_mapdata}
+\name{get_Helsinki_spatial}
+\alias{get_Helsinki_spatial}
 \title{Retrieve spatial data for Helsinki region}
 \usage{
-get_Helsinki_mapdata(map.type = NULL, map.specifier = NULL,
+get_Helsinki_spatial(map.type = NULL, map.specifier = NULL,
   data.dir = tempdir())
 }
 \arguments{
@@ -31,7 +31,7 @@ For licensing information and other details, see
 http://kartta.hel.fi/avoindata/aineistot/
 }
 \examples{
-# tab <- get_Helsinki_mapdata(map.type="seutukartta", map.specifier="l_kiitor")
+tab <- get_Helsinki_spatial(map.type="seutukartta", map.specifier="l_kiitor")
 }
 \author{
 Juuso Parkkinen, Joona Lehtomaki and Leo Lahti

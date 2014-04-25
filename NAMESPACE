@@ -1,7 +1,7 @@
 export(LouhosStoragePath)
 export(generate_map_colours)
 export(get_Helsinki_aluejakokartat)
-export(get_Helsinki_mapdata)
+export(get_Helsinki_spatial)
 export(get_MML)
 export(get_geocode)
 export(get_theme_map)

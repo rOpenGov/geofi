@@ -9,3 +9,5 @@ inst/extras/*.Rcheck
 TEMPDIR/*
 ggmapTemp.png
 figure
+
+fingis_tutorial.*

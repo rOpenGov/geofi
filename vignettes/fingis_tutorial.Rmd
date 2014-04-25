@@ -36,7 +36,7 @@ FIXME: link below
 Further installation and development instructions at the [home
 page](https://github.com/rOpenGov/fingis).
 
-### Retrieve and plot Helsinki region aluejakokartat (district maps)
+### Helsinki region aluejakokartat (district maps)
 
 List available maps
 
@@ -47,14 +47,14 @@ map.list
 
 Retrieve 'suuralue' spatial object and plot it with the plot_shape() function.
 
-```{r hkk-suuralue1, message=FALSE}
+```{r hkk-suuralue1, message=FALSE, warning=FALSE, results='hide'}
 sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue")
-plot_shape(sp=sp.suuralue, varname="Name", type="discrete")
+plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 ```
 
 Retrieval 'suuralue_piste' spatial object, containing the center points of the districts, and plot with spplot().
 
-```{r hkk-suuralue2, message=FALSE}
+```{r hkk-suuralue2, message=FALSE, warning=FALSE, results='hide'}
 sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier="suuralue_piste")
 sp::spplot(obj=sp.suuralue.piste, zcol="Name")
 ```
@@ -87,15 +87,66 @@ ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=Name), a
 
 Retrieve and plot äänetysaluejako (election districts).
 
-```{r hkk-aanestysalue, message=FALSE}
+```{r hkk-aanestysalue, message=FALSE, warning=FALSE, results='hide'}
 sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier="aanestysalue")
-plot_shape(sp.aanestys, "KUNTA", type="discrete")
+plot_shape(sp.aanestys, "KUNTA", type="discrete", plot=FALSE)
+```
+
+### Other Helsinki region spatial data
+
+To be added
+
+### Spatial data from Maanmittauslaitos (MML, Land Survey Finland)
+
+These data are preprocessde into RData format (FIXME: add description)
+
+List available data sets
+
+```{r MML_list, message=FALSE} 
+list_mml_datasets()
+```
+
+Retrieve regional borders for Finland.
+
+```{r MML_regions, message=FALSE, warning=FALSE} 
+# Get a specific map
+sp.mml <- get_MML(map.id="Yleiskartta-4500", data.id="HallintoAlue") 
+
+# Investigate available variables in this map
+head(as.data.frame(sp.mun))
+```
+
+Plot provinces (maakunnat).
+
+```{r MML_province, message=FALSE, warning=FALSE} 
+# Plot the shape file, colour provinces
+plot_shape(sp=sp.mml, varname="Maakunta", type="discrete", plot = FALSE)
+```
+
+Plot municipalities (kunnat).
+
+```{r MML_municipality, message=FALSE, warning=FALSE} 
+# Plot the shape file, colour municipalities
+plot_shape(sp=sp.mml, varname="Kunta", type="discrete", plot = FALSE)
 ```
 
 ### Geocoding examples
 
+Get geocodes for given location (address etc.) using one of the available services. Please read carefully the usage policies for the different services:
+* [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
+* [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
+* [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
+The function get_geocode() returns both latitude and longitude for the first hit, and the raw output (varies depending on the service used).
 
+```{r geocoding, message=FALSE}
+gc1 <- get_geocode("Mannerheimintie 100, Helsinki", service="okf")
+unlist(gc1[1:2])
+gc2 <- get_geocode("Mannerheimintie 100, Helsinki", service="openstreetmap")
+unlist(gc2[1:2])
+gc3 <- get_geocode("Mannerheimintie 100, Helsinki", service="google")
+unlist(gc3[1:2])
+```
 
 ### Licensing and Citations
 

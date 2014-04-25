@@ -1,0 +1,120 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{An R Markdown Vignette made with knitr}
+-->
+
+Finland GIS R tools
+===========
+
+This is an [rOpenGov](http://ropengov.github.com/helsinki) R package
+providing tools for Finnish GIS data.
+
+
+### Installation
+
+Note! The fingis package uses the rgdal library, which depends on the GDAL spatial framework. Installing this might be tricky. 
+
+FIXME: Add rgdal installation tips for all platforms:
+* Windows:
+* Linux: 
+* OSX: Check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+
+Release version for general users (NOT AVAILABLE YET):
+
+
+Development version for developers:
+
+```{r install2, eval=FALSE}
+install.packages("devtools")
+library(devtools)
+install_github("fingis", "ropengov")
+library(fingis)
+```
+
+FIXME: link below
+
+Further installation and development instructions at the [home
+page](https://github.com/rOpenGov/fingis).
+
+### Retrieve and plot Helsinki region aluejakokartat (district maps)
+
+List available maps
+
+```{r aluejako_list, message=FALSE}
+map.list <- get_Helsinki_aluejakokartat()
+map.list
+```
+
+Retrieve 'suuralue' spatial object and plot it with the plot_shape() function.
+
+```{r hkk-suuralue1, message=FALSE}
+sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue")
+plot_shape(sp=sp.suuralue, varname="Name", type="discrete")
+```
+
+Retrieval 'suuralue_piste' spatial object, containing the center points of the districts, and plot with spplot().
+
+```{r hkk-suuralue2, message=FALSE}
+sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier="suuralue_piste")
+sp::spplot(obj=sp.suuralue.piste, zcol="Name")
+```
+
+Use the sp2df() function to tranform the spatial objects into data frames. Plot with ggplot2, using blank theme with get_theme_map(). 
+
+```{r hkk-suuralue3, message=FALSE}
+# Get data frames
+df.suuralue <- sp2df(sp.suuralue, "Name")
+df.suuralue.piste <- sp2df(sp.suuralue.piste, "Name")
+
+# Set map theme
+theme_set(get_theme_map())
+# Plot regions, add labels using the points data
+ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + geom_polygon() + geom_text(data=df.suuralue.piste, aes(label=Name)) + theme(legend.position="none")
+```
+
+Add background map from OpenStreetMap using the [ggmap](https://sites.google.com/site/davidkahle/ggmap) package.
+
+```{r hkk-suuralue4, message=FALSE}
+# Add background map from OpenStreetMap using ggmap
+library(ggmap)
+# Get bounding box from sp.suuralue
+hel.bbox <- as.vector(sp.suuralue@bbox)
+# Get map using openstreetmap
+hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
+# Plot transparent districts on top the background map
+ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, label=Name)) + theme(legend.position="none")
+```
+
+Retrieve and plot äänetysaluejako (election districts).
+
+```{r hkk-aanestysalue, message=FALSE}
+sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier="aanestysalue")
+plot_shape(sp.aanestys, "KUNTA", type="discrete")
+```
+
+### Geocoding examples
+
+
+
+
+### Licensing and Citations
+
+This work can be freely used, modified and distributed under the
+[Two-clause FreeBSD
+license](http://en.wikipedia.org/wiki/BSD\_licenses). Cite this R
+package and and the appropriate data provider, including a url
+link. Kindly cite the R package as 'Leo Lahti, Juuso Parkkinen ja
+Joona Lehtomäki (2014). fingis R package. URL:
+http://ropengov.github.io/gisfi'.
+
+FIXME: link above
+
+### Session info
+
+
+This vignette was created with
+
+```{r sessioninfo, message=FALSE, warning=FALSE}
+sessionInfo()
+```
+

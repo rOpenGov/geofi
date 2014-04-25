@@ -7,3 +7,5 @@ inst/extras/*.Rcheck
 .Rproj.user
 .Rhistory
 TEMPDIR/*
+ggmapTemp.png
+figure

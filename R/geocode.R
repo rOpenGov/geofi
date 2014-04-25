@@ -59,8 +59,8 @@ get_geocode <- function(query, service="okf") {
     if (length(res.list)==0) {
       stop("No geocode found")
     } else {
-      res <- list(lat=res.list[[1]]$lat,
-                  lon=res.list[[1]]$lon,
+      res <- list(lat=as.numeric(res.list[[1]]$lat),
+                  lon=as.numeric(res.list[[1]]$lon),
                   raw.list=res.list)
       #       res <- t(sapply(res.list, function(x) as.numeric(c(x$lat, x$lon))))
       #       colnames(res) <- c("lat", "lon")

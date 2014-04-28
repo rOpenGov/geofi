@@ -6,9 +6,16 @@
 Finland GIS R tools
 ===========
 
-This is an [rOpenGov](http://ropengov.github.com/helsinki) R package
+This is an [rOpenGov](https://github.com/rOpenGov/fingis) R package
 providing tools for Finnish GIS data.
 
+## Availablae data
+
+The following data sets are currently available:
+* [Installation](#installation)
+* [Helsinki region aluejakokartat](https://github.com/rOpenGov/fingis/#helsinki-region-aluejakokartat)
+* [Maanmittauslaitos](https://github.com/rOpenGov/fingis/#maanmittauslaitos)
+* [Geocoding](https://github.com/rOpenGov/fingis/#geocoding)
 
 ### Installation
 
@@ -36,7 +43,9 @@ FIXME: link below
 Further installation and development instructions at the [home
 page](https://github.com/rOpenGov/fingis).
 
-### Helsinki region aluejakokartat (district maps)
+### Helsinki region aluejakokartat
+
+Retrieve Helsinki region aluejakokartat (district maps.)
 
 List available maps
 
@@ -96,9 +105,9 @@ plot_shape(sp.aanestys, "KUNTA", type="discrete", plot=FALSE)
 
 To be added
 
-### Spatial data from Maanmittauslaitos (MML, Land Survey Finland)
+### Maanmittauslaitos
 
-These data are preprocessde into RData format (FIXME: add description)
+Spatial data from  Maanmittauslaitos (MML, Land Survey Finland). These data are preprocessed into RData format (FIXME: add description).
 
 List available data sets
 
@@ -130,7 +139,7 @@ Plot municipalities (kunnat).
 plot_shape(sp=sp.mml, varname="Kunta", type="discrete", plot = FALSE)
 ```
 
-### Geocoding examples
+### Geocoding
 
 Get geocodes for given location (address etc.) using one of the available services. Please read carefully the usage policies for the different services:
 * [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
@@ -156,9 +165,8 @@ license](http://en.wikipedia.org/wiki/BSD\_licenses). Cite this R
 package and and the appropriate data provider, including a url
 link. Kindly cite the R package as 'Leo Lahti, Juuso Parkkinen ja
 Joona Lehtomäki (2014). fingis R package. URL:
-http://ropengov.github.io/gisfi'.
+https://github.com/rOpenGov/fingis'.
 
-FIXME: link above
 
 ### Session info
 

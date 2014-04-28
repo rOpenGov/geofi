@@ -5,7 +5,7 @@
 sp2df(sp, region)
 }
 \arguments{
-  \item{sp}{A sp object to be transformed}
+  \item{sp}{A spatial object to be transformed}
 
   \item{region}{A string specifying the region of interest}
 }
@@ -16,7 +16,10 @@ A ggplot2 theme object
 Transform data from sp to data frame for ggplot2
 }
 \examples{
-# sp2df(sp, region.name);
+sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+          df.suuralue <- sp2df(sp.suuralue, "Name");
+          theme_set(get_theme_map());
+          ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + geom_polygon() + theme(legend.position="none")
 }
 \author{
 Juuso Parkkinen \email{louhos@googlegroups.com}

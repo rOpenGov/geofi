@@ -13,16 +13,16 @@
 #' Run 'get_Helsinki_aluejakokartat()' to see available options.
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
 #'
-#' @return a shape object (from SpatialPolygonsDataFrame class)
+#' @return a shape object (from SpatialPolygons class)
 #' @importFrom rgdal readOGR
 #' @importFrom rgdal ogrListLayers
 #' @export
 #' @note This function replaces sorvi::GetHRIaluejakokartat; The data is now retrieved directly from HKK.
-
-#' @references
-#' See citation("fingis") 
+#'
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
-#' @examples # sp <- get_Helsinki_district_boundaries(map.specifier="suuralue"); 
+#' @references See citation("fingis") 
+#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 
 get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()) {
   
@@ -90,9 +90,9 @@ get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' Helsinki Real Estate Department
 #' (Helsingin kaupungin kiinteistovirasto, HKK)
 #' through the HKK website
-#' http://kartta.hel.fi/avoindata/index.html.
+#' http://ptp.hel.fi/avoindata/.
 #'
-#' For licensing information and other details, see http://kartta.hel.fi/avoindata/aineistot/
+#' For licensing information and other details, see http://ptp.hel.fi/avoindata/.
 #'
 #' @param map.type  A string. Specify the type of HKK map data to retrieve:
 #' 'seutukartta', 'piirijako', 'rakennusrekisteri'
@@ -105,10 +105,10 @@ get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' @importFrom rgdal ogrListLayers
 #' @export
 #' 
-#' @references
-#' See citation("fingis") 
+#' @references See citation("fingis") 
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
-#' @examples tab <- get_Helsinki_spatial(map.type="seutukartta", map.specifier="l_kiitor")
+#' @examples sp.piiri <- get_Helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_SUURPIIRI");
+#'           plot_shape(sp=sp.piiri, varname="NIMI", type="discrete", plot=FALSE);
 
 get_Helsinki_spatial <- function(map.type=NULL, map.specifier=NULL, data.dir = tempdir()) {
   

@@ -1,14 +1,17 @@
 #' Transform data from sp to data frame for ggplot2
 #'
-#' @param sp A sp object to be transformed
+#' @param sp A spatial object to be transformed
 #' @param region A string specifying the region of interest
 #' @return A ggplot2 theme object
 #' @importFrom ggplot2 fortify
 #' @export
 #' 
-#' @references See citation("fingis")
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @examples # sp2df(sp, region.name); 
+#' @references See citation("fingis")
+#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#'           df.suuralue <- sp2df(sp.suuralue, "Name");
+#'           theme_set(get_theme_map());
+#'           ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + geom_polygon() + theme(legend.position="none")
 
 sp2df <- function(sp, region) {
   
@@ -43,9 +46,12 @@ sp2df <- function(sp, region) {
 #' @importFrom ggplot2 element_blank
 #' @export
 #' 
-#' @references See citation("fingis")
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @examples theme_set(get_theme_map()); 
+#' @references See citation("fingis")
+#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#'           df.suuralue <- sp2df(sp.suuralue, "Name");
+#'           theme_set(get_theme_map());
+#'           ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + geom_polygon() + theme(legend.position="none")
 get_theme_map <- function() {
   
   theme_map <- ggplot2::theme_bw()
@@ -63,8 +69,9 @@ get_theme_map <- function() {
 #' Visualize the specified fields of a shape object on using 
 #' 1- or 2-way color scale. 
 #' 
-#' This function is used for fast investigation of shape objects; standard visualization choices are made
-#' automatically; fast and easy-to-use but does not necessarily provide optimal visualization.
+#' This function is used for fast investigation of shape objects;
+#' standard visualization choices are made automatically;
+#' fast and easy-to-use but does not necessarily provide optimal visualization.
 #'
 #' @param sp Shape object 
 #' @param varname Variable name from the shape object sp to be visualized
@@ -90,7 +97,8 @@ get_theme_map <- function() {
 #'
 #' @references See citation("fingis") 
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @examples # plot_shape(sp, varname) 
+#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 #' @keywords utilities
 plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL, min.color = "white", max.color = "red", plot = TRUE) {
   
@@ -232,13 +240,15 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
 #' Generate color indices for shape object with the aim to color 
 #  neighboring objects with distinct colors.
 #'
-#' @param sp SpatialPolygonsDataFrame object
+#' @param sp A SpatialPolygonsDataFrame object
 #' @return Color index vector
-#' @references See citation("fingis") 
 #' @importFrom spdep poly2nb
 #' @export
+#' 
 #' @author Modified from the code by Karl Ove Hufthammer from http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html; modifications by Leo Lahti
-#' @examples # col <- generate_map_colours(sp)    
+#' @references See citation("fingis") 
+#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+#'           col <- generate_map_colours(sp.suuralue)    
 #' @keywords utilities
 
 generate_map_colours <- function(sp) {

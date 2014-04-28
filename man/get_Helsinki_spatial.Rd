@@ -24,14 +24,15 @@ Shape object (from SpatialPolygonsDataFrame class)
 Retrieves spatial data for Helsinki region from Helsinki
 Real Estate Department (Helsingin kaupungin
 kiinteistovirasto, HKK) through the HKK website
-http://kartta.hel.fi/avoindata/index.html.
+http://ptp.hel.fi/avoindata/.
 }
 \details{
 For licensing information and other details, see
-http://kartta.hel.fi/avoindata/aineistot/
+http://ptp.hel.fi/avoindata/.
 }
 \examples{
-tab <- get_Helsinki_spatial(map.type="seutukartta", map.specifier="l_kiitor")
+sp.piiri <- get_Helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_SUURPIIRI");
+          plot_shape(sp=sp.piiri, varname="NIMI", type="discrete", plot=FALSE);
 }
 \author{
 Juuso Parkkinen, Joona Lehtomaki and Leo Lahti

@@ -23,14 +23,14 @@
 #' or place, e.g. 'Eduskuntatalo'
 #' @param service Geocoding service to use, one of 'okf', 'openstreetmap' or 'google' 
 #'
-#' @return list Coordinates (lat, long) of first output, and the raw output list
+#' @return A list with coordinates (lat, long) of the first output, and the raw output list
 #' @importFrom RCurl getURI
 #' @importFrom rjson fromJSON
 #' @export
 #' 
-#' @references See citation("fingis")
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @examples # gc <- get_geocode("Mannerheimintie 100, Helsinki"); 
+#' @references See citation("fingis")
+#' @examples gc <- get_geocode("Mannerheimintie 100, Helsinki"); 
 get_geocode <- function(query, service="okf") {
   
   ## TODO: process outpus into similar format

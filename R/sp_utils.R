@@ -17,12 +17,12 @@
 #' @param FID A string that names the column used as FID
 #'
 #' @return a list of Shape objects (from SpatialPolygonsDataFrame class)
-#' @export
-#' @seealso spChFIDs, spRbind
-#' @references
-#' See citation("fingis") 
-#' @author Joona Lehtomaki \email{louhos@@googlegroups.com}
 #' @note Not tested (at all)
+#' @export
+#' 
+#' @seealso spChFIDs, spRbind
+#' @author Joona Lehtomaki \email{louhos@@googlegroups.com}
+#' @references See citation("fingis") 
 
 merge_spatial <- function(sp.list, CRS=NA, FID=NA) {
   
@@ -92,10 +92,8 @@ merge_spatial <- function(sp.list, CRS=NA, FID=NA) {
 #' @return a list of Shape objects (from SpatialPolygonsDataFrame class)
 #' @export
 #' 
-#' @references
-#' See citation("fingis") 
 #' @author Joona Lehtomaki \email{louhos@@googlegroups.com}
-#' @examples #
+#' @references See citation("fingis") 
 
 split_spatial <- function(sp.object, split.field) {
   

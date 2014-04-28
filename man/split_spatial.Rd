@@ -24,9 +24,6 @@ factor.
 No schema or CRS checking is performed as all the spatial
 information and geometries are coming from a common source.
 }
-\examples{
-#
-}
 \author{
 Joona Lehtomaki \email{louhos@googlegroups.com}
 }

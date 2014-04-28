@@ -13,20 +13,17 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 #' LouhosStoragePath
+#' 
+#' Get url for Louhos storage.
 #'
-#' Arguments:
-#'   ... Arguments to pass
-#'
-#' Return:
 #' @return URL for Louhos data
 #'
-#' @examples # url <- LouhosStoragePath()
-#'
 #' @export
-#' @references
-#' See citation("fingis") 
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
+#' @references See citation("fingis") 
+#' @examples url <- LouhosStoragePath()
 #' @keywords utilities
+
 LouhosStoragePath <- function () {
   # Louhos data is stored in Github avoindata repo: 
   # https://github.com/avoindata/ which is 
@@ -35,30 +32,21 @@ LouhosStoragePath <- function () {
 }
 
 
-
 #' List Land Survey Finland (MML) data sets readily available in RData format.
 #'
-#' Arguments:
-#' @param ... Arguments to be passed
+#' Retrieves the list of currently available MML data sets in http://www.datavaalit.fi/storage/avoindata/mml/rdata/
 #'
-#' Return:
 #' @return List of data sets
 #'
-#' @details Retrieves the list of currently available MML data sets in http://www.datavaalit.fi/storage/avoindata/mml/rdata/
 #' @importFrom XML readHTMLTable
-#'
 #' @export
-#' @references
-#' See citation("sorvi") 
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
-#'@examples # list_mml_datasets()
-
+#' @references See citation("fingis") 
+#' @examples datasets = list_mml_datasets()
 #' @keywords utilities
 
+list_mml_datasets <- function () {
 
-list_mml_datasets <- function (...) {
-
-#  .InstallMarginal("XML")
   url <- paste(LouhosStoragePath(), "mml/rdata/", sep = "")
 
   message(paste("Retrieving data set listing from ", url))
@@ -83,7 +71,9 @@ list_mml_datasets <- function (...) {
 }
 
 
-#' get_MML
+#' MML (Land Survey Finland) data
+#' 
+#' Retrieve data from Land Survey Finland (Maanmittauslaitos, MML)
 #'
 #' @param map.id data ID. See details.
 #' @param data.id data ID. See details.
@@ -91,18 +81,15 @@ list_mml_datasets <- function (...) {
 #' 
 #' @return url connection
 #'
-#' @details See help(MML). To browse for RData options, see https://github.com/avoindata/mml/tree/master/rdata or in R: list_mml_datasets()
-#'
-#' @examples # datasets <- list_mml_datasets(); 
-#'           # map.id = names(datasets)[[1]]; 
-#'           # data.id <- datasets[[map.id]][[1]]; 
-#'           # sp <- get_MML(map.id, data.id) 
+#' @details To browse for RData options, run list_mml_datasets() or see https://github.com/avoindata/mml/tree/master/rdata. 
 #'
 #' @export
-#' @references
-#' See citation("sorvi") 
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
-#' @keywords utilities
+#' @references See citation("fingis") 
+#' @examples datasets <- list_mml_datasets(); 
+#'           map.id = names(datasets)[[1]]; 
+#'           data.id <- datasets[[map.id]][[1]]; 
+#'           sp <- get_MML(map.id, data.id)
 
 get_MML <- function(map.id, data.id, verbose = TRUE) {
 

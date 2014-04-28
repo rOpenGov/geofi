@@ -13,8 +13,8 @@ get_geocode(query, service = "okf")
   'openstreetmap' or 'google'}
 }
 \value{
-list Coordinates (lat, long) of first output, and the raw
-output list
+A list with coordinates (lat, long) of the first output,
+and the raw output list
 }
 \description{
 Get gecode for given query from one of the geocoding
@@ -26,7 +26,7 @@ Google Maps API See Terms and Conditions from
 http://code.google.com/apis/maps/documentation/geocoding/
 }
 \examples{
-# gc <- get_geocode("Mannerheimintie 100, Helsinki");
+gc <- get_geocode("Mannerheimintie 100, Helsinki");
 }
 \author{
 Juuso Parkkinen \email{louhos@googlegroups.com}

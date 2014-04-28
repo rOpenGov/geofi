@@ -1,6 +1,6 @@
 \name{get_MML}
 \alias{get_MML}
-\title{get_MML}
+\title{MML (Land Survey Finland) data}
 \usage{
 get_MML(map.id, data.id, verbose = TRUE)
 }
@@ -15,24 +15,23 @@ get_MML(map.id, data.id, verbose = TRUE)
 url connection
 }
 \description{
-get_MML
+Retrieve data from Land Survey Finland (Maanmittauslaitos,
+MML)
 }
 \details{
-See help(MML). To browse for RData options, see
-https://github.com/avoindata/mml/tree/master/rdata or in R:
-list_mml_datasets()
+To browse for RData options, run list_mml_datasets() or see
+https://github.com/avoindata/mml/tree/master/rdata.
 }
 \examples{
-# datasets <- list_mml_datasets();
-          # map.id = names(datasets)[[1]];
-          # data.id <- datasets[[map.id]][[1]];
-          # sp <- get_MML(map.id, data.id)
+datasets <- list_mml_datasets();
+          map.id = names(datasets)[[1]];
+          data.id <- datasets[[map.id]][[1]];
+          sp <- get_MML(map.id, data.id)
 }
 \author{
 Leo Lahti \email{louhos@googlegroups.com}
 }
 \references{
-See citation("sorvi")
+See citation("fingis")
 }
-\keyword{utilities}
 

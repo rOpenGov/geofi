@@ -11,7 +11,10 @@ theme_map A ggplot2 theme object
 Get blank ggplot2 theme for plotting maps
 }
 \examples{
-theme_set(get_theme_map());
+sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+          df.suuralue <- sp2df(sp.suuralue, "Name");
+          theme_set(get_theme_map());
+          ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + geom_polygon() + theme(legend.position="none")
 }
 \author{
 Juuso Parkkinen \email{louhos@googlegroups.com}

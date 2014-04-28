@@ -23,7 +23,7 @@ Juuso Parkkinen, Leo Lahti and Joona Lehtomaki
 }
 \references{
 See citation("fingis")
-\url{http://ropengov.github.com/fingis}
+\url{https://github.com/rOpenGov/fingis}
 }
 \keyword{package}
 

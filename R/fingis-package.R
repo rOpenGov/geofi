@@ -19,7 +19,7 @@
 #' @author Juuso Parkkinen, Leo Lahti and Joona Lehtomaki \email{louhos@@googlegroups.com}
 #' @references
 #' See citation("fingis")
-#' \url{http://ropengov.github.com/fingis}
+#' \url{https://github.com/rOpenGov/fingis}
 #' @examples # library(fingis)
 #' @keywords package
 NULL

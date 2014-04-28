@@ -8,13 +8,10 @@ LouhosStoragePath()
 URL for Louhos data
 }
 \description{
-Arguments: ... Arguments to pass
-}
-\details{
-Return:
+Get url for Louhos storage.
 }
 \examples{
-# url <- LouhosStoragePath()
+url <- LouhosStoragePath()
 }
 \author{
 Leo Lahti and Juuso Parkkinen

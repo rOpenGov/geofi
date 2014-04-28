@@ -5,7 +5,7 @@
 generate_map_colours(sp)
 }
 \arguments{
-  \item{sp}{SpatialPolygonsDataFrame object}
+  \item{sp}{A SpatialPolygonsDataFrame object}
 }
 \value{
 Color index vector
@@ -15,7 +15,8 @@ Generate color indices for shape object with the aim to
 color
 }
 \examples{
-# col <- generate_map_colours(sp)
+sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+          col <- generate_map_colours(sp.suuralue)
 }
 \author{
 Modified from the code by Karl Ove Hufthammer from

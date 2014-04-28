@@ -3,6 +3,13 @@
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
 
+
+```r
+opts_knit$set(upload.fun = imgur_upload, base.url = NULL)  # upload all images to imgur.com
+# opts_chunk$set(fig.width=5, fig.height=5, cache=TRUE)
+```
+
+
 Finland GIS R tools
 ===========
 
@@ -13,17 +20,17 @@ providing tools for Finnish GIS data.
 
 The following data sets are currently available:
 * [Installation](#installation)
-* [Helsinki region aluejakokartat](https://github.com/rOpenGov/fingis/#helsinki-region-aluejakokartat)
-* [Maanmittauslaitos](https://github.com/rOpenGov/fingis/#maanmittauslaitos)
-* [Geocoding](https://github.com/rOpenGov/fingis/#geocoding)
+* [Helsinki region aluejakokartat](#helsinki-region-aluejakokartat)
+* [Maanmittauslaitos](#maanmittauslaitos)
+* [Geocoding](#geocoding)
 
 ### Installation
 
 Note! The fingis package uses the rgdal library, which depends on the GDAL spatial framework. Installing this might be tricky. 
 
-FIXME: Add rgdal installation tips for all platforms:
-* Windows:
-* Linux: 
+Some rgdal installation tips for various platforms:
+* Windows: FIXME
+* Linux: FIXME
 * OSX: Check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
 
 Release version for general users (NOT AVAILABLE YET):
@@ -40,9 +47,7 @@ library(fingis)
 ```
 
 
-FIXME: link below
-
-Further installation and development instructions at the [home
+Further installation and development instructions at the [Github
 page](https://github.com/rOpenGov/fingis).
 
 ### Helsinki region aluejakokartat
@@ -72,7 +77,7 @@ sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier = "suuralue")
 plot_shape(sp = sp.suuralue, varname = "Name", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-suuralue1](figure/hkk-suuralue1.png) 
+![plot of chunk hkk-suuralue1](http://i.imgur.com/yiq4aMV.png) 
 
 
 Retrieval 'suuralue_piste' spatial object, containing the center points of the districts, and plot with spplot().
@@ -83,7 +88,7 @@ sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste
 sp::spplot(obj = sp.suuralue.piste, zcol = "Name")
 ```
 
-![plot of chunk hkk-suuralue2](figure/hkk-suuralue2.png) 
+![plot of chunk hkk-suuralue2](http://i.imgur.com/u81bJj8.png) 
 
 
 Use the sp2df() function to tranform the spatial objects into data frames. Plot with ggplot2, using blank theme with get_theme_map(). 
@@ -101,7 +106,7 @@ ggplot(df.suuralue, aes(x = long, y = lat, fill = Name)) + geom_polygon() +
     geom_text(data = df.suuralue.piste, aes(label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue3](figure/hkk-suuralue3.png) 
+![plot of chunk hkk-suuralue3](http://i.imgur.com/NCrxcX9.png) 
 
 
 Add background map from OpenStreetMap using the [ggmap](https://sites.google.com/site/davidkahle/ggmap) package.
@@ -120,7 +125,7 @@ ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = 
     label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue4](figure/hkk-suuralue4.png) 
+![plot of chunk hkk-suuralue4](http://i.imgur.com/XcPsPtM.png) 
 
 
 Retrieve and plot äänetysaluejako (election districts).
@@ -131,7 +136,7 @@ sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier = "aanestysalue")
 plot_shape(sp.aanestys, "KUNTA", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](figure/hkk-aanestysalue.png) 
+![plot of chunk hkk-aanestysalue](http://i.imgur.com/8e9LAIs.png) 
 
 
 ### Other Helsinki region spatial data
@@ -221,7 +226,7 @@ Plot provinces (maakunnat).
 plot_shape(sp = sp.mml, varname = "Maakunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_province](figure/MML_province.png) 
+![plot of chunk MML_province](http://i.imgur.com/viPMmb4.png) 
 
 
 Plot municipalities (kunnat).
@@ -232,7 +237,7 @@ Plot municipalities (kunnat).
 plot_shape(sp = sp.mml, varname = "Kunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_municipality](figure/MML_municipality.png) 
+![plot of chunk MML_municipality](http://i.imgur.com/wdjCYFq.png) 
 
 
 ### Geocoding

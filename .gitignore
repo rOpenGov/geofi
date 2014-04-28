@@ -8,4 +8,3 @@ inst/extras/*.Rcheck
 .Rhistory
 TEMPDIR/*
 ggmapTemp.png
-figure

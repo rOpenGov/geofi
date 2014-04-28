@@ -3,6 +3,11 @@
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
 
+```{r setup}
+opts_knit$set(upload.fun = imgur_upload, base.url = NULL) # upload all images to imgur.com
+# opts_chunk$set(fig.width=5, fig.height=5, cache=TRUE)
+````
+
 Finland GIS R tools
 ===========
 
@@ -13,17 +18,17 @@ providing tools for Finnish GIS data.
 
 The following data sets are currently available:
 * [Installation](#installation)
-* [Helsinki region aluejakokartat](https://github.com/rOpenGov/fingis/#helsinki-region-aluejakokartat)
-* [Maanmittauslaitos](https://github.com/rOpenGov/fingis/#maanmittauslaitos)
-* [Geocoding](https://github.com/rOpenGov/fingis/#geocoding)
+* [Helsinki region aluejakokartat](#helsinki-region-aluejakokartat)
+* [Maanmittauslaitos](#maanmittauslaitos)
+* [Geocoding](#geocoding)
 
 ### Installation
 
 Note! The fingis package uses the rgdal library, which depends on the GDAL spatial framework. Installing this might be tricky. 
 
-FIXME: Add rgdal installation tips for all platforms:
-* Windows:
-* Linux: 
+Some rgdal installation tips for various platforms:
+* Windows: FIXME
+* Linux: FIXME
 * OSX: Check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
 
 Release version for general users (NOT AVAILABLE YET):
@@ -38,9 +43,7 @@ install_github("fingis", "ropengov")
 library(fingis)
 ```
 
-FIXME: link below
-
-Further installation and development instructions at the [home
+Further installation and development instructions at the [Github
 page](https://github.com/rOpenGov/fingis).
 
 ### Helsinki region aluejakokartat

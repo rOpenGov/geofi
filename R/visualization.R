@@ -15,7 +15,7 @@
 
 sp2df <- function(sp, region) {
   
-  message("TODO: study how general and/or necessary this function is!")
+  ## TODO: study how general and/or necessary this function is!
   # Add IDs 
   sp@data$id <- rownames(sp@data) 
   

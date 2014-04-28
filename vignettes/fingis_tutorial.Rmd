@@ -14,7 +14,7 @@ Finland GIS R tools
 This is an [rOpenGov](https://github.com/rOpenGov/fingis) R package
 providing tools for Finnish GIS data.
 
-## Availablae data
+## Available data
 
 The following data sets are currently available:
 * [Installation](#installation)
@@ -125,7 +125,7 @@ Retrieve regional borders for Finland.
 sp.mml <- get_MML(map.id="Yleiskartta-4500", data.id="HallintoAlue") 
 
 # Investigate available variables in this map
-head(as.data.frame(sp.mun))
+head(as.data.frame(sp.mml))
 ```
 
 Plot provinces (maakunnat).

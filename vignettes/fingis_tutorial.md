@@ -16,7 +16,7 @@ Finland GIS R tools
 This is an [rOpenGov](https://github.com/rOpenGov/fingis) R package
 providing tools for Finnish GIS data.
 
-## Availablae data
+## Available data
 
 The following data sets are currently available:
 * [Installation](#installation)
@@ -77,7 +77,7 @@ sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier = "suuralue")
 plot_shape(sp = sp.suuralue, varname = "Name", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-suuralue1](http://i.imgur.com/yiq4aMV.png) 
+![plot of chunk hkk-suuralue1](http://i.imgur.com/iClCH8M.png) 
 
 
 Retrieval 'suuralue_piste' spatial object, containing the center points of the districts, and plot with spplot().
@@ -88,7 +88,7 @@ sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste
 sp::spplot(obj = sp.suuralue.piste, zcol = "Name")
 ```
 
-![plot of chunk hkk-suuralue2](http://i.imgur.com/u81bJj8.png) 
+![plot of chunk hkk-suuralue2](http://i.imgur.com/ezefPnk.png) 
 
 
 Use the sp2df() function to tranform the spatial objects into data frames. Plot with ggplot2, using blank theme with get_theme_map(). 
@@ -106,7 +106,7 @@ ggplot(df.suuralue, aes(x = long, y = lat, fill = Name)) + geom_polygon() +
     geom_text(data = df.suuralue.piste, aes(label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue3](http://i.imgur.com/NCrxcX9.png) 
+![plot of chunk hkk-suuralue3](http://i.imgur.com/QU2mwge.png) 
 
 
 Add background map from OpenStreetMap using the [ggmap](https://sites.google.com/site/davidkahle/ggmap) package.
@@ -125,7 +125,7 @@ ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = 
     label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue4](http://i.imgur.com/XcPsPtM.png) 
+![plot of chunk hkk-suuralue4](http://i.imgur.com/E8NsdMY.png) 
 
 
 Retrieve and plot äänetysaluejako (election districts).
@@ -136,7 +136,7 @@ sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier = "aanestysalue")
 plot_shape(sp.aanestys, "KUNTA", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](http://i.imgur.com/8e9LAIs.png) 
+![plot of chunk hkk-aanestysalue](http://i.imgur.com/guQdfvK.png) 
 
 
 ### Other Helsinki region spatial data
@@ -210,11 +210,52 @@ Retrieve regional borders for Finland.
 sp.mml <- get_MML(map.id = "Yleiskartta-4500", data.id = "HallintoAlue")
 
 # Investigate available variables in this map
-head(as.data.frame(sp.mun))
+head(as.data.frame(sp.mml))
 ```
 
 ```
-## Error: error in evaluating the argument 'x' in selecting a method for function 'head': Error in as.data.frame(sp.mun) : object 'sp.mun' not found
+##   Kohderyhma Kohdeluokk Enklaavi AVI Maakunta Kunta
+## 0         71      84200        1   1       01   078
+## 1         71      84200        1   1       01   149
+## 2         71      84200        1   7       21   318
+## 3         71      84200        1   1       01   710
+## 4         71      84200        1   1       01   235
+## 5         71      84200        1   7       21   062
+##                            AVI_ni1
+## 0 Etelä-Suomen aluehallintovirasto
+## 1 Etelä-Suomen aluehallintovirasto
+## 2       Ahvenanmaan valtionvirasto
+## 3 Etelä-Suomen aluehallintovirasto
+## 4 Etelä-Suomen aluehallintovirasto
+## 5       Ahvenanmaan valtionvirasto
+##                                    AVI_ni2            Maaku_ni1
+## 0 Regionförvaltningsverket i Södra Finland              Uusimaa
+## 1 Regionförvaltningsverket i Södra Finland              Uusimaa
+## 2              Statens ämbetsverk på Åland Ahvenanmaan maakunta
+## 3 Regionförvaltningsverket i Södra Finland              Uusimaa
+## 4 Regionförvaltningsverket i Södra Finland              Uusimaa
+## 5              Statens ämbetsverk på Åland Ahvenanmaan maakunta
+##          Maaku_ni2  Kunta_ni1 Kunta_ni2 Kieli_ni1 Kieli_ni2
+## 0           Nyland      Hanko     Hangö     Suomi    Ruotsi
+## 1           Nyland       Ingå     Inkoo    Ruotsi     Suomi
+## 2 Landskapet Åland      Kökar       N_A    Ruotsi       N_A
+## 3           Nyland   Raseborg Raasepori    Ruotsi     Suomi
+## 4           Nyland Kauniainen Grankulla     Suomi    Ruotsi
+## 5 Landskapet Åland      Föglö       N_A    Ruotsi       N_A
+##                             AVI.FI Kieli.FI          Maakunta.FI
+## 0 Etelä-Suomen aluehallintovirasto    Suomi              Uusimaa
+## 1 Etelä-Suomen aluehallintovirasto   Ruotsi              Uusimaa
+## 2       Ahvenanmaan valtionvirasto   Ruotsi Ahvenanmaan maakunta
+## 3 Etelä-Suomen aluehallintovirasto   Ruotsi              Uusimaa
+## 4 Etelä-Suomen aluehallintovirasto    Suomi              Uusimaa
+## 5       Ahvenanmaan valtionvirasto   Ruotsi Ahvenanmaan maakunta
+##     Kunta.FI
+## 0      Hanko
+## 1      Inkoo
+## 2      Kökar
+## 3  Raasepori
+## 4 Kauniainen
+## 5      Föglö
 ```
 
 
@@ -226,7 +267,7 @@ Plot provinces (maakunnat).
 plot_shape(sp = sp.mml, varname = "Maakunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_province](http://i.imgur.com/viPMmb4.png) 
+![plot of chunk MML_province](http://i.imgur.com/1saFrcg.png) 
 
 
 Plot municipalities (kunnat).
@@ -237,7 +278,7 @@ Plot municipalities (kunnat).
 plot_shape(sp = sp.mml, varname = "Kunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_municipality](http://i.imgur.com/wdjCYFq.png) 
+![plot of chunk MML_municipality](http://i.imgur.com/ppwEm0P.png) 
 
 
 ### Geocoding
@@ -313,12 +354,12 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2      maps_2.3-6         ggmap_2.3         
-##  [4] knitr_1.5          rgeos_0.3-4        maptools_0.8-29   
-##  [7] fingis_0.9.8       RColorBrewer_1.0-5 XML_3.95-0.2      
-## [10] RCurl_1.95-4.1     bitops_1.0-6       rjson_0.2.13      
-## [13] ggplot2_0.9.3.1    spdep_0.5-71       Matrix_1.1-2-2    
-## [16] rgdal_0.8-16       sp_1.0-14          roxygen2_3.1.0    
+##  [1] rgeos_0.3-4        maptools_0.8-29    fingis_0.9.8      
+##  [4] RColorBrewer_1.0-5 XML_3.95-0.2       RCurl_1.95-4.1    
+##  [7] bitops_1.0-6       rjson_0.2.13       spdep_0.5-71      
+## [10] Matrix_1.1-2-2     rgdal_0.8-16       roxygen2_3.1.0    
+## [13] mapproj_1.2-2      maps_2.3-6         ggmap_2.3         
+## [16] ggplot2_0.9.3.1    knitr_1.5          sp_1.0-14         
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        

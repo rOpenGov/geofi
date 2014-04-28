@@ -11,7 +11,11 @@ Depends:
     R (>= 3.0.1),
     rgdal,
     sp,
+    spdep,
+    ggplot2,
     rjson,
-    RCurl
+    RCurl,
+    XML,
+    RColorBrewer
 URL: https://github.com/ropengov/fingis
 LazyLoad: yes

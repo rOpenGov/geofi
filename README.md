@@ -1,3 +1,12 @@
+fingis
+======
+
+R tools for reading open geographical data in Finland.
+
+[![Build Status](https://api.travis-ci.org/rOpenGov/fingis.png)](https://travis-ci.org/rOpenGov/fingis)
+[![Stories in Ready](https://badge.waffle.io/ropengov/fingis.png?label=TODO)](http://waffle.io/ropengov/fingis)
+
+
 ### Overview
 
   [fingis](http://ropengov.github.com/fingis) is a Finland open GIS

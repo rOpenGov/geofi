@@ -45,7 +45,7 @@ page](https://github.com/rOpenGov/fingis).
 
 ### Helsinki region aluejakokartat
 
-Retrieve Helsinki region aluejakokartat (district maps).
+Helsinki region aluejakokartat (district maps) from [HKK](http://ptp.hel.fi/avoindata/).
 
 List available maps with `get_Helsinki_aluejakokartat()`.
 
@@ -69,7 +69,7 @@ sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier = "suuralue")
 plot_shape(sp = sp.suuralue, varname = "Name", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-suuralue1](http://i.imgur.com/jp0zFrr.png) 
+![plot of chunk hkk-suuralue1](http://i.imgur.com/vV63Axi.png) 
 
 
 Retrieve 'suuralue_piste' spatial object, containing the center points of the districts, and plot with `spplot()`.
@@ -80,7 +80,7 @@ sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste
 sp::spplot(obj = sp.suuralue.piste, zcol = "Name")
 ```
 
-![plot of chunk hkk-suuralue2](http://i.imgur.com/KNjNQtt.png) 
+![plot of chunk hkk-suuralue2](http://i.imgur.com/mKkJOw3.png) 
 
 
 Use `sp2df()` function to tranform the spatial objects into data frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with `get_theme_map()`. 
@@ -98,7 +98,7 @@ ggplot(df.suuralue, aes(x = long, y = lat, fill = Name)) + geom_polygon() +
     geom_text(data = df.suuralue.piste, aes(label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue3](http://i.imgur.com/rk4tF6J.png) 
+![plot of chunk hkk-suuralue3](http://i.imgur.com/9klF7AS.png) 
 
 
 Add background map from OpenStreetMap using `get_map()` from [ggmap](https://sites.google.com/site/davidkahle/ggmap) and plot again.
@@ -111,24 +111,13 @@ library(ggmap)
 hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
 hel.map <- ggmap::get_map(location = hel.bbox, source = "osm")
-```
-
-```
-## Warning: cannot open: HTTP status was '503 Service Unavailable'
-```
-
-```
-## Error: map grabbing failed - see details in ?get_openstreetmap.
-```
-
-```r
 # Plot transparent districts on top the background map
 ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = Name), 
     alpha = 0.5) + geom_text(data = df.suuralue.piste, aes(x = long, y = lat, 
     label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue4](http://i.imgur.com/RXTRj1g.png) 
+![plot of chunk hkk-suuralue4](http://i.imgur.com/4wAqxCW.png) 
 
 
 Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `plot_shape()`.
@@ -139,10 +128,12 @@ sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier = "aanestysalue")
 plot_shape(sp.aanestys, "KUNTA", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](http://i.imgur.com/lwPKdoJ.png) 
+![plot of chunk hkk-aanestysalue](http://i.imgur.com/nMuTY9x.png) 
 
 
-### Other Helsinki region spatial data
+### Helsinki spatial data
+
+Other Helsinki region spatial data from [HKK](http://ptp.hel.fi/avoindata/).
 
 List available spatial data with `get_Helsinki_spatial()`.
 
@@ -303,7 +294,7 @@ Plot provinces (maakunnat) with `plot_shape()`.
 plot_shape(sp = sp.mml, varname = "Maakunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_province](http://i.imgur.com/gXsR5fs.png) 
+![plot of chunk MML_province](http://i.imgur.com/TzXDOvq.png) 
 
 
 Plot municipalities (kunnat) with `plot_shape()`.
@@ -314,7 +305,7 @@ Plot municipalities (kunnat) with `plot_shape()`.
 plot_shape(sp = sp.mml, varname = "Kunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_municipality](http://i.imgur.com/0LXycIL.png) 
+![plot of chunk MML_municipality](http://i.imgur.com/smez98J.png) 
 
 
 ### Geocoding

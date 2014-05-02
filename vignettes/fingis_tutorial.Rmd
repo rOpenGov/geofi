@@ -45,7 +45,7 @@ page](https://github.com/rOpenGov/fingis).
 
 ### Helsinki region aluejakokartat
 
-Retrieve Helsinki region aluejakokartat (district maps).
+Helsinki region aluejakokartat (district maps) from [HKK](http://ptp.hel.fi/avoindata/).
 
 List available maps with `get_Helsinki_aluejakokartat()`.
 
@@ -100,7 +100,9 @@ sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier="aanestysalue")
 plot_shape(sp.aanestys, "KUNTA", type="discrete", plot=FALSE)
 ```
 
-### Other Helsinki region spatial data
+### Helsinki spatial data
+
+Other Helsinki region spatial data from [HKK](http://ptp.hel.fi/avoindata/).
 
 List available spatial data with `get_Helsinki_spatial()`.
 

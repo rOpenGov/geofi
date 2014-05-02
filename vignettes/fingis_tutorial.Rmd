@@ -23,15 +23,13 @@ The following data sets are currently available:
 
 ### Installation
 
-Note! The fingis package uses the rgdal library, which depends on the GDAL spatial framework. Installing this might be tricky. If you encounter problems, please contact us by email: louhos@googlegroups.com.
-
-Some rgdal installation tips for various platforms:
+Note! The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
 * Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
 * OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
 * Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
-Release version for general users (NOT AVAILABLE YET):
 
+Release version for general users (NOT AVAILABLE YET):
 
 Development version for developers:
 
@@ -52,8 +50,7 @@ Retrieve Helsinki region aluejakokartat (district maps).
 List available maps with `get_Helsinki_aluejakokartat()`.
 
 ```{r aluejako_list, message=FALSE}
-map.list <- get_Helsinki_aluejakokartat()
-map.list
+get_Helsinki_aluejakokartat()
 ```
 
 Retrieve 'suuralue' spatial object with `get_Helsinki_aluejakokartat()`, and plot with `plot_shape()`.
@@ -105,11 +102,16 @@ plot_shape(sp.aanestys, "KUNTA", type="discrete", plot=FALSE)
 
 ### Other Helsinki region spatial data
 
-To be added
+List available spatial data with `get_Helsinki_spatial()`.
+
+```{r hki_spatial_list, message=FALSE}
+get_Helsinki_spatial()
+```
+
 
 ### Maanmittauslaitos
 
-Spatial data from  Maanmittauslaitos (MML, Land Survey Finland). These data are preprocessed into RData format (FIXME: add description).
+Spatial data from  Maanmittauslaitos (MML, Land Survey Finland). These data are preprocessed into RData format, see details [here](https://github.com/avoindata/mml/tree/master/rdata).
 
 List available data sets with `list_mml_datasets()`.
 

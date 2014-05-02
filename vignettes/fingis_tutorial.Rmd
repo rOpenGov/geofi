@@ -18,6 +18,7 @@ providing tools for Finnish GIS data.
 
 The following data sets are currently available:
 * [Helsinki region aluejakokartat](#helsinki-region-aluejakokartat)
+* [Helsinki spatial data](#helsinki-spatial-data)
 * [Maanmittauslaitos](#maanmittauslaitos)
 * [Geocoding](#geocoding)
 
@@ -37,6 +38,11 @@ Development version for developers:
 install.packages("devtools")
 library(devtools)
 install_github("fingis", "ropengov")
+```
+
+Load package.
+
+```{r load}
 library(fingis)
 ```
 

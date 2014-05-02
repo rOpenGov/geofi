@@ -1,3 +1,18 @@
+# This file is a part of the helsinki package (http://github.com/rOpenGov/helsinki)
+# in association with the rOpenGov project (ropengov.github.io)
+
+# Copyright (C) 2010-2014 Joona Lehtomäki / Louhos <louhos.github.com>. 
+# All rights reserved.
+
+# This program is open source software; you can redistribute it and/or modify 
+# it under the terms of the FreeBSD License (keep this notice): 
+# http://en.wikipedia.org/wiki/BSD_licenses
+
+# This program is distributed in the hope that it will be useful, 
+# but WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
 #' Merge a list of Spatial*DataFrame objects into one Spatial*DataFrame
 #'
 #' Several independent Spatatial*DataFrame objects held in a list can be merged

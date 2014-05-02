@@ -1,6 +1,7 @@
-# This file is a part of rOpenGov (http://ropengov.github.io)
+# This file is a part of the helsinki package (http://github.com/rOpenGov/helsinki)
+# in association with the rOpenGov project (ropengov.github.io)
 
-# Copyright (C) 2010-2014 Leo Lahti, Juuso Parkkinen and Joona Lehtomaki <ropengov.github.com>. 
+# Copyright (C) 2010-2014 Juuso Parkkinen, Leo Lahti and Joona Lehtomäki / Louhos <louhos.github.com>. 
 # All rights reserved.
 
 # This program is open source software; you can redistribute it and/or modify 

@@ -41,6 +41,7 @@
 
 get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()) {
   
+  # If data not specified, return a list of available options
   if (is.null(map.specifier)) {
     message("Please specify 'map.specifier'!")
     return(c("kunta", "pienalue", "pienalue_piste", "suuralue", "suuralue_piste", "tilastoalue", "tilastoalue_piste", "aanestysalue"))

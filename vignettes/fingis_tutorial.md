@@ -47,6 +47,21 @@ Load package.
 library(fingis)
 ```
 
+```
+## Loading required package: rgdal
+## Loading required package: sp
+## rgdal: version: 0.8-16, (SVN revision 498)
+## Geospatial Data Abstraction Library extensions to R successfully loaded
+## Loaded GDAL runtime: GDAL 1.9.2, released 2012/10/08
+## Path to GDAL shared files: /Library/Frameworks/R.framework/Versions/3.0/Resources/library/rgdal/gdal
+## Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
+## Path to PROJ.4 shared files: /Library/Frameworks/R.framework/Versions/3.0/Resources/library/rgdal/proj
+## fingis R package: tools for open GIS data for Finland.
+## This R package is part of rOpenGov <ropengov.github.io>.
+## Copyright (C) 2010-2014 Leo Lahti, Juuso Parkkinen and Joona Lehtomaki.
+## This is free software. You are free to use, modify and redistribute it under the FreeBSD license.
+```
+
 
 Further development instructions at the [Github
 page](https://github.com/rOpenGov/fingis).
@@ -77,7 +92,7 @@ sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier = "suuralue")
 plot_shape(sp = sp.suuralue, varname = "Name", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-suuralue1](http://i.imgur.com/DC34S6v.png) 
+![plot of chunk hkk-suuralue1](http://i.imgur.com/LeMuWw7.png) 
 
 
 Retrieve 'suuralue_piste' spatial object, containing the center points of the districts, and plot with `spplot()`.
@@ -88,7 +103,7 @@ sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste
 sp::spplot(obj = sp.suuralue.piste, zcol = "Name")
 ```
 
-![plot of chunk hkk-suuralue2](http://i.imgur.com/uRx66PB.png) 
+![plot of chunk hkk-suuralue2](http://i.imgur.com/RLMmhWx.png) 
 
 
 Use `sp2df()` function to tranform the spatial objects into data frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with `get_theme_map()`. 
@@ -100,13 +115,14 @@ df.suuralue <- sp2df(sp.suuralue, "Name")
 df.suuralue.piste <- sp2df(sp.suuralue.piste, "Name")
 
 # Set map theme
+library(ggplot2)
 theme_set(get_theme_map())
 # Plot regions, add labels using the points data
 ggplot(df.suuralue, aes(x = long, y = lat, fill = Name)) + geom_polygon() + 
     geom_text(data = df.suuralue.piste, aes(label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue3](http://i.imgur.com/fR5ERTO.png) 
+![plot of chunk hkk-suuralue3](http://i.imgur.com/0hVPgQl.png) 
 
 
 Add background map from OpenStreetMap using `get_map()` from [ggmap](https://sites.google.com/site/davidkahle/ggmap) and plot again.
@@ -136,7 +152,9 @@ ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = 
     label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue4](http://i.imgur.com/IYCEFlJ.png) 
+```
+## Error: object 'hel.map' not found
+```
 
 
 Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `plot_shape()`.
@@ -147,7 +165,7 @@ sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier = "aanestysalue")
 plot_shape(sp.aanestys, "KUNTA", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](http://i.imgur.com/BrQUM4N.png) 
+![plot of chunk hkk-aanestysalue](http://i.imgur.com/h2uL3TA.png) 
 
 
 ### Helsinki spatial data
@@ -313,7 +331,7 @@ Plot provinces (maakunnat) with `plot_shape()`.
 plot_shape(sp = sp.mml, varname = "Maakunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_province](http://i.imgur.com/QFLCA2i.png) 
+![plot of chunk MML_province](http://i.imgur.com/gDW8wyM.png) 
 
 
 Plot municipalities (kunnat) with `plot_shape()`.
@@ -324,7 +342,7 @@ Plot municipalities (kunnat) with `plot_shape()`.
 plot_shape(sp = sp.mml, varname = "Kunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_municipality](http://i.imgur.com/IeXZyZ8.png) 
+![plot of chunk MML_municipality](http://i.imgur.com/YrAp1zJ.png) 
 
 
 ### Geocoding
@@ -400,24 +418,22 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2      maps_2.3-6         ggmap_2.3         
-##  [4] rgeos_0.3-4        maptools_0.8-29    knitr_1.5         
-##  [7] fingis_0.9.9       RColorBrewer_1.0-5 XML_3.95-0.2      
-## [10] ggplot2_0.9.3.1    spdep_0.5-71       Matrix_1.1-2-2    
-## [13] RCurl_1.95-4.1     bitops_1.0-6       rjson_0.2.13      
-## [16] roxygen2_3.1.0     rgdal_0.8-16       sp_1.0-14         
+## [1] ggmap_2.3       ggplot2_0.9.3.1 rgeos_0.3-4     maptools_0.8-29
+## [5] fingis_0.9.9    rgdal_0.8-16    sp_1.0-14       knitr_1.5      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        
-##  [4] codetools_0.2-8     colorspace_1.2-4    deldir_0.1-5       
-##  [7] dichromat_2.0-0     digest_0.6.4        evaluate_0.5.1     
-## [10] foreign_0.8-60      formatR_0.10        grid_3.0.3         
-## [13] gtable_0.1.2        labeling_0.2        lattice_0.20-27    
-## [16] LearnBayes_2.12     MASS_7.3-30         munsell_0.4.2      
-## [19] nlme_3.1-115        plyr_1.8.1          png_0.1-7          
-## [22] proto_0.3-10        Rcpp_0.11.1         reshape2_1.2.2     
-## [25] RgoogleMaps_1.2.0.5 RJSONIO_1.0-3       scales_0.2.3       
-## [28] splines_3.0.3       stringr_0.6.2       tools_3.0.3
+##  [1] boot_1.3-10         coda_0.16-1         colorspace_1.2-4   
+##  [4] deldir_0.1-5        dichromat_2.0-0     digest_0.6.4       
+##  [7] evaluate_0.5.1      foreign_0.8-60      formatR_0.10       
+## [10] grid_3.0.3          gtable_0.1.2        labeling_0.2       
+## [13] lattice_0.20-27     LearnBayes_2.12     mapproj_1.2-2      
+## [16] maps_2.3-6          MASS_7.3-30         Matrix_1.1-2-2     
+## [19] munsell_0.4.2       nlme_3.1-115        plyr_1.8.1         
+## [22] png_0.1-7           proto_0.3-10        RColorBrewer_1.0-5 
+## [25] Rcpp_0.11.1         RCurl_1.95-4.1      reshape2_1.2.2     
+## [28] RgoogleMaps_1.2.0.5 rjson_0.2.13        RJSONIO_1.0-3      
+## [31] scales_0.2.3        spdep_0.5-71        splines_3.0.3      
+## [34] stringr_0.6.2       tools_3.0.3         XML_3.95-0.2
 ```
 
 

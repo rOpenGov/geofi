@@ -6,7 +6,7 @@
 ```{r setup}
 opts_knit$set(upload.fun = imgur_upload, base.url = NULL) # upload all images to imgur.com
 # opts_chunk$set(fig.width=5, fig.height=5, cache=TRUE)
-````
+```
 
 Finland GIS R tools
 ===========
@@ -17,19 +17,18 @@ providing tools for Finnish GIS data.
 ## Available data
 
 The following data sets are currently available:
-* [Installation](#installation)
 * [Helsinki region aluejakokartat](#helsinki-region-aluejakokartat)
 * [Maanmittauslaitos](#maanmittauslaitos)
 * [Geocoding](#geocoding)
 
 ### Installation
 
-Note! The fingis package uses the rgdal library, which depends on the GDAL spatial framework. Installing this might be tricky. 
+Note! The fingis package uses the rgdal library, which depends on the GDAL spatial framework. Installing this might be tricky. If you encounter problems, please contact us by email: louhos@googlegroups.com.
 
 Some rgdal installation tips for various platforms:
-* Windows: FIXME
-* Linux: FIXME
-* OSX: Check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+* Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
+* OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+* Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
 Release version for general users (NOT AVAILABLE YET):
 

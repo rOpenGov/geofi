@@ -19,19 +19,18 @@ providing tools for Finnish GIS data.
 ## Available data
 
 The following data sets are currently available:
-* [Installation](#installation)
 * [Helsinki region aluejakokartat](#helsinki-region-aluejakokartat)
 * [Maanmittauslaitos](#maanmittauslaitos)
 * [Geocoding](#geocoding)
 
 ### Installation
 
-Note! The fingis package uses the rgdal library, which depends on the GDAL spatial framework. Installing this might be tricky. 
+Note! The fingis package uses the rgdal library, which depends on the GDAL spatial framework. Installing this might be tricky. If you encounter problems, please contact us by email: louhos@googlegroups.com.
 
 Some rgdal installation tips for various platforms:
-* Windows: FIXME
-* Linux: FIXME
-* OSX: Check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+* Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
+* OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+* Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
 Release version for general users (NOT AVAILABLE YET):
 
@@ -77,7 +76,7 @@ sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier = "suuralue")
 plot_shape(sp = sp.suuralue, varname = "Name", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-suuralue1](http://i.imgur.com/iClCH8M.png) 
+![plot of chunk hkk-suuralue1](http://i.imgur.com/RckepmJ.png) 
 
 
 Retrieval 'suuralue_piste' spatial object, containing the center points of the districts, and plot with spplot().
@@ -88,7 +87,7 @@ sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste
 sp::spplot(obj = sp.suuralue.piste, zcol = "Name")
 ```
 
-![plot of chunk hkk-suuralue2](http://i.imgur.com/ezefPnk.png) 
+![plot of chunk hkk-suuralue2](http://i.imgur.com/UevJThW.png) 
 
 
 Use the sp2df() function to tranform the spatial objects into data frames. Plot with ggplot2, using blank theme with get_theme_map(). 
@@ -106,7 +105,7 @@ ggplot(df.suuralue, aes(x = long, y = lat, fill = Name)) + geom_polygon() +
     geom_text(data = df.suuralue.piste, aes(label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue3](http://i.imgur.com/QU2mwge.png) 
+![plot of chunk hkk-suuralue3](http://i.imgur.com/fG3teDC.png) 
 
 
 Add background map from OpenStreetMap using the [ggmap](https://sites.google.com/site/davidkahle/ggmap) package.
@@ -125,7 +124,7 @@ ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = 
     label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue4](http://i.imgur.com/E8NsdMY.png) 
+![plot of chunk hkk-suuralue4](http://i.imgur.com/Jc3OIhQ.png) 
 
 
 Retrieve and plot äänetysaluejako (election districts).
@@ -136,7 +135,7 @@ sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier = "aanestysalue")
 plot_shape(sp.aanestys, "KUNTA", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](http://i.imgur.com/guQdfvK.png) 
+![plot of chunk hkk-aanestysalue](http://i.imgur.com/Ta4c0MO.png) 
 
 
 ### Other Helsinki region spatial data
@@ -267,7 +266,7 @@ Plot provinces (maakunnat).
 plot_shape(sp = sp.mml, varname = "Maakunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_province](http://i.imgur.com/1saFrcg.png) 
+![plot of chunk MML_province](http://i.imgur.com/gaW04kE.png) 
 
 
 Plot municipalities (kunnat).
@@ -278,7 +277,7 @@ Plot municipalities (kunnat).
 plot_shape(sp = sp.mml, varname = "Kunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_municipality](http://i.imgur.com/ppwEm0P.png) 
+![plot of chunk MML_municipality](http://i.imgur.com/WIIAUKC.png) 
 
 
 ### Geocoding
@@ -354,12 +353,12 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] rgeos_0.3-4        maptools_0.8-29    fingis_0.9.8      
-##  [4] RColorBrewer_1.0-5 XML_3.95-0.2       RCurl_1.95-4.1    
-##  [7] bitops_1.0-6       rjson_0.2.13       spdep_0.5-71      
-## [10] Matrix_1.1-2-2     rgdal_0.8-16       roxygen2_3.1.0    
-## [13] mapproj_1.2-2      maps_2.3-6         ggmap_2.3         
-## [16] ggplot2_0.9.3.1    knitr_1.5          sp_1.0-14         
+##  [1] mapproj_1.2-2      maps_2.3-6         ggmap_2.3         
+##  [4] rgeos_0.3-4        maptools_0.8-29    knitr_1.5         
+##  [7] fingis_0.9.9       RColorBrewer_1.0-5 XML_3.95-0.2      
+## [10] ggplot2_0.9.3.1    spdep_0.5-71       Matrix_1.1-2-2    
+## [13] RCurl_1.95-4.1     bitops_1.0-6       rjson_0.2.13      
+## [16] roxygen2_3.1.0     rgdal_0.8-16       sp_1.0-14         
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        

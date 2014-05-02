@@ -3,7 +3,7 @@
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
 
-```{r setup}
+```{r setup, echo=FALSE}
 opts_knit$set(upload.fun = imgur_upload, base.url = NULL) # upload all images to imgur.com
 # opts_chunk$set(fig.width=5, fig.height=5, cache=TRUE)
 ```
@@ -42,35 +42,35 @@ install_github("fingis", "ropengov")
 library(fingis)
 ```
 
-Further installation and development instructions at the [Github
+Further development instructions at the [Github
 page](https://github.com/rOpenGov/fingis).
 
 ### Helsinki region aluejakokartat
 
-Retrieve Helsinki region aluejakokartat (district maps.)
+Retrieve Helsinki region aluejakokartat (district maps).
 
-List available maps
+List available maps with `get_Helsinki_aluejakokartat()`.
 
 ```{r aluejako_list, message=FALSE}
 map.list <- get_Helsinki_aluejakokartat()
 map.list
 ```
 
-Retrieve 'suuralue' spatial object and plot it with the plot_shape() function.
+Retrieve 'suuralue' spatial object with `get_Helsinki_aluejakokartat()`, and plot with `plot_shape()`.
 
 ```{r hkk-suuralue1, message=FALSE, warning=FALSE, results='hide'}
 sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue")
 plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 ```
 
-Retrieval 'suuralue_piste' spatial object, containing the center points of the districts, and plot with spplot().
+Retrieve 'suuralue_piste' spatial object, containing the center points of the districts, and plot with `spplot()`.
 
 ```{r hkk-suuralue2, message=FALSE, warning=FALSE, results='hide'}
 sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier="suuralue_piste")
 sp::spplot(obj=sp.suuralue.piste, zcol="Name")
 ```
 
-Use the sp2df() function to tranform the spatial objects into data frames. Plot with ggplot2, using blank theme with get_theme_map(). 
+Use `sp2df()` function to tranform the spatial objects into data frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with `get_theme_map()`. 
 
 ```{r hkk-suuralue3, message=FALSE}
 # Get data frames
@@ -83,7 +83,7 @@ theme_set(get_theme_map())
 ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + geom_polygon() + geom_text(data=df.suuralue.piste, aes(label=Name)) + theme(legend.position="none")
 ```
 
-Add background map from OpenStreetMap using the [ggmap](https://sites.google.com/site/davidkahle/ggmap) package.
+Add background map from OpenStreetMap using `get_map()` from [ggmap](https://sites.google.com/site/davidkahle/ggmap) and plot again.
 
 ```{r hkk-suuralue4, message=FALSE}
 # Add background map from OpenStreetMap using ggmap
@@ -96,7 +96,7 @@ hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
 ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, label=Name)) + theme(legend.position="none")
 ```
 
-Retrieve and plot äänetysaluejako (election districts).
+Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `plot_shape()`.
 
 ```{r hkk-aanestysalue, message=FALSE, warning=FALSE, results='hide'}
 sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier="aanestysalue")
@@ -111,13 +111,13 @@ To be added
 
 Spatial data from  Maanmittauslaitos (MML, Land Survey Finland). These data are preprocessed into RData format (FIXME: add description).
 
-List available data sets
+List available data sets with `list_mml_datasets()`.
 
 ```{r MML_list, message=FALSE} 
 list_mml_datasets()
 ```
 
-Retrieve regional borders for Finland.
+Retrieve regional borders for Finland with `get_MML()`.
 
 ```{r MML_regions, message=FALSE, warning=FALSE} 
 # Get a specific map
@@ -127,14 +127,14 @@ sp.mml <- get_MML(map.id="Yleiskartta-4500", data.id="HallintoAlue")
 head(as.data.frame(sp.mml))
 ```
 
-Plot provinces (maakunnat).
+Plot provinces (maakunnat) with `plot_shape()`.
 
 ```{r MML_province, message=FALSE, warning=FALSE} 
 # Plot the shape file, colour provinces
 plot_shape(sp=sp.mml, varname="Maakunta", type="discrete", plot = FALSE)
 ```
 
-Plot municipalities (kunnat).
+Plot municipalities (kunnat) with `plot_shape()`.
 
 ```{r MML_municipality, message=FALSE, warning=FALSE} 
 # Plot the shape file, colour municipalities
@@ -148,7 +148,7 @@ Get geocodes for given location (address etc.) using one of the available servic
 * [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
 * [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
-The function get_geocode() returns both latitude and longitude for the first hit, and the raw output (varies depending on the service used).
+The function `get_geocode()` returns both latitude and longitude for the first hit, and the raw output (varies depending on the service used).
 
 ```{r geocoding, message=FALSE}
 gc1 <- get_geocode("Mannerheimintie 100, Helsinki", service="okf")

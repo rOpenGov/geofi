@@ -18,8 +18,10 @@ Transform data from sp to data frame for ggplot2
 \examples{
 sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
           df.suuralue <- sp2df(sp.suuralue, "Name");
+          library(ggplot2);
           theme_set(get_theme_map());
-          ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + geom_polygon() + theme(legend.position="none")
+          ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) +
+          geom_polygon() + theme(legend.position="none")
 }
 \author{
 Juuso Parkkinen \email{louhos@googlegroups.com}

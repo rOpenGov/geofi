@@ -19,6 +19,7 @@ Imports:
     XML,
     RColorBrewer
 Suggests:
+    rgeos,
     maptools
 URL: https://github.com/ropengov/fingis
 LazyLoad: yes

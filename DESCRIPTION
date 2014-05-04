@@ -18,5 +18,7 @@ Imports:
     ggplot2,
     XML,
     RColorBrewer
+Suggests:
+    maptools
 URL: https://github.com/ropengov/fingis
 LazyLoad: yes

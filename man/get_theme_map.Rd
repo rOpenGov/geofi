@@ -12,6 +12,7 @@ Get blank ggplot2 theme for plotting maps
 }
 \examples{
 sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+          library(maptools);
           df.suuralue <- sp2df(sp.suuralue, "Name");
           library(ggplot2);
           theme_set(get_theme_map());

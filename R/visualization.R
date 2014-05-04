@@ -24,6 +24,7 @@
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("fingis")
 #' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#'           library(maptools);
 #'           df.suuralue <- sp2df(sp.suuralue, "Name");
 #'           library(ggplot2);
 #'           theme_set(get_theme_map());
@@ -66,6 +67,7 @@ sp2df <- function(sp, region) {
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("fingis")
 #' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#'           library(maptools);
 #'           df.suuralue <- sp2df(sp.suuralue, "Name");
 #'           library(ggplot2);
 #'           theme_set(get_theme_map());

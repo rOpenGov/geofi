@@ -280,6 +280,7 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
 
 generate_map_colours <- function(sp) {
   
+  message("Generating neighbour colours...")
   nb <- spdep::poly2nb(sp)   # Generate neighbours lists
   
   n <- length(sp)            # Number of polygons
@@ -292,11 +293,31 @@ generate_map_colours <- function(sp) {
   
   for(i in 2:n)
     cols[i] <- which.min(cols1n %in% cols[nb[[i]]])
-  
+
   cols
-  
+
+#   # Alternative, using gcolor, from the same url as above code
+#   nb <- spdep::poly2nb(sp)
+#   mat <- spdep::nb2mat(nb, style="B")
+#   gcol <- gcolor::ineq(mat) 
+#   gcol
 }
 
-
+# ## FIXME: Fix the neighbour region colours
+# # This does not work
+# sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+# plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
+# 
+# # This kins of works (one mistake)
+# sp.suuralue@data$COL <- factor(generate_map_colours(sp.suuralue))
+# spplot(sp.suuralue, zcol="COL")
+# plot_shape(sp=sp.suuralue, varname="COL", type="discrete", plot=FALSE)
+# 
+# # This is even better (no mistakes)
+# nb <- spdep::poly2nb(sp.suuralue)
+# mat <- spdep::nb2mat(nb, style="B")
+# sp.suuralue@data$GCOL <- factor(gcolor::ineq(mat))
+# spplot(sp.suuralue, "GCOL")
+# plot_shape(sp=sp.suuralue, varname="GCOL", type="discrete", plot=FALSE)
 
 

@@ -319,5 +319,11 @@ generate_map_colours <- function(sp) {
 # sp.suuralue@data$GCOL <- factor(gcolor::ineq(mat))
 # spplot(sp.suuralue, "GCOL")
 # plot_shape(sp=sp.suuralue, varname="GCOL", type="discrete", plot=FALSE)
-
-
+# 
+# # Works also for municipality data
+# sp.mml <- get_MML(map.id = "Yleiskartta-4500", data.id = "HallintoAlue")
+# nb <- spdep::poly2nb(sp.mml)
+# mat <- spdep::nb2mat(nb, style="B")
+# sp.mml@data$GCOL <- factor(gcolor::ineq(mat))
+# spplot(sp.mml, "GCOL")
+# plot_shape(sp=sp.mml, varname="GCOL", type="discrete", plot=FALSE)

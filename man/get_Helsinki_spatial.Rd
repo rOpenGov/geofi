@@ -3,7 +3,7 @@
 \title{Retrieve spatial data for Helsinki region}
 \usage{
 get_Helsinki_spatial(map.type = NULL, map.specifier = NULL,
-  data.dir = tempdir())
+  data.dir = tempdir(), verbose = TRUE)
 }
 \arguments{
   \item{map.type}{A string. Specify the type of HKK map
@@ -16,6 +16,9 @@ get_Helsinki_spatial(map.type = NULL, map.specifier = NULL,
 
   \item{data.dir}{A string. Specify a temporary folder for
   storing downloaded data.}
+
+  \item{verbose}{logical. Should R report extra information
+  on progress?}
 }
 \value{
 Shape object (from SpatialPolygonsDataFrame class)

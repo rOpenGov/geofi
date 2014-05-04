@@ -2,7 +2,11 @@
 \alias{list_mml_datasets}
 \title{List Land Survey Finland (MML) data sets readily available in RData format.}
 \usage{
-list_mml_datasets()
+list_mml_datasets(verbose = TRUE)
+}
+\arguments{
+  \item{verbose}{logical. Should R report extra information
+  on progress?}
 }
 \value{
 List of data sets

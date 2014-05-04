@@ -27,6 +27,7 @@
 #' Helsinki District Boundary data set to retrieve.
 #' Run 'get_Helsinki_aluejakokartat()' to see available options.
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
+#' @param verbose logical. Should R report extra information on progress? 
 #'
 #' @return a shape object (from SpatialPolygons class)
 #' @importFrom rgdal readOGR
@@ -39,7 +40,7 @@
 #' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 
-get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()) {
+get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir(), verbose=TRUE) {
   
   # If data not specified, return a list of available options
   if (is.null(map.specifier)) {
@@ -56,22 +57,28 @@ get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
   # Define data to download
   if (map.specifier %in% c("kunta", "pienalue", "pienalue_piste", "suuralue", "suuralue_piste", "tilastoalue", "tilastoalue_piste")) {
     zip.file <- "PKS_Kartta_Rajat_KML2011.zip"
-    message("Helsinki region district boundaries (Paakaupunkiseudun aluejakokartat) (C) HKK 2011")
-    message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Kartta_avoindata_kayttoehdot_v02_3_2011.pdf'")
+    if (verbose) {
+      message("Helsinki region district boundaries (Paakaupunkiseudun aluejakokartat) (C) HKK 2011")
+      message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Kartta_avoindata_kayttoehdot_v02_3_2011.pdf'")
+    }
   } else if (map.specifier == "aanestysalue") {
     zip.file <- "pk_seudun_aanestysalueet.zip"
-    message("Helsinki election district boundaries (Paakaupunkiseudun aanestysalueet) (C) HKK 2011")
-    message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Avoin%20lisenssi%20aanestysalueet.pdf'")
+    if (verbose) {
+      message("Helsinki election district boundaries (Paakaupunkiseudun aanestysalueet) (C) HKK 2011")
+      message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Avoin%20lisenssi%20aanestysalueet.pdf'")
+    }
   }
   
   # Download data
   remote.zip <- paste0("http://ptp.hel.fi/avoindata/aineistot/", zip.file)
   local.zip <-  file.path(data.dir, zip.file)
   if (!file.exists(local.zip)) {
-    message("Dowloading ", remote.zip, "\ninto ", local.zip, "\n")
-    utils::download.file(remote.zip, destfile = local.zip)
+    if (verbose)
+      message("Dowloading ", remote.zip, "\ninto ", local.zip, "\n")
+    utils::download.file(remote.zip, destfile = local.zip, quiet=!verbose)
   } else {
-    message("File ", local.zip, " already found, will not download!")
+    if (verbose)
+      message("File ", local.zip, " already found, will not download!")
   }
   
   ## Process data ----------------------------------------
@@ -87,15 +94,17 @@ get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
   }
   
   # Read spatial data
-  message("Reading filename ", filename)
+  if (verbose)
+    message("Reading filename ", filename)
   
   # TODO: fix warning about Z-dimension discarded
   if (map.specifier != "aanestysalue") {
-    sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = TRUE, drop_unsupported_fields=T, dropNULLGeometries=T)
+    sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = verbose, drop_unsupported_fields=T, dropNULLGeometries=T)
   } else {
-    sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = TRUE, drop_unsupported_fields=T, dropNULLGeometries=T, encoding="ISO-8859-1", use_iconv=TRUE)
+    sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = verbose, drop_unsupported_fields=T, dropNULLGeometries=T, encoding="ISO-8859-1", use_iconv=TRUE)
   }
-  message("\nData loaded successfully!")
+  if (verbose)
+    message("\nData loaded successfully!")
   return(sp)
 }
 
@@ -115,6 +124,7 @@ get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' @param map.specifier  A string. Specify the specific data to retrieve. 
 #' Run 'get_Helsinki_mapdata()' to see available options.
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
+#' @param verbose logical. Should R report extra information on progress? 
 #'
 #' @return Shape object (from SpatialPolygonsDataFrame class)
 #' @importFrom rgdal readOGR
@@ -126,7 +136,7 @@ get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' @examples sp.piiri <- get_Helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_SUURPIIRI");
 #'           plot_shape(sp=sp.piiri, varname="NIMI", type="discrete", plot=FALSE);
 
-get_Helsinki_spatial <- function(map.type=NULL, map.specifier=NULL, data.dir = tempdir()) {
+get_Helsinki_spatial <- function(map.type=NULL, map.specifier=NULL, data.dir = tempdir(), verbose=TRUE) {
   
   # If data not specified, return a list of available options
   if (is.null(map.type) | is.null(map.specifier)) {
@@ -145,23 +155,26 @@ get_Helsinki_spatial <- function(map.type=NULL, map.specifier=NULL, data.dir = t
   # Specify data to download
   if (map.type=="seutukartta") {
     zip.file <- "sk14_avoin.zip"
-    message("Helsinki Region Map (Seutukartta)")
-    message("For metadata see 'http://ptp.hel.fi/paikkatietohakemisto/?id=30' and 'http://ptp.hel.fi/avoindata/aineistot/Seutukartta_aineistokuvaus.pdf'")
-    message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Seudullinen_avoimen_tietoaineiston_lisenssi_1.0.pdf'")
-    
+    if (verbose) {
+      message("Helsinki Region Map (Seutukartta)")
+      message("For metadata see 'http://ptp.hel.fi/paikkatietohakemisto/?id=30' and 'http://ptp.hel.fi/avoindata/aineistot/Seutukartta_aineistokuvaus.pdf'")
+      message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Seudullinen_avoimen_tietoaineiston_lisenssi_1.0.pdf'")
+    }    
   } else if (map.type=="piirijako") {
     zip.file <- "Helsingin_piirijako_2013.zip"
-    message("District Division of the City of Helsinki (Helsingin aluejaot - piirijako)")
-    message("For metadata see 'http://ptp.hel.fi/paikkatietohakemisto/?id=139'")
-    message("Licence information: 'http://www.hel.fi/hki/Kv/fi/Kaupunkimittausosasto'")
-    
+    if (verbose) {
+      message("District Division of the City of Helsinki (Helsingin aluejaot - piirijako)")
+      message("For metadata see 'http://ptp.hel.fi/paikkatietohakemisto/?id=139'")
+      message("Licence information: 'http://www.hel.fi/hki/Kv/fi/Kaupunkimittausosasto'")
+    }
   } else if (map.type=="rakennusrekisteri") {
     zip.file <- "rakennukset_Helsinki_06_2012.zip"
-    message("Helsinki city building registry (rakennusrekisterin ote) (C) Helsinging kaupunki, 2012")
-    message("For metadata see file 'Metatieto_rakennukset.xls' in the zip file")
-    message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Rakennusdata%20lisenssi_09_2012.pdf'")
-    message("Warning! The zip file si really big and may cause problems for downloading!")
-    
+    if (verbose) {
+      message("Helsinki city building registry (rakennusrekisterin ote) (C) Helsinging kaupunki, 2012")
+      message("For metadata see file 'Metatieto_rakennukset.xls' in the zip file")
+      message("Licence: 'http://ptp.hel.fi/avoindata/aineistot/Rakennusdata%20lisenssi_09_2012.pdf'")
+      message("Warning! The zip file si really big and may cause problems for downloading!")
+    } 
   } else {
     stop("Invalid 'map.type'! Run 'temp=get_Helsinki_mapdata()' to list available options.")
   }
@@ -170,10 +183,12 @@ get_Helsinki_spatial <- function(map.type=NULL, map.specifier=NULL, data.dir = t
   remote.zip <- paste0("http://ptp.hel.fi/avoindata/aineistot/", zip.file)
   local.zip <-  file.path(data.dir, zip.file)
   if (!file.exists(local.zip)) {
-    message("\nDowloading ", remote.zip, "\ninto ", local.zip, "\n")
-    utils::download.file(remote.zip, destfile = local.zip)
+    if (verbose)
+      message("\nDowloading ", remote.zip, "\ninto ", local.zip, "\n")
+    utils::download.file(remote.zip, destfile = local.zip, quiet=!verbose)
   } else {
-    message("\nFile ", local.zip, " already found, will not download!")
+    if (verbose)
+      message("\nFile ", local.zip, " already found, will not download!")
   }
   
   ## Process data ----------------------------------------
@@ -202,7 +217,9 @@ get_Helsinki_spatial <- function(map.type=NULL, map.specifier=NULL, data.dir = t
     stop("Invalid 'map.specifier'! Run 'temp=get_Helsinki_mapdata()' to list available options.")
   
   # Read spatial data
-  sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = TRUE, drop_unsupported_fields=T, dropNULLGeometries=T, encoding="ISO-8859-1", use_iconv=TRUE)
-  
+  sp <- rgdal::readOGR(filename, layer = rgdal::ogrListLayers(filename), verbose = verbose, drop_unsupported_fields=T, dropNULLGeometries=T, encoding="ISO-8859-1", use_iconv=TRUE)
+
+  if (verbose)
+    message("\nData loaded successfully!")
   return(sp)
 }

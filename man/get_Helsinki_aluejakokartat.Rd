@@ -2,7 +2,8 @@
 \alias{get_Helsinki_aluejakokartat}
 \title{Retrieve District Boundaries in Helsinki}
 \usage{
-get_Helsinki_aluejakokartat(map.specifier = NULL, data.dir = tempdir())
+get_Helsinki_aluejakokartat(map.specifier = NULL, data.dir = tempdir(),
+  verbose = TRUE)
 }
 \arguments{
   \item{map.specifier}{A string. Specify the name of the
@@ -12,6 +13,9 @@ get_Helsinki_aluejakokartat(map.specifier = NULL, data.dir = tempdir())
 
   \item{data.dir}{A string. Specify a temporary folder for
   storing downloaded data.}
+
+  \item{verbose}{logical. Should R report extra information
+  on progress?}
 }
 \value{
 a shape object (from SpatialPolygons class)

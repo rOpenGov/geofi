@@ -37,6 +37,8 @@ LouhosStoragePath <- function () {
 #'
 #' Retrieves the list of currently available MML data sets in http://www.datavaalit.fi/storage/avoindata/mml/rdata/
 #'
+#' @param verbose logical. Should R report extra information on progress? 
+#'
 #' @return List of data sets
 #'
 #' @importFrom XML readHTMLTable
@@ -46,11 +48,12 @@ LouhosStoragePath <- function () {
 #' @examples datasets = list_mml_datasets()
 #' @keywords utilities
 
-list_mml_datasets <- function () {
+list_mml_datasets <- function (verbose=TRUE) {
 
   url <- paste(LouhosStoragePath(), "mml/rdata/", sep = "")
 
-  message(paste("Retrieving data set listing from ", url))
+  if (verbose)
+    message(paste("Retrieving data set listing from ", url))
 
   readHTMLTable <- NULL
   temp <- XML::readHTMLTable(url)
@@ -66,9 +69,9 @@ list_mml_datasets <- function () {
     data.ids[[id]] <- gsub(".RData", "", entries2[grep(".RData$", as.vector(temp2[[1]]$Name))])
  
   }
-
-  data.ids
-
+  if (verbose)
+    message("\nData loaded successfully!")
+  return(data.ids)
 }
 
 
@@ -78,7 +81,7 @@ list_mml_datasets <- function () {
 #'
 #' @param map.id data ID. See details.
 #' @param data.id data ID. See details.
-#' @param verbose verbose
+#' @param verbose logical. Should R report extra information on progress? 
 #' 
 #' @return url connection
 #'
@@ -100,7 +103,8 @@ get_MML <- function(map.id, data.id, verbose = TRUE) {
 
   url <- paste(LouhosStoragePath(), "mml/rdata/", sep = "")
   filepath <- paste(url, map.id, "/", data.id, ".RData", sep = "")
-  if (verbose) {message(paste("Loading ", filepath, ". (C) MML 2013. Converted to RData shape object by Louhos. For more information, see https://github.com/avoindata/mml/", sep = ""))}
+  if (verbose)
+    message("Loading ", filepath, ". (C) MML 2013. Converted to RData shape object by Louhos. For more information, see https://github.com/avoindata/mml/")
 
   # Direct downloads from Github:
   # library(RCurl)
@@ -108,7 +112,9 @@ get_MML <- function(map.id, data.id, verbose = TRUE) {
 
   #load(url(filepath), envir = .GlobalEnv) # Returns a shape file sp
   load(url(filepath)) # Returns a shape file sp
-  sp
-
+  
+  if (verbose)
+    message("\nData loaded successfully!")
+  return(sp)
 }
 

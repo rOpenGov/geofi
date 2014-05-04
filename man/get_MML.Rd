@@ -9,7 +9,8 @@ get_MML(map.id, data.id, verbose = TRUE)
 
   \item{data.id}{data ID. See details.}
 
-  \item{verbose}{verbose}
+  \item{verbose}{logical. Should R report extra information
+  on progress?}
 }
 \value{
 url connection

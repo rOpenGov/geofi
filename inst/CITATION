@@ -10,7 +10,7 @@ citEntry(entry="misc",
 	 journal = "",
 	 year = "2014",
          textVersion =
-         paste("(C) Juuso Parkkinen, Leo Lahti and Joona Lehtomaki 2014.",
+         paste("(C) Juuso Parkkinen, Leo Lahti and Joona Lehtom\"{a}ki 2014.",
                "fingis R package",
                sep=" ")
          )

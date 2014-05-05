@@ -2,7 +2,7 @@
 \name{fingis-package}
 \alias{fingis}
 \alias{fingis-package}
-\title{Finland GIS tools for R}
+\title{Finland GIS R tools}
 \description{
 Brief summary of the helsinki package
 }

@@ -17,7 +17,8 @@ Imports:
     spdep,
     ggplot2,
     XML,
-    RColorBrewer
+    RColorBrewer,
+    gcolor
 Suggests:
     rgeos,
     maptools

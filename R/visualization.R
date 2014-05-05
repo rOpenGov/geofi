@@ -93,6 +93,60 @@ get_theme_map <- function() {
 }
 
 
+#' Generate color indices for shape object with the aim to color 
+#  neighboring objects with distinct colors.
+#'
+#' @param sp A SpatialPolygonsDataFrame object
+#' @param algorithm integer. Choose algorithm 1 or 2.
+#' @param verbose logical. Should R report extra information on progress? 
+#' 
+#' @return Color index vector
+#' @importFrom spdep poly2nb
+#' @importFrom spdep nb2mat
+#' @importFrom gcolor ineq
+#' @export
+#' 
+#' @author Modified from the code by Karl Ove Hufthammer from
+#' http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html;
+#' modifications by Leo Lahti and Juuso Parkkinen
+#' @references See citation("fingis") 
+#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+#'           sp.suuralue@data$COL <- factor(generate_map_colours(sp=sp.suuralue, algorithm=2));
+#' @keywords utilities
+
+generate_map_colours <- function(sp, algorithm=1, verbose=TRUE) {
+  
+  if (verbose)
+    message("Generating neighbour colours using algorithm ", algorithm, " ...")
+  
+  if (algorithm==1) {
+    # Generate neighbours lists
+    nb <- spdep::poly2nb(sp)   
+    # Number of polygons
+    n <- length(sp)            
+    # Initial colouring
+    cols <- numeric(n)        
+    # Let the first polygon have colour 1
+    cols[1] <- 1             
+    # Available colour indices
+    cols1n <- 1:n             
+    # Set good colours by magic
+    for(i in 2:n)
+      cols[i] <- which.min(cols1n %in% cols[nb[[i]]])
+    
+  } else if (algorithm==2) {
+    # Generate neighbours lists
+    nb <- spdep::poly2nb(sp)
+    mat <- spdep::nb2mat(nb, style="B")
+    cols <- gcolor::ineq(mat) 
+  } else {
+    stop("Invalid 'algorithm' given!")
+  }
+  return(cols)
+}
+
+
+
 #' Visualize the specified fields of a shape object on using 
 #' 1- or 2-way color scale. 
 #' 
@@ -264,66 +318,3 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
 
 
 
-#' Generate color indices for shape object with the aim to color 
-#  neighboring objects with distinct colors.
-#'
-#' @param sp A SpatialPolygonsDataFrame object
-#' @return Color index vector
-#' @importFrom spdep poly2nb
-#' @export
-#' 
-#' @author Modified from the code by Karl Ove Hufthammer from http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html; modifications by Leo Lahti
-#' @references See citation("fingis") 
-#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
-#'           col <- generate_map_colours(sp.suuralue)    
-#' @keywords utilities
-
-generate_map_colours <- function(sp) {
-  
-  message("Generating neighbour colours...")
-  nb <- spdep::poly2nb(sp)   # Generate neighbours lists
-  
-  n <- length(sp)            # Number of polygons
-  
-  cols <- numeric(n)        # Initial colouring
-  
-  cols[1] <- 1              # Let the first polygon have colour 1
-  
-  cols1n <- 1:n             # Available colour indices
-  
-  for(i in 2:n)
-    cols[i] <- which.min(cols1n %in% cols[nb[[i]]])
-
-  cols
-
-#   # Alternative, using gcolor, from the same url as above code
-#   nb <- spdep::poly2nb(sp)
-#   mat <- spdep::nb2mat(nb, style="B")
-#   gcol <- gcolor::ineq(mat) 
-#   gcol
-}
-
-# ## FIXME: Fix the neighbour region colours
-# # This does not work
-# sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
-# plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
-# 
-# # This kins of works (one mistake)
-# sp.suuralue@data$COL <- factor(generate_map_colours(sp.suuralue))
-# spplot(sp.suuralue, zcol="COL")
-# plot_shape(sp=sp.suuralue, varname="COL", type="discrete", plot=FALSE)
-# 
-# # This is even better (no mistakes)
-# nb <- spdep::poly2nb(sp.suuralue)
-# mat <- spdep::nb2mat(nb, style="B")
-# sp.suuralue@data$GCOL <- factor(gcolor::ineq(mat))
-# spplot(sp.suuralue, "GCOL")
-# plot_shape(sp=sp.suuralue, varname="GCOL", type="discrete", plot=FALSE)
-# 
-# # Works also for municipality data
-# sp.mml <- get_MML(map.id = "Yleiskartta-4500", data.id = "HallintoAlue")
-# nb <- spdep::poly2nb(sp.mml)
-# mat <- spdep::nb2mat(nb, style="B")
-# sp.mml@data$GCOL <- factor(gcolor::ineq(mat))
-# spplot(sp.mml, "GCOL")
-# plot_shape(sp=sp.mml, varname="GCOL", type="discrete", plot=FALSE)

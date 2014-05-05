@@ -97,13 +97,10 @@ get_theme_map <- function() {
 #  neighboring objects with distinct colors.
 #'
 #' @param sp A SpatialPolygonsDataFrame object
-#' @param algorithm integer. Choose algorithm 1 or 2.
 #' @param verbose logical. Should R report extra information on progress? 
 #' 
 #' @return Color index vector
 #' @importFrom spdep poly2nb
-#' @importFrom spdep nb2mat
-#' @importFrom gcolor ineq
 #' @export
 #' 
 #' @author Modified from the code by Karl Ove Hufthammer from
@@ -111,37 +108,28 @@ get_theme_map <- function() {
 #' modifications by Leo Lahti and Juuso Parkkinen
 #' @references See citation("fingis") 
 #' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
-#'           sp.suuralue@data$COL <- factor(generate_map_colours(sp=sp.suuralue, algorithm=2));
+#'           sp.suuralue@data$COL <- factor(generate_map_colours(sp=sp.suuralue));
 #' @keywords utilities
 
-generate_map_colours <- function(sp, algorithm=1, verbose=TRUE) {
+generate_map_colours <- function(sp, verbose=TRUE) {
   
   if (verbose)
-    message("Generating neighbour colours using algorithm ", algorithm, " ...")
+    message("Generating neighbour colours...")
   
-  if (algorithm==1) {
-    # Generate neighbours lists
-    nb <- spdep::poly2nb(sp)   
-    # Number of polygons
-    n <- length(sp)            
-    # Initial colouring
-    cols <- numeric(n)        
-    # Let the first polygon have colour 1
-    cols[1] <- 1             
-    # Available colour indices
-    cols1n <- 1:n             
-    # Set good colours by magic
-    for(i in 2:n)
-      cols[i] <- which.min(cols1n %in% cols[nb[[i]]])
-    
-  } else if (algorithm==2) {
-    # Generate neighbours lists
-    nb <- spdep::poly2nb(sp)
-    mat <- spdep::nb2mat(nb, style="B")
-    cols <- gcolor::ineq(mat) 
-  } else {
-    stop("Invalid 'algorithm' given!")
-  }
+  # Generate neighbours lists
+  nb <- spdep::poly2nb(sp)   
+  # Number of polygons
+  n <- length(sp)            
+  # Initial colouring
+  cols <- numeric(n)        
+  # Let the first polygon have colour 1
+  cols[1] <- 1             
+  # Available colour indices
+  cols1n <- 1:n             
+  # Set good colours by magic
+  for(i in 2:n)
+    cols[i] <- which.min(cols1n %in% cols[nb[[i]]])
+  
   return(cols)
 }
 
@@ -222,12 +210,12 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
     }
     
     q <- sp::spplot(sp, varname,
-                col.regions = col.regions,
-                main = main,
-                colorkey = colorkey,
-                lwd = lwd,
-                col = border.col,
-                at = at)
+                    col.regions = col.regions,
+                    main = main,
+                    colorkey = colorkey,
+                    lwd = lwd,
+                    col = border.col,
+                    at = at)
     
     
   } else if (type %in% c("twoway", "bipolar", "diverging")) { 
@@ -262,12 +250,12 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
     }
     
     q <- sp::spplot(sp, varname,
-                col.regions = col.regions,
-                main = main,
-                colorkey = colorkey,
-                lwd = lwd,
-                col = border.col,
-                at = at)
+                    col.regions = col.regions,
+                    main = main,
+                    colorkey = colorkey,
+                    lwd = lwd,
+                    col = border.col,
+                    at = at)
     
   } else if (type %in% c("qualitative", "discrete")) {
     

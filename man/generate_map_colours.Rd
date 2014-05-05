@@ -2,12 +2,10 @@
 \alias{generate_map_colours}
 \title{Generate color indices for shape object with the aim to color}
 \usage{
-generate_map_colours(sp, algorithm = 1, verbose = TRUE)
+generate_map_colours(sp, verbose = TRUE)
 }
 \arguments{
   \item{sp}{A SpatialPolygonsDataFrame object}
-
-  \item{algorithm}{integer. Choose algorithm 1 or 2.}
 
   \item{verbose}{logical. Should R report extra information
   on progress?}

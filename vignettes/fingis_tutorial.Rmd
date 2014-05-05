@@ -8,29 +8,38 @@ opts_knit$set(upload.fun = imgur_upload, base.url = NULL) # upload all images to
 # opts_chunk$set(fig.width=5, fig.height=5, cache=TRUE)
 ```
 
-Finland GIS R tools
+fingis - tutorial
 ===========
 
-This is an [rOpenGov](https://github.com/rOpenGov/fingis) R package
-providing tools for Finnish GIS data.
+This R package provides tools to access open spatial data in Finland
+as part of the [rOpenGov](http://ropengov.github.io) project.
 
-## Available data
+For contact information and source code, see the [github page](https://github.com/rOpenGov/fingis)
 
-The following data sets are currently available:
-* [Helsinki region aluejakokartat](#helsinki-region-aluejakokartat)
-* [Helsinki spatial data](#helsinki-spatial-data)
-* [Maanmittauslaitos](#maanmittauslaitos)
+## Available data sources
+
+The following data sources are currently available:
+* [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
+  * Contents: Aluejakokartat, äänestysaluejako from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+* [Helsinki spatial data](#hel-spatial)
+  * Contents: Seutukartta, Helsingin piirijako, rakennusrekisterin ote from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
+* [National Land Survery data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
+  * Contents: Yleiskartat from [National Land Survery Finland](http://www.maanmittauslaitos.fi/en/opendata)
 * [Geocoding](#geocoding)
+  * Services: [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
-### Installation
+## Installation
 
 Note! The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
 * Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
 * OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
 * Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
+Release version for general users:
 
-Release version for general users (NOT AVAILABLE YET):
+```{r install, eval=FALSE}
+install.packages("fingis")
+```
 
 Development version for developers:
 
@@ -46,12 +55,9 @@ Load package.
 library(fingis)
 ```
 
-Further development instructions at the [Github
-page](https://github.com/rOpenGov/fingis).
+## <a name="aluejakokartat"></a>Helsinki region district maps
 
-### Helsinki region aluejakokartat
-
-Helsinki region aluejakokartat (district maps) from [HKK](http://ptp.hel.fi/avoindata/).
+Helsinki region district maps (Helsingin seudun aluejakokartat) from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/).
 
 List available maps with `get_Helsinki_aluejakokartat()`.
 
@@ -107,9 +113,9 @@ sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier="aanestysalue")
 plot_shape(sp.aanestys, "KUNTA", type="discrete", plot=FALSE)
 ```
 
-### Helsinki spatial data
+## <a name="hel-spatial"></a>Helsinki spatial data
 
-Other Helsinki region spatial data from [HKK](http://ptp.hel.fi/avoindata/).
+Other Helsinki region spatial data from [Helsingin Kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/).
 
 List available spatial data with `get_Helsinki_spatial()`.
 
@@ -118,9 +124,9 @@ get_Helsinki_spatial()
 ```
 
 
-### Maanmittauslaitos
+## <a name="maanmittauslaitos"></a>National Land Survery Finland
 
-Spatial data from  Maanmittauslaitos (MML, Land Survey Finland). These data are preprocessed into RData format, see details [here](https://github.com/avoindata/mml/tree/master/rdata).
+Spatial data from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)  (Maanmittauslaitos, MML). These data are preprocessed into RData format, see details [here](https://github.com/avoindata/mml/tree/master/rdata).
 
 List available data sets with `list_mml_datasets()`.
 
@@ -152,7 +158,7 @@ Plot municipalities (kunnat) with `plot_shape()`.
 plot_shape(sp=sp.mml, varname="Kunta", type="discrete", plot = FALSE)
 ```
 
-### Geocoding
+## <a name="geocoding"></a>Geocoding
 
 Get geocodes for given location (address etc.) using one of the available services. Please read carefully the usage policies for the different services:
 * [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
@@ -160,6 +166,9 @@ Get geocodes for given location (address etc.) using one of the available servic
 * [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
 The function `get_geocode()` returns both latitude and longitude for the first hit, and the raw output (varies depending on the service used).
+
+Warning! The geocode result may vary between sources, use with care!
+
 
 ```{r geocoding, message=FALSE}
 gc1 <- get_geocode("Mannerheimintie 100, Helsinki", service="okf")
@@ -170,15 +179,15 @@ gc3 <- get_geocode("Mannerheimintie 100, Helsinki", service="google")
 unlist(gc3[1:2])
 ```
 
-### Licensing and Citations
+### Citing the package
 
-This work can be freely used, modified and distributed under the
-[Two-clause FreeBSD
-license](http://en.wikipedia.org/wiki/BSD\_licenses). Cite this R
-package and and the appropriate data provider, including a url
-link. Kindly cite the R package as 'Leo Lahti, Juuso Parkkinen ja
-Joona Lehtomäki (2014). fingis R package. URL:
-https://github.com/rOpenGov/fingis'.
+**Citing the data:** See `help()` to get citation information for each data source individually.
+
+**Citing the R package:** Cite the package using the following information:
+
+```{r citation, comment=FALSE}
+citation(fingis)
+```
 
 
 ### Session info

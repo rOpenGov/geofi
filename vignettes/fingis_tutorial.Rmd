@@ -74,10 +74,10 @@ sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue")
 spplot(sp.suuralue, zcol="Name")
 ```
 
-There are two algorithms available for generating nice region colours with separable adjacent regions in function `generate_map_colours()`. Here algorithm 2 is used and the map is plotted with `spplot()`.
+Function `generate_map_colours()` generates nice region colours with separable adjacent regions. This is used here for plotting and colouring the regions with `spplot()`.
 
 ```{r hkk-suuralue2, message=FALSE, warning=FALSE, results='hide'}
-sp.suuralue@data$COL <- factor(generate_map_colours(sp=sp.suuralue, algorithm=2))
+sp.suuralue@data$COL <- factor(generate_map_colours(sp=sp.suuralue))
 spplot(sp.suuralue, zcol="COL", col.regions=rainbow(length(levels(sp.suuralue@data$COL))), colorkey=FALSE)
 ```
 
@@ -156,8 +156,8 @@ Plot municipalities (kunnat) with `spplot()`, using colours from `generate_map_c
 
 
 ```{r MML_province, message=FALSE, warning=FALSE}
-# Get region colouring for municipalities using algorithm 1
-sp.mml@data$COL <- factor(generate_map_colours(sp.mml, algorithm=1))
+# Get region colouring for municipalities
+sp.mml@data$COL <- factor(generate_map_colours(sp.mml))
 # Plot the shape file, colour municipalities
 spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))), colorkey=FALSE)
 ```

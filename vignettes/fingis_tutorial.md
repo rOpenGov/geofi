@@ -92,11 +92,11 @@ spplot(sp.suuralue, zcol = "Name")
 ![plot of chunk hkk-suuralue1](figure/hkk-suuralue1.png) 
 
 
-There are two algorithms available for generating nice region colours with separable adjacent regions in function `generate_map_colours()`. Here algorithm 2 is used and the map is plotted with `spplot()`.
+Function `generate_map_colours()` generates nice region colours with separable adjacent regions. This is used here for plotting and colouring the regions with `spplot()`.
 
 
 ```r
-sp.suuralue@data$COL <- factor(generate_map_colours(sp = sp.suuralue, algorithm = 2))
+sp.suuralue@data$COL <- factor(generate_map_colours(sp = sp.suuralue))
 spplot(sp.suuralue, zcol = "COL", col.regions = rainbow(length(levels(sp.suuralue@data$COL))), 
     colorkey = FALSE)
 ```
@@ -116,7 +116,7 @@ sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste
 
 ```
 ## OGR data source with driver: KML 
-## Source: "/var/folders/6h/s1qsd2q557nfghh2vmc77m2c0000gn/T//RtmpLgunVW/PKS_suuralue_piste.kml", layer: "pks_suuralue_piste"
+## Source: "/var/folders/6h/s1qsd2q557nfghh2vmc77m2c0000gn/T//RtmpJN2vx9/PKS_suuralue_piste.kml", layer: "pks_suuralue_piste"
 ## with 23 features and 2 fields
 ## Feature type: wkbPoint with 3 dimensions
 ```
@@ -329,8 +329,8 @@ Plot municipalities (kunnat) with `spplot()`, using colours from `generate_map_c
 
 
 ```r
-# Get region colouring for municipalities using algorithm 1
-sp.mml@data$COL <- factor(generate_map_colours(sp.mml, algorithm = 1))
+# Get region colouring for municipalities
+sp.mml@data$COL <- factor(generate_map_colours(sp.mml))
 # Plot the shape file, colour municipalities
 spplot(sp.mml, zcol = "COL", col.regions = rainbow(length(levels(sp.mml@data$COL))), 
     colorkey = FALSE)
@@ -449,13 +449,12 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2      maps_2.3-6         rgeos_0.3-4       
-##  [4] maptools_0.8-29    knitr_1.5          ggmap_2.3         
-##  [7] fingis_0.9.10      gcolor_1.0         RColorBrewer_1.0-5
-## [10] XML_3.95-0.2       ggplot2_0.9.3.1    spdep_0.5-71      
-## [13] Matrix_1.1-2-2     RCurl_1.95-4.1     bitops_1.0-6      
-## [16] rjson_0.2.13       rgdal_0.8-16       sp_1.0-14         
-## [19] roxygen2_3.1.0    
+##  [1] mapproj_1.2-2      maps_2.3-6         ggmap_2.3         
+##  [4] rgeos_0.3-4        maptools_0.8-29    knitr_1.5         
+##  [7] fingis_0.9.10      RColorBrewer_1.0-5 XML_3.95-0.2      
+## [10] ggplot2_0.9.3.1    spdep_0.5-71       Matrix_1.1-2-2    
+## [13] RCurl_1.95-4.1     bitops_1.0-6       rjson_0.2.13      
+## [16] rgdal_0.8-16       roxygen2_3.1.0     sp_1.0-14         
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        
@@ -463,11 +462,12 @@ sessionInfo()
 ##  [7] dichromat_2.0-0     digest_0.6.4        evaluate_0.5.1     
 ## [10] foreign_0.8-60      formatR_0.10        grid_3.0.3         
 ## [13] gtable_0.1.2        labeling_0.2        lattice_0.20-27    
-## [16] LearnBayes_2.12     MASS_7.3-30         munsell_0.4.2      
-## [19] nlme_3.1-115        plyr_1.8.1          png_0.1-7          
-## [22] proto_0.3-10        Rcpp_0.11.1         reshape2_1.2.2     
-## [25] RgoogleMaps_1.2.0.5 RJSONIO_1.0-3       scales_0.2.3       
-## [28] splines_3.0.3       stringr_0.6.2       tools_3.0.3
+## [16] LearnBayes_2.12     markdown_0.6.4      MASS_7.3-30        
+## [19] munsell_0.4.2       nlme_3.1-115        plyr_1.8.1         
+## [22] png_0.1-7           proto_0.3-10        Rcpp_0.11.1        
+## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 RJSONIO_1.0-3      
+## [28] scales_0.2.3        splines_3.0.3       stringr_0.6.2      
+## [31] tools_3.0.3
 ```
 
 

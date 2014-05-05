@@ -3,10 +3,6 @@
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
 
-```{r setup, echo=FALSE}
-opts_knit$set(upload.fun = imgur_upload, base.url = NULL) # upload all images to imgur.com
-# opts_chunk$set(fig.width=5, fig.height=5, cache=TRUE)
-```
 
 fingis - tutorial
 ===========
@@ -23,8 +19,8 @@ The following data sources are currently available:
   * Aluejakokartat, äänestysaluejako from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
   * Seutukartta, Helsingin piirijako, rakennusrekisterin ote from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
-* [National Land Survery data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
-  * Yleiskartat from [National Land Survery Finland](http://www.maanmittauslaitos.fi/en/opendata)
+* [National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
+  * Yleiskartat from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)
 * [Geocoding](#geocoding)
   * Services: [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
@@ -126,7 +122,7 @@ get_Helsinki_spatial()
 ```
 
 
-## <a name="maanmittauslaitos"></a>National Land Survery Finland
+## <a name="maanmittauslaitos"></a>National Land Survey Finland
 
 Spatial data from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)  (Maanmittauslaitos, MML). These data are preprocessed into RData format, see details [here](https://github.com/avoindata/mml/tree/master/rdata).
 
@@ -169,7 +165,7 @@ Get geocodes for given location (address etc.) using one of the available servic
 
 The function `get_geocode()` returns both latitude and longitude for the first hit, and the raw output (varies depending on the service used).
 
-Warning! The geocode result may vary between sources, use with care!
+Warning! The geocode results may vary between sources, use with care!
 
 
 ```{r geocoding, message=FALSE}
@@ -181,7 +177,7 @@ gc3 <- get_geocode("Mannerheimintie 100, Helsinki", service="google")
 unlist(gc3[1:2])
 ```
 
-### Citing the package
+### Citation
 
 **Citing the data:** See `help()` to get citation information for each data source individually.
 

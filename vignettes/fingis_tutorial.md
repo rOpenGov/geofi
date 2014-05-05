@@ -116,7 +116,7 @@ sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste
 
 ```
 ## OGR data source with driver: KML 
-## Source: "/var/folders/6h/s1qsd2q557nfghh2vmc77m2c0000gn/T//RtmpTNoMHN/PKS_suuralue_piste.kml", layer: "pks_suuralue_piste"
+## Source: "/var/folders/6h/s1qsd2q557nfghh2vmc77m2c0000gn/T//RtmpLgunVW/PKS_suuralue_piste.kml", layer: "pks_suuralue_piste"
 ## with 23 features and 2 fields
 ## Feature type: wkbPoint with 3 dimensions
 ```
@@ -146,21 +146,10 @@ library(ggmap)
 hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
 hel.map <- ggmap::get_map(location = hel.bbox, source = "osm")
-```
-
-```
-## Warning: cannot open: HTTP status was '503 Service Unavailable'
-```
-
-```
-## Error: map grabbing failed - see details in ?get_openstreetmap.
-```
-
-```r
 # Plot transparent districts on top the background map
-ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = Name), 
-    alpha = 0.5) + geom_text(data = df.suuralue.piste, aes(x = long, y = lat, 
-    label = Name)) + theme(legend.position = "none")
+ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = COL, 
+    group = Name), alpha = 0.5) + geom_text(data = df.suuralue.piste, aes(x = long, 
+    y = lat, label = Name)) + theme(legend.position = "none")
 ```
 
 ![plot of chunk hkk-suuralue4](figure/hkk-suuralue4.png) 
@@ -460,8 +449,8 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2      maps_2.3-6         ggmap_2.3         
-##  [4] rgeos_0.3-4        maptools_0.8-29    knitr_1.5         
+##  [1] mapproj_1.2-2      maps_2.3-6         rgeos_0.3-4       
+##  [4] maptools_0.8-29    knitr_1.5          ggmap_2.3         
 ##  [7] fingis_0.9.10      gcolor_1.0         RColorBrewer_1.0-5
 ## [10] XML_3.95-0.2       ggplot2_0.9.3.1    spdep_0.5-71      
 ## [13] Matrix_1.1-2-2     RCurl_1.95-4.1     bitops_1.0-6      
@@ -474,12 +463,11 @@ sessionInfo()
 ##  [7] dichromat_2.0-0     digest_0.6.4        evaluate_0.5.1     
 ## [10] foreign_0.8-60      formatR_0.10        grid_3.0.3         
 ## [13] gtable_0.1.2        labeling_0.2        lattice_0.20-27    
-## [16] LearnBayes_2.12     markdown_0.6.4      MASS_7.3-30        
-## [19] munsell_0.4.2       nlme_3.1-115        plyr_1.8.1         
-## [22] png_0.1-7           proto_0.3-10        Rcpp_0.11.1        
-## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 RJSONIO_1.0-3      
-## [28] scales_0.2.3        splines_3.0.3       stringr_0.6.2      
-## [31] tools_3.0.3
+## [16] LearnBayes_2.12     MASS_7.3-30         munsell_0.4.2      
+## [19] nlme_3.1-115        plyr_1.8.1          png_0.1-7          
+## [22] proto_0.3-10        Rcpp_0.11.1         reshape2_1.2.2     
+## [25] RgoogleMaps_1.2.0.5 RJSONIO_1.0-3       scales_0.2.3       
+## [28] splines_3.0.3       stringr_0.6.2       tools_3.0.3
 ```
 
 

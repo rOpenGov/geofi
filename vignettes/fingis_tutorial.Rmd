@@ -108,7 +108,7 @@ hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
 hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
 # Plot transparent districts on top the background map
-ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, label=Name)) + theme(legend.position="none")
+ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, group=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, label=Name)) + theme(legend.position="none")
 ```
 
 ### Plot elecetion districts

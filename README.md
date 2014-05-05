@@ -2,7 +2,7 @@ fingis - Finland GIS R tools
 ======
 
 [![Build Status](https://api.travis-ci.org/rOpenGov/fingis.png)](https://travis-ci.org/rOpenGov/fingis)
-[![Stories in Ready](https://badge.waffle.io/ropengov/fingis.png?label=TODO)](http://waffle.io/ropengov/fingis)
+[![Stories in Ready](https://badge.waffle.io/ropengov/fingis.png?label=Ready)](http://waffle.io/ropengov/fingis)
 
 R tools for spatial data in Finland from the [rOpenGov](http://ropengov.github.io) project.   
 

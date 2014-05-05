@@ -20,20 +20,15 @@ For contact information and source code, see the [github page](https://github.co
 
 The following data sources are currently available:
 * [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
-  * Contents: Aluejakokartat, äänestysaluejako from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
-* [Helsinki spatial data](#hel-spatial)
-  * Contents: Seutukartta, Helsingin piirijako, rakennusrekisterin ote from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
+  * Aluejakokartat, äänestysaluejako from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+* [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
+  * Seutukartta, Helsingin piirijako, rakennusrekisterin ote from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
 * [National Land Survery data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
-  * Contents: Yleiskartat from [National Land Survery Finland](http://www.maanmittauslaitos.fi/en/opendata)
+  * Yleiskartat from [National Land Survery Finland](http://www.maanmittauslaitos.fi/en/opendata)
 * [Geocoding](#geocoding)
   * Services: [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
 ## Installation
-
-Note! The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
-* Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
-* OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
-* Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
 Release version for general users:
 
@@ -54,6 +49,13 @@ Load package.
 ```{r load}
 library(fingis)
 ```
+
+### Notes
+
+The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
+* Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
+* OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+* Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
 ## <a name="aluejakokartat"></a>Helsinki region district maps
 
@@ -183,10 +185,10 @@ unlist(gc3[1:2])
 
 **Citing the data:** See `help()` to get citation information for each data source individually.
 
-**Citing the R package:** Cite the package using the following information:
+**Citing the R package:**
 
-```{r citation, comment=FALSE}
-citation(fingis)
+```{r citation, comment=NA}
+citation("fingis")
 ```
 
 

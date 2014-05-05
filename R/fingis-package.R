@@ -14,7 +14,7 @@
 #' @name fingis-package
 #' @aliases fingis
 #' @docType package
-#' @title Finland GIS tools for R
+#' @title Finland GIS R tools
 #'
 #' @author Juuso Parkkinen, Leo Lahti and Joona Lehtomaki \email{louhos@@googlegroups.com}
 #' @references

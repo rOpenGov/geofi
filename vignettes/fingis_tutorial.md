@@ -18,20 +18,15 @@ For contact information and source code, see the [github page](https://github.co
 
 The following data sources are currently available:
 * [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
-  * Contents: Aluejakokartat, äänestysaluejako from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
-* [Helsinki spatial data](#hel-spatial)
-  * Contents: Seutukartta, Helsingin piirijako, rakennusrekisterin ote from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
+  * Aluejakokartat, äänestysaluejako from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+* [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
+  * Seutukartta, Helsingin piirijako, rakennusrekisterin ote from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
 * [National Land Survery data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
-  * Contents: Yleiskartat from [National Land Survery Finland](http://www.maanmittauslaitos.fi/en/opendata)
+  * Yleiskartat from [National Land Survery Finland](http://www.maanmittauslaitos.fi/en/opendata)
 * [Geocoding](#geocoding)
   * Services: [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
 ## Installation
-
-Note! The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
-* Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
-* OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
-* Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
 Release version for general users:
 
@@ -59,6 +54,13 @@ library(fingis)
 ```
 
 
+### Notes
+
+The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
+* Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
+* OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+* Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
+
 ## <a name="aluejakokartat"></a>Helsinki region district maps
 
 Helsinki region district maps (Helsingin seudun aluejakokartat) from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/).
@@ -85,7 +87,7 @@ sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier = "suuralue")
 plot_shape(sp = sp.suuralue, varname = "Name", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-suuralue1](http://i.imgur.com/ScH6N7V.png) 
+![plot of chunk hkk-suuralue1](http://i.imgur.com/gYsrvi2.png) 
 
 
 Retrieve 'suuralue_piste' spatial object, containing the center points of the districts, and plot with `spplot()`.
@@ -96,7 +98,7 @@ sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste
 sp::spplot(obj = sp.suuralue.piste, zcol = "Name")
 ```
 
-![plot of chunk hkk-suuralue2](http://i.imgur.com/K2xZoXC.png) 
+![plot of chunk hkk-suuralue2](http://i.imgur.com/vivAdou.png) 
 
 
 Use `sp2df()` function to tranform the spatial objects into data frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with `get_theme_map()`. 
@@ -115,7 +117,7 @@ ggplot(df.suuralue, aes(x = long, y = lat, fill = Name)) + geom_polygon() +
     geom_text(data = df.suuralue.piste, aes(label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue3](http://i.imgur.com/llRumcm.png) 
+![plot of chunk hkk-suuralue3](http://i.imgur.com/TYaIzKx.png) 
 
 
 Add background map from OpenStreetMap using `get_map()` from [ggmap](https://sites.google.com/site/davidkahle/ggmap) and plot again.
@@ -128,13 +130,24 @@ library(ggmap)
 hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
 hel.map <- ggmap::get_map(location = hel.bbox, source = "osm")
+```
+
+```
+## Warning: cannot open: HTTP status was '503 Service Unavailable'
+```
+
+```
+## Error: map grabbing failed - see details in ?get_openstreetmap.
+```
+
+```r
 # Plot transparent districts on top the background map
 ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = Name), 
     alpha = 0.5) + geom_text(data = df.suuralue.piste, aes(x = long, y = lat, 
     label = Name)) + theme(legend.position = "none")
 ```
 
-![plot of chunk hkk-suuralue4](http://i.imgur.com/Scao1Wl.png) 
+![plot of chunk hkk-suuralue4](http://i.imgur.com/D6pepKr.png) 
 
 
 Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `plot_shape()`.
@@ -145,7 +158,7 @@ sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier = "aanestysalue")
 plot_shape(sp.aanestys, "KUNTA", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](http://i.imgur.com/HxXoRQj.png) 
+![plot of chunk hkk-aanestysalue](http://i.imgur.com/vVDCwmL.png) 
 
 
 ## <a name="hel-spatial"></a>Helsinki spatial data
@@ -311,7 +324,7 @@ Plot provinces (maakunnat) with `plot_shape()`.
 plot_shape(sp = sp.mml, varname = "Maakunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_province](http://i.imgur.com/CaxRJgy.png) 
+![plot of chunk MML_province](http://i.imgur.com/RNvdDlK.png) 
 
 
 Plot municipalities (kunnat) with `plot_shape()`.
@@ -322,7 +335,7 @@ Plot municipalities (kunnat) with `plot_shape()`.
 plot_shape(sp = sp.mml, varname = "Kunta", type = "discrete", plot = FALSE)
 ```
 
-![plot of chunk MML_municipality](http://i.imgur.com/8da7hDd.png) 
+![plot of chunk MML_municipality](http://i.imgur.com/HvRe9TP.png) 
 
 
 ## <a name="geocoding"></a>Geocoding
@@ -373,15 +386,30 @@ unlist(gc3[1:2])
 
 **Citing the data:** See `help()` to get citation information for each data source individually.
 
-**Citing the R package:** Cite the package using the following information:
+**Citing the R package:**
 
 
 ```r
-citation(fingis)
+citation("fingis")
 ```
 
 ```
-FALSE Error: object 'fingis' not found
+
+Kindly cite the helsinki R package as follows:
+
+  (C) Leo Lahti, Juuso Parkkinen and Joona Lehtomaki 2014. fingis
+  R package
+
+A BibTeX entry for LaTeX users is
+
+  @Misc{,
+    title = {fingis R package},
+    author = {Leo Lahti and Juuso Parkkinen and Joona Lehtomaki},
+    year = {2014},
+  }
+
+Many thanks for all contributors! For more info, see:
+http://ropengov.github.com/fingis
 ```
 
 

@@ -3,16 +3,16 @@ citHeader("Kindly cite the helsinki R package as follows:")
 citEntry(entry="misc",
          title = "fingis R package",
          author = personList(
-	   person(given ="Leo", family="Lahti", email = "leo.lahti@iki.fi"),
-	   person(given ="Juuso", family="Parkkinen"),
+     person(given ="Juuso", family="Parkkinen", email = "juuso.parkkinen@iki.fi"),
+	   person(given ="Leo", family="Lahti"),
 	   person(given ="Joona", family="Lehtomaki")
          ),
 	 journal = "",
 	 year = "2014",
          textVersion =
-         paste("(C) Leo Lahti, Juuso Parkkinen and Joona Lehtomaki 2014.",
+         paste("(C) Juuso Parkkinen, Leo Lahti and Joona Lehtomaki 2014.",
                "fingis R package",
                sep=" ")
          )
 
-citFooter("\nMany thanks for all contributors! For more info, see: http://ropengov.github.com/fingis")
+citFooter("\nMany thanks for all contributors! For more info, see: https://github.com/rOpenGov/fingis")

@@ -17,11 +17,13 @@ url connection
 }
 \description{
 Retrieve data from Land Survey Finland (Maanmittauslaitos,
-MML)
+MML). The data are processed into .RData files due to their
+big size. See the preprocessing details in
+https://github.com/avoindata/mml.
 }
 \details{
-To browse for RData options, run list_mml_datasets() or see
-https://github.com/avoindata/mml/tree/master/rdata.
+To browse for available RData, run list_mml_datasets() or
+see https://github.com/avoindata/mml/tree/master/rdata.
 }
 \examples{
 datasets <- list_mml_datasets();

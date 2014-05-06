@@ -16,13 +16,16 @@ For contact information and source code, see the [github page](https://github.co
 
 The following data sources are currently available:
 * [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
- * *Aluejakokartat (kunta, pien-, suur-, tilastoalueet), äänestysaluejako* from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+ * Datasets: *Aluejakokartat (kunta, pien-, suur-, tilastoalueet), äänestysaluejako*
+ * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
- * *Seutukartta, Helsingin piirijako, rakennusrekisterin ote* from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
+ * Datasets: *Seutukartta, Helsingin piirijako, rakennusrekisterin ote*
+ * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
- * *Yleiskartat (kunta-, maakuntarajat)* from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)
+ * Datasets: *Yleiskartat (kunta-, maakuntarajat)*
+ * Source: [Maanmittauslaitos (MML)](http://www.maanmittauslaitos.fi/avoindata)
 * [Geocoding](#geocoding)
- * Services: *[OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)*
+ * Sources: *[OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)*
 
 ## Installation
 
@@ -92,7 +95,7 @@ spplot(sp.suuralue, zcol = "Name")
 ![plot of chunk hkk-suuralue1](figure/hkk-suuralue1.png) 
 
 
-Function `generate_map_colours()` generates nice region colours with separable adjacent regions. This is used here for plotting and colouring the regions with `spplot()`.
+Function `generate_map_colours()` allows nice region colouring separable adjacent regions. This is used here with the `rainbow()` colour scale to plot the regions with `spplot()`.
 
 
 ```r
@@ -112,16 +115,6 @@ Use the 'sp.suuralue' retrieved above, and retrieve also the center points of th
 ```r
 # Retrieve center points
 sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste")
-```
-
-```
-## OGR data source with driver: KML 
-## Source: "/var/folders/6h/s1qsd2q557nfghh2vmc77m2c0000gn/T//RtmpkBNz3T/PKS_suuralue_piste.kml", layer: "pks_suuralue_piste"
-## with 23 features and 2 fields
-## Feature type: wkbPoint with 3 dimensions
-```
-
-```r
 # Get data frames
 df.suuralue <- sp2df(sp.suuralue, "Name")
 df.suuralue.piste <- sp2df(sp.suuralue.piste, "Name")
@@ -146,31 +139,18 @@ library(ggmap)
 hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
 hel.map <- ggmap::get_map(location = hel.bbox, source = "osm")
-```
-
-```
-## Warning: cannot open: HTTP status was '503 Service Unavailable'
-```
-
-```
-## Error: map grabbing failed - see details in ?get_openstreetmap.
-```
-
-```r
 # Plot transparent districts on top the background map
 ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = COL, 
     group = Name), alpha = 0.5) + geom_text(data = df.suuralue.piste, aes(x = long, 
     y = lat, label = Name)) + theme(legend.position = "none")
 ```
 
-```
-## Error: object 'hel.map' not found
-```
+![plot of chunk hkk-suuralue4](figure/hkk-suuralue4.png) 
 
 
-### Plot elecetion districts
+### Plot election districts
 
-Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `spplot()`.
+Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `spplot()`, use colours to separate municipalities.
 
 
 ```r
@@ -423,10 +403,10 @@ citation("fingis")
 
 ```
 
-Kindly cite the helsinki R package as follows:
+Kindly cite the fingis R package as follows:
 
-  (C) Juuso Parkkinen, Leo Lahti and Joona Lehtom"{a}ki 2014.
-  fingis R package
+  (C) Juuso Parkkinen, Leo Lahti and Joona Lehtomaki 2014. fingis
+  R package
 
 A BibTeX entry for LaTeX users is
 
@@ -463,12 +443,11 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] ggmap_2.3          rgeos_0.3-4        maptools_0.8-29   
-##  [4] knitr_1.5          fingis_0.9.10      RColorBrewer_1.0-5
-##  [7] XML_3.95-0.2       ggplot2_0.9.3.1    spdep_0.5-71      
-## [10] Matrix_1.1-2-2     RCurl_1.95-4.1     bitops_1.0-6      
-## [13] rjson_0.2.13       rgdal_0.8-16       sp_1.0-14         
-## [16] roxygen2_3.1.0    
+##  [1] mapproj_1.2-2   maps_2.3-6      ggmap_2.3       rgeos_0.3-4    
+##  [5] maptools_0.8-29 knitr_1.5       fingis_0.9.11   XML_3.95-0.2   
+##  [9] ggplot2_0.9.3.1 spdep_0.5-71    Matrix_1.1-2-2  RCurl_1.95-4.1 
+## [13] bitops_1.0-6    rjson_0.2.13    rgdal_0.8-16    sp_1.0-14      
+## [17] roxygen2_3.1.0 
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        
@@ -476,9 +455,9 @@ sessionInfo()
 ##  [7] dichromat_2.0-0     digest_0.6.4        evaluate_0.5.1     
 ## [10] foreign_0.8-60      formatR_0.10        grid_3.0.3         
 ## [13] gtable_0.1.2        labeling_0.2        lattice_0.20-27    
-## [16] LearnBayes_2.12     mapproj_1.2-2       maps_2.3-6         
-## [19] MASS_7.3-30         munsell_0.4.2       nlme_3.1-115       
-## [22] plyr_1.8.1          png_0.1-7           proto_0.3-10       
+## [16] LearnBayes_2.12     markdown_0.6.4      MASS_7.3-30        
+## [19] munsell_0.4.2       nlme_3.1-115        plyr_1.8.1         
+## [22] png_0.1-7           proto_0.3-10        RColorBrewer_1.0-5 
 ## [25] Rcpp_0.11.1         reshape2_1.2.2      RgoogleMaps_1.2.0.5
 ## [28] RJSONIO_1.0-3       scales_0.2.3        splines_3.0.3      
 ## [31] stringr_0.6.2       tools_3.0.3

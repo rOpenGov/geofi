@@ -16,13 +16,16 @@ For contact information and source code, see the [github page](https://github.co
 
 The following data sources are currently available:
 * [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
- * *Aluejakokartat (kunta, pien-, suur-, tilastoalueet), äänestysaluejako* from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+ * Datasets: *Aluejakokartat (kunta, pien-, suur-, tilastoalueet), äänestysaluejako*
+ * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
- * *Seutukartta, Helsingin piirijako, rakennusrekisterin ote* from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
+ * Datasets: *Seutukartta, Helsingin piirijako, rakennusrekisterin ote*
+ * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
- * *Yleiskartat (kunta-, maakuntarajat)* from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)
+ * Datasets: *Yleiskartat (kunta-, maakuntarajat)*
+ * Source: [Maanmittauslaitos (MML)](http://www.maanmittauslaitos.fi/avoindata)
 * [Geocoding](#geocoding)
- * Services: *[OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)*
+ * Sources: *[OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)*
 
 ## Installation
 

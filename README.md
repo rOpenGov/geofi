@@ -18,6 +18,3 @@ You are welcome to contact us:
 * join IRC at ropengov@Freenode
 * follow us in [social media](http://ropengov.github.io/contribute/)  
 
-  
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/fdfcd0ee746a540299b8f7be2833b93f "githalytics.com")](http://githalytics.com/ropengov/fingis)
-

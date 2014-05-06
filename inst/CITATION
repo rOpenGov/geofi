@@ -5,12 +5,12 @@ citEntry(entry="misc",
          author = personList(
      person(given ="Juuso", family="Parkkinen", email = "juuso.parkkinen@iki.fi"),
 	   person(given ="Leo", family="Lahti"),
-	   person(given ="Joona", family="Lehtom\"{a}ki")
+	   person(given ="Joona", family="Lehtomaki")
          ),
 	 journal = "",
 	 year = "2014",
          textVersion =
-         paste("(C) Juuso Parkkinen, Leo Lahti and Joona Lehtomäki 2014.",
+         paste("(C) Juuso Parkkinen, Leo Lahti and Joona Lehtomaki 2014.",
                "fingis R package",
                sep=" ")
          )

@@ -160,7 +160,6 @@ generate_map_colours <- function(sp, verbose=TRUE) {
 #' @return A Trellis Plot Object
 #' @details Visualization types include: oneway/sequential (color scale ranges from white to dark red, or custom color given with the palette argument); twoway/bipolar/diverging (color scale ranges from dark blue through white to dark red; or custom colors); discrete/qualitative (discrete color scale; the colors are used to visually separate regions); and "custom" (specify colors with the col.regions argument)
 #' 
-#' @importFrom RColorBrewer brewer.pal
 #' @importFrom sp spplot
 #' @export
 #'
@@ -266,14 +265,18 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
       # Aims to find colors such that neighboring polygons have 
       # distinct colors
       cols <- generate_map_colours(sp) # Generate color indices
+      # Changed 6.5.2014 to use rainbow()
+      col.regions <- rainbow(max(cols))[cols]
       # FIXME: check if we could here use standard palettes and avoid dependency  
-      col.regions <- RColorBrewer::brewer.pal(max(cols), "Paired")[cols]
+      #       col.regions <- RColorBrewer::brewer.pal(max(cols), "Paired")[cols]
       
     } else if ( is.null(col.regions) ) {
       
       # Use ncol colors, loop them to fill all regions    
       nlevels <- length(levels(vars))
-      col.regions <- rep(RColorBrewer::brewer.pal(ncol, "Paired"), ceiling(nlevels/ncol))[1:nlevels]  
+      # Changed 6.5.2014 to use rainbow()
+      col.regions <- rep(rainbow(ncol), ceiling(nlevels/ncol))[1:nlevels]  
+#      col.regions <- rep(RColorBrewer::brewer.pal(ncol, "Paired"), ceiling(nlevels/ncol))[1:nlevels]  
     }
     
     colorkey <- FALSE

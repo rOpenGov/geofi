@@ -1,16 +1,16 @@
-citHeader("Kindly cite the helsinki R package as follows:")
+citHeader("Kindly cite the fingis R package as follows:")
 
 citEntry(entry="misc",
          title = "fingis R package",
          author = personList(
      person(given ="Juuso", family="Parkkinen", email = "juuso.parkkinen@iki.fi"),
 	   person(given ="Leo", family="Lahti"),
-	   person(given ="Joona", family="Lehtomaki")
+	   person(given ="Joona", family="Lehtom\"{a}ki")
          ),
 	 journal = "",
 	 year = "2014",
          textVersion =
-         paste("(C) Juuso Parkkinen, Leo Lahti and Joona Lehtom\"{a}ki 2014.",
+         paste("(C) Juuso Parkkinen, Leo Lahti and Joona Lehtomäki 2014.",
                "fingis R package",
                sep=" ")
          )

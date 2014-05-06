@@ -16,13 +16,13 @@ For contact information and source code, see the [github page](https://github.co
 
 The following data sources are currently available:
 * [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
- * Aluejakokartat, äänestysaluejako from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+ * *Aluejakokartat (kunta, pien-, suur-, tilastoalueet), äänestysaluejako* from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
- * Seutukartta, Helsingin piirijako, rakennusrekisterin ote from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
+ * *Seutukartta, Helsingin piirijako, rakennusrekisterin ote* from [Helsingin kaupungin Kiinteistövirasto](http://ptp.hel.fi/avoindata/)
 * [National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
- * Yleiskartat from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)
+ * *Yleiskartat (kunta-, maakuntarajat)* from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)
 * [Geocoding](#geocoding)
- * Services: [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)
+ * Services: *[OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)*
 
 ## Installation
 
@@ -74,7 +74,7 @@ sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue")
 spplot(sp.suuralue, zcol="Name")
 ```
 
-Function `generate_map_colours()` generates nice region colours with separable adjacent regions. This is used here for plotting and colouring the regions with `spplot()`.
+Function `generate_map_colours()` allows nice region colouring separable adjacent regions. This is used here with the `rainbow()` colour scale to plot the regions with `spplot()`.
 
 ```{r hkk-suuralue2, message=FALSE, warning=FALSE, results='hide'}
 sp.suuralue@data$COL <- factor(generate_map_colours(sp=sp.suuralue))
@@ -85,7 +85,7 @@ spplot(sp.suuralue, zcol="COL", col.regions=rainbow(length(levels(sp.suuralue@da
 
 Use the 'sp.suuralue' retrieved above, and retrieve also the center points of the districts. Use `sp2df()` function to tranform the spatial objects into data frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with `get_theme_map()`. 
 
-```{r hkk-suuralue3, message=FALSE}
+```{r hkk-suuralue3, message=FALSE, warning=FALSE, results='hide'}
 # Retrieve center points
 sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier="suuralue_piste")
 # Get data frames
@@ -100,7 +100,7 @@ ggplot(df.suuralue, aes(x=long, y=lat)) + geom_polygon(aes(fill=COL, group=Name)
 
 Add background map from OpenStreetMap using `get_map()` from [ggmap](https://sites.google.com/site/davidkahle/ggmap) and plot again.
 
-```{r hkk-suuralue4, message=FALSE}
+```{r hkk-suuralue4, message=FALSE, warning=FALSE, results='hide'}
 # Add background map from OpenStreetMap using ggmap
 library(ggmap)
 # Get bounding box from sp.suuralue
@@ -111,9 +111,9 @@ hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
 ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, group=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, label=Name)) + theme(legend.position="none")
 ```
 
-### Plot elecetion districts
+### Plot election districts
 
-Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `spplot()`.
+Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `spplot()`, use colours to separate municipalities.
 
 ```{r hkk-aanestysalue, message=FALSE, warning=FALSE, results='hide'}
 sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier="aanestysalue")
@@ -135,7 +135,7 @@ get_Helsinki_spatial()
 
 ## <a name="maanmittauslaitos"></a>National Land Survey Finland
 
-Spatial data from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)  (Maanmittauslaitos, MML). These data are preprocessed into RData format, see details [here](https://github.com/avoindata/mml/tree/master/rdata).
+Spatial data from [National Land Survey Finland](http://www.maanmittauslaitos.fi/en/opendata)  (Maanmittauslaitos, MML). These data are preprocessed into RData format, see details [here](https://github.com/avoindata/mml).
 
 List available data sets with `list_mml_datasets()`.
 
@@ -165,8 +165,8 @@ spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))),
 Plot provinces (maakunnat) with `spplot()`. Note that `generate_map_colours()` works currently only for the smallest polygons in the data, here municipalities, and can not be used for the provinces!
 
 ```{r MML_municipality, message=FALSE, warning=FALSE}
-# Use factors for showing provinces names
-sp.mml@data$Maakunta.FI <- factor(sp.mml@data$Maakunta.FI)
+# Convert municipality names to factors and fix character encoding
+sp.mml@data$Maakunta.FI <- factor(iconv(sp.mml@data$Maakunta.FI, from="UTF-8", to="ISO-8859-1"))
 # Plot the shape file, colour provinces 
 spplot(sp.mml, zcol="Maakunta.FI", col.regions=rainbow(length(levels(sp.mml@data$Maakunta.FI))))
 ```

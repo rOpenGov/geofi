@@ -19,7 +19,7 @@ color
 }
 \examples{
 sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
-          sp.suuralue
+          cols <- factor(generate_map_colours(sp=sp.suuralue));
 }
 \author{
 Modified from the code by Karl Ove Hufthammer from

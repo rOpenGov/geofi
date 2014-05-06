@@ -108,7 +108,7 @@ get_theme_map <- function() {
 #' modifications by Leo Lahti and Juuso Parkkinen
 #' @references See citation("fingis") 
 #' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
-#'           sp.suuralue@data$COL <- factor(generate_map_colours(sp=sp.suuralue));
+#'           cols <- factor(generate_map_colours(sp=sp.suuralue));
 #' @keywords utilities
 
 generate_map_colours <- function(sp, verbose=TRUE) {

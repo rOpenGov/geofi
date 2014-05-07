@@ -1,8 +1,8 @@
-\name{get_MML}
-\alias{get_MML}
+\name{get_mml}
+\alias{get_mml}
 \title{MML (Land Survey Finland) data}
 \usage{
-get_MML(map.id, data.id, verbose = TRUE)
+get_mml(map.id, data.id, verbose = TRUE)
 }
 \arguments{
   \item{map.id}{data ID. See details.}
@@ -29,7 +29,7 @@ see https://github.com/avoindata/mml/tree/master/rdata.
 datasets <- list_mml_datasets();
           map.id = names(datasets)[[1]];
           data.id <- datasets[[map.id]][[1]];
-          sp <- get_MML(map.id, data.id)
+          sp <- get_mml(map.id, data.id)
 }
 \author{
 Leo Lahti \email{louhos@googlegroups.com}

@@ -65,7 +65,7 @@ the colors are used to visually separate regions); and
 "custom" (specify colors with the col.regions argument)
 }
 \examples{
-sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 }
 \author{

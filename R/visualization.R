@@ -23,7 +23,7 @@
 #' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("fingis")
-#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+#' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
 #'           # Need to load rgeos and maptools for ggplot2::fortify in sp2df() 
 #'           library(rgeos);
 #'           library(maptools);
@@ -69,7 +69,7 @@ sp2df <- function(sp, region) {
 #' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("fingis")
-#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           # Need to load rgeos and maptools for ggplot2::fortify in sp2df() 
 #'           library(rgeos);
 #'           library(maptools);
@@ -107,7 +107,7 @@ get_theme_map <- function() {
 #' http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html;
 #' modifications by Leo Lahti and Juuso Parkkinen
 #' @references See citation("fingis") 
-#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+#' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
 #'           cols <- factor(generate_map_colours(sp=sp.suuralue));
 #' @keywords utilities
 
@@ -165,7 +165,7 @@ generate_map_colours <- function(sp, verbose=TRUE) {
 #'
 #' @references See citation("fingis") 
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 #' @keywords utilities
 plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL, min.color = "white", max.color = "red", plot = TRUE) {

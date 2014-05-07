@@ -18,7 +18,7 @@ Generate color indices for shape object with the aim to
 color
 }
 \examples{
-sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
           cols <- factor(generate_map_colours(sp=sp.suuralue));
 }
 \author{

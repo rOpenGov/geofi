@@ -16,7 +16,7 @@ A ggplot2 theme object
 Transform data from sp to data frame for ggplot2
 }
 \examples{
-sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
           # Need to load rgeos and maptools for ggplot2::fortify in sp2df()
           library(rgeos);
           library(maptools);

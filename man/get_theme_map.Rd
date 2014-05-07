@@ -11,7 +11,7 @@ theme_map A ggplot2 theme object
 Get blank ggplot2 theme for plotting maps
 }
 \examples{
-sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue");
+sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
           # Need to load rgeos and maptools for ggplot2::fortify in sp2df()
           library(rgeos);
           library(maptools);

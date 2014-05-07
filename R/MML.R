@@ -13,19 +13,19 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
-#' LouhosStoragePath
+#' Get Louhos storage path.
 #' 
-#' Get url for Louhos storage.
+#' Get url for Louhos storage. It is used to store some large data files.
 #'
 #' @return URL for Louhos data
 #'
 #' @export
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("fingis") 
-#' @examples url <- LouhosStoragePath()
+#' @examples url <- get_louhos_storage_path()
 #' @keywords utilities
 
-LouhosStoragePath <- function () {
+get_louhos_storage_path <- function () {
   # Louhos data is stored in Github avoindata repo: 
   # https://github.com/avoindata/ which is 
   # mirrored on Datavaalit server
@@ -50,7 +50,7 @@ LouhosStoragePath <- function () {
 
 list_mml_datasets <- function (verbose=TRUE) {
 
-  url <- paste(LouhosStoragePath(), "mml/rdata/", sep = "")
+  url <- paste(get_louhos_storage_path(), "mml/rdata/", sep = "")
 
   if (verbose)
     message(paste("Retrieving data set listing from ", url))
@@ -93,15 +93,15 @@ list_mml_datasets <- function (verbose=TRUE) {
 #' @examples datasets <- list_mml_datasets(); 
 #'           map.id = names(datasets)[[1]]; 
 #'           data.id <- datasets[[map.id]][[1]]; 
-#'           sp <- get_MML(map.id, data.id)
+#'           sp <- get_mml(map.id, data.id)
 
-get_MML <- function(map.id, data.id, verbose = TRUE) {
+get_mml <- function(map.id, data.id, verbose = TRUE) {
 
   # DO NOT SET sp <- NULL HERE; this will return NULL for the function
   # IN CONTRAST TO INTENDED OUTPUT!!!
   sp <- NULL	
 
-  url <- paste(LouhosStoragePath(), "mml/rdata/", sep = "")
+  url <- paste(get_louhos_storage_path(), "mml/rdata/", sep = "")
   filepath <- paste(url, map.id, "/", data.id, ".RData", sep = "")
   if (verbose)
     message("Loading ", filepath, ". (C) MML 2013. Converted to RData shape object by Louhos. For more information, see https://github.com/avoindata/mml/")

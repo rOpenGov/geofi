@@ -25,7 +25,7 @@
 #' 
 #' @param map.specifier A string. Specify the name of the
 #' Helsinki District Boundary data set to retrieve.
-#' Run 'get_Helsinki_aluejakokartat()' to see available options.
+#' Run 'get_helsinki_aluejakokartat()' to see available options.
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
 #' @param verbose logical. Should R report extra information on progress? 
 #'
@@ -37,10 +37,10 @@
 #'
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
 #' @references See citation("fingis") 
-#' @examples sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue"); 
+#' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 
-get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir(), verbose=TRUE) {
+get_helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir(), verbose=TRUE) {
   
   # If data not specified, return a list of available options
   if (is.null(map.specifier)) {
@@ -122,7 +122,7 @@ get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' @param map.type  A string. Specify the type of HKK map data to retrieve:
 #' 'seutukartta', 'piirijako', 'rakennusrekisteri'
 #' @param map.specifier  A string. Specify the specific data to retrieve. 
-#' Run 'get_Helsinki_mapdata()' to see available options.
+#' Run 'get_helsinki_spatial()' to see available options.
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
 #' @param verbose logical. Should R report extra information on progress? 
 #'
@@ -133,10 +133,10 @@ get_Helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' 
 #' @references See citation("fingis") 
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
-#' @examples sp.piiri <- get_Helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_SUURPIIRI");
+#' @examples sp.piiri <- get_helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_SUURPIIRI");
 #'           plot_shape(sp=sp.piiri, varname="NIMI", type="discrete", plot=FALSE);
 
-get_Helsinki_spatial <- function(map.type=NULL, map.specifier=NULL, data.dir = tempdir(), verbose=TRUE) {
+get_helsinki_spatial <- function(map.type=NULL, map.specifier=NULL, data.dir = tempdir(), verbose=TRUE) {
   
   # If data not specified, return a list of available options
   if (is.null(map.type) | is.null(map.specifier)) {

@@ -1,8 +1,8 @@
-\name{get_Helsinki_spatial}
-\alias{get_Helsinki_spatial}
+\name{get_helsinki_spatial}
+\alias{get_helsinki_spatial}
 \title{Retrieve spatial data for Helsinki region}
 \usage{
-get_Helsinki_spatial(map.type = NULL, map.specifier = NULL,
+get_helsinki_spatial(map.type = NULL, map.specifier = NULL,
   data.dir = tempdir(), verbose = TRUE)
 }
 \arguments{
@@ -11,7 +11,7 @@ get_Helsinki_spatial(map.type = NULL, map.specifier = NULL,
   'rakennusrekisteri'}
 
   \item{map.specifier}{A string. Specify the specific data
-  to retrieve. Run 'get_Helsinki_mapdata()' to see
+  to retrieve. Run 'get_helsinki_spatial()' to see
   available options.}
 
   \item{data.dir}{A string. Specify a temporary folder for
@@ -34,7 +34,7 @@ For licensing information and other details, see
 http://ptp.hel.fi/avoindata/.
 }
 \examples{
-sp.piiri <- get_Helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_SUURPIIRI");
+sp.piiri <- get_helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_SUURPIIRI");
           plot_shape(sp=sp.piiri, varname="NIMI", type="discrete", plot=FALSE);
 }
 \author{

@@ -1,13 +1,13 @@
 \docType{package}
-\name{fingis-package}
-\alias{fingis}
-\alias{fingis-package}
+\name{gisfin-package}
+\alias{gisfin}
+\alias{gisfin-package}
 \title{Finland GIS R tools}
 \description{
-Brief summary of the helsinki package
+Brief summary of the gisfin package
 }
 \details{
-\tabular{ll}{ Package: \tab fingis\cr Type: \tab Package\cr
+\tabular{ll}{ Package: \tab gisfin\cr Type: \tab Package\cr
 Version: \tab See sessionInfo() or DESCRIPTION file\cr
 Date: \tab 2014\cr License: \tab FreeBSD\cr LazyLoad: \tab
 yes\cr }
@@ -15,15 +15,15 @@ yes\cr }
 R Tools for helsinki API
 }
 \examples{
-# library(fingis)
+# library(gisfin)
 }
 \author{
 Juuso Parkkinen, Leo Lahti and Joona Lehtomaki
 \email{louhos@googlegroups.com}
 }
 \references{
-See citation("fingis")
-\url{https://github.com/rOpenGov/fingis}
+See citation("gisfin")
+\url{https://github.com/rOpenGov/gisfin}
 }
 \keyword{package}
 

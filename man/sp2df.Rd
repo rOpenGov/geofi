@@ -31,6 +31,6 @@ sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
 Juuso Parkkinen \email{louhos@googlegroups.com}
 }
 \references{
-See citation("fingis")
+See citation("gisfin")
 }
 

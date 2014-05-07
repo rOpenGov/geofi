@@ -32,6 +32,6 @@ gc <- get_geocode("Mannerheimintie 100, Helsinki");
 Juuso Parkkinen \email{louhos@googlegroups.com}
 }
 \references{
-See citation("fingis")
+See citation("gisfin")
 }
 

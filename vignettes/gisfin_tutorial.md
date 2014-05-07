@@ -4,13 +4,13 @@
 -->
 
 
-fingis - tutorial
+gisfin - tutorial
 ===========
 
 This R package provides tools to access open spatial data in Finland
 as part of the [rOpenGov](http://ropengov.github.io) project.
 
-For contact information and source code, see the [github page](https://github.com/rOpenGov/fingis)
+For contact information and source code, see the [github page](https://github.com/rOpenGov/gisfin)
 
 ## Available data sources
 
@@ -38,7 +38,7 @@ Release version for general users:
 
 
 ```r
-install.packages("fingis")
+install.packages("gisfin")
 ```
 
 
@@ -48,7 +48,7 @@ Development version for developers:
 ```r
 install.packages("devtools")
 library(devtools)
-install_github("fingis", "ropengov")
+install_github("gisfin", "ropengov")
 ```
 
 
@@ -56,13 +56,13 @@ Load package.
 
 
 ```r
-library(fingis)
+library(gisfin)
 ```
 
 
 ### Notes
 
-The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
+The gisfin package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
 * Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
 * OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
 * Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
@@ -403,26 +403,26 @@ unlist(gc3[1:2])
 
 
 ```r
-citation("fingis")
+citation("gisfin")
 ```
 
 ```
 
-Kindly cite the fingis R package as follows:
+Kindly cite the gisfin R package as follows:
 
-  (C) Juuso Parkkinen, Leo Lahti and Joona Lehtomaki 2014. fingis
+  (C) Juuso Parkkinen, Leo Lahti and Joona Lehtomaki 2014. gisfin
   R package
 
 A BibTeX entry for LaTeX users is
 
   @Misc{,
-    title = {fingis R package},
+    title = {gisfin R package},
     author = {Juuso Parkkinen and Leo Lahti and Joona Lehtomaki},
     year = {2014},
   }
 
 Many thanks for all contributors! For more info, see:
-https://github.com/rOpenGov/fingis
+https://github.com/rOpenGov/gisfin
 ```
 
 
@@ -448,24 +448,23 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2   maps_2.3-6      rgeos_0.3-4     maptools_0.8-29
-##  [5] XML_3.95-0.2    spdep_0.5-71    Matrix_1.1-2-2  RCurl_1.95-4.1 
-##  [9] bitops_1.0-6    rjson_0.2.13    roxygen2_3.1.0  ggmap_2.3      
-## [13] ggplot2_0.9.3.1 fingis_0.9.12   rgdal_0.8-16    sp_1.0-14      
-## [17] knitr_1.5      
+##  [1] mapproj_1.2-2   maps_2.3-6      ggmap_2.3       ggplot2_0.9.3.1
+##  [5] rgeos_0.3-4     maptools_0.8-29 knitr_1.5       gisfin_0.9.13  
+##  [9] rgdal_0.8-16    sp_1.0-14      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        
-##  [4] codetools_0.2-8     colorspace_1.2-4    deldir_0.1-5       
-##  [7] dichromat_2.0-0     digest_0.6.4        evaluate_0.5.1     
-## [10] foreign_0.8-60      formatR_0.10        grid_3.0.3         
-## [13] gtable_0.1.2        labeling_0.2        lattice_0.20-27    
-## [16] LearnBayes_2.12     MASS_7.3-30         munsell_0.4.2      
-## [19] nlme_3.1-115        plyr_1.8.1          png_0.1-7          
-## [22] proto_0.3-10        RColorBrewer_1.0-5  Rcpp_0.11.1        
-## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 RJSONIO_1.0-3      
-## [28] scales_0.2.3        splines_3.0.3       stringr_0.6.2      
-## [31] tools_3.0.3
+##  [1] boot_1.3-10         coda_0.16-1         colorspace_1.2-4   
+##  [4] deldir_0.1-5        dichromat_2.0-0     digest_0.6.4       
+##  [7] evaluate_0.5.1      foreign_0.8-60      formatR_0.10       
+## [10] grid_3.0.3          gtable_0.1.2        labeling_0.2       
+## [13] lattice_0.20-27     LearnBayes_2.12     MASS_7.3-30        
+## [16] Matrix_1.1-2-2      munsell_0.4.2       nlme_3.1-115       
+## [19] plyr_1.8.1          png_0.1-7           proto_0.3-10       
+## [22] RColorBrewer_1.0-5  Rcpp_0.11.1         RCurl_1.95-4.1     
+## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 rjson_0.2.13       
+## [28] RJSONIO_1.0-3       scales_0.2.3        spdep_0.5-71       
+## [31] splines_3.0.3       stringr_0.6.2       tools_3.0.3        
+## [34] XML_3.95-0.2
 ```
 
 

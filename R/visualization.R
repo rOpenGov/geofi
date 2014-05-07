@@ -22,7 +22,7 @@
 #' @export
 #' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @references See citation("fingis")
+#' @references See citation("gisfin")
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
 #'           # Need to load rgeos and maptools for ggplot2::fortify in sp2df() 
 #'           library(rgeos);
@@ -68,7 +68,7 @@ sp2df <- function(sp, region) {
 #' @export
 #' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @references See citation("fingis")
+#' @references See citation("gisfin")
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           # Need to load rgeos and maptools for ggplot2::fortify in sp2df() 
 #'           library(rgeos);
@@ -106,7 +106,7 @@ get_theme_map <- function() {
 #' @author Modified from the code by Karl Ove Hufthammer from
 #' http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html;
 #' modifications by Leo Lahti and Juuso Parkkinen
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
 #'           cols <- factor(generate_map_colours(sp=sp.suuralue));
 #' @keywords utilities
@@ -163,7 +163,7 @@ generate_map_colours <- function(sp, verbose=TRUE) {
 #' @importFrom sp spplot
 #' @export
 #'
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)

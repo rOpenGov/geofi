@@ -21,7 +21,7 @@
 #'
 #' @export
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 #' @examples url <- get_louhos_storage_path()
 #' @keywords utilities
 
@@ -44,7 +44,7 @@ get_louhos_storage_path <- function () {
 #' @importFrom XML readHTMLTable
 #' @export
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 #' @examples datasets = list_mml_datasets()
 #' @keywords utilities
 
@@ -89,7 +89,7 @@ list_mml_datasets <- function (verbose=TRUE) {
 #'
 #' @export
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 #' @examples datasets <- list_mml_datasets(); 
 #'           map.id = names(datasets)[[1]]; 
 #'           data.id <- datasets[[map.id]][[1]]; 

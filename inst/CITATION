@@ -1,7 +1,7 @@
-citHeader("Kindly cite the fingis R package as follows:")
+citHeader("Kindly cite the gisfin R package as follows:")
 
 citEntry(entry="misc",
-         title = "fingis R package",
+         title = "gisfin R package",
          author = personList(
      person(given ="Juuso", family="Parkkinen", email = "juuso.parkkinen@iki.fi"),
 	   person(given ="Leo", family="Lahti"),
@@ -11,8 +11,8 @@ citEntry(entry="misc",
 	 year = "2014",
          textVersion =
          paste("(C) Juuso Parkkinen, Leo Lahti and Joona Lehtomaki 2014.",
-               "fingis R package",
+               "gisfin R package",
                sep=" ")
          )
 
-citFooter("\nMany thanks for all contributors! For more info, see: https://github.com/rOpenGov/fingis")
+citFooter("\nMany thanks for all contributors! For more info, see: https://github.com/rOpenGov/gisfin")

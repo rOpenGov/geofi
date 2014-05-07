@@ -27,7 +27,7 @@ http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-
 modifications by Leo Lahti and Juuso Parkkinen
 }
 \references{
-See citation("fingis")
+See citation("gisfin")
 }
 \keyword{utilities}
 

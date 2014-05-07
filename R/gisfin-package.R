@@ -1,7 +1,7 @@
-#' Brief summary of the helsinki package
+#' Brief summary of the gisfin package
 #'
 #' \tabular{ll}{
-#' Package: \tab fingis\cr
+#' Package: \tab gisfin\cr
 #' Type: \tab Package\cr
 #' Version: \tab See sessionInfo() or DESCRIPTION file\cr
 #' Date: \tab 2014\cr
@@ -11,15 +11,15 @@
 #'
 #' R Tools for helsinki API
 #'
-#' @name fingis-package
-#' @aliases fingis
+#' @name gisfin-package
+#' @aliases gisfin
 #' @docType package
 #' @title Finland GIS R tools
 #'
 #' @author Juuso Parkkinen, Leo Lahti and Joona Lehtomaki \email{louhos@@googlegroups.com}
 #' @references
-#' See citation("fingis")
-#' \url{https://github.com/rOpenGov/fingis}
-#' @examples # library(fingis)
+#' See citation("gisfin")
+#' \url{https://github.com/rOpenGov/gisfin}
+#' @examples # library(gisfin)
 #' @keywords package
 NULL

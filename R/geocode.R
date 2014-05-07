@@ -32,7 +32,7 @@
 #' @export
 #' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @references See citation("fingis")
+#' @references See citation("gisfin")
 #' @examples gc <- get_geocode("Mannerheimintie 100, Helsinki"); 
 get_geocode <- function(query, service="okf") {
   

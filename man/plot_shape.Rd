@@ -73,7 +73,7 @@ Leo Lahti and Juuso Parkkinen
 \email{louhos@googlegroups.com}
 }
 \references{
-See citation("fingis")
+See citation("gisfin")
 }
 \keyword{utilities}
 

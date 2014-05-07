@@ -1,7 +1,7 @@
-Package: fingis
+Package: gisfin
 Type: Package
 Title: Finland GIS R tools
-Version: 0.9.12
+Version: 0.9.13
 Date: 2014-05-07
 Author: Juuso Parkkinen, Leo Lahti, Joona Lehtomaki
 Maintainer: Juuso Parkkinen <louhos@googlegroups.com>
@@ -20,5 +20,5 @@ Imports:
 Suggests:
     rgeos,
     maptools
-URL: https://github.com/ropengov/fingis
+URL: https://github.com/ropengov/gisfin
 LazyLoad: yes

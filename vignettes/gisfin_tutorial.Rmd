@@ -4,13 +4,13 @@
 -->
 
 
-fingis - tutorial
+gisfin - tutorial
 ===========
 
 This R package provides tools to access open spatial data in Finland
 as part of the [rOpenGov](http://ropengov.github.io) project.
 
-For contact information and source code, see the [github page](https://github.com/rOpenGov/fingis)
+For contact information and source code, see the [github page](https://github.com/rOpenGov/gisfin)
 
 ## Available data sources
 
@@ -37,7 +37,7 @@ The following data sources are currently available:
 Release version for general users:
 
 ```{r install, eval=FALSE}
-install.packages("fingis")
+install.packages("gisfin")
 ```
 
 Development version for developers:
@@ -45,18 +45,18 @@ Development version for developers:
 ```{r install2, eval=FALSE}
 install.packages("devtools")
 library(devtools)
-install_github("fingis", "ropengov")
+install_github("gisfin", "ropengov")
 ```
 
 Load package.
 
 ```{r load}
-library(fingis)
+library(gisfin)
 ```
 
 ### Notes
 
-The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
+The gisfin package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
 * Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
 * OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
 * Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
@@ -207,7 +207,7 @@ unlist(gc3[1:2])
 **Citing the R package:**
 
 ```{r citation, comment=NA}
-citation("fingis")
+citation("gisfin")
 ```
 
 

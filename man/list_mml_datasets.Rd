@@ -22,7 +22,7 @@ datasets = list_mml_datasets()
 Leo Lahti \email{louhos@googlegroups.com}
 }
 \references{
-See citation("fingis")
+See citation("gisfin")
 }
 \keyword{utilities}
 

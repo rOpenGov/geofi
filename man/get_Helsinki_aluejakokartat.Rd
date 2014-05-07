@@ -42,6 +42,6 @@ Juuso Parkkinen, Joona Lehtomaki and Leo Lahti
 \email{louhos@googlegroups.com}
 }
 \references{
-See citation("fingis")
+See citation("gisfin")
 }
 

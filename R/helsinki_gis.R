@@ -36,7 +36,7 @@
 #' @note This function replaces sorvi::GetHRIaluejakokartat; The data is now retrieved directly from HKK.
 #'
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
 
@@ -131,7 +131,7 @@ get_helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' @importFrom rgdal ogrListLayers
 #' @export
 #' 
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
 #' @examples sp.piiri <- get_helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_SUURPIIRI");
 #'           plot_shape(sp=sp.piiri, varname="NIMI", type="discrete", plot=FALSE);

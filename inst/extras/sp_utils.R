@@ -37,7 +37,7 @@
 #' 
 #' @seealso spChFIDs, spRbind
 #' @author Joona Lehtomaki \email{louhos@@googlegroups.com}
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 
 merge_spatial <- function(sp.list, CRS=NA, FID=NA) {
   
@@ -108,7 +108,7 @@ merge_spatial <- function(sp.list, CRS=NA, FID=NA) {
 #' @export
 #' 
 #' @author Joona Lehtomaki \email{louhos@@googlegroups.com}
-#' @references See citation("fingis") 
+#' @references See citation("gisfin") 
 
 split_spatial <- function(sp.object, split.field) {
   

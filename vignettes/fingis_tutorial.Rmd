@@ -16,16 +16,21 @@ For contact information and source code, see the [github page](https://github.co
 
 The following data sources are currently available:
 * [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
- * Datasets: *Aluejakokartat (kunta, pien-, suur-, tilastoalueet), äänestysaluejako*
+ * Aluejakokartat: kunta, pien-, suur-, tilastoalueet (Helsinki region district maps)
+ * Äänestysaluejako: (Helsinki region election district maps)
  * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
- * Datasets: *Seutukartta, Helsingin piirijako, rakennusrekisterin ote*
+ * Seutukartta (Helsinki Region Maps)
+ * Helsingin piirijako (District Division of the City of Helsinki)
+ * Rakennusrekisterin ote (Helsinki building registry)
  * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
- * Datasets: *Yleiskartat (kunta-, maakuntarajat)*
+ * Yleiskartat: kunta-, maakuntarajat (municipality and province borders)
  * Source: [Maanmittauslaitos (MML)](http://www.maanmittauslaitos.fi/avoindata)
 * [Geocoding](#geocoding)
- * Sources: *[OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)*
+ * [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
+ * [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
+ * [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
 ## Installation
 
@@ -60,20 +65,20 @@ The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal
 
 Helsinki region district maps (Helsingin seudun aluejakokartat) from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/).
 
-List available maps with `get_Helsinki_aluejakokartat()`.
+List available maps with `get_helsinki_aluejakokartat()`.
 
 ```{r aluejako_list, message=FALSE}
-get_Helsinki_aluejakokartat()
+get_helsinki_aluejakokartat()
 ```
 
 Below the 'suuralue' districts is used for plotting examples with `spplot()` and [ggplot2](http://ggplot2.org/). The other district types can be plotted similarly.
 
 ### Plot with spplot
 
-Retrieve 'suuralue' spatial object with `get_Helsinki_aluejakokartat()` and plot with `spplot()`.
+Retrieve 'suuralue' spatial object with `get_helsinki_aluejakokartat()` and plot with `spplot()`.
 
 ```{r hkk-suuralue1, message=FALSE, warning=FALSE, results='hide'}
-sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier="suuralue")
+sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue")
 spplot(sp.suuralue, zcol="Name")
 ```
 
@@ -90,7 +95,7 @@ Use the 'sp.suuralue' retrieved above, and retrieve also the center points of th
 
 ```{r hkk-suuralue3, message=FALSE, warning=FALSE, results='hide'}
 # Retrieve center points
-sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier="suuralue_piste")
+sp.suuralue.piste <- get_helsinki_aluejakokartat(map.specifier="suuralue_piste")
 # Get data frames
 df.suuralue <- sp2df(sp.suuralue, "Name")
 df.suuralue.piste <- sp2df(sp.suuralue.piste, "Name")
@@ -116,10 +121,10 @@ ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, gro
 
 ### Plot election districts
 
-Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `spplot()`, use colours to separate municipalities.
+Retrieve and plot äänetysaluejako (election districts) with `get_helsinki_aluejakokartat()` and `spplot()`, use colours to separate municipalities.
 
 ```{r hkk-aanestysalue, message=FALSE, warning=FALSE, results='hide'}
-sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier="aanestysalue")
+sp.aanestys <- get_helsinki_aluejakokartat(map.specifier="aanestysalue")
 spplot(sp.aanestys, zcol="KUNTA", col.regions=rainbow(length(levels(sp.aanestys@data$KUNTA))), colorkey=FALSE)
 
 ```
@@ -129,10 +134,10 @@ spplot(sp.aanestys, zcol="KUNTA", col.regions=rainbow(length(levels(sp.aanestys@
 
 Other Helsinki region spatial data from [Helsingin Kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/).
 
-List available spatial data with `get_Helsinki_spatial()`.
+List available spatial data with `get_helsinki_spatial()`.
 
 ```{r hki_spatial_list, message=FALSE}
-get_Helsinki_spatial()
+get_helsinki_spatial()
 ```
 
 
@@ -146,11 +151,11 @@ List available data sets with `list_mml_datasets()`.
 list_mml_datasets()
 ```
 
-Retrieve regional borders for Finland with `get_MML()`.
+Retrieve regional borders for Finland with `get_mml()`.
 
 ```{r MML_regions, message=FALSE, warning=FALSE} 
 # Get a specific map
-sp.mml <- get_MML(map.id="Yleiskartta-4500", data.id="HallintoAlue")
+sp.mml <- get_mml(map.id="Yleiskartta-4500", data.id="HallintoAlue")
 # Investigate available variables in this map
 head(as.data.frame(sp.mml))
 ```

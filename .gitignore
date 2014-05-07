@@ -9,3 +9,4 @@ inst/extras/*.Rcheck
 TEMPDIR/*
 ggmapTemp.png
 fingis.Rproj
+fingis_tutorial.txt

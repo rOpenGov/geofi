@@ -16,16 +16,21 @@ For contact information and source code, see the [github page](https://github.co
 
 The following data sources are currently available:
 * [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
- * Datasets: *Aluejakokartat (kunta, pien-, suur-, tilastoalueet), äänestysaluejako*
+ * Aluejakokartat: kunta, pien-, suur-, tilastoalueet (Helsinki region district maps)
+ * Äänestysaluejako: (Helsinki region election district maps)
  * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
- * Datasets: *Seutukartta, Helsingin piirijako, rakennusrekisterin ote*
+ * Seutukartta (Helsinki Region Maps)
+ * Helsingin piirijako (District Division of the City of Helsinki)
+ * Rakennusrekisterin ote (Helsinki building registry)
  * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
 * [National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
- * Datasets: *Yleiskartat (kunta-, maakuntarajat)*
+ * Yleiskartat: kunta-, maakuntarajat (municipality and province borders)
  * Source: [Maanmittauslaitos (MML)](http://www.maanmittauslaitos.fi/avoindata)
 * [Geocoding](#geocoding)
- * Sources: *[OKF.fi Geocoding API Test Console](http://data.okf.fi/console/), [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy), [Google](http://code.google.com/apis/maps/documentation/geocoding/)*
+ * [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
+ * [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
+ * [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
 ## Installation
 
@@ -66,11 +71,11 @@ The fingis package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal
 
 Helsinki region district maps (Helsingin seudun aluejakokartat) from [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/).
 
-List available maps with `get_Helsinki_aluejakokartat()`.
+List available maps with `get_helsinki_aluejakokartat()`.
 
 
 ```r
-get_Helsinki_aluejakokartat()
+get_helsinki_aluejakokartat()
 ```
 
 ```
@@ -84,11 +89,11 @@ Below the 'suuralue' districts is used for plotting examples with `spplot()` and
 
 ### Plot with spplot
 
-Retrieve 'suuralue' spatial object with `get_Helsinki_aluejakokartat()` and plot with `spplot()`.
+Retrieve 'suuralue' spatial object with `get_helsinki_aluejakokartat()` and plot with `spplot()`.
 
 
 ```r
-sp.suuralue <- get_Helsinki_aluejakokartat(map.specifier = "suuralue")
+sp.suuralue <- get_helsinki_aluejakokartat(map.specifier = "suuralue")
 spplot(sp.suuralue, zcol = "Name")
 ```
 
@@ -114,7 +119,7 @@ Use the 'sp.suuralue' retrieved above, and retrieve also the center points of th
 
 ```r
 # Retrieve center points
-sp.suuralue.piste <- get_Helsinki_aluejakokartat(map.specifier = "suuralue_piste")
+sp.suuralue.piste <- get_helsinki_aluejakokartat(map.specifier = "suuralue_piste")
 # Get data frames
 df.suuralue <- sp2df(sp.suuralue, "Name")
 df.suuralue.piste <- sp2df(sp.suuralue.piste, "Name")
@@ -150,11 +155,11 @@ ggmap(hel.map) + geom_polygon(data = df.suuralue, aes(x = long, y = lat, fill = 
 
 ### Plot election districts
 
-Retrieve and plot äänetysaluejako (election districts) with `get_Helsinki_aluejakokartat()` and `spplot()`, use colours to separate municipalities.
+Retrieve and plot äänetysaluejako (election districts) with `get_helsinki_aluejakokartat()` and `spplot()`, use colours to separate municipalities.
 
 
 ```r
-sp.aanestys <- get_Helsinki_aluejakokartat(map.specifier = "aanestysalue")
+sp.aanestys <- get_helsinki_aluejakokartat(map.specifier = "aanestysalue")
 spplot(sp.aanestys, zcol = "KUNTA", col.regions = rainbow(length(levels(sp.aanestys@data$KUNTA))), 
     colorkey = FALSE)
 ```
@@ -167,11 +172,11 @@ spplot(sp.aanestys, zcol = "KUNTA", col.regions = rainbow(length(levels(sp.aanes
 
 Other Helsinki region spatial data from [Helsingin Kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/).
 
-List available spatial data with `get_Helsinki_spatial()`.
+List available spatial data with `get_helsinki_spatial()`.
 
 
 ```r
-get_Helsinki_spatial()
+get_helsinki_spatial()
 ```
 
 ```
@@ -261,12 +266,12 @@ list_mml_datasets()
 ```
 
 
-Retrieve regional borders for Finland with `get_MML()`.
+Retrieve regional borders for Finland with `get_mml()`.
 
 
 ```r
 # Get a specific map
-sp.mml <- get_MML(map.id = "Yleiskartta-4500", data.id = "HallintoAlue")
+sp.mml <- get_mml(map.id = "Yleiskartta-4500", data.id = "HallintoAlue")
 # Investigate available variables in this map
 head(as.data.frame(sp.mml))
 ```
@@ -443,11 +448,11 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2   maps_2.3-6      ggmap_2.3       rgeos_0.3-4    
-##  [5] maptools_0.8-29 knitr_1.5       fingis_0.9.11   XML_3.95-0.2   
-##  [9] ggplot2_0.9.3.1 spdep_0.5-71    Matrix_1.1-2-2  RCurl_1.95-4.1 
-## [13] bitops_1.0-6    rjson_0.2.13    rgdal_0.8-16    sp_1.0-14      
-## [17] roxygen2_3.1.0 
+##  [1] mapproj_1.2-2   maps_2.3-6      rgeos_0.3-4     maptools_0.8-29
+##  [5] XML_3.95-0.2    spdep_0.5-71    Matrix_1.1-2-2  RCurl_1.95-4.1 
+##  [9] bitops_1.0-6    rjson_0.2.13    roxygen2_3.1.0  ggmap_2.3      
+## [13] ggplot2_0.9.3.1 fingis_0.9.12   rgdal_0.8-16    sp_1.0-14      
+## [17] knitr_1.5      
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        
@@ -455,12 +460,12 @@ sessionInfo()
 ##  [7] dichromat_2.0-0     digest_0.6.4        evaluate_0.5.1     
 ## [10] foreign_0.8-60      formatR_0.10        grid_3.0.3         
 ## [13] gtable_0.1.2        labeling_0.2        lattice_0.20-27    
-## [16] LearnBayes_2.12     markdown_0.6.4      MASS_7.3-30        
-## [19] munsell_0.4.2       nlme_3.1-115        plyr_1.8.1         
-## [22] png_0.1-7           proto_0.3-10        RColorBrewer_1.0-5 
-## [25] Rcpp_0.11.1         reshape2_1.2.2      RgoogleMaps_1.2.0.5
-## [28] RJSONIO_1.0-3       scales_0.2.3        splines_3.0.3      
-## [31] stringr_0.6.2       tools_3.0.3
+## [16] LearnBayes_2.12     MASS_7.3-30         munsell_0.4.2      
+## [19] nlme_3.1-115        plyr_1.8.1          png_0.1-7          
+## [22] proto_0.3-10        RColorBrewer_1.0-5  Rcpp_0.11.1        
+## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 RJSONIO_1.0-3      
+## [28] scales_0.2.3        splines_3.0.3       stringr_0.6.2      
+## [31] tools_3.0.3
 ```
 
 

@@ -18,6 +18,7 @@
 #' @param sp A spatial object to be transformed
 #' @param region A string specifying the region of interest
 #' @return A ggplot2 theme object
+#' 
 #' @importFrom ggplot2 fortify
 #' @export
 #' 
@@ -34,7 +35,7 @@
 #'           ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + 
 #'           geom_polygon() + theme(legend.position="none")
 
-sp2df <- function(sp, region) {
+sp2df <- function(sp, region=NULL) {
   
   ## TODO: study how general and/or necessary this function is!
   # Add IDs 
@@ -42,9 +43,14 @@ sp2df <- function(sp, region) {
   
   if (class(sp)=="SpatialPointsDataFrame") {
     # Construct data frame manually, as ggplot::fortify can not handle SpatialPoints
-    df <- data.frame(long=sp@coords[,1], lat=sp@coords[,2], region=sp@data[region])
+    if (!is.null(region))
+      message("Note! parameter 'region' not used for SpatialPointsDataFrame")
+    df <- data.frame(long=sp@coords[,1], lat=sp@coords[,2], sp@data)
     
   } else {
+    if (is.null(region))
+      stop("Please specify 'region'!")
+    
     # Get point data
     sp.points <- ggplot2::fortify(sp, region=region)
     # Regex to joinable format
@@ -160,14 +166,14 @@ generate_map_colours <- function(sp, verbose=TRUE) {
 #' @return A Trellis Plot Object
 #' @details Visualization types include: oneway/sequential (color scale ranges from white to dark red, or custom color given with the palette argument); twoway/bipolar/diverging (color scale ranges from dark blue through white to dark red; or custom colors); discrete/qualitative (discrete color scale; the colors are used to visually separate regions); and "custom" (specify colors with the col.regions argument)
 #' 
-#' @importFrom sp spplot
 #' @export
 #'
 #' @references See citation("gisfin") 
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
-#'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
+#'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE);
 #' @keywords utilities
+
 plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL, min.color = "white", max.color = "red", plot = TRUE) {
   
   # type = "oneway"; ncol = 10; at = NULL; palette = NULL; main = NULL; colorkey = TRUE; lwd = .4; border.col = "black"; col.regions = NULL
@@ -276,7 +282,7 @@ plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, pale
       nlevels <- length(levels(vars))
       # Changed 6.5.2014 to use rainbow()
       col.regions <- rep(rainbow(ncol), ceiling(nlevels/ncol))[1:nlevels]  
-#      col.regions <- rep(RColorBrewer::brewer.pal(ncol, "Paired"), ceiling(nlevels/ncol))[1:nlevels]  
+      #      col.regions <- rep(RColorBrewer::brewer.pal(ncol, "Paired"), ceiling(nlevels/ncol))[1:nlevels]  
     }
     
     colorkey <- FALSE

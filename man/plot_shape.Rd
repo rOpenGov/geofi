@@ -66,7 +66,7 @@ the colors are used to visually separate regions); and
 }
 \examples{
 sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
-          plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
+          plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE);
 }
 \author{
 Leo Lahti and Juuso Parkkinen

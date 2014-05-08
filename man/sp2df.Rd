@@ -2,7 +2,7 @@
 \alias{sp2df}
 \title{Transform data from sp to data frame for ggplot2}
 \usage{
-sp2df(sp, region)
+sp2df(sp, region = NULL)
 }
 \arguments{
   \item{sp}{A spatial object to be transformed}

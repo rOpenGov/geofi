@@ -18,7 +18,7 @@ get_helsinki_aluejakokartat(map.specifier = NULL, data.dir = tempdir(),
   on progress?}
 }
 \value{
-a shape object (from SpatialPolygons class)
+a spatial object (from SpatialPolygonsDataFrame class)
 }
 \description{
 Retrieves District Boundaries data (Aluejakorajat,
@@ -35,7 +35,7 @@ data is now retrieved directly from HKK.
 }
 \examples{
 sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
-          plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE)
+          spplot(sp.suuralue, zcol="Name");
 }
 \author{
 Juuso Parkkinen, Joona Lehtomaki and Leo Lahti

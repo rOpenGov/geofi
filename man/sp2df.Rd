@@ -2,12 +2,15 @@
 \alias{sp2df}
 \title{Transform data from sp to data frame for ggplot2}
 \usage{
-sp2df(sp, region = NULL)
+sp2df(sp, region = NULL, verbose = TRUE)
 }
 \arguments{
   \item{sp}{A spatial object to be transformed}
 
   \item{region}{A string specifying the region of interest}
+
+  \item{verbose}{logical. Should R report extra information
+  on progress?}
 }
 \value{
 A ggplot2 theme object

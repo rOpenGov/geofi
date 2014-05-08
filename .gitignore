@@ -8,5 +8,5 @@ inst/extras/*.Rcheck
 .Rhistory
 TEMPDIR/*
 ggmapTemp.png
-fingis.Rproj
-fingis_tutorial.txt
+gisfin.Rproj
+gisfin_tutorial.txt

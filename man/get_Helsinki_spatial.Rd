@@ -37,7 +37,7 @@ http://ptp.hel.fi/avoindata/.
 }
 \examples{
 sp.piiri <- get_helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_PERUSPIIRI");
-          spplot(sp.piiri, zcol="OSAALUE_NIMI");
+          spplot(sp.piiri, zcol="NIMI");
 }
 \author{
 Juuso Parkkinen, Joona Lehtomaki and Leo Lahti

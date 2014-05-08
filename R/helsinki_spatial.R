@@ -30,6 +30,9 @@
 #' @param verbose logical. Should R report extra information on progress? 
 #'
 #' @return a spatial object (from SpatialPolygonsDataFrame class)
+#' 
+#' @import rgdal
+#' @import sp
 #' @export
 #' @note This function replaces sorvi::GetHRIaluejakokartat; The data is now retrieved directly from HKK.
 #'
@@ -139,6 +142,8 @@ get_helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' @param verbose logical. Should R report extra information on progress? 
 #'
 #' @return a spatial object (from SpatialPolygonsDataFrame or SpatialPointsDataFrame class)
+#' @import rgdal
+#' @import sp
 #' @export
 #' 
 #' @references See citation("gisfin") 

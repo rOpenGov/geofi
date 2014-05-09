@@ -3,6 +3,12 @@
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
 
+```{r knit, eval=FALSE, echo=FALSE}
+# Hot to knit this document into .md and .html
+library(knitr)
+knit(input="vignettes/gisfin_tutorial.Rmd", output="vignettes/gisfin_tutorial.md")
+knit2html(input="vignettes/gisfin_tutorial.md", output="vignettes/gisfin_tutorial.html", options=c("use_xhtml","smartypants","mathjax","highlight_code"))
+```
 
 gisfin - tutorial
 ===========

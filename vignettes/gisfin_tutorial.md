@@ -4,6 +4,8 @@
 -->
 
 
+
+
 gisfin - tutorial
 ===========
 
@@ -59,6 +61,22 @@ Load package.
 
 ```r
 library(gisfin)
+```
+
+```
+## Loading required package: rgdal
+## Loading required package: sp
+## rgdal: version: 0.8-16, (SVN revision 498)
+## Geospatial Data Abstraction Library extensions to R successfully loaded
+## Loaded GDAL runtime: GDAL 1.9.2, released 2012/10/08
+## Path to GDAL shared files: /Library/Frameworks/R.framework/Versions/3.0/Resources/library/rgdal/gdal
+## Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
+## Path to PROJ.4 shared files: /Library/Frameworks/R.framework/Versions/3.0/Resources/library/rgdal/proj
+## 
+## gisfin R package: tools for open GIS data for Finland.
+## This R package is part of rOpenGov <ropengov.github.io>.
+## Copyright (C) 2010-2014 Juuso Parkkinen, Leo Lahti and Joona Lehtomaki.
+## This is free software. You are free to use, modify and redistribute it under the FreeBSD license.
 ```
 
 
@@ -441,24 +459,23 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] knitr_1.5       mapproj_1.2-2   maps_2.3-6      ggmap_2.3      
-##  [5] rgeos_0.3-4     maptools_0.8-29 gisfin_0.9.14   XML_3.95-0.2   
-##  [9] ggplot2_0.9.3.1 spdep_0.5-71    Matrix_1.1-2-2  RCurl_1.95-4.1 
-## [13] bitops_1.0-6    rjson_0.2.13    rgdal_0.8-16    sp_1.0-14      
-## [17] roxygen2_3.1.0 
+##  [1] mapproj_1.2-2   maps_2.3-6      ggmap_2.3       ggplot2_0.9.3.1
+##  [5] rgeos_0.3-4     maptools_0.8-29 gisfin_0.9.14   rgdal_0.8-16   
+##  [9] sp_1.0-14       knitr_1.5      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        
-##  [4] codetools_0.2-8     colorspace_1.2-4    deldir_0.1-5       
-##  [7] dichromat_2.0-0     digest_0.6.4        evaluate_0.5.1     
-## [10] foreign_0.8-60      formatR_0.10        grid_3.0.3         
-## [13] gtable_0.1.2        labeling_0.2        lattice_0.20-27    
-## [16] LearnBayes_2.12     MASS_7.3-30         munsell_0.4.2      
+##  [1] boot_1.3-10         coda_0.16-1         colorspace_1.2-4   
+##  [4] deldir_0.1-5        dichromat_2.0-0     digest_0.6.4       
+##  [7] evaluate_0.5.1      foreign_0.8-60      formatR_0.10       
+## [10] grid_3.0.3          gtable_0.1.2        labeling_0.2       
+## [13] lattice_0.20-27     LearnBayes_2.12     markdown_0.6.4     
+## [16] MASS_7.3-30         Matrix_1.1-2-2      munsell_0.4.2      
 ## [19] nlme_3.1-115        plyr_1.8.1          png_0.1-7          
 ## [22] proto_0.3-10        RColorBrewer_1.0-5  Rcpp_0.11.1        
-## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 RJSONIO_1.0-3      
-## [28] scales_0.2.3        splines_3.0.3       stringr_0.6.2      
-## [31] tools_3.0.3
+## [25] RCurl_1.95-4.1      reshape2_1.2.2      RgoogleMaps_1.2.0.5
+## [28] rjson_0.2.13        RJSONIO_1.0-3       scales_0.2.3       
+## [31] spdep_0.5-71        splines_3.0.3       stringr_0.6.2      
+## [34] tools_3.0.3         XML_3.95-0.2
 ```
 
 

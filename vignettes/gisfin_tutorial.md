@@ -63,22 +63,6 @@ Load package.
 library(gisfin)
 ```
 
-```
-## Loading required package: rgdal
-## Loading required package: sp
-## rgdal: version: 0.8-16, (SVN revision 498)
-## Geospatial Data Abstraction Library extensions to R successfully loaded
-## Loaded GDAL runtime: GDAL 1.9.2, released 2012/10/08
-## Path to GDAL shared files: /Library/Frameworks/R.framework/Versions/3.0/Resources/library/rgdal/gdal
-## Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
-## Path to PROJ.4 shared files: /Library/Frameworks/R.framework/Versions/3.0/Resources/library/rgdal/proj
-## 
-## gisfin R package: tools for open GIS data for Finland.
-## This R package is part of rOpenGov <ropengov.github.io>.
-## Copyright (C) 2010-2014 Juuso Parkkinen, Leo Lahti and Joona Lehtomaki.
-## This is free software. You are free to use, modify and redistribute it under the FreeBSD license.
-```
-
 
 ### Notes
 
@@ -345,7 +329,7 @@ spplot(sp.mml, zcol = "COL", col.regions = rainbow(length(levels(sp.mml@data$COL
     colorkey = FALSE)
 ```
 
-![plot of chunk MML_province](figure/MML_province.png) 
+![plot of chunk MML_municipality](figure/MML_municipality.png) 
 
 
 Plot provinces (maakunnat) with `spplot()`. Note that `generate_map_colours()` works currently only for the smallest polygons in the data, here municipalities, and can not be used for the provinces!
@@ -359,7 +343,7 @@ sp.mml@data$Maakunta.FI <- factor(iconv(sp.mml@data$Maakunta.FI, from = "UTF-8",
 spplot(sp.mml, zcol = "Maakunta.FI", col.regions = rainbow(length(levels(sp.mml@data$Maakunta.FI))))
 ```
 
-![plot of chunk MML_municipality](figure/MML_municipality.png) 
+![plot of chunk MML_provinces](figure/MML_provinces.png) 
 
 
 ## <a name="geocoding"></a>Geocoding
@@ -468,14 +452,14 @@ sessionInfo()
 ##  [4] deldir_0.1-5        dichromat_2.0-0     digest_0.6.4       
 ##  [7] evaluate_0.5.1      foreign_0.8-60      formatR_0.10       
 ## [10] grid_3.0.3          gtable_0.1.2        labeling_0.2       
-## [13] lattice_0.20-27     LearnBayes_2.12     markdown_0.6.4     
-## [16] MASS_7.3-30         Matrix_1.1-2-2      munsell_0.4.2      
-## [19] nlme_3.1-115        plyr_1.8.1          png_0.1-7          
-## [22] proto_0.3-10        RColorBrewer_1.0-5  Rcpp_0.11.1        
-## [25] RCurl_1.95-4.1      reshape2_1.2.2      RgoogleMaps_1.2.0.5
-## [28] rjson_0.2.13        RJSONIO_1.0-3       scales_0.2.3       
-## [31] spdep_0.5-71        splines_3.0.3       stringr_0.6.2      
-## [34] tools_3.0.3         XML_3.95-0.2
+## [13] lattice_0.20-27     LearnBayes_2.12     MASS_7.3-30        
+## [16] Matrix_1.1-2-2      munsell_0.4.2       nlme_3.1-115       
+## [19] plyr_1.8.1          png_0.1-7           proto_0.3-10       
+## [22] RColorBrewer_1.0-5  Rcpp_0.11.1         RCurl_1.95-4.1     
+## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 rjson_0.2.13       
+## [28] RJSONIO_1.0-3       scales_0.2.3        spdep_0.5-71       
+## [31] splines_3.0.3       stringr_0.6.2       tools_3.0.3        
+## [34] XML_3.95-0.2
 ```
 
 

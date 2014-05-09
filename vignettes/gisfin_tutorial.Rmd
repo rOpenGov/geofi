@@ -6,6 +6,7 @@
 ```{r knit, eval=FALSE, echo=FALSE}
 # Hot to knit this document into .md and .html
 library(knitr)
+opts_knit$set(base.dir = "vignettes") # Change the base dir where to save figures
 knit(input="vignettes/gisfin_tutorial.Rmd", output="vignettes/gisfin_tutorial.md")
 knit2html(input="vignettes/gisfin_tutorial.md", output="vignettes/gisfin_tutorial.html", options=c("use_xhtml","smartypants","mathjax","highlight_code"))
 ```
@@ -58,7 +59,7 @@ install_github("gisfin", "ropengov")
 
 Load package.
 
-```{r load}
+```{r load, message=FALSE, warning=FALSE, results='hide'}
 library(gisfin)
 ```
 
@@ -183,7 +184,7 @@ head(as.data.frame(sp.mml))
 Plot municipalities (kunnat) with `spplot()`, using colours from `generate_map_colours()`.
 
 
-```{r MML_province, message=FALSE, warning=FALSE}
+```{r MML_municipality, message=FALSE, warning=FALSE}
 # Get region colouring for municipalities
 sp.mml@data$COL <- factor(generate_map_colours(sp.mml))
 # Plot the shape file, colour municipalities
@@ -192,7 +193,7 @@ spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))),
 
 Plot provinces (maakunnat) with `spplot()`. Note that `generate_map_colours()` works currently only for the smallest polygons in the data, here municipalities, and can not be used for the provinces!
 
-```{r MML_municipality, message=FALSE, warning=FALSE}
+```{r MML_provinces, message=FALSE, warning=FALSE}
 # Convert municipality names to factors and fix character encoding
 sp.mml@data$Maakunta.FI <- factor(iconv(sp.mml@data$Maakunta.FI, from="UTF-8", to="ISO-8859-1"))
 # Plot the shape file, colour provinces 

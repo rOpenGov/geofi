@@ -5,6 +5,9 @@ gisfin - Potential data sources to be added
  * [Seutukartta](http://www.hri.fi/fi/data/seutukartta) Seutukartta on Helsingin seudun neljäntoista kunnan tiedoista koottu kartta-aineisto.
  * [Helsingin kaupungin avoimet paikkatietoaineistot](http://kartta.hel.fi/avoindata/) - Mm. Seutukartta ([[metatieto|http://ptp.hel.fi/paikkatietohakemisto/taulu.asp?id=32]]), ks. myös [[HRI|http://www.hri.fi/fi/data/seutukartta/]]  
 
+* Varsinais-Suomi
+ * [Lounaispaikka](http://paikkatietokeskus.lounaispaikka.fi/fi/aineistot/) Avoimia paikkatieto- ym. aineistoja varsinais-Suomesta.
+
 * Finland 
  * [Kattava listaus suomalaisista avoimista paikkatietoaineistoista](http://www.paikkatietoikkuna.fi/web/fi/avoin-paikkatieto;jsessionid=CFF2637CEBAB47D6766CF5752B66297F)
  * [Latuviitan aineistot](http://latuviitta.org/)

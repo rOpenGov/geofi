@@ -36,6 +36,9 @@ The following data sources are currently available:
  * [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
  * [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
+List of potential data sources to be added to the package can be found [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
+
+
 ## Installation
 
 Release version for general users:

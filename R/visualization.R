@@ -130,7 +130,7 @@ get_theme_map <- function() {
 generate_map_colours <- function(sp, verbose=TRUE) {
   
   if (verbose)
-    message("Generating neighbour colours...")
+    message("Generating colours for map regions...")
   
   # Generate neighbours lists
   nb <- spdep::poly2nb(sp)   

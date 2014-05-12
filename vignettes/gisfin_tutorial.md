@@ -16,25 +16,27 @@ For contact information and source code, see the [github page](https://github.co
 
 ## Available data sources
 
-The following data sources are currently available:
-* [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
- * Aluejakokartat: kunta, pien-, suur-, tilastoalueet (Helsinki region district maps)
- * Äänestysaluejako: (Helsinki region election district maps)
- * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
-* [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
- * Seutukartta (Helsinki Region Maps)
- * Helsingin piirijako (District Division of the City of Helsinki)
- * Seudullinen osoiteluettelo (Regional Address List)
- * Helsingin osoiteluettelo (Register of Addresses of the City of Helsinki)
- * Rakennusrekisterin ote (Helsinki building registry)
- * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
-* [National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
- * Yleiskartat: kunta-, maakuntarajat (municipality and province borders)
- * Source: [Maanmittauslaitos (MML)](http://www.maanmittauslaitos.fi/avoindata)
-* [Geocoding](#geocoding)
- * [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
- * [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
- * [Google](http://code.google.com/apis/maps/documentation/geocoding/)
+[Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
+* Aluejakokartat: kunta, pien-, suur-, tilastoalueet (Helsinki region district maps)
+* Äänestysaluejako: (Helsinki region election district maps)
+* Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+
+[Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
+* Seutukartta (Helsinki Region Maps)
+* Helsingin piirijako (District Division of the City of Helsinki)
+* Seudullinen osoiteluettelo (Regional Address List)
+* Helsingin osoiteluettelo (Register of Addresses of the City of Helsinki)
+* Rakennusrekisterin ote (Helsinki building registry)
+* Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+
+[National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
+* Yleiskartat: kunta-, maakuntarajat (municipality and province borders)
+* Source: [Maanmittauslaitos (MML)](http://www.maanmittauslaitos.fi/avoindata)
+
+[Geocoding](#geocoding)
+* [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
+* [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
+* [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
 List of potential data sources to be added to the package can be found [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 
@@ -446,23 +448,24 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2   maps_2.3-6      ggmap_2.3       ggplot2_0.9.3.1
-##  [5] rgeos_0.3-4     maptools_0.8-29 gisfin_0.9.14   rgdal_0.8-16   
-##  [9] sp_1.0-14       knitr_1.5      
+##  [1] mapproj_1.2-2   maps_2.3-6      ggmap_2.3       rgeos_0.3-4    
+##  [5] maptools_0.8-29 gisfin_0.9.14   knitr_1.5       XML_3.95-0.2   
+##  [9] ggplot2_0.9.3.1 spdep_0.5-71    Matrix_1.1-2-2  RCurl_1.95-4.1 
+## [13] bitops_1.0-6    rjson_0.2.13    rgdal_0.8-16    sp_1.0-14      
+## [17] roxygen2_3.1.0 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-10         coda_0.16-1         colorspace_1.2-4   
-##  [4] deldir_0.1-5        dichromat_2.0-0     digest_0.6.4       
-##  [7] evaluate_0.5.1      foreign_0.8-60      formatR_0.10       
-## [10] grid_3.0.3          gtable_0.1.2        labeling_0.2       
-## [13] lattice_0.20-27     LearnBayes_2.12     MASS_7.3-30        
-## [16] Matrix_1.1-2-2      munsell_0.4.2       nlme_3.1-115       
-## [19] plyr_1.8.1          png_0.1-7           proto_0.3-10       
-## [22] RColorBrewer_1.0-5  Rcpp_0.11.1         RCurl_1.95-4.1     
-## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 rjson_0.2.13       
-## [28] RJSONIO_1.0-3       scales_0.2.3        spdep_0.5-71       
-## [31] splines_3.0.3       stringr_0.6.2       tools_3.0.3        
-## [34] XML_3.95-0.2
+##  [1] boot_1.3-10         brew_1.0-6          coda_0.16-1        
+##  [4] codetools_0.2-8     colorspace_1.2-4    deldir_0.1-5       
+##  [7] dichromat_2.0-0     digest_0.6.4        evaluate_0.5.1     
+## [10] foreign_0.8-60      formatR_0.10        grid_3.0.3         
+## [13] gtable_0.1.2        labeling_0.2        lattice_0.20-27    
+## [16] LearnBayes_2.12     MASS_7.3-30         munsell_0.4.2      
+## [19] nlme_3.1-115        plyr_1.8.1          png_0.1-7          
+## [22] proto_0.3-10        RColorBrewer_1.0-5  Rcpp_0.11.1        
+## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.5 RJSONIO_1.0-3      
+## [28] scales_0.2.3        splines_3.0.3       stringr_0.6.2      
+## [31] tools_3.0.3
 ```
 
 

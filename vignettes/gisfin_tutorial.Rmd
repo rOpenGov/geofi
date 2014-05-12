@@ -21,25 +21,27 @@ For contact information and source code, see the [github page](https://github.co
 
 ## Available data sources
 
-The following data sources are currently available:
-* [Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
- * Aluejakokartat: kunta, pien-, suur-, tilastoalueet (Helsinki region district maps)
- * Äänestysaluejako: (Helsinki region election district maps)
- * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
-* [Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
- * Seutukartta (Helsinki Region Maps)
- * Helsingin piirijako (District Division of the City of Helsinki)
- * Seudullinen osoiteluettelo (Regional Address List)
- * Helsingin osoiteluettelo (Register of Addresses of the City of Helsinki)
- * Rakennusrekisterin ote (Helsinki building registry)
- * Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
-* [National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
- * Yleiskartat: kunta-, maakuntarajat (municipality and province borders)
- * Source: [Maanmittauslaitos (MML)](http://www.maanmittauslaitos.fi/avoindata)
-* [Geocoding](#geocoding)
- * [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
- * [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
- * [Google](http://code.google.com/apis/maps/documentation/geocoding/)
+[Helsinki region district maps](#aluejakokartat) (Helsingin seudun aluejakokartat)
+* Aluejakokartat: kunta, pien-, suur-, tilastoalueet (Helsinki region district maps)
+* Äänestysaluejako: (Helsinki region election district maps)
+* Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+
+[Helsinki spatial data](#hel-spatial) (Helsingin seudun avoimia paikkatietoaineistoja)
+* Seutukartta (Helsinki Region Maps)
+* Helsingin piirijako (District Division of the City of Helsinki)
+* Seudullinen osoiteluettelo (Regional Address List)
+* Helsingin osoiteluettelo (Register of Addresses of the City of Helsinki)
+* Rakennusrekisterin ote (Helsinki building registry)
+* Source: [Helsingin kaupungin Kiinteistövirasto (HKK)](http://ptp.hel.fi/avoindata/)
+
+[National Land Survey data](#maanmittauslaitos) (Maanmittauslaitoksen avointa dataa)
+* Yleiskartat: kunta-, maakuntarajat (municipality and province borders)
+* Source: [Maanmittauslaitos (MML)](http://www.maanmittauslaitos.fi/avoindata)
+
+[Geocoding](#geocoding)
+* [OKF.fi Geocoding API Test Console](http://data.okf.fi/console/)
+* [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
+* [Google](http://code.google.com/apis/maps/documentation/geocoding/)
 
 List of potential data sources to be added to the package can be found [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 

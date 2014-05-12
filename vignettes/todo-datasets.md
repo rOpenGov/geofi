@@ -1,6 +1,11 @@
 gisfin - Potential data sources to be added
 ==========
 
+* Buildings
+ * Helsinki done in get_helsinki_spatial(), consider moving
+ * [Espoo](http://www.hri.fi/fi/data/espoon-rakennukset/)
+ * [Vantaa](http://www.hri.fi/fi/data/vantaan-rakennukset/)
+
 * Varsinais-Suomi
  * [Lounaispaikka](http://paikkatietokeskus.lounaispaikka.fi/fi/aineistot/) Avoimia paikkatieto- ym. aineistoja varsinais-Suomesta.
 

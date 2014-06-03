@@ -1,6 +1,9 @@
 gisfin - Potential data sources to be added
 ==========
 
+* Finland population registry
+ * [Rakennusten osoite- ja koordinaattitiedot väestötietojärjestelmässä](http://vrk.fi/default.aspx?id=280) sisältää muun muassa seuraavat paikkatiedot: rakennuksen keskipisteen koordinaatit, kiinteistö- ja rakennustunnus, rakennuksen lähiosoite, henkilön vakinaisen asuinpaikan osoite, kuntakoodi ja äänestysalue. Väestötietojärjestelmän kaikki tiedot voidaan jollakin tavalla liittää johonkin paikkaan tai alueeseen. Paikkatiedot
+
 * Buildings
  * Helsinki done in get_helsinki_spatial(), consider moving
  * [Espoo](http://www.hri.fi/fi/data/espoon-rakennukset/)

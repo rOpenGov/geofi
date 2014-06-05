@@ -3,6 +3,15 @@
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
 
+<!--
+Joissakin esimerkeissa tarvittavat riippuvuudet 
+	<a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
+	<a href="http://freeglut.sourceforge.net/">freeglut</a>, 
+	<a href="http://xmlsoft.org/downloads.html">XML</a>, 
+	<a href="http://trac.osgeo.org/geos">GEOS</a> ja 
+	<a href="http://trac.osgeo.org/proj">PROJ.4</a>. 
+-->
+
 
 
 gisfin - tutorial
@@ -142,13 +151,6 @@ Add background map from OpenStreetMap using `get_map()` from [ggmap](https://sit
 ```r
 # Add background map from OpenStreetMap using ggmap
 library(ggmap)
-```
-
-```
-## Error: there is no package called 'ggmap'
-```
-
-```r
 # Get bounding box from sp.suuralue
 hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
@@ -156,7 +158,7 @@ hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
 ```
 
 ```
-## Error: there is no package called 'ggmap'
+## Error: map grabbing failed - see details in ?get_openstreetmap.
 ```
 
 ```r
@@ -165,7 +167,7 @@ ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, gro
 ```
 
 ```
-## Error: could not find function "ggmap"
+## Error: object 'hel.map' not found
 ```
 
 ### Plot election districts
@@ -207,7 +209,7 @@ ggmap(hel.map) + geom_polygon(data=df.piiri, aes(x=long, y=lat, fill=NIMI), alph
 ```
 
 ```
-## Error: could not find function "ggmap"
+## Error: object 'hel.map' not found
 ```
 
 ## <a name="maanmittauslaitos"></a>National Land Survey Finland
@@ -420,14 +422,14 @@ citation("gisfin")
 
 Kindly cite the gisfin R package as follows:
 
-  (C) Juuso Parkkinen, Leo Lahti and Joona Lehtomaki 2014. gisfin
-  R package
+  (C) Juuso Parkkinen, Leo Lahti, Joona Lehtomaki and Janne Aukia
+  2014. gisfin R package
 
 A BibTeX entry for LaTeX users is
 
   @Misc{,
     title = {gisfin R package},
-    author = {Juuso Parkkinen and Leo Lahti and Joona Lehtomaki},
+    author = {Juuso Parkkinen and Leo Lahti and Joona Lehtomaki and Janne Aukia},
     year = {2014},
   }
 
@@ -462,17 +464,21 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_1.0.0   rgeos_0.3-4     maptools_0.8-29 gisfin_0.9.15  
-## [5] rgdal_0.8-16    sp_1.0-15       knitr_1.6      
+## [1] ggmap_2.3       ggplot2_1.0.0   rgeos_0.3-4     maptools_0.8-29
+## [5] gisfin_0.9.15   rgdal_0.8-16    sp_1.0-15       knitr_1.6      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
-##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
-##  [9] grid_3.1.0       gtable_0.1.2     labeling_0.2     lattice_0.20-29 
-## [13] LearnBayes_2.12  MASS_7.3-33      Matrix_1.1-3     munsell_0.4.2   
-## [17] nlme_3.1-117     plyr_1.8.1       proto_0.3-10     Rcpp_0.11.1     
-## [21] RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.13     scales_0.2.4    
-## [25] spdep_0.5-71     splines_3.1.0    stringr_0.6.2    tools_3.1.0     
-## [29] XML_3.98-1.1
+##  [1] boot_1.3-11         coda_0.16-1         colorspace_1.2-4   
+##  [4] deldir_0.1-5        digest_0.6.4        evaluate_0.5.5     
+##  [7] foreign_0.8-61      formatR_0.10        grid_3.1.0         
+## [10] gtable_0.1.2        labeling_0.2        lattice_0.20-29    
+## [13] LearnBayes_2.12     mapproj_1.2-2       maps_2.3-6         
+## [16] MASS_7.3-33         Matrix_1.1-3        munsell_0.4.2      
+## [19] nlme_3.1-117        plyr_1.8.1          png_0.1-7          
+## [22] proto_0.3-10        Rcpp_0.11.1         RCurl_1.95-4.1     
+## [25] reshape2_1.4        RgoogleMaps_1.2.0.6 rjson_0.2.13       
+## [28] RJSONIO_1.2-0.2     scales_0.2.4        spdep_0.5-71       
+## [31] splines_3.1.0       stringr_0.6.2       tools_3.1.0        
+## [34] XML_3.98-1.1
 ```
 

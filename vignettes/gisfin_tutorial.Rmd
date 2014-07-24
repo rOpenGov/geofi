@@ -55,6 +55,10 @@ For contact information and source code, see the [github page](https://github.co
 [IP address geographic coordinates](#ip) 
 * [Data Science Toolkit](http://www.datasciencetoolkit.org/)
 
+[Statistics Finland grid data](#geostatfi)
+* Population grid data 1 km x 1 km
+* Source: [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/index_en.html)
+
 List of potential data sources to be added to the package can be found [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 
 
@@ -246,6 +250,33 @@ Geographic coordinates for a given IP-address from
 ```{r iplocation, message=FALSE, eval=TRUE}
 ip_location("137.224.252.10")
 ```
+
+## <a name="geostatfi"></a>Population density in Finland
+
+Retrieves and saves population density for the years 2012-2013.
+
+```{r population-density-save, message=FALSE, warning=FALSE, results='hide'}
+x <- Population1()
+x$query(years=c(2012, 2013))
+x$save("~/tmp/population1.grd")
+```
+
+Creates a fresh object, loads the saved data and plots the density.
+
+```{r population-density-plot}
+x <- Population1()
+x$load("~/tmp/population1.grd")
+plot(x$getRaster(feature="VAESTO", year=2012))
+```
+
+Gets population density around Helsinki Cathedral and Kallio church.
+
+```{r population-density-values}
+xy <- SpatialPoints(matrix(c(24.952222, 60.170278, 24.949167, 60.184167), ncol=2, byrow=T), proj4string=CRS("+proj=longlat +datum=WGS84"))
+xy <- spTransform(xy, CRSobj=x$getCRS())
+x$extract(xy=xy, feature="VAESTO", year=2013)
+```
+
 
 ### Citation
 

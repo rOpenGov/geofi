@@ -16,7 +16,9 @@ Imports:
     RCurl,
     spdep,
     ggplot2,
-    XML
+    XML,
+    methods,
+    raster
 Suggests:
     rgeos,
     maptools

@@ -49,6 +49,10 @@ For contact information and source code, see the [github page](https://github.co
 [IP address geographic coordinates](#ip) 
 * [Data Science Toolkit](http://www.datasciencetoolkit.org/)
 
+[Statistics Finland grid data](#geostatfi)
+* Population grid data 1 km x 1 km
+* Source: [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/index_en.html)
+
 List of potential data sources to be added to the package can be found [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 
 
@@ -155,20 +159,11 @@ library(ggmap)
 hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
 hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
-```
-
-```
-## Error: map grabbing failed - see details in ?get_openstreetmap.
-```
-
-```r
 # Plot transparent districts on top the background map
 ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, group=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, label=Name)) + theme(legend.position="none")
 ```
 
-```
-## Error: object 'hel.map' not found
-```
+![plot of chunk hkk-suuralue4](figure/hkk-suuralue4.png) 
 
 ### Plot election districts
 
@@ -208,9 +203,7 @@ df.piiri <- sp2df(sp.piiri, region="NIMI")
 ggmap(hel.map) + geom_polygon(data=df.piiri, aes(x=long, y=lat, fill=NIMI), alpha=0.5) + theme(legend.position="none")
 ```
 
-```
-## Error: object 'hel.map' not found
-```
+![plot of chunk peruspiiri](figure/peruspiiri.png) 
 
 ## <a name="maanmittauslaitos"></a>National Land Survey Finland
 
@@ -407,6 +400,42 @@ ip_location("137.224.252.10")
 ## [1] "51.9667015075684" "5.66669988632202"
 ```
 
+## <a name="geostatfi"></a>Population density in Finland
+
+Retrieves and saves population density for the years 2012-2013.
+
+
+```r
+x <- Population1()
+x$query(years=c(2012, 2013))
+x$save("~/tmp/population1.grd")
+```
+
+Creates a fresh object, loads the saved data and plots the density.
+
+
+```r
+x <- Population1()
+x$load("~/tmp/population1.grd")
+plot(x$getRaster(feature="VAESTO", year=2012))
+```
+
+![plot of chunk population-density-plot](figure/population-density-plot.png) 
+
+Gets population density around Helsinki Cathedral and Kallio church.
+
+
+```r
+xy <- SpatialPoints(matrix(c(24.952222, 60.170278, 24.949167, 60.184167), ncol=2, byrow=T), proj4string=CRS("+proj=longlat +datum=WGS84"))
+xy <- spTransform(xy, CRSobj=x$getCRS())
+x$extract(xy=xy, feature="VAESTO", year=2013)
+```
+
+```
+## [1]  8003 20267
+```
+
+
 ### Citation
 
 **Citing the data:** See `help()` to get citation information for each data source individually.
@@ -449,36 +478,31 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.0 (2014-04-10)
-## Platform: x86_64-pc-linux-gnu (64-bit)
+## R version 3.0.2 (2013-09-25)
+## Platform: x86_64-apple-darwin10.8.0 (64-bit)
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggmap_2.3       ggplot2_1.0.0   rgeos_0.3-4     maptools_0.8-29
-## [5] gisfin_0.9.15   rgdal_0.8-16    sp_1.0-15       knitr_1.6      
+##  [1] mapproj_1.2-2   maps_2.3-6      ggmap_2.3       knitr_1.6      
+##  [5] rgeos_0.3-2     maptools_0.8-27 ggplot2_0.9.3.1 gisfin_0.9.15  
+##  [9] raster_2.2-5    rgdal_0.8-14    sp_1.0-14      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-11         coda_0.16-1         colorspace_1.2-4   
-##  [4] deldir_0.1-5        digest_0.6.4        evaluate_0.5.5     
-##  [7] foreign_0.8-61      formatR_0.10        grid_3.1.0         
-## [10] gtable_0.1.2        labeling_0.2        lattice_0.20-29    
-## [13] LearnBayes_2.12     mapproj_1.2-2       maps_2.3-6         
-## [16] MASS_7.3-33         Matrix_1.1-3        munsell_0.4.2      
-## [19] nlme_3.1-117        plyr_1.8.1          png_0.1-7          
-## [22] proto_0.3-10        Rcpp_0.11.1         RCurl_1.95-4.1     
-## [25] reshape2_1.4        RgoogleMaps_1.2.0.6 rjson_0.2.13       
-## [28] RJSONIO_1.2-0.2     scales_0.2.4        spdep_0.5-71       
-## [31] splines_3.1.0       stringr_0.6.2       tools_3.1.0        
-## [34] XML_3.98-1.1
+##  [1] boot_1.3-9          coda_0.16-1         colorspace_1.2-4   
+##  [4] deldir_0.1-5        dichromat_2.0-0     digest_0.6.4       
+##  [7] evaluate_0.5.5      foreign_0.8-55      formatR_0.10       
+## [10] grid_3.0.2          gtable_0.1.2        labeling_0.2       
+## [13] lattice_0.20-29     LearnBayes_2.15     MASS_7.3-29        
+## [16] Matrix_1.1-1.1      munsell_0.4.2       nlme_3.1-111       
+## [19] plyr_1.8            png_0.1-7           proto_0.3-10       
+## [22] RColorBrewer_1.0-5  RCurl_1.95-4.1      reshape2_1.2.2     
+## [25] RgoogleMaps_1.2.0.6 rjson_0.2.14        RJSONIO_1.2-0.2    
+## [28] scales_0.2.3        spdep_0.5-74        splines_3.0.2      
+## [31] stringr_0.6.2       tools_3.0.2         XML_3.95-0.2
 ```
 

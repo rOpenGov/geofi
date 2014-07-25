@@ -3,26 +3,25 @@
 \name{Population1-class}
 \alias{Population1}
 \alias{Population1-class}
-\title{Reference class for retrieving population density in Finland on a grid.}
+\title{Retrieves population density in Finland on a grid.}
 \description{
 Reference class for retrieving population density in Finland on a 1 km x 1 km grid provided by Statistics Finland.
+For inherited methods, see the base class \code{\link{GeoStatFi}} help.
+For more information, see http://www.stat.fi/tup/rajapintapalvelut/index_en.html.
+For General Terms of Use, see http://www.stat.fi/org/lainsaadanto/yleiset_kayttoehdot_en.html/.
 }
 \details{
-The data is currently available for the years 2005, 2010, 2011, 2012 and 2013 and contains the following features:
+The data is currently available for the years 2005, 2010, 2011, 2012 and 2013 and contains the following fields:
 \describe{
-  \item{VAESTO}{Total population density (km^2)}
-  \item{MIEHET}{Population density of males (km^2)}
-  \item{NAISET}{Population density of females (km^2)}
+  \item{VAESTO}{Total population density (km^2).}
+  \item{MIEHET}{Population density of males (km^2).}
+  \item{NAISET}{Population density of females (km^2).}
   \item{IKA_0_14}{Population density of individuals aged <15 years.}
   \item{IKA_15_64}{Population density of individuals aged 15--64 years.}
-  \item{IKA_65_}{Populatuon density of individuals aged >64 years.}
+  \item{IKA_65_}{Population density of individuals aged >64 years.}
 }
 Unoccupied grid cells are marked with value -1 as well as cells outside Finland. For the cells with <10 individuals,
 only total population density (VAESTO) is provided.
-
-For inherited methods, see the base class help \code{\link{GeoStatFi}}.
-For more information, see http://www.stat.fi/tup/rajapintapalvelut/index_en.html.
-For General Terms of Use, see http://www.stat.fi/org/lainsaadanto/yleiset_kayttoehdot_en.html/.
 }
 \section{Methods}{
 
@@ -31,7 +30,7 @@ For General Terms of Use, see http://www.stat.fi/org/lainsaadanto/yleiset_kaytto
 }}
 \examples{
 x <- Population1()
-x$queryPopulation(c(2012, 2013))
+x$query(c(2012, 2013))
 plot(x$getRaster("VAESTO", 2012))
 plot(x$getRaster("VAESTO", 2013))
 }

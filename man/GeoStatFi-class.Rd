@@ -7,19 +7,17 @@
 \description{
 Abstract reference class for grid statistics provided by Statistics Finland. See the currently implemented
 classes for the available data queries: \code{\link{Population1}}.
-}
-\details{
 For more information, see http://www.stat.fi/tup/rajapintapalvelut/index_en.html.
 For General Terms of Use, see http://www.stat.fi/org/lainsaadanto/yleiset_kayttoehdot_en.html/.
 }
 \section{Methods}{
 
 \describe{
-\item{\code{extract(xy, feature, year)}}{Extract values of feature \code{feature} at coordinates \code{xy} of type Spatial* in year \code{year}. Does not check if coordinates are outside Finland. Returns a vector of the extracted values.}
+\item{\code{extract(xy, field, year)}}{Extract values of field \code{field} at coordinates \code{xy} of type Spatial* in year \code{year}. Does not check if coordinates are outside Finland. Returns a vector of the extracted values.}
 
-\item{\code{getCRS()}}{Returns a CRS object.}
+\item{\code{getCRS()}}{Returns the grid coordinate reference system as a CRS object.}
 
-\item{\code{getRaster(feature, year)}}{Returns a raster layer object for feature \code{feature} in year \code{year}.}
+\item{\code{getRaster(field, year)}}{Returns a raster layer object for \code{field} in \code{year}.}
 
 \item{\code{load(fileName)}}{Load rasters into the object from \code{fileName}.}
 

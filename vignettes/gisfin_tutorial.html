@@ -260,6 +260,13 @@ as part of the <a href="http://ropengov.github.io">rOpenGov</a> project.</p>
 <li>Source: <a href="http://www.stat.fi/tup/rajapintapalvelut/index_en.html">Statistics Finland</a></li>
 </ul>
 
+<p><a href="#weather">Weather data</a></p>
+
+<ul>
+<li>Daily weather time-series</li>
+<li>Source: <a href="https://en.ilmatieteenlaitos.fi/open-data">Finnish Meteorological Instititute</a></li>
+</ul>
+
 <p>List of potential data sources to be added to the package can be found <a href="https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md">here</a>.</p>
 
 <h2>Installation</h2>
@@ -351,11 +358,17 @@ library(ggmap)
 hel.bbox &lt;- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
 hel.map &lt;- ggmap::get_map(location=hel.bbox, source=&quot;osm&quot;)
-# Plot transparent districts on top the background map
+</code></pre>
+
+<pre><code>## Error: map grabbing failed - see details in ?get_openstreetmap.
+</code></pre>
+
+<pre><code class="r"># Plot transparent districts on top the background map
 ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, group=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, label=Name)) + theme(legend.position=&quot;none&quot;)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue4.png" alt="plot of chunk hkk-suuralue4"/> </p>
+<pre><code>## Error: object &#39;hel.map&#39; not found
+</code></pre>
 
 <h3>Plot election districts</h3>
 
@@ -388,7 +401,8 @@ df.piiri &lt;- sp2df(sp.piiri, region=&quot;NIMI&quot;)
 ggmap(hel.map) + geom_polygon(data=df.piiri, aes(x=long, y=lat, fill=NIMI), alpha=0.5) + theme(legend.position=&quot;none&quot;)
 </code></pre>
 
-<p><img src="figure/peruspiiri.png" alt="plot of chunk peruspiiri"/> </p>
+<pre><code>## Error: object &#39;hel.map&#39; not found
+</code></pre>
 
 <h2><a name="maanmittauslaitos"></a>National Land Survey Finland</h2>
 
@@ -566,33 +580,73 @@ unlist(gc3[1:2])
 <pre><code>## [1] &quot;51.9667015075684&quot; &quot;5.66669988632202&quot;
 </code></pre>
 
-<h2><a name="geostatfi"></a>Population density in Finland</h2>
+<h2><a name="geostatfi"></a>Statistics Finland grid data</h2>
 
-<p>Retrieves and saves population density for the years 2012-2013.</p>
+<p>Population density on 1 km x 1 km grid in Finland provided by <a href="http://www.stat.fi/tup/rajapintapalvelut/inspire_en.html">Statistics Finland</a>.</p>
+
+<p>Retrieve population density for the years 2012-2013 and save the rasters to a file for later access.</p>
 
 <pre><code class="r">x &lt;- Population1()
 x$query(years=c(2012, 2013))
 x$save(&quot;~/tmp/population1.grd&quot;)
 </code></pre>
 
-<p>Creates a fresh object, loads the saved data and plots the density.</p>
+<p>Create a fresh object, load the saved rasters to the object and plot the density on relative scale.</p>
 
 <pre><code class="r">x &lt;- Population1()
 x$load(&quot;~/tmp/population1.grd&quot;)
-plot(x$getRaster(feature=&quot;VAESTO&quot;, year=2012))
+y &lt;- x$getRaster(field=&quot;VAESTO&quot;, year=2012)
+plot(log(y))
 </code></pre>
 
 <p><img src="figure/population-density-plot.png" alt="plot of chunk population-density-plot"/> </p>
 
-<p>Gets population density around Helsinki Cathedral and Kallio church.</p>
+<p>Get population density around Helsinki Cathedral and Kallio church.</p>
 
 <pre><code class="r">xy &lt;- SpatialPoints(matrix(c(24.952222, 60.170278, 24.949167, 60.184167), ncol=2, byrow=T), proj4string=CRS(&quot;+proj=longlat +datum=WGS84&quot;))
+# Transform the coordinates to the same CRS
 xy &lt;- spTransform(xy, CRSobj=x$getCRS())
-x$extract(xy=xy, feature=&quot;VAESTO&quot;, year=2013)
+x$extract(xy=xy, field=&quot;VAESTO&quot;, year=2013)
 </code></pre>
 
 <pre><code>## [1]  8003 20267
 </code></pre>
+
+<p>Total population in Finland in 2013.</p>
+
+<pre><code class="r">y &lt;- x$getRaster(field=&quot;VAESTO&quot;, year=2013)
+y[y&lt;0] &lt;- NA
+sum(y[], na.rm=T)
+</code></pre>
+
+<pre><code>## [1] 5387981
+</code></pre>
+
+<h2><a name="weather"></a>Weather data</h2>
+
+<p>Daily weather time-series from <a href="https://en.ilmatieteenlaitos.fi/open-data">Finnish Meteorological Instititue</a>.</p>
+
+<p>Distribution of temperatures across the weather stations on 2014-1-1.
+Note that you need to get an API key to access the FMI open data first from
+<a href="https://ilmatieteenlaitos.fi/rekisteroityminen-avoimen-datan-kayttajaksi">FMI</a>
+and then provide it for the <code>query()</code> method.</p>
+
+<pre><code class="r">#fmiApiKey &lt;- &quot;SPECIFY YOUR API KEY HERE&quot;
+x &lt;- DailyWeather()
+x$query(startDateTime=as.POSIXlt(&quot;2014-01-01&quot;), endDateTime=as.POSIXlt(&quot;2014-01-01&quot;), apiKey=fmiApiKey)
+hist(x$getSPDF()@data$tday, xlab=&quot;Temperature&quot;)
+</code></pre>
+
+<p><img src="figure/temperature-histogram.png" alt="plot of chunk temperature-histogram"/> </p>
+
+<p>Interpolated snow cover on 2014-1-1 and the weather station locations.</p>
+
+<pre><code class="r">y &lt;- x$interpolate()
+plot(y[[&quot;snow&quot;]])
+plot(x$getSPDF(), add=T)
+</code></pre>
+
+<p><img src="figure/snow-cover.png" alt="plot of chunk snow-cover"/> </p>
 
 <h3>Citation</h3>
 
@@ -635,25 +689,27 @@ https://github.com/rOpenGov/gisfin
 ## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## [1] grid      stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2   maps_2.3-6      ggmap_2.3       knitr_1.6      
-##  [5] rgeos_0.3-2     maptools_0.8-27 ggplot2_0.9.3.1 gisfin_0.9.15  
-##  [9] raster_2.2-5    rgdal_0.8-14    sp_1.0-14      
+##  [1] fields_6.9.1     maps_2.3-6       spam_0.40-0      ggmap_2.3       
+##  [5] ggplot2_1.0.0.99 rgeos_0.3-2      maptools_0.8-27  gisfin_0.9.16   
+##  [9] rgdal_0.8-14     sp_1.0-14        knitr_1.6       
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-9          coda_0.16-1         colorspace_1.2-4   
 ##  [4] deldir_0.1-5        dichromat_2.0-0     digest_0.6.4       
 ##  [7] evaluate_0.5.5      foreign_0.8-55      formatR_0.10       
-## [10] grid_3.0.2          gtable_0.1.2        labeling_0.2       
-## [13] lattice_0.20-29     LearnBayes_2.15     MASS_7.3-29        
+## [10] gtable_0.1.2        labeling_0.2        lattice_0.20-29    
+## [13] LearnBayes_2.15     mapproj_1.2-2       MASS_7.3-29        
 ## [16] Matrix_1.1-1.1      munsell_0.4.2       nlme_3.1-111       
 ## [19] plyr_1.8            png_0.1-7           proto_0.3-10       
-## [22] RColorBrewer_1.0-5  RCurl_1.95-4.1      reshape2_1.2.2     
-## [25] RgoogleMaps_1.2.0.6 rjson_0.2.14        RJSONIO_1.2-0.2    
-## [28] scales_0.2.3        spdep_0.5-74        splines_3.0.2      
-## [31] stringr_0.6.2       tools_3.0.2         XML_3.95-0.2
+## [22] raster_2.2-5        RColorBrewer_1.0-5  RCurl_1.95-4.1     
+## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.6 rjson_0.2.14       
+## [28] RJSONIO_1.2-0.2     scales_0.2.3        spdep_0.5-74       
+## [31] splines_3.0.2       stringr_0.6.2       tools_3.0.2        
+## [34] XML_3.95-0.2
 </code></pre>
 
 </body>

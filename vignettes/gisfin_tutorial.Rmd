@@ -93,7 +93,7 @@ library(gisfin)
 
 The gisfin package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
 * Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
-* OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+* OSX: It is preferable to NOT use the [CRAN binaries](http://cran.r-project.org/web/packages/rgdal/index.html). Instead, you should check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks)  and install the latest GDAL Complete (v. 1.11 in July 2014) and then install the corresponding rgdal package from the same page (v. 0.8.16 in July 2014). 
 * Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
 ## <a name="aluejakokartat"></a>Helsinki region district maps
@@ -265,14 +265,17 @@ Retrieve population density for the years 2012-2013 and save the rasters to a fi
 ```{r population-density-save, message=FALSE, warning=FALSE, results='hide'}
 x <- Population1()
 x$query(years=c(2012, 2013))
-x$save("~/tmp/population1.grd")
+# Use tempdir() instead, should work on all platforms
+# x$save("~/tmp/population1.grd")
+x$save(file.path(tempdir(), "population1.grd"))
 ```
 
 Create a fresh object, load the saved rasters to the object and plot the density on relative scale.
 
 ```{r population-density-plot}
 x <- Population1()
-x$load("~/tmp/population1.grd")
+# x$load("~/tmp/population1.grd")
+x$load(file.path(tempdir(), "population1.grd"))
 y <- x$getRaster(field="VAESTO", year=2012)
 plot(log(y))
 ```
@@ -297,6 +300,8 @@ sum(y[], na.rm=T)
 
 ## <a name="weather"></a>Weather data
 
+NOTE! This example will be moved to a new weather data package soon!
+
 Daily weather time-series from [Finnish Meteorological Instititue](https://en.ilmatieteenlaitos.fi/open-data).
 
 Distribution of temperatures across the weather stations on 2014-1-1.
@@ -306,17 +311,17 @@ and then provide it for the `query()` method.
 
 ```{r temperature-histogram, message=FALSE}
 #fmiApiKey <- "SPECIFY YOUR API KEY HERE"
-x <- DailyWeather()
-x$query(startDateTime=as.POSIXlt("2014-01-01"), endDateTime=as.POSIXlt("2014-01-01"), apiKey=fmiApiKey)
-hist(x$getSPDF()@data$tday, xlab="Temperature")
+# x <- DailyWeather()
+# x$query(startDateTime=as.POSIXlt("2014-01-01"), endDateTime=as.POSIXlt("2014-01-01"), apiKey=fmiApiKey)
+# hist(x$getSPDF()@data$tday, xlab="Temperature")
 ```
 
 Interpolated snow cover on 2014-1-1 and the weather station locations.
 
 ```{r snow-cover, message=FALSE}
-y <- x$interpolate()
-plot(y[["snow"]])
-plot(x$getSPDF(), add=T)
+# y <- x$interpolate()
+# plot(y[["snow"]])
+# plot(x$getSPDF(), add=T)
 ```
 
 

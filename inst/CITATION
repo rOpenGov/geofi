@@ -6,12 +6,13 @@ citEntry(entry="misc",
      person(given ="Juuso", family="Parkkinen", email = "juuso.parkkinen@iki.fi"),
 	   person(given ="Leo", family="Lahti"),
 	   person(given ="Joona", family="Lehtomaki"),
-	   person(given ="Janne", family="Aukia")
+	   person(given ="Janne", family="Aukia"),
+	   person(given ="Jussi", family="Jousimo")
          ),
 	 journal = "",
 	 year = "2014",
          textVersion =
-         paste("(C) Juuso Parkkinen, Leo Lahti, Joona Lehtomaki and Janne Aukia 2014.",
+         paste("(C) Juuso Parkkinen, Leo Lahti, Joona Lehtomaki, Janne Aukia and Jussi Jousimo 2014.",
                "gisfin R package",
                sep=" ")
          )

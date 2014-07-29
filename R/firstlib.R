@@ -20,6 +20,6 @@
   # Sys.setlocale(locale = "UTF-8")
   # Sys.setlocale(locale = "WINDOWS-1252")
 
-  packageStartupMessage("\ngisfin R package: tools for open GIS data for Finland.\nThis R package is part of rOpenGov <ropengov.github.io>.\nCopyright (C) 2010-2014 Juuso Parkkinen, Leo Lahti and Joona Lehtomaki.\nThis is free software. You are free to use, modify and redistribute it under the FreeBSD license.")
+  packageStartupMessage("\ngisfin R package: tools for open GIS data for Finland.\nThis R package is part of rOpenGov <ropengov.github.io>.\nCopyright (C) 2010-2014 Juuso Parkkinen, Leo Lahti, Joona Lehtomaki, Janne Aukia and Jussi Jousimo.\nThis is free software. You are free to use, modify and redistribute it under the FreeBSD license.")
 
 }

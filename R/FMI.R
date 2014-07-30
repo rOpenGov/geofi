@@ -149,13 +149,13 @@ FMIObservationsWeatherDailyMultiPointCoverageParse <- function(fileName) {
 #' @import rgdal
 #' @references See citation("gisfin")
 #' @author Jussi Jousimo \email{louhos@@googlegroups.com}
-#' @examples fmiApiKey <- "SPECIFY YOUR API KEY HERE"
+#' @examples \donttest{ fmiApiKey <- "SPECIFY YOUR API KEY HERE";
 #' x <- DailyWeather()
-#' x$query(startDateTime=as.POSIXlt("2014-01-01"), endDateTime=as.POSIXlt("2014-01-01"), apiKey=fmiApiKey)
-#' hist(x$getSPDF()@@data$tday, xlab="Temperature")
-#' y <- x$interpolate()
-#' plot(y[["snow"]])
-#' plot(x$getSPDF(), add=T)
+#' x$query(startDateTime=as.POSIXlt("2014-01-01"), endDateTime=as.POSIXlt("2014-01-01"), apiKey=fmiApiKey);
+#' hist(x$getSPDF()@@data$tday, xlab="Temperature");
+#' y <- x$interpolate();
+#' plot(y[["snow"]]);
+#' plot(x$getSPDF(), add=T); }
 #' @exportClass DailyWeather
 #' @export DailyWeather
 DailyWeather <- setRefClass(

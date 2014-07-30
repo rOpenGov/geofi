@@ -37,13 +37,13 @@ Missing data are marked with NA.
   70.13)), apiKey)}}{Retrieves daily weather time-series from FMI. Time interval is specified with \code{startDateTime} and \code{endDateTime} as POSIXt objects and spatial coverage with \code{bbox} as an extent object (defaults to whole Finland, CRS = WGS84). API key is given by \code{apiKey}.}
 }}
 \examples{
-fmiApiKey <- "SPECIFY YOUR API KEY HERE"
+\donttest{ fmiApiKey <- "SPECIFY YOUR API KEY HERE";
 x <- DailyWeather()
-x$query(startDateTime=as.POSIXlt("2014-01-01"), endDateTime=as.POSIXlt("2014-01-01"), apiKey=fmiApiKey)
-hist(x$getSPDF()@data$tday, xlab="Temperature")
-y <- x$interpolate()
-plot(y[["snow"]])
-plot(x$getSPDF(), add=T)
+x$query(startDateTime=as.POSIXlt("2014-01-01"), endDateTime=as.POSIXlt("2014-01-01"), apiKey=fmiApiKey);
+hist(x$getSPDF()@data$tday, xlab="Temperature");
+y <- x$interpolate();
+plot(y[["snow"]]);
+plot(x$getSPDF(), add=T); }
 }
 \author{
 Jussi Jousimo \email{louhos@googlegroups.com}

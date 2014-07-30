@@ -55,8 +55,11 @@ For contact information and source code, see the [github page](https://github.co
 [IP address geographic coordinates](#ip) 
 * [Data Science Toolkit](http://www.datasciencetoolkit.org/)
 
-[Statistics Finland grid data](#geostatfi)
-* Population grid data 1 km x 1 km
+[Statistics Finland geospatial data](#geostatfi)
+* Population densities in various demographic groups
+* Production and industrial facilities
+* Educational institutions
+* Road accidents
 * Source: [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/index_en.html)
 
 

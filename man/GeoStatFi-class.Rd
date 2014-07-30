@@ -3,33 +3,48 @@
 \name{GeoStatFi-class}
 \alias{GeoStatFi}
 \alias{GeoStatFi-class}
-\title{Abstract reference class for grid statistics provided by Statistics Finland.}
+\title{Retrieves geospatial data from stat.fi.}
 \description{
-Abstract reference class for grid statistics provided by Statistics Finland. See the currently implemented
-classes for the available data queries: \code{\link{Population1}}.
+Retrieves geospatial data from Statistics Finland (http://www.stat.fi).
 For more information, see http://www.stat.fi/tup/rajapintapalvelut/index_en.html.
 For General Terms of Use, see http://www.stat.fi/org/lainsaadanto/yleiset_kayttoehdot_en.html/.
+}
+\details{
+Currently available data sets include:
+\itemize{
+  \item Population densities in various demographic groups
+  \item Production and industrial facilities
+  \item Educational institutions
+  \item Road accidents
+}
 }
 \section{Methods}{
 
 \describe{
-\item{\code{extract(xy, field, year)}}{Extract values of field \code{field} at coordinates \code{xy} of type Spatial* in year \code{year}. Does not check if coordinates are outside Finland. Returns a vector of the extracted values.}
+\item{\code{getEducationalInstitutions(layer = "oppilaitokset:oppilaitokset")}}{Get educational institutions.}
 
-\item{\code{getCRS()}}{Returns the grid coordinate reference system as a CRS object.}
+\item{\code{getPopulation(layer)}}{Get population grid data set 'layer'.}
 
-\item{\code{getRaster(field, year)}}{Returns a raster layer object for \code{field} in \code{year}.}
+\item{\code{getProductionAndIndustrialFacilities(layer = "ttlaitokset:toimipaikat")}}{Get production and industrial facilities.}
 
-\item{\code{load(fileName)}}{Load rasters into the object from \code{fileName}.}
+\item{\code{getRaster(layer, template = raster(extent(85000, 726000, 6629000, 7777000),
+  nrows = 1148, ncols = 641, crs =
+  CRS("+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs")),
+  fun = "count")}}{Converts SpatialPolygonsDataFrame object 'layer' to Raster* object or rasterizes SpatialPointsDataFrame onto 'template' raster with 'fun' function.}
 
-\item{\code{save(fileName)}}{Save rasters to location \code{fileName} for later access, so no need to download the data again.}
+\item{\code{getRoadAccidents(layer)}}{Get road accident data set 'layer'.}
+
+\item{\code{listPopulationLayers()}}{List population grid data sets.}
+
+\item{\code{listRoadAccidentsLayers()}}{List road accident data sets.}
 }}
+\examples{
+See the vignette.
+}
 \author{
 Jussi Jousimo \email{louhos@googlegroups.com}
 }
 \references{
 See citation("gisfin")
-}
-\seealso{
-\code{\link{Population1}}
 }
 

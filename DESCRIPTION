@@ -16,12 +16,10 @@ Imports:
     RCurl,
     spdep,
     ggplot2,
-    XML,
     methods,
     raster
 Suggests:
     rgeos,
-    maptools,
-    fields
+    maptools
 URL: https://github.com/ropengov/gisfin
 LazyLoad: yes

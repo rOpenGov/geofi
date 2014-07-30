@@ -53,10 +53,6 @@ For contact information and source code, see the [github page](https://github.co
 * Population grid data 1 km x 1 km
 * Source: [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/index_en.html)
 
-[Weather data](#weather)
-* Daily weather time-series
-* Source: [Finnish Meteorological Instititute](https://en.ilmatieteenlaitos.fi/open-data)
-
 
 List of potential data sources to be added to the package can be found [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 
@@ -90,7 +86,7 @@ library(gisfin)
 
 The gisfin package uses the [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal installation tips for various platforms lister below. If you encounter problems, please contact us by email: louhos@googlegroups.com.
 * Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
-* OSX: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html). Check also [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks) 
+* OSX: It is preferable to NOT use the [CRAN binaries](http://cran.r-project.org/web/packages/rgdal/index.html). Instead, you should check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks)  and install the latest GDAL Complete (v. 1.11 in July 2014) and then install the corresponding rgdal package from the same page (v. 0.8.16 in July 2014). 
 * Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
 ## <a name="aluejakokartat"></a>Helsinki region district maps
@@ -160,6 +156,13 @@ Add background map from OpenStreetMap using `get_map()` from [ggmap](https://sit
 ```r
 # Add background map from OpenStreetMap using ggmap
 library(ggmap)
+```
+
+```
+## Error: there is no package called 'ggmap'
+```
+
+```r
 # Get bounding box from sp.suuralue
 hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
@@ -167,7 +170,7 @@ hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
 ```
 
 ```
-## Error: map grabbing failed - see details in ?get_openstreetmap.
+## Error: there is no package called 'ggmap'
 ```
 
 ```r
@@ -176,7 +179,7 @@ ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, gro
 ```
 
 ```
-## Error: object 'hel.map' not found
+## Error: could not find function "ggmap"
 ```
 
 ### Plot election districts
@@ -218,7 +221,7 @@ ggmap(hel.map) + geom_polygon(data=df.piiri, aes(x=long, y=lat, fill=NIMI), alph
 ```
 
 ```
-## Error: object 'hel.map' not found
+## Error: could not find function "ggmap"
 ```
 
 ## <a name="maanmittauslaitos"></a>National Land Survey Finland
@@ -416,89 +419,54 @@ ip_location("137.224.252.10")
 ## [1] "51.9667015075684" "5.66669988632202"
 ```
 
-## <a name="geostatfi"></a>Statistics Finland grid data
+## <a name="geostatfi"></a>Statistics Finland geospatial data
 
-Population density on 1 km x 1 km grid in Finland provided by [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/inspire_en.html).
+Geospatial data provided by [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/inspire_en.html).
 
-Retrieve population density for the years 2012-2013 and save the rasters to a file for later access.
+Retrieve a list of the available data sets for population density.
 
 
 ```r
-x <- Population1()
-x$query(years=c(2012, 2013))
-x$save("~/tmp/population1.grd")
+geoStatFi <- GeoStatFi()
+layers <- geoStatFi$listPopulationLayers()
+layers
 ```
 
-Create a fresh object, load the saved rasters to the object and plot the density on relative scale.
+```
+##  [1] "vaestoruutu:vaki2005_1km"    "vaestoruutu:vaki2005_1km_kp"
+##  [3] "vaestoruutu:vaki2010_1km"    "vaestoruutu:vaki2010_1km_kp"
+##  [5] "vaestoruutu:vaki2011_1km"    "vaestoruutu:vaki2011_1km_kp"
+##  [7] "vaestoruutu:vaki2012_1km"    "vaestoruutu:vaki2012_1km_kp"
+##  [9] "vaestoruutu:vaki2013_1km"    "vaestoruutu:vaki2013_1km_kp"
+## [11] "vaestoruutu:vaki2005_5km"    "vaestoruutu:vaki2010_5km"   
+## [13] "vaestoruutu:vaki2011_5km"    "vaestoruutu:vaki2012_5km"   
+## [15] "vaestoruutu:vaki2013_5km"
+```
+
+Get population density in year 2005 on a 5 km x 5 km grid, convert to RasterStack object and plot.
 
 
 ```r
-x <- Population1()
-x$load("~/tmp/population1.grd")
-y <- x$getRaster(field="VAESTO", year=2012)
-plot(log(y))
+population <- geoStatFi$getPopulation(layers[11])
+x <- geoStatFi$getRaster(population)
+plot(x[["vaesto"]])
 ```
 
 ![plot of chunk population-density-plot](figure/population-density-plot.png) 
 
-Get population density around Helsinki Cathedral and Kallio church.
+Plot road accident density in 2011.
 
 
 ```r
-xy <- SpatialPoints(matrix(c(24.952222, 60.170278, 24.949167, 60.184167), ncol=2, byrow=T), proj4string=CRS("+proj=longlat +datum=WGS84"))
-# Transform the coordinates to the same CRS
-xy <- spTransform(xy, CRSobj=x$getCRS())
-x$extract(xy=xy, field="VAESTO", year=2013)
+roadAccidents <- geoStatFi$getRoadAccidents("tieliikenne:tieliikenne_2011")
+# Rasterize point data onto a 5 km x 5 km grid
+library(raster)
+template <- raster(extent(85000, 730000, 6625000, 7780000), nrows=231, ncols=129, crs=CRS("+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))
+x <- geoStatFi$getRaster(roadAccidents[,1], template=template, fun="count")
+plot(x[[1]])
 ```
 
-```
-## [1]  8003 20267
-```
-
-Total population in Finland in 2013.
-
-
-```r
-y <- x$getRaster(field="VAESTO", year=2013)
-y[y<0] <- NA
-sum(y[], na.rm=T)
-```
-
-```
-## [1] 5387981
-```
-
-
-## <a name="weather"></a>Weather data
-
-Daily weather time-series from [Finnish Meteorological Instititue](https://en.ilmatieteenlaitos.fi/open-data).
-
-Distribution of temperatures across the weather stations on 2014-1-1.
-Note that you need to get an API key to access the FMI open data first from
-[FMI](https://ilmatieteenlaitos.fi/rekisteroityminen-avoimen-datan-kayttajaksi)
-and then provide it for the `query()` method.
-
-
-```r
-#fmiApiKey <- "SPECIFY YOUR API KEY HERE"
-x <- DailyWeather()
-x$query(startDateTime=as.POSIXlt("2014-01-01"), endDateTime=as.POSIXlt("2014-01-01"), apiKey=fmiApiKey)
-hist(x$getSPDF()@data$tday, xlab="Temperature")
-```
-
-![plot of chunk temperature-histogram](figure/temperature-histogram.png) 
-
-Interpolated snow cover on 2014-1-1 and the weather station locations.
-
-
-```r
-y <- x$interpolate()
-plot(y[["snow"]])
-plot(x$getSPDF(), add=T)
-```
-
-![plot of chunk snow-cover](figure/snow-cover.png) 
-
+![plot of chunk road-accident-density](figure/road-accident-density.png) 
 
 ### Citation
 
@@ -515,14 +483,14 @@ citation("gisfin")
 
 Kindly cite the gisfin R package as follows:
 
-  (C) Juuso Parkkinen, Leo Lahti, Joona Lehtomaki and Janne Aukia
-  2014. gisfin R package
+  (C) Juuso Parkkinen, Leo Lahti, Joona Lehtomaki, Janne Aukia and
+  Jussi Jousimo 2014. gisfin R package
 
 A BibTeX entry for LaTeX users is
 
   @Misc{,
     title = {gisfin R package},
-    author = {Juuso Parkkinen and Leo Lahti and Joona Lehtomaki and Janne Aukia},
+    author = {Juuso Parkkinen and Leo Lahti and Joona Lehtomaki and Janne Aukia and Jussi Jousimo},
     year = {2014},
   }
 
@@ -542,33 +510,27 @@ sessionInfo()
 ```
 
 ```
-## R version 3.0.2 (2013-09-25)
-## Platform: x86_64-apple-darwin10.8.0 (64-bit)
+## R version 3.1.1 (2014-07-10)
+## Platform: x86_64-apple-darwin13.1.0 (64-bit)
 ## 
 ## locale:
 ## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
 ## 
 ## attached base packages:
-## [1] grid      stats     graphics  grDevices utils     datasets  methods  
-## [8] base     
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] fields_6.9.1     maps_2.3-6       spam_0.40-0      ggmap_2.3       
-##  [5] ggplot2_1.0.0.99 rgeos_0.3-2      maptools_0.8-27  gisfin_0.9.16   
-##  [9] rgdal_0.8-14     sp_1.0-14        knitr_1.6       
+## [1] raster_2.2-31   ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30
+## [5] gisfin_0.9.16   rgdal_0.8-16    sp_1.0-15       knitr_1.6      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-9          coda_0.16-1         colorspace_1.2-4   
-##  [4] deldir_0.1-5        dichromat_2.0-0     digest_0.6.4       
-##  [7] evaluate_0.5.5      foreign_0.8-55      formatR_0.10       
-## [10] gtable_0.1.2        labeling_0.2        lattice_0.20-29    
-## [13] LearnBayes_2.15     mapproj_1.2-2       MASS_7.3-29        
-## [16] Matrix_1.1-1.1      munsell_0.4.2       nlme_3.1-111       
-## [19] plyr_1.8            png_0.1-7           proto_0.3-10       
-## [22] raster_2.2-5        RColorBrewer_1.0-5  RCurl_1.95-4.1     
-## [25] reshape2_1.2.2      RgoogleMaps_1.2.0.6 rjson_0.2.14       
-## [28] RJSONIO_1.2-0.2     scales_0.2.3        spdep_0.5-74       
-## [31] splines_3.0.2       stringr_0.6.2       tools_3.0.2        
-## [34] XML_3.95-0.2
+##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
+##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
+##  [9] grid_3.1.1       gtable_0.1.2     labeling_0.2     lattice_0.20-29 
+## [13] LearnBayes_2.15  markdown_0.7     MASS_7.3-33      Matrix_1.1-4    
+## [17] munsell_0.4.2    nlme_3.1-117     plyr_1.8.1       proto_0.3-10    
+## [21] Rcpp_0.11.2      RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.14    
+## [25] scales_0.2.4     spdep_0.5-74     splines_3.1.1    stringr_0.6.2   
+## [29] tools_3.1.1      XML_3.98-1.1
 ```
 

@@ -49,11 +49,11 @@ For contact information and source code, see the [github page](https://github.co
 [IP address geographic coordinates](#ip) 
 * [Data Science Toolkit](http://www.datasciencetoolkit.org/)
 
-[Statistics Finland geospatial data](#geostatfi)
-* Population densities in various demographic groups
-* Production and industrial facilities
-* Educational institutions
-* Road accidents
+[Statistics Finland geospatial data](#geostatfi) (Tilastokeskuksen paikkatietoaineistoja)
+* Väestöruutuaineisto (Population grid)
+* Tuotanto- ja teollisuuslaitokset (Production and industrial facilities)
+* Oppilaitokset (Educational institutions)
+* Road accidents (Tieliikenneonnettomuudet)
 * Source: [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/index_en.html)
 
 

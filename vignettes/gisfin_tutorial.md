@@ -53,7 +53,7 @@ For contact information and source code, see the [github page](https://github.co
 * Väestöruutuaineisto (Population grid)
 * Tuotanto- ja teollisuuslaitokset (Production and industrial facilities)
 * Oppilaitokset (Educational institutions)
-* Road accidents (Tieliikenneonnettomuudet)
+* Tieliikenneonnettomuudet (Road accidents)
 * Source: [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/index_en.html)
 
 
@@ -159,31 +159,15 @@ Add background map from OpenStreetMap using `get_map()` from [ggmap](https://sit
 ```r
 # Add background map from OpenStreetMap using ggmap
 library(ggmap)
-```
-
-```
-## Error: there is no package called 'ggmap'
-```
-
-```r
 # Get bounding box from sp.suuralue
 hel.bbox <- as.vector(sp.suuralue@bbox)
 # Get map using openstreetmap
 hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
-```
-
-```
-## Error: there is no package called 'ggmap'
-```
-
-```r
 # Plot transparent districts on top the background map
 ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, group=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, label=Name)) + theme(legend.position="none")
 ```
 
-```
-## Error: could not find function "ggmap"
-```
+![plot of chunk hkk-suuralue4](figure/hkk-suuralue4.png) 
 
 ### Plot election districts
 
@@ -223,9 +207,7 @@ df.piiri <- sp2df(sp.piiri, region="NIMI")
 ggmap(hel.map) + geom_polygon(data=df.piiri, aes(x=long, y=lat, fill=NIMI), alpha=0.5) + theme(legend.position="none")
 ```
 
-```
-## Error: could not find function "ggmap"
-```
+![plot of chunk peruspiiri](figure/peruspiiri.png) 
 
 ## <a name="maanmittauslaitos"></a>National Land Survey Finland
 
@@ -523,17 +505,21 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] raster_2.2-31   ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30
-## [5] gisfin_0.9.16   rgdal_0.8-16    sp_1.0-15       knitr_1.6      
+##  [1] mapproj_1.2-2   maps_2.3-7      ggmap_2.3       raster_2.2-31  
+##  [5] ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30 gisfin_0.9.16  
+##  [9] rgdal_0.8-16    sp_1.0-15       knitr_1.6      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
-##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
-##  [9] grid_3.1.1       gtable_0.1.2     labeling_0.2     lattice_0.20-29 
-## [13] LearnBayes_2.15  markdown_0.7     MASS_7.3-33      Matrix_1.1-4    
-## [17] munsell_0.4.2    nlme_3.1-117     plyr_1.8.1       proto_0.3-10    
-## [21] Rcpp_0.11.2      RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.14    
-## [25] scales_0.2.4     spdep_0.5-74     splines_3.1.1    stringr_0.6.2   
-## [29] tools_3.1.1      XML_3.98-1.1
+##  [1] boot_1.3-11         coda_0.16-1         colorspace_1.2-4   
+##  [4] deldir_0.1-5        digest_0.6.4        evaluate_0.5.5     
+##  [7] foreign_0.8-61      formatR_0.10        grid_3.1.1         
+## [10] gtable_0.1.2        labeling_0.2        lattice_0.20-29    
+## [13] LearnBayes_2.15     markdown_0.7        MASS_7.3-33        
+## [16] Matrix_1.1-4        munsell_0.4.2       nlme_3.1-117       
+## [19] plyr_1.8.1          png_0.1-7           proto_0.3-10       
+## [22] Rcpp_0.11.2         RCurl_1.95-4.1      reshape2_1.4       
+## [25] RgoogleMaps_1.2.0.6 rjson_0.2.14        RJSONIO_1.2-0.2    
+## [28] scales_0.2.4        spdep_0.5-74        splines_3.1.1      
+## [31] stringr_0.6.2       tools_3.1.1         XML_3.98-1.1
 ```
 

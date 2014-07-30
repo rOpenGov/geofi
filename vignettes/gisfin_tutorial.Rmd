@@ -59,7 +59,7 @@ For contact information and source code, see the [github page](https://github.co
 * Väestöruutuaineisto (Population grid)
 * Tuotanto- ja teollisuuslaitokset (Production and industrial facilities)
 * Oppilaitokset (Educational institutions)
-* Road accidents (Tieliikenneonnettomuudet)
+* Tieliikenneonnettomuudet (Road accidents)
 * Source: [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/index_en.html)
 
 
@@ -269,7 +269,7 @@ layers
 
 Get population density in year 2005 on a 5 km x 5 km grid, convert to RasterStack object and plot.
 
-```{r population-density-plot, message=FALSE, results='hide'}
+```{r population-density-plot, message=FALSE, warning=FALSE, results='hide'}
 population <- geoStatFi$getPopulation(layers[11])
 x <- geoStatFi$getRaster(population)
 plot(x[["vaesto"]])

@@ -44,7 +44,6 @@ GeoStatFi <- setRefClass(
     initialize = function(verbose=TRUE, ...) {
       callSuper(...)
       verbose <<- verbose
-      return(invisible(.self))
     },
     
     listLayers = function(feature) {

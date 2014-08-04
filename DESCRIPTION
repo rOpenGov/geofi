@@ -17,7 +17,8 @@ Imports:
     spdep,
     ggplot2,
     methods,
-    raster
+    raster,
+    XML
 Suggests:
     rgeos,
     maptools

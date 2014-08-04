@@ -32,7 +32,8 @@
 #' @import raster
 #' @references See citation("gisfin")
 #' @author Jussi Jousimo \email{louhos@@googlegroups.com}
-#' @examples See the vignette.
+#' @examples 
+#' # See the vignette.
 #' @exportClass GeoStatFi
 #' @export GeoStatFi
 GeoStatFi <- setRefClass(

@@ -30,6 +30,7 @@
 #' @import rgdal
 #' @import sp
 #' @import raster
+#' @return In case the service at stat.fi cannot be reached, the relevant methods return \code{character(0)}.
 #' @references See citation("gisfin")
 #' @author Jussi Jousimo \email{louhos@@googlegroups.com}
 #' @examples 
@@ -53,7 +54,13 @@ GeoStatFi <- setRefClass(
       url <- paste("WFS:http://geo.stat.fi/geoserver", feature, "wfs", sep="/")
       if (verbose)
         message(paste("Retrieving data set listing from", url))
-      layers <- rgdal::ogrListLayers(url)
+      
+      layers <- try(rgdal::ogrListLayers(url))
+      if (inherits(layer, "try-error") && length(grep("Cannot open data source", layers)) == 1) {
+        warning(paste("Service unavailable at", url))
+        return(character())
+      }
+      
       return(layers)
     },
     
@@ -63,12 +70,18 @@ GeoStatFi <- setRefClass(
       url <- paste("WFS:http://geo.stat.fi/geoserver", feature, "wfs", sep="/")
       if (verbose)
         message(paste("Retrieving data set from", url))
-      layer <- rgdal::readOGR(dsn=url, layer=layer, verbose=verbose)
+      
+      layer <- try(rgdal::readOGR(dsn=url, layer=layer, verbose=verbose))
+      if (inherits(layer, "try-error") && length(grep("Cannot open file", layer)) == 1) {
+        warning(paste("Service unavailable at", url))
+        return(character())
+      }
+      
       return(layer)
     },
     
     getRaster = function(layer, template=raster(extent(85000, 726000, 6629000, 7777000), nrows=1148, ncols=641, crs=CRS("+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs")), fun="count") {
-      "Converts SpatialPolygonsDataFrame object 'layer' to Raster* object or rasterizes SpatialPointsDataFrame onto 'template' raster with 'fun' function."
+      "Converts SpatialPolygonsDataFrame object \\code{layer} to Raster* object or rasterizes SpatialPointsDataFrame using the \\code{template} RasterLayer object as a template with the function \\code{fun}."
       
       if (missing(layer))
         stop("Required argument 'layer' missing.")
@@ -88,12 +101,12 @@ GeoStatFi <- setRefClass(
     },
     
     listPopulationLayers = function() {
-      "List population grid data sets."
+      "Returns a list of available population grid data sets as a character vector."
       return(listLayers(feature="vaestoruutu"))
     },
     
     getPopulation = function(layer) {
-      "Get population grid data set 'layer'."
+      "Retrieves population grid data \\code{layer} as a Spatial* object."
       if (missing(layer))
         stop("Required argument 'layer' missing.")
       return(getLayer(feature="vaestoruutu", layer=layer))
@@ -104,7 +117,7 @@ GeoStatFi <- setRefClass(
     },
     
     getProductionAndIndustrialFacilities = function(layer="ttlaitokset:toimipaikat") {
-      "Get production and industrial facilities."
+      "Retrieves production and industrial facilities as a Spatial* object."
       if (missing(layer))
         stop("Required argument 'layer' missing.")
       return(getLayer(feature="ttlaitokset/ttlaitokset:toimipaikat", layer=layer))
@@ -115,19 +128,19 @@ GeoStatFi <- setRefClass(
     },
     
     getEducationalInstitutions = function(layer="oppilaitokset:oppilaitokset") {
-      "Get educational institutions."
+      "Retrieves educational institutions as a Spatial* object."
       if (missing(layer))
         stop("Required argument 'layer' missing.")
       return(getLayer(feature="oppilaitokset/oppilaitokset:oppilaitokset", layer=layer))      
     },
     
     listRoadAccidentsLayers = function() {
-      "List road accident data sets."
+      "Returns a list of available road accident data sets as a character vector."
       return(listLayers(feature="tieliikenne"))
     },
     
     getRoadAccidents = function(layer) {
-      "Get road accident data set 'layer'."
+      "Retrieves road accident data \\code{layer} as a Spatial* object."
       if (missing(layer))
         stop("Required argument 'layer' missing.")
       return(getLayer(feature="tieliikenne", layer=layer))      

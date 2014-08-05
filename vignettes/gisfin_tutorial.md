@@ -408,13 +408,14 @@ ip_location("137.224.252.10")
 
 Geospatial data provided by [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/inspire_en.html).
 
-Retrieve a list of the available data sets for population density.
+Retrieve a list of the available data sets for population density. In case the service is unreachable,
+`character(0)` is returned.
 
 
 ```r
 geoStatFi <- GeoStatFi()
 layers <- geoStatFi$listPopulationLayers()
-layers
+if (length(layers) > 0) layers
 ```
 
 ```
@@ -433,8 +434,10 @@ Get population density in year 2005 on a 5 km x 5 km grid, convert to RasterStac
 
 ```r
 population <- geoStatFi$getPopulation(layers[11])
-x <- geoStatFi$getRaster(population)
-plot(x[["vaesto"]])
+if (length(population) > 0) {
+  x <- geoStatFi$getRaster(population)
+  plot(x[["vaesto"]])
+}
 ```
 
 ![plot of chunk population-density-plot](figure/population-density-plot.png) 
@@ -444,11 +447,13 @@ Plot road accident density in 2011.
 
 ```r
 roadAccidents <- geoStatFi$getRoadAccidents("tieliikenne:tieliikenne_2011")
-# Rasterize point data onto a 5 km x 5 km grid
-library(raster)
-template <- raster(extent(85000, 730000, 6625000, 7780000), nrows=231, ncols=129, crs=CRS("+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))
-x <- geoStatFi$getRaster(roadAccidents[,1], template=template, fun="count")
-plot(x[[1]])
+if (length(roadAccidents) > 0) {
+  # Rasterize point data onto a 5 km x 5 km grid
+  library(raster)
+  template <- raster(extent(85000, 730000, 6625000, 7780000), nrows=231, ncols=129, crs=CRS("+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))
+  x <- geoStatFi$getRaster(roadAccidents[,1], template=template, fun="count")
+  plot(x[[1]])
+}
 ```
 
 ![plot of chunk road-accident-density](figure/road-accident-density.png) 
@@ -505,21 +510,21 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] mapproj_1.2-2   maps_2.3-7      ggmap_2.3       raster_2.2-31  
-##  [5] ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30 gisfin_0.9.16  
-##  [9] rgdal_0.8-16    sp_1.0-15       knitr_1.6      
+##  [1] mapproj_1.2-2   maps_2.3-7      ggmap_2.3       ggplot2_1.0.0  
+##  [5] rgeos_0.3-6     maptools_0.8-30 knitr_1.6       raster_2.2-31  
+##  [9] gisfin_0.9.16   rgdal_0.8-16    sp_1.0-15      
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-11         coda_0.16-1         colorspace_1.2-4   
 ##  [4] deldir_0.1-5        digest_0.6.4        evaluate_0.5.5     
 ##  [7] foreign_0.8-61      formatR_0.10        grid_3.1.1         
 ## [10] gtable_0.1.2        labeling_0.2        lattice_0.20-29    
-## [13] LearnBayes_2.15     markdown_0.7        MASS_7.3-33        
-## [16] Matrix_1.1-4        munsell_0.4.2       nlme_3.1-117       
-## [19] plyr_1.8.1          png_0.1-7           proto_0.3-10       
-## [22] Rcpp_0.11.2         RCurl_1.95-4.1      reshape2_1.4       
-## [25] RgoogleMaps_1.2.0.6 rjson_0.2.14        RJSONIO_1.2-0.2    
-## [28] scales_0.2.4        spdep_0.5-74        splines_3.1.1      
-## [31] stringr_0.6.2       tools_3.1.1         XML_3.98-1.1
+## [13] LearnBayes_2.15     MASS_7.3-33         Matrix_1.1-4       
+## [16] munsell_0.4.2       nlme_3.1-117        plyr_1.8.1         
+## [19] png_0.1-7           proto_0.3-10        Rcpp_0.11.2        
+## [22] RCurl_1.95-4.1      reshape2_1.4        RgoogleMaps_1.2.0.6
+## [25] rjson_0.2.14        RJSONIO_1.2-0.2     scales_0.2.4       
+## [28] spdep_0.5-74        splines_3.1.1       stringr_0.6.2      
+## [31] tools_3.1.1         XML_3.98-1.1
 ```
 

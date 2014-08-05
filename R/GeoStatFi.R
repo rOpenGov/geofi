@@ -56,7 +56,7 @@ GeoStatFi <- setRefClass(
         message(paste("Retrieving data set listing from", url))
       
       layers <- try(rgdal::ogrListLayers(url))
-      if (inherits(layer, "try-error") && length(grep("Cannot open data source", layers)) == 1) {
+      if (inherits(layers, "try-error") && length(grep("Cannot open data source", layers)) == 1) {
         warning(paste("Service unavailable at", url))
         return(character())
       }

@@ -217,6 +217,7 @@ spplot(sp.aanestys, zcol="KUNTA",
 
 ```
 
+----
 
 ## <a name="hel-spatial"></a>Helsinki spatial data
 
@@ -230,8 +231,7 @@ get_helsinki_spatial()
 ```
 
 Retrieve municipality map for the larger Helsinki region with 
-`get_helsinki_spatial()`. Transform coordinates with `sp::spTransform()` and 
-plot with `ggmap()`.
+`get_helsinki_spatial()` and transform coordinates with `sp::spTransform()`.
 
 ```{r peruspiiri, message=FALSE, warning=FALSE, results='hide'}
 sp.piiri <- get_helsinki_spatial(map.type="piirijako", 
@@ -240,10 +240,9 @@ sp.piiri <- get_helsinki_spatial(map.type="piirijako",
 sp.piiri@proj4string
 # Transform coordinates to WGS84
 sp.piiri <- sp::spTransform(sp.piiri, CRS("+proj=longlat +datum=WGS84"))
-# Transform to data frame and plot with ggplot on top of OpenStreetMap
-df.piiri <- sp2df(sp.piiri, region="NIMI")
-#ggmap(hel.map) + geom_polygon(data=df.piiri, aes(x=long, y=lat, fill=NIMI), alpha=0.5) + theme(legend.position="none")
 ```
+
+----
 
 ## <a name="maanmittauslaitos"></a>National Land Survey Finland
 

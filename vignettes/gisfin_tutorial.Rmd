@@ -5,8 +5,8 @@
 
 <!--
 Joissakin esimerkeissa tarvittavat riippuvuudet 
-	<a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
-	<a href="http://freeglut.sourceforge.net/">freeglut</a>, 
+  <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
+  <a href="http://freeglut.sourceforge.net/">freeglut</a>, 
 	<a href="http://xmlsoft.org/downloads.html">XML</a>, 
 	<a href="http://trac.osgeo.org/geos">GEOS</a> ja 
 	<a href="http://trac.osgeo.org/proj">PROJ.4</a>. 
@@ -15,8 +15,7 @@ Joissakin esimerkeissa tarvittavat riippuvuudet
 ```{r knit, eval=FALSE, echo=FALSE}
 # How to knit this document into .md and .html
 library(knitr)
-# Change the base dir where to save figures
-opts_knit$set(base.dir = "vignettes") 
+opts_knit$set(base.dir = "vignettes") # Change the base dir where to save figures
 knit(input="vignettes/gisfin_tutorial.Rmd", 
      output="vignettes/gisfin_tutorial.md")
 knit2html(input="vignettes/gisfin_tutorial.md", 
@@ -24,8 +23,7 @@ knit2html(input="vignettes/gisfin_tutorial.md",
           options=c("use_xhtml","smartypants","mathjax","highlight_code"))
 ```
 
-gisfin - tutorial
-=================
+# gisfin - tutorial
 
 This R package provides tools to access open spatial data in Finland
 as part of the [rOpenGov](http://ropengov.github.io) project.
@@ -69,8 +67,7 @@ dataa)
 
 + [Data Science Toolkit](http://www.datasciencetoolkit.org/)
 
-[Statistics Finland geospatial data](#geostatfi) (Tilastokeskuksen 
-paikkatietoaineistoja)
+[Statistics Finland geospatial data](#geostatfi) (Tilastokeskuksen paikkatietoaineistoja)
 
 + Väestöruutuaineisto (Population grid)
 + Tuotanto- ja teollisuuslaitokset (Production and industrial facilities)
@@ -82,6 +79,48 @@ List of potential data sources to be added to the package can be found
 [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 
 ## Installation
+
+### Requirements
+
+The gisfin package uses the 
+[rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) package, which 
+depends on [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library). 
+Some rgdal installation tips for various platforms are listed below. If you 
+encounter problems, please contact us by email: louhos@googlegroups.com.
+
+#### Windows
+
+Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
+
+#### OSX
+
+It is preferable to NOT use the [CRAN binaries](http://cran.r-project.org/web/packages/rgdal/index.html). Instead, you should check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks)
+and install the latest GDAL Complete (v. 1.11 in July 2014) and then install the 
+corresponding rgdal package from the same page (v. 0.8.16 in July 2014). 
+
+#### Linux 
+
+Install the following packages through your distribution's package manager
+
+__Ubuntu/Debian__
+
+```
+sudo apt-get -y install libgdal1-dev libproj-dev
+```
+
+__Fedora__
+
+```
+sudo yum -y install gdal-devel proj-devel
+```
+
+__openSUSE__
+
+```
+sudo zypper --non-interactive in libgdal-devel libproj-devel
+```
+
+### Installing the package
 
 Release version for general users:
 
@@ -102,18 +141,6 @@ Load package.
 ```{r load, message=FALSE, warning=FALSE, results='hide'}
 library(gisfin)
 ```
-
-### Notes
-
-The gisfin package uses the 
-[rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) library, which 
-depends on the [GDAL](http://www.gdal.org/) spatial framework. Some rgdal 
-installation tips for various platforms lister below. If you encounter problems, 
-please contact us by email: louhos@googlegroups.com.
-
-+ Windows: Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.html)
-+ OSX: It is preferable to NOT use the [CRAN binaries](http://cran.r-project.org/web/packages/rgdal/index.html). Instead, you should check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks)  and install the latest GDAL Complete (v. 1.11 in July 2014) and then install the corresponding rgdal package from the same page (v. 0.8.16 in July 2014). 
-+ Linux: Try the installation scripts [here](https://github.com/louhos/takomo/tree/master/installation/) (not necessarily up-to-date!)
 
 ## <a name="aluejakokartat"></a>Helsinki region district maps
 

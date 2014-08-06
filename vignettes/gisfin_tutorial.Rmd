@@ -341,21 +341,6 @@ if (length(population) > 0) {
 }
 ```
 
-Plot road accident density in 2011.
-
-```{r road-accident-density, message=FALSE, results='hide'}
-roadAccidents <- geoStatFi$getRoadAccidents("tieliikenne:tieliikenne_2011")
-if (length(roadAccidents) > 0) {
-  # Rasterize point data onto a 5 km x 5 km grid
-  library(raster)
-  template <- raster(extent(85000, 730000, 6625000, 7780000), nrows=231, 
-                     ncols=129, 
-                     crs=CRS("+init=epsg:3067"))
-  x <- geoStatFi$getRaster(roadAccidents[,1], template=template, fun="count")
-  plot(x[[1]])
-}
-```
-
 ----
 
 ### Citation

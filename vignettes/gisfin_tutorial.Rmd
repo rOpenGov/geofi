@@ -277,19 +277,6 @@ spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))),
        colorkey=FALSE)
 ```
 
-Plot provinces (maakunnat) with `spplot()`. Note that `generate_map_colours()` 
-works currently only for the smallest polygons in the data, here municipalities, 
-and can not be used for the provinces!
-
-```{r MML_provinces, message=FALSE, warning=FALSE}
-# Convert municipality names to factors and fix character encoding
-sp.mml@data$Maakunta.FI <- factor(iconv(sp.mml@data$Maakunta.FI, from="UTF-8", 
-                                        to="ISO-8859-1"))
-# Plot the shape file, colour provinces 
-spplot(sp.mml, zcol="Maakunta.FI", 
-       col.regions=rainbow(length(levels(sp.mml@data$Maakunta.FI))))
-```
-
 ----
 
 ## <a name="geocoding"></a>Geocoding

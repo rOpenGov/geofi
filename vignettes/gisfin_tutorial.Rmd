@@ -345,7 +345,7 @@ if (length(roadAccidents) > 0) {
   library(raster)
   template <- raster(extent(85000, 730000, 6625000, 7780000), nrows=231, 
                      ncols=129, 
-                     crs=CRS("+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))
+                     crs=CRS("+init=epsg:3067"))
   x <- geoStatFi$getRaster(roadAccidents[,1], template=template, fun="count")
   plot(x[[1]])
 }

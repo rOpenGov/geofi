@@ -290,6 +290,8 @@ spplot(sp.mml, zcol="Maakunta.FI",
        col.regions=rainbow(length(levels(sp.mml@data$Maakunta.FI))))
 ```
 
+----
+
 ## <a name="geocoding"></a>Geocoding
 
 Get geocodes for given location (address etc.) using one of the available 
@@ -314,6 +316,8 @@ gc3 <- get_geocode("Mannerheimintie 100, Helsinki", service="google")
 unlist(gc3[1:2])
 ```
 
+----
+
 ## <a name="ip"></a>IP Location
 
 Geographic coordinates for a given IP-address from
@@ -322,6 +326,8 @@ Geographic coordinates for a given IP-address from
 ```{r iplocation, message=FALSE, eval=TRUE}
 ip_location("137.224.252.10")
 ```
+
+----
 
 ## <a name="geostatfi"></a>Statistics Finland geospatial data
 
@@ -362,6 +368,8 @@ if (length(roadAccidents) > 0) {
   plot(x[[1]])
 }
 ```
+
+----
 
 ### Citation
 

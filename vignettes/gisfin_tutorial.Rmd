@@ -142,6 +142,8 @@ Load package.
 library(gisfin)
 ```
 
+----
+
 ## <a name="aluejakokartat"></a>Helsinki region district maps
 
 Helsinki region district maps (Helsingin seudun aluejakokartat) from 
@@ -199,22 +201,6 @@ ggplot(df.suuralue, aes(x=long, y=lat)) + geom_polygon(aes(fill=COL,
                                                            group=Name)) + 
   geom_text(data=df.suuralue.piste, aes(label=Name)) + 
   theme(legend.position="none")
-```
-
-Add background map from OpenStreetMap using `get_map()` from 
-[ggmap](https://sites.google.com/site/davidkahle/ggmap) and plot again.
-
-```{r hkk-suuralue4, message=FALSE, warning=FALSE, results='hide'}
-# Add background map from OpenStreetMap using ggmap
-library(ggmap)
-# Get bounding box from sp.suuralue
-#hel.bbox <- as.vector(sp.suuralue@bbox)
-# Get map using openstreetmap
-#hel.map <- ggmap::get_map(location=hel.bbox, source="osm")
-# Plot transparent districts on top the background map
-#ggmap(hel.map) + geom_polygon(data=df.suuralue, aes(x=long, y=lat, fill=COL, 
-#group=Name), alpha=0.5) + geom_text(data=df.suuralue.piste, aes(x=long, y=lat, 
-#label=Name)) + theme(legend.position="none")
 ```
 
 ### Plot election districts

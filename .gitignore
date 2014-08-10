@@ -10,4 +10,5 @@ TEMPDIR/*
 ggmapTemp.png
 gisfin.Rproj
 vignettes/gisfin_tutorial.txt
-
+cache/
+vignetttes/cache/

@@ -111,6 +111,15 @@ __openSUSE__
 sudo zypper --non-interactive in libgdal-devel libproj-devel
 ```
 
+The gisfin package also depends on the [rwfs](http://github.com/ropengov/rwfs) package, which can be installed from GitHub.
+For that, install the devtools package first:
+
+```r
+install.packages("devtools")
+library(devtools)
+install_github("rwfs", "rOpenGov")
+```
+
 ### Installing the package
 
 Release version for general users:
@@ -124,8 +133,6 @@ Development version for developers:
 
 
 ```r
-install.packages("devtools")
-library(devtools)
 install_github("gisfin", "ropengov")
 ```
 
@@ -550,17 +557,19 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30 knitr_1.6      
-## [5] gisfin_0.9.16   rwfs_0.1.01     rgdal_0.9-1     sp_1.0-15      
+## [1] devtools_1.5    ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30
+## [5] knitr_1.6       gisfin_0.9.16   rwfs_0.1.01     rgdal_0.9-1    
+## [9] sp_1.0-15      
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
 ##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
-##  [9] grid_3.1.1       gtable_0.1.2     labeling_0.2     lattice_0.20-29 
-## [13] LearnBayes_2.15  MASS_7.3-33      Matrix_1.1-4     munsell_0.4.2   
-## [17] nlme_3.1-117     plyr_1.8.1       proto_0.3-10     raster_2.2-31   
-## [21] Rcpp_0.11.2      RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.14    
-## [25] scales_0.2.4     spdep_0.5-74     splines_3.1.1    stringr_0.6.2   
-## [29] tools_3.1.1      XML_3.98-1.1
+##  [9] grid_3.1.1       gtable_0.1.2     httr_0.4         labeling_0.2    
+## [13] lattice_0.20-29  LearnBayes_2.15  markdown_0.7     MASS_7.3-33     
+## [17] Matrix_1.1-4     memoise_0.2.1    munsell_0.4.2    nlme_3.1-117    
+## [21] parallel_3.1.1   plyr_1.8.1       proto_0.3-10     raster_2.2-31   
+## [25] Rcpp_0.11.2      RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.14    
+## [29] scales_0.2.4     spdep_0.5-74     splines_3.1.1    stringr_0.6.2   
+## [33] tools_3.1.1      whisker_0.3-2    XML_3.98-1.1
 ```
 

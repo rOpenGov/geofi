@@ -120,14 +120,6 @@ __openSUSE__
 sudo zypper --non-interactive in libgdal-devel libproj-devel
 ```
 
-The gisfin package also depends on the [rwfs](http://github.com/ropengov/rwfs) package, which can be installed from GitHub.
-For that, install the devtools package first:
-```{r install_rwfs, eval=FALSE}
-install.packages("devtools")
-library(devtools)
-install_github("rwfs", "rOpenGov")
-```
-
 ### Installing the package
 
 Release version for general users:
@@ -139,6 +131,8 @@ install.packages("gisfin")
 Development version for developers:
 
 ```{r install2, eval=FALSE}
+install.packages("devtools")
+library(devtools)
 install_github("gisfin", "ropengov")
 ```
 

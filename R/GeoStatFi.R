@@ -12,8 +12,7 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of 
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-WFSRequest <- getFromNamespace("WFSRequest", "rwfs")
-WFSStreamClient <- getFromNamespace("WFSStreamClient", "rwfs")
+#' @include WFSClient.R
 
 #' Builds WFS request to the stat.fi geospatial API.
 #'

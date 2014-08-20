@@ -10,8 +10,7 @@ License: BSD_2_clause + file LICENSE
 Depends:
     R (>= 3.0.1),
     rgdal,
-    sp,
-    rwfs
+    sp
 Imports:
     rjson,
     RCurl,
@@ -25,3 +24,14 @@ Suggests:
     maptools
 URL: https://github.com/ropengov/gisfin
 LazyLoad: yes
+Collate:
+    'WFSRequest.R'
+    'WFSClient.R'
+    'GeoStatFi.R'
+    'MML.R'
+    'firstlib.R'
+    'geocode.R'
+    'gisfin-package.R'
+    'helsinki_spatial.R'
+    'ip.R'
+    'visualization.R'

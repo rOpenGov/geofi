@@ -8,7 +8,7 @@ R tools for spatial data in Finland from the [rOpenGov](http://ropengov.github.i
 
 For installation and usage, check the [tutorial page](https://github.com/rOpenGov/gisfin/blob/master/vignettes/gisfin_tutorial.md). 
 
-Authors: [Juuso Parkkinen](https://github.com/ouzor),  [Leo Lahti](https://github.com/antagomir), [Joona Lehtomäki](https://github.com/jlehtoma)
+Authors: [Juuso Parkkinen](https://github.com/ouzor),  [Leo Lahti](https://github.com/antagomir), [Joona Lehtomäki](https://github.com/jlehtoma), [Jussi Jousimo](https://github.com/statguy)
   
 You are welcome to contact us:
 

@@ -464,8 +464,8 @@ service is unreachable, `character(0)` is returned.
 
 
 ```r
-geoStatFi <- GeoStatFi()
-layers <- geoStatFi$listPopulationLayers()
+client <- GeoStatFiWFSClient()
+layers <- client$listPopulationLayers()
 if (length(layers) > 0) layers
 ```
 
@@ -485,10 +485,11 @@ RasterStack object and plot.
 
 
 ```r
-population <- geoStatFi$getPopulation(layers[11])
+population <- client$getPopulation(layers[11])
 if (length(population) > 0) {
-  x <- geoStatFi$getRaster(population)
-  plot(x[["vaesto"]])
+  x <- sp::SpatialPixelsDataFrame(coordinates(population), population@data, proj4string=population@proj4string)
+  population <- raster::stack(x)
+  plot(population[["vaesto"]])
 }
 ```
 
@@ -539,34 +540,27 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.0 (2014-04-10)
-## Platform: x86_64-suse-linux-gnu (64-bit)
+## R version 3.1.1 (2014-07-10)
+## Platform: x86_64-apple-darwin13.1.0 (64-bit)
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30 gisfin_0.9.16  
-## [5] rgdal_0.8-16    sp_1.0-15       knitr_1.6       devtools_1.5   
+## [1] ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30 knitr_1.6      
+## [5] gisfin_0.9.16   rwfs_0.1.01     rgdal_0.9-1     sp_1.0-15      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-6    
+##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
 ##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
-##  [9] grid_3.1.0       gtable_0.1.2     htmltools_0.2.4  httr_0.4        
-## [13] labeling_0.2     lattice_0.20-29  LearnBayes_2.15  MASS_7.3-31     
-## [17] Matrix_1.1-3     memoise_0.2.1    munsell_0.4.2    nlme_3.1-117    
-## [21] parallel_3.1.0   plyr_1.8.1       proto_0.3-10     raster_2.2-31   
-## [25] Rcpp_0.11.2      RCurl_1.95-4.3   reshape2_1.4     rjson_0.2.14    
-## [29] rmarkdown_0.2.54 scales_0.2.4     spdep_0.5-74     splines_3.1.0   
-## [33] stringr_0.6.2    tools_3.1.0      whisker_0.3-2    XML_3.98-1.1    
-## [37] yaml_2.1.13
+##  [9] grid_3.1.1       gtable_0.1.2     labeling_0.2     lattice_0.20-29 
+## [13] LearnBayes_2.15  MASS_7.3-33      Matrix_1.1-4     munsell_0.4.2   
+## [17] nlme_3.1-117     plyr_1.8.1       proto_0.3-10     raster_2.2-31   
+## [21] Rcpp_0.11.2      RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.14    
+## [25] scales_0.2.4     spdep_0.5-74     splines_3.1.1    stringr_0.6.2   
+## [29] tools_3.1.1      XML_3.98-1.1
 ```
 

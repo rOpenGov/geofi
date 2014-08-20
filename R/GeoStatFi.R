@@ -12,6 +12,29 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of 
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+WFSRequest <- getFromNamespace("WFSRequest", "rwfs")
+WFSStreamClient <- getFromNamespace("WFSStreamClient", "rwfs")
+
+#' Builds WFS request to the stat.fi geospatial API.
+#'
+#' @import methods
+#' @references See citation("gisfin")
+#' @author Jussi Jousimo \email{louhos@@googlegroups.com}
+#' @exportClass GeoStatFiWFSRequest
+#' @export GeoStatFiWFSRequest
+GeoStatFiWFSRequest <- setRefClass(
+  "GeoStatFiWFSRequest",
+  contains = "WFSRequest",
+  methods = list(
+    getURL = function() {
+      if (getPathString() == "")
+        stop("Required field 'path' has not been specified for the constructor.")
+      url <- paste0("http://geo.stat.fi/geoserver/", getPathString(), "/wfs?", getParametersString())
+      return(url)
+    }
+  )
+)
+
 #' Retrieves geospatial data from stat.fi.
 #' 
 #' Retrieves geospatial data from Statistics Finland (http://www.stat.fi).
@@ -35,115 +58,76 @@
 #' @author Jussi Jousimo \email{louhos@@googlegroups.com}
 #' @examples 
 #' # See the vignette.
-#' @exportClass GeoStatFi
-#' @export GeoStatFi
-GeoStatFi <- setRefClass(
-  Class = "GeoStatFi",
+#' @exportClass GeoStatFiWFSClient
+#' @export GeoStatFiWFSClient
+GeoStatFiWFSClient <- setRefClass(
+  Class = "GeoStatFiWFSClient",
+  contains = "WFSStreamClient",
   fields = list(
-    verbose = "logical"  
   ),
   methods = list(
-    initialize = function(verbose=TRUE, ...) {
-      callSuper(...)
-      verbose <<- verbose
-    },
-    
-    listLayers = function(feature) {
-      if (missing(feature))
-        stop("Required argument 'feature' missing.")
-      url <- paste("WFS:http://geo.stat.fi/geoserver", feature, "wfs", sep="/")
-      if (verbose)
-        message(paste("Retrieving data set listing from", url))
-      
-      layers <- try(rgdal::ogrListLayers(url))
-      if (inherits(layers, "try-error") && length(grep("Cannot open data source", layers)) == 1) {
-        warning(paste("Service unavailable at", url))
-        return(character())
-      }
-      
-      return(layers)
-    },
-    
-    getLayer = function(feature, layer) {
-      if (missing(feature) | missing(layer))
-        stop("Required arguments 'feature' and/or 'layer' missing.")
-      url <- paste("WFS:http://geo.stat.fi/geoserver", feature, "wfs", sep="/")
-      if (verbose)
-        message(paste("Retrieving data set from", url))
-      
-      layer <- try(rgdal::readOGR(dsn=url, layer=layer, verbose=verbose))
-      if (inherits(layer, "try-error") && length(grep("Cannot open file", layer)) == 1) {
-        warning(paste("Service unavailable at", url))
-        return(character())
-      }
-      
-      return(layer)
-    },
-    
-    getRaster = function(layer, template=raster(extent(85000, 726000, 6629000, 7777000), nrows=1148, ncols=641, crs=CRS("+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs")), fun="count") {
-      "Converts SpatialPolygonsDataFrame object \\code{layer} to Raster* object or rasterizes SpatialPointsDataFrame using the \\code{template} RasterLayer object as a template with the function \\code{fun}."
-      
-      if (missing(layer))
-        stop("Required argument 'layer' missing.")
-      
-      raster <- if (inherits(layer, "SpatialPolygonsDataFrame")) {
-        pixels <- sp::SpatialPixelsDataFrame(coordinates(layer), layer@data, proj4string=layer@proj4string)
-        raster::stack(pixels)               
-      }
-      else if (inherits(layer, "SpatialPointsDataFrame")) {
-        if (missing(template) | missing(fun))
-          stop("Required arguments 'template' and/or 'fun' missing.")
-        raster::rasterize(layer, template, fun=fun)
-      }
-      else stop("Unsupported layer type.")
-      
-      return(raster)
-    },
-    
     listPopulationLayers = function() {
       "Returns a list of available population grid data sets as a character vector."
-      return(listLayers(feature="vaestoruutu"))
+      
+      request <- GeoStatFiWFSRequest(path=list("vaestoruutu"))
+      layers <- listLayers(request)
+      return(layers)
     },
     
     getPopulation = function(layer) {
       "Retrieves population grid data \\code{layer} as a Spatial* object."
       if (missing(layer))
         stop("Required argument 'layer' missing.")
-      return(getLayer(feature="vaestoruutu", layer=layer))
+      
+      request <- GeoStatFiWFSRequest(path=list("vaestoruutu"))
+      response <- getLayer(request, layer=layer)
+      return(response)
     },
     
     listProductionAndIndustrialFacilitiesLayers = function() {
-      return(listLayers(feature="ttlaitokset/ttlaitokset:toimipaikat"))
+      request <- GeoStatFiWFSRequest(path=list("ttlaitokset/ttlaitokset:toimipaikat"))
+      layers <- listLayers(request)
+      return(layers)
     },
     
     getProductionAndIndustrialFacilities = function(layer="ttlaitokset:toimipaikat") {
       "Retrieves production and industrial facilities as a Spatial* object."
       if (missing(layer))
         stop("Required argument 'layer' missing.")
-      return(getLayer(feature="ttlaitokset/ttlaitokset:toimipaikat", layer=layer))
+      request <- GeoStatFiWFSRequest(path=list("ttlaitokset/ttlaitokset:toimipaikat"))
+      response <- getLayer(request, layer=layer)
+      return(response)
     },
     
     listEducationalInstitutionsLayers = function() {
-      return(listLayers(feature="oppilaitokset/oppilaitokset:oppilaitokset"))
+      request <- GeoStatFiWFSRequest(path=list("oppilaitokset/oppilaitokset:oppilaitokset"))
+      layers <- listLayers(request)
+      return(layers)
     },
     
     getEducationalInstitutions = function(layer="oppilaitokset:oppilaitokset") {
       "Retrieves educational institutions as a Spatial* object."
       if (missing(layer))
         stop("Required argument 'layer' missing.")
-      return(getLayer(feature="oppilaitokset/oppilaitokset:oppilaitokset", layer=layer))      
+      request <- GeoStatFiWFSRequest(path=list("oppilaitokset/oppilaitokset:oppilaitokset"))
+      response <- getLayer(request, layer=layer)
+      return(response)
     },
     
     listRoadAccidentsLayers = function() {
       "Returns a list of available road accident data sets as a character vector."
-      return(listLayers(feature="tieliikenne"))
+      request <- GeoStatFiWFSRequest(path=list("tieliikenne"))
+      layers <- listLayers(request)
+      return(layers)
     },
     
     getRoadAccidents = function(layer) {
       "Retrieves road accident data \\code{layer} as a Spatial* object."
       if (missing(layer))
         stop("Required argument 'layer' missing.")
-      return(getLayer(feature="tieliikenne", layer=layer))      
+      request <- GeoStatFiWFSRequest(path=list("tieliikenne"))
+      response <- getLayer(request, layer=layer)
+      return(response)
     }
   )
 )

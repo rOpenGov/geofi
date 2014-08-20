@@ -10,7 +10,8 @@ License: BSD_2_clause + file LICENSE
 Depends:
     R (>= 3.0.1),
     rgdal,
-    sp
+    sp,
+    rwfs
 Imports:
     rjson,
     RCurl,

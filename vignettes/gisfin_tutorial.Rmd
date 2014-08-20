@@ -325,8 +325,8 @@ Retrieve a list of the available data sets for population density. In case the
 service is unreachable, `character(0)` is returned.
 
 ```{r population-density-list, message=FALSE}
-geoStatFi <- GeoStatFi()
-layers <- geoStatFi$listPopulationLayers()
+client <- GeoStatFiWFSClient()
+layers <- client$listPopulationLayers()
 if (length(layers) > 0) layers
 ```
 
@@ -334,10 +334,11 @@ Get population density in year 2005 on a 5 km x 5 km grid, convert to
 RasterStack object and plot.
 
 ```{r population-density-plot, message=FALSE, warning=FALSE, results='hide'}
-population <- geoStatFi$getPopulation(layers[11])
+population <- client$getPopulation(layers[11])
 if (length(population) > 0) {
-  x <- geoStatFi$getRaster(population)
-  plot(x[["vaesto"]])
+  x <- sp::SpatialPixelsDataFrame(coordinates(population), population@data, proj4string=population@proj4string)
+  population <- raster::stack(x)
+  plot(population[["vaesto"]])
 }
 ```
 

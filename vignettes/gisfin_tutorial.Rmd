@@ -333,7 +333,7 @@ if (length(layers) > 0) layers
 Get population density in year 2005 on a 5 km x 5 km grid, convert to 
 RasterStack object and plot.
 
-```{r population-density-plot, message=FALSE, warning=FALSE, results='hide'}
+```{r population-density-plot, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
 population <- client$getPopulation(layers[11])
 if (length(population) > 0) {
   x <- sp::SpatialPixelsDataFrame(coordinates(population), population@data, proj4string=population@proj4string)

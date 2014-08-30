@@ -30,21 +30,34 @@ WFSClient <- setRefClass(
       if (!inherits(dataSource, "character"))
         stop("Argument 'dataSource' must be a descendant of class 'character'.")
       
-      layers <- rgdal::ogrListLayers(dsn=dataSource)
-      if (inherits(layers, "try-error") && length(grep("Cannot open data source", layers)) == 1) {
-        stop("Error in query result. Invalid query?")
+      layers <- try(rgdal::ogrListLayers(dsn=dataSource))
+      if (inherits(layers, "try-error")) {
+        if (length(grep("Cannot open data source", layers)) == 1) {
+          warning("Unable to connect to the data source or error in query result.")
+          return(character(0))
+        }
+        else stop("Fatal error.")
       }
+      
       return(layers)
     },
     
-    .private.getLayer = function(dataSource, layer, crs=NULL, swapAxisOrder=FALSE) {
+    .private.getLayer = function(dataSource, layer, crs=NULL) {
       if (missing(dataSource))
         stop("Required argument 'dataSource' missing.")
       if (missing(layer))
         stop("Required argument 'layer' missing.")
       if (!inherits(dataSource, "character"))
         stop("Argument 'dataSource' must be a descendant of class 'character'.")
-      response <- rgdal::readOGR(dsn=dataSource, layer=layer, p4s=crs, swapAxisOrder=swapAxisOrder, stringsAsFactors=FALSE)
+      
+      response <- try(rgdal::readOGR(dsn=dataSource, layer=layer, p4s=crs, stringsAsFactors=FALSE))
+      if (inherits(response, "try-error")) {
+        if (length(grep("Cannot open data source", response)) == 1) {
+          warning("Unable to connect to the data source or error in query result.")
+          return(character(0))
+        }
+        else stop("Fatal error.")
+      }
       
       return(response)
     },
@@ -53,7 +66,7 @@ WFSClient <- setRefClass(
       stop("Unimplemented method.")
     },
     
-    getLayer = function(request, layer, crs=NULL, swapAxisOrder=FALSE, parameters) {
+    getLayer = function(request, layer, crs=NULL, parameters) {
       stop("Unimplemented method.")
     },
     
@@ -94,7 +107,7 @@ WFSStreamClient <- setRefClass(
         stop("Argument 'request' must be a descendant of class 'WFSRequest'.")
       
       dataSourceURL <- request$getStreamURL()
-      response <- .private.getLayer(dataSource=dataSourceURL, layer=layer, crs=crs, swapAxisOrder=swapAxisOrder)
+      response <- .private.getLayer(dataSource=dataSourceURL, layer=layer, crs=crs)
       return(response)
     }
   )

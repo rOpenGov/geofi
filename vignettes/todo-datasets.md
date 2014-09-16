@@ -1,6 +1,9 @@
 gisfin - Potential data sources to be added
 ==========
 
+* Finnish Transport Agency
+ * [Liikenneviraston avoin data](http://portal.liikennevirasto.fi/sivu/www/f/aineistopalvelut/avoin_data#.VBgSKEgRavk)
+
 * Finland population registry
  * [Rakennusten osoite- ja koordinaattitiedot väestötietojärjestelmässä](http://vrk.fi/default.aspx?id=280) sisältää muun muassa seuraavat paikkatiedot: rakennuksen keskipisteen koordinaatit, kiinteistö- ja rakennustunnus, rakennuksen lähiosoite, henkilön vakinaisen asuinpaikan osoite, kuntakoodi ja äänestysalue. Väestötietojärjestelmän kaikki tiedot voidaan jollakin tavalla liittää johonkin paikkaan tai alueeseen. Paikkatiedot
 

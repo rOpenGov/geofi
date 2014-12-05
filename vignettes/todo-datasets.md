@@ -36,3 +36,4 @@ gisfin - Potential data sources to be added
 
 * Miscellaneous
  * [Museoviraston paikkatietoaineistoja](http://www.nba.fi/fi/tietopalvelut/tietojarjestelmat/kympariston_tietojarjestelma/aineistojen_lataaminen) (suojelukohteita ym.)
+ * [Nokia HERE geocode](https://github.com/corynissen/geocodeHERE)

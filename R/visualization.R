@@ -40,22 +40,31 @@ sp2df <- function(sp, region=NULL, verbose=TRUE) {
     
   if (verbose)
     message("Transforming ", class(sp), " into a data frame")
+  if (!is.null(region))
+    message("Parameter 'region' not used anymore!")
+  
   if (class(sp)=="SpatialPointsDataFrame") {
     # Construct data frame manually, as ggplot::fortify can not handle SpatialPoints
-    if (!is.null(region) & verbose)
-      message("Note! parameter 'region' not used for SpatialPointsDataFrame")
+#     if (!is.null(region) & verbose)
+#       message("Note! parameter 'region' not used for SpatialPointsDataFrame")
     df <- data.frame(long=sp@coords[,1], lat=sp@coords[,2], sp@data)
     
   } else {
-    if (is.null(region))
-      stop("Please specify 'region'!")
+#     if (is.null(region))
+#       stop("Please specify 'region'!")
+    
+    ## NEW implementation 6.1.2015
+    # Following https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles
+    sp@data$id <- rownames(sp@data)
+    sp.points <- ggplot2::fortify(sp, region="id")
+    df <- merge(sp.points, sp@data, by="id")
     
     ## NEW implementation 8.5.2014
-    # Get point data
-    sp.points <- ggplot2::fortify(sp, region=region)
-    names(sp.points)[names(sp.points)=="id"] <- region
-    # Merge original data
-    df <- merge(sp.points, sp@data, by=region) 
+#     # Get point data
+#     sp.points <- ggplot2::fortify(sp, region=region)
+#     names(sp.points)[names(sp.points)=="id"] <- region
+#     # Merge original data
+#     df <- merge(sp.points, sp@data, by=region) 
     
     ## OLD implementation
 #     # Add IDs 

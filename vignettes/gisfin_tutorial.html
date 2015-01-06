@@ -5,6 +5,18 @@
 
 <title>gisfin - tutorial</title>
 
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
    pre .operator,
@@ -45,9 +57,6 @@ var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/<
 hljs.initHighlightingOnLoad();
 </script>
 
-<!-- MathJax scripts -->
-<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 <style type="text/css">
@@ -99,7 +108,9 @@ a:visited {
 pre, img {
   max-width: 100%;
 }
-
+pre {
+  overflow-x: auto;
+}
 pre code {
    display: block; padding: 0.5em;
 }
@@ -193,15 +204,6 @@ hr {
 <!--
 %\VignetteEngine{knitr}
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
--->
-
-<!--
-Joissakin esimerkeissa tarvittavat riippuvuudet 
-  <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
-  <a href="http://freeglut.sourceforge.net/">freeglut</a>, 
-    <a href="http://xmlsoft.org/downloads.html">XML</a>, 
-    <a href="http://trac.osgeo.org/geos">GEOS</a> ja 
-    <a href="http://trac.osgeo.org/proj">PROJ.4</a>. 
 -->
 
 <h1>gisfin - tutorial</h1>
@@ -310,6 +312,15 @@ corresponding rgdal package from the same page (v. 0.8.16 in July 2014). </p>
 <pre><code>sudo zypper --non-interactive in libgdal-devel libproj-devel
 </code></pre>
 
+<h3>Additional dependencies</h3>
+
+<p>These may be needed:
+  <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
+  <a href="http://freeglut.sourceforge.net/">freeglut</a>, 
+  <a href="http://xmlsoft.org/downloads.html">XML</a>, 
+    <a href="http://trac.osgeo.org/geos">GEOS</a> and
+    <a href="http://trac.osgeo.org/proj">PROJ.4</a>.</p>
+
 <h3>Installing the package</h3>
 
 <p>Release version for general users:</p>
@@ -359,7 +370,7 @@ with <code>spplot()</code>.</p>
 spplot(sp.suuralue, zcol=&quot;Name&quot;)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue1.png" alt="plot of chunk hkk-suuralue1"/> </p>
+<p><img src="figure/hkk-suuralue1-1.png" alt="plot of chunk hkk-suuralue1"/> </p>
 
 <p>Function <code>generate_map_colours()</code> allows nice region colouring separable 
 adjacent regions. This is used here with the <code>rainbow()</code> colour scale to plot 
@@ -371,7 +382,7 @@ spplot(sp.suuralue, zcol=&quot;COL&quot;,
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue2.png" alt="plot of chunk hkk-suuralue2"/> </p>
+<p><img src="figure/hkk-suuralue2-1.png" alt="plot of chunk hkk-suuralue2"/> </p>
 
 <h3>Plot with ggplot2</h3>
 
@@ -383,19 +394,19 @@ frames. Plot with <a href="http://ggplot2.org/">ggplot2</a>, using blank map the
 <pre><code class="r"># Retrieve center points
 sp.suuralue.piste &lt;- get_helsinki_aluejakokartat(map.specifier=&quot;suuralue_piste&quot;)
 # Get data frames
-df.suuralue &lt;- sp2df(sp.suuralue, &quot;Name&quot;)
-df.suuralue.piste &lt;- sp2df(sp.suuralue.piste, &quot;Name&quot;)
+df.suuralue &lt;- sp2df(sp.suuralue)
+df.suuralue.piste &lt;- sp2df(sp.suuralue.piste)
 # Set map theme
 library(ggplot2)
 theme_set(get_theme_map())
 # Plot regions, add labels using the points data
-ggplot(df.suuralue, aes(x=long, y=lat)) + geom_polygon(aes(fill=COL, 
-                                                           group=Name)) + 
+ggplot(df.suuralue, aes(x=long, y=lat)) + 
+  geom_polygon(aes(fill=COL, group=Name)) + 
   geom_text(data=df.suuralue.piste, aes(label=Name)) + 
   theme(legend.position=&quot;none&quot;)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue3.png" alt="plot of chunk hkk-suuralue3"/> </p>
+<p><img src="figure/hkk-suuralue3-1.png" alt="plot of chunk hkk-suuralue3"/> </p>
 
 <h3>Plot election districts</h3>
 
@@ -409,7 +420,7 @@ spplot(sp.aanestys, zcol=&quot;KUNTA&quot;,
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/hkk-aanestysalue.png" alt="plot of chunk hkk-aanestysalue"/> </p>
+<p><img src="figure/hkk-aanestysalue-1.png" alt="plot of chunk hkk-aanestysalue"/> </p>
 
 <hr/>
 
@@ -473,15 +484,20 @@ details <a href="https://github.com/avoindata/mml">here</a>.</p>
 ## [1] &quot;N62_p&quot; &quot;N62_s&quot; &quot;N62_t&quot; &quot;N62_v&quot;
 ## 
 ## $`Yleiskartta-1000`
-##  [1] &quot;AmpumaRaja&quot;          &quot;HallintoAlue&quot;        &quot;HallintoalueRaja&quot;   
-##  [4] &quot;KaasuJohto&quot;          &quot;KarttanimiPiste500&quot;  &quot;KarttanimiPiste1000&quot;
-##  [7] &quot;KorkeusAlue&quot;         &quot;KorkeusViiva500&quot;     &quot;KorkeusViiva1000&quot;   
-## [10] &quot;LentokenttaPiste&quot;    &quot;LiikenneAlue&quot;        &quot;MaaAlue&quot;            
-## [13] &quot;Maasto1Reuna&quot;        &quot;Maasto2Alue&quot;         &quot;MetsaRaja&quot;          
-## [16] &quot;PeltoAlue&quot;           &quot;RautatieViiva&quot;       &quot;SahkoLinja&quot;         
-## [19] &quot;SuojaAlue&quot;           &quot;SuojametsaRaja&quot;      &quot;SuojeluAlue&quot;        
-## [22] &quot;TaajamaAlue&quot;         &quot;TaajamaPiste&quot;        &quot;TieViiva&quot;           
-## [25] &quot;VesiAlue&quot;            &quot;VesiViiva&quot;          
+##  [1] &quot;AmpumaRaja&quot;             &quot;HallintoAlue&quot;          
+##  [3] &quot;HallintoAlue_DataFrame&quot; &quot;HallintoalueRaja&quot;      
+##  [5] &quot;KaasuJohto&quot;             &quot;KarttanimiPiste500&quot;    
+##  [7] &quot;KarttanimiPiste1000&quot;    &quot;KorkeusAlue&quot;           
+##  [9] &quot;KorkeusViiva500&quot;        &quot;KorkeusViiva1000&quot;      
+## [11] &quot;LentokenttaPiste&quot;       &quot;LiikenneAlue&quot;          
+## [13] &quot;MaaAlue&quot;                &quot;Maasto1Reuna&quot;          
+## [15] &quot;Maasto2Alue&quot;            &quot;MetsaRaja&quot;             
+## [17] &quot;PeltoAlue&quot;              &quot;RautatieViiva&quot;         
+## [19] &quot;SahkoLinja&quot;             &quot;SuojaAlue&quot;             
+## [21] &quot;SuojametsaRaja&quot;         &quot;SuojeluAlue&quot;           
+## [23] &quot;TaajamaAlue&quot;            &quot;TaajamaPiste&quot;          
+## [25] &quot;TieViiva&quot;               &quot;VesiAlue&quot;              
+## [27] &quot;VesiViiva&quot;             
 ## 
 ## $`Yleiskartta-4500`
 ##  [1] &quot;HallintoAlue&quot;        &quot;HallintoalueRaja&quot;    &quot;KarttanimiPiste2000&quot;
@@ -555,7 +571,7 @@ spplot(sp.mml, zcol=&quot;COL&quot;, col.regions=rainbow(length(levels(sp.mml@da
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/MML_municipality.png" alt="plot of chunk MML_municipality"/> </p>
+<p><img src="figure/MML_municipality-1.png" alt="plot of chunk MML_municipality"/> </p>
 
 <hr/>
 
@@ -579,24 +595,24 @@ hit, and the raw output (varies depending on the service used).</p>
 unlist(gc1[1:2])
 </code></pre>
 
-<pre><code>##   lat   lon 
-## 60.17 24.94
+<pre><code>##      lat      lon 
+## 60.18856 24.91736
 </code></pre>
 
 <pre><code class="r">gc2 &lt;- get_geocode(&quot;Mannerheimintie 100, Helsinki&quot;, service=&quot;openstreetmap&quot;)
 unlist(gc2[1:2])
 </code></pre>
 
-<pre><code>##   lat   lon 
-## 60.19 24.92
+<pre><code>##      lat      lon 
+## 60.16924 24.93968
 </code></pre>
 
 <pre><code class="r">gc3 &lt;- get_geocode(&quot;Mannerheimintie 100, Helsinki&quot;, service=&quot;google&quot;)
 unlist(gc3[1:2])
 </code></pre>
 
-<pre><code>##   lat   lon 
-## 60.19 24.92
+<pre><code>##      lat      lon 
+## 60.18892 24.91747
 </code></pre>
 
 <hr/>
@@ -648,7 +664,7 @@ if (length(population) &gt; 0) {
 }
 </code></pre>
 
-<p><img src="figure/population-density-plot.png" alt="plot of chunk population-density-plot"/> </p>
+<p><img src="figure/population-density-plot-1.png" alt="plot of chunk population-density-plot"/> </p>
 
 <hr/>
 
@@ -665,14 +681,14 @@ source individually.</p>
 <pre><code>
 Kindly cite the gisfin R package as follows:
 
-  (C) Juuso Parkkinen, Leo Lahti, Joona Lehtomaki, Janne Aukia and
-  Jussi Jousimo 2014. gisfin R package
+  (C) Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo
+  and Janne Aukia 2014. gisfin R package
 
 A BibTeX entry for LaTeX users is
 
   @Misc{,
     title = {gisfin R package},
-    author = {Juuso Parkkinen and Leo Lahti and Joona Lehtomaki and Janne Aukia and Jussi Jousimo},
+    author = {Joona Lehtomaki and Juuso Parkkinen and Leo Lahti and Jussi Jousimo and Janne Aukia},
     year = {2014},
   }
 
@@ -687,30 +703,28 @@ https://github.com/rOpenGov/gisfin
 <pre><code class="r">sessionInfo()
 </code></pre>
 
-<pre><code>## R version 3.1.1 (2014-07-10)
-## Platform: x86_64-apple-darwin13.1.0 (64-bit)
+<pre><code>## R version 3.1.2 (2014-10-31)
+## Platform: x86_64-apple-darwin13.4.0 (64-bit)
 ## 
 ## locale:
-## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] devtools_1.5    ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30
-## [5] knitr_1.6       gisfin_0.9.16   rwfs_0.1.01     rgdal_0.9-1    
-## [9] sp_1.0-15      
+## [1] ggplot2_1.0.0   rgeos_0.3-4     maptools_0.8-30 knitr_1.8      
+## [5] gisfin_0.9.18   rgdal_0.8-16    sp_1.0-15      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
-##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
-##  [9] grid_3.1.1       gtable_0.1.2     httr_0.4         labeling_0.2    
-## [13] lattice_0.20-29  LearnBayes_2.15  MASS_7.3-33      Matrix_1.1-4    
-## [17] memoise_0.2.1    munsell_0.4.2    nlme_3.1-117     parallel_3.1.1  
-## [21] plyr_1.8.1       proto_0.3-10     raster_2.2-31    Rcpp_0.11.2     
-## [25] RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.14     scales_0.2.4    
-## [29] spdep_0.5-74     splines_3.1.1    stringr_0.6.2    tools_3.1.1     
-## [33] whisker_0.3-2    XML_3.98-1.1
+##  [1] boot_1.3-13      coda_0.16-1      colorspace_1.2-4 deldir_0.1-6    
+##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_1.0     
+##  [9] grid_3.1.2       gtable_0.1.2     labeling_0.3     lattice_0.20-29 
+## [13] LearnBayes_2.15  MASS_7.3-35      Matrix_1.1-4     munsell_0.4.2   
+## [17] nlme_3.1-118     parallel_3.1.2   plyr_1.8.1       proto_0.3-10    
+## [21] raster_2.3-12    Rcpp_0.11.3      RCurl_1.95-4.3   reshape2_1.4    
+## [25] rjson_0.2.14     scales_0.2.4     spdep_0.5-77     splines_3.1.2   
+## [29] stringr_0.6.2    tools_3.1.2      XML_3.98-1.1
 </code></pre>
 
 </body>

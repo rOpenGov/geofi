@@ -9,5 +9,3 @@ before_script:
 - ./travis-tool.sh install_r rgeos
 - ./travis-tool.sh install_r maptools
 - ./travis-tool.sh install_deps
-- ./travis-tool.sh github_package assertthat
-

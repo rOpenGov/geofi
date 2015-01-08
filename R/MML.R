@@ -29,6 +29,8 @@ get_louhos_storage_path <- function () {
   # Louhos data is stored in Github avoindata repo: 
   # https://github.com/avoindata/ which is 
   # mirrored on Datavaalit server
+  # and generated with scripts maintained at 
+  # https://github.com/avoindata/mml
   "http://www.datavaalit.fi/storage/avoindata/"
 }
 

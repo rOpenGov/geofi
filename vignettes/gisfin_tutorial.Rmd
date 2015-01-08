@@ -3,14 +3,6 @@
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
 
-<!--
-Joissakin esimerkeissa tarvittavat riippuvuudet 
-  <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
-  <a href="http://freeglut.sourceforge.net/">freeglut</a>, 
-	<a href="http://xmlsoft.org/downloads.html">XML</a>, 
-	<a href="http://trac.osgeo.org/geos">GEOS</a> ja 
-	<a href="http://trac.osgeo.org/proj">PROJ.4</a>. 
--->
 
 ```{r knit, eval=FALSE, echo=FALSE}
 # How to knit this document into .md and .html
@@ -120,6 +112,15 @@ __openSUSE__
 sudo zypper --non-interactive in libgdal-devel libproj-devel
 ```
 
+### Additional dependencies
+
+These may be needed:
+  <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
+  <a href="http://freeglut.sourceforge.net/">freeglut</a>, 
+  <a href="http://xmlsoft.org/downloads.html">XML</a>, 
+	<a href="http://trac.osgeo.org/geos">GEOS</a> and
+	<a href="http://trac.osgeo.org/proj">PROJ.4</a>.
+
 ### Installing the package
 
 Release version for general users:
@@ -191,14 +192,14 @@ frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with
 # Retrieve center points
 sp.suuralue.piste <- get_helsinki_aluejakokartat(map.specifier="suuralue_piste")
 # Get data frames
-df.suuralue <- sp2df(sp.suuralue, "Name")
-df.suuralue.piste <- sp2df(sp.suuralue.piste, "Name")
+df.suuralue <- sp2df(sp.suuralue)
+df.suuralue.piste <- sp2df(sp.suuralue.piste)
 # Set map theme
 library(ggplot2)
 theme_set(get_theme_map())
 # Plot regions, add labels using the points data
-ggplot(df.suuralue, aes(x=long, y=lat)) + geom_polygon(aes(fill=COL, 
-                                                           group=Name)) + 
+ggplot(df.suuralue, aes(x=long, y=lat)) + 
+  geom_polygon(aes(fill=COL, group=Name)) + 
   geom_text(data=df.suuralue.piste, aes(label=Name)) + 
   theme(legend.position="none")
 ```

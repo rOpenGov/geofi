@@ -3,14 +3,6 @@
 %\VignetteIndexEntry{An R Markdown Vignette made with knitr}
 -->
 
-<!--
-Joissakin esimerkeissa tarvittavat riippuvuudet 
-  <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
-  <a href="http://freeglut.sourceforge.net/">freeglut</a>, 
-	<a href="http://xmlsoft.org/downloads.html">XML</a>, 
-	<a href="http://trac.osgeo.org/geos">GEOS</a> ja 
-	<a href="http://trac.osgeo.org/proj">PROJ.4</a>. 
--->
 
 
 
@@ -111,6 +103,15 @@ __openSUSE__
 sudo zypper --non-interactive in libgdal-devel libproj-devel
 ```
 
+### Additional dependencies
+
+These may be needed:
+  <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>, 
+  <a href="http://freeglut.sourceforge.net/">freeglut</a>, 
+  <a href="http://xmlsoft.org/downloads.html">XML</a>, 
+	<a href="http://trac.osgeo.org/geos">GEOS</a> and
+	<a href="http://trac.osgeo.org/proj">PROJ.4</a>.
+
 ### Installing the package
 
 Release version for general users:
@@ -171,7 +172,7 @@ sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue")
 spplot(sp.suuralue, zcol="Name")
 ```
 
-![plot of chunk hkk-suuralue1](figure/hkk-suuralue1.png) 
+![plot of chunk hkk-suuralue1](figure/hkk-suuralue1-1.png) 
 
 Function `generate_map_colours()` allows nice region colouring separable 
 adjacent regions. This is used here with the `rainbow()` colour scale to plot 
@@ -185,7 +186,7 @@ spplot(sp.suuralue, zcol="COL",
        colorkey=FALSE)
 ```
 
-![plot of chunk hkk-suuralue2](figure/hkk-suuralue2.png) 
+![plot of chunk hkk-suuralue2](figure/hkk-suuralue2-1.png) 
 
 ### Plot with ggplot2
 
@@ -199,19 +200,19 @@ frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with
 # Retrieve center points
 sp.suuralue.piste <- get_helsinki_aluejakokartat(map.specifier="suuralue_piste")
 # Get data frames
-df.suuralue <- sp2df(sp.suuralue, "Name")
-df.suuralue.piste <- sp2df(sp.suuralue.piste, "Name")
+df.suuralue <- sp2df(sp.suuralue)
+df.suuralue.piste <- sp2df(sp.suuralue.piste)
 # Set map theme
 library(ggplot2)
 theme_set(get_theme_map())
 # Plot regions, add labels using the points data
-ggplot(df.suuralue, aes(x=long, y=lat)) + geom_polygon(aes(fill=COL, 
-                                                           group=Name)) + 
+ggplot(df.suuralue, aes(x=long, y=lat)) + 
+  geom_polygon(aes(fill=COL, group=Name)) + 
   geom_text(data=df.suuralue.piste, aes(label=Name)) + 
   theme(legend.position="none")
 ```
 
-![plot of chunk hkk-suuralue3](figure/hkk-suuralue3.png) 
+![plot of chunk hkk-suuralue3](figure/hkk-suuralue3-1.png) 
 
 ### Plot election districts
 
@@ -227,7 +228,7 @@ spplot(sp.aanestys, zcol="KUNTA",
        colorkey=FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](figure/hkk-aanestysalue.png) 
+![plot of chunk hkk-aanestysalue](figure/hkk-aanestysalue-1.png) 
 
 ----
 
@@ -298,15 +299,20 @@ list_mml_datasets()
 ## [1] "N62_p" "N62_s" "N62_t" "N62_v"
 ## 
 ## $`Yleiskartta-1000`
-##  [1] "AmpumaRaja"          "HallintoAlue"        "HallintoalueRaja"   
-##  [4] "KaasuJohto"          "KarttanimiPiste500"  "KarttanimiPiste1000"
-##  [7] "KorkeusAlue"         "KorkeusViiva500"     "KorkeusViiva1000"   
-## [10] "LentokenttaPiste"    "LiikenneAlue"        "MaaAlue"            
-## [13] "Maasto1Reuna"        "Maasto2Alue"         "MetsaRaja"          
-## [16] "PeltoAlue"           "RautatieViiva"       "SahkoLinja"         
-## [19] "SuojaAlue"           "SuojametsaRaja"      "SuojeluAlue"        
-## [22] "TaajamaAlue"         "TaajamaPiste"        "TieViiva"           
-## [25] "VesiAlue"            "VesiViiva"          
+##  [1] "AmpumaRaja"             "HallintoAlue"          
+##  [3] "HallintoAlue_DataFrame" "HallintoalueRaja"      
+##  [5] "KaasuJohto"             "KarttanimiPiste500"    
+##  [7] "KarttanimiPiste1000"    "KorkeusAlue"           
+##  [9] "KorkeusViiva500"        "KorkeusViiva1000"      
+## [11] "LentokenttaPiste"       "LiikenneAlue"          
+## [13] "MaaAlue"                "Maasto1Reuna"          
+## [15] "Maasto2Alue"            "MetsaRaja"             
+## [17] "PeltoAlue"              "RautatieViiva"         
+## [19] "SahkoLinja"             "SuojaAlue"             
+## [21] "SuojametsaRaja"         "SuojeluAlue"           
+## [23] "TaajamaAlue"            "TaajamaPiste"          
+## [25] "TieViiva"               "VesiAlue"              
+## [27] "VesiViiva"             
 ## 
 ## $`Yleiskartta-4500`
 ##  [1] "HallintoAlue"        "HallintoalueRaja"    "KarttanimiPiste2000"
@@ -386,7 +392,7 @@ spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))),
        colorkey=FALSE)
 ```
 
-![plot of chunk MML_municipality](figure/MML_municipality.png) 
+![plot of chunk MML_municipality](figure/MML_municipality-1.png) 
 
 ----
 
@@ -412,8 +418,8 @@ unlist(gc1[1:2])
 ```
 
 ```
-##   lat   lon 
-## 60.17 24.94
+##      lat      lon 
+## 60.18856 24.91736
 ```
 
 ```r
@@ -422,8 +428,8 @@ unlist(gc2[1:2])
 ```
 
 ```
-##   lat   lon 
-## 60.19 24.92
+##      lat      lon 
+## 60.16924 24.93968
 ```
 
 ```r
@@ -432,8 +438,8 @@ unlist(gc3[1:2])
 ```
 
 ```
-##   lat   lon 
-## 60.19 24.92
+##      lat      lon 
+## 60.18892 24.91747
 ```
 
 ----
@@ -493,7 +499,7 @@ if (length(population) > 0) {
 }
 ```
 
-![plot of chunk population-density-plot](figure/population-density-plot.png) 
+![plot of chunk population-density-plot](figure/population-density-plot-1.png) 
 
 ----
 
@@ -513,14 +519,14 @@ citation("gisfin")
 
 Kindly cite the gisfin R package as follows:
 
-  (C) Juuso Parkkinen, Leo Lahti, Joona Lehtomaki, Janne Aukia and
-  Jussi Jousimo 2014. gisfin R package
+  (C) Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo
+  and Janne Aukia 2014. gisfin R package
 
 A BibTeX entry for LaTeX users is
 
   @Misc{,
     title = {gisfin R package},
-    author = {Juuso Parkkinen and Leo Lahti and Joona Lehtomaki and Janne Aukia and Jussi Jousimo},
+    author = {Joona Lehtomaki and Juuso Parkkinen and Leo Lahti and Jussi Jousimo and Janne Aukia},
     year = {2014},
   }
 
@@ -540,29 +546,27 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.1 (2014-07-10)
-## Platform: x86_64-apple-darwin13.1.0 (64-bit)
+## R version 3.1.2 (2014-10-31)
+## Platform: x86_64-apple-darwin13.4.0 (64-bit)
 ## 
 ## locale:
-## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] devtools_1.5    ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30
-## [5] knitr_1.6       gisfin_0.9.16   rwfs_0.1.01     rgdal_0.9-1    
-## [9] sp_1.0-15      
+## [1] ggplot2_1.0.0   rgeos_0.3-4     maptools_0.8-30 knitr_1.8      
+## [5] gisfin_0.9.18   rgdal_0.8-16    sp_1.0-15      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
-##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
-##  [9] grid_3.1.1       gtable_0.1.2     httr_0.4         labeling_0.2    
-## [13] lattice_0.20-29  LearnBayes_2.15  MASS_7.3-33      Matrix_1.1-4    
-## [17] memoise_0.2.1    munsell_0.4.2    nlme_3.1-117     parallel_3.1.1  
-## [21] plyr_1.8.1       proto_0.3-10     raster_2.2-31    Rcpp_0.11.2     
-## [25] RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.14     scales_0.2.4    
-## [29] spdep_0.5-74     splines_3.1.1    stringr_0.6.2    tools_3.1.1     
-## [33] whisker_0.3-2    XML_3.98-1.1
+##  [1] boot_1.3-13      coda_0.16-1      colorspace_1.2-4 deldir_0.1-6    
+##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_1.0     
+##  [9] grid_3.1.2       gtable_0.1.2     labeling_0.3     lattice_0.20-29 
+## [13] LearnBayes_2.15  MASS_7.3-35      Matrix_1.1-4     munsell_0.4.2   
+## [17] nlme_3.1-118     parallel_3.1.2   plyr_1.8.1       proto_0.3-10    
+## [21] raster_2.3-12    Rcpp_0.11.3      RCurl_1.95-4.3   reshape2_1.4    
+## [25] rjson_0.2.14     scales_0.2.4     spdep_0.5-77     splines_3.1.2   
+## [29] stringr_0.6.2    tools_3.1.2      XML_3.98-1.1
 ```
 

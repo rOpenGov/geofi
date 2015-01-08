@@ -1,7 +1,7 @@
 # This file is a part of the helsinki package (http://github.com/rOpenGov/helsinki)
 # in association with the rOpenGov project (ropengov.github.io)
 
-# Copyright (C) 2010-2014 Leo Lahti and Juuso Parkkinen / Louhos <louhos.github.com>. 
+# Copyright (C) 2010-2015 Leo Lahti and Juuso Parkkinen / Louhos <louhos.github.com>. 
 # All rights reserved.
 
 # This program is open source software; you can redistribute it and/or modify 
@@ -13,25 +13,30 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
-#' Get Louhos storage path.
-#' 
-#' Get url for Louhos storage. It is used to store some large data files.
+#' ropengov_storage_path
 #'
+#' Arguments:
+#'   ... Arguments to pass
+#'
+#' Return:
 #' @return URL for Louhos data
 #'
+#' @examples url <- ropengov_storage_path()
+#'
 #' @export
-#' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
-#' @references See citation("gisfin") 
-#' @examples url <- get_louhos_storage_path()
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{louhos@@googlegroups.com}
 #' @keywords utilities
-
-get_louhos_storage_path <- function () {
+ropengov_storage_path <- function () {
   # Louhos data is stored in Github avoindata repo: 
   # https://github.com/avoindata/ which is 
   # mirrored on Datavaalit server
-  # and generated with scripts maintained at 
-  # https://github.com/avoindata/mml
-  "http://www.datavaalit.fi/storage/avoindata/"
+  #"http://www.datavaalit.fi/storage/avoindata/"
+
+  # OKF Finland Server is now running daily cron jobs to
+  # update the avoindata Github repository
+  "http://data.okf.fi/ropengov/avoindata/"
 }
 
 
@@ -52,7 +57,7 @@ get_louhos_storage_path <- function () {
 
 list_mml_datasets <- function (verbose=TRUE) {
 
-  url <- paste(get_louhos_storage_path(), "mml/rdata/", sep = "")
+  url <- paste(ropengov_storage_path(), "mml/rdata/", sep = "")
 
   if (verbose)
     message(paste("Retrieving data set listing from ", url))
@@ -103,7 +108,7 @@ get_mml <- function(map.id, data.id, verbose = TRUE) {
   # IN CONTRAST TO INTENDED OUTPUT!!!
   sp <- NULL	
 
-  url <- paste(get_louhos_storage_path(), "mml/rdata/", sep = "")
+  url <- paste(ropengov_storage_path(), "mml/rdata/", sep = "")
   filepath <- paste(url, map.id, "/", data.id, ".RData", sep = "")
   if (verbose)
     message("Loading ", filepath, ". (C) MML 2013. Converted to RData shape object by Louhos. For more information, see https://github.com/avoindata/mml/")

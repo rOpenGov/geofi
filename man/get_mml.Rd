@@ -23,7 +23,7 @@ To browse for available RData, run list_mml_datasets() or see https://github.com
 }
 \examples{
 datasets <- list_mml_datasets();
-          map.id = names(datasets)[[1]];
+          map.id <- names(datasets)[[4]];
           data.id <- datasets[[map.id]][[1]];
           sp <- get_mml(map.id, data.id)
 }

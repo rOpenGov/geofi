@@ -127,7 +127,7 @@ Development version for developers:
 ```r
 install.packages("devtools")
 library(devtools)
-install_github("gisfin", "ropengov")
+install_github("ropengov/gisfin")
 ```
 
 Load package.
@@ -273,22 +273,6 @@ list_mml_datasets()
 ```
 
 ```
-## $`1_milj_Shape_etrs_shape`
-##  [1] "AVI1_l"   "AVI1_p"   "airport"  "asemat"   "cityp"    "coast_l" 
-##  [7] "coast_p"  "dcont_l"  "dcont_p"  "forest"   "hcont_l"  "hcont_p" 
-## [13] "hpoint"   "kunta1_l" "kunta1_p" "lake_l"   "lake_p"   "maaku1_l"
-## [19] "maaku1_p" "namep"    "pelto"    "railway"  "river"    "rivera_l"
-## [25] "rivera_p" "road"     "suot"     "taajama" 
-## 
-## $`4_5_milj_shape_etrs-tm35fin`
-##  [1] "AVI1_l"   "AVI1_p"   "AVI4_l"   "AVI4_p"   "airport"  "asemat"  
-##  [7] "cityp"    "coast"    "coast_l"  "coast_p"  "dcont_l"  "dcont_p" 
-## [13] "forest"   "hcont_l"  "hcont_p"  "hpoint"   "kunta1_l" "kunta1_p"
-## [19] "kunta4_l" "kunta4_p" "lake"     "lake_l"   "lake_p"   "maaku1_l"
-## [25] "maaku1_p" "maaku4_l" "maaku4_p" "namep"    "pelto"    "railway" 
-## [31] "rajamuu"  "river"    "rivera_l" "rivera_p" "road"     "suot"    
-## [37] "taajama" 
-## 
 ## $`2012`
 ## character(0)
 ## 
@@ -335,48 +319,48 @@ head(as.data.frame(sp.mml))
 ```
 
 ```
-##   Kohderyhma Kohdeluokk Enklaavi AVI Maakunta Kunta
-## 0         71      84200        1   1       01   078
-## 1         71      84200        1   1       01   149
-## 2         71      84200        1   7       21   318
-## 3         71      84200        1   1       01   710
-## 4         71      84200        1   1       01   235
-## 5         71      84200        1   7       21   062
-##                            AVI_ni1
-## 0 Etelä-Suomen aluehallintovirasto
-## 1 Etelä-Suomen aluehallintovirasto
-## 2       Ahvenanmaan valtionvirasto
-## 3 Etelä-Suomen aluehallintovirasto
-## 4 Etelä-Suomen aluehallintovirasto
-## 5       Ahvenanmaan valtionvirasto
-##                                    AVI_ni2            Maaku_ni1
-## 0 Regionförvaltningsverket i Södra Finland              Uusimaa
-## 1 Regionförvaltningsverket i Södra Finland              Uusimaa
-## 2              Statens ämbetsverk på Åland Ahvenanmaan maakunta
-## 3 Regionförvaltningsverket i Södra Finland              Uusimaa
-## 4 Regionförvaltningsverket i Södra Finland              Uusimaa
-## 5              Statens ämbetsverk på Åland Ahvenanmaan maakunta
-##          Maaku_ni2  Kunta_ni1 Kunta_ni2 Kieli_ni1 Kieli_ni2
-## 0           Nyland      Hanko     Hangö     Suomi    Ruotsi
-## 1           Nyland       Ingå     Inkoo    Ruotsi     Suomi
-## 2 Landskapet Åland      Kökar       N_A    Ruotsi       N_A
-## 3           Nyland   Raseborg Raasepori    Ruotsi     Suomi
-## 4           Nyland Kauniainen Grankulla     Suomi    Ruotsi
-## 5 Landskapet Åland      Föglö       N_A    Ruotsi       N_A
-##                             AVI.FI Kieli.FI          Maakunta.FI
-## 0 Etelä-Suomen aluehallintovirasto    Suomi              Uusimaa
-## 1 Etelä-Suomen aluehallintovirasto   Ruotsi              Uusimaa
-## 2       Ahvenanmaan valtionvirasto   Ruotsi Ahvenanmaan maakunta
-## 3 Etelä-Suomen aluehallintovirasto   Ruotsi              Uusimaa
-## 4 Etelä-Suomen aluehallintovirasto    Suomi              Uusimaa
-## 5       Ahvenanmaan valtionvirasto   Ruotsi Ahvenanmaan maakunta
+##     Kohderyhma Kohdeluokk Enklaavi AVI Maakunta Kunta
+## 005         71      84200        1   4       14   005
+## 009         71      84200        1   5       17   009
+## 010         71      84200        1   4       14   010
+## 016         71      84200        1   1       07   016
+## 018         71      84200        1   1       01   018
+## 019         71      84200        1   2       02   019
+##                                       AVI_ni1
+## 005 Länsi- ja Sisä-Suomen aluehallintovirasto
+## 009        Pohjois-Suomen aluehallintovirasto
+## 010 Länsi- ja Sisä-Suomen aluehallintovirasto
+## 016          Etelä-Suomen aluehallintovirasto
+## 018          Etelä-Suomen aluehallintovirasto
+## 019        Lounais-Suomen aluehallintovirasto
+##                                                AVI_ni2         Maaku_ni1
+## 005 Regionförvaltningsverket i Västra och Inre Finland   Etelä-Pohjanmaa
+## 009           Regionförvaltningsverket i Norra Finland Pohjois-Pohjanmaa
+## 010 Regionförvaltningsverket i Västra och Inre Finland   Etelä-Pohjanmaa
+## 016           Regionförvaltningsverket i Södra Finland       Päijät-Häme
+## 018           Regionförvaltningsverket i Södra Finland           Uusimaa
+## 019       Regionförvaltningsverket i Sydvästra Finland   Varsinais-Suomi
+##               Maaku_ni2 Kunta_ni1 Kunta_ni2 Kieli_ni1 Kieli_ni2
+## 005   Södra Österbotten  Alajärvi       N_A     Suomi       N_A
+## 009   Norra Österbotten Alavieska       N_A     Suomi       N_A
+## 010   Södra Österbotten    Alavus       N_A     Suomi       N_A
+## 016 Päijänne-Tavastland  Asikkala       N_A     Suomi       N_A
+## 018              Nyland    Askola       N_A     Suomi       N_A
+## 019   Egentliga Finland      Aura       N_A     Suomi       N_A
+##                                        AVI.FI Kieli.FI       Maakunta.FI
+## 005 Länsi- ja Sisä-Suomen aluehallintovirasto    Suomi  EtelÃ¤-Pohjanmaa
+## 009        Pohjois-Suomen aluehallintovirasto    Suomi Pohjois-Pohjanmaa
+## 010 Länsi- ja Sisä-Suomen aluehallintovirasto    Suomi  EtelÃ¤-Pohjanmaa
+## 016          Etelä-Suomen aluehallintovirasto    Suomi    PÃ¤ijÃ¤t-HÃ¤me
+## 018          Etelä-Suomen aluehallintovirasto    Suomi           Uusimaa
+## 019        Lounais-Suomen aluehallintovirasto    Suomi   Varsinais-Suomi
 ##     Kunta.FI
-## 0      Hanko
-## 1      Inkoo
-## 2      Kökar
-## 3  Raasepori
-## 4 Kauniainen
-## 5      Föglö
+## 005     <NA>
+## 009     <NA>
+## 010     <NA>
+## 016     <NA>
+## 018     <NA>
+## 019     <NA>
 ```
 
 Plot municipalities (kunnat) with `spplot()`, using colours from 
@@ -483,7 +467,11 @@ if (length(layers) > 0) layers
 ##  [9] "vaestoruutu:vaki2013_1km"    "vaestoruutu:vaki2013_1km_kp"
 ## [11] "vaestoruutu:vaki2005_5km"    "vaestoruutu:vaki2010_5km"   
 ## [13] "vaestoruutu:vaki2011_5km"    "vaestoruutu:vaki2012_5km"   
-## [15] "vaestoruutu:vaki2013_5km"
+## [15] "vaestoruutu:vaki2013_5km"   
+## attr(,"driver")
+## [1] "WFS"
+## attr(,"nlayers")
+## [1] 15
 ```
 
 Get population density in year 2005 on a 5 km x 5 km grid, convert to 
@@ -498,8 +486,6 @@ if (length(population) > 0) {
   plot(population[["vaesto"]])
 }
 ```
-
-![plot of chunk population-density-plot](figure/population-density-plot-1.png) 
 
 ----
 
@@ -546,27 +532,32 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.2 (2014-10-31)
-## Platform: x86_64-apple-darwin13.4.0 (64-bit)
+## R version 3.1.1 (2014-07-10)
+## Platform: x86_64-suse-linux-gnu (64-bit)
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+##  [1] LC_CTYPE=en_US.UTF-8      LC_NUMERIC=C             
+##  [3] LC_TIME=en_US.utf8        LC_COLLATE=en_US.utf8    
+##  [5] LC_MONETARY=en_US.utf8    LC_MESSAGES=en_US.utf8   
+##  [7] LC_PAPER=en_US.utf8       LC_NAME=C                
+##  [9] LC_ADDRESS=C              LC_TELEPHONE=C           
+## [11] LC_MEASUREMENT=en_US.utf8 LC_IDENTIFICATION=C      
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_1.0.0   rgeos_0.3-4     maptools_0.8-30 knitr_1.8      
-## [5] gisfin_0.9.18   rgdal_0.8-16    sp_1.0-15      
+## [1] ggplot2_1.0.0   rgeos_0.3-8     maptools_0.8-30 gisfin_0.9.18  
+## [5] rgdal_0.9-1     sp_1.0-17       knitr_1.8       devtools_1.6.1 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-13      coda_0.16-1      colorspace_1.2-4 deldir_0.1-6    
-##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_1.0     
-##  [9] grid_3.1.2       gtable_0.1.2     labeling_0.3     lattice_0.20-29 
-## [13] LearnBayes_2.15  MASS_7.3-35      Matrix_1.1-4     munsell_0.4.2   
-## [17] nlme_3.1-118     parallel_3.1.2   plyr_1.8.1       proto_0.3-10    
-## [21] raster_2.3-12    Rcpp_0.11.3      RCurl_1.95-4.3   reshape2_1.4    
-## [25] rjson_0.2.14     scales_0.2.4     spdep_0.5-77     splines_3.1.2   
-## [29] stringr_0.6.2    tools_3.1.2      XML_3.98-1.1
+##  [1] bitops_1.0-6     boot_1.3-11      coda_0.16-1      colorspace_1.2-4
+##  [5] deldir_0.1-7     digest_0.6.8     evaluate_0.5.5   foreign_0.8-62  
+##  [9] formatR_1.0      grid_3.1.1       gtable_0.1.2     labeling_0.3    
+## [13] lattice_0.20-29  LearnBayes_2.15  MASS_7.3-37      Matrix_1.1-4    
+## [17] munsell_0.4.2    nlme_3.1-119     plyr_1.8.1       proto_0.3-10    
+## [21] raster_2.3-12    Rcpp_0.11.3      RCurl_1.95-4.5   reshape2_1.4.1  
+## [25] rjson_0.2.15     scales_0.2.4     spdep_0.5-82     splines_3.1.1   
+## [29] stringr_0.6.2    tools_3.1.1      XML_3.98-1.1
 ```
 

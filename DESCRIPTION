@@ -10,7 +10,8 @@ License: BSD_2_clause + file LICENSE
 Depends:
     R (>= 3.0.1),
     rgdal,
-    sp
+    sp,
+    R6
 Imports:
     rjson,
     RCurl,
@@ -18,11 +19,11 @@ Imports:
     ggplot2,
     methods,
     raster,
-    XML
+    XML,
+    digest
 Suggests:
     rgeos,
-    maptools,
-    R6
+    maptools
 URL: https://github.com/ropengov/gisfin
 LazyLoad: yes
 Collate:

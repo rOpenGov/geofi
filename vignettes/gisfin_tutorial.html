@@ -5,18 +5,6 @@
 
 <title>gisfin - tutorial</title>
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
-  }
-};
-</script>
-
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
    pre .operator,
@@ -57,6 +45,9 @@ var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/<
 hljs.initHighlightingOnLoad();
 </script>
 
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <style type="text/css">
@@ -108,9 +99,7 @@ a:visited {
 pre, img {
   max-width: 100%;
 }
-pre {
-  overflow-x: auto;
-}
+
 pre code {
    display: block; padding: 0.5em;
 }
@@ -332,7 +321,7 @@ corresponding rgdal package from the same page (v. 0.8.16 in July 2014). </p>
 
 <pre><code class="r">install.packages(&quot;devtools&quot;)
 library(devtools)
-install_github(&quot;gisfin&quot;, &quot;ropengov&quot;)
+install_github(&quot;ropengov/gisfin&quot;)
 </code></pre>
 
 <p>Load package.</p>
@@ -370,7 +359,7 @@ with <code>spplot()</code>.</p>
 spplot(sp.suuralue, zcol=&quot;Name&quot;)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue1-1.png" alt="plot of chunk hkk-suuralue1"/> </p>
+<p><img src="figure/hkk-suuralue1.png" alt="plot of chunk hkk-suuralue1"/> </p>
 
 <p>Function <code>generate_map_colours()</code> allows nice region colouring separable 
 adjacent regions. This is used here with the <code>rainbow()</code> colour scale to plot 
@@ -382,7 +371,7 @@ spplot(sp.suuralue, zcol=&quot;COL&quot;,
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue2-1.png" alt="plot of chunk hkk-suuralue2"/> </p>
+<p><img src="figure/hkk-suuralue2.png" alt="plot of chunk hkk-suuralue2"/> </p>
 
 <h3>Plot with ggplot2</h3>
 
@@ -406,7 +395,7 @@ ggplot(df.suuralue, aes(x=long, y=lat)) +
   theme(legend.position=&quot;none&quot;)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue3-1.png" alt="plot of chunk hkk-suuralue3"/> </p>
+<p><img src="figure/hkk-suuralue3.png" alt="plot of chunk hkk-suuralue3"/> </p>
 
 <h3>Plot election districts</h3>
 
@@ -420,7 +409,7 @@ spplot(sp.aanestys, zcol=&quot;KUNTA&quot;,
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/hkk-aanestysalue-1.png" alt="plot of chunk hkk-aanestysalue"/> </p>
+<p><img src="figure/hkk-aanestysalue.png" alt="plot of chunk hkk-aanestysalue"/> </p>
 
 <hr/>
 
@@ -458,23 +447,7 @@ details <a href="https://github.com/avoindata/mml">here</a>.</p>
 <pre><code class="r">list_mml_datasets()
 </code></pre>
 
-<pre><code>## $`1_milj_Shape_etrs_shape`
-##  [1] &quot;AVI1_l&quot;   &quot;AVI1_p&quot;   &quot;airport&quot;  &quot;asemat&quot;   &quot;cityp&quot;    &quot;coast_l&quot; 
-##  [7] &quot;coast_p&quot;  &quot;dcont_l&quot;  &quot;dcont_p&quot;  &quot;forest&quot;   &quot;hcont_l&quot;  &quot;hcont_p&quot; 
-## [13] &quot;hpoint&quot;   &quot;kunta1_l&quot; &quot;kunta1_p&quot; &quot;lake_l&quot;   &quot;lake_p&quot;   &quot;maaku1_l&quot;
-## [19] &quot;maaku1_p&quot; &quot;namep&quot;    &quot;pelto&quot;    &quot;railway&quot;  &quot;river&quot;    &quot;rivera_l&quot;
-## [25] &quot;rivera_p&quot; &quot;road&quot;     &quot;suot&quot;     &quot;taajama&quot; 
-## 
-## $`4_5_milj_shape_etrs-tm35fin`
-##  [1] &quot;AVI1_l&quot;   &quot;AVI1_p&quot;   &quot;AVI4_l&quot;   &quot;AVI4_p&quot;   &quot;airport&quot;  &quot;asemat&quot;  
-##  [7] &quot;cityp&quot;    &quot;coast&quot;    &quot;coast_l&quot;  &quot;coast_p&quot;  &quot;dcont_l&quot;  &quot;dcont_p&quot; 
-## [13] &quot;forest&quot;   &quot;hcont_l&quot;  &quot;hcont_p&quot;  &quot;hpoint&quot;   &quot;kunta1_l&quot; &quot;kunta1_p&quot;
-## [19] &quot;kunta4_l&quot; &quot;kunta4_p&quot; &quot;lake&quot;     &quot;lake_l&quot;   &quot;lake_p&quot;   &quot;maaku1_l&quot;
-## [25] &quot;maaku1_p&quot; &quot;maaku4_l&quot; &quot;maaku4_p&quot; &quot;namep&quot;    &quot;pelto&quot;    &quot;railway&quot; 
-## [31] &quot;rajamuu&quot;  &quot;river&quot;    &quot;rivera_l&quot; &quot;rivera_p&quot; &quot;road&quot;     &quot;suot&quot;    
-## [37] &quot;taajama&quot; 
-## 
-## $`2012`
+<pre><code>## $`2012`
 ## character(0)
 ## 
 ## $`Maastotietokanta-tiesto1`
@@ -517,48 +490,48 @@ sp.mml &lt;- get_mml(map.id=&quot;Yleiskartta-4500&quot;, data.id=&quot;Hallinto
 head(as.data.frame(sp.mml))
 </code></pre>
 
-<pre><code>##   Kohderyhma Kohdeluokk Enklaavi AVI Maakunta Kunta
-## 0         71      84200        1   1       01   078
-## 1         71      84200        1   1       01   149
-## 2         71      84200        1   7       21   318
-## 3         71      84200        1   1       01   710
-## 4         71      84200        1   1       01   235
-## 5         71      84200        1   7       21   062
-##                            AVI_ni1
-## 0 Etelä-Suomen aluehallintovirasto
-## 1 Etelä-Suomen aluehallintovirasto
-## 2       Ahvenanmaan valtionvirasto
-## 3 Etelä-Suomen aluehallintovirasto
-## 4 Etelä-Suomen aluehallintovirasto
-## 5       Ahvenanmaan valtionvirasto
-##                                    AVI_ni2            Maaku_ni1
-## 0 Regionförvaltningsverket i Södra Finland              Uusimaa
-## 1 Regionförvaltningsverket i Södra Finland              Uusimaa
-## 2              Statens ämbetsverk på Åland Ahvenanmaan maakunta
-## 3 Regionförvaltningsverket i Södra Finland              Uusimaa
-## 4 Regionförvaltningsverket i Södra Finland              Uusimaa
-## 5              Statens ämbetsverk på Åland Ahvenanmaan maakunta
-##          Maaku_ni2  Kunta_ni1 Kunta_ni2 Kieli_ni1 Kieli_ni2
-## 0           Nyland      Hanko     Hangö     Suomi    Ruotsi
-## 1           Nyland       Ingå     Inkoo    Ruotsi     Suomi
-## 2 Landskapet Åland      Kökar       N_A    Ruotsi       N_A
-## 3           Nyland   Raseborg Raasepori    Ruotsi     Suomi
-## 4           Nyland Kauniainen Grankulla     Suomi    Ruotsi
-## 5 Landskapet Åland      Föglö       N_A    Ruotsi       N_A
-##                             AVI.FI Kieli.FI          Maakunta.FI
-## 0 Etelä-Suomen aluehallintovirasto    Suomi              Uusimaa
-## 1 Etelä-Suomen aluehallintovirasto   Ruotsi              Uusimaa
-## 2       Ahvenanmaan valtionvirasto   Ruotsi Ahvenanmaan maakunta
-## 3 Etelä-Suomen aluehallintovirasto   Ruotsi              Uusimaa
-## 4 Etelä-Suomen aluehallintovirasto    Suomi              Uusimaa
-## 5       Ahvenanmaan valtionvirasto   Ruotsi Ahvenanmaan maakunta
+<pre><code>##     Kohderyhma Kohdeluokk Enklaavi AVI Maakunta Kunta
+## 005         71      84200        1   4       14   005
+## 009         71      84200        1   5       17   009
+## 010         71      84200        1   4       14   010
+## 016         71      84200        1   1       07   016
+## 018         71      84200        1   1       01   018
+## 019         71      84200        1   2       02   019
+##                                       AVI_ni1
+## 005 Länsi- ja Sisä-Suomen aluehallintovirasto
+## 009        Pohjois-Suomen aluehallintovirasto
+## 010 Länsi- ja Sisä-Suomen aluehallintovirasto
+## 016          Etelä-Suomen aluehallintovirasto
+## 018          Etelä-Suomen aluehallintovirasto
+## 019        Lounais-Suomen aluehallintovirasto
+##                                                AVI_ni2         Maaku_ni1
+## 005 Regionförvaltningsverket i Västra och Inre Finland   Etelä-Pohjanmaa
+## 009           Regionförvaltningsverket i Norra Finland Pohjois-Pohjanmaa
+## 010 Regionförvaltningsverket i Västra och Inre Finland   Etelä-Pohjanmaa
+## 016           Regionförvaltningsverket i Södra Finland       Päijät-Häme
+## 018           Regionförvaltningsverket i Södra Finland           Uusimaa
+## 019       Regionförvaltningsverket i Sydvästra Finland   Varsinais-Suomi
+##               Maaku_ni2 Kunta_ni1 Kunta_ni2 Kieli_ni1 Kieli_ni2
+## 005   Södra Österbotten  Alajärvi       N_A     Suomi       N_A
+## 009   Norra Österbotten Alavieska       N_A     Suomi       N_A
+## 010   Södra Österbotten    Alavus       N_A     Suomi       N_A
+## 016 Päijänne-Tavastland  Asikkala       N_A     Suomi       N_A
+## 018              Nyland    Askola       N_A     Suomi       N_A
+## 019   Egentliga Finland      Aura       N_A     Suomi       N_A
+##                                        AVI.FI Kieli.FI       Maakunta.FI
+## 005 Länsi- ja Sisä-Suomen aluehallintovirasto    Suomi  EtelÃ¤-Pohjanmaa
+## 009        Pohjois-Suomen aluehallintovirasto    Suomi Pohjois-Pohjanmaa
+## 010 Länsi- ja Sisä-Suomen aluehallintovirasto    Suomi  EtelÃ¤-Pohjanmaa
+## 016          Etelä-Suomen aluehallintovirasto    Suomi    PÃ¤ijÃ¤t-HÃ¤me
+## 018          Etelä-Suomen aluehallintovirasto    Suomi           Uusimaa
+## 019        Lounais-Suomen aluehallintovirasto    Suomi   Varsinais-Suomi
 ##     Kunta.FI
-## 0      Hanko
-## 1      Inkoo
-## 2      Kökar
-## 3  Raasepori
-## 4 Kauniainen
-## 5      Föglö
+## 005     &lt;NA&gt;
+## 009     &lt;NA&gt;
+## 010     &lt;NA&gt;
+## 016     &lt;NA&gt;
+## 018     &lt;NA&gt;
+## 019     &lt;NA&gt;
 </code></pre>
 
 <p>Plot municipalities (kunnat) with <code>spplot()</code>, using colours from 
@@ -571,7 +544,7 @@ spplot(sp.mml, zcol=&quot;COL&quot;, col.regions=rainbow(length(levels(sp.mml@da
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/MML_municipality-1.png" alt="plot of chunk MML_municipality"/> </p>
+<p><img src="figure/MML_municipality.png" alt="plot of chunk MML_municipality"/> </p>
 
 <hr/>
 
@@ -595,24 +568,24 @@ hit, and the raw output (varies depending on the service used).</p>
 unlist(gc1[1:2])
 </code></pre>
 
-<pre><code>##      lat      lon 
-## 60.18856 24.91736
+<pre><code>##   lat   lon 
+## 60.19 24.92
 </code></pre>
 
 <pre><code class="r">gc2 &lt;- get_geocode(&quot;Mannerheimintie 100, Helsinki&quot;, service=&quot;openstreetmap&quot;)
 unlist(gc2[1:2])
 </code></pre>
 
-<pre><code>##      lat      lon 
-## 60.16924 24.93968
+<pre><code>##   lat   lon 
+## 60.17 24.94
 </code></pre>
 
 <pre><code class="r">gc3 &lt;- get_geocode(&quot;Mannerheimintie 100, Helsinki&quot;, service=&quot;google&quot;)
 unlist(gc3[1:2])
 </code></pre>
 
-<pre><code>##      lat      lon 
-## 60.18892 24.91747
+<pre><code>##   lat   lon 
+## 60.19 24.92
 </code></pre>
 
 <hr/>
@@ -638,8 +611,9 @@ unlist(gc3[1:2])
 <p>Retrieve a list of the available data sets for population density. In case the 
 service is unreachable, <code>character(0)</code> is returned.</p>
 
-<pre><code class="r">client &lt;- GeoStatFiWFSClient()
-layers &lt;- client$listPopulationLayers()
+<pre><code class="r">request &lt;- gisfin::GeoStatFiWFSRequest$new()$getPopulationLayers()
+client &lt;- gisfin::GeoStatFiWFSClient$new(request)
+layers &lt;- client$listLayers()
 if (length(layers) &gt; 0) layers
 </code></pre>
 
@@ -654,17 +628,19 @@ if (length(layers) &gt; 0) layers
 </code></pre>
 
 <p>Get population density in year 2005 on a 5 km x 5 km grid, convert to 
-RasterStack object and plot.</p>
+RasterStack object and plot on log scale.</p>
 
-<pre><code class="r">population &lt;- client$getPopulation(layers[11])
+<pre><code class="r">request$getPopulation(layers[11])
+client &lt;- gisfin::GeoStatFiWFSClient$new(request)
+population &lt;- client$getLayer(layers[11])
 if (length(population) &gt; 0) {
   x &lt;- sp::SpatialPixelsDataFrame(coordinates(population), population@data, proj4string=population@proj4string)
   population &lt;- raster::stack(x)
-  plot(population[[&quot;vaesto&quot;]])
+  plot(log(population[[&quot;vaesto&quot;]]))
 }
 </code></pre>
 
-<p><img src="figure/population-density-plot-1.png" alt="plot of chunk population-density-plot"/> </p>
+<p><img src="figure/population-density-plot.png" alt="plot of chunk population-density-plot"/> </p>
 
 <hr/>
 
@@ -703,28 +679,28 @@ https://github.com/rOpenGov/gisfin
 <pre><code class="r">sessionInfo()
 </code></pre>
 
-<pre><code>## R version 3.1.2 (2014-10-31)
-## Platform: x86_64-apple-darwin13.4.0 (64-bit)
+<pre><code>## R version 3.1.1 (2014-07-10)
+## Platform: x86_64-apple-darwin13.1.0 (64-bit)
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_1.0.0   rgeos_0.3-4     maptools_0.8-30 knitr_1.8      
-## [5] gisfin_0.9.18   rgdal_0.8-16    sp_1.0-15      
+## [1] ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30 knitr_1.6      
+## [5] raster_2.2-31   gisfin_0.9.19   rgdal_0.8-16    sp_1.0-15      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-13      coda_0.16-1      colorspace_1.2-4 deldir_0.1-6    
-##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_1.0     
-##  [9] grid_3.1.2       gtable_0.1.2     labeling_0.3     lattice_0.20-29 
-## [13] LearnBayes_2.15  MASS_7.3-35      Matrix_1.1-4     munsell_0.4.2   
-## [17] nlme_3.1-118     parallel_3.1.2   plyr_1.8.1       proto_0.3-10    
-## [21] raster_2.3-12    Rcpp_0.11.3      RCurl_1.95-4.3   reshape2_1.4    
-## [25] rjson_0.2.14     scales_0.2.4     spdep_0.5-77     splines_3.1.2   
-## [29] stringr_0.6.2    tools_3.1.2      XML_3.98-1.1
+##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
+##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
+##  [9] grid_3.1.1       gtable_0.1.2     labeling_0.2     lattice_0.20-29 
+## [13] LearnBayes_2.15  markdown_0.7     MASS_7.3-33      Matrix_1.1-4    
+## [17] munsell_0.4.2    nlme_3.1-117     plyr_1.8.1       proto_0.3-10    
+## [21] R6_2.0.1         Rcpp_0.11.2      RCurl_1.95-4.1   reshape2_1.4    
+## [25] rjson_0.2.14     scales_0.2.4     spdep_0.5-74     splines_3.1.1   
+## [29] stringr_0.6.2    tools_3.1.1      XML_3.98-1.1
 </code></pre>
 
 </body>

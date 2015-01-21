@@ -326,20 +326,23 @@ Retrieve a list of the available data sets for population density. In case the
 service is unreachable, `character(0)` is returned.
 
 ```{r population-density-list, message=FALSE}
-client <- GeoStatFiWFSClient()
-layers <- client$listPopulationLayers()
+request <- gisfin::GeoStatFiWFSRequest$new()$getPopulationLayers()
+client <- gisfin::GeoStatFiWFSClient$new(request)
+layers <- client$listLayers()
 if (length(layers) > 0) layers
 ```
 
 Get population density in year 2005 on a 5 km x 5 km grid, convert to 
-RasterStack object and plot.
+RasterStack object and plot on log scale.
 
-```{r population-density-plot, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
-population <- client$getPopulation(layers[11])
+```{r population-density-plot, message=FALSE, warning=FALSE, results='hide', eval=TRUE}
+request$getPopulation(layers[11])
+client <- gisfin::GeoStatFiWFSClient$new(request)
+population <- client$getLayer(layers[11])
 if (length(population) > 0) {
   x <- sp::SpatialPixelsDataFrame(coordinates(population), population@data, proj4string=population@proj4string)
   population <- raster::stack(x)
-  plot(population[["vaesto"]])
+  plot(log(population[["vaesto"]]))
 }
 ```
 

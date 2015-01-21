@@ -13,120 +13,99 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 #' @include WFSClient.R
-
-#' Builds WFS request to the stat.fi geospatial API.
 #'
-#' @import methods
-#' @references See citation("gisfin")
-#' @author Jussi Jousimo \email{louhos@@googlegroups.com}
-#' @exportClass GeoStatFiWFSRequest
-#' @export GeoStatFiWFSRequest
-GeoStatFiWFSRequest <- setRefClass(
-  "GeoStatFiWFSRequest",
-  contains = "WFSRequest",
-  methods = list(
-    getURL = function() {
-      if (getPathString() == "")
-        stop("Required field 'path' has not been specified for the constructor.")
-      url <- paste0("http://geo.stat.fi/geoserver/", getPathString(), "/wfs?", getParametersString())
-      return(url)
-    }
-  )
-)
-
-#' Retrieves geospatial data from stat.fi.
+#' @title Builds a WFS request to the \code{stat.fi} geospatial API.
 #' 
-#' Retrieves geospatial data from Statistics Finland (http://www.stat.fi).
-#' For more information, see http://www.stat.fi/tup/rajapintapalvelut/index_en.html.
-#' For General Terms of Use, see http://www.stat.fi/org/lainsaadanto/yleiset_kayttoehdot_en.html/. 
+#' @description Builds a WFS request to the \code{stat.fi} geospatial API. The request is submitted with
+#' \code{\link{GeoStatFiWFSClient}} to retrieve the data.
+#' For more information about the API, see \url{http://www.stat.fi/tup/rajapintapalvelut/index_en.html}.
+#' For General Terms of Use, see \url{http://www.stat.fi/org/lainsaadanto/yleiset_kayttoehdot_en.html/}. 
 #'
-#' Currently available data sets include:
+#' @section Currently supported data sets:
 #' \itemize{
 #'   \item Population densities in various demographic groups
 #'   \item Production and industrial facilities
 #'   \item Educational institutions
 #'   \item Road accidents
 #' }
+#'
+#' @section Methods:
+#' \itemize{
+#'   \item\code{getPopulationLayers()}: A request for a list of available population grid data sets (layers).
+#'   \item\code{getPopulation(layer)}: A request for population grid data \code{layer}.
+#'   \item\code{getProductionAndIndustrialFacilities()}: A request for production and industrial facilities.
+#'   \item\code{getEducationalInstitutions()}: A request for educational institutions.
+#'   \item\code{getRoadAccidentsLayers()}: A request for a list of available road accident data sets as a character vector.
+#'   \item\code{getRoadAccidents(layer)}: A request for road accident data \code{layer}.
+#' }
 #' 
-#' @import methods
-#' @import rgdal
-#' @import sp
-#' @import raster
-#' @return In case the service at stat.fi cannot be reached, the relevant methods return \code{character(0)}.
+#' @usage NULL
+#' @format NULL
+#' @import R6
 #' @references See citation("gisfin")
 #' @author Jussi Jousimo \email{louhos@@googlegroups.com}
-#' @examples 
+#' @examples
 #' # See the vignette.
+#' @seealso \code{\link{GeoStatFiWFSClient}} \code{\link{WFSStreamingRequest}}
+#' @exportClass GeoStatFiWFSRequest
+#' @export GeoStatFiWFSRequest
+GeoStatFiWFSRequest <- R6::R6Class(
+  "GeoStatFiWFSRequest",
+  inherit = gisfin::WFSStreamingRequest,
+  private = list(
+    getURL = function() {
+      url <- paste0("http://geo.stat.fi/geoserver/", private$getPathString(), "/wfs?", private$getParametersString())
+      return(url)
+    }
+  ),
+  public = list(
+    getDataSource = function() private$getURL(),
+    
+    getGeoStatFiLayers = function(path) {
+      if (missing(path))
+        stop("Required argument 'path' missing.")      
+      return(self$setPath(path)$getCapabilities())
+    },
+
+    getGeoStatFiLayer = function(path, layer) {
+      if (missing(path))
+        stop("Required argument 'path' missing.")      
+      if (missing(layer))
+        stop("Required argument 'layer' missing.")
+      return(self$setPath(path)$getFeature(typeName=layer))
+    },
+    
+    getPopulationLayers = function() self$getGeoStatFiLayers("vaestoruutu"),
+    getPopulation = function(layer) self$getGeoStatFiLayer("vaestoruutu", layer),
+    getProductionAndIndustrialFacilitiesLayers = function() self$getGeoStatFiLayers("ttlaitokset/ttlaitokset:toimipaikat"),
+    getProductionAndIndustrialFacilities = function(layer="ttlaitokset:toimipaikat") self$getGeoStatFiLayer("ttlaitokset/ttlaitokset:toimipaikat", layer),
+    getEducationalInstitutionsLayers = function() self$getGeoStatFiLayers("oppilaitokset/oppilaitokset:oppilaitokset"),
+    getEducationalInstitutions = function(layer="oppilaitokset:oppilaitokset") self$getGeoStatFiLayer("oppilaitokset/oppilaitokset:oppilaitokset", layer),
+    getRoadAccidentsLayers = function() self$getGeoStatFiLayers("tieliikenne"),
+    getRoadAccidents = function(layer) self$getGeoStatFiLayer("tieliikenne", layer)
+  )
+)
+
+#' @title Retrieves geospatial data from \code{stat.fi}.
+#' 
+#' @description Retrieves geospatial data from Statistics Finland (\url{http://www.stat.fi}). A request object
+#' to retrieve data is constructed from the class \code{\link{GeoStatFiWFSRequest}}. Layer lists are
+#' returned as \code{character} vectors and map data (layers) as \code{Spatial*} objects.
+#' 
+#' @usage NULL
+#' @format NULL
+#' @import R6
+#' @return In case the service at \code{stat.fi} cannot be reached, the relevant methods return \code{character(0)}.
+#' @references See citation("gisfin")
+#' @author Jussi Jousimo \email{louhos@@googlegroups.com}
+#' @examples
+#' # See the vignette.
+#' @seealso \code{\link{GeoStatFiWFSRequest}} \code{\link{WFSStreamingClient}}
 #' @exportClass GeoStatFiWFSClient
 #' @export GeoStatFiWFSClient
-GeoStatFiWFSClient <- setRefClass(
-  Class = "GeoStatFiWFSClient",
-  contains = "WFSStreamClient",
-  fields = list(
-  ),
-  methods = list(
-    listPopulationLayers = function() {
-      "Returns a list of available population grid data sets as a character vector."
-      
-      request <- GeoStatFiWFSRequest(path=list("vaestoruutu"))
-      layers <- listLayers(request)
-      return(layers)
-    },
-    
-    getPopulation = function(layer) {
-      "Retrieves population grid data \\code{layer} as a Spatial* object."
-      if (missing(layer))
-        stop("Required argument 'layer' missing.")
-      
-      request <- GeoStatFiWFSRequest(path=list("vaestoruutu"))
-      response <- getLayer(request, layer=layer)
-      return(response)
-    },
-    
-    listProductionAndIndustrialFacilitiesLayers = function() {
-      request <- GeoStatFiWFSRequest(path=list("ttlaitokset/ttlaitokset:toimipaikat"))
-      layers <- listLayers(request)
-      return(layers)
-    },
-    
-    getProductionAndIndustrialFacilities = function(layer="ttlaitokset:toimipaikat") {
-      "Retrieves production and industrial facilities as a Spatial* object."
-      if (missing(layer))
-        stop("Required argument 'layer' missing.")
-      request <- GeoStatFiWFSRequest(path=list("ttlaitokset/ttlaitokset:toimipaikat"))
-      response <- getLayer(request, layer=layer)
-      return(response)
-    },
-    
-    listEducationalInstitutionsLayers = function() {
-      request <- GeoStatFiWFSRequest(path=list("oppilaitokset/oppilaitokset:oppilaitokset"))
-      layers <- listLayers(request)
-      return(layers)
-    },
-    
-    getEducationalInstitutions = function(layer="oppilaitokset:oppilaitokset") {
-      "Retrieves educational institutions as a Spatial* object."
-      if (missing(layer))
-        stop("Required argument 'layer' missing.")
-      request <- GeoStatFiWFSRequest(path=list("oppilaitokset/oppilaitokset:oppilaitokset"))
-      response <- getLayer(request, layer=layer)
-      return(response)
-    },
-    
-    listRoadAccidentsLayers = function() {
-      "Returns a list of available road accident data sets as a character vector."
-      request <- GeoStatFiWFSRequest(path=list("tieliikenne"))
-      layers <- listLayers(request)
-      return(layers)
-    },
-    
-    getRoadAccidents = function(layer) {
-      "Retrieves road accident data \\code{layer} as a Spatial* object."
-      if (missing(layer))
-        stop("Required argument 'layer' missing.")
-      request <- GeoStatFiWFSRequest(path=list("tieliikenne"))
-      response <- getLayer(request, layer=layer)
-      return(response)
-    }
+GeoStatFiWFSClient <- R6::R6Class(
+  "GeoStatFiWFSClient",
+  inherit = gisfin::WFSStreamingClient,
+  public = list(
   )
 )

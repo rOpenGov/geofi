@@ -22,7 +22,8 @@ Imports:
 Suggests:
     rgeos,
     maptools,
-    R6
+    R6,
+    digest
 URL: https://github.com/ropengov/gisfin
 LazyLoad: yes
 Collate:

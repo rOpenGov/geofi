@@ -16,7 +16,7 @@
 #' @docType package
 #' @title Finland GIS R tools
 #'
-#' @author Juuso Parkkinen, Leo Lahti and Joona Lehtomaki \email{louhos@@googlegroups.com}
+#' @author Juuso Parkkinen, Leo Lahti, Joona Lehtomaki and Jussi Jousimo \email{louhos@@googlegroups.com}
 #' @references
 #' See citation("gisfin")
 #' \url{https://github.com/rOpenGov/gisfin}

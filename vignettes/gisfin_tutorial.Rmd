@@ -67,6 +67,10 @@ dataa)
 + Tieliikenneonnettomuudet (Road accidents)
 + Source: [Statistics Finland](http://www.stat.fi/tup/rajapintapalvelut/index_en.html)
 
+[Finnish postal code areas](#pnro) (Suomalaiset postinumero KML-muodossa)
+
++ Source: [Duukkis](http://www.palomaki.info/apps/pnro/)
+
 List of potential data sources to be added to the package can be found 
 [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 
@@ -86,9 +90,7 @@ Install binaries from [CRAN](http://cran.r-project.org/web/packages/rgdal/index.
 
 #### OSX
 
-It is preferable to NOT use the [CRAN binaries](http://cran.r-project.org/web/packages/rgdal/index.html). Instead, you should check [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks)
-and install the latest GDAL Complete (v. 1.11 in July 2014) and then install the 
-corresponding rgdal package from the same page (v. 0.8.16 in July 2014). 
+Follow [these instructions](http://tlocoh.r-forge.r-project.org/mac_rgeos_rgdal.html) to install rgeos and rgdal on OSX. If these don't work, install the rgdal from [KyngChaos Wiki](http://www.kyngchaos.com/software/frameworks).This is preferred over using the [CRAN binaries](http://cran.r-project.org/web/packages/rgdal/index.html).
 
 #### Linux 
 
@@ -345,6 +347,17 @@ if (length(population) > 0) {
   plot(log(population[["vaesto"]]))
 }
 ```
+
+## <a name="pnro"></a>Finnish postal code areas
+
+Spatial data provided by [Duukkis](http://www.palomaki.info/apps/pnro/).
+
+Get the data
+
+```{r, message=FALSE, results='hide', warning=FALSE}
+pnro.sp <- get_postalcode_areas()
+```
+
 
 ----
 

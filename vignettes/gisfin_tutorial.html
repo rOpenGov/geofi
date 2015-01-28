@@ -5,6 +5,18 @@
 
 <title>gisfin - tutorial</title>
 
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
    pre .operator,
@@ -45,9 +57,6 @@ var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/<
 hljs.initHighlightingOnLoad();
 </script>
 
-<!-- MathJax scripts -->
-<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 <style type="text/css">
@@ -99,7 +108,9 @@ a:visited {
 pre, img {
   max-width: 100%;
 }
-
+pre {
+  overflow-x: auto;
+}
 pre code {
    display: block; padding: 0.5em;
 }
@@ -259,6 +270,12 @@ dataa)</p>
 <li>Source: <a href="http://www.stat.fi/tup/rajapintapalvelut/index_en.html">Statistics Finland</a></li>
 </ul>
 
+<p><a href="#pnro">Finnish postal code areas</a> (Suomalaiset postinumero KML-muodossa)</p>
+
+<ul>
+<li>Source: <a href="http://www.palomaki.info/apps/pnro/">Duukkis</a></li>
+</ul>
+
 <p>List of potential data sources to be added to the package can be found 
 <a href="https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md">here</a>.</p>
 
@@ -278,9 +295,7 @@ encounter problems, please contact us by email: <a href="mailto:louhos@googlegro
 
 <h4>OSX</h4>
 
-<p>It is preferable to NOT use the <a href="http://cran.r-project.org/web/packages/rgdal/index.html">CRAN binaries</a>. Instead, you should check <a href="http://www.kyngchaos.com/software/frameworks">KyngChaos Wiki</a>
-and install the latest GDAL Complete (v. 1.11 in July 2014) and then install the 
-corresponding rgdal package from the same page (v. 0.8.16 in July 2014). </p>
+<p>Follow <a href="http://tlocoh.r-forge.r-project.org/mac_rgeos_rgdal.html">these instructions</a> to install rgeos and rgdal on OSX. If these don&#39;t work, install the rgdal from <a href="http://www.kyngchaos.com/software/frameworks">KyngChaos Wiki</a>.This is preferred over using the <a href="http://cran.r-project.org/web/packages/rgdal/index.html">CRAN binaries</a>.</p>
 
 <h4>Linux</h4>
 
@@ -359,7 +374,7 @@ with <code>spplot()</code>.</p>
 spplot(sp.suuralue, zcol=&quot;Name&quot;)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue1.png" alt="plot of chunk hkk-suuralue1"/> </p>
+<p><img src="figure/hkk-suuralue1-1.png" alt="plot of chunk hkk-suuralue1"/> </p>
 
 <p>Function <code>generate_map_colours()</code> allows nice region colouring separable 
 adjacent regions. This is used here with the <code>rainbow()</code> colour scale to plot 
@@ -371,7 +386,7 @@ spplot(sp.suuralue, zcol=&quot;COL&quot;,
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue2.png" alt="plot of chunk hkk-suuralue2"/> </p>
+<p><img src="figure/hkk-suuralue2-1.png" alt="plot of chunk hkk-suuralue2"/> </p>
 
 <h3>Plot with ggplot2</h3>
 
@@ -395,7 +410,7 @@ ggplot(df.suuralue, aes(x=long, y=lat)) +
   theme(legend.position=&quot;none&quot;)
 </code></pre>
 
-<p><img src="figure/hkk-suuralue3.png" alt="plot of chunk hkk-suuralue3"/> </p>
+<p><img src="figure/hkk-suuralue3-1.png" alt="plot of chunk hkk-suuralue3"/> </p>
 
 <h3>Plot election districts</h3>
 
@@ -409,7 +424,7 @@ spplot(sp.aanestys, zcol=&quot;KUNTA&quot;,
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/hkk-aanestysalue.png" alt="plot of chunk hkk-aanestysalue"/> </p>
+<p><img src="figure/hkk-aanestysalue-1.png" alt="plot of chunk hkk-aanestysalue"/> </p>
 
 <hr/>
 
@@ -544,7 +559,7 @@ spplot(sp.mml, zcol=&quot;COL&quot;, col.regions=rainbow(length(levels(sp.mml@da
        colorkey=FALSE)
 </code></pre>
 
-<p><img src="figure/MML_municipality.png" alt="plot of chunk MML_municipality"/> </p>
+<p><img src="figure/MML_municipality-1.png" alt="plot of chunk MML_municipality"/> </p>
 
 <hr/>
 
@@ -568,24 +583,24 @@ hit, and the raw output (varies depending on the service used).</p>
 unlist(gc1[1:2])
 </code></pre>
 
-<pre><code>##   lat   lon 
-## 60.19 24.92
+<pre><code>##      lat      lon 
+## 60.18856 24.91736
 </code></pre>
 
 <pre><code class="r">gc2 &lt;- get_geocode(&quot;Mannerheimintie 100, Helsinki&quot;, service=&quot;openstreetmap&quot;)
 unlist(gc2[1:2])
 </code></pre>
 
-<pre><code>##   lat   lon 
-## 60.17 24.94
+<pre><code>##      lat      lon 
+## 60.18864 24.91750
 </code></pre>
 
 <pre><code class="r">gc3 &lt;- get_geocode(&quot;Mannerheimintie 100, Helsinki&quot;, service=&quot;google&quot;)
 unlist(gc3[1:2])
 </code></pre>
 
-<pre><code>##   lat   lon 
-## 60.19 24.92
+<pre><code>##      lat      lon 
+## 60.18892 24.91747
 </code></pre>
 
 <hr/>
@@ -624,7 +639,11 @@ if (length(layers) &gt; 0) layers
 ##  [9] &quot;vaestoruutu:vaki2013_1km&quot;    &quot;vaestoruutu:vaki2013_1km_kp&quot;
 ## [11] &quot;vaestoruutu:vaki2005_5km&quot;    &quot;vaestoruutu:vaki2010_5km&quot;   
 ## [13] &quot;vaestoruutu:vaki2011_5km&quot;    &quot;vaestoruutu:vaki2012_5km&quot;   
-## [15] &quot;vaestoruutu:vaki2013_5km&quot;
+## [15] &quot;vaestoruutu:vaki2013_5km&quot;   
+## attr(,&quot;driver&quot;)
+## [1] &quot;WFS&quot;
+## attr(,&quot;nlayers&quot;)
+## [1] 15
 </code></pre>
 
 <p>Get population density in year 2005 on a 5 km x 5 km grid, convert to 
@@ -640,7 +659,16 @@ if (length(population) &gt; 0) {
 }
 </code></pre>
 
-<p><img src="figure/population-density-plot.png" alt="plot of chunk population-density-plot"/> </p>
+<p><img src="figure/population-density-plot-1.png" alt="plot of chunk population-density-plot"/> </p>
+
+<h2><a name="pnro"></a>Finnish postal code areas</h2>
+
+<p>Spatial data provided by <a href="http://www.palomaki.info/apps/pnro/">Duukkis</a>.</p>
+
+<p>Get the data</p>
+
+<pre><code class="r">pnro.sp &lt;- get_postalcode_areas()
+</code></pre>
 
 <hr/>
 
@@ -658,14 +686,14 @@ source individually.</p>
 Kindly cite the gisfin R package as follows:
 
   (C) Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo
-  and Janne Aukia 2014. gisfin R package
+  and Janne Aukia 2015. gisfin R package
 
 A BibTeX entry for LaTeX users is
 
   @Misc{,
     title = {gisfin R package},
     author = {Joona Lehtomaki and Juuso Parkkinen and Leo Lahti and Jussi Jousimo and Janne Aukia},
-    year = {2014},
+    year = {2015},
   }
 
 Many thanks for all contributors! For more info, see:
@@ -679,28 +707,29 @@ https://github.com/rOpenGov/gisfin
 <pre><code class="r">sessionInfo()
 </code></pre>
 
-<pre><code>## R version 3.1.1 (2014-07-10)
-## Platform: x86_64-apple-darwin13.1.0 (64-bit)
+<pre><code>## R version 3.1.2 (2014-10-31)
+## Platform: x86_64-apple-darwin13.4.0 (64-bit)
 ## 
 ## locale:
-## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30 knitr_1.6      
-## [5] raster_2.2-31   gisfin_0.9.19   rgdal_0.8-16    sp_1.0-15      
+## [1] raster_2.3-12   ggplot2_1.0.0   rgeos_0.3-8     maptools_0.8-30
+## [5] knitr_1.7       gisfin_0.9.20   R6_2.0.1        rgdal_0.9-1    
+## [9] sp_1.0-16      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
-##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
-##  [9] grid_3.1.1       gtable_0.1.2     labeling_0.2     lattice_0.20-29 
-## [13] LearnBayes_2.15  markdown_0.7     MASS_7.3-33      Matrix_1.1-4    
-## [17] munsell_0.4.2    nlme_3.1-117     plyr_1.8.1       proto_0.3-10    
-## [21] R6_2.0.1         Rcpp_0.11.2      RCurl_1.95-4.1   reshape2_1.4    
-## [25] rjson_0.2.14     scales_0.2.4     spdep_0.5-74     splines_3.1.1   
-## [29] stringr_0.6.2    tools_3.1.1      XML_3.98-1.1
+##  [1] boot_1.3-13      coda_0.16-1      colorspace_1.2-4 deldir_0.1-6    
+##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_1.0     
+##  [9] grid_3.1.2       gtable_0.1.2     labeling_0.3     lattice_0.20-29 
+## [13] LearnBayes_2.15  MASS_7.3-35      Matrix_1.1-4     munsell_0.4.2   
+## [17] nlme_3.1-118     parallel_3.1.2   plyr_1.8.1       proto_0.3-10    
+## [21] Rcpp_0.11.3      RCurl_1.95-4.3   reshape2_1.4     rjson_0.2.15    
+## [25] scales_0.2.4     spdep_0.5-77     splines_3.1.2    stringr_0.6.2   
+## [29] tools_3.1.2      XML_3.98-1.1
 </code></pre>
 
 </body>

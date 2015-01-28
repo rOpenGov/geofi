@@ -1,8 +1,8 @@
 Package: gisfin
 Type: Package
 Title: Finland GIS R tools
-Version: 0.9.19
-Date: 2015-01-21
+Version: 0.9.20
+Date: 2015-01-28
 Author: Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo, Janne Aukia
 Maintainer: Joona Lehtomaki, Jussi Jousimo <louhos@googlegroups.com>
 Description: R tools for reading open geographical data in Finland.
@@ -17,8 +17,6 @@ Imports:
     RCurl,
     spdep,
     ggplot2,
-    methods,
-    raster,
     XML,
     digest
 Suggests:
@@ -36,4 +34,5 @@ Collate:
     'gisfin-package.R'
     'helsinki_spatial.R'
     'ip.R'
+    'postal_code.R'
     'visualization.R'

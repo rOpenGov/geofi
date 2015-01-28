@@ -10,9 +10,9 @@ citEntry(entry="misc",
 	   person(given ="Janne", family="Aukia")
          ),
 	 journal = "",
-	 year = "2014",
+	 year = "2015",
          textVersion =
-         paste("(C) Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo and Janne Aukia 2014.",
+         paste("(C) Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo and Janne Aukia 2015.",
                "gisfin R package",
                sep=" ")
          )

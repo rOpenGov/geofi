@@ -27,7 +27,6 @@
 #' @param service Geocoding service to use, one of 'okf', 'openstreetmap' or 'google' 
 #'
 #' @return A list with coordinates (lat, long) of the first output, and the raw output list
-#' @importFrom RCurl getURI
 #' @importFrom rjson fromJSON
 #' @export
 #' 

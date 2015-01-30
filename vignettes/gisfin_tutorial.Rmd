@@ -138,14 +138,14 @@ Development version for developers:
 
 ```{r install2, eval=FALSE}
 install.packages("devtools")
-library(devtools)
+library("devtools")
 install_github("ropengov/gisfin")
 ```
 
 Load package.
 
 ```{r load, message=TRUE, warning=FALSE, results='hide'}
-library(gisfin)
+library("gisfin")
 ```
 
 ----
@@ -356,10 +356,15 @@ if (length(population) > 0) {
 
 Spatial data provided by [Duukkis](http://www.palomaki.info/apps/pnro/).
 
-Get the data
+Get the postal code areas and plot them for the Helsinki region.
 
 ```{r, message=FALSE, results='hide', warning=FALSE}
 pnro.sp <- get_postalcode_areas()
+pnro.sp@data$COL <- factor(generate_map_colours(sp=pnro.sp))
+pnro.pks.sp <- pnro.sp[substr(pnro.sp$pnro, 1, 2) %in% c("00", "01", "02"), ]
+spplot(pnro.pks.sp, zcol="COL", 
+       col.regions=rainbow(length(levels(pnro.pks.sp@data$COL))), 
+       colorkey=FALSE)
 ```
 
 

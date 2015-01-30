@@ -71,9 +71,12 @@ List of potential data sources to be added to the package can be found
 
 The gisfin package uses the 
 [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) package, which 
-depends on [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library). 
-Some rgdal installation tips for various platforms are listed below. If you 
-encounter problems, please contact us by email: louhos@googlegroups.com.
+depends on [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library).
+Some rgdal installation tips for various platforms are listed below. The
+gisfin package has been tested with recent versions of the dependency packages
+and libraries and it is recommended to use the recent releases. The older versions
+are known to cause problems in some cases. If you encounter problems, please contact
+us by email: louhos@googlegroups.com.
 
 #### Windows
 
@@ -174,7 +177,7 @@ sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue")
 spplot(sp.suuralue, zcol="Name")
 ```
 
-![plot of chunk hkk-suuralue1](figure/hkk-suuralue1-1.png) 
+![plot of chunk hkk-suuralue1](figure/hkk-suuralue1.png) 
 
 Function `generate_map_colours()` allows nice region colouring separable 
 adjacent regions. This is used here with the `rainbow()` colour scale to plot 
@@ -188,7 +191,7 @@ spplot(sp.suuralue, zcol="COL",
        colorkey=FALSE)
 ```
 
-![plot of chunk hkk-suuralue2](figure/hkk-suuralue2-1.png) 
+![plot of chunk hkk-suuralue2](figure/hkk-suuralue2.png) 
 
 ### Plot with ggplot2
 
@@ -214,7 +217,7 @@ ggplot(df.suuralue, aes(x=long, y=lat)) +
   theme(legend.position="none")
 ```
 
-![plot of chunk hkk-suuralue3](figure/hkk-suuralue3-1.png) 
+![plot of chunk hkk-suuralue3](figure/hkk-suuralue3.png) 
 
 ### Plot election districts
 
@@ -230,7 +233,7 @@ spplot(sp.aanestys, zcol="KUNTA",
        colorkey=FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](figure/hkk-aanestysalue-1.png) 
+![plot of chunk hkk-aanestysalue](figure/hkk-aanestysalue.png) 
 
 ----
 
@@ -378,7 +381,7 @@ spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))),
        colorkey=FALSE)
 ```
 
-![plot of chunk MML_municipality](figure/MML_municipality-1.png) 
+![plot of chunk MML_municipality](figure/MML_municipality.png) 
 
 ----
 
@@ -404,8 +407,8 @@ unlist(gc1[1:2])
 ```
 
 ```
-##      lat      lon 
-## 60.18856 24.91736
+##   lat   lon 
+## 60.19 24.92
 ```
 
 ```r
@@ -414,8 +417,8 @@ unlist(gc2[1:2])
 ```
 
 ```
-##      lat      lon 
-## 60.18864 24.91750
+##   lat   lon 
+## 60.19 24.92
 ```
 
 ```r
@@ -424,8 +427,8 @@ unlist(gc3[1:2])
 ```
 
 ```
-##      lat      lon 
-## 60.18892 24.91747
+##   lat   lon 
+## 60.19 24.92
 ```
 
 ----
@@ -482,6 +485,7 @@ RasterStack object and plot on log scale.
 
 
 ```r
+library(raster)
 request$getPopulation(layers[11])
 client <- gisfin::GeoStatFiWFSClient$new(request)
 population <- client$getLayer(layers[11])
@@ -492,7 +496,7 @@ if (length(population) > 0) {
 }
 ```
 
-![plot of chunk population-density-plot](figure/population-density-plot-1.png) 
+![plot of chunk population-density-plot](figure/population-density-plot.png) 
 
 ## <a name="pnro"></a>Finnish postal code areas
 
@@ -551,28 +555,28 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.2 (2014-10-31)
-## Platform: x86_64-apple-darwin13.4.0 (64-bit)
+## R version 3.1.1 (2014-07-10)
+## Platform: x86_64-apple-darwin13.1.0 (64-bit)
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] raster_2.3-12   ggplot2_1.0.0   rgeos_0.3-8     maptools_0.8-30
-## [5] knitr_1.7       gisfin_0.9.20   R6_2.0.1        rgdal_0.9-1    
-## [9] sp_1.0-16      
+## [1] raster_2.2-31   ggplot2_1.0.0   rgeos_0.3-6     maptools_0.8-30
+## [5] knitr_1.6       gisfin_0.9.20   R6_2.0.1        rgdal_0.9-1    
+## [9] sp_1.0-17      
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] boot_1.3-13      coda_0.16-1      colorspace_1.2-4 deldir_0.1-6    
-##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_1.0     
-##  [9] grid_3.1.2       gtable_0.1.2     labeling_0.3     lattice_0.20-29 
-## [13] LearnBayes_2.15  MASS_7.3-35      Matrix_1.1-4     munsell_0.4.2   
-## [17] nlme_3.1-118     parallel_3.1.2   plyr_1.8.1       proto_0.3-10    
-## [21] Rcpp_0.11.3      RCurl_1.95-4.3   reshape2_1.4     rjson_0.2.15    
-## [25] scales_0.2.4     spdep_0.5-77     splines_3.1.2    stringr_0.6.2   
-## [29] tools_3.1.2      XML_3.98-1.1
+##  [1] boot_1.3-11      coda_0.16-1      colorspace_1.2-4 deldir_0.1-5    
+##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_0.10    
+##  [9] grid_3.1.1       gtable_0.1.2     labeling_0.2     lattice_0.20-29 
+## [13] LearnBayes_2.15  markdown_0.7     MASS_7.3-33      Matrix_1.1-4    
+## [17] munsell_0.4.2    nlme_3.1-117     plyr_1.8.1       proto_0.3-10    
+## [21] Rcpp_0.11.2      RCurl_1.95-4.1   reshape2_1.4     rjson_0.2.14    
+## [25] scales_0.2.4     spdep_0.5-74     splines_3.1.1    stringr_0.6.2   
+## [29] tools_3.1.1      XML_3.98-1.1
 ```
 

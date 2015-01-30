@@ -80,9 +80,12 @@ List of potential data sources to be added to the package can be found
 
 The gisfin package uses the 
 [rgdal](http://cran.r-project.org/web/packages/rgdal/index.html) package, which 
-depends on [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library). 
-Some rgdal installation tips for various platforms are listed below. If you 
-encounter problems, please contact us by email: louhos@googlegroups.com.
+depends on [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library).
+Some rgdal installation tips for various platforms are listed below. The
+gisfin package has been tested with recent versions of the dependency packages
+and libraries and it is recommended to use the recent releases. The older versions
+are known to cause problems in some cases. If you encounter problems, please contact
+us by email: louhos@googlegroups.com.
 
 #### Windows
 
@@ -141,7 +144,7 @@ install_github("ropengov/gisfin")
 
 Load package.
 
-```{r load, message=FALSE, warning=FALSE, results='hide'}
+```{r load, message=TRUE, warning=FALSE, results='hide'}
 library(gisfin)
 ```
 
@@ -338,6 +341,7 @@ Get population density in year 2005 on a 5 km x 5 km grid, convert to
 RasterStack object and plot on log scale.
 
 ```{r population-density-plot, message=FALSE, warning=FALSE, results='hide', eval=TRUE}
+library(raster)
 request$getPopulation(layers[11])
 client <- gisfin::GeoStatFiWFSClient$new(request)
 population <- client$getLayer(layers[11])

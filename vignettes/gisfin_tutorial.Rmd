@@ -352,7 +352,7 @@ Spatial data provided by [Duukkis](http://www.palomaki.info/apps/pnro/).
 
 Get the postal code areas and plot them for the Helsinki region.
 
-```{r, message=FALSE, results='hide', warning=FALSE}
+```{r postal_code, message=FALSE, results='hide', warning=FALSE}
 pnro.sp <- get_postalcode_areas()
 pnro.sp@data$COL <- factor(generate_map_colours(sp=pnro.sp))
 pnro.pks.sp <- pnro.sp[substr(pnro.sp$pnro, 1, 2) %in% c("00", "01", "02"), ]

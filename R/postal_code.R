@@ -4,6 +4,9 @@
 #' 
 #' The data is created by Duukkis and licensed under CC BY 4.0
 #' 
+#' Please not that this function requires a recent version of GDAL.
+#' Please see the tutorial for more instructions
+#' 
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
 #' @param verbose logical. Should R report extra information on progress? 
 #' 
@@ -13,7 +16,7 @@
 #' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin")
-#' @examples \dontrun{pnro.sp <- get_postalcode_areas()}
+#' @examples pnro.sp <- get_postalcode_areas()
 
 get_postalcode_areas <- function(data.dir = tempdir(), verbose=TRUE) {
   

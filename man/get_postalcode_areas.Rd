@@ -20,7 +20,7 @@ Retrieves postal code areas from http://www.palomaki.info/apps/pnro/
 The data is created by Duukkis and licensed under CC BY 4.0
 }
 \examples{
-pnro.sp <- get_postalcode_areas()
+\dontrun{pnro.sp <- get_postalcode_areas()}
 }
 \author{
 Juuso Parkkinen \email{louhos@googlegroups.com}

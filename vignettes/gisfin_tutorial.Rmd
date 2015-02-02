@@ -128,12 +128,6 @@ These may be needed:
 
 ### Installing the package
 
-Release version for general users:
-
-```{r install, eval=FALSE}
-install.packages("gisfin")
-```
-
 Development version for developers:
 
 ```{r install2, eval=FALSE}

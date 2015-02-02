@@ -1,18 +1,3 @@
-# This file is a part of the helsinki package (http://github.com/rOpenGov/helsinki)
-# in association with the rOpenGov project (ropengov.github.io)
-
-# Copyright (C) 2011-2015 Juuso Parkkinen / Louhos <louhos.github.com>. 
-# All rights reserved.
-
-# This program is open source software; you can redistribute it and/or modify 
-# it under the terms of the FreeBSD License (keep this notice): 
-# http://en.wikipedia.org/wiki/BSD_licenses
-
-# This program is distributed in the hope that it will be useful, 
-# but WITHOUT ANY WARRANTY; without even the implied warranty of 
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-
 #' Retrieve postal code areas as spatial data
 #' 
 #' Retrieves postal code areas from http://www.palomaki.info/apps/pnro/
@@ -28,7 +13,7 @@
 #' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin")
-#' @examples pnro.sp <- get_postalcode_areas()
+#' @examples \dontrun{pnro.sp <- get_postalcode_areas()}
 
 get_postalcode_areas <- function(data.dir = tempdir(), verbose=TRUE) {
   

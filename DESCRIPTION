@@ -4,7 +4,7 @@ Title: Finland GIS R tools
 Version: 0.9.21
 Date: 2015-01-31
 Author: Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo, Janne Aukia
-Maintainer: "Joona Lehtomaki, Jussi Jousimo <louhos@googlegroups.com>"
+Maintainer: Joona Lehtomaki, Jussi Jousimo <louhos@googlegroups.com>
 Description: R tools for reading open geographical data in Finland.
 License: BSD_2_clause + file LICENSE
 Depends:

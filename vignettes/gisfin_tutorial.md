@@ -119,13 +119,6 @@ These may be needed:
 
 ### Installing the package
 
-Release version for general users:
-
-
-```r
-install.packages("gisfin")
-```
-
 Development version for developers:
 
 
@@ -140,23 +133,6 @@ Load package.
 
 ```r
 library("gisfin")
-```
-
-```
-## Loading required package: rgdal
-## Loading required package: sp
-## rgdal: version: 0.9-1, (SVN revision 518)
-## Geospatial Data Abstraction Library extensions to R successfully loaded
-## Loaded GDAL runtime: GDAL 1.11.1, released 2014/09/24
-## Path to GDAL shared files: /Library/Frameworks/GDAL.framework/Versions/1.11/Resources/gdal
-## Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
-## Path to PROJ.4 shared files: (autodetected)
-## Loading required package: R6
-## 
-## gisfin R package: tools for open GIS data for Finland.
-## This R package is part of rOpenGov <ropengov.github.io>.
-## Copyright (C) 2010-2015 Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo and Janne Aukia.
-## This is free software. You are free to use, modify and redistribute it under the FreeBSD license.
 ```
 
 ----
@@ -524,14 +500,37 @@ Get the postal code areas and plot them for the Helsinki region.
 
 ```r
 pnro.sp <- get_postalcode_areas()
+```
+
+```
+## Error in stopifnot(is.list(srl)): ring not closed
+```
+
+```r
 pnro.sp@data$COL <- factor(generate_map_colours(sp=pnro.sp))
+```
+
+```
+## Error in extends(class(pl), "SpatialPolygons"): object 'pnro.sp' not found
+```
+
+```r
 pnro.pks.sp <- pnro.sp[substr(pnro.sp$pnro, 1, 2) %in% c("00", "01", "02"), ]
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'pnro.sp' not found
+```
+
+```r
 spplot(pnro.pks.sp, zcol="COL", 
        col.regions=rainbow(length(levels(pnro.pks.sp@data$COL))), 
        colorkey=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png) 
+```
+## Error in spplot(pnro.pks.sp, zcol = "COL", col.regions = rainbow(length(levels(pnro.pks.sp@data$COL))), : error in evaluating the argument 'obj' in selecting a method for function 'spplot': Error: object 'pnro.pks.sp' not found
+```
 
 
 ----
@@ -580,24 +579,29 @@ sessionInfo()
 
 ```
 ## R version 3.1.2 (2014-10-31)
-## Platform: x86_64-apple-darwin13.4.0 (64-bit)
+## Platform: x86_64-pc-linux-gnu (64-bit)
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
 ## [1] raster_2.3-12   ggplot2_1.0.0   rgeos_0.3-8     maptools_0.8-30
-## [5] gisfin_0.9.20   R6_2.0.1        rgdal_0.9-1     sp_1.0-16      
-## [9] knitr_1.7      
+## [5] gisfin_0.9.21   R6_2.0.1        rgdal_0.9-1     sp_1.0-16      
+## [9] knitr_1.8      
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] boot_1.3-13      coda_0.16-1      colorspace_1.2-4 deldir_0.1-6    
 ##  [5] digest_0.6.4     evaluate_0.5.5   foreign_0.8-61   formatR_1.0     
 ##  [9] grid_3.1.2       gtable_0.1.2     labeling_0.3     lattice_0.20-29 
-## [13] LearnBayes_2.15  MASS_7.3-35      Matrix_1.1-4     munsell_0.4.2   
+## [13] LearnBayes_2.15  MASS_7.3-34      Matrix_1.1-4     munsell_0.4.2   
 ## [17] nlme_3.1-118     parallel_3.1.2   plyr_1.8.1       proto_0.3-10    
 ## [21] Rcpp_0.11.3      RCurl_1.95-4.3   reshape2_1.4     rjson_0.2.15    
 ## [25] scales_0.2.4     spdep_0.5-77     splines_3.1.2    stringr_0.6.2   

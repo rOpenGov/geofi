@@ -37,6 +37,8 @@
 #'   \item\code{getEducationalInstitutions()}: A request for educational institutions.
 #'   \item\code{getRoadAccidentsLayers()}: A request for a list of available road accident data sets as a character vector.
 #'   \item\code{getRoadAccidents(layer)}: A request for road accident data \code{layer}.
+#'   \item\code{getPostalCodeAreaLayers()}: A request for a list of available postal code area data sets as a character vector.
+#'   \item\code{getPostalCodeArea(layer)}: A request for postal code area data \code{layer}.
 #' }
 #' 
 #' @usage NULL
@@ -82,7 +84,9 @@ GeoStatFiWFSRequest <- R6::R6Class(
     getEducationalInstitutionsLayers = function() self$getGeoStatFiLayers("oppilaitokset/oppilaitokset:oppilaitokset"),
     getEducationalInstitutions = function(layer="oppilaitokset:oppilaitokset") self$getGeoStatFiLayer("oppilaitokset/oppilaitokset:oppilaitokset", layer),
     getRoadAccidentsLayers = function() self$getGeoStatFiLayers("tieliikenne"),
-    getRoadAccidents = function(layer) self$getGeoStatFiLayer("tieliikenne", layer)
+    getRoadAccidents = function(layer) self$getGeoStatFiLayer("tieliikenne", layer),
+    getPostalCodeAreaLayers = function() self$getGeoStatFiLayers("postialue"),
+    getPostalCodeArea = function(layer) self$getGeoStatFiLayer("postialue", layer)
   )
 )
 

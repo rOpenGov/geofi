@@ -5,6 +5,6 @@
   # Sys.setlocale(locale = "UTF-8")
   # Sys.setlocale(locale = "WINDOWS-1252")
 
-  packageStartupMessage("\ngisfin R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.github.io>. Kindly cite the work, see citation("gisfin").")
+  packageStartupMessage("\ngisfin R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.github.io>.")
 
 }

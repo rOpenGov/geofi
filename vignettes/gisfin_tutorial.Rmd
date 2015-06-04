@@ -71,6 +71,8 @@ dataa)
 
 + Source: [Duukkis](http://www.palomaki.info/apps/pnro/)
 
+[Examples](#examples) (Further usage examples)
+
 List of potential data sources to be added to the package can be found 
 [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 
@@ -250,9 +252,9 @@ Spatial data from [National Land Survey Finland](http://www.maanmittauslaitos.fi
 (Maanmittauslaitos, MML). These data are preprocessed into RData format, see 
 details [here](https://github.com/avoindata/mml).
 
-List available data sets with `list_mml_datasets()`.
+List available data sets (output not shown here): 
 
-```{r MML_list, message=FALSE} 
+```{r MML_list, message=FALSE, echo=FALSE} 
 list_mml_datasets()
 ```
 
@@ -276,6 +278,78 @@ sp.mml@data$COL <- factor(generate_map_colours(sp.mml))
 spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))), 
        colorkey=FALSE)
 ```
+
+
+## <a name="examples"></a>Further examples
+
+### Visualizing Finnish municipalities with your own data
+
+Here we show examples with the standard shape tools. For interactive maps, see [leaflet](https://rstudio.github.io/leaflet/map_widget.html) and [rMaps](http://rmaps.github.io/). Examples to be added later.
+
+
+First, retrieve population data (2013) for Finnish municipalities:
+
+```{r gisfin-owndata0, message=FALSE, warning=FALSE}
+# Get municipality population data from Statistics Finland
+# using the pxweb package
+library(pxweb)
+mydata <- get_pxweb_data(url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/Kuntien_talous_ja_toiminta/Kunnat/ktt14/080_ktt14_2013_fi.px",
+             dims = list(Alue = c('*'),
+                         Tunnusluku = c('30'),
+                         Vuosi = c('Arvo')),
+             clean = TRUE)
+
+# Pick municipality ID from the text field
+mydata$Kuntakoodi <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[1]])
+mydata$Kunta <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[2]])
+
+# Rename fields for clarity
+mydata$Asukasluku <- mydata$values
+
+# Pick only the necessary fields for clarity
+mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
+```
+
+
+Visualize municipality population data with Land Survey Finland (MML) maps:
+
+```{r gisfin-owndata1, message=FALSE, warning=FALSE}
+# Get the municipality map for visualization
+sp <- get_mml(map.id="Yleiskartta-1000", data.id="HallintoAlue")
+# Convert municipality ID to character (for matching)
+sp@data$Kunta <- as.character(sp@data$Kunta)
+
+# Merge the Finnish map shape file and the population data based on
+# the 'Kunta' field. The population data contains also some other
+# regions besides municipalities. These will be ignored when merged
+# with the municipality map:
+sp2 <- sp::merge(sp, mydata, all.x = TRUE, by.x = "Kunta", by.y="Kuntakoodi")
+
+# Plot the shape file, colour municipalities by population
+spplot(sp2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
+```
+
+
+Same with GADM maps. You can select the desired maps at the [GADM service](http://gadm.org/country). Choose Finland and file format R. This will give the [link to the Finnish municipality data file](http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData):
+
+```{r gisfin-owndata2, message=FALSE, warning=FALSE}
+# Load municipality borders from GADM:
+con <- url("http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData")
+load(con); close(con)
+
+# Convert NAME field into factor (needed for plots)
+gadm$NAME_4 <- factor(gadm$NAME_4)
+
+# Merge the Finnish map shape file and the population data based on
+# the 'Kunta' field (see above)
+gadm2 <- sp::merge(gadm, mydata, by.x = "NAME_4", by.y = "Kunta", all.x = TRUE)
+
+# Plot the shape file, colour municipalities by population
+# It turns out that not all municipality names can be matched.
+# We are happy to add solutions here if you have any.
+spplot(gadm2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
+```
+
 
 ----
 

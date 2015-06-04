@@ -137,22 +137,6 @@ Load package.
 library("gisfin")
 ```
 
-```
-## Loading required package: rgdal
-## Loading required package: sp
-## rgdal: version: 0.9-3, (SVN revision 530)
-##  Geospatial Data Abstraction Library extensions to R successfully loaded
-##  Loaded GDAL runtime: GDAL 1.11.2, released 2015/02/10
-##  Path to GDAL shared files: /usr/share/gdal/1.11
-##  Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
-##  Path to PROJ.4 shared files: (autodetected)
-##  Linking to sp version: 1.1-0 
-## Loading required package: R6
-## 
-## gisfin R package: tools for open GIS data for Finland.
-## Part of rOpenGov <ropengov.github.io>.
-```
-
 ----
 
 ## <a name="aluejakokartat"></a>Helsinki region district maps
@@ -465,7 +449,7 @@ sp2 <- sp::merge(sp, population, all.x = TRUE, by = "Kunta")
 ```
 
 ```
-## Error in `[.data.frame`(y, , by.y, drop = FALSE): undefined columns selected
+## Error in as.data.frame.default(y): cannot coerce class "structure("RasterStack", package = "raster")" to a data.frame
 ```
 
 ```r

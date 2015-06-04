@@ -62,6 +62,8 @@ dataa)
 
 + Source: [Duukkis](http://www.palomaki.info/apps/pnro/)
 
+[Examples](#examples) (Further usage examples)
+
 List of potential data sources to be added to the package can be found 
 [here](https://github.com/rOpenGov/gisfin/blob/master/vignettes/todo-datasets.md).
 
@@ -138,18 +140,17 @@ library("gisfin")
 ```
 ## Loading required package: rgdal
 ## Loading required package: sp
-## rgdal: version: 0.9-1, (SVN revision 518)
-## Geospatial Data Abstraction Library extensions to R successfully loaded
-## Loaded GDAL runtime: GDAL 1.11.1, released 2014/09/24
-## Path to GDAL shared files: /Library/Frameworks/GDAL.framework/Versions/1.11/Resources/gdal
-## Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
-## Path to PROJ.4 shared files: (autodetected)
+## rgdal: version: 0.9-3, (SVN revision 530)
+##  Geospatial Data Abstraction Library extensions to R successfully loaded
+##  Loaded GDAL runtime: GDAL 1.11.2, released 2015/02/10
+##  Path to GDAL shared files: /usr/share/gdal/1.11
+##  Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
+##  Path to PROJ.4 shared files: (autodetected)
+##  Linking to sp version: 1.1-0 
 ## Loading required package: R6
 ## 
 ## gisfin R package: tools for open GIS data for Finland.
-## This R package is part of rOpenGov <ropengov.github.io>.
-## Copyright (C) 2010-2015 Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo and Janne Aukia.
-## This is free software. You are free to use, modify and redistribute it under the FreeBSD license.
+## Part of rOpenGov <ropengov.github.io>.
 ```
 
 ----
@@ -280,12 +281,8 @@ Spatial data from [National Land Survey Finland](http://www.maanmittauslaitos.fi
 (Maanmittauslaitos, MML). These data are preprocessed into RData format, see 
 details [here](https://github.com/avoindata/mml).
 
-List available data sets with `list_mml_datasets()`.
+List available data sets (output not shown here): 
 
-
-```r
-list_mml_datasets()
-```
 
 ```
 ## $`2012`
@@ -393,6 +390,126 @@ spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))),
 
 ![plot of chunk MML_municipality](figure/MML_municipality-1.png) 
 
+
+## <a name="examples"></a>Further examples
+
+### Visualizing Finnish municipalities with your own data
+
+Here we show examples with the standard shape tools. For interactive maps, see [leaflet](https://rstudio.github.io/leaflet/map_widget.html) and [rMaps](http://rmaps.github.io/). Examples to be added later.
+
+With Land Survey Finland maps:
+
+
+```r
+# Get municipality population data from Statistics Finland
+# using the pxweb package
+library(sotkanet)
+mydata <- get_pxweb_data(url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/Kuntien_talous_ja_toiminta/Kunnat/ktt14/080_ktt14_2013_fi.px",
+             dims = list(Alue = c('*'),
+                         Tunnusluku = c('30'),
+                         Vuosi = c('Arvo')),
+             clean = TRUE)
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "get_pxweb_data"
+```
+
+```r
+# Pick municipality ID from the text field
+mydata$Kuntakoodi <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[1]])
+```
+
+```
+## Error in strsplit(as.character(mydata$Alue), " "): object 'mydata' not found
+```
+
+```r
+mydata$Kunta <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[2]])
+```
+
+```
+## Error in strsplit(as.character(mydata$Alue), " "): object 'mydata' not found
+```
+
+```r
+# Rename fields for clarity
+mydata$Asukasluku <- mydata$values
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'mydata' not found
+```
+
+```r
+# Pick only the necessary fields for clarity
+mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'mydata' not found
+```
+
+```r
+# Get the municipality map for visualization
+sp <- get_mml(map.id="Yleiskartta-1000", data.id="HallintoAlue")
+# Convert municipality ID to character (for matching)
+sp@data$Kunta <- as.character(sp@data$Kunta)
+
+
+# Merge the Finnish map shape file and the population data based on
+# the 'Kunta' field. The population data contains also some other
+# regions besides municipalities. These will be ignored when merged
+# with the municipality map:
+sp2 <- sp::merge(sp, population, all.x = TRUE, by = "Kunta")
+```
+
+```
+## Error in `[.data.frame`(y, , by.y, drop = FALSE): undefined columns selected
+```
+
+```r
+# Plot the shape file, colour municipalities by population
+spplot(sp2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
+```
+
+```
+## Error in `[.data.frame`(obj@data, zcol): undefined columns selected
+```
+
+
+With GADM maps. You can select the desired maps at the [GADM service](http://gadm.org/country). Choose Finland and file format R. This will give the [link to the Finnish municipality data file](http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData):
+
+
+```r
+# Load municipality borders from GADM:
+con <- url("http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData")
+load(con); close(con)
+
+# Convert NAME field into factor (needed for plots)
+gadm$NAME_4 <- factor(gadm$NAME_4)
+
+# Merge the Finnish map shape file and the population data based on
+# the 'Kunta' field (see above)
+gadm2 <- sp::merge(gadm, mydata, by.x = "NAME_4", by.y = "Kunta", all.x = TRUE)
+```
+
+```
+## Error in sp::merge(gadm, mydata, by.x = "NAME_4", by.y = "Kunta", all.x = TRUE): error in evaluating the argument 'y' in selecting a method for function 'merge': Error: object 'mydata' not found
+```
+
+```r
+# Plot the shape file, colour municipalities by population
+# It turns out that not all municipality names can be matched.
+# We are happy to add solutions here if you have any.
+spplot(gadm2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
+```
+
+```
+## Error in spplot(gadm2, zcol = "Asukasluku", colorkey = TRUE, main = "Population in Finnish municipalities"): error in evaluating the argument 'obj' in selecting a method for function 'spplot': Error: object 'gadm2' not found
+```
+
+
 ----
 
 ## <a name="geocoding"></a>Geocoding
@@ -481,13 +598,14 @@ if (length(layers) > 0) layers
 ##  [5] "vaestoruutu:vaki2011_1km"    "vaestoruutu:vaki2011_1km_kp"
 ##  [7] "vaestoruutu:vaki2012_1km"    "vaestoruutu:vaki2012_1km_kp"
 ##  [9] "vaestoruutu:vaki2013_1km"    "vaestoruutu:vaki2013_1km_kp"
-## [11] "vaestoruutu:vaki2005_5km"    "vaestoruutu:vaki2010_5km"   
-## [13] "vaestoruutu:vaki2011_5km"    "vaestoruutu:vaki2012_5km"   
-## [15] "vaestoruutu:vaki2013_5km"   
+## [11] "vaestoruutu:vaki2014_1km"    "vaestoruutu:vaki2014_1km_kp"
+## [13] "vaestoruutu:vaki2005_5km"    "vaestoruutu:vaki2010_5km"   
+## [15] "vaestoruutu:vaki2011_5km"    "vaestoruutu:vaki2012_5km"   
+## [17] "vaestoruutu:vaki2013_5km"    "vaestoruutu:vaki2014_5km"   
 ## attr(,"driver")
 ## [1] "WFS"
 ## attr(,"nlayers")
-## [1] 15
+## [1] 18
 ```
 
 Get population density in year 2005 on a 5 km x 5 km grid, convert to 
@@ -572,28 +690,36 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.2 (2014-10-31)
-## Platform: x86_64-apple-darwin13.4.0 (64-bit)
+## R version 3.2.0 (2015-04-16)
+## Platform: x86_64-unknown-linux-gnu (64-bit)
+## Running under: Ubuntu 15.04
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] raster_2.3-24   ggplot2_1.0.0   rgeos_0.3-8     maptools_0.8-30
-## [5] gisfin_0.9.21   R6_2.0.1        rgdal_0.9-1     sp_1.0-17      
-## [9] knitr_1.9      
+##  [1] raster_2.3-40      sotkanet_0.9.11    rjson_0.2.15      
+##  [4] RCurl_1.95-4.6     bitops_1.0-6       ggplot2_1.0.1     
+##  [7] maptools_0.8-36    gisfin_0.9.24      R6_2.0.1          
+## [10] rgdal_0.9-3        sp_1.1-0           knitr_1.10.5      
+## [13] scimapClient_0.2.1
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] bitops_1.0-6     boot_1.3-14      coda_0.16-1      colorspace_1.2-4
-##  [5] deldir_0.1-7     digest_0.6.8     evaluate_0.5.5   foreign_0.8-62  
-##  [9] formatR_1.0      grid_3.1.2       gtable_0.1.2     labeling_0.3    
-## [13] lattice_0.20-29  LearnBayes_2.15  MASS_7.3-37      Matrix_1.1-5    
-## [17] munsell_0.4.2    nlme_3.1-119     plyr_1.8.1       proto_0.3-10    
-## [21] Rcpp_0.11.4      RCurl_1.95-4.5   reshape2_1.4.1   rjson_0.2.15    
-## [25] scales_0.2.4     spdep_0.5-83     splines_3.1.2    stringr_0.6.2   
-## [29] tools_3.1.2      XML_3.98-1.1
+##  [1] Rcpp_0.11.6      spdep_0.5-88     formatR_1.2      plyr_1.8.2      
+##  [5] LearnBayes_2.15  tools_3.2.0      boot_1.3-16      digest_0.6.8    
+##  [9] evaluate_0.7     gtable_0.1.2     nlme_3.1-120     lattice_0.20-31 
+## [13] Matrix_1.2-0     proto_0.3-10     coda_0.17-1      stringr_1.0.0   
+## [17] rgeos_0.3-8      grid_3.2.0       XML_3.98-1.2     foreign_0.8-63  
+## [21] RJSONIO_1.3-0    reshape2_1.4.1   deldir_0.1-9     magrittr_1.5    
+## [25] scales_0.2.4     MASS_7.3-40      splines_3.2.0    colorspace_1.2-6
+## [29] labeling_0.3     stringi_0.4-1    munsell_0.4.2
 ```
 

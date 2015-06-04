@@ -323,7 +323,7 @@ sp@data$Kunta <- as.character(sp@data$Kunta)
 # the 'Kunta' field. The population data contains also some other
 # regions besides municipalities. These will be ignored when merged
 # with the municipality map:
-sp2 <- sp::merge(sp, population, all.x = TRUE, by = "Kunta")
+sp2 <- sp::merge(sp, mydata, all.x = TRUE, by.x = "Kunta", by.y="Kuntakoodi")
 
 # Plot the shape file, colour municipalities by population
 spplot(sp2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")

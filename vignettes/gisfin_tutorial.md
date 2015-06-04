@@ -420,21 +420,13 @@ sp@data$Kunta <- as.character(sp@data$Kunta)
 # the 'Kunta' field. The population data contains also some other
 # regions besides municipalities. These will be ignored when merged
 # with the municipality map:
-sp2 <- sp::merge(sp, population, all.x = TRUE, by = "Kunta")
-```
+sp2 <- sp::merge(sp, mydata, all.x = TRUE, by.x = "Kunta", by.y="Kuntakoodi")
 
-```
-## Error in as.data.frame.default(y): cannot coerce class "structure("RasterStack", package = "raster")" to a data.frame
-```
-
-```r
 # Plot the shape file, colour municipalities by population
 spplot(sp2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
 ```
 
-```
-## Error in `[.data.frame`(obj@data, zcol): undefined columns selected
-```
+![plot of chunk gisfin-owndata1](figure/gisfin-owndata1-1.png) 
 
 
 Same with GADM maps. You can select the desired maps at the [GADM service](http://gadm.org/country). Choose Finland and file format R. This will give the [link to the Finnish municipality data file](http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData):

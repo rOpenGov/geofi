@@ -1,11 +1,11 @@
 Package: gisfin
 Type: Package
-Title: Finland GIS R tools
-Version: 0.9.22
-Date: 2015-03-13
+Title: Finland GIS R Tools
+Version: 0.9.23
+Date: 2015-06-04
 Author: Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo, Janne Aukia
-Maintainer: Joona Lehtomaki, Jussi Jousimo <louhos@googlegroups.com>
-Description: R tools for reading open geographical data in Finland.
+Maintainer: "Joona Lehtomaki, Jussi Jousimo <louhos@googlegroups.com>"
+Description: Tools for reading open geographical data in Finland.
 License: BSD_2_clause + file LICENSE
 Depends:
     R (>= 3.0.1),
@@ -23,7 +23,6 @@ Suggests:
     rgeos,
     maptools
 URL: https://github.com/ropengov/gisfin
-LazyLoad: yes
 Collate:
     'WFSClient.R'
     'GeoStatFi.R'

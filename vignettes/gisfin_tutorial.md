@@ -407,7 +407,7 @@ mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
 ```
 
 
-Visualize municipality population data with Land Survey Finland (MML) maps:
+Visualize municipality population data with Land Survey Finland (MML) maps. See also [blog post on this topic](http://louhos.github.io/news/2015/06/06/kuntakartat/):
 
 
 ```r
@@ -426,11 +426,11 @@ spplot(sp2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish muni
 
 ![plot of chunk gisfin-owndata1](figure/gisfin-owndata1-1.png) 
 
-You can also use fast wrapper for interactive visualization. This generates ggplot2-object that can be further modified if necessary:
+You can use fast wrapper for interactive visualization. This generates ggplot2-object that can be further modified if necessary:
 
 
 ```r
-p <- region_plot(sp2, color = "Asukasluku", region = "kuntakoodi")
+p <- region_plot(sp2, color = "Asukasluku", region = "kuntakoodi", by = 100000)
 print(p)
 ```
 

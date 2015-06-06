@@ -5,7 +5,7 @@ Version: 0.9.25
 Date: 2015-06-06
 Authors@R: c(
     person("Jousimo", "Jussi", email = "louhos@googlegroups.com", role = c("aut", "cre")),
-    person("Lehtomaki", "Joona", role = c("aut", "cre")),
+    person("Lehtomaki", "Joona", role = c("aut")),
     person("Lahti", "Leo", role = c("aut")),
     person("Aukia", "Janne", role = c("aut")),
     person("Parkkinen", "Juuso", role = c("aut")))

@@ -396,7 +396,8 @@ mydata$Asukasluku <- mydata$values
 mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
 ```
 
-Visualize municipality population data with Land Survey Finland (MML) maps. See also [blog post on this topic](http://louhos.github.io/news/2015/06/06/kuntakartat/). Use a fast wrapper that generates ggplot2-object that can be further modified if necessary:
+
+Visualize population with Land Survey Finland (MML) maps. See also [blog post on this topic](http://louhos.github.io/news/2015/06/06/kuntakartat/). Use a fast wrapper that generates ggplot2-object that can be further modified if necessary:
 
 
 

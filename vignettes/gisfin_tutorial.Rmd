@@ -329,8 +329,8 @@ spplot(sp2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish muni
 
 You can also use fast wrapper for interactive visualization. This generates ggplot2-object that can be further modified if necessary:
 
-```{r regionplotwrapper, warning=FALSE, message=FALSE}
-p <- region_plot(sp2, color = "Asukasluku", region = "kuntakoodi")
+```{r regionplotwrapper, warning=FALSE, message=FALSE, fig.width=5, fig.height=10}
+p <- region_plot(sp2, color = "Asukasluku", region = "kuntakoodi", by = 50000)
 print(p)
 ```
 

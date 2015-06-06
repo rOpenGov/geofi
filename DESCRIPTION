@@ -1,8 +1,8 @@
 Package: gisfin
 Type: Package
 Title: Finland GIS R Tools
-Version: 0.9.24
-Date: 2015-06-04
+Version: 0.9.25
+Date: 2015-06-06
 Author: Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo, Janne Aukia
 Maintainer: Joona Lehtomaki, Jussi Jousimo <louhos@googlegroups.com>
 Description: Tools for reading open geographical data in Finland.

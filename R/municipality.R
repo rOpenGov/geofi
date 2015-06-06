@@ -9,6 +9,7 @@
 #'    GADM \url{http://gadm.org/country}. For further maps from MML, see \code{\link{get_mml}}. For further maps from GADM, see \url{http://gadm.org/country}. Note that the GADM map data is not up-to-date.
 #'
 #' @export
+#' @seealso \code{\link{get_mml}}
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin") 
 #' @examples sp <- get_municipality_map("MML")

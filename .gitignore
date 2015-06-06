@@ -12,5 +12,6 @@ gisfin.Rproj
 vignettes/gisfin_tutorial.txt
 cache/
 vignetttes/cache/
+vignetttes/.RData
 gisfin_tutorial.txt
 .DS_Store

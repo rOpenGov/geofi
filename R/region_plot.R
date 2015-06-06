@@ -1,6 +1,6 @@
 #' Fast wrapper for visualizing regions on a map
 #' 
-#' @param sp \link{SpatialPolygon} shape object
+#' @param sp \link{SpatialPolygonsDataFrame} object
 #' @param color Colour variable for filling
 #' @param region Grouping variable (the desired regions)
 #' @param palette Colour palette
@@ -10,10 +10,19 @@
 #' @return \link{ggplot2} object
 #'
 #' @export
+#' @importFrom ggplot2 theme_set
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 geom_polygon
+#' @importFrom ggplot2 scale_fill_gradientn
+#' @importFrom ggplot2 ggtitle
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin") 
 #' @examples sp <- get_municipality_map("MML"); region_plot(sp, color = "Kieli_ni1", region = "kuntakoodi") 
 region_plot <- function (sp, color, region, palette = c("darkblue", "blue", "white", "red", "darkred"), by = 20, main = "") {
+
+  # Avoid warnings in build
+  fill <- group <- long <- lat <- NULL
 
   # Get data frame
   df <- sp2df(sp)

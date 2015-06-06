@@ -9,6 +9,7 @@
 #'    GADM \url{http://gadm.org/country}. For further maps from MML, see \code{\link{get_mml}}. For further maps from GADM, see \url{http://gadm.org/country}. Note that the GADM map data is not up-to-date.
 #'
 #' @export
+#' @importFrom ggplot2 theme_set
 #' @seealso \code{\link{get_mml}}
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin") 
@@ -43,12 +44,11 @@ get_municipality_map <- function (data.source = "MML") {
     gadm$kuntanimi <- factor(gadm$kuntanimi)
 
     # Harmonize municipality names
-    map.gadm$kuntanimi <- convert_municipality_names(as.character(map.gadm$kuntanimi))
+    #map.gadm$kuntanimi <- convert_municipality_names(as.character(map.gadm$kuntanimi))
     # TODO: there are too many municipalities and some names are outdated.
     # Provide proper preprocessing. 
-
     # TODO: Add municipality code after the municipality names are up-to-date
-    map.gadm$kuntakoodi <- convert_municipality_codes(municipalities = map.gadm$kuntanimi) 
+    #map.gadm$kuntakoodi <- convert_municipality_codes(municipalities = map.gadm$kuntanimi) 
  
     sp <- gadm
 

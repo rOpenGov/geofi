@@ -310,10 +310,10 @@ mydata$Asukasluku <- mydata$values
 mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
 ```
 
+Visualize municipality population data with Land Survey Finland (MML) maps. See also [blog post on this topic](http://louhos.github.io/news/2015/06/06/kuntakartat/). Use a fast wrapper that generates ggplot2-object that can be further modified if necessary:
 
-Visualize municipality population data with Land Survey Finland (MML) maps. See also [blog post on this topic](http://louhos.github.io/news/2015/06/06/kuntakartat/):
 
-```{r gisfin-owndata1, message=FALSE, warning=FALSE}
+```{r gisfin-owndata1, message=FALSE, warning=FALSE, fig.width=4, fig.height=9}
 # Get the municipality map for visualization
 sp <- get_municipality_map(data.source = "MML")
 
@@ -323,17 +323,11 @@ sp <- get_municipality_map(data.source = "MML")
 # with the municipality map:
 sp2 <- sp::merge(sp, mydata, all.x = TRUE, by.x = "kuntakoodi", by.y="Kuntakoodi")
 
-# Plot the shape file, colour municipalities by population
-spplot(sp2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
-```
-
-You can use fast wrapper for interactive visualization. This generates ggplot2-object that can be further modified if necessary:
-
-```{r regionplotwrapper, warning=FALSE, message=FALSE, fig.width=4, fig.height=10}
 p <- region_plot(sp2, color = "Asukasluku", region = "kuntakoodi", by = 100000)
 print(p)
 ```
 
+### Using GADM maps
 
 Same with GADM maps. You can select the desired maps at the [GADM service](http://gadm.org/country). Choose Finland and file format R. This will give the [link to the Finnish municipality data file](http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData). GADM contains very useful maps but the Finnish municipality map data seems a bit outdated:
 

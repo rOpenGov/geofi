@@ -137,6 +137,22 @@ Load package.
 library("gisfin")
 ```
 
+```
+## Loading required package: rgdal
+## Loading required package: sp
+## rgdal: version: 0.9-3, (SVN revision 530)
+##  Geospatial Data Abstraction Library extensions to R successfully loaded
+##  Loaded GDAL runtime: GDAL 1.11.2, released 2015/02/10
+##  Path to GDAL shared files: /usr/share/gdal/1.11
+##  Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
+##  Path to PROJ.4 shared files: (autodetected)
+##  Linking to sp version: 1.1-0 
+## Loading required package: R6
+## 
+## gisfin R package: tools for open GIS data for Finland.
+## Part of rOpenGov <ropengov.github.io>.
+```
+
 ----
 
 ## <a name="aluejakokartat"></a>Helsinki region district maps
@@ -406,8 +422,8 @@ mydata$Asukasluku <- mydata$values
 mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
 ```
 
+Visualize municipality population data with Land Survey Finland (MML) maps. See also [blog post on this topic](http://louhos.github.io/news/2015/06/06/kuntakartat/). Use a fast wrapper that generates ggplot2-object that can be further modified if necessary:
 
-Visualize municipality population data with Land Survey Finland (MML) maps. See also [blog post on this topic](http://louhos.github.io/news/2015/06/06/kuntakartat/):
 
 
 ```r
@@ -420,22 +436,13 @@ sp <- get_municipality_map(data.source = "MML")
 # with the municipality map:
 sp2 <- sp::merge(sp, mydata, all.x = TRUE, by.x = "kuntakoodi", by.y="Kuntakoodi")
 
-# Plot the shape file, colour municipalities by population
-spplot(sp2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
-```
-
-![plot of chunk gisfin-owndata1](figure/gisfin-owndata1-1.png) 
-
-You can use fast wrapper for interactive visualization. This generates ggplot2-object that can be further modified if necessary:
-
-
-```r
 p <- region_plot(sp2, color = "Asukasluku", region = "kuntakoodi", by = 100000)
 print(p)
 ```
 
-![plot of chunk regionplotwrapper](figure/regionplotwrapper-1.png) 
+![plot of chunk gisfin-owndata1](figure/gisfin-owndata1-1.png) 
 
+### Using GADM maps
 
 Same with GADM maps. You can select the desired maps at the [GADM service](http://gadm.org/country). Choose Finland and file format R. This will give the [link to the Finnish municipality data file](http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData). GADM contains very useful maps but the Finnish municipality map data seems a bit outdated:
 

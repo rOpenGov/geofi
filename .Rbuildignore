@@ -8,4 +8,7 @@
 inst/extras/.RData
 .git
 inst/extras/...Rcheck
-	  
+
+# Vignettes
+vignettes/.RData
+

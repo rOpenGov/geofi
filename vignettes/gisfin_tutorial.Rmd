@@ -262,9 +262,9 @@ sp.mml <- get_mml(map.id="Yleiskartta-4500", data.id="HallintoAlue")
 head(as.data.frame(sp.mml))
 ```
 
-You can list other available data sets with (output not shown): 
+You can list other available data sets: 
 
-```{r MML_list, message=FALSE, echo=TRUE, results='none'} 
+```{r MML_list, message=FALSE, echo=TRUE} 
 list_mml_datasets()
 ```
 

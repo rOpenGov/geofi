@@ -252,11 +252,6 @@ Spatial data from [National Land Survey Finland](http://www.maanmittauslaitos.fi
 (Maanmittauslaitos, MML). These data are preprocessed into RData format, see 
 details [here](https://github.com/avoindata/mml).
 
-List available data sets (output not shown here): 
-
-```{r MML_list, message=FALSE, echo=FALSE} 
-list_mml_datasets()
-```
 
 Retrieve regional borders for Finland with `get_mml()`.
 
@@ -267,16 +262,10 @@ sp.mml <- get_mml(map.id="Yleiskartta-4500", data.id="HallintoAlue")
 head(as.data.frame(sp.mml))
 ```
 
-Plot municipalities (kunnat) with `spplot()`, using colours from 
-`generate_map_colours()`.
+You can list other available data sets with (output not shown): 
 
-
-```{r MML_municipality, message=FALSE, warning=FALSE}
-# Get region colouring for municipalities
-sp.mml@data$COL <- factor(generate_map_colours(sp.mml))
-# Plot the shape file, colour municipalities
-spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))), 
-       colorkey=FALSE)
+```{r MML_list, message=FALSE, echo=TRUE, results='false'} 
+list_mml_datasets()
 ```
 
 
@@ -313,7 +302,7 @@ mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
 Visualize municipality population data with Land Survey Finland (MML) maps. See also [blog post on this topic](http://louhos.github.io/news/2015/06/06/kuntakartat/). Use a fast wrapper that generates ggplot2-object that can be further modified if necessary:
 
 
-```{r gisfin-owndata1, message=FALSE, warning=FALSE, fig.width=4, fig.height=9}
+```{r gisfin-owndata1, message=FALSE, warning=FALSE, fig.width=4, fig.height=8}
 # Get the municipality map for visualization
 sp <- get_municipality_map(data.source = "MML")
 
@@ -333,7 +322,9 @@ Same with GADM maps. You can select the desired maps at the [GADM service](http:
 
 ```{r gisfin-owndata2, message=FALSE, warning=FALSE}
 # Load municipality borders from GADM:
-con <- url("http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData")
+# sp <- get_municipality_map(data.source = "GADM") # also possible
+gadm.url <- "http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData"
+con <- url(gadm.url)
 load(con); close(con)
 
 # Convert NAME field into factor (needed for plots)

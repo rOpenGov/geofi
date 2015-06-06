@@ -137,22 +137,6 @@ Load package.
 library("gisfin")
 ```
 
-```
-## Loading required package: rgdal
-## Loading required package: sp
-## rgdal: version: 0.9-3, (SVN revision 530)
-##  Geospatial Data Abstraction Library extensions to R successfully loaded
-##  Loaded GDAL runtime: GDAL 1.11.2, released 2015/02/10
-##  Path to GDAL shared files: /usr/share/gdal/1.11
-##  Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 480]
-##  Path to PROJ.4 shared files: (autodetected)
-##  Linking to sp version: 1.1-0 
-## Loading required package: R6
-## 
-## gisfin R package: tools for open GIS data for Finland.
-## Part of rOpenGov <ropengov.github.io>.
-```
-
 ----
 
 ## <a name="aluejakokartat"></a>Helsinki region district maps
@@ -281,44 +265,6 @@ Spatial data from [National Land Survey Finland](http://www.maanmittauslaitos.fi
 (Maanmittauslaitos, MML). These data are preprocessed into RData format, see 
 details [here](https://github.com/avoindata/mml).
 
-List available data sets (output not shown here): 
-
-
-```
-## $`2012`
-## character(0)
-## 
-## $`Maastotietokanta-tiesto1`
-## [1] "N61_v"
-## 
-## $`Maastotietokanta-tiesto2`
-## [1] "N62_p" "N62_s" "N62_t" "N62_v"
-## 
-## $`Yleiskartta-1000`
-##  [1] "AmpumaRaja"             "HallintoAlue"          
-##  [3] "HallintoAlue_DataFrame" "HallintoalueRaja"      
-##  [5] "KaasuJohto"             "KarttanimiPiste500"    
-##  [7] "KarttanimiPiste1000"    "KorkeusAlue"           
-##  [9] "KorkeusViiva500"        "KorkeusViiva1000"      
-## [11] "LentokenttaPiste"       "LiikenneAlue"          
-## [13] "MaaAlue"                "Maasto1Reuna"          
-## [15] "Maasto2Alue"            "MetsaRaja"             
-## [17] "PeltoAlue"              "RautatieViiva"         
-## [19] "SahkoLinja"             "SuojaAlue"             
-## [21] "SuojametsaRaja"         "SuojeluAlue"           
-## [23] "TaajamaAlue"            "TaajamaPiste"          
-## [25] "TieViiva"               "VesiAlue"              
-## [27] "VesiViiva"             
-## 
-## $`Yleiskartta-4500`
-##  [1] "HallintoAlue"        "HallintoalueRaja"    "KarttanimiPiste2000"
-##  [4] "KarttanimiPiste4500" "KarttanimiPiste8000" "KorkeusAlue"        
-##  [7] "KorkeusViiva"        "Maasto1Reuna"        "RautatieViiva"      
-## [10] "TaajamaPiste2000"    "TaajamaPiste4500"    "TaajamaPiste8000"   
-## [13] "TieViiva2000"        "TieViiva4500"        "TieViiva8000"       
-## [16] "VesiAlue"            "VesiViiva2000"       "VesiViiva4500"      
-## [19] "VesiViiva8000"
-```
 
 Retrieve regional borders for Finland with `get_mml()`.
 
@@ -375,20 +321,48 @@ head(as.data.frame(sp.mml))
 ## 019     <NA>
 ```
 
-Plot municipalities (kunnat) with `spplot()`, using colours from 
-`generate_map_colours()`.
-
+You can list other available data sets with (output not shown): 
 
 
 ```r
-# Get region colouring for municipalities
-sp.mml@data$COL <- factor(generate_map_colours(sp.mml))
-# Plot the shape file, colour municipalities
-spplot(sp.mml, zcol="COL", col.regions=rainbow(length(levels(sp.mml@data$COL))), 
-       colorkey=FALSE)
+list_mml_datasets()
 ```
 
-![plot of chunk MML_municipality](figure/MML_municipality-1.png) 
+```
+## $`2012`
+## character(0)
+## 
+## $`Maastotietokanta-tiesto1`
+## [1] "N61_v"
+## 
+## $`Maastotietokanta-tiesto2`
+## [1] "N62_p" "N62_s" "N62_t" "N62_v"
+## 
+## $`Yleiskartta-1000`
+##  [1] "AmpumaRaja"             "HallintoAlue"          
+##  [3] "HallintoAlue_DataFrame" "HallintoalueRaja"      
+##  [5] "KaasuJohto"             "KarttanimiPiste500"    
+##  [7] "KarttanimiPiste1000"    "KorkeusAlue"           
+##  [9] "KorkeusViiva500"        "KorkeusViiva1000"      
+## [11] "LentokenttaPiste"       "LiikenneAlue"          
+## [13] "MaaAlue"                "Maasto1Reuna"          
+## [15] "Maasto2Alue"            "MetsaRaja"             
+## [17] "PeltoAlue"              "RautatieViiva"         
+## [19] "SahkoLinja"             "SuojaAlue"             
+## [21] "SuojametsaRaja"         "SuojeluAlue"           
+## [23] "TaajamaAlue"            "TaajamaPiste"          
+## [25] "TieViiva"               "VesiAlue"              
+## [27] "VesiViiva"             
+## 
+## $`Yleiskartta-4500`
+##  [1] "HallintoAlue"        "HallintoalueRaja"    "KarttanimiPiste2000"
+##  [4] "KarttanimiPiste4500" "KarttanimiPiste8000" "KorkeusAlue"        
+##  [7] "KorkeusViiva"        "Maasto1Reuna"        "RautatieViiva"      
+## [10] "TaajamaPiste2000"    "TaajamaPiste4500"    "TaajamaPiste8000"   
+## [13] "TieViiva2000"        "TieViiva4500"        "TieViiva8000"       
+## [16] "VesiAlue"            "VesiViiva2000"       "VesiViiva4500"      
+## [19] "VesiViiva8000"
+```
 
 
 ## <a name="examples"></a>Further examples
@@ -449,7 +423,9 @@ Same with GADM maps. You can select the desired maps at the [GADM service](http:
 
 ```r
 # Load municipality borders from GADM:
-con <- url("http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData")
+# sp <- get_municipality_map(data.source = "GADM") # also possible
+gadm.url <- "http://biogeo.ucdavis.edu/data/gadm2/R/FIN_adm4.RData"
+con <- url(gadm.url)
 load(con); close(con)
 
 # Convert NAME field into factor (needed for plots)

@@ -3,8 +3,7 @@
 #' @param ip IP address as character
 #' @return Latitude and longitude as a numeric vector
 #' @export 
-#' @references
-#' See citation("gisfin") 
+#' @references See citation("gisfin") 
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
 #' @note Modified from original version by Kay Cichini
 #' @examples \dontrun{ip_location("137.224.252.10")}

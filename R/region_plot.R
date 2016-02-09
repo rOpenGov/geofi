@@ -1,12 +1,12 @@
 #' @title Fast wrapper for visualizing regions on a map
-#' @description Fast wrapper for visualizing regions on a map
+#' @description Fast wrapper for visualizing regions on a map.
 #' @param sp \link{SpatialPolygonsDataFrame} object
 #' @param color Colour variable for filling
 #' @param region Grouping variable (the desired regions)
 #' @param palette Colour palette
 #' @param by Interval for colors
 #' @param main Plot title
-#' @return \link{ggplot2} object
+#' @return \code{\link{ggplot2}} object
 #' @export
 #' @importFrom ggplot2 theme_set
 #' @importFrom ggplot2 ggplot

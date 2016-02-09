@@ -10,7 +10,7 @@
 #' @keywords utilities
 ip_location <- function(ip) {
 
-   url <- "http://www.datasciencetoolkit.org//ip2coordinates/"
+   url <- "http://www.datasciencetoolkit.org/ip2coordinates/"
    URL_IP <- paste(url, ip, sep = "")
 
    message(paste("Retrieving the IP", ip, "from ", url))

@@ -284,53 +284,20 @@ Retrieve regional borders for Finland with `get_mml()`.
 # Get a specific map
 sp.mml <- get_mml(map.id="Yleiskartta-4500", data.id="HallintoAlue")
 # Investigate available variables in this map
-head(as.data.frame(sp.mml))
+library(knitr)
+kable(head(as.data.frame(sp.mml)))
 ```
 
-```
-##     Kohderyhma Kohdeluokk Enklaavi AVI Maakunta Kunta
-## 005         71      84200        1   4       14   005
-## 009         71      84200        1   5       17   009
-## 010         71      84200        1   4       14   010
-## 016         71      84200        1   1       07   016
-## 018         71      84200        1   1       01   018
-## 019         71      84200        1   2       02   019
-##                                       AVI_ni1
-## 005 Länsi- ja Sisä-Suomen aluehallintovirasto
-## 009        Pohjois-Suomen aluehallintovirasto
-## 010 Länsi- ja Sisä-Suomen aluehallintovirasto
-## 016          Etelä-Suomen aluehallintovirasto
-## 018          Etelä-Suomen aluehallintovirasto
-## 019        Lounais-Suomen aluehallintovirasto
-##                                                AVI_ni2         Maaku_ni1
-## 005 Regionförvaltningsverket i Västra och Inre Finland   Etelä-Pohjanmaa
-## 009           Regionförvaltningsverket i Norra Finland Pohjois-Pohjanmaa
-## 010 Regionförvaltningsverket i Västra och Inre Finland   Etelä-Pohjanmaa
-## 016           Regionförvaltningsverket i Södra Finland       Päijät-Häme
-## 018           Regionförvaltningsverket i Södra Finland           Uusimaa
-## 019       Regionförvaltningsverket i Sydvästra Finland   Varsinais-Suomi
-##               Maaku_ni2 Kunta_ni1 Kunta_ni2 Kieli_ni1 Kieli_ni2
-## 005   Södra Österbotten  Alajärvi       N_A     Suomi       N_A
-## 009   Norra Österbotten Alavieska       N_A     Suomi       N_A
-## 010   Södra Österbotten    Alavus       N_A     Suomi       N_A
-## 016 Päijänne-Tavastland  Asikkala       N_A     Suomi       N_A
-## 018              Nyland    Askola       N_A     Suomi       N_A
-## 019   Egentliga Finland      Aura       N_A     Suomi       N_A
-##                                        AVI.FI Kieli.FI       Maakunta.FI
-## 005 Länsi- ja Sisä-Suomen aluehallintovirasto    Suomi  EtelÃ¤-Pohjanmaa
-## 009        Pohjois-Suomen aluehallintovirasto    Suomi Pohjois-Pohjanmaa
-## 010 Länsi- ja Sisä-Suomen aluehallintovirasto    Suomi  EtelÃ¤-Pohjanmaa
-## 016          Etelä-Suomen aluehallintovirasto    Suomi    PÃ¤ijÃ¤t-HÃ¤me
-## 018          Etelä-Suomen aluehallintovirasto    Suomi           Uusimaa
-## 019        Lounais-Suomen aluehallintovirasto    Suomi   Varsinais-Suomi
-##     Kunta.FI
-## 005     <NA>
-## 009     <NA>
-## 010     <NA>
-## 016     <NA>
-## 018     <NA>
-## 019     <NA>
-```
+
+
+|    | Kohderyhma| Kohdeluokk| Enklaavi|AVI |Maakunta |Kunta |AVI_ni1                                   |AVI_ni2                                            |Maaku_ni1         |Maaku_ni2           |Kunta_ni1 |Kunta_ni2 |Kieli_ni1 |Kieli_ni2 |AVI.FI                                    |Kieli.FI |Maakunta.FI       |Kunta.FI |
+|:---|----------:|----------:|--------:|:---|:--------|:-----|:-----------------------------------------|:--------------------------------------------------|:-----------------|:-------------------|:---------|:---------|:---------|:---------|:-----------------------------------------|:--------|:-----------------|:--------|
+|005 |         71|      84200|        1|4   |14       |005   |Länsi- ja Sisä-Suomen aluehallintovirasto |Regionförvaltningsverket i Västra och Inre Finland |Etelä-Pohjanmaa   |Södra Österbotten   |Alajärvi  |N_A       |Suomi     |N_A       |Länsi- ja Sisä-Suomen aluehallintovirasto |Suomi    |EtelÃ¤-Pohjanmaa  |NA       |
+|009 |         71|      84200|        1|5   |17       |009   |Pohjois-Suomen aluehallintovirasto        |Regionförvaltningsverket i Norra Finland           |Pohjois-Pohjanmaa |Norra Österbotten   |Alavieska |N_A       |Suomi     |N_A       |Pohjois-Suomen aluehallintovirasto        |Suomi    |Pohjois-Pohjanmaa |NA       |
+|010 |         71|      84200|        1|4   |14       |010   |Länsi- ja Sisä-Suomen aluehallintovirasto |Regionförvaltningsverket i Västra och Inre Finland |Etelä-Pohjanmaa   |Södra Österbotten   |Alavus    |N_A       |Suomi     |N_A       |Länsi- ja Sisä-Suomen aluehallintovirasto |Suomi    |EtelÃ¤-Pohjanmaa  |NA       |
+|016 |         71|      84200|        1|1   |07       |016   |Etelä-Suomen aluehallintovirasto          |Regionförvaltningsverket i Södra Finland           |Päijät-Häme       |Päijänne-Tavastland |Asikkala  |N_A       |Suomi     |N_A       |Etelä-Suomen aluehallintovirasto          |Suomi    |PÃ¤ijÃ¤t-HÃ¤me    |NA       |
+|018 |         71|      84200|        1|1   |01       |018   |Etelä-Suomen aluehallintovirasto          |Regionförvaltningsverket i Södra Finland           |Uusimaa           |Nyland              |Askola    |N_A       |Suomi     |N_A       |Etelä-Suomen aluehallintovirasto          |Suomi    |Uusimaa           |NA       |
+|019 |         71|      84200|        1|2   |02       |019   |Lounais-Suomen aluehallintovirasto        |Regionförvaltningsverket i Sydvästra Finland       |Varsinais-Suomi   |Egentliga Finland   |Aura      |N_A       |Suomi     |N_A       |Lounais-Suomen aluehallintovirasto        |Suomi    |Varsinais-Suomi   |NA       |
 
 You can list other available data sets: 
 
@@ -390,13 +357,6 @@ First, retrieve population data (2013) for Finnish municipalities:
 # Get municipality population data from Statistics Finland
 # using the pxweb package
 library(pxweb)
-```
-
-```
-## Error in library(pxweb): there is no package called 'pxweb'
-```
-
-```r
 mydata <- get_pxweb_data(url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/Kuntien_talous_ja_toiminta/Kunnat/ktt14/080_ktt14_2013_fi.px",
              dims = list(Alue = c('*'),
                          Tunnusluku = c('30'),
@@ -405,7 +365,7 @@ mydata <- get_pxweb_data(url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/Kuntien
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "get_pxweb_data"
+## Error: Success: (200) OK
 ```
 
 ```r
@@ -732,17 +692,19 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] raster_2.5-2  ggplot2_2.0.0 gisfin_0.9.26 R6_2.1.2      rgdal_1.1-3  
-## [6] sp_1.2-1      knitr_1.12   
+## [1] raster_2.5-2  pxweb_0.5.58  ggplot2_2.0.0 gisfin_0.9.26 R6_2.1.2     
+## [6] rgdal_1.1-3   sp_1.2-1      knitr_1.12   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] spdep_0.5-92     Rcpp_0.12.3      magrittr_1.5     maptools_0.8-37 
-##  [5] splines_3.2.2    MASS_7.3-45      munsell_0.4.2    colorspace_1.2-6
-##  [9] lattice_0.20-33  rjson_0.2.15     stringr_1.0.0    plyr_1.8.3      
-## [13] tools_3.2.2      grid_3.2.2       gtable_0.1.2     nlme_3.1-122    
-## [17] coda_0.18-1      deldir_0.1-9     digest_0.6.9     Matrix_1.2-3    
-## [21] formatR_1.2.1    bitops_1.0-6     RCurl_1.95-4.7   evaluate_0.8    
-## [25] stringi_1.0-1    LearnBayes_2.15  scales_0.3.0     boot_1.3-17     
-## [29] XML_3.98-1.3     foreign_0.8-66
+##  [1] Rcpp_0.12.3      spdep_0.5-92     highr_0.5.1      formatR_1.2.1   
+##  [5] plyr_1.8.3       bitops_1.0-6     LearnBayes_2.15  tools_3.2.2     
+##  [9] boot_1.3-17      digest_0.6.9     jsonlite_0.9.19  evaluate_0.8    
+## [13] nlme_3.1-122     gtable_0.1.2     lattice_0.20-33  Matrix_1.2-3    
+## [17] curl_0.9.5       coda_0.18-1      stringr_1.0.0    httr_1.1.0      
+## [21] grid_3.2.2       data.table_1.9.6 XML_3.98-1.3     foreign_0.8-66  
+## [25] RJSONIO_1.3-0    deldir_0.1-9     magrittr_1.5     scales_0.3.0    
+## [29] MASS_7.3-45      splines_3.2.2    maptools_0.8-37  colorspace_1.2-6
+## [33] stringi_1.0-1    RCurl_1.95-4.7   munsell_0.4.2    chron_2.3-47    
+## [37] rjson_0.2.15
 ```
 

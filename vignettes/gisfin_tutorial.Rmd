@@ -4,6 +4,12 @@
 -->
 
 
+```{r setup, include=FALSE}
+# Global options
+library(knitr)
+opts_chunk$set(fig.path="fig/")
+```
+
 ```{r knit, eval=FALSE, echo=FALSE}
 # How to knit this document into .md and .html
 library(knitr)

@@ -1,25 +1,28 @@
-#' Get geocode for given query
-#'
-#' Get gecode for given query from one of the geocoding services:
+#' @title Get geocode for given query
+#' @description Get gecode for given query from one of the geocoding services:
 #' OKF.fi Geocoding API Test Console: http://data.okf.fi/console/
 #' OpenStreetMap Nominatim
-#' (usage policy: http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy)
+#' (usage policy: \url{http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy})
 #' Google Maps API
-#' See Terms and Conditions from http://code.google.com/apis/maps/documentation/geocoding/
+#' See Terms and Conditions from \url{http://code.google.com/apis/maps/documentation/geocoding/}
 #' 
 #' @param query Either a street address, e.g. 'Mannerheimintie 100, Helsinki'
 #' or place, e.g. 'Eduskuntatalo'
 #' @param service Geocoding service to use, one of 'okf', 'openstreetmap' or 'google' 
-#' @param raw_query If true, don't prepend / append some default parameters to query. 
-#' Except for the ones specifying json format, send the query to API as-it-is
+#' @param raw_query If true, don't prepend / append some default parameters to query.  Except for the ones specifying json format, send the query to API as-it-is
 #' @return A list with coordinates (lat, long) of the first output, and the raw output list
 #' @importFrom rjson fromJSON
 #' @export
-#' 
-#' @author Juuso Parkkinen \email{louhos@@googlegroups.com}, minor updates by Aaro 
-#' Salosensaari \email{aaro.salosensaari@@helsinki.fi}
+#' @author Juuso Parkkinen \email{louhos@@googlegroups.com}, minor updates by Aaro Salosensaari \email{aaro.salosensaari@@helsinki.fi} and Leo Lahti.
 #' @references See citation("gisfin")
-#' @examples gc <- get_geocode("Mannerheimintie 100, Helsinki"); 
+#' @examples
+#'  \dontrun{
+#'    # Geocode for a street address:
+#'    gc1 <- get_geocode("Mannerheimintie 100, Helsinki");
+#' 
+#'    # Geocode for a place name
+#'    gc2 <- get_geocode("&city=Helsinki", service="openstreetmap", raw_query=T)
+#' }
 get_geocode <- function(query, service="okf", raw_query=F) {
   
   ## TODO: process outpus into similar format

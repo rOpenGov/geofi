@@ -348,6 +348,7 @@ spplot(gadm2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish mu
 
 ## <a name="geocoding"></a>Geocoding
 
+
 Get geocodes for given location (address etc.) using one of the available 
 services. Please read carefully the usage policies for the different services:
 
@@ -364,10 +365,20 @@ Warning! The geocode results may vary between sources, use with care!
 ```{r geocoding, message=FALSE}
 gc1 <- get_geocode("Mannerheimintie 100, Helsinki", service="okf")
 unlist(gc1[1:2])
+
 gc2 <- get_geocode("Mannerheimintie 100, Helsinki", service="openstreetmap")
 unlist(gc2[1:2])
+
 gc3 <- get_geocode("Mannerheimintie 100, Helsinki", service="google")
 unlist(gc3[1:2])
+```
+
+
+Get geocode for a city (instead of street address; only implemented for OSM at the moment):
+
+```{r geocoding2, message=FALSE}
+gc4 <- get_geocode("&city=Helsinki", service="openstreetmap", raw_query=T)
+unlist(gc4[1:2])
 ```
 
 ----

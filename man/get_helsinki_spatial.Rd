@@ -24,12 +24,9 @@ a spatial object (from SpatialPolygonsDataFrame or SpatialPointsDataFrame class)
 }
 \description{
 Retrieves spatial data for Helsinki region from
-Helsinki Real Estate Department
-(Helsingin kaupungin kiinteistovirasto, HKK)
-through the HKK website
-http://ptp.hel.fi/avoindata/.
-}
-\details{
+Helsinki Real Estate Department (Helsingin kaupungin kiinteistovirasto, HKK)
+through the HKK website \url{http://ptp.hel.fi/avoindata/}.
+
 For licensing information and other details, see http://ptp.hel.fi/avoindata/.
 }
 \examples{

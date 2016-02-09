@@ -1,10 +1,5 @@
-#' Retrieve District Boundaries in Helsinki
-#'
-#' Retrieves District Boundaries data (Aluejakorajat, Aanestysalueet)
-#' from Helsinki Real Estate Department
-#' (Helsingin kaupungin kiinteistovirasto, HKK)
-#' through the HKK website
-#' http://ptp.hel.fi/avoindata/index.html
+#' @title Retrieve District Boundaries in Helsinki
+#' @description Retrieves District Boundaries data (Aluejakorajat, Aanestysalueet) from Helsinki Real Estate Department (Helsingin kaupungin kiinteistovirasto, HKK) through the HKK website \url{http://ptp.hel.fi/avoindata/index.html}
 #'
 #' The data (C) 2011 Helsingin kaupunkimittausosasto.
 #' 
@@ -13,19 +8,14 @@
 #' Run 'get_helsinki_aluejakokartat()' to see available options.
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
 #' @param verbose logical. Should R report extra information on progress? 
-#'
 #' @return a spatial object (from SpatialPolygonsDataFrame class)
-#' 
 #' @import rgdal
 #' @import sp
 #' @export
-#' @note This function replaces sorvi::GetHRIaluejakokartat; The data is now retrieved directly from HKK.
-#'
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin") 
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           spplot(sp.suuralue, zcol="Name");
-
 get_helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir(), verbose=TRUE) {
   
   # If data not specified, return a list of available options
@@ -108,13 +98,10 @@ get_helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 }
 
 
-#' Retrieve spatial data from Helsinki Real Estate Department
-#'
-#' Retrieves spatial data for Helsinki region from
-#' Helsinki Real Estate Department
-#' (Helsingin kaupungin kiinteistovirasto, HKK)
-#' through the HKK website
-#' http://ptp.hel.fi/avoindata/.
+#' @title Retrieve spatial data from Helsinki Real Estate Department
+#' @description Retrieves spatial data for Helsinki region from
+#' Helsinki Real Estate Department (Helsingin kaupungin kiinteistovirasto, HKK)
+#' through the HKK website \url{http://ptp.hel.fi/avoindata/}.
 #'
 #' For licensing information and other details, see http://ptp.hel.fi/avoindata/.
 #'
@@ -125,12 +112,10 @@ get_helsinki_aluejakokartat <- function(map.specifier=NULL, data.dir = tempdir()
 #' Run 'get_helsinki_spatial()' to see available options.
 #' @param data.dir A string. Specify a temporary folder for storing downloaded data.
 #' @param verbose logical. Should R report extra information on progress? 
-#'
 #' @return a spatial object (from SpatialPolygonsDataFrame or SpatialPointsDataFrame class)
 #' @import rgdal
 #' @import sp
 #' @export
-#' 
 #' @references See citation("gisfin") 
 #' @author Juuso Parkkinen, Joona Lehtomaki and Leo Lahti \email{louhos@@googlegroups.com}
 #' @examples sp.piiri <- get_helsinki_spatial(map.type="piirijako", map.specifier="ALUEJAKO_PERUSPIIRI");

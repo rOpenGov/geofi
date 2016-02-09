@@ -2,8 +2,7 @@
 % Please edit documentation in R/ip.R
 \name{ip_location}
 \alias{ip_location}
-\title{Get geographic coordinates for a given IP-address from 
-http://www.datasciencetoolkit.org//ip2coordinates/}
+\title{Get IP location}
 \usage{
 ip_location(ip)
 }
@@ -14,8 +13,7 @@ ip_location(ip)
 Latitude and longitude as a numeric vector
 }
 \description{
-Get geographic coordinates for a given IP-address from 
-http://www.datasciencetoolkit.org//ip2coordinates/
+Get geographic coordinates for a given IP-address from \url{http://www.datasciencetoolkit.org//ip2coordinates/}
 }
 \note{
 Modified from original version by Kay Cichini

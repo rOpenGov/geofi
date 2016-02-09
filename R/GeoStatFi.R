@@ -1,26 +1,9 @@
-# This file is a part of the gisfin package (http://github.com/rOpenGov/gisfin)
-# in association with the rOpenGov project (ropengov.github.io)
-
-# Copyright (C) 2014 Jussi Jousimo / Louhos <louhos.github.com>. 
-# All rights reserved.
-
-# This program is open source software; you can redistribute it and/or modify 
-# it under the terms of the FreeBSD License (keep this notice): 
-# http://en.wikipedia.org/wiki/BSD_licenses
-
-# This program is distributed in the hope that it will be useful, 
-# but WITHOUT ANY WARRANTY; without even the implied warranty of 
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 #' @include WFSClient.R
-#'
 #' @title Builds a WFS request to the \code{stat.fi} geospatial API.
-#' 
 #' @description Builds a WFS request to the \code{stat.fi} geospatial API. The request is submitted with
 #' \code{\link{GeoStatFiWFSClient}} to retrieve the data.
 #' For more information about the API, see \url{http://www.stat.fi/tup/rajapintapalvelut/index_en.html}.
 #' For General Terms of Use, see \url{http://www.stat.fi/org/lainsaadanto/yleiset_kayttoehdot_en.html/}. 
-#'
 #' @section Currently supported data sets:
 #' \itemize{
 #'   \item Population densities in various demographic groups
@@ -28,7 +11,6 @@
 #'   \item Educational institutions
 #'   \item Road accidents
 #' }
-#'
 #' @section Methods:
 #' \itemize{
 #'   \item\code{getPopulationLayers()}: A request for a list of available population grid data sets (layers).
@@ -40,14 +22,11 @@
 #'   \item\code{getPostalCodeAreaLayers()}: A request for a list of available postal code area data sets as a character vector.
 #'   \item\code{getPostalCodeArea(layer)}: A request for postal code area data \code{layer}.
 #' }
-#' 
-#' @usage NULL
-#' @format NULL
 #' @import R6
 #' @references See citation("gisfin")
 #' @author Jussi Jousimo \email{louhos@@googlegroups.com}
 #' @examples
-#' # See the vignette.
+#'   # See the vignette.
 #' @seealso \code{\link{GeoStatFiWFSClient}} \code{\link{WFSStreamingRequest}}
 #' @exportClass GeoStatFiWFSRequest
 #' @export GeoStatFiWFSRequest
@@ -90,14 +69,10 @@ GeoStatFiWFSRequest <- R6::R6Class(
   )
 )
 
-#' @title Retrieves geospatial data from \code{stat.fi}.
-#' 
-#' @description Retrieves geospatial data from Statistics Finland (\url{http://www.stat.fi}). A request object
+#' @title Retrieves geospatial data from \code{stat.fi}
+#' @description Retrieves geospatial data from Statistics Finland (\url{http://www.stat.fi}). A request obje
 #' to retrieve data is constructed from the class \code{\link{GeoStatFiWFSRequest}}. Layer lists are
 #' returned as \code{character} vectors and map data (layers) as \code{Spatial*} objects.
-#' 
-#' @usage NULL
-#' @format NULL
 #' @import R6
 #' @return In case the service at \code{stat.fi} cannot be reached, the relevant methods return \code{character(0)}.
 #' @references See citation("gisfin")

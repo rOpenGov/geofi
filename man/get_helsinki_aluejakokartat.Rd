@@ -20,17 +20,9 @@ Run 'get_helsinki_aluejakokartat()' to see available options.}
 a spatial object (from SpatialPolygonsDataFrame class)
 }
 \description{
-Retrieves District Boundaries data (Aluejakorajat, Aanestysalueet)
-from Helsinki Real Estate Department
-(Helsingin kaupungin kiinteistovirasto, HKK)
-through the HKK website
-http://ptp.hel.fi/avoindata/index.html
-}
-\details{
+Retrieves District Boundaries data (Aluejakorajat, Aanestysalueet) from Helsinki Real Estate Department (Helsingin kaupungin kiinteistovirasto, HKK) through the HKK website \url{http://ptp.hel.fi/avoindata/index.html}
+
 The data (C) 2011 Helsingin kaupunkimittausosasto.
-}
-\note{
-This function replaces sorvi::GetHRIaluejakokartat; The data is now retrieved directly from HKK.
 }
 \examples{
 sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 

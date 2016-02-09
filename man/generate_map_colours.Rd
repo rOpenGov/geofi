@@ -2,7 +2,7 @@
 % Please edit documentation in R/visualization.R
 \name{generate_map_colours}
 \alias{generate_map_colours}
-\title{Generate color indices for shape object with the aim to color}
+\title{Generate color indices}
 \usage{
 generate_map_colours(sp, verbose = TRUE)
 }
@@ -15,7 +15,7 @@ generate_map_colours(sp, verbose = TRUE)
 Color index vector
 }
 \description{
-Generate color indices for shape object with the aim to color
+Generate color indices for shape object with the aim to color neighboring objects with distinct colors.
 }
 \examples{
 sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
@@ -23,8 +23,7 @@ sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
 }
 \author{
 Modified from the code by Karl Ove Hufthammer from
-http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html;
-modifications by Leo Lahti and Juuso Parkkinen
+\url{http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html}; modifications by Leo Lahti and Juuso Parkkinen
 }
 \references{
 See citation("gisfin")

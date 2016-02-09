@@ -5,8 +5,7 @@
 \alias{WFSCachingClient}
 \title{Downloads response from a WFS and parses the intermediate file}
 \description{
-Dispatches a WFS request, saves the response to a file and parses the file. The data can be converted
-using ogr2ogr of RGDAL. Provides a caching mechanism for subsequent queries on the same data.
+Dispatches a WFS request, saves the response to a file and parses the file. The data can be converted using ogr2ogr of RGDAL. Provides a caching mechanism for subsequent queries on the same data.
 }
 \author{
 Jussi Jousimo \email{jvj@iki.fi}

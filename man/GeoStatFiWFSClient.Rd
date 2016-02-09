@@ -3,12 +3,16 @@
 \docType{data}
 \name{GeoStatFiWFSClient}
 \alias{GeoStatFiWFSClient}
-\title{Retrieves geospatial data from \code{stat.fi}.}
+\title{Retrieves geospatial data from \code{stat.fi}}
+\format{An object of class \code{R6ClassGenerator} of length 24.}
+\usage{
+GeoStatFiWFSClient
+}
 \value{
 In case the service at \code{stat.fi} cannot be reached, the relevant methods return \code{character(0)}.
 }
 \description{
-Retrieves geospatial data from Statistics Finland (\url{http://www.stat.fi}). A request object
+Retrieves geospatial data from Statistics Finland (\url{http://www.stat.fi}). A request obje
 to retrieve data is constructed from the class \code{\link{GeoStatFiWFSRequest}}. Layer lists are
 returned as \code{character} vectors and map data (layers) as \code{Spatial*} objects.
 }

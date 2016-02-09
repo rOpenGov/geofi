@@ -1,13 +1,11 @@
-#' Transform data from sp to data frame for ggplot2
-#'
+#' @title Transform data from sp to data frame for ggplot2
+#' @description Transform data from sp to data frame for ggplot2
 #' @param sp A spatial object to be transformed
 #' @param region A string specifying the region of interest
 #' @param verbose logical. Should R report extra information on progress? 
 #' @return A ggplot2 theme object
-#' 
 #' @importFrom ggplot2 fortify
 #' @export
-#' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin")
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
@@ -20,7 +18,6 @@
 #'           theme_set(get_theme_map());
 #'           ggplot(df.suuralue, aes(x=long, y=lat, fill=Name)) + 
 #'           geom_polygon() + theme(legend.position="none")
-
 sp2df <- function(sp, region=NULL, verbose=TRUE) {
     
   if (verbose)
@@ -70,13 +67,12 @@ sp2df <- function(sp, region=NULL, verbose=TRUE) {
 }
 
 
-#' Get blank ggplot2 theme for plotting maps
-#'
+#' @title Get blank ggplot2 theme for plotting maps
+#' @description Get blank ggplot2 theme for plotting maps
 #' @return theme_map A ggplot2 theme object
 #' @importFrom ggplot2 theme_bw
 #' @importFrom ggplot2 element_blank
 #' @export
-#' 
 #' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin")
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
@@ -103,24 +99,20 @@ get_theme_map <- function() {
 }
 
 
-#' Generate color indices for shape object with the aim to color 
-#  neighboring objects with distinct colors.
-#'
+
+#' @title Generate color indices
+#' @description Generate color indices for shape object with the aim to color neighboring objects with distinct colors.
 #' @param sp A SpatialPolygonsDataFrame object
 #' @param verbose logical. Should R report extra information on progress? 
-#' 
 #' @return Color index vector
 #' @importFrom spdep poly2nb
 #' @export
-#' 
 #' @author Modified from the code by Karl Ove Hufthammer from
-#' http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html;
-#' modifications by Leo Lahti and Juuso Parkkinen
+#' \url{http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html}; modifications by Leo Lahti and Juuso Parkkinen
 #' @references See citation("gisfin") 
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue");
 #'           cols <- factor(generate_map_colours(sp=sp.suuralue));
 #' @keywords utilities
-
 generate_map_colours <- function(sp, verbose=TRUE) {
   
   if (verbose)
@@ -144,9 +136,8 @@ generate_map_colours <- function(sp, verbose=TRUE) {
 }
 
 
-
-#' Visualize the specified fields of a shape object on using 
-#' 1- or 2-way color scale. 
+#' @title Visualize fields
+#' @description Visualize the specified fields of a shape object on using 1- or 2-way color scale. 
 #' 
 #' This function is used for fast investigation of shape objects;
 #' standard visualization choices are made automatically;
@@ -166,18 +157,14 @@ generate_map_colours <- function(sp, verbose=TRUE) {
 #' @param min.color Color for minimum values in the color scale
 #' @param max.color Color for maximum values in the color scale
 #' @param plot Plot the image TRUE/FALSE
-#'
 #' @return A Trellis Plot Object
 #' @details Visualization types include: oneway/sequential (color scale ranges from white to dark red, or custom color given with the palette argument); twoway/bipolar/diverging (color scale ranges from dark blue through white to dark red; or custom colors); discrete/qualitative (discrete color scale; the colors are used to visually separate regions); and "custom" (specify colors with the col.regions argument)
-#' 
 #' @export
-#'
 #' @references See citation("gisfin") 
 #' @author Leo Lahti and Juuso Parkkinen \email{louhos@@googlegroups.com}
 #' @examples sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue"); 
 #'           plot_shape(sp=sp.suuralue, varname="Name", type="discrete", plot=FALSE);
 #' @keywords utilities
-
 plot_shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL, min.color = "white", max.color = "red", plot = TRUE) {
   
   # type = "oneway"; ncol = 10; at = NULL; palette = NULL; main = NULL; colorkey = TRUE; lwd = .4; border.col = "black"; col.regions = NULL

@@ -2,8 +2,7 @@
 % Please edit documentation in R/visualization.R
 \name{plot_shape}
 \alias{plot_shape}
-\title{Visualize the specified fields of a shape object on using 
-1- or 2-way color scale.}
+\title{Visualize fields}
 \usage{
 plot_shape(sp, varname, type = "oneway", ncol = 10, at = NULL,
   palette = NULL, main = NULL, colorkey = TRUE, lwd = 0.4,
@@ -43,6 +42,8 @@ plot_shape(sp, varname, type = "oneway", ncol = 10, at = NULL,
 A Trellis Plot Object
 }
 \description{
+Visualize the specified fields of a shape object on using 1- or 2-way color scale. 
+
 This function is used for fast investigation of shape objects;
 standard visualization choices are made automatically;
 fast and easy-to-use but does not necessarily provide optimal visualization.

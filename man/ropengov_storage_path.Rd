@@ -2,23 +2,21 @@
 % Please edit documentation in R/MML.R
 \name{ropengov_storage_path}
 \alias{ropengov_storage_path}
-\title{ropengov_storage_path}
+\title{ropengov storage path}
 \usage{
 ropengov_storage_path()
+}
+\arguments{
+\item{...}{Arguments to pass}
 }
 \value{
 URL for Louhos data
 }
 \description{
-Arguments:
-  ... Arguments to pass
-}
-\details{
-Return:
+Storage path for rOpenGov files.
 }
 \examples{
 url <- ropengov_storage_path()
-
 }
 \author{
 Leo Lahti \email{louhos@googlegroups.com}

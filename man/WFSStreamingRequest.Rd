@@ -3,7 +3,14 @@
 \docType{data}
 \name{WFSStreamingRequest}
 \alias{WFSStreamingRequest}
-\title{An abstract class for building a URL reference to a WFS}
+\title{WFSStreamingRequest abstract class}
+\format{An object of class \code{R6ClassGenerator} of length 24.}
+\usage{
+WFSStreamingRequest
+}
+\description{
+An abstract class for building a URL reference to a WFS.
+}
 \author{
 Jussi Jousimo \email{jvj@iki.fi}
 }

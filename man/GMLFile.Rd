@@ -4,6 +4,9 @@
 \name{GMLFile}
 \alias{GMLFile}
 \title{A class for providing a file name reference to a GML document}
+\description{
+A class for providing a file name reference to a GML document.
+}
 \author{
 Jussi Jousimo \email{jvj@iki.fi}
 }

@@ -1,20 +1,16 @@
-#' Get municipality border maps
-#' 
+#' @title Get municipality border maps
+#' @description Get municipality border maps
 #' @param data.source Specify the source of municipality map data: "MML" or "GADM"-
-#' 
 #' @return \link{SpatialPolygonsDataFrame}-object in longlat-format. 
-#'
 #' @details Retrieve municipality maps from
 #'    MML (Land Survey Finland; Maanmittauslaitos, MML) (see \url{https://github.com/avoindata/mml}) or
 #'    GADM \url{http://gadm.org/country}. For further maps from MML, see \code{\link{get_mml}}. For further maps from GADM, see \url{http://gadm.org/country}. Note that the GADM map data is not up-to-date.
-#'
 #' @export
 #' @importFrom ggplot2 theme_set
 #' @seealso \code{\link{get_mml}}
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin") 
 #' @examples sp <- get_municipality_map("MML")
-
 get_municipality_map <- function (data.source = "MML") {
 
   if (data.source == "MML") {

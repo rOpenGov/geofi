@@ -1,9 +1,6 @@
-
-#' Get geographic coordinates for a given IP-address from 
-#' http://www.datasciencetoolkit.org//ip2coordinates/
-#'
+#' @title Get IP location
+#' @description Get geographic coordinates for a given IP-address from \url{http://www.datasciencetoolkit.org//ip2coordinates/}
 #' @param ip IP address as character
-#'
 #' @return Latitude and longitude as a numeric vector
 #' @export 
 #' @references
@@ -12,7 +9,6 @@
 #' @note Modified from original version by Kay Cichini
 #' @examples \dontrun{ip_location("137.224.252.10")}
 #' @keywords utilities
-
 ip_location <- function(ip) {
 
    url <- "http://www.datasciencetoolkit.org//ip2coordinates/"

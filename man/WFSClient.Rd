@@ -4,6 +4,9 @@
 \name{WFSClient}
 \alias{WFSClient}
 \title{WFS client abstract class}
+\description{
+WFS client abstract class.
+}
 \author{
 Jussi Jousimo \email{jvj@iki.fi}
 }

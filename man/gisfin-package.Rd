@@ -13,7 +13,7 @@ Brief summary of the gisfin package
 Package: \tab gisfin\cr
 Type: \tab Package\cr
 Version: \tab See sessionInfo() or DESCRIPTION file\cr
-Date: \tab 2015\cr
+Date: \tab 2014-2016\cr
 License: \tab FreeBSD\cr
 LazyLoad: \tab yes\cr
 }
@@ -21,7 +21,7 @@ LazyLoad: \tab yes\cr
 R Tools for helsinki API
 }
 \examples{
-# library(gisfin)
+library(gisfin)
 }
 \author{
 Juuso Parkkinen, Leo Lahti, Joona Lehtomaki and Jussi Jousimo \email{louhos@googlegroups.com}

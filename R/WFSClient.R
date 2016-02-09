@@ -1,18 +1,5 @@
-# This file is a part of the rwfs package (http://github.com/rOpenGov/rwfs)
-# in association with the rOpenGov project (ropengov.github.io)
-
-# Copyright (C) 2014 Jussi Jousimo
-# All rights reserved.
-
-# This program is open source software; you can redistribute it and/or modify 
-# it under the terms of the FreeBSD License (keep this notice): 
-# http://en.wikipedia.org/wiki/BSD_licenses
-
-# This program is distributed in the hope that it will be useful, 
-# but WITHOUT ANY WARRANTY; without even the implied warranty of 
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 #' @title WFS client abstract class
+#' @description WFS client abstract class.
 #' @seealso \code{\link{WFSStreamingClient}}, \code{\link{WFSCachingClient}}, \code{\link{WFSRequest}}
 #' @usage NULL
 #' @format NULL
@@ -155,8 +142,7 @@ WFSStreamingClient <- R6::R6Class(
 )
 
 #' @title Downloads response from a WFS and parses the intermediate file
-#' @description Dispatches a WFS request, saves the response to a file and parses the file. The data can be converted
-#' using ogr2ogr of RGDAL. Provides a caching mechanism for subsequent queries on the same data.
+#' @description Dispatches a WFS request, saves the response to a file and parses the file. The data can be converted using ogr2ogr of RGDAL. Provides a caching mechanism for subsequent queries on the same data.
 #' @seealso \code{\link{WFSRequest}}, \code{\link{WFSStreamingClient}}
 #' @usage NULL
 #' @format NULL

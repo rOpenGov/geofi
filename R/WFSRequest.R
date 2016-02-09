@@ -1,23 +1,7 @@
-# This file is a part of the rwfs package (http://github.com/rOpenGov/rwfs)
-# in association with the rOpenGov project (ropengov.github.io)
-
-# Copyright (C) 2014 Jussi Jousimo
-# All rights reserved.
-
-# This program is open source software; you can redistribute it and/or modify 
-# it under the terms of the FreeBSD License (keep this notice): 
-# http://en.wikipedia.org/wiki/BSD_licenses
-
-# This program is distributed in the hope that it will be useful, 
-# but WITHOUT ANY WARRANTY; without even the implied warranty of 
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 #' @title An abstract class for referencing a WFS or a GML document
 #' @description This class should be inherited and the abstract method \code{getDataSource} overloaded
 #' in a subclass to provide a reference.
 #' @seealso \code{\link{WFSClient}}, \code{\link{GMLFile}}
-#' @usage NULL
-#' @format NULL
 #' @import R6
 #' @author Jussi Jousimo \email{jvj@@iki.fi}
 #' @exportClass WFSRequest
@@ -36,10 +20,9 @@ WFSRequest <- R6::R6Class(
   )
 )
 
-#' @title An abstract class for building a URL reference to a WFS
+#' @title WFSStreamingRequest abstract class
+#' @description An abstract class for building a URL reference to a WFS.
 #' @import R6
-#' @usage NULL
-#' @format NULL
 #' @author Jussi Jousimo \email{jvj@@iki.fi}
 #' @exportClass WFSStreamingRequest
 #' @export WFSStreamingRequest
@@ -132,6 +115,7 @@ WFSCachingRequest <- R6::R6Class(
 )
 
 #' @title A class for providing a file name reference to a GML document
+#' @description A class for providing a file name reference to a GML document.
 #' @usage NULL
 #' @format NULL
 #' @import R6

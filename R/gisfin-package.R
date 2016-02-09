@@ -4,7 +4,7 @@
 #' Package: \tab gisfin\cr
 #' Type: \tab Package\cr
 #' Version: \tab See sessionInfo() or DESCRIPTION file\cr
-#' Date: \tab 2015\cr
+#' Date: \tab 2014-2016\cr
 #' License: \tab FreeBSD\cr
 #' LazyLoad: \tab yes\cr
 #' }
@@ -20,6 +20,6 @@
 #' @references
 #' See citation("gisfin")
 #' \url{https://github.com/rOpenGov/gisfin}
-#' @examples # library(gisfin)
+#' @examples library(gisfin)
 #' @keywords package
 NULL

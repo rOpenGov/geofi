@@ -16,10 +16,7 @@ a spatial object (from SpatialPolygonsDataFrame class)
 }
 \description{
 Retrieves postal code areas from http://www.palomaki.info/apps/pnro/
-}
-\details{
 The data is created by Duukkis and licensed under CC BY 4.0
-
 Please not that this function requires a recent version of GDAL.
 Please see the tutorial for more instructions
 }

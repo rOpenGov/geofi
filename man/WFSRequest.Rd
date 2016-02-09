@@ -4,6 +4,10 @@
 \name{WFSRequest}
 \alias{WFSRequest}
 \title{An abstract class for referencing a WFS or a GML document}
+\format{An object of class \code{R6ClassGenerator} of length 24.}
+\usage{
+WFSRequest
+}
 \description{
 This class should be inherited and the abstract method \code{getDataSource} overloaded
 in a subclass to provide a reference.

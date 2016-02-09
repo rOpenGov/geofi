@@ -4,6 +4,10 @@
 \name{GeoStatFiWFSRequest}
 \alias{GeoStatFiWFSRequest}
 \title{Builds a WFS request to the \code{stat.fi} geospatial API.}
+\format{An object of class \code{R6ClassGenerator} of length 24.}
+\usage{
+GeoStatFiWFSRequest
+}
 \description{
 Builds a WFS request to the \code{stat.fi} geospatial API. The request is submitted with
 \code{\link{GeoStatFiWFSClient}} to retrieve the data.
@@ -34,7 +38,7 @@ For General Terms of Use, see \url{http://www.stat.fi/org/lainsaadanto/yleiset_k
 }
 }
 \examples{
-# See the vignette.
+  # See the vignette.
 }
 \author{
 Jussi Jousimo \email{louhos@googlegroups.com}

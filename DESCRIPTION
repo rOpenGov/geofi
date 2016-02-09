@@ -42,3 +42,4 @@ Collate:
     'postal_code.R'
     'region_plot.R'
     'visualization.R'
+RoxygenNote: 5.0.1

@@ -21,10 +21,10 @@ region_plot(sp, color, region, palette = c("darkblue", "blue", "white", "red",
 \item{main}{Plot title}
 }
 \value{
-\link{ggplot2} object
+\code{\link{ggplot2}} object
 }
 \description{
-Fast wrapper for visualizing regions on a map
+Fast wrapper for visualizing regions on a map.
 }
 \examples{
 sp <- get_municipality_map("MML"); region_plot(sp, color = "Kieli_ni1", region = "kuntakoodi") 

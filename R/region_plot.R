@@ -6,7 +6,7 @@
 #' @param palette Colour palette
 #' @param by Interval for colors
 #' @param main Plot title
-#' @return \code{\link{ggplot2}} object
+#' @return ggplot2 object
 #' @export
 #' @importFrom ggplot2 theme_set
 #' @importFrom ggplot2 ggplot

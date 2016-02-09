@@ -6,6 +6,8 @@
 
 
 
+
+
 # gisfin - tutorial
 
 This R package provides tools to access open spatial data in Finland
@@ -172,7 +174,7 @@ sp.suuralue <- get_helsinki_aluejakokartat(map.specifier="suuralue")
 spplot(sp.suuralue, zcol="Name")
 ```
 
-![plot of chunk hkk-suuralue1](figure/hkk-suuralue1-1.png) 
+![plot of chunk hkk-suuralue1](fig/hkk-suuralue1-1.png)
 
 Function `generate_map_colours()` allows nice region colouring separable 
 adjacent regions. This is used here with the `rainbow()` colour scale to plot 
@@ -186,7 +188,7 @@ spplot(sp.suuralue, zcol="COL",
        colorkey=FALSE)
 ```
 
-![plot of chunk hkk-suuralue2](figure/hkk-suuralue2-1.png) 
+![plot of chunk hkk-suuralue2](fig/hkk-suuralue2-1.png)
 
 ### Plot with ggplot2
 
@@ -201,6 +203,13 @@ frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with
 sp.suuralue.piste <- get_helsinki_aluejakokartat(map.specifier="suuralue_piste")
 # Get data frames
 df.suuralue <- sp2df(sp.suuralue)
+```
+
+```
+## Error in get("rgeos", envir = .MAPTOOLS_CACHE): object 'rgeos' not found
+```
+
+```r
 df.suuralue.piste <- sp2df(sp.suuralue.piste)
 # Set map theme
 library(ggplot2)
@@ -212,7 +221,9 @@ ggplot(df.suuralue, aes(x=long, y=lat)) +
   theme(legend.position="none")
 ```
 
-![plot of chunk hkk-suuralue3](figure/hkk-suuralue3-1.png) 
+```
+## Error in ggplot(df.suuralue, aes(x = long, y = lat)): object 'df.suuralue' not found
+```
 
 ### Plot election districts
 
@@ -228,7 +239,7 @@ spplot(sp.aanestys, zcol="KUNTA",
        colorkey=FALSE)
 ```
 
-![plot of chunk hkk-aanestysalue](figure/hkk-aanestysalue-1.png) 
+![plot of chunk hkk-aanestysalue](fig/hkk-aanestysalue-1.png)
 
 ----
 
@@ -321,7 +332,7 @@ head(as.data.frame(sp.mml))
 ## 019     <NA>
 ```
 
-You can list other available data sets with (output not shown): 
+You can list other available data sets: 
 
 
 ```r
@@ -379,21 +390,57 @@ First, retrieve population data (2013) for Finnish municipalities:
 # Get municipality population data from Statistics Finland
 # using the pxweb package
 library(pxweb)
+```
+
+```
+## Error in library(pxweb): there is no package called 'pxweb'
+```
+
+```r
 mydata <- get_pxweb_data(url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/Kuntien_talous_ja_toiminta/Kunnat/ktt14/080_ktt14_2013_fi.px",
              dims = list(Alue = c('*'),
                          Tunnusluku = c('30'),
                          Vuosi = c('Arvo')),
              clean = TRUE)
+```
 
+```
+## Error in eval(expr, envir, enclos): could not find function "get_pxweb_data"
+```
+
+```r
 # Pick municipality ID from the text field
 mydata$Kuntakoodi <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[1]])
-mydata$Kunta <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[2]])
+```
 
+```
+## Error in strsplit(as.character(mydata$Alue), " "): object 'mydata' not found
+```
+
+```r
+mydata$Kunta <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[2]])
+```
+
+```
+## Error in strsplit(as.character(mydata$Alue), " "): object 'mydata' not found
+```
+
+```r
 # Rename fields for clarity
 mydata$Asukasluku <- mydata$values
+```
 
+```
+## Error in eval(expr, envir, enclos): object 'mydata' not found
+```
+
+```r
 # Pick only the necessary fields for clarity
 mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'mydata' not found
 ```
 
 
@@ -410,12 +457,27 @@ sp <- get_municipality_map(data.source = "MML")
 # regions besides municipalities. These will be ignored when merged
 # with the municipality map:
 sp2 <- sp::merge(sp, mydata, all.x = TRUE, by.x = "kuntakoodi", by.y="Kuntakoodi")
+```
 
+```
+## Error in sp::merge(sp, mydata, all.x = TRUE, by.x = "kuntakoodi", by.y = "Kuntakoodi"): error in evaluating the argument 'y' in selecting a method for function 'merge': Error: object 'mydata' not found
+```
+
+```r
 p <- region_plot(sp2, color = "Asukasluku", region = "kuntakoodi", by = 100000)
+```
+
+```
+## Error in message("Transforming ", class(sp), " into a data frame"): object 'sp2' not found
+```
+
+```r
 print(p)
 ```
 
-![plot of chunk gisfin-owndata1](figure/gisfin-owndata1-1.png) 
+```
+## Error in print(p): error in evaluating the argument 'x' in selecting a method for function 'print': Error: object 'p' not found
+```
 
 ### Using GADM maps
 
@@ -435,14 +497,22 @@ gadm$NAME_4 <- factor(gadm$NAME_4)
 # Merge the Finnish map shape file and the population data based on
 # the 'Kunta' field (see above)
 gadm2 <- sp::merge(gadm, mydata, by.x = "NAME_4", by.y = "Kunta", all.x = TRUE)
+```
 
+```
+## Error in sp::merge(gadm, mydata, by.x = "NAME_4", by.y = "Kunta", all.x = TRUE): error in evaluating the argument 'y' in selecting a method for function 'merge': Error: object 'mydata' not found
+```
+
+```r
 # Plot the shape file, colour municipalities by population
 # It turns out that not all municipality names can be matched.
 # We are happy to add solutions here if you have any.
 spplot(gadm2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
 ```
 
-![plot of chunk gisfin-owndata2](figure/gisfin-owndata2-1.png) 
+```
+## Error in spplot(gadm2, zcol = "Asukasluku", colorkey = TRUE, main = "Population in Finnish municipalities"): error in evaluating the argument 'obj' in selecting a method for function 'spplot': Error: object 'gadm2' not found
+```
 
 
 
@@ -450,6 +520,7 @@ spplot(gadm2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish mu
 ----
 
 ## <a name="geocoding"></a>Geocoding
+
 
 Get geocodes for given location (address etc.) using one of the available 
 services. Please read carefully the usage policies for the different services:
@@ -495,6 +566,20 @@ unlist(gc3[1:2])
 ## 60.18892 24.91747
 ```
 
+
+Get geocode for a city (instead of street address; only implemented for OSM at the moment):
+
+
+```r
+gc4 <- get_geocode("&city=Helsinki", service="openstreetmap", raw_query=T)
+unlist(gc4[1:2])
+```
+
+```
+##      lat      lon 
+## 60.16663 24.94351
+```
+
 ----
 
 ## <a name="ip"></a>IP Location
@@ -508,7 +593,11 @@ ip_location("137.224.252.10")
 ```
 
 ```
-## [1] "51.9667015075684" "5.66669988632202"
+## Warning in file(con, "r"): cannot open: HTTP status was '0 (null)'
+```
+
+```
+## Error in file(con, "r"): cannot open the connection
 ```
 
 ----
@@ -561,7 +650,7 @@ if (length(population) > 0) {
 }
 ```
 
-![plot of chunk population-density-plot](figure/population-density-plot-1.png) 
+![plot of chunk population-density-plot](fig/population-density-plot-1.png)
 
 ## <a name="pnro"></a>Finnish postal code areas
 
@@ -579,7 +668,7 @@ spplot(pnro.pks.sp, zcol="COL",
        colorkey=FALSE)
 ```
 
-![plot of chunk postal_code](figure/postal_code-1.png) 
+![plot of chunk postal_code](fig/postal_code-1.png)
 
 
 ----
@@ -601,7 +690,7 @@ citation("gisfin")
 Kindly cite the gisfin R package as follows:
 
   (C) Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo
-  and Janne Aukia 2015. gisfin R package
+  and Janne Aukia 2015-2016. gisfin R package
 
 A BibTeX entry for LaTeX users is
 
@@ -627,9 +716,9 @@ sessionInfo()
 ```
 
 ```
-## R version 3.2.0 (2015-04-16)
-## Platform: x86_64-unknown-linux-gnu (64-bit)
-## Running under: Ubuntu 15.04
+## R version 3.2.2 (2015-08-14)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 15.10
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -643,21 +732,17 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] raster_2.3-40      pxweb_0.5.53       ggplot2_1.0.1     
-##  [4] maptools_0.8-36    gisfin_0.9.25      R6_2.0.1          
-##  [7] rgdal_0.9-3        sp_1.1-0           knitr_1.10.5      
-## [10] scimapClient_0.2.1
+## [1] raster_2.5-2  ggplot2_2.0.0 gisfin_0.9.26 R6_2.1.2      rgdal_1.1-3  
+## [6] sp_1.2-1      knitr_1.12   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.11.6      spdep_0.5-88     formatR_1.2      plyr_1.8.2      
-##  [5] bitops_1.0-6     LearnBayes_2.15  tools_3.2.0      boot_1.3-16     
-##  [9] digest_0.6.8     jsonlite_0.9.16  evaluate_0.7     gtable_0.1.2    
-## [13] nlme_3.1-120     lattice_0.20-31  Matrix_1.2-0     proto_0.3-10    
-## [17] coda_0.17-1      httr_0.6.1       stringr_1.0.0    rgeos_0.3-8     
-## [21] grid_3.2.0       data.table_1.9.4 XML_3.98-1.2     foreign_0.8-63  
-## [25] RJSONIO_1.3-0    reshape2_1.4.1   deldir_0.1-9     magrittr_1.5    
-## [29] scales_0.2.4     MASS_7.3-40      splines_3.2.0    colorspace_1.2-6
-## [33] labeling_0.3     stringi_0.4-1    RCurl_1.95-4.6   munsell_0.4.2   
-## [37] chron_2.3-45     rjson_0.2.15
+##  [1] spdep_0.5-92     Rcpp_0.12.3      magrittr_1.5     maptools_0.8-37 
+##  [5] splines_3.2.2    MASS_7.3-45      munsell_0.4.2    colorspace_1.2-6
+##  [9] lattice_0.20-33  rjson_0.2.15     stringr_1.0.0    plyr_1.8.3      
+## [13] tools_3.2.2      grid_3.2.2       gtable_0.1.2     nlme_3.1-122    
+## [17] coda_0.18-1      deldir_0.1-9     digest_0.6.9     Matrix_1.2-3    
+## [21] formatR_1.2.1    bitops_1.0-6     RCurl_1.95-4.7   evaluate_0.8    
+## [25] stringi_1.0-1    LearnBayes_2.15  scales_0.3.0     boot_1.3-17     
+## [29] XML_3.98-1.3     foreign_0.8-66
 ```
 

@@ -41,5 +41,6 @@ Collate:
     'municipality.R'
     'postal_code.R'
     'region_plot.R'
+    'ropengov_storage_path.R'
     'visualization.R'
 RoxygenNote: 5.0.1

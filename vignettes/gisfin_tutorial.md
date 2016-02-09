@@ -696,8 +696,8 @@ sessionInfo()
 ## [6] rgdal_1.1-3   sp_1.2-1      knitr_1.12   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.3      spdep_0.5-92     highr_0.5.1      formatR_1.2.1   
-##  [5] plyr_1.8.3       bitops_1.0-6     LearnBayes_2.15  tools_3.2.2     
+##  [1] Rcpp_0.12.3      spdep_0.5-92     formatR_1.2.1    plyr_1.8.3      
+##  [5] highr_0.5.1      bitops_1.0-6     LearnBayes_2.15  tools_3.2.2     
 ##  [9] boot_1.3-17      digest_0.6.9     jsonlite_0.9.19  evaluate_0.8    
 ## [13] nlme_3.1-122     gtable_0.1.2     lattice_0.20-33  Matrix_1.2-3    
 ## [17] curl_0.9.5       coda_0.18-1      stringr_1.0.0    httr_1.1.0      

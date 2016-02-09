@@ -10,15 +10,17 @@
 #' @param query Either a street address, e.g. 'Mannerheimintie 100, Helsinki'
 #' or place, e.g. 'Eduskuntatalo'
 #' @param service Geocoding service to use, one of 'okf', 'openstreetmap' or 'google' 
-#'
+#' @param raw_query If true, don't prepend / append some default parameters to query. 
+#' Except for the ones specifying json format, send the query to API as-it-is
 #' @return A list with coordinates (lat, long) of the first output, and the raw output list
 #' @importFrom rjson fromJSON
 #' @export
 #' 
-#' @author Juuso Parkkinen \email{louhos@@googlegroups.com}
+#' @author Juuso Parkkinen \email{louhos@@googlegroups.com}, minor updates by Aaro 
+#' Salosensaari \email{aaro.salosensaari@@helsinki.fi}
 #' @references See citation("gisfin")
 #' @examples gc <- get_geocode("Mannerheimintie 100, Helsinki"); 
-get_geocode <- function(query, service="okf") {
+get_geocode <- function(query, service="okf", raw_query=F) {
   
   ## TODO: process outpus into similar format
   
@@ -27,7 +29,12 @@ get_geocode <- function(query, service="okf") {
   
   if (service=="okf") {
     # Access OKF geocode API
-    uri <- paste0("http://api.okf.fi/gis/1/geocode.json?address=",query,"&lat=&lng=&language=fin")
+    base_uri <- "http://api.okf.fi/gis/1/geocode.json?"
+    if (raw_query) {
+      uri <- paste0(base_uri, query)
+    } else {
+      uri <- paste0(base_uri, "address=", query,"&lat=&lng=&language=fin")
+    }
     res.json <- RCurl::getURI(uri)
     res.list <- rjson::fromJSON(res.json)
     if (res.list$status!="OK") {
@@ -40,7 +47,12 @@ get_geocode <- function(query, service="okf") {
     
   } else if (service=="openstreetmap") {
     # Access OpenStreetMap Nominatim API
-    uri <- paste0("http://nominatim.openstreetmap.org/search?format=json&q=",query)
+    base_uri <- "http://nominatim.openstreetmap.org/search?format=json"
+    if (raw_query) {
+      uri <- paste0(base_uri, query)
+    } else {
+      uri <- paste0(base_uri, "&q=",query)
+    }
     res.json <- RCurl::getURI(uri)
     res.list <- rjson::fromJSON(res.json)
     if (length(res.list)==0) {
@@ -55,7 +67,12 @@ get_geocode <- function(query, service="okf") {
     
   } else if (service=="google") {
     # Access The Google Geocoding API
-    uri <- paste0("http://maps.google.com/maps/api/geocode/json?sensor=false&address=",query)
+    base_uri <- paste0("http://maps.google.com/maps/api/geocode/json?")
+    if (raw_query) {
+      uri <- paste0(base_uri, query)
+    } else {
+      uri <- paste0(base_uri, "sensor=false&address=", query)
+    }
     res.json <- RCurl::getURI(uri)
     res.list <- rjson::fromJSON(res.json)
     if (res.list$status!="OK") {

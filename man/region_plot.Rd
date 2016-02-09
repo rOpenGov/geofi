@@ -21,7 +21,7 @@ region_plot(sp, color, region, palette = c("darkblue", "blue", "white", "red",
 \item{main}{Plot title}
 }
 \value{
-\code{\link{ggplot2}} object
+ggplot2 object
 }
 \description{
 Fast wrapper for visualizing regions on a map.

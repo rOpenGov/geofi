@@ -4,13 +4,16 @@
 \alias{get_geocode}
 \title{Get geocode for given query}
 \usage{
-get_geocode(query, service = "okf")
+get_geocode(query, service = "okf", raw_query = F)
 }
 \arguments{
 \item{query}{Either a street address, e.g. 'Mannerheimintie 100, Helsinki'
 or place, e.g. 'Eduskuntatalo'}
 
 \item{service}{Geocoding service to use, one of 'okf', 'openstreetmap' or 'google'}
+
+\item{raw_query}{If true, don't prepend / append some default parameters to query. 
+Except for the ones specifying json format, send the query to API as-it-is}
 }
 \value{
 A list with coordinates (lat, long) of the first output, and the raw output list
@@ -27,7 +30,8 @@ See Terms and Conditions from http://code.google.com/apis/maps/documentation/geo
 gc <- get_geocode("Mannerheimintie 100, Helsinki"); 
 }
 \author{
-Juuso Parkkinen \email{louhos@googlegroups.com}
+Juuso Parkkinen \email{louhos@googlegroups.com}, minor updates by Aaro 
+Salosensaari \email{aaro.salosensaari@helsinki.fi}
 }
 \references{
 See citation("gisfin")

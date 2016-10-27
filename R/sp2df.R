@@ -35,6 +35,8 @@ sp2df <- function(sp, region=NULL, verbose=TRUE) {
 #     if (is.null(region))
 #       stop("Please specify 'region'!")
     
+    require("rgeos")
+    require("maptools")
     ## NEW implementation 6.1.2015
     # Following https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles
     sp@data$id <- rownames(sp@data)

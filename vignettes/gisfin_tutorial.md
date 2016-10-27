@@ -203,13 +203,6 @@ frames. Plot with [ggplot2](http://ggplot2.org/), using blank map theme with
 sp.suuralue.piste <- get_helsinki_aluejakokartat(map.specifier="suuralue_piste")
 # Get data frames
 df.suuralue <- sp2df(sp.suuralue)
-```
-
-```
-## Error in get("rgeos", envir = .MAPTOOLS_CACHE): object 'rgeos' not found
-```
-
-```r
 df.suuralue.piste <- sp2df(sp.suuralue.piste)
 # Set map theme
 library(ggplot2)
@@ -221,9 +214,7 @@ ggplot(df.suuralue, aes(x=long, y=lat)) +
   theme(legend.position="none")
 ```
 
-```
-## Error in ggplot(df.suuralue, aes(x = long, y = lat)): object 'df.suuralue' not found
-```
+![plot of chunk hkk-suuralue3](fig/hkk-suuralue3-1.png)
 
 ### Plot election districts
 
@@ -310,6 +301,9 @@ list_mml_datasets()
 ## $`2012`
 ## character(0)
 ## 
+## $`2016`
+## character(0)
+## 
 ## $`Maastotietokanta-tiesto1`
 ## [1] "N61_v"
 ## 
@@ -362,45 +356,16 @@ mydata <- get_pxweb_data(url = "http://pxwebapi2.stat.fi/PXWeb/api/v1/fi/Kuntien
                          Tunnusluku = c('30'),
                          Vuosi = c('Arvo')),
              clean = TRUE)
-```
 
-```
-## Error: Success: (200) OK
-```
-
-```r
 # Pick municipality ID from the text field
 mydata$Kuntakoodi <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[1]])
-```
-
-```
-## Error in strsplit(as.character(mydata$Alue), " "): object 'mydata' not found
-```
-
-```r
 mydata$Kunta <- sapply(strsplit(as.character(mydata$Alue), " "), function (x) x[[2]])
-```
 
-```
-## Error in strsplit(as.character(mydata$Alue), " "): object 'mydata' not found
-```
-
-```r
 # Rename fields for clarity
 mydata$Asukasluku <- mydata$values
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'mydata' not found
-```
-
-```r
 # Pick only the necessary fields for clarity
 mydata <- mydata[, c("Kunta", "Kuntakoodi", "Asukasluku")]
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'mydata' not found
 ```
 
 
@@ -417,27 +382,12 @@ sp <- get_municipality_map(data.source = "MML")
 # regions besides municipalities. These will be ignored when merged
 # with the municipality map:
 sp2 <- sp::merge(sp, mydata, all.x = TRUE, by.x = "kuntakoodi", by.y="Kuntakoodi")
-```
 
-```
-## Error in sp::merge(sp, mydata, all.x = TRUE, by.x = "kuntakoodi", by.y = "Kuntakoodi"): error in evaluating the argument 'y' in selecting a method for function 'merge': Error: object 'mydata' not found
-```
-
-```r
 p <- region_plot(sp2, color = "Asukasluku", region = "kuntakoodi", by = 100000)
-```
-
-```
-## Error in message("Transforming ", class(sp), " into a data frame"): object 'sp2' not found
-```
-
-```r
 print(p)
 ```
 
-```
-## Error in print(p): error in evaluating the argument 'x' in selecting a method for function 'print': Error: object 'p' not found
-```
+![plot of chunk gisfin-owndata1](fig/gisfin-owndata1-1.png)
 
 ### Using GADM maps
 
@@ -457,22 +407,14 @@ gadm$NAME_4 <- factor(gadm$NAME_4)
 # Merge the Finnish map shape file and the population data based on
 # the 'Kunta' field (see above)
 gadm2 <- sp::merge(gadm, mydata, by.x = "NAME_4", by.y = "Kunta", all.x = TRUE)
-```
 
-```
-## Error in sp::merge(gadm, mydata, by.x = "NAME_4", by.y = "Kunta", all.x = TRUE): error in evaluating the argument 'y' in selecting a method for function 'merge': Error: object 'mydata' not found
-```
-
-```r
 # Plot the shape file, colour municipalities by population
 # It turns out that not all municipality names can be matched.
 # We are happy to add solutions here if you have any.
 spplot(gadm2, zcol="Asukasluku", colorkey=TRUE, main = "Population in Finnish municipalities")
 ```
 
-```
-## Error in spplot(gadm2, zcol = "Asukasluku", colorkey = TRUE, main = "Population in Finnish municipalities"): error in evaluating the argument 'obj' in selecting a method for function 'spplot': Error: object 'gadm2' not found
-```
+![plot of chunk gisfin-owndata2](fig/gisfin-owndata2-1.png)
 
 
 
@@ -523,7 +465,7 @@ unlist(gc3[1:2])
 
 ```
 ##      lat      lon 
-## 60.18892 24.91747
+## 60.18864 24.91753
 ```
 
 
@@ -537,7 +479,7 @@ unlist(gc4[1:2])
 
 ```
 ##      lat      lon 
-## 60.16663 24.94351
+## 60.16741 24.94257
 ```
 
 ----
@@ -553,11 +495,7 @@ ip_location("137.224.252.10")
 ```
 
 ```
-## Warning in file(con, "r"): cannot open: HTTP status was '0 (null)'
-```
-
-```
-## Error in file(con, "r"): cannot open the connection
+## [1] "51.9667015075684" "5.66669988632202"
 ```
 
 ----
@@ -585,13 +523,15 @@ if (length(layers) > 0) layers
 ##  [7] "vaestoruutu:vaki2012_1km"    "vaestoruutu:vaki2012_1km_kp"
 ##  [9] "vaestoruutu:vaki2013_1km"    "vaestoruutu:vaki2013_1km_kp"
 ## [11] "vaestoruutu:vaki2014_1km"    "vaestoruutu:vaki2014_1km_kp"
-## [13] "vaestoruutu:vaki2005_5km"    "vaestoruutu:vaki2010_5km"   
-## [15] "vaestoruutu:vaki2011_5km"    "vaestoruutu:vaki2012_5km"   
-## [17] "vaestoruutu:vaki2013_5km"    "vaestoruutu:vaki2014_5km"   
+## [13] "vaestoruutu:vaki2015_1km"    "vaestoruutu:vaki2015_1km_kp"
+## [15] "vaestoruutu:vaki2005_5km"    "vaestoruutu:vaki2010_5km"   
+## [17] "vaestoruutu:vaki2011_5km"    "vaestoruutu:vaki2012_5km"   
+## [19] "vaestoruutu:vaki2013_5km"    "vaestoruutu:vaki2014_5km"   
+## [21] "vaestoruutu:vaki2015_5km"   
 ## attr(,"driver")
 ## [1] "WFS"
 ## attr(,"nlayers")
-## [1] 18
+## [1] 21
 ```
 
 Get population density in year 2005 on a 5 km x 5 km grid, convert to 
@@ -657,7 +597,7 @@ A BibTeX entry for LaTeX users is
   @Misc{,
     title = {gisfin R package},
     author = {Joona Lehtomaki and Juuso Parkkinen and Leo Lahti and Jussi Jousimo and Janne Aukia},
-    year = {2015},
+    year = {2015-2016},
   }
 
 Many thanks for all contributors! For more info, see:
@@ -676,35 +616,32 @@ sessionInfo()
 ```
 
 ```
-## R version 3.2.2 (2015-08-14)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 15.10
+## R version 3.3.0 (2016-05-03)
+## Platform: x86_64-apple-darwin13.4.0 (64-bit)
+## Running under: OS X 10.10.5 (Yosemite)
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] raster_2.5-2  pxweb_0.5.58  ggplot2_2.0.0 gisfin_0.9.26 R6_2.1.2     
-## [6] rgdal_1.1-3   sp_1.2-1      knitr_1.12   
+##  [1] raster_2.5-2    pxweb_0.6.3     ggplot2_2.1.0   maptools_0.8-39
+##  [5] rgeos_0.3-19    knitr_1.13      gisfin_0.9.26   R6_2.1.2       
+##  [9] rgdal_1.1-9     sp_1.2-3       
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.3      spdep_0.5-92     formatR_1.2.1    plyr_1.8.3      
-##  [5] highr_0.5.1      bitops_1.0-6     LearnBayes_2.15  tools_3.2.2     
-##  [9] boot_1.3-17      digest_0.6.9     jsonlite_0.9.19  evaluate_0.8    
-## [13] nlme_3.1-122     gtable_0.1.2     lattice_0.20-33  Matrix_1.2-3    
-## [17] curl_0.9.5       coda_0.18-1      stringr_1.0.0    httr_1.1.0      
-## [21] grid_3.2.2       data.table_1.9.6 XML_3.98-1.3     foreign_0.8-66  
-## [25] RJSONIO_1.3-0    deldir_0.1-9     magrittr_1.5     scales_0.3.0    
-## [29] MASS_7.3-45      splines_3.2.2    maptools_0.8-37  colorspace_1.2-6
-## [33] stringi_1.0-1    RCurl_1.95-4.7   munsell_0.4.2    chron_2.3-47    
-## [37] rjson_0.2.15
+##  [1] Rcpp_0.12.6      spdep_0.6-4      formatR_1.4      plyr_1.8.4      
+##  [5] highr_0.6        bitops_1.0-6     LearnBayes_2.15  tools_3.3.0     
+##  [9] boot_1.3-18      digest_0.6.10    jsonlite_0.9.20  evaluate_0.9    
+## [13] nlme_3.1-127     gtable_0.2.0     lattice_0.20-33  Matrix_1.2-6    
+## [17] curl_0.9.7       coda_0.18-1      httr_1.1.0       stringr_1.1.0   
+## [21] gtools_3.5.0     grid_3.3.0       data.table_1.9.6 XML_3.98-1.4    
+## [25] foreign_0.8-66   RJSONIO_1.3-0    gdata_2.17.0     deldir_0.1-12   
+## [29] magrittr_1.5     scales_0.4.0     MASS_7.3-45      gmodels_2.16.2  
+## [33] splines_3.3.0    rsconnect_0.4.3  colorspace_1.2-6 labeling_0.3    
+## [37] stringi_1.1.1    RCurl_1.95-4.8   munsell_0.4.3    chron_2.3-47    
+## [41] rjson_0.2.15
 ```
 

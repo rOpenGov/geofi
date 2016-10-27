@@ -616,32 +616,36 @@ sessionInfo()
 ```
 
 ```
-## R version 3.3.0 (2016-05-03)
-## Platform: x86_64-apple-darwin13.4.0 (64-bit)
-## Running under: OS X 10.10.5 (Yosemite)
+## R version 3.3.1 (2016-06-21)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.1 LTS
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=de_BE.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=de_BE.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=de_BE.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=de_BE.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] raster_2.5-2    pxweb_0.6.3     ggplot2_2.1.0   maptools_0.8-39
-##  [5] rgeos_0.3-19    knitr_1.13      gisfin_0.9.26   R6_2.1.2       
-##  [9] rgdal_1.1-9     sp_1.2-3       
+##  [1] raster_2.5-8    pxweb_0.6.3     ggplot2_2.1.0   maptools_0.8-39
+##  [5] rgeos_0.3-21    gisfin_0.9.27   R6_2.2.0        rgdal_1.1-10   
+##  [9] sp_1.2-3        knitr_1.14     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.6      spdep_0.6-4      formatR_1.4      plyr_1.8.4      
-##  [5] highr_0.6        bitops_1.0-6     LearnBayes_2.15  tools_3.3.0     
-##  [9] boot_1.3-18      digest_0.6.10    jsonlite_0.9.20  evaluate_0.9    
-## [13] nlme_3.1-127     gtable_0.2.0     lattice_0.20-33  Matrix_1.2-6    
-## [17] curl_0.9.7       coda_0.18-1      httr_1.1.0       stringr_1.1.0   
-## [21] gtools_3.5.0     grid_3.3.0       data.table_1.9.6 XML_3.98-1.4    
-## [25] foreign_0.8-66   RJSONIO_1.3-0    gdata_2.17.0     deldir_0.1-12   
-## [29] magrittr_1.5     scales_0.4.0     MASS_7.3-45      gmodels_2.16.2  
-## [33] splines_3.3.0    rsconnect_0.4.3  colorspace_1.2-6 labeling_0.3    
-## [37] stringi_1.1.1    RCurl_1.95-4.8   munsell_0.4.3    chron_2.3-47    
-## [41] rjson_0.2.15
+##  [1] Rcpp_0.12.7      spdep_0.6-8      formatR_1.4      plyr_1.8.4      
+##  [5] highr_0.6        bitops_1.0-6     LearnBayes_2.15  tools_3.3.1     
+##  [9] boot_1.3-18      digest_0.6.10    jsonlite_1.1     evaluate_0.10   
+## [13] nlme_3.1-128     gtable_0.2.0     lattice_0.20-34  Matrix_1.2-7.1  
+## [17] curl_2.1         coda_0.18-1      httr_1.2.1       stringr_1.1.0   
+## [21] gtools_3.5.0     grid_3.3.1       data.table_1.9.6 XML_3.98-1.4    
+## [25] foreign_0.8-67   RJSONIO_1.3-0    gdata_2.17.0     deldir_0.1-12   
+## [29] magrittr_1.5     scales_0.4.0     MASS_7.3-45      splines_3.3.1   
+## [33] gmodels_2.16.2   colorspace_1.2-7 labeling_0.3     stringi_1.1.2   
+## [37] RCurl_1.95-4.8   munsell_0.4.3    chron_2.3-47     rjson_0.2.15
 ```
 

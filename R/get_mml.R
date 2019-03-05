@@ -18,8 +18,13 @@ get_mml <- function(map.id, data.id, verbose = TRUE) {
   # IN CONTRAST TO INTENDED OUTPUT!!!
   sp <- NULL	
 
-  url <- paste(ropengov_storage_path(), "mml/rdata/", sep = "")
-  filepath <- paste(url, map.id, "/", data.id, ".RData", sep = "")
+  #url <- paste(ropengov_storage_path(), "mml/rdata/", sep = "")
+  #url <- "https://github.com/avoindata/mml/tree/master/rdata/"
+  url <- "https://github.com/avoindata/mml/blob/master/rdata/"
+
+  filepath <- paste(url, map.id, "/", data.id, ".RData?raw=true", sep = "")
+  # Yleiskartta-4500/HallintoAlue.RData
+
   if (verbose)
     message("Loading ", filepath, ". (C) MML 2013. Converted to RData shape object by Louhos. For more information, see https://github.com/avoindata/mml/")
 

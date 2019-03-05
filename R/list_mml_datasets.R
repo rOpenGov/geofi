@@ -3,14 +3,14 @@
 #' @param verbose logical. Should R report extra information on progress? 
 #' @return List of data sets
 #' @importFrom XML readHTMLTable
-#' @export
 #' @author Leo Lahti \email{louhos@@googlegroups.com}
 #' @references See citation("gisfin") 
 #' @examples datasets = list_mml_datasets()
 #' @keywords utilities
 list_mml_datasets <- function (verbose=TRUE) {
 
-  url <- paste(ropengov_storage_path(), "mml/rdata/", sep = "")
+  #url <- paste(ropengov_storage_path(), "mml/rdata/", sep = "")
+  url <- "https://github.com/avoindata/mml/tree/master/rdata"
 
   if (verbose)
     message(paste("Retrieving data set listing from ", url))

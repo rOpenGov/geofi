@@ -29,7 +29,7 @@ get_postalcode_areas <- function(data.dir = tempdir(), verbose=TRUE) {
   # 3. Click File -> Download -> Format: KML, download the file and get the download URL from your browser
   
   kml.file <- file.path(data.dir, "pnro.kml")  
-  kml.url <- "https://www.google.com/fusiontables/exporttable?query=select+col2+from+1m9trydaf6rdt9qBfQkU-4iRKkhNn6O1lRw7XWnXF&o=kml&g=col2&styleId=2&templateId=2"
+  kml.url <- "https://fusiontables.google.com/exporttable?query=select+col2+from+1m9trydaf6rdt9qBfQkU-4iRKkhNn6O1lRw7XWnXF&o=kml&g=col2&styleId=2&templateId=2"
   if (!RCurl::url.exists(kml.url)) {
     message(paste("Sorry! Url", kml.url, "not available!\nReturned NULL."))
     return(NULL)

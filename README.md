@@ -1,7 +1,9 @@
 gisfin - Finland GIS R tools
 ======
 
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://api.travis-ci.org/rOpenGov/gisfin.png)](https://travis-ci.org/rOpenGov/gisfin)
+[![](http://www.r-pkg.org/badges/version/gisfin)](http://www.r-pkg.org/pkg/gisfin)
 [![Stories in Ready](https://badge.waffle.io/ropengov/gisfin.png?label=Ready)](http://waffle.io/ropengov/gisfin)
 
 R tools for spatial data in Finland from the [rOpenGov](http://ropengov.github.io) project.   

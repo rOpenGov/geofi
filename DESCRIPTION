@@ -19,4 +19,5 @@ Suggests:
     testthat
 URL: https://github.com/ropengov/gisfin
 Collate:
+    firstlib.R
 RoxygenNote: 6.1.1

@@ -1,3 +1,5 @@
+#' @importFrom ows4R WFSClient
+
 .onAttach <- function(lib, pkg)
 {
 

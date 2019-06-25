@@ -16,7 +16,9 @@ get_municipalities <- function(year=2017){
 
   layer <- paste0("tilastointialueet:kunta1000k_",year)
   
-  shape <- wfs(url = "http://geo.stat.fi/geoserver/wfs", layer = layer, serviceVersion = "1.0.0")
+  shape <- wfs(url = "http://geo.stat.fi/geoserver/wfs",
+               layer = layer,
+	       serviceVersion = "1.0.0")
 
   return(shape)
 }

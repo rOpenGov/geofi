@@ -32,7 +32,7 @@ ggplot(shape) + geom_sf(aes(fill = kunta)) + theme(legend.position = "none")
 
 
 ```{r zipcode_map}
-shape <- gisfin::get_zipcodes(year = 2019)
+shape <- get_zipcodes(year = 2019) 
 ggplot(shape) + geom_sf(aes(fill = he_kika)) + theme(legend.position = "none")
 ```
 

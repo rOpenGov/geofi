@@ -1,6 +1,10 @@
 #' @title Get geospatial data at kunta, maakunta, etc leves from MML
 #' @description preprocessed geospatial data sf-objects
 #' @author Markus Kainu <markus.kainu@kela.fi>
+#' @param url Source data URL
+#' @param layer TBA
+#' @param serviceVersion Service version
+#' @param logger TBA
 #' @return sf-object
 #' @examples
 #'  \dontrun{

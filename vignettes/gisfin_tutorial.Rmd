@@ -1,0 +1,38 @@
+---
+title: "gisfin tutorial"
+author: "Markus Kainu, Leo Lahti & Joona Lehtomäki"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Municipalities
+
+```{r municipality_map}
+library(ows4R)
+library(gisfin)
+library(dplyr)
+library(ggplot2)
+
+shape <- gisfin::get_municipalities(year = 2019)
+ggplot(shape) + geom_sf(aes(fill = kunta)) + theme(legend.position = "none")
+```
+
+## Zipcodes
+
+
+```{r zipcode_map}
+shape <- gisfin::get_zipcodes(year = 2019)
+ggplot(shape) + geom_sf(aes(fill = he_kika)) + theme(legend.position = "none")
+```
+

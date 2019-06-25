@@ -20,3 +20,5 @@ Suggests:
     testthat
 URL: https://github.com/ropengov/gisfin
 RoxygenNote: 6.1.1
+Encoding: UTF-8
+

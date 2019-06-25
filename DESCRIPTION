@@ -14,10 +14,9 @@ Depends:
     R (>= 3.5.2)
 Imports:
     dplyr,
-    sf
+    sf,
+    ows4R
 Suggests:
     testthat
 URL: https://github.com/ropengov/gisfin
-Collate:
-    firstlib.R
 RoxygenNote: 6.1.1

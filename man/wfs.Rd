@@ -6,6 +6,15 @@
 \usage{
 wfs(url, layer, serviceVersion = "1.0.0", logger = "INFO")
 }
+\arguments{
+\item{url}{Source data URL}
+
+\item{layer}{TBA}
+
+\item{serviceVersion}{Service version}
+
+\item{logger}{TBA}
+}
 \value{
 sf-object
 }

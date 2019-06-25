@@ -10,12 +10,12 @@ output:
 <br>
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![CRAN published](http://www.r-pkg.org/badges/version/gisfin)](http://www.r-pkg.org/pkg/gisfin)
+<!--[![CRAN published](http://www.r-pkg.org/badges/version/gisfin)](http://www.r-pkg.org/pkg/gisfin)-->
 [![Build Status](https://api.travis-ci.org/rOpenGov/gisfin.png)](https://travis-ci.org/rOpenGov/gisfin)
 [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/github/rOpenGov/gisfin?branch=master&svg=true)](https://ci.appveyor.com/project/rOpenGov/gisfin)
 [![codecov.io](https://codecov.io/github/rOpenGov/gisfin/coverage.svg?branch=master)](https://codecov.io/github/rOpenGov/gisfin?branch=master)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/gisfin)](https://cran.r-project.org/package=gisfin)
-[![Downloads](http://cranlogs.r-pkg.org/badges/gisfin)](https://cran.r-project.org/package=gisfin)
+<!--[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/gisfin)](https://cran.r-project.org/package=gisfin)-->
+<!--[![Downloads](http://cranlogs.r-pkg.org/badges/gisfin)](https://cran.r-project.org/package=gisfin)-->
 [![Gitter](https://badges.gitter.im/rOpenGov/gisfin.svg)](https://gitter.im/rOpenGov/gisfin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]

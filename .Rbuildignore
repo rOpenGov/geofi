@@ -4,6 +4,8 @@
 # Travis scripts
 .travis.yml
 
+README.Rmd
+docs
 .gitignore
 inst/extras/.RData
 .git

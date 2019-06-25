@@ -7,7 +7,7 @@ Authors@R: c(
     person("Kainu", "Markus", email = "markus.kainu@kapsi.fi", role = c("aut", "cre")),
     person("Lehtomaki", "Joona", role = c("aut")),
     person("Lahti", "Leo", role = c("aut")),
-    person("Parkkinen", "Juuso", role = c("aut")))
+    person("Parkkinen", "Juuso", role = c("ctb")))
 Description: Tools for reading open geographical data in Finland.
 License: BSD_2_clause + file LICENSE
 Depends:

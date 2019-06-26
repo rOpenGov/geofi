@@ -9,19 +9,19 @@
   \item{kunta}{Kuntanumero}
   \item{name}{Kunnan nimi suomeksi}
   \item{avi_code}{Aluehallintoviraston koodi}
-  \item{avi_nimi}{Aluehallintoviraston nimi}
+  \item{avi_name}{Aluehallintoviraston nimi}
   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen koodi}
-  \item{ely_nimi}{Elinkeino-, liikenne- ja ympäristökeskuksen nimi}
+  \item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen nimi}
   \item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen koodi}
-  \item{kr_nimi}{Tilastokeskuksen tilastollisen kuntaluokituksen nimi}
+  \item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen nimi}
   \item{mk_code}{Maakunnan koodi}
-  \item{mk_nimi}{Maakunnan nimi}
+  \item{mk_name}{Maakunnan nimi}
   \item{sa_code}{Suuralueen koodi}
-  \item{sa_nimi}{Suuralueen nimi}
+  \item{sa_name}{Suuralueen nimi}
   \item{sk_code}{Seutukunnan koodi}
-  \item{sk_nimi}{Seutukunnan nimi}
+  \item{sk_name}{Seutukunnan nimi}
   \item{va_code}{Vaalipiirin koodi}
-  \item{va_nimi}{Vaalipiirin nimi}
+  \item{va_name}{Vaalipiirin nimi}
 }}
 \source{
 \url{http://www.stat.fi/meta/luokitukset/kunta/001-2015/luokitusavaimet.html}

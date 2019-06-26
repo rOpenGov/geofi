@@ -9,49 +9,23 @@
   \item{kunta}{Kuntanumero}
   \item{name}{Kunnan nimi suomeksi}
   \item{avi_code}{Aluehallintoviraston koodi}
-  \item{avi_nimi}{Aluehallintoviraston nimi}
+  \item{avi_name}{Aluehallintoviraston nimi}
   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen koodi}
-  \item{ely_nimi}{Elinkeino-, liikenne- ja ympäristökeskuksen nimi}
+  \item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen nimi}
   \item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen koodi}
-  \item{kr_nimi}{Tilastokeskuksen tilastollisen kuntaluokituksen nimi}
+  \item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen nimi}
   \item{mk_code}{Maakunnan koodi}
-  \item{mk_nimi}{Maakunnan nimi}
+  \item{mk_name}{Maakunnan nimi}
   \item{sa_code}{Suuralueen koodi}
-  \item{sa_nimi}{Suuralueen nimi}
+  \item{sa_name}{Suuralueen nimi}
   \item{sk_code}{Seutukunnan koodi}
-  \item{sk_nimi}{Seutukunnan nimi}
+  \item{sk_name}{Seutukunnan nimi}
   \item{va_code}{Vaalipiirin koodi}
-  \item{va_nimi}{Vaalipiirin nimi}
-  \item{avi_nimi_sv}{avi_nimi_sv}
-  \item{ely_nimi_sv}{ely_nimi_sv}
-  \item{kr_nimi_sv}{kr_nimi_sv}
-  \item{mk_nimi_sv}{mk_nimi_sv}
-  \item{15_64_vuotiaiden_osuus_vaestosta_prosenttia_2014}{15_64_vuotiaiden_osuus_vaestosta_prosenttia_2014}
-  \item{alkutuotannon_tyopaikkojen_osuus_prosenttia_2013}{alkutuotannon_tyopaikkojen_osuus_prosenttia_2013}
-  \item{alle_15_vuotiaiden_osuus_vaestosta_prosenttia_2014}{alle_15_vuotiaiden_osuus_vaestosta_prosenttia_2014}
-  \item{alueella_asuvan_tyollisen_tyovoiman_maara_2013}{alueella_asuvan_tyollisen_tyovoiman_maara_2013}
-  \item{asuinkunnassaan_tyossakayvien_osuus_prosenttia_2013}{asuinkunnassaan_tyossakayvien_osuus_prosenttia_2013}
-  \item{asuntokuntien_lukumaara_2014}{asuntokuntien_lukumaara_2014}
-  \item{elakelaisten_osuus_vaestosta_prosenttia_2013}{elakelaisten_osuus_vaestosta_prosenttia_2013}
-  \item{jalostuksen_tyopaikkojen_osuus_prosenttia_2013}{jalostuksen_tyopaikkojen_osuus_prosenttia_2013}
-  \item{korkea_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2014}{korkea_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2014}
-  \item{kunnassa_olevien_tyopaikkojen_lukumaara_2013}{kunnassa_olevien_tyopaikkojen_lukumaara_2013}
-  \item{kuntien_valinen_muuttovoitto_tappio_henkiloa_2014}{kuntien_valinen_muuttovoitto_tappio_henkiloa_2014}
-  \item{palvelujen_tyopaikkojen_osuus_prosenttia_2013}{palvelujen_tyopaikkojen_osuus_prosenttia_2013}
-  \item{perheiden_lukumaara_2014}{perheiden_lukumaara_2014}
-  \item{rivi_ja_pientaloissa_asuvien_asuntokuntien_osuus_prosenttia_2014}{rivi_ja_pientaloissa_asuvien_asuntokuntien_osuus_prosenttia_2014}
-  \item{ruotsinkielisten_osuus_vaestosta_prosenttia_2014}{ruotsinkielisten_osuus_vaestosta_prosenttia_2014}
-  \item{syntyneiden_enemmyys_henkiloa_2014}{syntyneiden_enemmyys_henkiloa_2014}
-  \item{taajama_aste_prosenttia_2014}{taajama_aste_prosenttia_2014}
-  \item{taloudellinen_huoltosuhde_2013}{taloudellinen_huoltosuhde_2013}
-  \item{tyollisyysaste_prosenttia_2013}{tyollisyysaste_prosenttia_2013}
-  \item{tyottomien_osuus_tyovoimasta_prosenttia_2013}{tyottomien_osuus_tyovoimasta_prosenttia_2013}
-  \item{ulkomaan_kansalaisten_osuus_vaestosta_prosenttia_2014}{ulkomaan_kansalaisten_osuus_vaestosta_prosenttia_2014}
-  \item{vahintaan_keskiasteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2014}{vahintaan_keskiasteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2014}
-  \item{vakiluku_2014}{vakiluku_2014}
-  \item{vakiluvun_muutos_edellisesta_vuodesta_prosenttia_2014}{vakiluvun_muutos_edellisesta_vuodesta_prosenttia_2014}
-  \item{vuokra_asunnoissa_asuvien_asuntokuntien_osuus_prosenttia_2014}{vuokra_asunnoissa_asuvien_asuntokuntien_osuus_prosenttia_2014}
-  \item{yli_64_vuotiaiden_osuus_vaestosta_prosenttia_2014}{yli_64_vuotiaiden_osuus_vaestosta_prosenttia_2014}
+  \item{va_name}{Vaalipiirin nimi}
+  \item{avi_name_sv}{avi_name_sv}
+  \item{ely_name_sv}{ely_name_sv}
+  \item{kr_name_sv}{kr_name_sv}
+  \item{mk_name_sv}{mk_name_sv}
 }}
 \source{
 \url{http://www.stat.fi}

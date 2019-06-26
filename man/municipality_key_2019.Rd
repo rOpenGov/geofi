@@ -9,68 +9,35 @@
   \item{kunta}{kunta}
   \item{name}{name}
   \item{avi_code}{avi_code}
-  \item{avi_nimi}{avi_nimi}
+  \item{avi_name}{avi_name}
   \item{ely_code}{ely_code}
-  \item{ely_nimi}{ely_nimi}
+  \item{ely_name}{ely_name}
   \item{kr_code}{kr_code}
-  \item{kr_nimi}{kr_nimi}
+  \item{kr_name}{kr_name}
   \item{mk_code}{mk_code}
-  \item{mk_nimi}{mk_nimi}
+  \item{mk_name}{mk_name}
   \item{sa_code}{sa_code}
-  \item{sa_nimi}{sa_nimi}
+  \item{sa_name}{sa_name}
   \item{sk_code}{sk_code}
-  \item{sk_nimi}{sk_nimi}
+  \item{sk_name}{sk_name}
   \item{sp_code}{sp_code}
-  \item{sp_nimi}{sp_nimi}
-  \item{erva_nimi}{erva_nimi}
+  \item{sp_name}{sp_name}
+  \item{erva_name}{erva_name}
   \item{erva_code}{erva_code}
   \item{va_code}{va_code}
-  \item{va_nimi}{va_nimi}
-  \item{vakuutuspiiri_nimi}{vakuutuspiiri_nimi}
+  \item{va_name}{va_name}
+  \item{vakuutuspiiri_name}{vakuutuspiiri_name}
   \item{vakuutuspiiri_code}{vakuutuspiiri_code}
-  \item{asumistukialue_nimi}{asumistukialue_nimi}
+  \item{asumistukialue_name}{asumistukialue_name}
   \item{asumistukialue_code}{asumistukialue_code}
-  \item{15_64_vuotiaiden_osuus_vaestosta_prosenttia_2017}{15_64_vuotiaiden_osuus_vaestosta_prosenttia_2017}
-  \item{alkutuotannon_tyopaikkojen_osuus_prosenttia_2016}{alkutuotannon_tyopaikkojen_osuus_prosenttia_2016}
-  \item{alle_15_vuotiaiden_osuus_vaestosta_prosenttia_2017}{alle_15_vuotiaiden_osuus_vaestosta_prosenttia_2017}
-  \item{alueella_asuvan_tyollisen_tyovoiman_maara_2016}{alueella_asuvan_tyollisen_tyovoiman_maara_2016}
-  \item{alueella_olevien_tyopaikkojen_lukumaara_2016}{alueella_olevien_tyopaikkojen_lukumaara_2016}
-  \item{asuinkunnassaan_tyossakayvien_osuus_prosenttia_2016}{asuinkunnassaan_tyossakayvien_osuus_prosenttia_2016}
-  \item{asuntokuntien_lukumaara_2017}{asuntokuntien_lukumaara_2017}
-  \item{elakelaisten_osuus_vaestosta_prosenttia_2016}{elakelaisten_osuus_vaestosta_prosenttia_2016}
-  \item{jalostuksen_tyopaikkojen_osuus_prosenttia_2016}{jalostuksen_tyopaikkojen_osuus_prosenttia_2016}
-  \item{konsernin_lainakanta_euroa_asukas_2017}{konsernin_lainakanta_euroa_asukas_2017}
-  \item{korkea_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2017}{korkea_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2017}
-  \item{kuntien_valinen_muuttovoitto_tappio_henkiloa_2017}{kuntien_valinen_muuttovoitto_tappio_henkiloa_2017}
-  \item{lainakanta_euroa_asukas_2017}{lainakanta_euroa_asukas_2017}
-  \item{opetus_ja_kulttuuritoiminta_yhteensa_nettokayttokustannukset_euroa_asukas_2017}{opetus_ja_kulttuuritoiminta_yhteensa_nettokayttokustannukset_euroa_asukas_2017}
-  \item{palvelujen_tyopaikkojen_osuus_prosenttia_2016}{palvelujen_tyopaikkojen_osuus_prosenttia_2016}
-  \item{perheiden_lukumaara_2017}{perheiden_lukumaara_2017}
-  \item{rivi_ja_pientaloissa_asuvien_asuntokuntien_osuus_prosenttia_2017}{rivi_ja_pientaloissa_asuvien_asuntokuntien_osuus_prosenttia_2017}
-  \item{ruotsinkielisten_osuus_vaestosta_prosenttia_2017}{ruotsinkielisten_osuus_vaestosta_prosenttia_2017}
-  \item{sosiaali_ja_terveystoiminta_yhteensa_nettokayttokustannukset_euroa_asukas_2017}{sosiaali_ja_terveystoiminta_yhteensa_nettokayttokustannukset_euroa_asukas_2017}
-  \item{syntyneiden_enemmyys_henkiloa_2017}{syntyneiden_enemmyys_henkiloa_2017}
-  \item{taajama_aste_prosenttia_2017}{taajama_aste_prosenttia_2017}
-  \item{taloudellinen_huoltosuhde_2016}{taloudellinen_huoltosuhde_2016}
-  \item{tyollisyysaste_prosenttia_2016}{tyollisyysaste_prosenttia_2016}
-  \item{tyottomien_osuus_tyovoimasta_prosenttia_2016}{tyottomien_osuus_tyovoimasta_prosenttia_2016}
-  \item{ulkomaan_kansalaisten_osuus_vaestosta_prosenttia_2017}{ulkomaan_kansalaisten_osuus_vaestosta_prosenttia_2017}
-  \item{vahintaan_toisen_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2017}{vahintaan_toisen_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2017}
-  \item{vakiluku_2017}{vakiluku_2017}
-  \item{vakiluvun_muutos_edellisesta_vuodesta_prosenttia_2017}{vakiluvun_muutos_edellisesta_vuodesta_prosenttia_2017}
-  \item{vuokra_asunnoissa_asuvien_asuntokuntien_osuus_prosenttia_2017}{vuokra_asunnoissa_asuvien_asuntokuntien_osuus_prosenttia_2017}
-  \item{vuosikate_euroa_asukas_2017}{vuosikate_euroa_asukas_2017}
-  \item{yli_64_vuotiaiden_osuus_vaestosta_prosenttia_2017}{yli_64_vuotiaiden_osuus_vaestosta_prosenttia_2017}
-  \item{avi_nimi_sv}{avi_nimi_sv}
-  \item{ely_nimi_sv}{ely_nimi_sv}
-  \item{mk_nimi_sv}{mk_nimi_sv}
-  \item{sa_nimi_sv}{sa_nimi_sv}
-  \item{sa_nimi_sk}{sa_nimi_sk}
-  \item{sp_nimi_sv}{sp_nimi_sv}
-  \item{va_nimi_sv}{va_nimi_sv}
-  \item{vakuutuspiiri_nimi_sv}{vakuutuspiiri_nimi_sv}
-  \item{name_sv}{name_sv}
-  \item{name_fi}{name_fi}
+  \item{avi_name_sv}{avi_name_sv}
+  \item{ely_name_sv}{ely_name_sv}
+  \item{mk_name_sv}{mk_name_sv}
+  \item{sa_name_sv}{sa_name_sv}
+  \item{sa_name_sk}{sa_name_sk}
+  \item{sp_name_sv}{sp_name_sv}
+  \item{va_name_sv}{va_name_sv}
+  \item{vakuutuspiiri_name_sv}{vakuutuspiiri_name_sv}
 }}
 \source{
 \url{http://www.stat.fi/meta/luokitukset/kunta/001-2019/luokitusavaimet.html}

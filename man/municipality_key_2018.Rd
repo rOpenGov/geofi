@@ -9,70 +9,39 @@
   \item{kunta}{Kuntanumero}
   \item{name}{Kunnan nimi suomeksi}
   \item{avi_code}{Aluehallintoviraston koodi}
-  \item{avi_nimi}{Aluehallintoviraston nimi}
+  \item{avi_name}{Aluehallintoviraston nimi}
   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen koodi}
-  \item{ely_nimi}{Elinkeino-, liikenne- ja ympäristökeskuksen nimi}
+  \item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen nimi}
   \item{hp_code}{Hovioikeuspiirin koodi}
-  \item{hp_nimi}{Hovioikeuspiirin nimi}
+  \item{hp_name}{Hovioikeuspiirin nimi}
   \item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen koodi}
-  \item{kr_nimi}{Tilastokeskuksen tilastollisen kuntaluokituksen nimi}
+  \item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen nimi}
   \item{mk_code}{Maakunnan koodi}
-  \item{mk_nimi}{Maakunnan nimi}
+  \item{mk_name}{Maakunnan nimi}
   \item{sa_code}{Suuralueen koodi}
-  \item{sa_nimi}{Suuralueen nimi}
+  \item{sa_name}{Suuralueen nimi}
   \item{sk_code}{Seutukunnan koodi}
-  \item{sk_nimi}{Seutukunnan nimi}
+  \item{sk_name}{Seutukunnan nimi}
   \item{sp_code}{Sairaanhoitopiirin koodi}
-  \item{sp_nimi}{Sairaanhoitopiirin nimi}
+  \item{sp_name}{Sairaanhoitopiirin nimi}
   \item{tk_code}{Työssäköyntialueen koodi}
-  \item{tk_nimi}{Työssäkäyntialueen nimi}
+  \item{tk_name}{Työssäkäyntialueen nimi}
   \item{va_code}{Vaalipiirin koodi}
-  \item{va_nimi}{Vaalipiirin nimi}
-  \item{vakuutuspiiri_nimi}{Kelan vakuutuspiirin nimi}
+  \item{va_name}{Vaalipiirin nimi}
+  \item{vakuutuspiiri_name}{Kelan vakuutuspiirin nimi}
   \item{vakuutuspiiri_code}{Kelan vakuutuspiirin koodi (epävirallinen)}
-  \item{asumistukialue_nimi}{Kelan asumistukialueen nimi}
+  \item{asumistukialue_name}{Kelan asumistukialueen nimi}
   \item{asumistukialue_code}{Kelan asumistukialueen koodi (epävirallinen)}
-  \item{erva_nimi}{Erityisvastuualueen nimi}
+  \item{erva_name}{Erityisvastuualueen nimi}
   \item{erva_code}{Erityisvastuualueen koodi (epävirallinen)}
-  \item{avi_nimi_sv}{avi_nimi_sv}
-  \item{ely_nimi_sv}{ely_nimi_sv}
-  \item{mk_nimi_sv}{mk_nimi_sv}
-  \item{sa_nimi_sv}{sa_nimi_sv}
-  \item{sa_nimi_sk}{sa_nimi_sk}
-  \item{sp_nimi_sv}{sp_nimi_sv}
-  \item{va_nimi_sv}{va_nimi_sv}
-  \item{vakuutuspiiri_nimi_sv}{vakuutuspiiri_nimi_sv}
-  \item{15_64_vuotiaiden_osuus_vaestosta_prosenttia_2016}{15_64_vuotiaiden_osuus_vaestosta_prosenttia_2016}
-  \item{alkutuotannon_tyopaikkojen_osuus_prosenttia_2015}{alkutuotannon_tyopaikkojen_osuus_prosenttia_2015}
-  \item{alle_15_vuotiaiden_osuus_vaestosta_prosenttia_2016}{alle_15_vuotiaiden_osuus_vaestosta_prosenttia_2016}
-  \item{alueella_asuvan_tyollisen_tyovoiman_maara_2015}{alueella_asuvan_tyollisen_tyovoiman_maara_2015}
-  \item{asuinkunnassaan_tyossakayvien_osuus_prosenttia_2015}{asuinkunnassaan_tyossakayvien_osuus_prosenttia_2015}
-  \item{asuntokuntien_lukumaara_2016}{asuntokuntien_lukumaara_2016}
-  \item{elakelaisten_osuus_vaestosta_prosenttia_2015}{elakelaisten_osuus_vaestosta_prosenttia_2015}
-  \item{jalostuksen_tyopaikkojen_osuus_prosenttia_2015}{jalostuksen_tyopaikkojen_osuus_prosenttia_2015}
-  \item{konsernin_lainakanta_euroa_asukas_2016}{konsernin_lainakanta_euroa_asukas_2016}
-  \item{korkea_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2016}{korkea_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2016}
-  \item{kunnassa_olevien_tyopaikkojen_lukumaara_2015}{kunnassa_olevien_tyopaikkojen_lukumaara_2015}
-  \item{kuntien_valinen_muuttovoitto_tappio_henkiloa_2016}{kuntien_valinen_muuttovoitto_tappio_henkiloa_2016}
-  \item{lainakanta_euroa_asukas_2016}{lainakanta_euroa_asukas_2016}
-  \item{opetus_ja_kulttuuritoiminta_yhteensa_nettokayttokustannukset_euroa_asukas_2016}{opetus_ja_kulttuuritoiminta_yhteensa_nettokayttokustannukset_euroa_asukas_2016}
-  \item{palvelujen_tyopaikkojen_osuus_prosenttia_2015}{palvelujen_tyopaikkojen_osuus_prosenttia_2015}
-  \item{perheiden_lukumaara_2016}{perheiden_lukumaara_2016}
-  \item{rivi_ja_pientaloissa_asuvien_asuntokuntien_osuus_prosenttia_2016}{rivi_ja_pientaloissa_asuvien_asuntokuntien_osuus_prosenttia_2016}
-  \item{ruotsinkielisten_osuus_vaestosta_prosenttia_2016}{ruotsinkielisten_osuus_vaestosta_prosenttia_2016}
-  \item{sosiaali_ja_terveystoiminta_yhteensa_nettokayttokustannukset_euroa_asukas_2016}{sosiaali_ja_terveystoiminta_yhteensa_nettokayttokustannukset_euroa_asukas_2016}
-  \item{syntyneiden_enemmyys_henkiloa_2016}{syntyneiden_enemmyys_henkiloa_2016}
-  \item{taajama_aste_prosenttia_2016}{taajama_aste_prosenttia_2016}
-  \item{taloudellinen_huoltosuhde_2015}{taloudellinen_huoltosuhde_2015}
-  \item{tyollisyysaste_prosenttia_2015}{tyollisyysaste_prosenttia_2015}
-  \item{tyottomien_osuus_tyovoimasta_prosenttia_2015}{tyottomien_osuus_tyovoimasta_prosenttia_2015}
-  \item{ulkomaan_kansalaisten_osuus_vaestosta_prosenttia_2016}{ulkomaan_kansalaisten_osuus_vaestosta_prosenttia_2016}
-  \item{vahintaan_toisen_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2016}{vahintaan_toisen_asteen_tutkinnon_suorittaneiden_osuus_15_vuotta_tayttaneista_prosenttia_2016}
-  \item{vakiluku_2016}{vakiluku_2016}
-  \item{vakiluvun_muutos_edellisesta_vuodesta_prosenttia_2016}{vakiluvun_muutos_edellisesta_vuodesta_prosenttia_2016}
-  \item{vuokra_asunnoissa_asuvien_asuntokuntien_osuus_prosenttia_2016}{vuokra_asunnoissa_asuvien_asuntokuntien_osuus_prosenttia_2016}
-  \item{vuosikate_euroa_asukas_2016}{vuosikate_euroa_asukas_2016}
-  \item{yli_64_vuotiaiden_osuus_vaestosta_prosenttia_2016}{yli_64_vuotiaiden_osuus_vaestosta_prosenttia_2016}
+  \item{avi_name_sv}{avi_name_sv}
+  \item{ely_name_sv}{ely_name_sv}
+  \item{mk_name_sv}{mk_name_sv}
+  \item{sa_name_sv}{sa_name_sv}
+  \item{sa_name_sk}{sa_name_sk}
+  \item{sp_name_sv}{sp_name_sv}
+  \item{va_name_sv}{va_name_sv}
+  \item{vakuutuspiiri_name_sv}{vakuutuspiiri_name_sv}
 }}
 \source{
 \url{http://www.stat.fi/meta/luokitukset/kunta/001-2018/luokitusavaimet.html}

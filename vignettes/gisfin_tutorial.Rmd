@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 ```{r municipality_map}
 library(gisfin)
 library(dplyr)
+library(tidyr)
 library(ggplot2)
 
 municipalities <- get_municipalities(year = 2019)

@@ -19,20 +19,21 @@ knitr::opts_chunk$set(
 ## Municipalities
 
 ```{r municipality_map}
-library(ows4R)
 library(gisfin)
 library(dplyr)
 library(ggplot2)
 
-shape <- gisfin::get_municipalities(year = 2019)
-ggplot(shape) + geom_sf(aes(fill = kunta)) + theme(legend.position = "none")
+municipalities <- get_municipalities(year = 2019)
+ggplot(municipalities) + 
+  geom_sf(aes(fill = as.integer(kunta)))
 ```
 
 ## Zipcodes
 
 
 ```{r zipcode_map}
-shape <- get_zipcodes(year = 2019) 
-ggplot(shape) + geom_sf(aes(fill = he_kika)) + theme(legend.position = "none")
+zipcodes <- get_zipcodes(year = 2019) 
+ggplot(zipcodes) + 
+  geom_sf(aes(fill = as.integer(posti_alue)))
 ```
 

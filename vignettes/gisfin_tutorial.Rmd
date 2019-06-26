@@ -37,3 +37,26 @@ ggplot(zipcodes) +
   geom_sf(aes(fill = as.integer(posti_alue)))
 ```
 
+## Aggregating municipalities data using internal municipality_key-files
+
+
+```{r}
+municipalities17 <- get_municipalities(year = 2017)
+# Join with municipality_key
+
+dat <- left_join(municipalities17 %>% mutate(kunta = as.integer(kunta)), 
+                 municipality_key_2017, by = c("name" = "name"))
+
+# Lets aggregate at maakunta level using column mk_name
+mk_data <- dat %>% 
+  group_by(mk_name,mk_code) %>% 
+  # And compute population at maakunta level
+  summarise(vakiluku_2017 = sum(vakiluku_2017))
+
+ggplot(mk_data) + 
+  geom_sf(aes(fill = vakiluku_2017)) +
+  geom_sf_text(aes(label = paste(mk_name, "\n",vakiluku_2017)), 
+               size = 3, 
+               color = "white")
+```
+

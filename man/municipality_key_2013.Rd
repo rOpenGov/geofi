@@ -3,29 +3,29 @@
 \docType{data}
 \name{municipality_key_2013}
 \alias{municipality_key_2013}
-\title{Vuoden 2013 kunnat erilaisilla alueluokituksilla}
+\title{Municipality key table for 2013}
 \format{A data frame with 320 rows and 20 variables:
 \describe{
-  \item{kunta}{Kuntanumero}
-  \item{name}{Kunnan nimi suomeksi}
-  \item{avi_code}{Aluehallintoviraston koodi}
-  \item{avi_name}{Aluehallintoviraston nimi}
-  \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen koodi}
-  \item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen nimi}
-  \item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen koodi}
-  \item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen nimi}
-  \item{mk_code}{Maakunnan koodi}
-  \item{mk_name}{Maakunnan nimi}
-  \item{sa_code}{Suuralueen koodi}
-  \item{sa_name}{Suuralueen nimi}
-  \item{sk_code}{Seutukunnan koodi}
-  \item{sk_name}{Seutukunnan nimi}
-  \item{sp_code}{Sairaanhoitopiirin koodi}
-  \item{sp_name}{Sairaanhoitopiirin nimi}
-  \item{tk_code}{Työssäköyntialueen koodi}
-  \item{tk_name}{Työssäkäyntialueen nimi}
-  \item{va_code}{Vaalipiirin koodi}
-  \item{va_name}{Vaalipiirin nimi}
+  \item{kunta}{Municipality code or kuntanumero}
+  \item{name}{Municipality name in Finnish}
+  \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
+  \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
+  \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
+  \item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment)}
+  \item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen code}
+  \item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen name}
+  \item{mk_code}{Maakunnan code (Regions of Finland NUTS 3)}
+  \item{mk_name}{Maakunnan name (Regions of Finland NUTS 3)}
+  \item{sa_code}{Suuralueen code (Large areas NUTS 2)}
+  \item{sa_name}{Suuralueen name (Large areas NUTS 2)}
+  \item{sk_code}{Seutukunnan code (Sub-Regions of Finland NUTS 3)}
+  \item{sk_name}{Seutukunnan name (Sub-Regions of Finland NUTS 3)}
+  \item{sp_code}{Sairaanhoitopiirin code (Health care regions)}
+  \item{sp_name}{Sairaanhoitopiirin name (Health care regions)}
+  \item{tk_code}{Työssäkäyntialueen code}
+  \item{tk_name}{Työssäkäyntialueen name}
+  \item{va_code}{Vaalipiirin code (Electoral district)}
+  \item{va_name}{Vaalipiirin name (Electoral district)}
 }}
 \source{
 \url{http://www.stat.fi/meta/luokitukset/kunta/001-2013/luokitusavaimet.html}
@@ -34,6 +34,6 @@
 municipality_key_2013
 }
 \description{
-Data jolla kuntatason datoja voidaan aggregoida ylemmälle tasolla
+Table for aggregating municipality level data to various regional groupings
 }
 \keyword{datasets}

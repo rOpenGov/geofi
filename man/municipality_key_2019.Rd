@@ -3,41 +3,43 @@
 \docType{data}
 \name{municipality_key_2019}
 \alias{municipality_key_2019}
-\title{Vuoden 2019 kunnat erilaisilla alueluokituksilla}
-\format{A data frame with 311 rows and 65 variables:
+\title{Municipality key table for 2019}
+\format{A data frame with 311 rows and 34 variables:
 \describe{
-  \item{kunta}{kunta}
+  \item{kunta}{Municipality code}
   \item{name}{name}
-  \item{avi_code}{avi_code}
-  \item{avi_name}{avi_name}
-  \item{ely_code}{ely_code}
-  \item{ely_name}{ely_name}
-  \item{kr_code}{kr_code}
-  \item{kr_name}{kr_name}
-  \item{mk_code}{mk_code}
-  \item{mk_name}{mk_name}
-  \item{sa_code}{sa_code}
-  \item{sa_name}{sa_name}
-  \item{sk_code}{sk_code}
-  \item{sk_name}{sk_name}
-  \item{sp_code}{sp_code}
-  \item{sp_name}{sp_name}
-  \item{erva_name}{erva_name}
-  \item{erva_code}{erva_code}
-  \item{va_code}{va_code}
-  \item{va_name}{va_name}
-  \item{vakuutuspiiri_name}{vakuutuspiiri_name}
-  \item{vakuutuspiiri_code}{vakuutuspiiri_code}
-  \item{asumistukialue_name}{asumistukialue_name}
-  \item{asumistukialue_code}{asumistukialue_code}
-  \item{avi_name_sv}{avi_name_sv}
-  \item{ely_name_sv}{ely_name_sv}
-  \item{mk_name_sv}{mk_name_sv}
-  \item{sa_name_sv}{sa_name_sv}
+  \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
+  \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
+  \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
+  \item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment)}
+  \item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen code}
+  \item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen name}
+  \item{mk_code}{Maakunnan code (Regions of Finland NUTS 3)}
+  \item{mk_name}{Maakunnan name (Regions of Finland NUTS 3)}
+  \item{sa_code}{Suuralueen code (Large areas NUTS 2)}
+  \item{sa_name}{Suuralueen name (Large areas NUTS 2)}
+  \item{sk_code}{Seutukunnan code (Sub-Regions of Finland NUTS 3)}
+  \item{sk_name}{Seutukunnan name (Sub-Regions of Finland NUTS 3)}
+  \item{sp_code}{Sairaanhoitopiirin code (Health care regions)}
+  \item{sp_name}{Sairaanhoitopiirin name (Health care regions)}
+  \item{erva_name}{Erityisvastuualueen name}
+  \item{erva_code}{Erityisvastuualueen koodi (epävirallinen)}
+  \item{va_code}{Vaalipiirin code (Electoral district)}
+  \item{va_name}{Vaalipiirin name (Electoral district)}
+  \item{vakuutuspiiri_name}{Kelan vakuutuspiirin name}
+  \item{vakuutuspiiri_code}{Kelan vakuutuspiirin koodi (epävirallinen)}
+  \item{asumistukialue_name}{Kelan asumistukialueen name}
+  \item{asumistukialue_code}{Kelan asumistukialueen koodi (epävirallinen)}
+  \item{avi_name_sv}{Aluehallintovirasto name (Regional State Administrative Agencies) in Swedish}
+  \item{ely_name_sv}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment) in Swedish}
+  \item{mk_name_sv}{Maakunnan name (Regions of Finland NUTS 3) in Swedish}
+  \item{sa_name_sv}{Suuralueen name (Large areas NUTS 2) in Swedish}
   \item{sa_name_sk}{sa_name_sk}
-  \item{sp_name_sv}{sp_name_sv}
-  \item{va_name_sv}{va_name_sv}
+  \item{sp_name_sv}{Sairaanhoitopiirin name (Health care regions) in Swedish}
+  \item{va_name_sv}{Vaalipiirin name (Electoral district) in Swedish}
   \item{vakuutuspiiri_name_sv}{vakuutuspiiri_name_sv}
+  \item{name_fi}{municipality name in Finnish}
+  \item{name_sv}{municipality name in Swedish}
 }}
 \source{
 \url{http://www.stat.fi/meta/luokitukset/kunta/001-2019/luokitusavaimet.html}
@@ -46,6 +48,6 @@
 municipality_key_2019
 }
 \description{
-Data jolla kuntatason datoja voidaan aggregoida ylemmälle tasolla
+Table for aggregating municipality level data to various regional groupings
 }
 \keyword{datasets}

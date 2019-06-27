@@ -4,7 +4,7 @@ Title: Finland GIS R Tools
 Version: 0.9.27.9001
 Date: 2019-06-27
 Authors@R: c(
-    person("Kainu", "Markus", email = "markus.kainu@kapsi.fi", role = c("aut", "cre"), comment = c(ORCID = "")),
+    person("Kainu", "Markus", email = "markus.kainu@kapsi.fi", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1376-503X")),
     person("Lehtomaki", "Joona", role = c("aut"), comment = c(ORCID = "0000-0002-7891-0843")),
     person("Leo", "Lahti", email = "leo.lahti@iki.fi", role = c("aut"), comment = c(ORCID = "0000-0001-5537-637X")),    
     person("Parkkinen", "Juuso", role = c("ctb"), comment = c(ORCID = "0000-0002-7818-5901")))

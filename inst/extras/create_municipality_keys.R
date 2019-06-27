@@ -1,4 +1,177 @@
 
+#    ____   __    ____                     _         
+#   |  _ \ (())  / ___|_   _____ _ __  ___| | ____ _ 
+#   | |_) / _ '| \___ \ \ / / _ \ '_ \/ __| |/ / _` |
+#   |  __/ (_| |  ___) \ V /  __/ | | \__ \   < (_| |
+#   |_|   \__,_| |____/ \_/ \___|_| |_|___/_|\_\__,_|
+#                                                    
+
+# Tässä luodaan data, jossa eri alueluokitukset ruotsiksiksi
+# 
+# Alempana luodaan ko. data, sitä ennen tehdään funktio posvenska jolla käännetään kukin avain
+#
+#  
+#
+# key <- readRDS("./rds/kunta_luokitusavain_17.RDS") %>% as_tibble()
+
+# posvenska <- function(avain){
+#   key <- readRDS(./"_local_data/svenska.RDS")
+# }
+
+if (FALSE){
+  library(dplyr)
+  
+  svenska <- tibble()
+  
+  # kunta_avi_teksti,
+  dat <- data_frame()
+  for (y in c("10","11","12","13","14","15","16","17","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/avi/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "avi"))
+  
+  # kunta_ely_teksti,
+  dat <- data_frame()
+  for (y in c("10","11","12","13","14","15","16","17","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/ely/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "ely"))
+  
+  # kunta_kunta_teksti,
+  dat <- data_frame()
+  for (y in c("08","09","10","11","12","13","14","16","17","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/kunta/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "kunta"))
+  
+  # kunta_kr_teksti,
+  dat <- data_frame()
+  for (y in c("09","10","11","13","14","15","16","17")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/kuntaryhmitys/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "kr"))
+  
+  # kunta_mk_teksti,
+  dat <- data_frame()
+  for (y in c("08","09","10","11","12","13","14","15","16","17","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/maakunta/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "mk"))
+  
+  # kunta_sa_teksti,
+  dat <- data_frame()
+  for (y in c("09","10","11","12","13","14","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/suuralue/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "sa"))
+  
+  # kunta_sk_teksti,
+  dat <- data_frame()
+  for (y in c("08","09","10","11","13","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/seutukunta/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "sk"))
+  
+  # kunta_sp_teksti,
+  dat <- data_frame()
+  for (y in c("10","11","12","13","14","15","16","17","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/sairaanhoitop/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "sp"))
+  
+  # kunta_nimi_teksti,
+  dat <- data_frame()
+  for (y in c("08","09","10","11","12","13","14","16","17","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/kunta/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "kuntanimi_sv"))
+  
+  # kunta_va_teksti,
+  dat <- data_frame()
+  for (y in c("11","12","13","15","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/vaalipiiri/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "va"))
+  
+  
+  # kunta_va_teksti,
+  dat <- data_frame()
+  for (y in c("11","12","13","15","18")){
+    tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/vaalipiiri/001-20",y,"/tekstitiedosto_sv.txt"), 
+                      header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
+    # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
+    tmp$vuosi <- paste0("20",y)
+    tmp$kod <- as.character(tmp$kod)
+    dat <- bind_rows(dat,tmp)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "va"))
+  
+  
+  
+  # kunta_kela_teksti
+  piiridata <- data_frame(kod = as.character(1:5),
+                          benämning = c("södra","västra","mellersta","östra","norra"))
+  dat <- data_frame()
+  for (y in 2016:2018){
+    piiridata$vuosi <- as.character(y)
+    dat <- bind_rows(dat,piiridata)
+  }
+  svenska <- bind_rows(svenska,dat %>% mutate(type = "vakuutuspiiri"))
+  
+  saveRDS(svenska, "./inst/extras/svenska.rds")
+}
+
+
 library(dplyr)
 library(tidyr)
 
@@ -287,7 +460,7 @@ tbl2 <- tbl
 
 # *************************************************
 # käännä ruotsiksi
-svkey <- readRDS("/media/aurelius/aral/local_data/kelagis_data/svenska.RDS")
+svkey <- readRDS("./inst/extras/svenska.rds")
 
 # avi
 svkey_tmp <- svkey[svkey$vuosi == 2018 & svkey$type == "avi",]
@@ -577,7 +750,7 @@ tbl2 <- tbl
 
 # *************************************************
 # käännä ruotsiksi
-svkey <- readRDS("/media/aurelius/aral/local_data/kelagis_data/svenska.RDS")
+svkey <- readRDS("./inst/extras/svenska.rds")
 
 # avi
 svkey_tmp <- svkey[svkey$vuosi == 2018 & svkey$type == "avi",]
@@ -860,7 +1033,7 @@ tbl2 <- tbl
 
 # *************************************************
 # käännä ruotsiksi
-svkey <- readRDS("/media/aurelius/aral/local_data/kelagis_data/svenska.RDS")
+svkey <- readRDS("./inst/extras/svenska.rds")
 
 # avi
 svkey_tmp <- svkey[svkey$vuosi == 2017 & svkey$type == "avi",]
@@ -1002,7 +1175,7 @@ tbl2 <- tbl
 
 # *************************************************
 # käännä ruotsiksi
-svkey <- readRDS("/media/aurelius/aral/local_data/kelagis_data/svenska.RDS")
+svkey <- readRDS("./inst/extras/svenska.rds")
 
 # avi
 svkey_tmp <- svkey[svkey$vuosi == 2016 & svkey$type == "avi",]
@@ -1354,3 +1527,9 @@ tbl2 <- tbl
 municipality_key_2013 <- tbl2
 save(municipality_key_2013, file = "./data/municipality_key_2013.rda")
 rm(list = ls())
+
+
+
+
+
+

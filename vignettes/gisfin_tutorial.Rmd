@@ -24,7 +24,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-municipalities <- get_municipalities(year = 2019)
+municipalities <- get_municipalities(year = 2019, scale = 4500)
 ggplot(municipalities) + 
   geom_sf(aes(fill = as.integer(kunta)))
 ```
@@ -38,7 +38,7 @@ ggplot(zipcodes) +
   geom_sf(aes(fill = as.integer(posti_alue)))
 ```
 
-## Aggregating municipalities data using internal municipality_key-files
+## Joining municipality level data from Statistics Finland
 
 
 ```{r}
@@ -68,12 +68,19 @@ tk_data2 <- tk_data %>%
 tk_data3 <- janitor::clean_names(tk_data2)
 
 # Join with Statistics Finland attribute data
-dat <- left_join(municipalities17, tk_data3) %>% 
-  # Join with municipality_key
-                 left_join(municipality_key_2017, by = c("name" = "name"))
+dat <- left_join(municipalities17, tk_data3)
+dat[1:10,1:10]
+```
+
+
+## Aggregating municipality level data using internal municipality_key-files
+
+```{r}
+# Lets join the municipality level data with internal municipality_key_2017-data
+dat2 <- left_join(dat, municipality_key_2017, by = c("name" = "name"))
 
 # Lets aggregate at maakunta level using column mk_name
-mk_data <- dat %>% 
+mk_data <- dat2 %>% 
   group_by(mk_name,mk_code) %>% 
   # And compute population at maakunta level
   summarise(vakiluku_2017 = sum(vakiluku_2017))
@@ -83,12 +90,14 @@ ggplot(mk_data) +
   geom_sf_text(aes(label = paste(mk_name, "\n",vakiluku_2017)), 
                size = 3, 
                color = "white")
+
 ```
+
 
 Or if you prefer aggregating at vaalipiiri-level you can
 
 ```{r}
-mk_data <- dat %>% 
+mk_data <- dat2 %>% 
   group_by(va_name,va_code) %>% 
   # And compute population at maakunta level
   summarise(vakiluku_2017 = sum(vakiluku_2017))
@@ -98,6 +107,47 @@ ggplot(mk_data) +
   geom_sf_text(aes(label = paste(va_name, "\n",vakiluku_2017)), 
                size = 3, 
                color = "white")
+
+```
+
+
+Or if you want the population at the national level aggregated up from municipality level you can: 
+
+```{r}
+mk_data <- dat2 %>% 
+  summarise(vakiluku_2017 = sum(vakiluku_2017))
+
+ggplot(mk_data) + 
+  geom_sf(aes(fill = vakiluku_2017)) +
+  geom_sf_text(aes(label = vakiluku_2017), 
+               size = 3, 
+               color = "white")
+
+```
+
+
+## Interactive maps using `leaflet`-package
+
+
+
+```{r}
+library(leaflet)
+library(gisfin)
+library(dplyr)
+
+municipalities <- get_municipalities(year = 2019, scale = 4500)
+municipalities_lonlat <- sf::st_transform(x = municipalities, crs = "+proj=longlat +datum=WGS84")
+
+leaflet(municipalities_lonlat) %>% 
+  addTiles() %>% 
+  addPolygons(color = "coral", 
+              weight = 1,
+              smoothFactor = 0.5,
+              opacity = 1.0,
+              fillOpacity = 0.5,
+    label = ~nimi,
+    highlightOptions = highlightOptions(color = "white", weight = 2,
+      bringToFront = TRUE))
 
 ```
 

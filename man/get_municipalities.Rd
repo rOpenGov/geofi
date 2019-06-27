@@ -4,10 +4,12 @@
 \alias{get_municipalities}
 \title{Get geospatial data at kunta, maakunta, etc leves from MML}
 \usage{
-get_municipalities(year = 2017)
+get_municipalities(year = 2017, scale = 4500)
 }
 \arguments{
-\item{year}{A numeric for year of the administerative borders. Available are 2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.}
+\item{year}{A numeric for year of the administerative borders. Available are 2013, 2014, 2015, 2016, 2017, 2018 and 2019.}
+
+\item{scale}{A scale or resolution of the shape. Two options: \code{1000} equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}
 }
 \value{
 sf-object
@@ -17,7 +19,7 @@ preprocessed geospatial data sf-objects
 }
 \examples{
  \dontrun{
- f <- get_geo(year=2016,level="kunta")
+ f <- get_municipalities(year=2016, scale = 4500)
  plot(f)
  }
 

@@ -53,7 +53,7 @@ Contributions are very welcome:
 
 ### Acknowledgements
 
-**Kindly cite this work** as follows: Markus Kainu, Joona Lehtomäki, and Leo Lahti. Retrieval and analysis of open geospatial data from Finland with the gisfin R package. R package version 0.9.27.9000. URL: [http://ropengov.github.io/gisfin](http://ropengov.github.io/gisfin)
+**Kindly cite this work** as follows: Markus Kainu, Joona Lehtomäki, and Leo Lahti. Retrieval and analysis of open geospatial data from Finland with the gisfin R package. R package version 0.9.27.9001. URL: [http://ropengov.github.io/gisfin](http://ropengov.github.io/gisfin)
 
 We are grateful to all [contributors](https://github.com/rOpenGov/gisfin/graphs/contributors), including Juusi Parkkinen, Jussi Jousimo, Janne Aukia, and Aaro Salosensaari. This project is part of [rOpenGov](http://ropengov.github.io).
 

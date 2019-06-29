@@ -3,6 +3,7 @@ sudo: required
 dist: trusty
 apt_packages:
   - gdal-bin
+  - libudunits2-dev    
   - libgdal1-dev
   - libproj-dev
 r_packages:

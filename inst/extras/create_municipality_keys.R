@@ -170,7 +170,7 @@ if (FALSE){
   
   saveRDS(svenska, "./inst/extras/svenska.rds")
 }
-
+svenska <- readRDS("./inst/extras/svenska.rds")
 
 library(dplyr)
 library(tidyr)
@@ -188,12 +188,12 @@ library(tidyr)
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_avi_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","avi_code","avi_name")
+names(d) <- c("kunta","kunta_name","avi_code","avi_name")
 kunta_avi_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_ely_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","ely_code","ely_name")
+names(d) <- c("kunta","kunta_name","ely_code","ely_name")
 kunta_ely_teksti <- d
 
 # EI oo html:ää eikä txt:tä
@@ -203,34 +203,34 @@ kunta_ely_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_hp_teksti.txt", 
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","hp_code","hp_name")
+# names(d) <- c("kunta","kunta_name","hp_code","hp_name")
 # kunta_hp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_mk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","mk_code","mk_name")
+names(d) <- c("kunta","kunta_name","mk_code","mk_name")
 kunta_mk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_sp_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sp_code","sp_name")
+names(d) <- c("kunta","kunta_name","sp_code","sp_name")
 kunta_sp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_sk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sk_code","sk_name")
+names(d) <- c("kunta","kunta_name","sk_code","sk_name")
 kunta_sk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_sa_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sa_code","sa_name")
+names(d) <- c("kunta","kunta_name","sa_code","sa_name")
 kunta_sa_teksti <- d
 
 library(rvest)
 URL <- "http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_kr.html"
 pg <- read_html(URL) 
 d <- html_table(pg, fill=TRUE, header = TRUE)[[1]]
-names(d) <- c("kunta","name","kr_code","kr_name")
+names(d) <- c("kunta","kunta_name","kr_code","kr_name")
 kunta_kr_teksti <- d
 
 ## tka ei toimi
@@ -242,13 +242,13 @@ kunta_kr_teksti <- d
 # URL <- "http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_tka.html"
 # pg <- read_html(URL) 
 # d <- html_table(pg, fill=TRUE, header = TRUE)[[1]]
-# names(d) <- c("kunta","name","kr_code","kr_name")
+# names(d) <- c("kunta","kunta_name","kr_code","kr_name")
 # kunta_tka_teksti <- d
 
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2019/kunta_va_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","va_code","va_name")
+names(d) <- c("kunta","kunta_name","va_code","va_name")
 kunta_va_teksti <- d
 
 
@@ -324,25 +324,25 @@ pohjoinen1[pohjoinen1 == "Savukoksi"] <- "Savukoski"
 pohjoinen <- pohjoinen1
 
 # Kelan kela_vakuutuspiirit
-key <- kunta_va_teksti %>% select(kunta, name)
+key <- kunta_va_teksti %>% select(kunta, kunta_name)
 
 kuntaluokitusavain <- key %>% 
   mutate(
     kela_vakuutuspiiri_name = case_when(
-      name %in% etelainen ~ "eteläinen",
-      name %in% itainen ~ "itäinen",
-      name %in% keskinen ~ "keskinen",
-      name %in% lantinen ~ "läntinen",
-      name %in% pohjoinen ~ "pohjoinen",
+      kunta_name %in%etelainen ~ "eteläinen",
+      kunta_name %in%itainen ~ "itäinen",
+      kunta_name %in%keskinen ~ "keskinen",
+      kunta_name %in%lantinen ~ "läntinen",
+      kunta_name %in%pohjoinen ~ "pohjoinen",
       TRUE ~ ""
     )) %>% 
   mutate(
     kela_vakuutuspiiri_code = case_when(
-      name %in% etelainen ~ 1,
-      name %in% itainen ~ 4,
-      name %in% keskinen ~ 3,
-      name %in% lantinen ~ 2,
-      name %in% pohjoinen ~ 5,
+      kunta_name %in%etelainen ~ 1,
+      kunta_name %in%itainen ~ 4,
+      kunta_name %in%keskinen ~ 3,
+      kunta_name %in%lantinen ~ 2,
+      kunta_name %in%pohjoinen ~ 5,
       TRUE ~ 0
     ),
     kela_vakuutuspiiri_code = ifelse(kela_vakuutuspiiri_code == 0, NA, kela_vakuutuspiiri_code),
@@ -351,13 +351,13 @@ kuntaluokitusavain <- key %>%
 
 
 kuntaluokitusavain$kela_asumistukialue_name <- NA
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Helsinki"),
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Helsinki"),
                                                       "I kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name)
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Espoo", "Kauniainen", "Vantaa"),
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Espoo", "Kauniainen", "Vantaa"),
                                                       "II kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name)
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Hyvinkää", "Hämeenlinna", "Joensuu",
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Hyvinkää", "Hämeenlinna", "Joensuu",
                                                                                      "Jyväskylä", "Järvenpää", "Kajaani",
                                                                                      "Kerava", "Kirkkonummi", "Kouvola",
                                                                                      "Kuopio", "Lahti", "Lappeenranta",
@@ -444,17 +444,17 @@ list(
 # tk_data2 <- tk_data %>% 
 #   rename(name = `Alue 2019`) %>%
 #   mutate(name = as.character(name)) %>%
-#   filter(name %in% tbl$name) %>% 
+#   filter(kunta_name %in%tbl$name) %>% 
 #   spread(Tiedot, `Kuntien avainluvut`) %>% 
 #   as_tibble()
 # 
 # tk_data3 <- janitor::clean_names(tk_data2)
 
 # Maarianhamina pitää uudelleennimetä
-tbl$kr_code[tbl$name == "Maarianhamina - Mariehamn"] <- 1
-tbl$kr_name[tbl$name == "Maarianhamina - Mariehamn"] <- "Kaupunkimaiset kunnat"
-tbl <- tbl[tbl$name != "Maarianhamina",]
-tbl$name[tbl$name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
+tbl$kr_code[tbl$kunta_name == "Maarianhamina - Mariehamn"] <- 1
+tbl$kr_name[tbl$kunta_name == "Maarianhamina - Mariehamn"] <- "Kaupunkimaiset kunnat"
+tbl <- tbl[tbl$kunta_name != "Maarianhamina",]
+tbl$kunta_name[tbl$kunta_name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
 
 tbl2 <- tbl
 
@@ -489,7 +489,7 @@ tbl2$kela_vakuutuspiiri_name_sv <- svkey_tmp$benämning[match(tbl2$kela_vakuutus
 # name
 svkey_tmp <- svkey[svkey$vuosi == 2018 & svkey$type == "name_sv",]
 tbl2$name_sv <- svkey_tmp$benämning[match(tbl2$kunta,svkey_tmp$kod)]
-tbl2$name_fi <- tbl2$name
+tbl2$name_fi <- tbl2$kunta_name
 
 # charcols <- !sapply(tbl, is.numeric)
 # tbl[charcols] <- lapply(tbl[charcols], iconv, from = "windows-1252", to = "UTF-8")
@@ -512,42 +512,42 @@ rm(list = ls())
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2018/kunta_avi_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","avi_code","avi_name")
+names(d) <- c("kunta","kunta_name","avi_code","avi_name")
 kunta_avi_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2018/kunta_ely_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","ely_code","ely_name")
+names(d) <- c("kunta","kunta_name","ely_code","ely_name")
 kunta_ely_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2018/kunta_hp_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","hp_code","hp_name")
+names(d) <- c("kunta","kunta_name","hp_code","hp_name")
 kunta_hp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2018/kunta_mk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","mk_code","mk_name")
+names(d) <- c("kunta","kunta_name","mk_code","mk_name")
 kunta_mk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2018/kunta_sp_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sp_code","sp_name")
+names(d) <- c("kunta","kunta_name","sp_code","sp_name")
 kunta_sp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2018/kunta_sk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sk_code","sk_name")
+names(d) <- c("kunta","kunta_name","sk_code","sk_name")
 kunta_sk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2018/kunta_sa_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sa_code","sa_name")
+names(d) <- c("kunta","kunta_name","sa_code","sa_name")
 kunta_sa_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2018/kunta_va_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","va_code","va_name")
+names(d) <- c("kunta","kunta_name","va_code","va_name")
 kunta_va_teksti <- d
 
 
@@ -623,14 +623,14 @@ pohjoinen1[pohjoinen1 == "Savukoksi"] <- "Savukoski"
 pohjoinen <- pohjoinen1
 
 # Kelan kela_vakuutuspiirit
-key <- kunta_va_teksti %>% select(kunta, name)
+key <- kunta_va_teksti %>% select(kunta, kunta_name)
 
 key$kela_vakuutuspiiri <- NA
-key$kela_vakuutuspiiri <- ifelse(key$name %in% etelainen, "eteläinen", key$name)
-key$kela_vakuutuspiiri <- ifelse(key$name %in% itainen, "itäinen", key$kela_vakuutuspiiri)
-key$kela_vakuutuspiiri <- ifelse(key$name %in% keskinen, "keskinen", key$kela_vakuutuspiiri)
-key$kela_vakuutuspiiri <- ifelse(key$name %in% lantinen, "läntinen", key$kela_vakuutuspiiri)
-key$kela_vakuutuspiiri <- ifelse(key$name %in% pohjoinen, "pohjoinen", key$kela_vakuutuspiiri)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%etelainen, "eteläinen", key$kunta_name)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%itainen, "itäinen", key$kela_vakuutuspiiri)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%keskinen, "keskinen", key$kela_vakuutuspiiri)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%lantinen, "läntinen", key$kela_vakuutuspiiri)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%pohjoinen, "pohjoinen", key$kela_vakuutuspiiri)
 
 kuntaluokitusavain <- key
 names(kuntaluokitusavain)[names(kuntaluokitusavain) == "kela_vakuutuspiiri"] <- "kela_vakuutuspiiri_name"
@@ -641,13 +641,13 @@ kuntaluokitusavain$kela_vakuutuspiiri_code[kuntaluokitusavain$kela_vakuutuspiiri
 kuntaluokitusavain$kela_vakuutuspiiri_code[kuntaluokitusavain$kela_vakuutuspiiri_name == "pohjoinen"] <- 5
 
 kuntaluokitusavain$kela_asumistukialue_name <- NA
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Helsinki"),
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Helsinki"),
                                                       "I kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name)
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Espoo", "Kauniainen", "Vantaa"),
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Espoo", "Kauniainen", "Vantaa"),
                                                       "II kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name)
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Hyvinkää", "Hämeenlinna", "Joensuu",
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Hyvinkää", "Hämeenlinna", "Joensuu",
                                                                                      "Jyväskylä", "Järvenpää", "Kajaani",
                                                                                      "Kerava", "Kirkkonummi", "Kouvola",
                                                                                      "Kuopio", "Lahti", "Lappeenranta",
@@ -735,15 +735,15 @@ list(
 #          # Paste Tiedot and Vuosi
 #          Tiedot = paste(Tiedot, Vuosi)) %>% 
 #   select(-Vuosi) %>% 
-#   filter(name %in% tbl$name) %>% 
+#   filter(kunta_name %in%tbl$name) %>% 
 #   spread(Tiedot, `Kuntien avainluvut`) %>% 
 #   as_tibble()
 # 
 # tk_data3 <- janitor::clean_names(tk_data2)
 
 # Maarianhamina pitää uudelleennimetä
-tbl <- tbl[tbl$name != "Maarianhamina",]
-tbl$name[tbl$name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
+tbl <- tbl[tbl$kunta_name != "Maarianhamina",]
+tbl$kunta_name[tbl$kunta_name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
 
 # tbl2 <- left_join(tbl,tk_data3)
 tbl2 <- tbl
@@ -779,7 +779,7 @@ tbl2$kela_vakuutuspiiri_name_sv <- svkey_tmp$benämning[match(tbl2$kela_vakuutus
 # name
 svkey_tmp <- svkey[svkey$vuosi == 2018 & svkey$type == "name_sv",]
 tbl2$name_sv <- svkey_tmp$benämning[match(tbl2$kunta,svkey_tmp$kod)]
-tbl2$name_fi <- tbl2$name
+tbl2$name_fi <- tbl2$kunta_name
 
 municipality_key_2018 <- tbl2
 save(municipality_key_2018, file = "./data/municipality_key_2018.rda")
@@ -799,57 +799,57 @@ rm(list = ls())
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_avi_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","avi_code","avi_name")
+names(d) <- c("kunta","kunta_name","avi_code","avi_name")
 kunta_avi_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_ely_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","ely_code","ely_name")
+names(d) <- c("kunta","kunta_name","ely_code","ely_name")
 kunta_ely_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_hp_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","hp_code","hp_name")
+names(d) <- c("kunta","kunta_name","hp_code","hp_name")
 kunta_hp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_kr_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","kr_code","kr_name")
+names(d) <- c("kunta","kunta_name","kr_code","kr_name")
 kunta_kr_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_mk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","mk_code","mk_name")
+names(d) <- c("kunta","kunta_name","mk_code","mk_name")
 kunta_mk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_sp_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sp_code","sp_name")
+names(d) <- c("kunta","kunta_name","sp_code","sp_name")
 kunta_sp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_sk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sk_code","sk_name")
+names(d) <- c("kunta","kunta_name","sk_code","sk_name")
 kunta_sk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_sa_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sa_code","sa_name")
+names(d) <- c("kunta","kunta_name","sa_code","sa_name")
 kunta_sa_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_tk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","tk_code","tk_name")
+names(d) <- c("kunta","kunta_name","tk_code","tk_name")
 kunta_tk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2017/kunta_va_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","va_code","va_name")
+names(d) <- c("kunta","kunta_name","va_code","va_name")
 kunta_va_teksti <- d
 
 
 # Kelan kela_vakuutuspiirit
-key <- kunta_va_teksti %>% select(kunta, name)
+key <- kunta_va_teksti %>% select(kunta, kunta_name)
 
 etelainen <- c("Asikkala","Askola","Espoo","Hamina","Hanko","Hartola","Heinola","Helsinki","Hollola","Hyvinkää",
                "Hämeenkoski","Iitti","Imatra","Inkoo","Järvenpää","Karkkila","Kauniainen","Kerava","Kirkkonummi",
@@ -907,11 +907,11 @@ pohjoinen <- c("Alavieska", "Enontekiö", "Hailuoto", "Haapajärvi", "Halsua", "
                "Ylivieska", "Ylitornio")
 
 key$kela_vakuutuspiiri <- NA
-key$kela_vakuutuspiiri <- ifelse(key$name %in% etelainen, "eteläinen", key$name)
-key$kela_vakuutuspiiri <- ifelse(key$name %in% itainen, "itäinen", key$kela_vakuutuspiiri)
-key$kela_vakuutuspiiri <- ifelse(key$name %in% keskinen, "keskinen", key$kela_vakuutuspiiri)
-key$kela_vakuutuspiiri <- ifelse(key$name %in% lantinen, "läntinen", key$kela_vakuutuspiiri)
-key$kela_vakuutuspiiri <- ifelse(key$name %in% pohjoinen, "pohjoinen", key$kela_vakuutuspiiri)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%etelainen, "eteläinen", key$kunta_name)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%itainen, "itäinen", key$kela_vakuutuspiiri)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%keskinen, "keskinen", key$kela_vakuutuspiiri)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%lantinen, "läntinen", key$kela_vakuutuspiiri)
+key$kela_vakuutuspiiri <- ifelse(key$kunta_name %in%pohjoinen, "pohjoinen", key$kela_vakuutuspiiri)
 
 kuntaluokitusavain <- key
 names(kuntaluokitusavain)[names(kuntaluokitusavain) == "kela_vakuutuspiiri"] <- "kela_vakuutuspiiri_name"
@@ -923,13 +923,13 @@ kuntaluokitusavain$kela_vakuutuspiiri_code[kuntaluokitusavain$kela_vakuutuspiiri
 
 
 kuntaluokitusavain$kela_asumistukialue_name <- NA
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Helsinki"),
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Helsinki"),
                                                       "I kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name)
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Espoo", "Kauniainen", "Vantaa"),
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Espoo", "Kauniainen", "Vantaa"),
                                                       "II kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name)
-kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$name %in% c("Hyvinkää", "Hämeenlinna", "Joensuu",
+kuntaluokitusavain$kela_asumistukialue_name <- ifelse(kuntaluokitusavain$kunta_name %in%c("Hyvinkää", "Hämeenlinna", "Joensuu",
                                                                                      "Jyväskylä", "Järvenpää", "Kajaani",
                                                                                      "Kerava", "Kirkkonummi", "Kouvola",
                                                                                      "Kuopio", "Lahti", "Lappeenranta",
@@ -1019,14 +1019,14 @@ list(
 #          # Paste Tiedot and Vuosi
 #          Tiedot = paste(Tiedot, Vuosi)) %>% 
 #   select(-Vuosi) %>% 
-#   filter(name %in% tbl$name) %>% 
+#   filter(kunta_name %in%tbl$name) %>% 
 #   spread(Tiedot, `Kuntien avainluvut`) %>% 
 #   as_tibble()
 # 
 # tk_data3 <- janitor::clean_names(tk_data2)
 
 # Maarianhamina pitää uudelleennimetä
-tbl <- tbl[tbl$name != "Maarianhamina - Mariehamn",]
+tbl <- tbl[tbl$kunta_name != "Maarianhamina - Mariehamn",]
 
 # tbl2 <- left_join(tbl,tk_data3)
 tbl2 <- tbl
@@ -1056,7 +1056,7 @@ tbl2$kela_vakuutuspiiri_name_sv <- svkey_tmp$benämning[match(tbl2$kela_vakuutus
 # name
 svkey_tmp <- svkey[svkey$vuosi == 2017 & svkey$type == "name_sv",]
 tbl2$name_sv <- svkey_tmp$benämning[match(tbl2$kunta,svkey_tmp$kod)]
-tbl2$name_fi <- tbl2$name
+tbl2$name_fi <- tbl2$kunta_name
 
 # charcols <- !sapply(tbl, is.numeric)
 # tbl[charcols] <- lapply(tbl[charcols], iconv, from = "windows-1252", to = "UTF-8")
@@ -1078,42 +1078,42 @@ rm(list = ls())
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_avi_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","avi_code","avi_name")
+names(d) <- c("kunta","kunta_name","avi_code","avi_name")
 kunta_avi_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_ely_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","ely_code","ely_name")
+names(d) <- c("kunta","kunta_name","ely_code","ely_name")
 kunta_ely_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_hp_teksti.txt",
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","hp_code","hp_name")
+# names(d) <- c("kunta","kunta_name","hp_code","hp_name")
 # kunta_hp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_kr_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","kr_code","kr_name")
+names(d) <- c("kunta","kunta_name","kr_code","kr_name")
 kunta_kr_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_mk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","mk_code","mk_name")
+names(d) <- c("kunta","kunta_name","mk_code","mk_name")
 kunta_mk_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_sp_teksti.txt", 
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","sp_code","sp_name")
+# names(d) <- c("kunta","kunta_name","sp_code","sp_name")
 # kunta_sp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_sk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sk_code","sk_name")
+names(d) <- c("kunta","kunta_name","sk_code","sk_name")
 kunta_sk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_sa_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sa_code","sa_name")
+names(d) <- c("kunta","kunta_name","sa_code","sa_name")
 kunta_sa_teksti <- d
 
 
@@ -1122,12 +1122,12 @@ d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_t
 d$kunta <- as.integer(row.names(d))
 d$nimike.2 <-  NULL
 d <- d[c(4,1,2,3)]
-names(d) <- c("kunta","name","tk_code","tk_name")
+names(d) <- c("kunta","kunta_name","tk_code","tk_name")
 kunta_tk_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2016/kunta_va_teksti.txt", 
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","va_code","va_name")
+# names(d) <- c("kunta","kunta_name","va_code","va_name")
 # kunta_va_teksti <- d
 
 list(
@@ -1160,15 +1160,15 @@ list(
 # tk_data2 <- tk_data %>% 
 #   rename(name = `Alue 2015`) %>%
 #   mutate(name = as.character(name)) %>%
-#   filter(name %in% tbl$name) %>% 
+#   filter(kunta_name %in%tbl$name) %>% 
 #   spread(Tiedot, `Kuntien avainluvut`) %>% 
 #   as_tibble()
 # 
 # tk_data3 <- janitor::clean_names(tk_data2)
 
 # Maarianhamina pitää uudelleennimetä
-tbl <- tbl[tbl$name != "Maarianhamina",]
-tbl$name[tbl$name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
+tbl <- tbl[tbl$kunta_name != "Maarianhamina",]
+tbl$kunta_name[tbl$kunta_name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
 
 # tbl2 <- left_join(tbl,tk_data3)
 tbl2 <- tbl
@@ -1197,7 +1197,7 @@ tbl2$mk_name_sv <- svkey_tmp$benämning[match(tbl2$mk_code,svkey_tmp$kod)]
 # tbl2$kela_vakuutuspiiri_name_sv <- svkey_tmp$benämning[match(tbl2$kela_vakuutuspiiri_code,svkey_tmp$kod)]
 svkey_tmp <- svkey[svkey$vuosi == 2016 & svkey$type == "name_sv",]
 tbl2$name_sv <- svkey_tmp$benämning[match(tbl2$kunta,svkey_tmp$kod)]
-tbl2$name_fi <- tbl2$name
+tbl2$name_fi <- tbl2$kunta_name
 
 
 # charcols <- !sapply(tbl, is.numeric)
@@ -1219,42 +1219,42 @@ rm(list = ls())
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/avi_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","avi_code","avi_name")
+names(d) <- c("kunta","kunta_name","avi_code","avi_name")
 kunta_avi_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/ely_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","ely_code","ely_name")
+names(d) <- c("kunta","kunta_name","ely_code","ely_name")
 kunta_ely_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/hp_teksti.txt", 
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","hp_code","hp_name")
+# names(d) <- c("kunta","kunta_name","hp_code","hp_name")
 # kunta_hp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/kr_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","kr_code","kr_name")
+names(d) <- c("kunta","kunta_name","kr_code","kr_name")
 kunta_kr_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/mk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","mk_code","mk_name")
+names(d) <- c("kunta","kunta_name","mk_code","mk_name")
 kunta_mk_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/sp_teksti.txt",
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","sp_code","sp_name")
+# names(d) <- c("kunta","kunta_name","sp_code","sp_name")
 # kunta_sp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/sk_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sk_code","sk_name")
+names(d) <- c("kunta","kunta_name","sk_code","sk_name")
 kunta_sk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/suuralue_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sa_code","sa_name")
+names(d) <- c("kunta","kunta_name","sa_code","sa_name")
 kunta_sa_teksti <- d
 
 
@@ -1263,12 +1263,12 @@ kunta_sa_teksti <- d
 # d$kunta <- as.integer(row.names(d))
 # d$nimike.2 <-  NULL
 # d <- d[c(4,1,2,3)]
-# names(d) <- c("kunta","name","tk_code","tk_name")
+# names(d) <- c("kunta","kunta_name","tk_code","tk_name")
 # kunta_tk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2015/vp_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","va_code","va_name")
+names(d) <- c("kunta","kunta_name","va_code","va_name")
 kunta_va_teksti <- d
 
 list(
@@ -1301,7 +1301,7 @@ list(
 # tk_data2 <- tk_data %>% 
 #   rename(name = `Alue 2015`) %>%
 #   mutate(name = as.character(name)) %>%
-#   filter(name %in% tbl$name) %>% 
+#   filter(kunta_name %in%tbl$name) %>% 
 #   spread(Tiedot, `Kuntien avainluvut`) %>% 
 #   as_tibble()
 # 
@@ -1326,42 +1326,42 @@ rm(list = ls())
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_avi_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","avi_code","avi_name")
+names(d) <- c("kunta","kunta_name","avi_code","avi_name")
 kunta_avi_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_ely_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","ely_code","ely_name")
+names(d) <- c("kunta","kunta_name","ely_code","ely_name")
 kunta_ely_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_hp_teksti.txt",
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","hp_code","hp_name")
+# names(d) <- c("kunta","kunta_name","hp_code","hp_name")
 # kunta_hp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_kryhmitys_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","kr_code","kr_name")
+names(d) <- c("kunta","kunta_name","kr_code","kr_name")
 kunta_kr_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_maakunta_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","mk_code","mk_name")
+names(d) <- c("kunta","kunta_name","mk_code","mk_name")
 kunta_mk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_sh_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sp_code","sp_name")
+names(d) <- c("kunta","kunta_name","sp_code","sp_name")
 kunta_sp_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_sk_teksti.txt", 
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","sk_code","sk_name")
+# names(d) <- c("kunta","kunta_name","sk_code","sk_name")
 # kunta_sk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_suuralue_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sa_code","sa_name")
+names(d) <- c("kunta","kunta_name","sa_code","sa_name")
 kunta_sa_teksti <- d
 
 
@@ -1370,12 +1370,12 @@ kunta_sa_teksti <- d
 # d$kunta <- as.integer(row.names(d))
 # d$nimike.2 <-  NULL
 # d <- d[c(4,1,2,3)]
-# names(d) <- c("kunta","name","tk_code","tk_name")
+# names(d) <- c("kunta","kunta_name","tk_code","tk_name")
 # kunta_tk_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2014/luokitusavain_vp_teksti.txt",
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","va_code","va_name")
+# names(d) <- c("kunta","kunta_name","va_code","va_name")
 # kunta_va_teksti <- d
 
 list(
@@ -1411,7 +1411,7 @@ list(
 #          # Paste Tiedot and Vuosi
 #          Tiedot = paste(Tiedot, Vuosi)) %>% 
 #   select(-Vuosi) %>% 
-#   filter(name %in% tbl$name) %>% 
+#   filter(kunta_name %in%tbl$name) %>% 
 #   spread(Tiedot, `Kuntien avainluvut`) %>% 
 #   as_tibble()
 # 
@@ -1435,52 +1435,52 @@ rm(list = ls())
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_avi_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","avi_code","avi_name")
+names(d) <- c("kunta","kunta_name","avi_code","avi_name")
 kunta_avi_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_ely_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","ely_code","ely_name")
+names(d) <- c("kunta","kunta_name","ely_code","ely_name")
 kunta_ely_teksti <- d
 
 # d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_hp_teksti.txt",
 #                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-# names(d) <- c("kunta","name","hp_code","hp_name")
+# names(d) <- c("kunta","kunta_name","hp_code","hp_name")
 # kunta_hp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_kuntaryhmitys_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","kr_code","kr_name")
+names(d) <- c("kunta","kunta_name","kr_code","kr_name")
 kunta_kr_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_maakunta_teksti.txt", 
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","mk_code","mk_name")
+names(d) <- c("kunta","kunta_name","mk_code","mk_name")
 kunta_mk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_sh_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sp_code","sp_name")
+names(d) <- c("kunta","kunta_name","sp_code","sp_name")
 kunta_sp_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_skunta_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sk_code","sk_name")
+names(d) <- c("kunta","kunta_name","sk_code","sk_name")
 kunta_sk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_suuralue_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","sa_code","sa_name")
+names(d) <- c("kunta","kunta_name","sa_code","sa_name")
 kunta_sa_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_tka_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","tk_code","tk_name")
+names(d) <- c("kunta","kunta_name","tk_code","tk_name")
 kunta_tk_teksti <- d
 
 d <- read.table("http://tilastokeskus.fi/meta/luokitukset/kunta/001-2013/luokitusavain_vaalipiiri_teksti.txt",
                 header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
-names(d) <- c("kunta","name","va_code","va_name")
+names(d) <- c("kunta","kunta_name","va_code","va_name")
 kunta_va_teksti <- d
 
 list(
@@ -1516,7 +1516,7 @@ list(
 #          # Paste Tiedot and Vuosi
 #          Tiedot = paste(Tiedot, Vuosi)) %>% 
 #   select(-Vuosi) %>% 
-#   filter(name %in% tbl$name) %>% 
+#   filter(kunta_name %in%tbl$name) %>% 
 #   spread(Tiedot, `Kuntien avainluvut`) %>% 
 #   as_tibble()
 # 

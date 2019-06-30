@@ -7,7 +7,7 @@
 \format{A data frame with 313 rows and 22 variables:
 \describe{
   \item{kunta}{Municipality code or kuntanumero}
-  \item{name}{Municipality name in Finnish}
+  \item{kunta_name}{Municipality name in Finnish}
   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
@@ -20,14 +20,14 @@
   \item{sa_name}{Suuralueen name (Large areas NUTS 2)}
   \item{sk_code}{Seutukunnan code (Sub-Regions of Finland NUTS 3)}
   \item{sk_name}{Seutukunnan name (Sub-Regions of Finland NUTS 3)}
-  \item{va_code}{Vaalipiirin code (Electoral district)}
-  \item{va_name}{Vaalipiirin name (Electoral district)}
+  \item{tk_code}{Työssäkäyntialueen code}
+  \item{tk_name}{Työssäkäyntialueen name}
   \item{avi_name_sv}{Aluehallintovirasto name (Regional State Administrative Agencies) in Swedish}
   \item{ely_name_sv}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment) in Swedish}
   \item{kr_name_sv}{Tilastokeskuksen tilastollisen kuntaluokituksen name in Swedish}
   \item{mk_name_sv}{Maakunnan name (Regions of Finland NUTS 3) in Swedish}
-  \item{name_fi}{municipality name in Finnish}
   \item{name_sv}{municipality name in Swedish}
+  \item{name_fi}{municipality name in Finnish}
 }}
 \source{
 \url{http://www.stat.fi}

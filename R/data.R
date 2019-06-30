@@ -5,7 +5,7 @@
 #' @format A data frame with 311 rows and 34 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
-#'   \item{name}{name}
+#'   \item{kunta_name}{Municipality name in Finnish}
 #'   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
 #'   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
 #'   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
@@ -49,7 +49,7 @@
 #' @format A data frame with 311 rows and 34 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
-#'   \item{name}{Municipality name in Finnish}
+#'   \item{kunta_name}{Municipality name in Finnish}
 #'   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
 #'   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
 #'   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
@@ -94,7 +94,7 @@
 #' @format A data frame with 311 rows and 36 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code ie. kuntanumero}
-#'   \item{name}{Municipality name in Finnish}
+#'   \item{kunta_name}{Municipality name in Finnish}
 #'   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
 #'   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
 #'   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
@@ -140,7 +140,7 @@
 #' @format A data frame with 313 rows and 22 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
-#'   \item{name}{Municipality name in Finnish}
+#'   \item{kunta_name}{Municipality name in Finnish}
 #'   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
 #'   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
 #'   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
@@ -172,7 +172,7 @@
 #' @format A data frame with 317 rows and 16 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
-#'   \item{name}{Municipality name in Finnish}
+#'   \item{kunta_name}{Municipality name in Finnish}
 #'   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
 #'   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
 #'   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
@@ -198,7 +198,7 @@
 #' @format A data frame with 320 rows and 14 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
-#'   \item{name}{Municipality name in Finnish}
+#'   \item{kunta_name}{Municipality name in Finnish}
 #'   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
 #'   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
 #'   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
@@ -222,7 +222,7 @@
 #' @format A data frame with 320 rows and 20 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
-#'   \item{name}{Municipality name in Finnish}
+#'   \item{kunta_name}{Municipality name in Finnish}
 #'   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
 #'   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
 #'   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}

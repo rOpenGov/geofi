@@ -7,7 +7,7 @@
 \format{A data frame with 320 rows and 14 variables:
 \describe{
   \item{kunta}{Municipality code or kuntanumero}
-  \item{name}{Municipality name in Finnish}
+  \item{kunta_name}{Municipality name in Finnish}
   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}

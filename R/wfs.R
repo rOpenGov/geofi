@@ -20,6 +20,6 @@ wfs <- function(url, layer, serviceVersion = "1.0.0", logger = "INFO"){
   caps <- wfs$getCapabilities()
   ft <- caps$findFeatureTypeByName(layer, exact = TRUE)
   shape <- ft$getFeatures()
-  if (is.na(attributes(shape$geom)$crs[[1]])) sf::st_crs(shape) <- "+init=epsg:3067"
+  if (is.na(attributes(shape[[attributes(shape)$sf_column]])$crs[[1]])) sf::st_crs(shape) <- "+init=epsg:3067"
   return(shape)
 }

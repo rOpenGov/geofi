@@ -1,8 +1,8 @@
 Package: gisfin
 Type: Package
 Title: Finland GIS R Tools
-Version: 0.9.27.9001
-Date: 2019-06-27
+Version: 0.9.27.9002
+Date: 2019-06-30
 Authors@R: c(
     person("Kainu", "Markus", email = "markus.kainu@kapsi.fi", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1376-503X")),
     person("Lehtomaki", "Joona", role = c("aut"), comment = c(ORCID = "0000-0002-7891-0843")),

@@ -77,7 +77,7 @@ dat[1:10,1:10]
 
 ```{r}
 # Lets join the municipality level data with internal municipality_key_2017-data
-dat2 <- left_join(dat, municipality_key_2017, by = c("name" = "name"))
+dat2 <- left_join(dat, municipality_key_2017, by = c("name" = "name_fi"))
 
 # Lets aggregate at maakunta level using column mk_name
 mk_data <- dat2 %>% 

@@ -7,7 +7,7 @@
 \format{A data frame with 311 rows and 36 variables:
 \describe{
   \item{kunta}{Municipality code ie. kuntanumero}
-  \item{name}{Municipality name in Finnish}
+  \item{kunta_name}{Municipality name in Finnish}
   \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
   \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
   \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
@@ -28,10 +28,10 @@
   \item{tk_name}{Työssäkäyntialueen name}
   \item{va_code}{Vaalipiirin code (Electoral district)}
   \item{va_name}{Vaalipiirin name (Electoral district)}
-  \item{vakuutuspiiri_name}{Kelan vakuutuspiirin name}
-  \item{vakuutuspiiri_code}{Kelan vakuutuspiirin koodi (epävirallinen)}
-  \item{asumistukialue_name}{Kelan asumistukialueen name}
-  \item{asumistukialue_code}{Kelan asumistukialueen koodi (epävirallinen)}
+  \item{kela_vakuutuspiiri_name}{Kelan vakuutuspiirin name}
+  \item{kela_vakuutuspiiri_code}{Kelan vakuutuspiirin koodi (epävirallinen)}
+  \item{kela_asumistukialue_name}{Kelan asumistukialueen name}
+  \item{kela_asumistukialue_code}{Kelan asumistukialueen koodi (epävirallinen)}
   \item{erva_name}{Erityisvastuualueen name}
   \item{erva_code}{Erityisvastuualueen koodi (epävirallinen)}
   \item{avi_name_sv}{Aluehallintovirasto name (Regional State Administrative Agencies) in Swedish}
@@ -40,8 +40,8 @@
   \item{mk_name_sv}{Maakunnan name (Regions of Finland NUTS 3) in Swedish}
   \item{sp_name_sv}{Sairaanhoitopiirin name (Health care regions) in Swedish}
   \item{kela_vakuutuspiiri_name_sv}{Kelan vakuutuspiirin name in Swedish}
-  \item{name_fi}{municipality name in Finnish}
   \item{name_sv}{municipality name in Swedish}
+  \item{name_fi}{municipality name in Finnish}
 }}
 \source{
 \url{http://www.stat.fi/meta/luokitukset/kunta/001-2017/luokitusavaimet.html}

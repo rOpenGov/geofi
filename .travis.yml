@@ -1,8 +1,10 @@
 language: r
 sudo: required
 dist: trusty
+warnings_are_errors: false
 apt_packages:
   - gdal-bin
+  - libudunits2-dev    
   - libgdal1-dev
   - libproj-dev
 r_packages:

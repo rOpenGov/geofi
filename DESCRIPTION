@@ -10,13 +10,14 @@ Authors@R: c(
     person("Parkkinen", "Juuso", role = c("ctb"), comment = c(ORCID = "0000-0002-7818-5901")))
 Description: Tools for reading open geographical data in Finland.
 License: BSD_2_clause + file LICENSE
-Depends:
+Depends: 
     R (>= 3.5.2)
-Imports:
+Imports: 
     dplyr,
     sf,
     ows4R
-Suggests:
+Suggests: 
+    httptest,
     testthat
 URL: https://github.com/ropengov/gisfin
 RoxygenNote: 6.1.1

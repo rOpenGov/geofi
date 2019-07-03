@@ -1,0 +1,6 @@
+Tilastokeskus:
+  URL: http://geo.stat.fi/geoserver/wfs
+  version: 1.0.0
+Paituli:
+  URL: http://avaa.tdata.fi/geoserver/paituli/wfs
+  version: 2.0.0

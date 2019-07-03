@@ -16,6 +16,7 @@ Imports:
     dplyr,
     sf,
     ows4R,
+    purrr,
     yaml
 Suggests: 
     httptest,

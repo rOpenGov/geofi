@@ -10,9 +10,9 @@ inst/extras/*.Rcheck
 TEMPDIR/*
 ggmapTemp.png
 gisfin.Rproj
-vignettes/gisfin_tutorial.txt
+vignettes/geofi_tutorial.txt
 cache/
 vignetttes/cache/
 vignetttes/.RData
-gisfin_tutorial.txt
+geofi_tutorial.txt
 .DS_Store

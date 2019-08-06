@@ -1,5 +1,5 @@
 ---
-title: "gisfin tutorial"
+title: "geofi tutorial"
 author: "Markus Kainu, Leo Lahti & Joona Lehtomäki"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ## Municipalities
 
 ```{r municipality_map}
-library(gisfin)
+library(geofi)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -132,7 +132,7 @@ ggplot(mk_data) +
 
 ```{r}
 library(leaflet)
-library(gisfin)
+library(geofi)
 library(dplyr)
 
 municipalities <- get_municipalities(year = 2019, scale = 4500)

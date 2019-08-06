@@ -1,6 +1,6 @@
-Package: gisfin
+Package: geofi
 Type: Package
-Title: Finland GIS R Tools
+Title: Finnish open geographical data for R
 Version: 0.9.27.9003
 Date: 2019-06-30
 Authors@R: c(
@@ -21,7 +21,7 @@ Imports:
 Suggests: 
     httptest,
     testthat
-URL: https://github.com/ropengov/gisfin
+URL: https://github.com/ropengov/geofi
 RoxygenNote: 6.1.1
 Encoding: UTF-8
 LazyData: true

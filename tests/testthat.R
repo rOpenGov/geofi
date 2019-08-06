@@ -1,4 +1,4 @@
 library(httptest)
 library(testthat)
-library(gisfin)
-test_check("gisfin")
+library(geofi)
+test_check("geofi")

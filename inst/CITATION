@@ -1,7 +1,7 @@
-citHeader("Kindly cite the gisfin R package as follows:")
+citHeader("Kindly cite the geofi R package as follows:")
 
 citEntry(entry="misc",
-         title = "gisfin R package",
+         title = "geofi R package",
          author = personList(
      person(given ="Joona", family="Lehtomaki", email = "joona.lehtomaki@gmail.com"),
      person(given ="Juuso", family="Parkkinen"),
@@ -13,8 +13,8 @@ citEntry(entry="misc",
 	 year = "2015-2016",
          textVersion =
          paste("(C) Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo and Janne Aukia 2015-2016.",
-               "gisfin R package",
+               "geofi R package",
                sep=" ")
          )
 
-citFooter("\nMany thanks for all contributors! For more info, see: https://github.com/rOpenGov/gisfin")
+citFooter("\nMany thanks for all contributors! For more info, see: https://github.com/rOpenGov/geofi")

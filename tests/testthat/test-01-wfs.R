@@ -1,8 +1,8 @@
 context("Basic WFS functionality")
 
 # Define a test WFS (Statistics Finland)
-wfs_url <- gisfin:::wfs_providers$Tilastokeskus$URL
-wfs_version <- gisfin:::wfs_providers$Tilastokeskus$version
+wfs_url <- geofi:::wfs_providers$Tilastokeskus$URL
+wfs_version <- geofi:::wfs_providers$Tilastokeskus$version
 wfs_layer <- paste0("tilastointialueet:kunta", 4500, "k_", 2019)
 
 

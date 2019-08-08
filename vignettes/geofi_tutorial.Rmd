@@ -151,3 +151,23 @@ leaflet(municipalities_lonlat) %>%
 
 ```
 
+
+## Plotting buildings
+
+
+```{r}
+library(geofi)
+kunnat <- get_municipalities(year = 2019, scale = 4500)
+rakennukset <- get_buildings()
+rakennukset_yo <- rakennukset %>% 
+  filter(katunimi_f == "Liisankatu", katunumero == 1) %>% 
+  distinct(sijaintiku, katunimi_f, katunumero, .keep_all = TRUE)
+  
+library(ggplot2)
+ggplot() +
+  geom_sf(data = kunnat) +
+  geom_sf(data = rakennukset_yo, color = "blue")
+
+```
+
+

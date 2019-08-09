@@ -30,16 +30,12 @@ geofi - Finland GIS R tools
 
 R tools for spatial data in Finland.
 
-For installation and usage, check the [tutorial page](https://github.com/rOpenGov/geofi/blob/master/vignettes/geofi_tutorial.md). 
-
 Authors: [Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), [Leo Lahti](https://github.com/antagomir)
-
 
 
 ### Installation and use
 
-See the [package homepage](http://ropengov.github.io/geofi) for installation and usage examples.
-
+For installation and usage, check the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_tutorial.html).
 
 ### Contribute
 

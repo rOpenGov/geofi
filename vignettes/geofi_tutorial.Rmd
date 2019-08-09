@@ -16,6 +16,16 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+## Installation
+
+`geofi` is not yet in CRAN, but can be installed from Github using
+
+```{r, eval = FALSE}
+remotes::install_github("ropengov/geofi")
+```
+
+
 ## Municipalities
 
 ```{r municipality_map, fig.height = 8}

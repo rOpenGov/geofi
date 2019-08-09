@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Municipalities
 
-```{r municipality_map}
+```{r municipality_map, fig.height = 8}
 library(geofi)
 library(dplyr)
 library(tidyr)
@@ -32,16 +32,55 @@ ggplot(municipalities) +
 ## Zipcodes
 
 
-```{r zipcode_map}
+```{r zipcode_map, fig.height = 8}
 zipcodes <- get_zipcodes(year = 2019) 
 ggplot(zipcodes) + 
   geom_sf(aes(fill = as.integer(posti_alue)))
 ```
 
+
+You can add variables from Paavo data (Statistics Finland) in following manner.
+
+```{r zipcode_with_statistics_finland, fig.height = 8}
+library(pxweb)
+# lets get all zipcodes and all variables
+pxweb_query_list <- 
+  list("Postinumeroalue"=c("*"),
+                           "Tiedot"=c("*"))
+
+# Download data 
+px_data <- 
+ pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
+           query = pxweb_query_list)
+
+# Convert to data.frame 
+tk_data_zip <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
+
+library(dplyr)
+library(tidyr)
+tk_data_zip2 <- tk_data_zip %>%
+  as_tibble() %>% 
+  setNames(c("region","indicator","value")) %>% 
+  spread(indicator, value)
+tk_zipdata <- janitor::clean_names(tk_data_zip2)
+tk_zipdata$zipcode <- substr(x = tk_zipdata$region, start = 1, stop = 5)
+tk_zipdata$zipname <- gsub("^.{6}", "", tk_zipdata$region)
+
+
+# Lets join with spatial data and plot the area of each zipcode
+zipcodes_new <- left_join(zipcodes, tk_zipdata, by = c("posti_alue" = "zipcode"))
+ggplot(zipcodes_new) + 
+  geom_sf(aes(fill = pinta_ala), color = alpha("white", 1/3))
+```
+
+
+
+
+
 ## Joining municipality level data from Statistics Finland
 
 
-```{r}
+```{r municipalities_with_data}
 municipalities17 <- get_municipalities(year = 2017)
 
 # pull municipality data from Statistics Finland
@@ -75,7 +114,7 @@ dat[1:10,1:10]
 
 ## Aggregating municipality level data using internal municipality_key-files
 
-```{r}
+```{r municipalities_map, fig.height = 8}
 # Lets join the municipality level data with internal municipality_key_2017-data
 dat2 <- left_join(dat, municipality_key_2017, by = c("name" = "name_fi"))
 
@@ -96,7 +135,7 @@ ggplot(mk_data) +
 
 Or if you prefer aggregating at vaalipiiri-level you can
 
-```{r}
+```{r vaalipiiri_map, fig.height = 8}
 mk_data <- dat2 %>% 
   group_by(va_name,va_code) %>% 
   # And compute population at maakunta level
@@ -113,7 +152,7 @@ ggplot(mk_data) +
 
 Or if you want the population at the national level aggregated up from municipality level you can: 
 
-```{r}
+```{r, national_map, fig.height = 8}
 mk_data <- dat2 %>% 
   summarise(vakiluku_2017 = sum(vakiluku_2017))
 

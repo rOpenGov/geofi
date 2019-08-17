@@ -1,6 +1,6 @@
-## CHANGES IN VERSION 0.10 (2019-06-25)
+## CHANGES IN VERSION 0.1 (2019-06-25)
 
-+ Reboot of `gisfin`.
++ Reboot of `gisfin`, package renamed to `geofi`.
 
 ### New features
 
@@ -9,3 +9,12 @@
   makes it easier to manage the data and to use it consistently in different 
   parts of the package (e.g. actual code and tests). Package internally, these
   data are parsed to an environment `wfs_providers`.
+
+### Development related
+
++ Municipal key rda files in `data` dir are now saved with `compress = "bzip2"`
+  to reduce the size of the rda files.
++ Decreased version number down to 0.1.0.9004 as this is a new package now.
++ Decreased R version requirement to 3.5.0 as check was complaining about the
+  previous version number (3.5.2).
++ DESCRIPTION now defines `knitr` as the VignetteEngine for the package.

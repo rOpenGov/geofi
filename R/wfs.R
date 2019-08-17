@@ -21,7 +21,7 @@
 #'
 #' @return sf object
 #'
-#' @importClassesFrom ows4R WFSClient
+#' @importFrom ows4R WFSClient
 #' @importFrom sf st_crs
 #'
 #' @examples

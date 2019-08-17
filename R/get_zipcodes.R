@@ -14,10 +14,11 @@
 #' @export
 
 get_zipcodes <- function(year=2017){
-  
+
   layer <- paste0("postialue:pno_",year)
-  
-  shape <- wfs(url = "http://geo.stat.fi/geoserver/wfs", layer = layer, serviceVersion = "1.0.0")
-  
+
+  shape <- get_wfs_layer(url = "http://geo.stat.fi/geoserver/wfs",
+                         layer = layer, serviceVersion = "1.0.0")
+
   return(shape)
 }

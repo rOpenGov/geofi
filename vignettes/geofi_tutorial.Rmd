@@ -30,9 +30,11 @@ remotes::install_github("ropengov/geofi")
 
 ```{r municipality_map, fig.height = 8}
 library(geofi)
-library(dplyr)
-library(tidyr)
 library(ggplot2)
+library(dplyr)
+library(janitor)
+library(tidyr)
+
 
 municipalities <- get_municipalities(year = 2019, scale = 4500)
 ggplot(municipalities) + 

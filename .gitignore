@@ -1,3 +1,5 @@
+geofi.Rproj
+*.Rproj
 inst/extras/..Rcheck/
 inst/extras/*.Rout
 inst/extras/*.Rcheck

@@ -23,5 +23,5 @@ preprocessed geospatial data sf-objects
 
 }
 \author{
-Markus Kainu <markus.kainu@kela.fi>
+Markus Kainu \href{mailto:markus.kainu@kela.fi}{markus.kainu@kela.fi}
 }

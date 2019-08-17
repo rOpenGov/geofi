@@ -42,6 +42,9 @@ wfs <- function(url, layer, serviceVersion = "1.0.0", logger = "INFO"){
   shape <- ft$getFeatures()
   # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN 
   # (epsg:3067)
-  if (is.na(attributes(shape[[attributes(shape)$sf_column]])$crs[[1]])) sf::st_crs(shape) <- "+init=epsg:3067"
+  if (is.na(sf::st_crs(shape))) {
+    warning("Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)", call. = FALSE)
+    sf::st_crs(shape) <- 3067
+  }
   return(shape)
 }

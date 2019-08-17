@@ -1,11 +1,11 @@
 structure(list(url = "http://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&typeName=tilastointialueet:kunta4500k_2019&request=DescribeFeatureType", 
-    status_code = 200L, headers = structure(list(date = "Thu, 04 Jul 2019 16:29:40 GMT", 
+    status_code = 200L, headers = structure(list(date = "Sat, 17 Aug 2019 13:12:49 GMT", 
         server = "Apache-Coyote/1.1", `x-content-type-options` = "nosniff", 
         `x-xss-protection` = "1; mode=block", `content-disposition` = "inline; filename=geoserver-DescribeFeatureType.text", 
         `content-encoding` = "gzip", `content-type` = "text/xml", 
         `access-control-allow-origin` = "*", `transfer-encoding` = "chunked"), class = c("insensitive", 
     "list")), all_headers = list(list(status = 200L, version = "HTTP/1.1", 
-        headers = structure(list(date = "Thu, 04 Jul 2019 16:29:40 GMT", 
+        headers = structure(list(date = "Sat, 17 Aug 2019 13:12:49 GMT", 
             server = "Apache-Coyote/1.1", `x-content-type-options` = "nosniff", 
             `x-xss-protection` = "1; mode=block", `content-disposition` = "inline; filename=geoserver-DescribeFeatureType.text", 
             `content-encoding` = "gzip", `content-type` = "text/xml", 
@@ -15,7 +15,7 @@ structure(list(url = "http://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0
         expiration = structure(numeric(0), class = c("POSIXct", 
         "POSIXt")), name = logical(0), value = logical(0)), row.names = integer(0), class = "data.frame"), 
     content = charToRaw("<?xml version=\"1.0\" encoding=\"UTF-8\"?><xsd:schema xmlns:gml=\"http://www.opengis.net/gml\" xmlns:tilastointialueet=\"http://www.tilastointialueet.fi\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" targetNamespace=\"http://www.tilastointialueet.fi\">\n  <xsd:import namespace=\"http://www.opengis.net/gml\" schemaLocation=\"http://geoserv.stat.fi:8080/geoserver/schemas/gml/2.1.2/feature.xsd\"/>\n  <xsd:complexType name=\"kunta4500k_2019Type\">\n    <xsd:complexContent>\n      <xsd:extension base=\"gml:AbstractFeatureType\">\n        <xsd:sequence>\n          <xsd:element maxOccurs=\"1\" minOccurs=\"0\" name=\"geom\" nillable=\"true\" type=\"gml:MultiPolygonPropertyType\"/>\n          <xsd:element maxOccurs=\"1\" minOccurs=\"0\" name=\"kunta\" nillable=\"true\" type=\"xsd:string\"/>\n          <xsd:element maxOccurs=\"1\" minOccurs=\"0\" name=\"vuosi\" nillable=\"true\" type=\"xsd:long\"/>\n          <xsd:element maxOccurs=\"1\" minOccurs=\"0\" name=\"nimi\" nillable=\"true\" type=\"xsd:string\"/>\n          <xsd:element maxOccurs=\"1\" minOccurs=\"0\" name=\"namn\" nillable=\"true\" type=\"xsd:string\"/>\n          <xsd:element maxOccurs=\"1\" minOccurs=\"0\" name=\"name\" nillable=\"true\" type=\"xsd:string\"/>\n        </xsd:sequence>\n      </xsd:extension>\n    </xsd:complexContent>\n  </xsd:complexType>\n  <xsd:element name=\"kunta4500k_2019\" substitutionGroup=\"gml:_Feature\" type=\"tilastointialueet:kunta4500k_2019Type\"/>\n</xsd:schema>\n"), 
-    date = structure(1562257780, class = c("POSIXct", "POSIXt"
-    ), tzone = "GMT"), times = c(redirect = 0, namelookup = 5.8e-05, 
-    connect = 6.2e-05, pretransfer = 0.000143, starttransfer = 0.034854, 
-    total = 0.035078)), class = "response")
+    date = structure(1566047569, class = c("POSIXct", "POSIXt"
+    ), tzone = "GMT"), times = c(redirect = 0, namelookup = 2.4e-05, 
+    connect = 2.5e-05, pretransfer = 8.4e-05, starttransfer = 0.03234, 
+    total = 0.084607)), class = "response")

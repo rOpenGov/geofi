@@ -1,7 +1,7 @@
 Package: geofi
 Type: Package
 Title: Finnish open geographical data for R
-Version: 0.9.27.9003
+Version: 0.9.27.9004
 Date: 2019-06-30
 Authors@R: c(
     person("Kainu", "Markus", email = "markus.kainu@kapsi.fi", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1376-503X")),

@@ -6,20 +6,20 @@
 \title{Municipality key table for 2014}
 \format{A data frame with 320 rows and 14 variables:
 \describe{
-  \item{kunta}{Municipality code or kuntanumero}
-  \item{kunta_name}{Municipality name in Finnish}
-  \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
-  \item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
-  \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
-  \item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment)}
-  \item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen code}
-  \item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen name}
-  \item{mk_code}{Maakunnan code (Regions of Finland NUTS 3)}
-  \item{mk_name}{Maakunnan name (Regions of Finland NUTS 3)}
-  \item{sa_code}{Suuralueen code (Large areas NUTS 2)}
-  \item{sa_name}{Suuralueen name (Large areas NUTS 2)}
-  \item{sp_code}{Sairaanhoitopiirin code (Health care regions)}
-  \item{sp_name}{Sairaanhoitopiirin name (Health care regions)}
+\item{kunta}{Municipality code or kuntanumero}
+\item{kunta_name}{Municipality name in Finnish}
+\item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
+\item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
+\item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
+\item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment)}
+\item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen code}
+\item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen name}
+\item{mk_code}{Maakunnan code (Regions of Finland NUTS 3)}
+\item{mk_name}{Maakunnan name (Regions of Finland NUTS 3)}
+\item{sa_code}{Suuralueen code (Large areas NUTS 2)}
+\item{sa_name}{Suuralueen name (Large areas NUTS 2)}
+\item{sp_code}{Sairaanhoitopiirin code (Health care regions)}
+\item{sp_name}{Sairaanhoitopiirin name (Health care regions)}
 }}
 \source{
 \url{http://www.stat.fi/meta/luokitukset/kunta/001-2014/luokitusavaimet.html}

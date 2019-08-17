@@ -21,6 +21,9 @@
 #'
 #' @return sf object
 #'
+#' @importClassesFrom ows4R WFSClient
+#' @importFrom sf st_crs
+#'
 #' @examples
 #'  \dontrun{
 #'  url <- http://geo.stat.fi/geoserver/wfs
@@ -35,7 +38,8 @@
 get_wfs_layer <- function(url, layer, serviceVersion = "1.0.0",
                           logger = "INFO"){
   # Create a WFS client and query capabilities from the server
-  client <- WFSClient$new(url, serviceVersion = serviceVersion, logger = logger)
+  client <- ows4R::WFSClient$new(url, serviceVersion = serviceVersion,
+                                 logger = logger)
   caps <- client$getCapabilities()
   # Get the desired feature layer using an exact match of the provided name
   ft <- caps$findFeatureTypeByName(layer, exact = TRUE)

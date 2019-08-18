@@ -1,4 +1,4 @@
-## CHANGES IN VERSION 0.1 (2019-06-25)
+## CHANGES IN VERSION 0.1 (2019-08-XX)
 
 + Reboot of `gisfin`, package renamed to `geofi`.
 
@@ -9,6 +9,9 @@
   makes it easier to manage the data and to use it consistently in different 
   parts of the package (e.g. actual code and tests). Package internally, these
   data are parsed to an environment `wfs_providers`.
++ `get_municipalities()` and `get_zipcodes()` can now pass extra-arguments 
+  (`...`) to underlying `get_wfs_layer()`. 
++ Basic testing harness is in place using `testthat` and `httptest`.
 
 ### Development related
 

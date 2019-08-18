@@ -14,3 +14,4 @@ inst/extras/...Rcheck
 # Vignettes
 vignettes/.RData
 
+^codecov\.yml$

@@ -23,7 +23,8 @@ Suggests:
     httptest,
     knitr,
     testthat,
-    tricolore
+    tricolore,
+    covr
 URL: https://github.com/ropengov/geofi
 RoxygenNote: 6.1.1
 Encoding: UTF-8

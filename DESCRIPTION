@@ -20,14 +20,17 @@ Imports:
     purrr,
     yaml
 Suggests: 
+    covr,
+    ggtern,
     httptest,
     janitor,
     knitr,
+    leaflet,
+    pxweb,
     rmarkdown,
     testthat,
     tidyr,
-    tricolore,
-    covr
+    tricolore
 URL: https://github.com/ropengov/geofi
 RoxygenNote: 6.1.1
 Encoding: UTF-8

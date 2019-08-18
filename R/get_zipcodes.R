@@ -13,9 +13,9 @@
 #' @rdname get_zipcodes
 #' @export
 
-get_zipcodes <- function(year=2017){
+get_zipcodes <- function(year = 2017){
 
-  layer <- paste0("postialue:pno_",year)
+  layer <- paste0("postialue:pno_", year)
 
   shape <- get_wfs_layer(url = "http://geo.stat.fi/geoserver/wfs",
                          layer = layer, serviceVersion = "1.0.0")

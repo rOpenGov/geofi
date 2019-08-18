@@ -13,9 +13,9 @@
 #' @rdname get_municipalities
 #' @export
 
-get_municipalities <- function(year=2017, scale = 4500){
+get_municipalities <- function(year = 2017, scale = 4500){
 
-  layer <- paste0("tilastointialueet:kunta",scale,"k_",year)
+  layer <- paste0("tilastointialueet:kunta", scale, "k_", year)
 
   shape <- get_wfs_layer(url = "http://geo.stat.fi/geoserver/wfs",
                          layer = layer, serviceVersion = "1.0.0")

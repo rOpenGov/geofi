@@ -1,9 +1,21 @@
-#' @title Get geospatial data at kunta, maakunta, etc leves from MML
-#' @description preprocessed geospatial data sf-objects
-#' @param year A numeric for year of the administerative borders. Available are 2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.
-#' @author Markus Kainu <markus.kainu@kela.fi>
-#' @return sf-object
+#' Get Finnish zip code (multi)polygons for different years.
+#' 
+#' Thin wrapper around Finnish zip code areas provided by 
+#' [Statistic Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).   
+#' 
+#' @param year A numeric for year of the administerative borders. Available are 
+#'             2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.
+#' @param ... Additional arguments passed to \code{\link{get_wfs_layer}}.
+#' 
+#' @return sf object
+#' 
+#' @author Markus Kainu <markus.kainu@@kela.fi>, Joona Lehtomäki <joona.lehtomaki@@iki.fi>
+#' 
+#' @seealso \code{\link{get_wfs_layer}} for how data is accessed from the 
+#' source WFS.
+#' 
 #' @export
+#' 
 #' @examples
 #'  \dontrun{
 #'  f <- get_zipcodes(year=2017)
@@ -13,12 +25,12 @@
 #' @rdname get_zipcodes
 #' @export
 
-get_zipcodes <- function(year = 2017){
+get_zipcodes <- function(year = 2017, ...){
 
   layer <- paste0("postialue:pno_", year)
 
   shape <- get_wfs_layer(url = "http://geo.stat.fi/geoserver/wfs",
-                         layer = layer, serviceVersion = "1.0.0")
+                         layer = layer, serviceVersion = "1.0.0", ...)
 
   return(shape)
 }

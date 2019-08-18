@@ -15,3 +15,4 @@ inst/extras/...Rcheck
 vignettes/.RData
 
 ^codecov\.yml$
+.covrignore

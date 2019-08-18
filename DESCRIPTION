@@ -21,9 +21,11 @@ Imports:
     yaml
 Suggests: 
     httptest,
+    janitor,
     knitr,
     rmarkdown,
     testthat,
+    tidyr,
     tricolore,
     covr
 URL: https://github.com/ropengov/geofi

@@ -2,26 +2,34 @@
 % Please edit documentation in R/get_zipcodes.R
 \name{get_zipcodes}
 \alias{get_zipcodes}
-\title{Get geospatial data at kunta, maakunta, etc leves from MML}
+\title{Get Finnish zip code (multi)polygons for different years.}
 \usage{
-get_zipcodes(year = 2017)
+get_zipcodes(year = 2017, ...)
 }
 \arguments{
-\item{year}{A numeric for year of the administerative borders. Available are 2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.}
+\item{year}{A numeric for year of the administerative borders. Available are
+2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.}
+
+\item{...}{Additional arguments passed to \code{\link{get_wfs_layer}}.}
 }
 \value{
-sf-object
+sf object
 }
 \description{
-preprocessed geospatial data sf-objects
+Thin wrapper around Finnish zip code areas provided by
+\href{https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html}{Statistic Finland}.
 }
 \examples{
  \dontrun{
- f <- get_zipcodes(year=2016,level="kunta")
+ f <- get_zipcodes(year=2017)
  plot(f)
  }
 
 }
+\seealso{
+\code{\link{get_wfs_layer}} for how data is accessed from the
+source WFS.
+}
 \author{
-Markus Kainu \href{mailto:markus.kainu@kela.fi}{markus.kainu@kela.fi}
+Markus Kainu \href{mailto:markus.kainu@kela.fi}{markus.kainu@kela.fi}, Joona Lehtomäki \href{mailto:joona.lehtomaki@iki.fi}{joona.lehtomaki@iki.fi}
 }

@@ -2,20 +2,25 @@
 % Please edit documentation in R/get_municipalities.R
 \name{get_municipalities}
 \alias{get_municipalities}
-\title{Get geospatial data at kunta, maakunta, etc leves from MML}
+\title{Get Finnish municipality (multi)polygons for different years and/or scales.}
 \usage{
-get_municipalities(year = 2017, scale = 4500)
+get_municipalities(year = 2017, scale = 4500, ...)
 }
 \arguments{
-\item{year}{A numeric for year of the administerative borders. Available are 2013, 2014, 2015, 2016, 2017, 2018 and 2019.}
+\item{year}{A numeric for year of the administerative borders. Available are
+2013, 2014, 2015, 2016, 2017, 2018 and 2019.}
 
-\item{scale}{A scale or resolution of the shape. Two options: \code{1000} equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}
+\item{scale}{A scale or resolution of the shape. Two options: \code{1000}
+equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}
+
+\item{...}{Additional arguments passed to \code{\link{get_wfs_layer}}.}
 }
 \value{
-sf-object
+sf object
 }
 \description{
-preprocessed geospatial data sf-objects
+Thin wrapper around Finnish zip code areas provided by
+\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet_en.html}{Statistic Finland}.
 }
 \examples{
  \dontrun{
@@ -25,5 +30,5 @@ preprocessed geospatial data sf-objects
 
 }
 \author{
-Markus Kainu \href{mailto:markus.kainu@kela.fi}{markus.kainu@kela.fi}
+Markus Kainu \href{mailto:markus.kainu@kela.fi}{markus.kainu@kela.fi}, Joona Lehtomäki \href{mailto:joona.lehtomaki@iki.fi}{joona.lehtomaki@iki.fi}
 }

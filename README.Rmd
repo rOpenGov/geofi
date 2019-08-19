@@ -2,6 +2,8 @@
 output: 
   html_document: 
     keep_md: yes
+  md_document:
+    preserve_yaml: false
 ---
 
 

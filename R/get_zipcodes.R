@@ -6,7 +6,7 @@
 #' @export
 #' @examples
 #'  \dontrun{
-#'  f <- get_zipcodes(year=2016,level="kunta")
+#'  f <- get_zipcodes(year=2016)
 #'  plot(f)
 #'  }
 #'

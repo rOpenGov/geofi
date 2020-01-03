@@ -7,7 +7,6 @@
 #'             2013, 2014, 2015, 2016, 2017, 2018 and 2019.
 #' @param scale A scale or resolution of the shape. Two options: \code{1000} 
 #'              equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
-#' @param ... Additional arguments passed to \code{\link{get_wfs_layer}}.
 #' 
 #' @return sf object
 #' 
@@ -30,10 +29,11 @@ get_municipalities <- function(year = 2017, scale = 4500){
   base_queries <- list("service" = "WFS", "version" = "1.0.0")
   typename <-  paste0("tilastointialueet:kunta", scale, "k_", year)
   
+  request = "getFeature"
   # Note that there should be at least one parameter: request type.
   queries <- append(base_queries, list(request = request, typename = typename))
   
-  api_obj <- wfs_api(base_url = base_url, request = "getFeature", queries = queries)
+  api_obj <- wfs_api(base_url = base_url, request = request, queries = queries)
   
   sf_obj <- to_sf(api_obj)
   # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN

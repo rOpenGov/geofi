@@ -5,7 +5,7 @@
 #' 
 #' @param year A numeric for year of the administerative borders. Available are 
 #'             2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.
-#' @param ... Additional arguments passed to \code{\link{get_wfs_layer}}.
+#' @param resolution 1 (1km x 1km) or 5 (5km x 5km)
 #' 
 #' @return sf object
 #' 
@@ -18,20 +18,20 @@
 #' 
 #' @examples
 #'  \dontrun{
-#'  f <- get_zipcodes(year=2017)
+#'  f <- get_population_grid(year=2017)
 #'  plot(f)
 #'  }
 #'
-#' @rdname get_zipcodes
+#' @rdname get_population_grid
 #' @export
 
-get_zipcodes <- function(year = 2017){
+get_population_grid <- function(year = 2017, resolution = 5){
   
   # Unmutable base URL
   base_url <- "http://geo.stat.fi/geoserver/wfs"
   # Standard and compulsory query parameters
   base_queries <- list("service" = "WFS", "version" = "1.0.0")
-  typename <-  paste0("postialue:pno_", year)
+  typename <-  paste0("vaestoruutu:vaki", year, "_", resolution, "km")
   
   request = "getFeature"
   # Note that there should be at least one parameter: request type.

@@ -30,7 +30,7 @@ remotes::install_github("ropengov/geofi")
 
 ## Municipalities
 
-```{r municipality_map, fig.height = 8}
+```{r municipality_map, fig.height = 4, fig.width = 7}
 library(geofi)
 library(ggplot2)
 library(dplyr)
@@ -46,16 +46,16 @@ ggplot(municipalities) +
 ## Zipcodes
 
 
-```{r zipcode_map, fig.height = 8}
+```{r zipcode_map, fig.height = 4, fig.width = 7}
 zipcodes <- get_zipcodes(year = 2019) 
 ggplot(zipcodes) + 
   geom_sf(aes(fill = as.integer(posti_alue)))
-```
+``` 
 
 
 You can add variables from Paavo data (Statistics Finland) in following manner.
 
-```{r zipcode_with_statistics_finland, fig.height = 8}
+```{r zipcode_with_statistics_finland, fig.height = 4, fig.width = 7}
 library(pxweb)
 # lets get all zipcodes and all variables
 pxweb_query_list <- 
@@ -128,7 +128,7 @@ dat[1:10,1:10]
 
 ## Aggregating municipality level data using internal municipality_key-files
 
-```{r municipalities_map, fig.height = 8}
+```{r municipalities_map, fig.height = 4, fig.width = 7}
 # Lets join the municipality level data with internal municipality_key_2017-data
 dat2 <- left_join(dat, municipality_key_2017, by = c("name" = "name_fi"))
 
@@ -149,7 +149,7 @@ ggplot(mk_data) +
 
 Or if you prefer aggregating at vaalipiiri-level you can
 
-```{r vaalipiiri_map, fig.height = 8}
+```{r vaalipiiri_map, fig.height = 4, fig.width = 7}
 mk_data <- dat2 %>% 
   group_by(va_name,va_code) %>% 
   # And compute population at maakunta level
@@ -166,7 +166,7 @@ ggplot(mk_data) +
 
 Or if you want the population at the national level aggregated up from municipality level you can: 
 
-```{r, national_map, fig.height = 8}
+```{r, national_map, fig.height = 4, fig.width = 7}
 mk_data <- dat2 %>% 
   summarise(vakiluku_2017 = sum(vakiluku_2017))
 
@@ -183,12 +183,12 @@ ggplot(mk_data) +
 
 
 
-```{r}
+```{r leaflet, fig.height = 4, fig.width = 7}
 library(leaflet)
 library(geofi)
 library(dplyr)
 
-municipalities <- get_zipcodes(year = 2019)
+municipalities <- get_municipalities(year = 2019)
 municipalities_lonlat <- sf::st_transform(x = municipalities, crs = "+proj=longlat +datum=WGS84")
 
 leaflet(municipalities_lonlat) %>% 
@@ -202,5 +202,35 @@ leaflet(municipalities_lonlat) %>%
     highlightOptions = highlightOptions(color = "white", weight = 2,
       bringToFront = TRUE))
 
+```
+
+# Population grid data
+
+## Whole country at 5km by 5km
+
+```{r, population_grid_data, fig.height = 4, fig.width = 7}
+pop_grid <- get_population_grid(year = 2018, resolution = 5)
+ggplot(pop_grid) + 
+  geom_sf(aes(fill = vaesto), color = NA) +
+  scale_fill_viridis_c(trans = "sqrt", option = "plasma")
+```
+
+## Helsinki at 1km by 1km as interactive leaflet map
+
+```{r, population_grid_data2, fig.height = 4, fig.width = 7}
+pop_grid <- get_population_grid(year = 2018, resolution = 1)
+
+pop_grid_helsinki <- sf::st_transform(x = pop_grid %>% filter(kunta == "091"), crs = "+proj=longlat +datum=WGS84")
+
+leaflet(pop_grid_helsinki) %>% 
+  addTiles() %>% 
+  addPolygons(color = "coral", 
+              weight = 1,
+              smoothFactor = 0.5,
+              opacity = 1.0,
+              fillOpacity = 0.5,
+    label = ~id_nro,
+    highlightOptions = highlightOptions(color = "white", weight = 2,
+      bringToFront = TRUE))
 ```
 

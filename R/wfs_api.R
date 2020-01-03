@@ -40,7 +40,7 @@
 #'   # List stored queries
 #'   wfs_api(request = "DescribeStoredQueries")
 #'
-wfs_api <- function(request, queries, storedquery_id = NULL, ...) {
+wfs_api <- function(base_url, request, queries, storedquery_id = NULL, ...) {
   
   if (!request %in% c("DescribeStoredQueries", "getFeature")) {
     stop("Invalid request type: ", request)
@@ -70,7 +70,7 @@ wfs_api <- function(request, queries, storedquery_id = NULL, ...) {
   content <- xml2::read_xml(resp$content)
   
   # Strip the namespace as it will be only trouble
-  xml2::xml_ns_strip(content)
+  # xml2::xml_ns_strip(content)
   
   if (httr::http_error(resp)) {
     status_code <- httr::status_code(resp)

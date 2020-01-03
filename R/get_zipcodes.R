@@ -64,15 +64,6 @@ get_zipcodes <- function(year = 2017, ...){
   api_obj$content <- content
   
   sf_obj <- to_sf(api_obj)
-  # sf_obj <- sf_obj %>%
-  #   dplyr::select(time = .data$Time, variable = .data$ParameterName,
-  #                 value = .data$ParameterValue) %>%
-  #   dplyr::mutate(time = lubridate::parse_date_time(.data$time, "Ymd HMS"),
-  #                 variable = as.character(.data$variable),
-  #                 # Factor needs to be coerced into character first
-  #                 value = as.numeric(as.character(.data$value))) %>%
-  #   dplyr::mutate(value = ifelse(is.nan(.data$value), NA, .data$value))
-  
   if (is.na(sf::st_crs(sf_obj))) {
     warning("Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)", call. = FALSE)
     sf::st_crs(sf_obj) <- 3067

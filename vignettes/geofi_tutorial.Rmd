@@ -5,8 +5,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{geofi tutorial}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -186,7 +188,7 @@ library(leaflet)
 library(geofi)
 library(dplyr)
 
-municipalities <- get_municipalities(year = 2019, scale = 4500)
+municipalities <- get_zipcodes(year = 2019)
 municipalities_lonlat <- sf::st_transform(x = municipalities, crs = "+proj=longlat +datum=WGS84")
 
 leaflet(municipalities_lonlat) %>% 

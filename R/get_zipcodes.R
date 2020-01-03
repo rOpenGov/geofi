@@ -25,50 +25,26 @@
 #' @rdname get_zipcodes
 #' @export
 
-get_zipcodes <- function(year = 2017, ...){
-  
-  
-  # Set the user agent
-  ua <- httr::user_agent("https://github.com/rOpenGov/geofi")
+get_zipcodes <- function(year = 2017){
   
   # Unmutable base URL
   base_url <- "http://geo.stat.fi/geoserver/wfs"
   # Standard and compulsory query parameters
   base_queries <- list("service" = "WFS", "version" = "1.0.0")
-  
-  request <- "GetFeature"
   typename <-  paste0("postialue:pno_", year)
   
   # Note that there should be at least one parameter: request type.
   queries <- append(base_queries, list(request = request, typename = typename))
   
-  # Construct the query URL
-  url <- httr::modify_url(base_url, query = queries)
-  
-  # Get the response and check the response.
-  resp <- httpcache::GET(url, ua)
-  
-  # Parse the response XML content
-  content <- xml2::read_xml(resp$content)
-  # Strip the namespace as it will be only trouble
-  xml2::xml_ns_strip(content)
-  
-  api_obj <- structure(
-    list(
-      url = url,
-      response = resp
-    ),
-    class = "fmi_api"
-  )
-  
-  api_obj$content <- content
+  api_obj <- wfs_api(base_url = base_url, request = "getFeature", queries = queries)
   
   sf_obj <- to_sf(api_obj)
+  # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN
+  # (epsg:3067)
   if (is.na(sf::st_crs(sf_obj))) {
     warning("Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)", call. = FALSE)
     sf::st_crs(sf_obj) <- 3067
   }
-  return(sf_obj)
   return(sf_obj)
   
 }

@@ -2,8 +2,8 @@
 #'
 #' @description Requests to various WFS API.
 #'
-#' @details Make a request to the WFS API. The base url is
-#' opendata.fmi.fi/wfs?service=WFS&version=2.0.0 to which other
+#' @details Make a request to the spesific WFS API. The base url is
+#' http://geo.stat.fi/geoserver/wfs to which other
 #' components defined by the arguments are appended.
 #'
 #' This is a low-level function intended to be used by other higher level
@@ -13,16 +13,8 @@
 #' are cached. If you want clear cache, use [httpcache::clearCache()]. To turn
 #' the cache off completely, use [httpcache::cacheOff()]
 #'
-#' @param request character request type of either `DescribeStoredQueries` or
-#'        `getFeature`.
-#' @param storedquery_id character id of the stored query id. If `request` is
-#'        `getFeature`, then `storedquery_id` must be provided and otherwise
-#'        it's ignored.
-#' @param ... stored query specific parameters. NOTE: it's up to the high-level
-#'        functions to check the validity of the parameters.
-#'
-#' @importFrom httr content http_error http_type modify_url status_code user_agent
-#' @importFrom httpcache GET
+#' @param baseUrl
+#' @param queries
 #' @importFrom xml2 read_xml xml_find_all xml_text
 #'
 #' @return wfs_api (S3) object with the following attributes:
@@ -40,26 +32,11 @@
 #'   # List stored queries
 #'   wfs_api(request = "DescribeStoredQueries")
 #'
-wfs_api <- function(base_url, request, queries, storedquery_id = NULL, ...) {
-  
-  if (!request %in% c("DescribeStoredQueries", "getFeature")) {
-    stop("Invalid request type: ", request)
-  }
-  
+wfs_api <- function(base_url, queries, ...) {
+
   # Set the user agent
   ua <- httr::user_agent("https://github.com/rOpenGov/geofi")
 
-  # All arguments contained in ... are used to construct the final URL.
-  if (request == "DescribeStoredQueries") {
-    if (!is.null(storedquery_id)) {
-      warning("storedquery_id ignored as request type is DescribeStoredQueries",
-              call. = FALSE)
-    }
-  } else if (request == "getFeature") {
-    # TODO: raise error if storedquery_id is missing
-    queries <- append(queries, list(storedquery_id = storedquery_id, ...))
-  }
-  
   # Construct the query URL
   url <- httr::modify_url(base_url, query = queries)
   
@@ -103,16 +80,8 @@ wfs_api <- function(base_url, request, queries, storedquery_id = NULL, ...) {
   
   api_obj$content <- content
   
-  if (request == "DescribeStoredQueries") {
-    # Get all the child nodes
-    nodes <- xml2::xml_children(content)
-    # Attach the nodes to the API object
-    api_obj$content <- nodes
-    # getFeature is used for getting actual data
-  } else if (request == "getFeature") {
-    # Attach the nodes to the API object
-    api_obj$content <- content
-  }
+  # Attach the nodes to the API object
+  api_obj$content <- content
   
   return(api_obj)
 }

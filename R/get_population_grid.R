@@ -27,17 +27,16 @@
 
 get_population_grid <- function(year = 2017, resolution = 5){
   
-  # Unmutable base URL
+ # Unmutable base URL
   base_url <- "http://geo.stat.fi/geoserver/wfs"
+ 
   # Standard and compulsory query parameters
   base_queries <- list("service" = "WFS", "version" = "1.0.0")
-  typename <-  paste0("vaestoruutu:vaki", year, "_", resolution, "km")
-  
-  request = "getFeature"
+    typename <-  paste0("vaestoruutu:vaki", year, "_", resolution, "km")
   # Note that there should be at least one parameter: request type.
-  queries <- append(base_queries, list(request = request, typename = typename))
-  
-  api_obj <- wfs_api(base_url = base_url, request = request, queries = queries)
+  queries <- append(base_queries, list(request = "getFeature", typename = typename))
+
+  api_obj <- wfs_api(base_url= base_url, queries = queries, request = queries$request)
   
   sf_obj <- to_sf(api_obj)
   # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN

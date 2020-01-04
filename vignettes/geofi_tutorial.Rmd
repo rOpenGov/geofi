@@ -220,16 +220,20 @@ ggplot(pop_grid) +
 ```{r, population_grid_data2, fig.height = 4, fig.width = 7}
 pop_grid <- get_population_grid(year = 2018, resolution = 1)
 
-pop_grid_helsinki <- sf::st_transform(x = pop_grid %>% filter(kunta == "091"), crs = "+proj=longlat +datum=WGS84")
+pop_grid_helsinki <- sf::st_transform(x = pop_grid %>% 
+                                        filter(kunta == "091"), crs = "+proj=longlat +datum=WGS84")
+
+
 
 leaflet(pop_grid_helsinki) %>% 
   addTiles() %>% 
-  addPolygons(color = "coral", 
+  addPolygons(fillColor = ~colorQuantile("RdYlGn", vaesto)(vaesto),
+              color = "coral", 
               weight = 1,
               smoothFactor = 0.5,
               opacity = 1.0,
               fillOpacity = 0.5,
-    label = ~id_nro,
+    label = ~vaesto,
     highlightOptions = highlightOptions(color = "white", weight = 2,
       bringToFront = TRUE))
 ```

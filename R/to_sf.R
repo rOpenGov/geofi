@@ -3,7 +3,7 @@
 #' FMI API response object's XML (GML) content is temporarily wrtitten on disk
 #' and then immediately read back in into a sf object.
 #'
-#' @param api_obj fmi api object
+#' @param api_obj wfs api object
 #'
 #' @return sf object
 #'
@@ -14,8 +14,6 @@
 #' @note For internal use, not exported.
 #'
 #' @author Joona Lehtomäki <joona.lehtomaki@@iki.fi>
-#'
-#' @seealso \link[fmi2]{fmi_api}
 #'
 #' @examples
 #'   \dontrun{

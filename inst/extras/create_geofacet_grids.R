@@ -125,13 +125,14 @@ save(grid_keski_suomi_2019, file = "./data/grid_keski_suomi_2019.rda",
 
 # Pohjois-Savo ---------------------------------------------- |
 mygrid <- data.frame(
-  code = c("263", "762", "925", "687", "239", "595", "402", "204", "857", "921", "844", "297", "749", "420", "686", "778", "915", "140"),
-  name = c("Kiuruvesi", "Sonkajärvi", "Vieremä", "Rautavaara", "Keitele", "Pielavesi", "Lapinlahti", "Kaavi", "Tuusniemi", "Vesanto", "Tervo", "Kuopio", "Siilinjärvi", "Leppävirta", "Rautalampi", "Suonenjoki", "Varkaus", "Iisalmi"),
-  row = c(1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 5, 2),
-  col = c(1, 3, 2, 4, 1, 2, 4, 5, 4, 1, 2, 3, 5, 4, 2, 3, 4, 3),
+  code = c("263", "925", "762", "140", "402", "687", "595", "239", "749", "921", "844", "204", "297", "857", "686", "778", "420", "915"),
+  name = c("Kiuruvesi", "Vieremä", "Sonkajärvi", "Iisalmi", "Lapinlahti", "Rautavaara", "Pielavesi", "Keitele", "Siilinjärvi", "Vesanto", "Tervo", "Kaavi", "Kuopio", "Tuusniemi", "Rautalampi", "Suonenjoki", "Leppävirta", "Varkaus"),
+  row = c(2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 6),
+  col = c(1, 2, 4, 3, 4, 5, 2, 1, 3, 1, 2, 5, 3, 4, 2, 3, 4, 4),
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
+mygrid$row <- mygrid$row - 1
 grid_pohjois_savo_2019 <- mygrid
 
 save(grid_pohjois_savo_2019, file = "./data/grid_pohjois_savo_2019.rda",
@@ -297,7 +298,7 @@ save(grid_uusimaa_2019, file = "./data/grid_uusimaa_2019.rda",
 
 # use the code below as geograhical reference map
 geofi::municipality_key_2019 %>% 
-  filter(grepl("^Uusimaa", mk_name)) %>% 
+  filter(grepl("^Pohjois-Sa", mk_name)) %>% 
   count(kunta,kunta_name) %>%
   select(-n) %>% 
   setNames(c("code","name")) -> tmp

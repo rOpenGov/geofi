@@ -19,7 +19,9 @@ Imports:
     sf,
     purrr,
     httpcache,
-    yaml
+    yaml,
+    methods,
+    xml2 (>= 1.2.0)
 Suggests: 
     covr,
     ggtern,

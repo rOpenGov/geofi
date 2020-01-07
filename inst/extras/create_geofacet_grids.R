@@ -281,10 +281,10 @@ save(grid_ahvenanmaa_2019, file = "./data/grid_ahvenanmaa_2019.rda",
 
 # Uusimaa ---------------------------------------------- |
 mygrid <- data.frame(
-  code = c("505", "106", "186", "224", "616", "543", "858", "245", "611", "18", "407", "504", "434", "638", "92", "49", "235", "444", "927", "753", "91", "257", "755", "149", "710", "78"),
-  name = c("Mäntsälä", "Hyvinkää", "Järvenpää", "Karkkila", "Pukkila", "Nurmijärvi", "Tuusula", "Kerava", "Pornainen", "Askola", "Lapinjärvi", "Myrskylä", "Loviisa", "Porvoo", "Vantaa", "Espoo", "Kauniainen", "Lohja", "Vihti", "Sipoo", "Helsinki", "Kirkkonummi", "Siuntio", "Inkoo", "Raasepori", "Hanko"),
-  row = c(2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6),
-  col = c(4, 3, 6, 2, 7, 3, 4, 5, 6, 7, 9, 8, 9, 8, 6, 5, 4, 2, 3, 7, 6, 4, 3, 2, 1, 1),
+  code = c("616", "505", "504", "106", "224", "186", "407", "18", "611", "245", "858", "543", "444", "927", "235", "434", "638", "753", "92", "257", "755", "149", "710", "49", "91", "78"),
+  name = c("Pukkila", "Mäntsälä", "Myrskylä", "Hyvinkää", "Karkkila", "Järvenpää", "Lapinjärvi", "Askola", "Pornainen", "Kerava", "Tuusula", "Nurmijärvi", "Lohja", "Vihti", "Kauniainen", "Loviisa", "Porvoo", "Sipoo", "Vantaa", "Kirkkonummi", "Siuntio", "Inkoo", "Raasepori", "Espoo", "Helsinki", "Hanko"),
+  row = c(2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6),
+  col = c(8, 7, 8, 5, 3, 7, 9, 9, 8, 7, 6, 5, 3, 4, 5, 9, 8, 7, 6, 4, 3, 2, 1, 5, 6, 1),
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)

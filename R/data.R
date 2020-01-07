@@ -1,3 +1,19 @@
+#' custom geofacet grid for regions as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Region name (maakunta) in Finnish}
+#'   \item{code}{Region code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_mk_2019"
+
+
+
+
 #' Municipality key table for 2019
 #'
 #' Table for aggregating municipality level data to various regional groupings  

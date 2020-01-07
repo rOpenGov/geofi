@@ -1,8 +1,8 @@
 Package: geofi
 Type: Package
 Title: Finnish open geographical data for R
-Version: 0.9.27.9005
-Date: 2019-08-20
+Version: 0.9.27.9009
+Date: 2020-01-07
 Authors@R: c(
     person("Kainu", "Markus", email = "markus.kainu@kapsi.fi", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1376-503X")),
     person("Lehtomaki", "Joona", email = "joona.lehtomaki@iki.fi", role = c("aut"), comment = c(ORCID = "0000-0002-7891-0843")),
@@ -17,8 +17,8 @@ Depends:
 Imports: 
     dplyr,
     sf,
-    ows4R,
     purrr,
+    httpcache,
     yaml
 Suggests: 
     covr,
@@ -33,7 +33,7 @@ Suggests:
     tidyr,
     tricolore
 URL: https://github.com/ropengov/geofi
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr

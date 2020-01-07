@@ -4,7 +4,7 @@
 \alias{get_municipalities}
 \title{Get Finnish municipality (multi)polygons for different years and/or scales.}
 \usage{
-get_municipalities(year = 2017, scale = 4500, ...)
+get_municipalities(year = 2017, scale = 4500)
 }
 \arguments{
 \item{year}{A numeric for year of the administerative borders. Available are
@@ -12,8 +12,6 @@ get_municipalities(year = 2017, scale = 4500, ...)
 
 \item{scale}{A scale or resolution of the shape. Two options: \code{1000}
 equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}
-
-\item{...}{Additional arguments passed to \code{\link{get_wfs_layer}}.}
 }
 \value{
 sf object

@@ -4,18 +4,7 @@
 \alias{wfs_api}
 \title{WFS API}
 \usage{
-wfs_api(base_url, request, queries, storedquery_id = NULL, ...)
-}
-\arguments{
-\item{request}{character request type of either \code{DescribeStoredQueries} or
-\code{getFeature}.}
-
-\item{storedquery_id}{character id of the stored query id. If \code{request} is
-\code{getFeature}, then \code{storedquery_id} must be provided and otherwise
-it's ignored.}
-
-\item{...}{stored query specific parameters. NOTE: it's up to the high-level
-functions to check the validity of the parameters.}
+wfs_api(base_url, queries, ...)
 }
 \value{
 wfs_api (S3) object with the following attributes:
@@ -29,8 +18,8 @@ wfs_api (S3) object with the following attributes:
 Requests to various WFS API.
 }
 \details{
-Make a request to the WFS API. The base url is
-opendata.fmi.fi/wfs?service=WFS&version=2.0.0 to which other
+Make a request to the spesific WFS API. The base url is
+http://geo.stat.fi/geoserver/wfs to which other
 components defined by the arguments are appended.
 
 This is a low-level function intended to be used by other higher level

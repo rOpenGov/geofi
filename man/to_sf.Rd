@@ -7,7 +7,7 @@
 to_sf(api_obj)
 }
 \arguments{
-\item{api_obj}{fmi api object}
+\item{api_obj}{wfs api object}
 }
 \value{
 sf object
@@ -28,9 +28,6 @@ For internal use, not exported.
     sf_obj <- to_sf(response)
   }
 
-}
-\seealso{
-\link[fmi2]{fmi_api}
 }
 \author{
 Joona Lehtomäki \href{mailto:joona.lehtomaki@iki.fi}{joona.lehtomaki@iki.fi}

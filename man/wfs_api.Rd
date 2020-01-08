@@ -6,6 +6,11 @@
 \usage{
 wfs_api(base_url, queries, ...)
 }
+\arguments{
+\item{base_url}{string Api base url}
+
+\item{queries}{list List of query parameters}
+}
 \value{
 wfs_api (S3) object with the following attributes:
 \describe{

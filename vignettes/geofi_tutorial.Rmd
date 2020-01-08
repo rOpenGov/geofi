@@ -286,3 +286,21 @@ ggplot(dat, aes(x = year, y = population, group = name)) +
 ```
 
 
+```{r geofacet2, fig.height = 6, fig.width = 7}
+
+dat <- left_join(geofi::municipality_key_2019 %>% filter(mk_name == "Uusimaa"),
+                 px_data) %>% 
+  group_by(mk_code, mk_name,year) %>% 
+  rename(code = kunta, name = kunta_name, population = value)
+
+library(geofacet)
+library(ggplot2)
+
+ggplot(dat, aes(x = year, y = population, group = name)) + 
+  geom_line() + 
+  facet_geo(facets = ~name, grid = grid_uusimaa_2019, scales = "free_y") +
+  theme(axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank()) +
+  labs(title = "Regional population 1987-2018")
+```
+

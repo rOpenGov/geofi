@@ -16,3 +16,4 @@ vignettes/.RData
 
 ^codecov\.yml$
 .covrignore
+^appveyor\.yml$

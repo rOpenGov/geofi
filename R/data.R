@@ -1,3 +1,265 @@
+#' custom geofacet grid for regions as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Region name (maakunta) in Finnish}
+#'   \item{code}{Region code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_mk_2019"
+
+#' custom geofacet grid for Ahvenanmaa region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_ahvenanmaa_2019"
+
+#' custom geofacet grid for Etelä-Karjala region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_etela_karjala_2019"
+
+#' custom geofacet grid for Etelä-Pohjanmaa region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_etela_pohjanmaa_2019"
+
+#' custom geofacet grid for Etelä-Savo region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_etela_savo_2019"
+
+#' custom geofacet grid for Kainuu region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_kainuu_2019"
+
+#' custom geofacet grid for Kanta-Häme region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_kanta_hame_2019"
+
+#' custom geofacet grid for Keski-Pohjanmaa region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_keski_pohjanmaa_2019"
+
+#' custom geofacet grid for Keski-Suomi region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_keski_suomi_2019"
+
+#' custom geofacet grid for Kymenlaakso region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_kymenlaakso_2019"
+
+#' custom geofacet grid for Lappi region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_lappi_2019"
+
+#' custom geofacet grid for Päijät-Häme region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_paijat_hame_2019"
+
+#' custom geofacet grid for Pirkanmaa region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_pirkanmaa_2019"
+
+#' custom geofacet grid for Pohjanmaa region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_pohjanmaa_2019"
+
+#' custom geofacet grid for Pohjois-Karjala region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_pohjois_karjala_2019"
+
+#' custom geofacet grid for Pohjois-Pohjanmaa region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_pohjois_pohjanmaa_2019"
+
+#' custom geofacet grid for Pohjois-Savo region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_pohjois_savo_2019"
+
+#' custom geofacet grid for Satakunta region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_satakunta_2019"
+
+#' custom geofacet grid for Uusimaa region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_uusimaa_2019"
+
+#' custom geofacet grid for Varsinais-Suomi region as in 2019 
+#'
+#' Grid table to be used with ggplot2 and geofacet
+#'
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Municipality name (kunta) in Finnish}
+#'   \item{code}{Municipality code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_varsinais_suomi_2019"
+
+
+
 #' Municipality key table for 2019
 #'
 #' Table for aggregating municipality level data to various regional groupings  

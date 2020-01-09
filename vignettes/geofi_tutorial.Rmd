@@ -277,18 +277,18 @@ dat <- left_join(geofi::municipality_key_2019,px_data) %>%
 library(geofacet)
 library(ggplot2)
 
-ggplot(dat, aes(x = year, y = population, group = name)) + 
+ggplot(dat, aes(x = year, y = population/1000, group = name)) + 
   geom_line() + 
   facet_geo(facets = ~name, grid = grid_mk_2019, scales = "free_y") +
-  theme(axis.text.x = element_blank(), 
-        axis.ticks.x = element_blank()) +
-  labs(title = "Regional population 1987-2018")
+  theme(axis.text.x = element_text(size = 6)) +
+  scale_x_discrete(breaks = seq.int(from = 1987, to = 2018, by = 5)) +
+  labs(title = "Population 1987-2018", y = "population (1000)")
 ```
 
 
 ```{r geofacet2, fig.height = 6, fig.width = 7}
 
-dat <- left_join(geofi::municipality_key_2019 %>% filter(mk_name == "Uusimaa"),
+dat <- left_join(geofi::municipality_key_2019 %>% filter(mk_name == "Ahvenanmaa"),
                  px_data) %>% 
   group_by(mk_code, mk_name,year) %>% 
   rename(code = kunta, name = kunta_name, population = value)
@@ -296,11 +296,11 @@ dat <- left_join(geofi::municipality_key_2019 %>% filter(mk_name == "Uusimaa"),
 library(geofacet)
 library(ggplot2)
 
-ggplot(dat, aes(x = year, y = population, group = name)) + 
+ggplot(dat, aes(x = year, y = population/1000, group = name)) + 
   geom_line() + 
-  facet_geo(facets = ~name, grid = grid_uusimaa_2019, scales = "free_y") +
-  theme(axis.text.x = element_blank(), 
-        axis.ticks.x = element_blank()) +
-  labs(title = "Regional population 1987-2018")
+  facet_geo(facets = ~name, grid = grid_ahvenanmaa_2019, scales = "free_y") +
+  theme(axis.text.x = element_text(size = 6)) +
+  scale_x_discrete(breaks = seq.int(from = 1987, to = 2018, by = 5)) +
+  labs(title = "Population 1987-2018", y = "population (1000)")
 ```
 

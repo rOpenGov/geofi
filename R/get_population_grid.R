@@ -11,9 +11,6 @@
 #' 
 #' @author Markus Kainu <markus.kainu@@kela.fi>, Joona Lehtomäki <joona.lehtomaki@@iki.fi>
 #' 
-#' @seealso \code{\link{get_wfs_layer}} for how data is accessed from the 
-#' source WFS.
-#' 
 #' @export
 #' 
 #' @examples
@@ -28,7 +25,7 @@
 get_population_grid <- function(year = 2017, resolution = 5){
   
  # Unmutable base URL
-  base_url <- "http://geo.stat.fi/geoserver/wfs"
+  # base_url <- "http://geo.stat.fi/geoserver/wfs"
  
   # Standard and compulsory query parameters
   base_queries <- list("service" = "WFS", "version" = "1.0.0")
@@ -36,7 +33,7 @@ get_population_grid <- function(year = 2017, resolution = 5){
   # Note that there should be at least one parameter: request type.
   queries <- append(base_queries, list(request = "getFeature", typename = typename))
 
-  api_obj <- wfs_api(base_url= base_url, queries = queries, request = queries$request)
+  api_obj <- wfs_api(base_url= "http://geo.stat.fi/geoserver/wfs", queries = queries)
   
   sf_obj <- to_sf(api_obj)
   # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN

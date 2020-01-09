@@ -26,10 +26,6 @@ Thin wrapper around Finnish zip code areas provided by
  }
 
 }
-\seealso{
-\code{\link{get_wfs_layer}} for how data is accessed from the
-source WFS.
-}
 \author{
 Markus Kainu \href{mailto:markus.kainu@kela.fi}{markus.kainu@kela.fi}, Joona Lehtomäki \href{mailto:joona.lehtomaki@iki.fi}{joona.lehtomaki@iki.fi}
 }

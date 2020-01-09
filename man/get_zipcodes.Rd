@@ -9,8 +9,6 @@ get_zipcodes(year = 2017)
 \arguments{
 \item{year}{A numeric for year of the administerative borders. Available are
 2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.}
-
-\item{...}{Additional arguments passed to \code{\link{get_wfs_layer}}.}
 }
 \value{
 sf object
@@ -25,10 +23,6 @@ Thin wrapper around Finnish zip code areas provided by
  plot(f)
  }
 
-}
-\seealso{
-\code{\link{get_wfs_layer}} for how data is accessed from the
-source WFS.
 }
 \author{
 Markus Kainu \href{mailto:markus.kainu@kela.fi}{markus.kainu@kela.fi}, Joona Lehtomäki \href{mailto:joona.lehtomaki@iki.fi}{joona.lehtomaki@iki.fi}

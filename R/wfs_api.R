@@ -29,10 +29,14 @@
 #' @author Joona Lehtomäki <joona.lehtomaki@@iki.fi>
 #'
 #' @examples
-#'   # List stored queries
-#'   wfs_api(request = "DescribeStoredQueries")
+#'   wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", 
+#'           queries = append(list("service" = "WFS", "version" = "1.0.0"), 
+#'                 list(request = "getFeature", 
+#'                      typename = "tilastointialueet:kunta4500k_2017")))
 #'
-wfs_api <- function(base_url, queries, ...) {
+wfs_api <- function(base_url = "http://geo.stat.fi/geoserver/wfs", queries) {
+  
+  if (!grepl("^http", base_url)) stop("Invalid base URL")
 
   # Set the user agent
   ua <- httr::user_agent("https://github.com/rOpenGov/geofi")

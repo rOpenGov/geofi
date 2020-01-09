@@ -59,7 +59,7 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows: Markus Kainu, Joona Lehtomäki, and Leo Lahti. Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version `r sessionInfo()$otherPkgs$geofi$Version`. URL: [http://ropengov.github.io/geofi](http://ropengov.github.io/geofi)
 
-We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Juusi Parkkinen, Jussi Jousimo, Janne Aukia, and Aaro Salosensaari. This project is part of [rOpenGov](http://ropengov.github.io).
+We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Juusi Parkkinen, Jussi Jousimo, Janne Aukia, Aaro Salosensaari and Jani Miettinen. This project is part of [rOpenGov](http://ropengov.github.io).
 
 
 [github-watch-badge]: https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Municipality key table for 2017 — municipality_key_2017 • geofi</title>
+<title>Get Finnish zip code (multi)polygons for different years. — get_population_grid • geofi</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Municipality key table for 2017 — municipality_key_2017" />
-<meta property="og:description" content="Table for aggregating municipality level data to various regional groupings" />
+<meta property="og:title" content="Get Finnish zip code (multi)polygons for different years. — get_population_grid" />
+<meta property="og:description" content="Thin wrapper around Finnish zip code areas provided by
+Statistic Finland." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,71 +124,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Municipality key table for 2017</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropengov/geofi/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>municipality_key_2017.Rd</code></div>
+    <h1>Get Finnish zip code (multi)polygons for different years.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropengov/geofi/blob/master/R/get_population_grid.R'><code>R/get_population_grid.R</code></a></small>
+    <div class="hidden name"><code>get_population_grid.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Table for aggregating municipality level data to various regional groupings</p>
+    <p>Thin wrapper around Finnish zip code areas provided by
+<a href='https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html'>Statistic Finland</a>.</p>
     </div>
 
-    <pre class="usage"><span class='no'>municipality_key_2017</span></pre>
+    <pre class="usage"><span class='fu'>get_population_grid</span>(<span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2017</span>, <span class='kw'>resolution</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>year</th>
+      <td><p>A numeric for year of the administerative borders. Available are
+2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.</p></td>
+    </tr>
+    <tr>
+      <th>resolution</th>
+      <td><p>1 (1km x 1km) or 5 (5km x 5km)</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 311 rows and 36 variables:</p><dl class='dl-horizontal'>
-<dt>kunta</dt><dd><p>Municipality code ie. kuntanumero</p></dd>
-<dt>kunta_name</dt><dd><p>Municipality name in Finnish</p></dd>
-<dt>avi_code</dt><dd><p>Aluehallintovirasto code (Regional State Administrative Agencies)</p></dd>
-<dt>avi_name</dt><dd><p>Aluehallintovirasto name (Regional State Administrative Agencies)</p></dd>
-<dt>ely_code</dt><dd><p>Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)</p></dd>
-<dt>ely_name</dt><dd><p>Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment)</p></dd>
-<dt>hp_code</dt><dd><p>Hovioikeuspiirin code</p></dd>
-<dt>hp_name</dt><dd><p>Hovioikeuspiirin name</p></dd>
-<dt>kr_code</dt><dd><p>Tilastokeskuksen tilastollisen kuntaluokituksen code</p></dd>
-<dt>kr_name</dt><dd><p>Tilastokeskuksen tilastollisen kuntaluokituksen name</p></dd>
-<dt>mk_code</dt><dd><p>Maakunnan code (Regions of Finland NUTS 3)</p></dd>
-<dt>mk_name</dt><dd><p>Maakunnan name (Regions of Finland NUTS 3)</p></dd>
-<dt>sa_code</dt><dd><p>Suuralueen code (Large areas NUTS 2)</p></dd>
-<dt>sa_name</dt><dd><p>Suuralueen name (Large areas NUTS 2)</p></dd>
-<dt>sk_code</dt><dd><p>Seutukunnan code (Sub-Regions of Finland NUTS 3)</p></dd>
-<dt>sk_name</dt><dd><p>Seutukunnan name (Sub-Regions of Finland NUTS 3)</p></dd>
-<dt>sp_code</dt><dd><p>Sairaanhoitopiirin code (Health care regions)</p></dd>
-<dt>sp_name</dt><dd><p>Sairaanhoitopiirin name (Health care regions)</p></dd>
-<dt>tk_code</dt><dd><p>Työssäkäyntialueen code</p></dd>
-<dt>tk_name</dt><dd><p>Työssäkäyntialueen name</p></dd>
-<dt>va_code</dt><dd><p>Vaalipiirin code (Electoral district)</p></dd>
-<dt>va_name</dt><dd><p>Vaalipiirin name (Electoral district)</p></dd>
-<dt>kela_vakuutuspiiri_name</dt><dd><p>Kelan vakuutuspiirin name</p></dd>
-<dt>kela_vakuutuspiiri_code</dt><dd><p>Kelan vakuutuspiirin koodi (epävirallinen)</p></dd>
-<dt>kela_asumistukialue_name</dt><dd><p>Kelan asumistukialueen name</p></dd>
-<dt>kela_asumistukialue_code</dt><dd><p>Kelan asumistukialueen koodi (epävirallinen)</p></dd>
-<dt>erva_name</dt><dd><p>Erityisvastuualueen name</p></dd>
-<dt>erva_code</dt><dd><p>Erityisvastuualueen koodi (epävirallinen)</p></dd>
-<dt>avi_name_sv</dt><dd><p>Aluehallintovirasto name (Regional State Administrative Agencies) in Swedish</p></dd>
-<dt>ely_name_sv</dt><dd><p>Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment) in Swedish</p></dd>
-<dt>kr_name_sv</dt><dd><p>Tilastokeskuksen tilastollisen kuntaluokituksen name in Swedish</p></dd>
-<dt>mk_name_sv</dt><dd><p>Maakunnan name (Regions of Finland NUTS 3) in Swedish</p></dd>
-<dt>sp_name_sv</dt><dd><p>Sairaanhoitopiirin name (Health care regions) in Swedish</p></dd>
-<dt>kela_vakuutuspiiri_name_sv</dt><dd><p>Kelan vakuutuspiirin name in Swedish</p></dd>
-<dt>name_sv</dt><dd><p>municipality name in Swedish</p></dd>
-<dt>name_fi</dt><dd><p>municipality name in Finnish</p></dd>
+    <p>sf object</p>
 
-</dl>
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='http://www.stat.fi/meta/luokitukset/kunta/001-2017/luokitusavaimet.html'>http://www.stat.fi/meta/luokitukset/kunta/001-2017/luokitusavaimet.html</a></p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'> <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+ <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>get_population_grid</span>(<span class='kw'>year</span><span class='kw'>=</span><span class='fl'>2017</span>)
+ <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>f</span>)
+ }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
-      <li><a href="#source">Source</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Markus Kainu <a href='mailto:markus.kainu@kela.fi'>markus.kainu@kela.fi</a>, Joona Lehtomäki <a href='mailto:joona.lehtomaki@iki.fi'>joona.lehtomaki@iki.fi</a></p>
   </div>
 </div>
 

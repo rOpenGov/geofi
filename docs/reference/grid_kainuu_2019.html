@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Municipality key table for 2017 — municipality_key_2017 • geofi</title>
+<title>custom geofacet grid for Kainuu region as in 2019 — grid_kainuu_2019 • geofi</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Municipality key table for 2017 — municipality_key_2017" />
-<meta property="og:description" content="Table for aggregating municipality level data to various regional groupings" />
+<meta property="og:title" content="custom geofacet grid for Kainuu region as in 2019 — grid_kainuu_2019" />
+<meta property="og:description" content="Grid table to be used with ggplot2 and geofacet" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,69 +123,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Municipality key table for 2017</h1>
+    <h1>custom geofacet grid for Kainuu region as in 2019</h1>
     <small class="dont-index">Source: <a href='https://github.com/ropengov/geofi/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>municipality_key_2017.Rd</code></div>
+    <div class="hidden name"><code>grid_kainuu_2019.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Table for aggregating municipality level data to various regional groupings</p>
+    <p>Grid table to be used with ggplot2 and geofacet</p>
     </div>
 
-    <pre class="usage"><span class='no'>municipality_key_2017</span></pre>
+    <pre class="usage"><span class='no'>grid_kainuu_2019</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 311 rows and 36 variables:</p><dl class='dl-horizontal'>
-<dt>kunta</dt><dd><p>Municipality code ie. kuntanumero</p></dd>
-<dt>kunta_name</dt><dd><p>Municipality name in Finnish</p></dd>
-<dt>avi_code</dt><dd><p>Aluehallintovirasto code (Regional State Administrative Agencies)</p></dd>
-<dt>avi_name</dt><dd><p>Aluehallintovirasto name (Regional State Administrative Agencies)</p></dd>
-<dt>ely_code</dt><dd><p>Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)</p></dd>
-<dt>ely_name</dt><dd><p>Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment)</p></dd>
-<dt>hp_code</dt><dd><p>Hovioikeuspiirin code</p></dd>
-<dt>hp_name</dt><dd><p>Hovioikeuspiirin name</p></dd>
-<dt>kr_code</dt><dd><p>Tilastokeskuksen tilastollisen kuntaluokituksen code</p></dd>
-<dt>kr_name</dt><dd><p>Tilastokeskuksen tilastollisen kuntaluokituksen name</p></dd>
-<dt>mk_code</dt><dd><p>Maakunnan code (Regions of Finland NUTS 3)</p></dd>
-<dt>mk_name</dt><dd><p>Maakunnan name (Regions of Finland NUTS 3)</p></dd>
-<dt>sa_code</dt><dd><p>Suuralueen code (Large areas NUTS 2)</p></dd>
-<dt>sa_name</dt><dd><p>Suuralueen name (Large areas NUTS 2)</p></dd>
-<dt>sk_code</dt><dd><p>Seutukunnan code (Sub-Regions of Finland NUTS 3)</p></dd>
-<dt>sk_name</dt><dd><p>Seutukunnan name (Sub-Regions of Finland NUTS 3)</p></dd>
-<dt>sp_code</dt><dd><p>Sairaanhoitopiirin code (Health care regions)</p></dd>
-<dt>sp_name</dt><dd><p>Sairaanhoitopiirin name (Health care regions)</p></dd>
-<dt>tk_code</dt><dd><p>Työssäkäyntialueen code</p></dd>
-<dt>tk_name</dt><dd><p>Työssäkäyntialueen name</p></dd>
-<dt>va_code</dt><dd><p>Vaalipiirin code (Electoral district)</p></dd>
-<dt>va_name</dt><dd><p>Vaalipiirin name (Electoral district)</p></dd>
-<dt>kela_vakuutuspiiri_name</dt><dd><p>Kelan vakuutuspiirin name</p></dd>
-<dt>kela_vakuutuspiiri_code</dt><dd><p>Kelan vakuutuspiirin koodi (epävirallinen)</p></dd>
-<dt>kela_asumistukialue_name</dt><dd><p>Kelan asumistukialueen name</p></dd>
-<dt>kela_asumistukialue_code</dt><dd><p>Kelan asumistukialueen koodi (epävirallinen)</p></dd>
-<dt>erva_name</dt><dd><p>Erityisvastuualueen name</p></dd>
-<dt>erva_code</dt><dd><p>Erityisvastuualueen koodi (epävirallinen)</p></dd>
-<dt>avi_name_sv</dt><dd><p>Aluehallintovirasto name (Regional State Administrative Agencies) in Swedish</p></dd>
-<dt>ely_name_sv</dt><dd><p>Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment) in Swedish</p></dd>
-<dt>kr_name_sv</dt><dd><p>Tilastokeskuksen tilastollisen kuntaluokituksen name in Swedish</p></dd>
-<dt>mk_name_sv</dt><dd><p>Maakunnan name (Regions of Finland NUTS 3) in Swedish</p></dd>
-<dt>sp_name_sv</dt><dd><p>Sairaanhoitopiirin name (Health care regions) in Swedish</p></dd>
-<dt>kela_vakuutuspiiri_name_sv</dt><dd><p>Kelan vakuutuspiirin name in Swedish</p></dd>
-<dt>name_sv</dt><dd><p>municipality name in Swedish</p></dd>
-<dt>name_fi</dt><dd><p>municipality name in Finnish</p></dd>
+    <p>A data frame with 19 rows and 4 variables:</p><dl class='dl-horizontal'>
+<dt>name</dt><dd><p>Municipality name (kunta) in Finnish</p></dd>
+<dt>code</dt><dd><p>Municipality code</p></dd>
+<dt>row</dt><dd><p>Vertical location in grid</p></dd>
+<dt>col</dt><dd><p>Horizontal location in grid</p></dd>
 
 </dl>
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='http://www.stat.fi/meta/luokitukset/kunta/001-2017/luokitusavaimet.html'>http://www.stat.fi/meta/luokitukset/kunta/001-2017/luokitusavaimet.html</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#format">Format</a></li>
-      <li><a href="#source">Source</a></li>
     </ul>
 
   </div>

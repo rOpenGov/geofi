@@ -44,6 +44,9 @@ wfs_api <- function(base_url = "http://geo.stat.fi/geoserver/wfs", queries) {
   # Construct the query URL
   url <- httr::modify_url(base_url, query = queries)
   
+  # Print out the URL
+  message("Requesting response from: ", url)
+  
   # Get the response and check the response.
   resp <- httpcache::GET(url, ua)
   

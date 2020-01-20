@@ -1,6 +1,6 @@
 pandoc: '2.5'
-pkgdown: 1.4.1
-pkgdown_sha: ~
+pkgdown: 1.4.1.9000
+pkgdown_sha: 24ef1bbdec0de44fe11eb1d58b40dba961525d43
 articles:
   geofi_tutorial: geofi_tutorial.html
   tricolore_tutorial: tricolore_tutorial.html

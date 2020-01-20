@@ -41,8 +41,14 @@ get_municipalities <- function(year = 2017, scale = 4500){
     warning("Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)", call. = FALSE)
     sf::st_crs(sf_obj) <- 3067
   }
+  
+  # Join the attribute data
+  sf_obj <- left_join(sf_obj %>% 
+                        mutate(kunta = as.integer(levels(kunta))), 
+            get(paste0("municipality_key_",year)), 
+            by = c("kunta" = "kunta"))
+  
   return(sf_obj)
-
 }
 
 

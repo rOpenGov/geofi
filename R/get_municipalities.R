@@ -44,7 +44,7 @@ get_municipalities <- function(year = 2017, scale = 4500){
   
   # Join the attribute data
   sf_obj <- left_join(sf_obj %>% 
-                        mutate(kunta2 = as.integer(levels(kunta))), 
+                        mutate(kunta = as.integer(levels(kunta))), 
             get(paste0("municipality_key_",year)), 
             by = c("kunta" = "kunta"))
   

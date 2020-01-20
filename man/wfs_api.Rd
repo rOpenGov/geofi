@@ -38,7 +38,7 @@ the cache off completely, use \code{\link[httpcache:cacheOff]{httpcache::cacheOf
   wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", 
           queries = append(list("service" = "WFS", "version" = "1.0.0"), 
                 list(request = "getFeature", 
-                     typename = "tilastointialueet:kunta4500k_2017")))
+                     layer = "tilastointialueet:kunta4500k_2017")))
 
 }
 \author{

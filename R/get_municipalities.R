@@ -28,9 +28,9 @@ get_municipalities <- function(year = 2017, scale = 4500){
  
   # Standard and compulsory query parameters
   base_queries <- list("service" = "WFS", "version" = "1.0.0")
-  typename <-  paste0("tilastointialueet:kunta", scale, "k_", year) 
+  layer <-  paste0("tilastointialueet:kunta", scale, "k_", year) 
   # Note that there should be at least one parameter: request type.
-  queries <- append(base_queries, list(request = "getFeature", typename = typename))
+  queries <- append(base_queries, list(request = "getFeature", typename = layer))
 
   api_obj <- wfs_api(base_url= "http://geo.stat.fi/geoserver/wfs", queries = queries)
   

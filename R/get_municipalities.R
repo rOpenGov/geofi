@@ -10,6 +10,10 @@
 #' 
 #' @return sf object
 #' 
+#' @importFrom dplyr left_join
+#' @importFrom dplyr %>%
+#' @importFrom dplyr mutate
+#' 
 #' @author Markus Kainu <markus.kainu@@kela.fi>, Joona Lehtomäki <joona.lehtomaki@@iki.fi>
 #' 
 #' @examples
@@ -23,16 +27,13 @@
 
 get_municipalities <- function(year = 2017, scale = 4500){
   
- # Unmutable base URL
-  # base_url <- "http://geo.stat.fi/geoserver/wfs"
- 
   # Standard and compulsory query parameters
-  base_queries <- list("service" = "WFS", "version" = "1.0.0")
-  layer <-  paste0("tilastointialueet:kunta", scale, "k_", year) 
+  base_queries <- list("service" = "WFS", "version" = wfs_providers$Tilastokeskus$version)
+  layer <-  paste0(wfs_providers$Tilastokeskus$layer_typename$get_municipalities, scale, "k_", year) 
   # Note that there should be at least one parameter: request type.
   queries <- append(base_queries, list(request = "getFeature", typename = layer))
 
-  api_obj <- wfs_api(base_url= "http://geo.stat.fi/geoserver/wfs", queries = queries)
+  api_obj <- wfs_api(base_url= wfs_providers$Tilastokeskus$URL, queries = queries)
   
   sf_obj <- to_sf(api_obj)
   # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN
@@ -47,6 +48,8 @@ get_municipalities <- function(year = 2017, scale = 4500){
                         mutate(kunta = as.integer(levels(kunta))), 
             get(paste0("municipality_key_",year)), 
             by = c("kunta" = "kunta"))
+  
+  message("Data is licensed under: ", wfs_providers$Tilastokeskus$license)
   
   return(sf_obj)
 }

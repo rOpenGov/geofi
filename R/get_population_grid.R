@@ -24,16 +24,13 @@
 
 get_population_grid <- function(year = 2017, resolution = 5){
   
- # Unmutable base URL
-  # base_url <- "http://geo.stat.fi/geoserver/wfs"
- 
   # Standard and compulsory query parameters
-  base_queries <- list("service" = "WFS", "version" = "1.0.0")
-  layer <-  paste0("vaestoruutu:vaki", year, "_", resolution, "km")
+  base_queries <- list("service" = "WFS", "version" = wfs_providers$Tilastokeskus$version)
+  layer <-  paste0(wfs_providers$Tilastokeskus$layer_typename$get_population_grid, year, "_", resolution, "km")
   # Note that there should be at least one parameter: request type.
   queries <- append(base_queries, list(request = "getFeature", typename = layer))
 
-  api_obj <- wfs_api(base_url= "http://geo.stat.fi/geoserver/wfs", queries = queries)
+  api_obj <- wfs_api(base_url= wfs_providers$Tilastokeskus$URL, queries = queries)
   
   sf_obj <- to_sf(api_obj)
   # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN
@@ -42,6 +39,8 @@ get_population_grid <- function(year = 2017, resolution = 5){
     warning("Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)", call. = FALSE)
     sf::st_crs(sf_obj) <- 3067
   }
+  message("Data is licensed under: ", wfs_providers$Tilastokeskus$license)
+  
   return(sf_obj)
   
 }

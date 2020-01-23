@@ -23,16 +23,19 @@
 
 get_zipcodes <- function(year = 2017){
   
-  # Unmutable base URL
-  # base_url <- "http://geo.stat.fi/geoserver/wfs"
+  # Check if you have access to http://geo.stat.fi/geoserver/wfs
+  if (!check_api_access()){
+    message("You have no access to http://geo.stat.fi/geoserver/wfs. 
+Please check your connection, firewall settings and/or review your proxy settings")
+  } else {
   
   # Standard and compulsory query parameters
-  base_queries <- list("service" = "WFS", "version" = "1.0.0")
-  layer <-  paste0("postialue:pno_", year)
+  base_queries <- list("service" = "WFS", "version" = wfs_providers$Tilastokeskus$version)
+  layer <-  paste0(wfs_providers$Tilastokeskus$layer_typename$get_zipcodes, year)
   # Note that there should be at least one parameter: request type.
   queries <- append(base_queries, list(request = "getFeature", typename = layer))
 
-  api_obj <- wfs_api(base_url= "http://geo.stat.fi/geoserver/wfs", queries = queries)
+  api_obj <- wfs_api(base_url= wfs_providers$Tilastokeskus$URL, queries = queries)
   
   sf_obj <- to_sf(api_obj)
   # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN
@@ -41,6 +44,8 @@ get_zipcodes <- function(year = 2017){
     warning("Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)", call. = FALSE)
     sf::st_crs(sf_obj) <- 3067
   }
-  return(sf_obj)
+  message("Data is licensed under: ", wfs_providers$Tilastokeskus$license)
   
+  return(sf_obj)
+  }
 }

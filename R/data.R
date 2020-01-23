@@ -307,7 +307,7 @@
 #' Municipality key table for 2018
 #'
 #' Table for aggregating municipality level data to various regional groupings  
-#'
+#' 
 #' @format A data frame with 311 rows and 34 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
@@ -352,7 +352,7 @@
 #' Municipality key table for 2017
 #'
 #' Table for aggregating municipality level data to various regional groupings  
-#'
+#' 
 #' @format A data frame with 311 rows and 36 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code ie. kuntanumero}
@@ -398,7 +398,7 @@
 #' Municipality key table for 2016
 #'
 #' Table for aggregating municipality level data to various regional groupings  
-#'
+#' 
 #' @format A data frame with 313 rows and 22 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
@@ -430,7 +430,7 @@
 #' Municipality key table for 2015
 #'
 #' Table for aggregating municipality level data to various regional groupings  
-#'
+#' 
 #' @format A data frame with 317 rows and 16 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
@@ -456,7 +456,7 @@
 #' Municipality key table for 2014
 #'
 #' Table for aggregating municipality level data to various regional groupings  
-#'
+#' 
 #' @format A data frame with 320 rows and 14 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}
@@ -480,7 +480,7 @@
 #' Municipality key table for 2013
 #'
 #' Table for aggregating municipality level data to various regional groupings  
-#'
+#' 
 #' @format A data frame with 320 rows and 20 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code or kuntanumero}

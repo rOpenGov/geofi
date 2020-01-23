@@ -26,8 +26,8 @@ get_population_grid <- function(year = 2017, resolution = 5){
   
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()){
-    message("You have no access to ec.europe.eu. 
-Please check your connection and/or review your proxy settings")
+    message("You have no access to http://geo.stat.fi/geoserver/wfs. 
+Please check your connection, firewall settings and/or review your proxy settings")
   } else {
   
   # Standard and compulsory query parameters

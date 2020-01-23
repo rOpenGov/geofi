@@ -24,6 +24,12 @@
 
 get_population_grid <- function(year = 2017, resolution = 5){
   
+  # Check if you have access to http://geo.stat.fi/geoserver/wfs
+  if (!check_api_access()){
+    message("You have no access to ec.europe.eu. 
+Please check your connection and/or review your proxy settings")
+  } else {
+  
   # Standard and compulsory query parameters
   base_queries <- list("service" = "WFS", "version" = wfs_providers$Tilastokeskus$version)
   layer <-  paste0(wfs_providers$Tilastokeskus$layer_typename$get_population_grid, year, "_", resolution, "km")
@@ -42,5 +48,5 @@ get_population_grid <- function(year = 2017, resolution = 5){
   message("Data is licensed under: ", wfs_providers$Tilastokeskus$license)
   
   return(sf_obj)
-  
+  }
 }

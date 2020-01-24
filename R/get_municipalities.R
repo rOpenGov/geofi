@@ -49,6 +49,12 @@ Please check your connection, firewall settings and/or review your proxy setting
     sf::st_crs(sf_obj) <- 3067
   }
   
+  # Check if dataset is found (if package is loaded)
+  dataset <- paste0("municipality_key_", year)
+  if (!exists(dataset)) {
+    library(geofi)
+  }
+  
   # Join the attribute data
   sf_obj <- left_join(sf_obj %>% 
                         mutate(kunta = as.integer(levels(kunta))), 

@@ -1,30 +1,52 @@
-Package: geofi
 Type: Package
+Package: geofi
 Title: Finnish open geographical data for R
-Version: 0.9.2800004
-Date: 2020-01-23
-Authors@R: c(
-    person("Kainu", "Markus", email = "markus.kainu@kapsi.fi", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1376-503X")),
-    person("Lehtomaki", "Joona", email = "joona.lehtomaki@iki.fi", role = c("aut"), comment = c(ORCID = "0000-0002-7891-0843")),
-    person("Parkkinen", "Juuso", role = c("ctb"), comment = c(ORCID = "0000-0002-7818-5901")),
-    person("Miettinen", "Jani", role = c("ctb")),
-    person("Leo", "Lahti", email = "leo.lahti@iki.fi", role = c("aut"), comment = c(ORCID = "0000-0001-5537-637X"))        
-    )
-Description: Tools for reading open geographical data in Finland.
+Version: 0.9.2800006
+Date: 2020-01-24
+Authors@R: 
+    c(person(given = "Kainu",
+             family = "Markus",
+             role = c("aut", "cre"),
+             email = "markus.kainu@kapsi.fi",
+             comment = c(ORCID = "0000-0003-1376-503X")),
+      person(given = "Lehtomaki",
+             family = "Joona",
+             role = "aut",
+             email = "joona.lehtomaki@iki.fi",
+             comment = c(ORCID = "0000-0002-7891-0843")),
+      person(given = "Parkkinen",
+             family = "Juuso",
+             role = "ctb",
+             comment = c(ORCID = "0000-0002-7818-5901")),
+      person(given = "Miettinen",
+             family = "Jani",
+             role = "ctb"),
+      person(given = "Leo",
+             family = "Lahti",
+             role = "aut",
+             email = "leo.lahti@iki.fi",
+             comment = c(ORCID = "0000-0001-5537-637X")))
+Description: Tools for reading open geographical data in
+    Finland.
 License: BSD_2_clause + file LICENSE
+URL: https://github.com/ropengov/geofi
 Depends: 
     R (>= 3.5.0)
 Imports: 
+    curl,
     dplyr,
-    sf,
-    purrr,
     httpcache,
-    yaml,
+    httr,
     methods,
+    purrr,
+    rlang,
+    sf,
     xml2 (>= 1.2.0),
-    httr
+    yaml
 Suggests: 
     covr,
+    geofacet,
+    ggplot2,
     ggtern,
     httptest,
     janitor,
@@ -34,11 +56,10 @@ Suggests:
     rmarkdown,
     testthat,
     tidyr,
-    tricolore,
-    geofacet
-URL: https://github.com/ropengov/geofi
-RoxygenNote: 7.0.2
+    tricolore
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
-VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2

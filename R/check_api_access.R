@@ -5,6 +5,7 @@
 #' @return a logical.
 #' 
 #' @importFrom httr status_code
+#' @importFrom curl curl_download
 #' 
 #' @examples
 #'  \dontrun{
@@ -21,7 +22,7 @@ check_api_access <- function(){
       curl::curl_download(http_url, temp, quiet = TRUE), 
       silent = TRUE)
   )
-  if (is.na(file.info(temp)$size)){
+  if (is.na(file.info(temp)$size)) {
     FALSE
   }
   else{

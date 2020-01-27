@@ -13,6 +13,7 @@
 #' @importFrom dplyr left_join
 #' @importFrom dplyr %>%
 #' @importFrom dplyr mutate
+#' @importFrom rlang .data
 #' 
 #' @author Markus Kainu <markus.kainu@@kela.fi>, Joona Lehtomäki <joona.lehtomaki@@iki.fi>
 #' 
@@ -28,7 +29,7 @@
 get_municipalities <- function(year = 2017, scale = 4500){
   
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
-  if (!check_api_access()){
+  if (!check_api_access()) {
     message("You have no access to http://geo.stat.fi/geoserver/wfs. 
 Please check your connection, firewall settings and/or review your proxy settings")
   } else {
@@ -39,7 +40,7 @@ Please check your connection, firewall settings and/or review your proxy setting
   # Note that there should be at least one parameter: request type.
   queries <- append(base_queries, list(request = "getFeature", typename = layer))
 
-  api_obj <- wfs_api(base_url= wfs_providers$Tilastokeskus$URL, queries = queries)
+  api_obj <- wfs_api(base_url = wfs_providers$Tilastokeskus$URL, queries = queries)
   
   sf_obj <- to_sf(api_obj)
   # If the data retrieved has no CRS defined, use ETRS89 / TM35FIN
@@ -49,10 +50,16 @@ Please check your connection, firewall settings and/or review your proxy setting
     sf::st_crs(sf_obj) <- 3067
   }
   
+  # Check if dataset is found (if package is loaded)
+  dataset <- paste0("municipality_key_", year)
+  if (!exists(dataset)) {
+    library(geofi)
+  }
+  
   # Join the attribute data
   sf_obj <- left_join(sf_obj %>% 
-                        mutate(kunta = as.integer(levels(kunta))), 
-            get(paste0("municipality_key_",year)), 
+                        mutate(kunta = as.integer(levels(.data$kunta))), 
+            get(paste0("municipality_key_", year)), 
             by = c("kunta" = "kunta"))
   
   message("Data is licensed under: ", wfs_providers$Tilastokeskus$license)

@@ -175,6 +175,23 @@ svenska <- readRDS("./inst/extras/svenska.rds")
 library(dplyr)
 library(tidyr)
 
+#    ____   ___ ____   ___  
+#   |___ \ / _ \___ \ / _ \ 
+#     __) | | | |__) | | | |
+#    / __/| |_| / __/| |_| |
+#   |_____|\___/_____|\___/ 
+#                           
+
+# Valtimo yhdistyi Nurmerkseen joten
+load("./data/municipality_key_2019.rda")
+municipality_key_2020 <- municipality_key_2019[municipality_key_2019$kunta_name != "Valtimo", ]
+save(municipality_key_2020, file = "./data/municipality_key_2020.rda",
+     compress = "bzip2")
+rm(list = ls())
+
+
+
+
 #    ____   ___  _  ___
 #   |___ \ / _ \/ |/ _ \
 #     __) | | | | | (_) |

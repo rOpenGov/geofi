@@ -26,7 +26,7 @@
 #' @rdname get_municipalities
 #' @export
 
-get_municipalities <- function(year = 2017, scale = 4500){
+get_municipalities <- function(year = 2020, scale = 4500){
   
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()) {
@@ -58,7 +58,7 @@ Please check your connection, firewall settings and/or review your proxy setting
   
   # Join the attribute data
   sf_obj <- left_join(sf_obj %>% 
-                        mutate(kunta = as.integer(levels(.data$kunta))), 
+                        mutate(kunta = as.integer(as.character(.data$kunta))), 
             get(paste0("municipality_key_", year)), 
             by = c("kunta" = "kunta"))
   

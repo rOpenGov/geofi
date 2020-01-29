@@ -4,7 +4,7 @@
 \alias{get_municipalities}
 \title{Get Finnish municipality (multi)polygons for different years and/or scales.}
 \usage{
-get_municipalities(year = 2017, scale = 4500)
+get_municipalities(year = 2020, scale = 4500)
 }
 \arguments{
 \item{year}{A numeric for year of the administerative borders. Available are

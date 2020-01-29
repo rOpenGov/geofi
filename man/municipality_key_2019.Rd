@@ -34,7 +34,7 @@
 \item{ely_name_sv}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment) in Swedish}
 \item{mk_name_sv}{Maakunnan name (Regions of Finland NUTS 3) in Swedish}
 \item{sa_name_sv}{Suuralueen name (Large areas NUTS 2) in Swedish}
-\item{sa_name_sk}{sa_name_sk}
+\item{sk_name_sv}{Seutukunnan name (Sub-Regions of Finland NUTS 3) in Swedish}
 \item{sp_name_sv}{Sairaanhoitopiirin name (Health care regions) in Swedish}
 \item{va_name_sv}{Vaalipiirin name (Electoral district) in Swedish}
 \item{kela_vakuutuspiiri_name_sv}{vakuutuspiiri_name_sv}

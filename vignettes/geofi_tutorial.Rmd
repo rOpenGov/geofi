@@ -264,7 +264,7 @@ names(px_data) <- c("kunta_name","var","year","value")
 # lets aggregate population data
 dat <- left_join(geofi::municipality_key_2019,px_data) %>% 
   group_by(mk_code, mk_name,year) %>% 
-  summarise(population = mean(value, na.rm = TRUE)) %>% 
+  summarise(population = sum(value, na.rm = TRUE)) %>% 
   na.omit() %>% 
   ungroup() %>% 
   rename(code = mk_code, name = mk_name)

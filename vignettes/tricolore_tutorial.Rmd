@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 For this example geodata is joined with municipality level data from Statistics Finland. Load packages which are needed for data wrangling and plotting. For ternary color coded maps we are using `tricolore` packgage. Check more information of tricolore package in github <https://github.com/jschoeley/tricolore>.
 
-```{r load_packages}
+```{r load_packages, eval = FALSE}
 library(geofi)
 library(dplyr)
 library(tidyr)
@@ -31,7 +31,7 @@ library(tricolore)
 
 ## Download and prepare datasets
 
-```{r municipalities_with_data}
+```{r municipalities_with_data, eval = FALSE}
 # Download municipalities geodata
 municipalities17 <- get_municipalities(year = 2017)
 
@@ -79,7 +79,7 @@ finland_popu2017 <- left_join(dat, municipality_key_2017, by = c("name" = "name_
 
 Ternary color codes are calculated by `Tricolore()`-function, which excepts variables which is used for color coding. Save rgb values to population dataset.
 
-```{r add_tricolore}
+```{r add_tricolore, eval = FALSE}
 tric_dat <- Tricolore(finland_popu2017,
                       p1 = 'over64',
                       p2 = 'y16_64', 
@@ -92,7 +92,7 @@ finland_popu2017$popu_rgb <- tric_dat$rgb
 
 Plot map by ggplot and use `scale_fill_identity()` option to make sure that each region is color coded by rgb-code.
 
-```{r plot_simplemap1, fig.height = 8, dpi=100}
+```{r plot_simplemap1, fig.height = 8, dpi=100, eval = FALSE}
 plot_pop <- ggplot(finland_popu2017) +
   geom_sf(aes(fill = popu_rgb, geometry = geom), size = .1) +
   scale_fill_identity() 
@@ -101,7 +101,7 @@ plot_pop
 
 Ternary colors can be adjusted to distinct municipalies differences better.
 
-```{r edit_tricolore}
+```{r edit_tricolore, eval = FALSE}
 tric_dat <- Tricolore(finland_popu2017,
                       p1 = 'over64',
                       p2 = 'y16_64', 
@@ -117,7 +117,7 @@ tric_dat <- Tricolore(finland_popu2017,
 finland_popu2017$popu_rgb <- tric_dat$rgb
 ```
 
-```{r plot_simplemap2, fig.height = 8, dpi=100}
+```{r plot_simplemap2, fig.height = 8, dpi=100, eval = FALSE}
 plot_pop <- ggplot(finland_popu2017) +
   geom_sf(aes(fill = popu_rgb, geometry = geom), size = .1) +
   scale_fill_identity() 
@@ -129,7 +129,7 @@ plot_pop
 
 Legend for tertinary color is added by `ggtern` and `annotation_custom()`. Package `ggtern` is important to load afer `ggplot2` package.
 
-```{r plot_finalmap,  fig.height = 6, dpi=300}
+```{r plot_finalmap,  fig.height = 6, dpi=300, eval = FALSE}
 library(ggtern)
 plot_pop <- ggplot(finland_popu2017) +
   geom_sf(aes(fill = popu_rgb, geometry = geom), size = .1) +

@@ -38,7 +38,8 @@ for (i in seq_along(langs)){
   lst[[i]] <- tmp
 }
 d_muni <- left_join(lst[[1]],lst[[2]]) %>%
-  left_join(lst[[3]])
+  left_join(lst[[3]]) %>%
+  mutate(kunta = as.character(as.integer(kunta)))
 
 
 # Get the available correspondenceTables
@@ -108,6 +109,7 @@ if (keyname == "nuts"){
     setNames(sub("_","3_", names(.))) %>%
     left_join(keydat3) -> outdatlist[[ii + 13]]
 } else {
+  class_dat[[paste0(keyname,"_code")]] <- as.character(as.integer(class_dat[[paste0(keyname,"_code")]]))
   outdatlist[[ii]] <- left_join(keydat, class_dat)
 }
 }
@@ -156,12 +158,22 @@ for (i in seq_along(langs)){
 }
 
 class_dat <- Reduce(function(...) merge(..., by="erva_code", all.x=TRUE), lst)
-ddx <- left_join(keydat,class_dat)
+ddx <- left_join(keydat,class_dat) #%>%
+
 
 ddd4 <- ddd3 %>%
   left_join(ddx) %>%
   mutate_at(.vars = vars(kunta,ends_with("_code")),
-            .funs = function(x) ifelse(grepl("[A-Za-z]", x), x, as.integer(x)))
+            .funs = function(x) ifelse(grepl("[A-Za-z]", x), x, as.integer(x))) %>%
+  # erva only applies to years 2018 onwards
+  mutate_at(.vars = vars(contains("erva")), .funs = function(x) ifelse(.$year < 2018, NA, x)) #%>%
+  # filter(year == 2018) %>%
+  # select(kunta_name,contains("erva"))
+
+# Case Maarianhamina
+ddd4$kunta_name[ddd4$kunta_name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
+ddd4$municipality_name_fi[ddd4$municipality_name_fi == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
+
 
 # adding Kela vakuutuspiirit
 library(httr)
@@ -293,6 +305,7 @@ gsub("^.*Pohjoinen", "", cont) %>%
 # Kelan kela_vakuutuspiirit
 key <- ddd4 %>% distinct(kunta_name)
 
+
 kuntaluokitusavain <- key %>%
   mutate(
     kela_vakuutuspiiri_name_fi = case_when(
@@ -387,14 +400,19 @@ mutate(kela_asumistukialue_name_sv = case_when(
 
 
 # Lets rename the Finnish version of Maarianhamina
-ddd4$kunta_name[ddd4$kunta_name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
-ddd4$municipality_name_fi[ddd4$municipality_name_fi == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
 municipality_key <- left_join(ddd4,kuntaluokitusavain_kela)
 
 # per year municipality keys
+yrs <- unique(municipality_key$year)
+for (i in seq_along(yrs)){
+  tmpx1 <- municipality_key[municipality_key$year == yrs[i],]
+  tmpx2 <- tmpx1[,colSums(is.na(tmpx1))<nrow(tmpx1)]
+  assign(x = paste0("municipality_key_", yrs[i]), value = tmpx2)
 
+  do.call(save, list(paste0("municipality_key_", yrs[i]), file=paste0("./data/",paste0("municipality_key_", yrs[i]),".rda"), compress = "bzip2"))
+}
 
-
-
-
+# Finally lets add the whole lot as a new data
+save(municipality_key, file = "./data/municipality_key.rda",
+     compress = "bzip2")
 

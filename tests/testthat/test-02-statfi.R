@@ -9,7 +9,7 @@ context("Statistics Finland")
     suppressWarnings({sf_obj <- get_zipcodes(year = 2017)})
     expect_is(sf_obj, "sf")
   })
- 
+
 # })
 
 

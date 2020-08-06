@@ -11,14 +11,17 @@ mygrid$col <- mygrid$col-2
 geofacet::grid_preview(mygrid)
 
 grid_mk_2019 <- mygrid
-
 save(grid_mk_2019, file = "./data/grid_mk_2019.rda",
+     compress = "bzip2")
+
+grid_mk_2020 <- grid_mk_2019
+save(grid_mk_2020, file = "./data/grid_mk_2020.rda",
      compress = "bzip2")
 
 # Municipalities per region
 
 
-# Lappi ------------------------------------------------ 
+# Lappi ------------------------------------------------
 mygrid <- data.frame(
   code = c("47", "890", "148", "498", "742", "758", "261", "273", "583", "698", "854", "320", "732", "976", "845", "241", "614", "683", "751", "240", "851"),
   name = c("Enontekiö", "Utsjoki", "Inari", "Muonio", "Savukoski", "Sodankylä", "Kittilä", "Kolari", "Pelkosenniemi", "Rovaniemi", "Pello", "Kemijärvi", "Salla", "Ylitornio", "Tervola", "Keminmaa", "Posio", "Ranua", "Simo", "Kemi", "Tornio"),
@@ -29,8 +32,11 @@ mygrid <- data.frame(
 geofacet::grid_preview(mygrid)
 
 grid_lappi_2019 <- mygrid
-
 save(grid_lappi_2019, file = "./data/grid_lappi_2019.rda",
+     compress = "bzip2")
+
+grid_lappi_2020 <- grid_lappi_2019
+save(grid_lappi_2020, file = "./data/grid_lappi_2020.rda",
      compress = "bzip2")
 
 
@@ -45,9 +51,13 @@ mygrid <- data.frame(
 geofacet::grid_preview(mygrid)
 
 grid_pohjois_pohjanmaa_2019 <- mygrid
-
 save(grid_pohjois_pohjanmaa_2019, file = "./data/grid_pohjois_pohjanmaa_2019.rda",
      compress = "bzip2")
+
+grid_pohjois_pohjanmaa_2020 <- grid_pohjois_pohjanmaa_2019
+save(grid_pohjois_pohjanmaa_2020, file = "./data/grid_pohjois_pohjanmaa_2020.rda",
+     compress = "bzip2")
+
 
 # Kainuu -------------------------------------------- |
 mygrid <- data.frame(
@@ -60,9 +70,13 @@ mygrid <- data.frame(
 geofacet::grid_preview(mygrid)
 
 grid_kainuu_2019 <- mygrid
-
 save(grid_kainuu_2019, file = "./data/grid_kainuu_2019.rda",
      compress = "bzip2")
+
+grid_kainuu_2020 <- grid_kainuu_2019
+save(grid_kainuu_2020, file = "./data/grid_kainuu_2020.rda",
+     compress = "bzip2")
+
 
 # Keski-Pohjanmaa -------------------------------------------- |
 mygrid <- data.frame(
@@ -75,8 +89,11 @@ mygrid <- data.frame(
 geofacet::grid_preview(mygrid)
 
 grid_keski_pohjanmaa_2019 <- mygrid
-
 save(grid_keski_pohjanmaa_2019, file = "./data/grid_keski_pohjanmaa_2019.rda",
+     compress = "bzip2")
+
+grid_keski_pohjanmaa_2020 <- grid_keski_pohjanmaa_2019
+save(grid_keski_pohjanmaa_2020, file = "./data/grid_keski_pohjanmaa_2020.rda",
      compress = "bzip2")
 
 # Pohjanmaa ---------------------------------------------- |
@@ -90,9 +107,13 @@ mygrid <- data.frame(
 geofacet::grid_preview(mygrid)
 
 grid_pohjanmaa_2019 <- mygrid
-
 save(grid_pohjanmaa_2019, file = "./data/grid_pohjanmaa_2019.rda",
      compress = "bzip2")
+
+grid_pohjanmaa_2020 <- grid_pohjanmaa_2019
+save(grid_pohjanmaa_2020, file = "./data/grid_pohjanmaa_2020.rda",
+     compress = "bzip2")
+
 
 # Etelä-Pohjanmaa ---------------------------------------------- |
 mygrid <- data.frame(
@@ -104,10 +125,15 @@ mygrid <- data.frame(
 )
 geofacet::grid_preview(mygrid)
 mygrid$row <- mygrid$row - 1
-grid_etela_pohjanmaa_2019 <- mygrid
 
+grid_etela_pohjanmaa_2019 <- mygrid
 save(grid_etela_pohjanmaa_2019, file = "./data/grid_etela_pohjanmaa_2019.rda",
      compress = "bzip2")
+
+grid_etela_pohjanmaa_2020 <- grid_etela_pohjanmaa_2019
+save(grid_etela_pohjanmaa_2020, file = "./data/grid_etela_pohjanmaa_2020.rda",
+     compress = "bzip2")
+
 
 # Keski-Suomi ---------------------------------------------- |
 mygrid <- data.frame(
@@ -118,9 +144,13 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_keski_suomi_2019 <- mygrid
 
+grid_keski_suomi_2019 <- mygrid
 save(grid_keski_suomi_2019, file = "./data/grid_keski_suomi_2019.rda",
+     compress = "bzip2")
+
+grid_keski_suomi_2020 <- grid_keski_suomi_2019
+save(grid_keski_suomi_2020, file = "./data/grid_keski_suomi_2020.rda",
      compress = "bzip2")
 
 # Pohjois-Savo ---------------------------------------------- |
@@ -133,9 +163,13 @@ mygrid <- data.frame(
 )
 geofacet::grid_preview(mygrid)
 mygrid$row <- mygrid$row - 1
-grid_pohjois_savo_2019 <- mygrid
 
+grid_pohjois_savo_2019 <- mygrid
 save(grid_pohjois_savo_2019, file = "./data/grid_pohjois_savo_2019.rda",
+     compress = "bzip2")
+
+grid_pohjois_savo_2020 <- grid_pohjois_savo_2019
+save(grid_pohjois_savo_2020, file = "./data/grid_pohjois_savo_2020.rda",
      compress = "bzip2")
 
 
@@ -149,9 +183,23 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_pohjois_karjala_2019 <- mygrid
 
+grid_pohjois_karjala_2019 <- mygrid
 save(grid_pohjois_karjala_2019, file = "./data/grid_pohjois_karjala_2019.rda",
+     compress = "bzip2")
+
+# Valtimo was merged with Nurmes in 2020
+mygrid <- data.frame(
+  code = c("422", "541", "176", "309", "607", "276", "146", "426", "167", "707", "848", "260"),
+  name = c("Lieksa", "Nurmes", "Juuka", "Outokumpu", "Polvijärvi", "Kontiolahti", "Ilomantsi", "Liperi", "Joensuu", "Rääkkylä", "Tohmajärvi", "Kitee"),
+  row = c(2, 1, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6),
+  col = c(3, 2, 2, 1, 2, 3, 4, 2, 3, 2, 3, 3),
+  stringsAsFactors = FALSE
+)
+geofacet::grid_preview(mygrid)
+
+grid_pohjois_karjala_2020 <- mygrid
+save(grid_pohjois_karjala_2020, file = "./data/grid_pohjois_karjala_2020.rda",
      compress = "bzip2")
 
 # Satakunta ---------------------------------------------- |
@@ -163,10 +211,15 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_satakunta_2019 <- mygrid
 
+grid_satakunta_2019 <- mygrid
 save(grid_satakunta_2019, file = "./data/grid_satakunta_2019.rda",
      compress = "bzip2")
+
+grid_satakunta_2020 <- grid_satakunta_2019
+save(grid_satakunta_2020, file = "./data/grid_satakunta_2020.rda",
+     compress = "bzip2")
+
 
 # Pirkanmaa ---------------------------------------------- |
 mygrid <- data.frame(
@@ -177,10 +230,15 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_pirkanmaa_2019 <- mygrid
 
+grid_pirkanmaa_2019 <- mygrid
 save(grid_pirkanmaa_2019, file = "./data/grid_pirkanmaa_2019.rda",
      compress = "bzip2")
+
+grid_pirkanmaa_2020 <- grid_pirkanmaa_2019
+save(grid_pirkanmaa_2020, file = "./data/grid_pirkanmaa_2020.rda",
+     compress = "bzip2")
+
 
 # Päijät-Häme ---------------------------------------------- |
 mygrid <- data.frame(
@@ -191,9 +249,13 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_paijat_hame_2019 <- mygrid
 
+grid_paijat_hame_2019 <- mygrid
 save(grid_paijat_hame_2019, file = "./data/grid_paijat_hame_2019.rda",
+     compress = "bzip2")
+
+grid_paijat_hame_2020 <- grid_paijat_hame_2019
+save(grid_paijat_hame_2020, file = "./data/grid_paijat_hame_2020.rda",
      compress = "bzip2")
 
 # Etelä-Savo ---------------------------------------------- |
@@ -205,9 +267,13 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_etela_savo_2019 <- mygrid
 
+grid_etela_savo_2019 <- mygrid
 save(grid_etela_savo_2019, file = "./data/grid_etela_savo_2019.rda",
+     compress = "bzip2")
+
+grid_etela_savo_2020 <- grid_etela_savo_2019
+save(grid_etela_savo_2020, file = "./data/grid_etela_savo_2020.rda",
      compress = "bzip2")
 
 # Varsinais-Suomi ---------------------------------------------- |
@@ -219,9 +285,13 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_varsinais_suomi_2019 <- mygrid
 
+grid_varsinais_suomi_2019 <- mygrid
 save(grid_varsinais_suomi_2019, file = "./data/grid_varsinais_suomi_2019.rda",
+     compress = "bzip2")
+
+grid_varsinais_suomi_2020 <- grid_varsinais_suomi_2019
+save(grid_varsinais_suomi_2020, file = "./data/grid_varsinais_suomi_2020.rda",
      compress = "bzip2")
 
 # Kanta-Häme ---------------------------------------------- |
@@ -233,10 +303,15 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_kanta_hame_2019 <- mygrid
 
+grid_kanta_hame_2019 <- mygrid
 save(grid_kanta_hame_2019, file = "./data/grid_kanta_hame_2019.rda",
      compress = "bzip2")
+
+grid_kanta_hame_2020 <- grid_kanta_hame_2019
+save(grid_kanta_hame_2020, file = "./data/grid_kanta_hame_2020.rda",
+     compress = "bzip2")
+
 
 # Kymenlaakso ---------------------------------------------- |
 mygrid <- data.frame(
@@ -247,10 +322,15 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_kymenlaakso_2019 <- mygrid
 
+grid_kymenlaakso_2019 <- mygrid
 save(grid_kymenlaakso_2019, file = "./data/grid_kymenlaakso_2019.rda",
      compress = "bzip2")
+
+grid_kymenlaakso_2020 <- grid_kymenlaakso_2019
+save(grid_kymenlaakso_2020, file = "./data/grid_kymenlaakso_2020.rda",
+     compress = "bzip2")
+
 
 # Etelä-Karjala ---------------------------------------------- |
 mygrid <- data.frame(
@@ -261,10 +341,15 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_etela_karjala_2019 <- mygrid
 
+grid_etela_karjala_2019 <- mygrid
 save(grid_etela_karjala_2019, file = "./data/grid_etela_karjala_2019.rda",
      compress = "bzip2")
+
+grid_etela_karjala_2020 <- grid_etela_karjala_2019
+save(grid_etela_karjala_2020, file = "./data/grid_etela_karjala_2020.rda",
+     compress = "bzip2")
+
 
 # Ahvenanmaa ---------------------------------------------- |
 mygrid <- data.frame(
@@ -275,9 +360,13 @@ mygrid <- data.frame(
   stringsAsFactors = FALSE
 )
 geofacet::grid_preview(mygrid)
-grid_ahvenanmaa_2019 <- mygrid
 
+grid_ahvenanmaa_2019 <- mygrid
 save(grid_ahvenanmaa_2019, file = "./data/grid_ahvenanmaa_2019.rda",
+     compress = "bzip2")
+
+grid_ahvenanmaa_2020 <- grid_ahvenanmaa_2019
+save(grid_ahvenanmaa_2020, file = "./data/grid_ahvenanmaa_2020.rda",
      compress = "bzip2")
 
 # Uusimaa ---------------------------------------------- |
@@ -290,26 +379,30 @@ mygrid <- data.frame(
 )
 geofacet::grid_preview(mygrid)
 mygrid$row <- mygrid$row - 1
-grid_uusimaa_2019 <- mygrid
 
+grid_uusimaa_2019 <- mygrid
 save(grid_uusimaa_2019, file = "./data/grid_uusimaa_2019.rda",
+     compress = "bzip2")
+
+grid_uusimaa_2020 <- grid_uusimaa_2019
+save(grid_uusimaa_2020, file = "./data/grid_uusimaa_2020.rda",
      compress = "bzip2")
 
 
 # use the code below as geograhical reference map
-geofi::municipality_key_2019 %>% 
-  filter(grepl("^Pohjois-Sa", mk_name)) %>% 
+geofi::municipality_key_2019 %>%
+  filter(grepl("^Pohjois-Sa", mk_name)) %>%
   count(kunta,kunta_name) %>%
-  select(-n) %>% 
+  select(-n) %>%
   setNames(c("code","name")) -> tmp
 write.csv(tmp, "tmp.csv", row.names = FALSE)
 file.edit("./tmp.csv")
 grid_design()
 
 muni <- get_municipalities()
-muni %>% 
-  mutate(kunta = as.integer(sub("^0+", "", kunta))) %>% 
-  filter(kunta %in% tmp$code) %>% 
+muni %>%
+  mutate(kunta = as.integer(sub("^0+", "", kunta))) %>%
+  filter(kunta %in% tmp$code) %>%
   ggplot() +
   geom_sf() +
   geom_sf_text(aes(label = name))

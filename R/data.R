@@ -522,7 +522,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 2519 rows and 69 variables:
+#' @format A data frame with 2519 rows and 71 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -581,6 +581,8 @@
 #'   \item{vaalipiiri_name_en}{Vaalipiiri name in English (Constituencies)}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #'   \item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}
@@ -601,7 +603,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 310 rows and 69 variables:
+#' @format A data frame with 310 rows and 71 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -660,6 +662,8 @@
 #'   \item{vaalipiiri_name_en}{Vaalipiiri name in English (Constituencies)}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #'   \item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}
@@ -681,7 +685,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 311 rows and 61 variables:
+#' @format A data frame with 311 rows and 63 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -740,6 +744,8 @@
 #'   \item{vaalipiiri_name_en}{Vaalipiiri name in English (Constituencies)}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #'   \item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}
@@ -752,7 +758,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 311 rows and 57 variables:
+#' @format A data frame with 311 rows and 59 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -807,6 +813,8 @@
 #'   \item{tyossakayntial_name_fi}{Työssäkäyntialue name in Finnish}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #'   \item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}
@@ -820,7 +828,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 311 rows and 51 variables:
+#' @format A data frame with 311 rows and 53 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -873,6 +881,8 @@
 #'   \item{nuts3_name_en}{NUTS 2016 classification name in English (level 3)}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2017"
@@ -881,7 +891,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 319 rows and 35 variables:
+#' @format A data frame with 319 rows and 37 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -918,6 +928,8 @@
 #'   \item{suuralue_name_en}{Suuralueen nimi in English (Large Areas)}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2016"
@@ -926,7 +938,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 317 rows and 35 variables:
+#' @format A data frame with 317 rows and 37 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -963,6 +975,8 @@
 #'   \item{suuralue_name_en}{Suuralueen nimi in English (Large Areas)}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2015"
@@ -971,7 +985,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 320 rows and 35 variables:
+#' @format A data frame with 320 rows and 37 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -1008,6 +1022,8 @@
 #'   \item{suuralue_name_en}{Suuralueen nimi in English (Large Areas)}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2014"
@@ -1016,7 +1032,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 320 rows and 31 variables:
+#' @format A data frame with 320 rows and 33 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -1049,6 +1065,8 @@
 #'   \item{year}{data year}
 #'   \item{municipality_code}{Municipality code}
 #'   \item{kunta_name}{Municipality name in Finnish}
+#'   \item{name_fi}{Municipality name in Finnish}
+#'   \item{name_sv}{Municipality name in Finnish}
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2013"

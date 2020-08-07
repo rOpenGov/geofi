@@ -5,7 +5,7 @@
 \alias{municipality_key_2013}
 \title{Municipality key table for 2013}
 \format{
-A data frame with 320 rows and 31 variables:
+A data frame with 320 rows and 33 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}
@@ -38,6 +38,8 @@ A data frame with 320 rows and 31 variables:
 \item{year}{data year}
 \item{municipality_code}{Municipality code}
 \item{kunta_name}{Municipality name in Finnish}
+\item{name_fi}{Municipality name in Finnish}
+\item{name_sv}{Municipality name in Finnish}
 }
 }
 \source{

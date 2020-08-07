@@ -5,7 +5,7 @@
 \alias{municipality_key_2018}
 \title{Municipality key table for 2018}
 \format{
-A data frame with 311 rows and 57 variables:
+A data frame with 311 rows and 59 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}
@@ -60,6 +60,8 @@ A data frame with 311 rows and 57 variables:
 \item{tyossakayntial_name_fi}{Työssäkäyntialue name in Finnish}
 \item{municipality_code}{Municipality code}
 \item{kunta_name}{Municipality name in Finnish}
+\item{name_fi}{Municipality name in Finnish}
+\item{name_sv}{Municipality name in Finnish}
 \item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
 \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}

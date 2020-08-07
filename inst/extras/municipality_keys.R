@@ -138,7 +138,9 @@ ddd3 <- ddd2 %>%
   rename(municipality_name_fi = name_name_fi,
          municipality_name_sv = name_name_sv,
          municipality_name_en = name_name_en) %>%
-  mutate(kunta_name = municipality_name_fi)
+  mutate(kunta_name = municipality_name_fi,
+         name_fi = municipality_name_fi,
+         name_sv = municipality_name_sv)
 
 # erva-regions can be found from sairaanhoitp <-> erva table
 res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20200101%23erva_3_20200101/maps?format=json")) %>%

@@ -5,7 +5,7 @@
 \alias{municipality_key}
 \title{Aggregated municipality key table for years 2013-2020}
 \format{
-A data frame with 2519 rows and 69 variables:
+A data frame with 2519 rows and 71 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}
@@ -64,6 +64,8 @@ A data frame with 2519 rows and 69 variables:
 \item{vaalipiiri_name_en}{Vaalipiiri name in English (Constituencies)}
 \item{municipality_code}{Municipality code}
 \item{kunta_name}{Municipality name in Finnish}
+\item{name_fi}{Municipality name in Finnish}
+\item{name_sv}{Municipality name in Finnish}
 \item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
 \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}

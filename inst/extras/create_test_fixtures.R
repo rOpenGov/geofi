@@ -21,5 +21,5 @@ httptest::stop_capturing()
 #
 httptest::start_capturing()
 get_municipalities(year = 2016, scale = 4500)
-# get_zipcodes(year = 2017)
+get_zipcodes(year = 2017)
 httptest::stop_capturing()

@@ -6,8 +6,9 @@ wfs_version <- geofi:::wfs_providers$Tilastokeskus$version
 wfs_layer <- paste0("tilastointialueet:kunta", 4500, "k_", 2019)
 
 
-# httptest::with_mock_api({
+httptest::with_mock_api({
   test_that("WFS API object is correctly created", {
+    skip_on_cran()
     expect_error(wfs_api(base_url = "foobar", queries = "foobar"),
                  "^Invalid base URL")
     expect_is(wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs",
@@ -33,6 +34,6 @@ wfs_layer <- paste0("tilastointialueet:kunta", 4500, "k_", 2019)
   #                                            logger = NULL))
   #   expect_equal(sf::st_crs(sf_obj)$epsg, 3067)
   # })
-# })
+})
 
 

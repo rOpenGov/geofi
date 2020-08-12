@@ -71,7 +71,7 @@ tk_data <- tk_data %>%
 dat <- left_join(municipalities17, tk_data)
 
 # Join the municipality level data with internal municipality_key_2017-data
-finland_popu2017 <- left_join(dat, municipality_key_2017, by = c("name" = "name_fi"))
+finland_popu2017 <- left_join(dat, municipality_key_2017, by = c("name" = "municipality_name_fi"))
 ```
 
 
@@ -137,7 +137,7 @@ plot_pop <- ggplot(finland_popu2017) +
   annotation_custom(
     ggplotGrob(tric_dat$key + labs(L = "% Young\n(0-14)", T = " % Working age\n(15-64)", R = "% Elderly\n(65+)")) ,
     xmin = -7e5, xmax = 1.7e5, ymin = 68e5, ymax = 77e5
-  ) + 
+  ) +
   scale_fill_identity() +
   theme_void() +
   labs(title = "Finnish population by municipalites",

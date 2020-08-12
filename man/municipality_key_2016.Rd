@@ -4,33 +4,50 @@
 \name{municipality_key_2016}
 \alias{municipality_key_2016}
 \title{Municipality key table for 2016}
-\format{A data frame with 313 rows and 22 variables:
+\format{
+A data frame with 319 rows and 37 variables:
 \describe{
-\item{kunta}{Municipality code or kuntanumero}
-\item{kunta_name}{Municipality name in Finnish}
+\item{kunta}{Municipality code}
+\item{municipality_name_fi}{Municipality name in Finnish}
+\item{municipality_name_sv}{Municipality name in Swedish}
+\item{municipality_name_en}{Municipality name in English}
+\item{kuntaryhmitys_code}{Tilastollinen kuntaryhmitys (Statistical grouping) code}
+\item{kuntaryhmitys_name_fi}{Tilastollinen kuntaryhmitys (Statistical grouping) name in Finnish}
+\item{kuntaryhmitys_name_sv}{Tilastollinen kuntaryhmitys (Statistical grouping) name in Swedish}
+\item{kuntaryhmitys_name_en}{Tilastollinen kuntaryhmitys (Statistical grouping) name in English}
 \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
-\item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
+\item{avi_name_fi}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
+\item{avi_name_sv}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
+\item{avi_name_en}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
 \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
-\item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment)}
-\item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen code}
-\item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen name}
-\item{mk_code}{Maakunnan code (Regions of Finland NUTS 3)}
-\item{mk_name}{Maakunnan name (Regions of Finland NUTS 3)}
-\item{sa_code}{Suuralueen code (Large areas NUTS 2)}
-\item{sa_name}{Suuralueen name (Large areas NUTS 2)}
-\item{sk_code}{Seutukunnan code (Sub-Regions of Finland NUTS 3)}
-\item{sk_name}{Seutukunnan name (Sub-Regions of Finland NUTS 3)}
-\item{tk_code}{Työssäkäyntialueen code}
-\item{tk_name}{Työssäkäyntialueen name}
-\item{avi_name_sv}{Aluehallintovirasto name (Regional State Administrative Agencies) in Swedish}
-\item{ely_name_sv}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment) in Swedish}
-\item{kr_name_sv}{Tilastokeskuksen tilastollisen kuntaluokituksen name in Swedish}
-\item{mk_name_sv}{Maakunnan name (Regions of Finland NUTS 3) in Swedish}
-\item{name_sv}{municipality name in Swedish}
-\item{name_fi}{municipality name in Finnish}
-}}
+\item{ely_name_fi}{Elinkeino-, liikenne- ja ympäristökeskuksen name in Finnish (Centre for Economic Development, Transport and the Environment)}
+\item{ely_name_sv}{Elinkeino-, liikenne- ja ympäristökeskuksen name in Swedish (Centre for Economic Development, Transport and the Environment)}
+\item{ely_name_en}{Elinkeino-, liikenne- ja ympäristökeskuksen name in English (Centre for Economic Development, Transport and the Environment)}
+\item{maakunta_code}{Maakunta code (Regions of Finland)}
+\item{maakunta_name_fi}{Maakunta name in Finnish (Regions of Finland)}
+\item{maakunta_name_sv}{Maakunta name in Swedish (Regions of Finland)}
+\item{maakunta_name_en}{Maakunta name in English (Regions of Finland)}
+\item{kielisuhde_code}{Kielisuhde code (Language distribution 2020)}
+\item{kielisuhde_name_fi}{Kielisuhde name in Finnish (Language distribution 2020)}
+\item{kielisuhde_name_sv}{Kielisuhde name in Swedish (Language distribution 2020)}
+\item{kielisuhde_name_en}{Kielisuhde name in English (Language distribution 2020)}
+\item{seutukunta_code}{Seutukunta code (Sub-regions of Finland)}
+\item{seutukunta_name_fi}{Seutukunta name in Finnish (Sub-regions of Finland)}
+\item{seutukunta_name_sv}{Seutukunta name in Swedish (Sub-regions of Finland)}
+\item{seutukunta_name_en}{Seutukunta name in English (Sub-regions of Finland)}
+\item{year}{data year}
+\item{suuralue_code}{Suuralue code}
+\item{suuralue_name_fi}{Suuralueen nimi in Finnish (Large Areas)}
+\item{suuralue_name_sv}{Suuralueen nimi in Swedish (Large Areas)}
+\item{suuralue_name_en}{Suuralueen nimi in English (Large Areas)}
+\item{municipality_code}{Municipality code}
+\item{kunta_name}{Municipality name in Finnish}
+\item{name_fi}{Municipality name in Finnish}
+\item{name_sv}{Municipality name in Finnish}
+}
+}
 \source{
-\url{http://www.stat.fi}
+\url{https://data.stat.fi/api/classifications/v2/classifications}
 }
 \usage{
 municipality_key_2016

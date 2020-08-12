@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Creating ternary color coded maps • geofi</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Creating ternary color coded maps">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="geofi">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2800009</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2000001</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ropengov/geofi">
+  <a href="https://github.com/ropengov/geofi/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -82,12 +82,12 @@
 
       
 
-      </header><div class="row">
+      </header><script src="tricolore_tutorial_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Creating ternary color coded maps</h1>
+      <h1 data-toc-skip>Creating ternary color coded maps</h1>
             
-            <h4 class="date">2020-02-24</h4>
+            <h4 class="date">2020-08-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropengov/geofi/blob/master/vignettes/tricolore_tutorial.Rmd"><code>vignettes/tricolore_tutorial.Rmd</code></a></small>
       <div class="hidden name"><code>tricolore_tutorial.Rmd</code></div>
@@ -100,166 +100,145 @@
 <h2 class="hasAnchor">
 <a href="#preparation" class="anchor"></a>Preparation</h2>
 <p>For this example geodata is joined with municipality level data from Statistics Finland. Load packages which are needed for data wrangling and plotting. For ternary color coded maps we are using <code>tricolore</code> packgage. Check more information of tricolore package in github <a href="https://github.com/jschoeley/tricolore" class="uri">https://github.com/jschoeley/tricolore</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(geofi)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; geofi R package: tools for open GIS data for Finland.</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt; Part of rOpenGov &lt;ropengov.github.io&gt;.</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; Attaching package: 'dplyr'</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; The following objects are masked from 'package:stats':</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;     filter, lag</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; The following objects are masked from 'package:base':</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt;     intersect, setdiff, setequal, union</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyr)</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tricolore)</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; Registered S3 methods overwritten by 'ggtern':</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt;   method           from   </span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt;   +.gg             ggplot2</span></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt;   grid.draw.ggplot ggplot2</span></a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt;   plot.ggplot      ggplot2</span></a>
-<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt;   print.ggplot     ggplot2</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">geofi</span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; geofi R package: tools for open GIS data for Finland.</span>
+<span class="co">#&gt; Part of rOpenGov &lt;ropengov.github.io&gt;.</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tricolore</span>)
+<span class="co">#&gt; Registered S3 methods overwritten by 'ggtern':</span>
+<span class="co">#&gt;   method           from   </span>
+<span class="co">#&gt;   grid.draw.ggplot ggplot2</span>
+<span class="co">#&gt;   plot.ggplot      ggplot2</span>
+<span class="co">#&gt;   print.ggplot     ggplot2</span></pre></body></html></div>
 </div>
 <div id="download-and-prepare-datasets" class="section level2">
 <h2 class="hasAnchor">
 <a href="#download-and-prepare-datasets" class="anchor"></a>Download and prepare datasets</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Download municipalities geodata</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">municipalities17 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_municipalities.html">get_municipalities</a></span>(<span class="dt">year =</span> <span class="dv">2017</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=tilastointialueet%3Akunta4500k_2017</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; Data is licensed under: Attribution 4.0 International (CC BY 4.0)</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># Pull municipalities and population data from Statistics Finland</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(pxweb)</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; pxweb: R tools for PX-WEB API.</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; Copyright (C) 2014-2018 Mans Magnusson, Leo Lahti et al.</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; https://github.com/ropengov/pxweb</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">pxweb_query_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"Alue 2019"</span>=<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"020"</span>,<span class="st">"005"</span>,<span class="st">"009"</span>,<span class="st">"010"</span>,<span class="st">"016"</span>,<span class="st">"018"</span>,<span class="st">"019"</span>,<span class="st">"035"</span>,<span class="st">"043"</span>,<span class="st">"046"</span>,<span class="st">"047"</span>,<span class="st">"049"</span>,<span class="st">"050"</span>,<span class="st">"051"</span>,<span class="st">"052"</span>,<span class="st">"060"</span>,<span class="st">"061"</span>,<span class="st">"062"</span>,<span class="st">"065"</span>,<span class="st">"069"</span>,<span class="st">"071"</span>,<span class="st">"072"</span>,<span class="st">"074"</span>,<span class="st">"075"</span>,<span class="st">"076"</span>,<span class="st">"077"</span>,<span class="st">"078"</span>,<span class="st">"079"</span>,<span class="st">"081"</span>,<span class="st">"082"</span>,<span class="st">"086"</span>,<span class="st">"111"</span>,<span class="st">"090"</span>,<span class="st">"091"</span>,<span class="st">"097"</span>,<span class="st">"098"</span>,<span class="st">"099"</span>,<span class="st">"102"</span>,<span class="st">"103"</span>,<span class="st">"105"</span>,<span class="st">"106"</span>,<span class="st">"108"</span>,<span class="st">"109"</span>,<span class="st">"139"</span>,<span class="st">"140"</span>,<span class="st">"142"</span>,<span class="st">"143"</span>,<span class="st">"145"</span>,<span class="st">"146"</span>,<span class="st">"153"</span>,<span class="st">"148"</span>,<span class="st">"149"</span>,<span class="st">"151"</span>,<span class="st">"152"</span>,<span class="st">"165"</span>,<span class="st">"167"</span>,<span class="st">"169"</span>,<span class="st">"170"</span>,<span class="st">"171"</span>,<span class="st">"172"</span>,<span class="st">"176"</span>,<span class="st">"177"</span>,<span class="st">"178"</span>,<span class="st">"179"</span>,<span class="st">"181"</span>,<span class="st">"182"</span>,<span class="st">"186"</span>,<span class="st">"202"</span>,<span class="st">"204"</span>,<span class="st">"205"</span>,<span class="st">"208"</span>,<span class="st">"211"</span>,<span class="st">"213"</span>,<span class="st">"214"</span>,<span class="st">"216"</span>,<span class="st">"217"</span>,<span class="st">"218"</span>,<span class="st">"224"</span>,<span class="st">"226"</span>,<span class="st">"230"</span>,<span class="st">"231"</span>,<span class="st">"232"</span>,<span class="st">"233"</span>,<span class="st">"235"</span>,<span class="st">"236"</span>,<span class="st">"239"</span>,<span class="st">"240"</span>,<span class="st">"320"</span>,<span class="st">"241"</span>,<span class="st">"322"</span>,<span class="st">"244"</span>,<span class="st">"245"</span>,<span class="st">"249"</span>,<span class="st">"250"</span>,<span class="st">"256"</span>,<span class="st">"257"</span>,<span class="st">"260"</span>,<span class="st">"261"</span>,<span class="st">"263"</span>,<span class="st">"265"</span>,<span class="st">"271"</span>,<span class="st">"272"</span>,<span class="st">"273"</span>,<span class="st">"275"</span>,<span class="st">"276"</span>,<span class="st">"280"</span>,<span class="st">"284"</span>,<span class="st">"285"</span>,<span class="st">"286"</span>,<span class="st">"287"</span>,<span class="st">"288"</span>,<span class="st">"290"</span>,<span class="st">"291"</span>,<span class="st">"295"</span>,<span class="st">"297"</span>,<span class="st">"300"</span>,<span class="st">"301"</span>,<span class="st">"304"</span>,<span class="st">"305"</span>,<span class="st">"312"</span>,<span class="st">"316"</span>,<span class="st">"317"</span>,<span class="st">"318"</span>,<span class="st">"398"</span>,<span class="st">"399"</span>,<span class="st">"400"</span>,<span class="st">"407"</span>,<span class="st">"402"</span>,<span class="st">"403"</span>,<span class="st">"405"</span>,<span class="st">"408"</span>,<span class="st">"410"</span>,<span class="st">"416"</span>,<span class="st">"417"</span>,<span class="st">"418"</span>,<span class="st">"420"</span>,<span class="st">"421"</span>,<span class="st">"422"</span>,<span class="st">"423"</span>,<span class="st">"425"</span>,<span class="st">"426"</span>,<span class="st">"444"</span>,<span class="st">"430"</span>,<span class="st">"433"</span>,<span class="st">"434"</span>,<span class="st">"435"</span>,<span class="st">"436"</span>,<span class="st">"438"</span>,<span class="st">"440"</span>,<span class="st">"441"</span>,<span class="st">"475"</span>,<span class="st">"478"</span>,<span class="st">"480"</span>,<span class="st">"481"</span>,<span class="st">"483"</span>,<span class="st">"484"</span>,<span class="st">"489"</span>,<span class="st">"491"</span>,<span class="st">"494"</span>,<span class="st">"495"</span>,<span class="st">"498"</span>,<span class="st">"499"</span>,<span class="st">"500"</span>,<span class="st">"503"</span>,<span class="st">"504"</span>,<span class="st">"505"</span>,<span class="st">"508"</span>,<span class="st">"507"</span>,<span class="st">"529"</span>,<span class="st">"531"</span>,<span class="st">"535"</span>,<span class="st">"536"</span>,<span class="st">"538"</span>,<span class="st">"541"</span>,<span class="st">"543"</span>,<span class="st">"545"</span>,<span class="st">"560"</span>,<span class="st">"561"</span>,<span class="st">"562"</span>,<span class="st">"563"</span>,<span class="st">"564"</span>,<span class="st">"309"</span>,<span class="st">"576"</span>,<span class="st">"577"</span>,<span class="st">"578"</span>,<span class="st">"445"</span>,<span class="st">"580"</span>,<span class="st">"581"</span>,<span class="st">"599"</span>,<span class="st">"583"</span>,<span class="st">"854"</span>,<span class="st">"584"</span>,<span class="st">"588"</span>,<span class="st">"592"</span>,<span class="st">"593"</span>,<span class="st">"595"</span>,<span class="st">"598"</span>,<span class="st">"601"</span>,<span class="st">"604"</span>,<span class="st">"607"</span>,<span class="st">"608"</span>,<span class="st">"609"</span>,<span class="st">"611"</span>,<span class="st">"638"</span>,<span class="st">"614"</span>,<span class="st">"615"</span>,<span class="st">"616"</span>,<span class="st">"619"</span>,<span class="st">"620"</span>,<span class="st">"623"</span>,<span class="st">"624"</span>,<span class="st">"625"</span>,<span class="st">"626"</span>,<span class="st">"630"</span>,<span class="st">"631"</span>,<span class="st">"635"</span>,<span class="st">"636"</span>,<span class="st">"678"</span>,<span class="st">"710"</span>,<span class="st">"680"</span>,<span class="st">"681"</span>,<span class="st">"683"</span>,<span class="st">"684"</span>,<span class="st">"686"</span>,<span class="st">"687"</span>,<span class="st">"689"</span>,<span class="st">"691"</span>,<span class="st">"694"</span>,<span class="st">"697"</span>,<span class="st">"698"</span>,<span class="st">"700"</span>,<span class="st">"702"</span>,<span class="st">"704"</span>,<span class="st">"707"</span>,<span class="st">"729"</span>,<span class="st">"732"</span>,<span class="st">"734"</span>,<span class="st">"736"</span>,<span class="st">"790"</span>,<span class="st">"738"</span>,<span class="st">"739"</span>,<span class="st">"740"</span>,<span class="st">"742"</span>,<span class="st">"743"</span>,<span class="st">"746"</span>,<span class="st">"747"</span>,<span class="st">"748"</span>,<span class="st">"791"</span>,<span class="st">"749"</span>,<span class="st">"751"</span>,<span class="st">"753"</span>,<span class="st">"755"</span>,<span class="st">"758"</span>,<span class="st">"759"</span>,<span class="st">"761"</span>,<span class="st">"762"</span>,<span class="st">"765"</span>,<span class="st">"766"</span>,<span class="st">"768"</span>,<span class="st">"771"</span>,<span class="st">"777"</span>,<span class="st">"778"</span>,<span class="st">"781"</span>,<span class="st">"783"</span>,<span class="st">"831"</span>,<span class="st">"832"</span>,<span class="st">"833"</span>,<span class="st">"834"</span>,<span class="st">"837"</span>,<span class="st">"844"</span>,<span class="st">"845"</span>,<span class="st">"846"</span>,<span class="st">"848"</span>,<span class="st">"849"</span>,<span class="st">"850"</span>,<span class="st">"851"</span>,<span class="st">"853"</span>,<span class="st">"857"</span>,<span class="st">"858"</span>,<span class="st">"859"</span>,<span class="st">"886"</span>,<span class="st">"887"</span>,<span class="st">"889"</span>,<span class="st">"890"</span>,<span class="st">"892"</span>,<span class="st">"893"</span>,<span class="st">"895"</span>,<span class="st">"785"</span>,<span class="st">"905"</span>,<span class="st">"908"</span>,<span class="st">"911"</span>,<span class="st">"092"</span>,<span class="st">"915"</span>,<span class="st">"918"</span>,<span class="st">"921"</span>,<span class="st">"922"</span>,<span class="st">"924"</span>,<span class="st">"925"</span>,<span class="st">"927"</span>,<span class="st">"931"</span>,<span class="st">"934"</span>,<span class="st">"935"</span>,<span class="st">"936"</span>,<span class="st">"941"</span>,<span class="st">"946"</span>,<span class="st">"976"</span>,<span class="st">"977"</span>,<span class="st">"980"</span>,<span class="st">"981"</span>,<span class="st">"989"</span>,<span class="st">"992"</span>),</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">       <span class="st">"Tiedot"</span>=<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"M411"</span>, <span class="st">"M391"</span>,<span class="st">"M421"</span>,<span class="st">"M478"</span>),</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">       <span class="st">"Vuosi"</span>=<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2017"</span>))</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">px_data &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/pxweb/man/pxweb_get.html">pxweb_get</a></span>(<span class="dt">url =</span> <span class="st">"http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px"</span>,</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">                     <span class="dt">query =</span> pxweb_query_list)</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co"># Convert to data.frame and wrangle dataset so that every row is municipality</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">tk_data &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(px_data, </a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">                         <span class="dt">column.name.type =</span> <span class="st">"text"</span>, </a>
-<a class="sourceLine" id="cb2-21" data-line-number="21">                         <span class="dt">variable.value.type =</span> <span class="st">"text"</span>)</a>
-<a class="sourceLine" id="cb2-22" data-line-number="22">tk_data &lt;-<span class="st"> </span>tk_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(<span class="dt">name =</span> <span class="st">`</span><span class="dt">Alue 2019</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">name =</span> <span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(name),</a>
-<a class="sourceLine" id="cb2-25" data-line-number="25">         <span class="co"># Paste Tiedot and Vuosi</span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26">         <span class="dt">Tiedot =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(Tiedot, Vuosi)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>Vuosi) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(Tiedot, <span class="st">`</span><span class="dt">Kuntien avainluvut</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()</a>
-<a class="sourceLine" id="cb2-30" data-line-number="30">tk_data &lt;-<span class="st"> </span>janitor<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span>(tk_data)</a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="co"># Rename variables in english</span></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33">tk_data &lt;-<span class="st"> </span>tk_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(</a>
-<a class="sourceLine" id="cb2-35" data-line-number="35">    <span class="dt">under_15 =</span> alle_<span class="dv">15</span>_vuotiaiden_osuus_vaestosta_percent_<span class="dv">2017</span>,</a>
-<a class="sourceLine" id="cb2-36" data-line-number="36">    <span class="dt">y16_64 =</span> x15_<span class="dv">64</span>_vuotiaiden_osuus_vaestosta_percent_<span class="dv">2017</span>,</a>
-<a class="sourceLine" id="cb2-37" data-line-number="37">    <span class="dt">over64 =</span> yli_<span class="dv">64</span>_vuotiaiden_osuus_vaestosta_percent_<span class="dv">2017</span>,</a>
-<a class="sourceLine" id="cb2-38" data-line-number="38">    <span class="dt">popu2017 =</span> vakiluku_<span class="dv">2017</span></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39">  )</a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41"></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="co"># Join with Statistics Finland attribute data</span></a>
-<a class="sourceLine" id="cb2-43" data-line-number="43">dat &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(municipalities17, tk_data)</a>
-<a class="sourceLine" id="cb2-44" data-line-number="44"><span class="co">#&gt; Joining, by = "name"</span></a>
-<a class="sourceLine" id="cb2-45" data-line-number="45"><span class="co">#&gt; Warning: Column `name` joining factor and character vector, coercing into</span></a>
-<a class="sourceLine" id="cb2-46" data-line-number="46"><span class="co">#&gt; character vector</span></a>
-<a class="sourceLine" id="cb2-47" data-line-number="47"></a>
-<a class="sourceLine" id="cb2-48" data-line-number="48"><span class="co"># Join the municipality level data with internal municipality_key_2017-data</span></a>
-<a class="sourceLine" id="cb2-49" data-line-number="49">finland_popu2017 &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(dat, municipality_key_<span class="dv">2017</span>, <span class="dt">by =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"name"</span> =<span class="st"> "name_fi"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Download municipalities geodata</span>
+<span class="no">municipalities17</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span>(<span class="kw">year</span> <span class="kw">=</span> <span class="fl">2017</span>)
+<span class="co">#&gt; Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=tilastointialueet%3Akunta4500k_2017</span>
+<span class="co">#&gt; Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</span>
+<span class="co">#&gt; Data is licensed under: Attribution 4.0 International (CC BY 4.0)</span>
+
+<span class="co"># Pull municipalities and population data from Statistics Finland</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">pxweb</span>)
+<span class="co">#&gt; pxweb: R tools for PX-WEB API.</span>
+<span class="co">#&gt; Copyright (C) 2014-2018 Mans Magnusson, Leo Lahti et al.</span>
+<span class="co">#&gt; https://github.com/ropengov/pxweb</span>
+<span class="no">pxweb_query_list</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"Alue 2019"</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"020"</span>,<span class="st">"005"</span>,<span class="st">"009"</span>,<span class="st">"010"</span>,<span class="st">"016"</span>,<span class="st">"018"</span>,<span class="st">"019"</span>,<span class="st">"035"</span>,<span class="st">"043"</span>,<span class="st">"046"</span>,<span class="st">"047"</span>,<span class="st">"049"</span>,<span class="st">"050"</span>,<span class="st">"051"</span>,<span class="st">"052"</span>,<span class="st">"060"</span>,<span class="st">"061"</span>,<span class="st">"062"</span>,<span class="st">"065"</span>,<span class="st">"069"</span>,<span class="st">"071"</span>,<span class="st">"072"</span>,<span class="st">"074"</span>,<span class="st">"075"</span>,<span class="st">"076"</span>,<span class="st">"077"</span>,<span class="st">"078"</span>,<span class="st">"079"</span>,<span class="st">"081"</span>,<span class="st">"082"</span>,<span class="st">"086"</span>,<span class="st">"111"</span>,<span class="st">"090"</span>,<span class="st">"091"</span>,<span class="st">"097"</span>,<span class="st">"098"</span>,<span class="st">"099"</span>,<span class="st">"102"</span>,<span class="st">"103"</span>,<span class="st">"105"</span>,<span class="st">"106"</span>,<span class="st">"108"</span>,<span class="st">"109"</span>,<span class="st">"139"</span>,<span class="st">"140"</span>,<span class="st">"142"</span>,<span class="st">"143"</span>,<span class="st">"145"</span>,<span class="st">"146"</span>,<span class="st">"153"</span>,<span class="st">"148"</span>,<span class="st">"149"</span>,<span class="st">"151"</span>,<span class="st">"152"</span>,<span class="st">"165"</span>,<span class="st">"167"</span>,<span class="st">"169"</span>,<span class="st">"170"</span>,<span class="st">"171"</span>,<span class="st">"172"</span>,<span class="st">"176"</span>,<span class="st">"177"</span>,<span class="st">"178"</span>,<span class="st">"179"</span>,<span class="st">"181"</span>,<span class="st">"182"</span>,<span class="st">"186"</span>,<span class="st">"202"</span>,<span class="st">"204"</span>,<span class="st">"205"</span>,<span class="st">"208"</span>,<span class="st">"211"</span>,<span class="st">"213"</span>,<span class="st">"214"</span>,<span class="st">"216"</span>,<span class="st">"217"</span>,<span class="st">"218"</span>,<span class="st">"224"</span>,<span class="st">"226"</span>,<span class="st">"230"</span>,<span class="st">"231"</span>,<span class="st">"232"</span>,<span class="st">"233"</span>,<span class="st">"235"</span>,<span class="st">"236"</span>,<span class="st">"239"</span>,<span class="st">"240"</span>,<span class="st">"320"</span>,<span class="st">"241"</span>,<span class="st">"322"</span>,<span class="st">"244"</span>,<span class="st">"245"</span>,<span class="st">"249"</span>,<span class="st">"250"</span>,<span class="st">"256"</span>,<span class="st">"257"</span>,<span class="st">"260"</span>,<span class="st">"261"</span>,<span class="st">"263"</span>,<span class="st">"265"</span>,<span class="st">"271"</span>,<span class="st">"272"</span>,<span class="st">"273"</span>,<span class="st">"275"</span>,<span class="st">"276"</span>,<span class="st">"280"</span>,<span class="st">"284"</span>,<span class="st">"285"</span>,<span class="st">"286"</span>,<span class="st">"287"</span>,<span class="st">"288"</span>,<span class="st">"290"</span>,<span class="st">"291"</span>,<span class="st">"295"</span>,<span class="st">"297"</span>,<span class="st">"300"</span>,<span class="st">"301"</span>,<span class="st">"304"</span>,<span class="st">"305"</span>,<span class="st">"312"</span>,<span class="st">"316"</span>,<span class="st">"317"</span>,<span class="st">"318"</span>,<span class="st">"398"</span>,<span class="st">"399"</span>,<span class="st">"400"</span>,<span class="st">"407"</span>,<span class="st">"402"</span>,<span class="st">"403"</span>,<span class="st">"405"</span>,<span class="st">"408"</span>,<span class="st">"410"</span>,<span class="st">"416"</span>,<span class="st">"417"</span>,<span class="st">"418"</span>,<span class="st">"420"</span>,<span class="st">"421"</span>,<span class="st">"422"</span>,<span class="st">"423"</span>,<span class="st">"425"</span>,<span class="st">"426"</span>,<span class="st">"444"</span>,<span class="st">"430"</span>,<span class="st">"433"</span>,<span class="st">"434"</span>,<span class="st">"435"</span>,<span class="st">"436"</span>,<span class="st">"438"</span>,<span class="st">"440"</span>,<span class="st">"441"</span>,<span class="st">"475"</span>,<span class="st">"478"</span>,<span class="st">"480"</span>,<span class="st">"481"</span>,<span class="st">"483"</span>,<span class="st">"484"</span>,<span class="st">"489"</span>,<span class="st">"491"</span>,<span class="st">"494"</span>,<span class="st">"495"</span>,<span class="st">"498"</span>,<span class="st">"499"</span>,<span class="st">"500"</span>,<span class="st">"503"</span>,<span class="st">"504"</span>,<span class="st">"505"</span>,<span class="st">"508"</span>,<span class="st">"507"</span>,<span class="st">"529"</span>,<span class="st">"531"</span>,<span class="st">"535"</span>,<span class="st">"536"</span>,<span class="st">"538"</span>,<span class="st">"541"</span>,<span class="st">"543"</span>,<span class="st">"545"</span>,<span class="st">"560"</span>,<span class="st">"561"</span>,<span class="st">"562"</span>,<span class="st">"563"</span>,<span class="st">"564"</span>,<span class="st">"309"</span>,<span class="st">"576"</span>,<span class="st">"577"</span>,<span class="st">"578"</span>,<span class="st">"445"</span>,<span class="st">"580"</span>,<span class="st">"581"</span>,<span class="st">"599"</span>,<span class="st">"583"</span>,<span class="st">"854"</span>,<span class="st">"584"</span>,<span class="st">"588"</span>,<span class="st">"592"</span>,<span class="st">"593"</span>,<span class="st">"595"</span>,<span class="st">"598"</span>,<span class="st">"601"</span>,<span class="st">"604"</span>,<span class="st">"607"</span>,<span class="st">"608"</span>,<span class="st">"609"</span>,<span class="st">"611"</span>,<span class="st">"638"</span>,<span class="st">"614"</span>,<span class="st">"615"</span>,<span class="st">"616"</span>,<span class="st">"619"</span>,<span class="st">"620"</span>,<span class="st">"623"</span>,<span class="st">"624"</span>,<span class="st">"625"</span>,<span class="st">"626"</span>,<span class="st">"630"</span>,<span class="st">"631"</span>,<span class="st">"635"</span>,<span class="st">"636"</span>,<span class="st">"678"</span>,<span class="st">"710"</span>,<span class="st">"680"</span>,<span class="st">"681"</span>,<span class="st">"683"</span>,<span class="st">"684"</span>,<span class="st">"686"</span>,<span class="st">"687"</span>,<span class="st">"689"</span>,<span class="st">"691"</span>,<span class="st">"694"</span>,<span class="st">"697"</span>,<span class="st">"698"</span>,<span class="st">"700"</span>,<span class="st">"702"</span>,<span class="st">"704"</span>,<span class="st">"707"</span>,<span class="st">"729"</span>,<span class="st">"732"</span>,<span class="st">"734"</span>,<span class="st">"736"</span>,<span class="st">"790"</span>,<span class="st">"738"</span>,<span class="st">"739"</span>,<span class="st">"740"</span>,<span class="st">"742"</span>,<span class="st">"743"</span>,<span class="st">"746"</span>,<span class="st">"747"</span>,<span class="st">"748"</span>,<span class="st">"791"</span>,<span class="st">"749"</span>,<span class="st">"751"</span>,<span class="st">"753"</span>,<span class="st">"755"</span>,<span class="st">"758"</span>,<span class="st">"759"</span>,<span class="st">"761"</span>,<span class="st">"762"</span>,<span class="st">"765"</span>,<span class="st">"766"</span>,<span class="st">"768"</span>,<span class="st">"771"</span>,<span class="st">"777"</span>,<span class="st">"778"</span>,<span class="st">"781"</span>,<span class="st">"783"</span>,<span class="st">"831"</span>,<span class="st">"832"</span>,<span class="st">"833"</span>,<span class="st">"834"</span>,<span class="st">"837"</span>,<span class="st">"844"</span>,<span class="st">"845"</span>,<span class="st">"846"</span>,<span class="st">"848"</span>,<span class="st">"849"</span>,<span class="st">"850"</span>,<span class="st">"851"</span>,<span class="st">"853"</span>,<span class="st">"857"</span>,<span class="st">"858"</span>,<span class="st">"859"</span>,<span class="st">"886"</span>,<span class="st">"887"</span>,<span class="st">"889"</span>,<span class="st">"890"</span>,<span class="st">"892"</span>,<span class="st">"893"</span>,<span class="st">"895"</span>,<span class="st">"785"</span>,<span class="st">"905"</span>,<span class="st">"908"</span>,<span class="st">"911"</span>,<span class="st">"092"</span>,<span class="st">"915"</span>,<span class="st">"918"</span>,<span class="st">"921"</span>,<span class="st">"922"</span>,<span class="st">"924"</span>,<span class="st">"925"</span>,<span class="st">"927"</span>,<span class="st">"931"</span>,<span class="st">"934"</span>,<span class="st">"935"</span>,<span class="st">"936"</span>,<span class="st">"941"</span>,<span class="st">"946"</span>,<span class="st">"976"</span>,<span class="st">"977"</span>,<span class="st">"980"</span>,<span class="st">"981"</span>,<span class="st">"989"</span>,<span class="st">"992"</span>),
+       <span class="st">"Tiedot"</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"M411"</span>, <span class="st">"M391"</span>,<span class="st">"M421"</span>,<span class="st">"M478"</span>),
+       <span class="st">"Vuosi"</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"2017"</span>))
+<span class="no">px_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pxweb/man/pxweb_get.html">pxweb_get</a></span>(<span class="kw">url</span> <span class="kw">=</span> <span class="st">"http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px"</span>,
+                     <span class="kw">query</span> <span class="kw">=</span> <span class="no">pxweb_query_list</span>)
+
+<span class="co"># Convert to data.frame and wrangle dataset so that every row is municipality</span>
+<span class="no">tk_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">px_data</span>,
+                         <span class="kw">column.name.type</span> <span class="kw">=</span> <span class="st">"text"</span>,
+                         <span class="kw">variable.value.type</span> <span class="kw">=</span> <span class="st">"text"</span>)
+<span class="no">tk_data</span> <span class="kw">&lt;-</span> <span class="no">tk_data</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="no">`Alue 2019`</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">name</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">name</span>),
+         <span class="co"># Paste Tiedot and Vuosi</span>
+         <span class="kw">Tiedot</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">Tiedot</span>, <span class="no">Vuosi</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">Vuosi</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="no">Tiedot</span>, <span class="no">`Kuntien avainluvut`</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>()
+<span class="no">tk_data</span> <span class="kw">&lt;-</span> <span class="kw pkg">janitor</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span>(<span class="no">tk_data</span>)
+
+<span class="co"># Rename variables in english</span>
+<span class="no">tk_data</span> <span class="kw">&lt;-</span> <span class="no">tk_data</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(
+    <span class="kw">under_15</span> <span class="kw">=</span> <span class="no">alle_15_vuotiaiden_osuus_vaestosta_percent_2017</span>,
+    <span class="kw">y16_64</span> <span class="kw">=</span> <span class="no">x15_64_vuotiaiden_osuus_vaestosta_percent_2017</span>,
+    <span class="kw">over64</span> <span class="kw">=</span> <span class="no">yli_64_vuotiaiden_osuus_vaestosta_percent_2017</span>,
+    <span class="kw">popu2017</span> <span class="kw">=</span> <span class="no">vakiluku_2017</span>
+  )
+
+
+<span class="co"># Join with Statistics Finland attribute data</span>
+<span class="no">dat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="no">municipalities17</span>, <span class="no">tk_data</span>)
+<span class="co">#&gt; Joining, by = "name"</span>
+
+<span class="co"># Join the municipality level data with internal municipality_key_2017-data</span>
+<span class="no">finland_popu2017</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span>(<span class="no">dat</span>, <span class="no">municipality_key_2017</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"name"</span> <span class="kw">=</span> <span class="st">"municipality_name_fi"</span>))</pre></body></html></div>
 <div id="calculating-color-code-to-the-dataset" class="section level3">
 <h3 class="hasAnchor">
 <a href="#calculating-color-code-to-the-dataset" class="anchor"></a>Calculating color-code to the dataset</h3>
 <p>Ternary color codes are calculated by <code><a href="https://rdrr.io/pkg/tricolore/man/Tricolore.html">Tricolore()</a></code>-function, which excepts variables which is used for color coding. Save rgb values to population dataset.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">tric_dat &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/tricolore/man/Tricolore.html">Tricolore</a></span>(finland_popu2017,</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">                      <span class="dt">p1 =</span> <span class="st">'over64'</span>,</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">                      <span class="dt">p2 =</span> <span class="st">'y16_64'</span>, </a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">                      <span class="dt">p3 =</span> <span class="st">'under_15'</span>, </a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">                      <span class="dt">center =</span> <span class="ot">NA</span>,</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">                      <span class="dt">crop =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">                      )</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; Warning: Ignoring unknown aesthetics: z</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">finland_popu2017<span class="op">$</span>popu_rgb &lt;-<span class="st"> </span>tric_dat<span class="op">$</span>rgb</a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">tric_dat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tricolore/man/Tricolore.html">Tricolore</a></span>(<span class="no">finland_popu2017</span>,
+                      <span class="kw">p1</span> <span class="kw">=</span> <span class="st">'over64'</span>,
+                      <span class="kw">p2</span> <span class="kw">=</span> <span class="st">'y16_64'</span>,
+                      <span class="kw">p3</span> <span class="kw">=</span> <span class="st">'under_15'</span>,
+                      <span class="kw">center</span> <span class="kw">=</span> <span class="fl">NA</span>,
+                      <span class="kw">crop</span> <span class="kw">=</span> <span class="fl">TRUE</span>
+                      )
+<span class="co">#&gt; Warning: Ignoring unknown aesthetics: z</span>
+<span class="no">finland_popu2017</span>$<span class="no">popu_rgb</span> <span class="kw">&lt;-</span> <span class="no">tric_dat</span>$<span class="no">rgb</span></pre></body></html></div>
 <p>Plot map by ggplot and use <code><a href="https://ggplot2.tidyverse.org/reference/scale_identity.html">scale_fill_identity()</a></code> option to make sure that each region is color coded by rgb-code.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">plot_pop &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(finland_popu2017) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill =</span> popu_rgb, <span class="dt">geometry =</span> geom), <span class="dt">size =</span> <span class="fl">.1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_identity.html">scale_fill_identity</a></span>() </a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">plot_pop</a></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">plot_pop</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">finland_popu2017</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">popu_rgb</span>, <span class="kw">geometry</span> <span class="kw">=</span> <span class="no">geom</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">.1</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_identity.html">scale_fill_identity</a></span>()
+<span class="no">plot_pop</span></pre></body></html></div>
 <p><img src="tricolore_tutorial_files/figure-html/plot_simplemap1-1.png" width="729.166666666667"></p>
 <p>Ternary colors can be adjusted to distinct municipalies differences better.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">tric_dat &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/tricolore/man/Tricolore.html">Tricolore</a></span>(finland_popu2017,</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">                      <span class="dt">p1 =</span> <span class="st">'over64'</span>,</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">                      <span class="dt">p2 =</span> <span class="st">'y16_64'</span>, </a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">                      <span class="dt">p3 =</span> <span class="st">'under_15'</span>, </a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">                      <span class="dt">center =</span> <span class="ot">NA</span>,</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">                      <span class="dt">crop =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">                      <span class="dt">spread =</span> <span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">                      <span class="dt">contrast =</span> <span class="fl">.4</span>, </a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">                      <span class="dt">lightness =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">                      <span class="dt">chroma =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">                      <span class="dt">hue =</span> <span class="dv">2</span><span class="op">/</span><span class="dv">12</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">                      )</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; Warning: Ignoring unknown aesthetics: z</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">finland_popu2017<span class="op">$</span>popu_rgb &lt;-<span class="st"> </span>tric_dat<span class="op">$</span>rgb</a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">plot_pop &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(finland_popu2017) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill =</span> popu_rgb, <span class="dt">geometry =</span> geom), <span class="dt">size =</span> <span class="fl">.1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_identity.html">scale_fill_identity</a></span>() </a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">plot_pop</a></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">tric_dat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tricolore/man/Tricolore.html">Tricolore</a></span>(<span class="no">finland_popu2017</span>,
+                      <span class="kw">p1</span> <span class="kw">=</span> <span class="st">'over64'</span>,
+                      <span class="kw">p2</span> <span class="kw">=</span> <span class="st">'y16_64'</span>,
+                      <span class="kw">p3</span> <span class="kw">=</span> <span class="st">'under_15'</span>,
+                      <span class="kw">center</span> <span class="kw">=</span> <span class="fl">NA</span>,
+                      <span class="kw">crop</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+                      <span class="kw">spread</span> <span class="kw">=</span> <span class="fl">3</span>,
+                      <span class="kw">contrast</span> <span class="kw">=</span> <span class="fl">.4</span>,
+                      <span class="kw">lightness</span> <span class="kw">=</span> <span class="fl">1</span>,
+                      <span class="kw">chroma</span> <span class="kw">=</span> <span class="fl">1</span>,
+                      <span class="kw">hue</span> <span class="kw">=</span> <span class="fl">2</span>/<span class="fl">12</span>
+                      )
+<span class="co">#&gt; Warning: Ignoring unknown aesthetics: z</span>
+<span class="no">finland_popu2017</span>$<span class="no">popu_rgb</span> <span class="kw">&lt;-</span> <span class="no">tric_dat</span>$<span class="no">rgb</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">plot_pop</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">finland_popu2017</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">popu_rgb</span>, <span class="kw">geometry</span> <span class="kw">=</span> <span class="no">geom</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">.1</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_identity.html">scale_fill_identity</a></span>()
+<span class="no">plot_pop</span></pre></body></html></div>
 <p><img src="tricolore_tutorial_files/figure-html/plot_simplemap2-1.png" width="729.166666666667"></p>
 </div>
 <div id="building-legend-for-a-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#building-legend-for-a-plot" class="anchor"></a>Building legend for a plot</h3>
 <p>Legend for tertinary color is added by <code>ggtern</code> and <code><a href="https://ggplot2.tidyverse.org/reference/annotation_custom.html">annotation_custom()</a></code>. Package <code>ggtern</code> is important to load afer <code>ggplot2</code> package.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggtern)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; --</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; Remember to cite, run citation(package = 'ggtern') for further info.</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; --</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; Attaching package: 'ggtern'</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; The following objects are masked from 'package:ggplot2':</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;     %+%, aes, annotate, calc_element, ggplot, ggplot_build,</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;     ggplot_gtable, ggplotGrob, ggsave, layer_data, theme, theme_bw,</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;     theme_classic, theme_dark, theme_gray, theme_light, theme_linedraw,</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;     theme_minimal, theme_void</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">plot_pop &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ggtern/man/ggplot.html">ggplot</a></span>(finland_popu2017) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span>(<span class="dt">fill =</span> popu_rgb, <span class="dt">geometry =</span> geom), <span class="dt">size =</span> <span class="fl">.1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">coord_sf</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">2e5</span>,<span class="fl">7.5e5</span>), <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">66.3e5</span>, <span class="fl">77.7e5</span>), <span class="dt">expand =</span> <span class="ot">FALSE</span>, <span class="dt">datum =</span> <span class="ot">NA</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/annotation_custom.html">annotation_custom</a></span>(</a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">    <span class="kw"><a href="https://rdrr.io/pkg/ggtern/man/ggplot_gtable.html">ggplotGrob</a></span>(tric_dat<span class="op">$</span>key <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">L =</span> <span class="st">"% Young</span><span class="ch">\n</span><span class="st">(0-14)"</span>, <span class="dt">T =</span> <span class="st">" % Working age</span><span class="ch">\n</span><span class="st">(15-64)"</span>, <span class="dt">R =</span> <span class="st">"% Elderly</span><span class="ch">\n</span><span class="st">(65+)"</span>)) ,</a>
-<a class="sourceLine" id="cb7-18" data-line-number="18">    <span class="dt">xmin =</span> <span class="fl">-7e5</span>, <span class="dt">xmax =</span> <span class="fl">1.7e5</span>, <span class="dt">ymin =</span> <span class="fl">68e5</span>, <span class="dt">ymax =</span> <span class="fl">77e5</span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19">  ) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_identity.html">scale_fill_identity</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/pkg/ggtern/man/ggtern_themes.html">theme_void</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">title =</span> <span class="st">"Finnish population by municipalites"</span>,</a>
-<a class="sourceLine" id="cb7-23" data-line-number="23">       <span class="dt">subtitle =</span> <span class="st">"Regional distibution of age groups in 2017."</span>,</a>
-<a class="sourceLine" id="cb7-24" data-line-number="24">       <span class="dt">caption =</span> <span class="st">"Data by Statistics Finland"</span>)</a>
-<a class="sourceLine" id="cb7-25" data-line-number="25">plot_pop</a></code></pre></div>
-<p><img src="tricolore_tutorial_files/figure-html/plot_finalmap-1.png" width="2187.5"></p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggtern</span>)
+<span class="no">plot_pop</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/ggplot.html">ggplot</a></span>(<span class="no">finland_popu2017</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">popu_rgb</span>, <span class="kw">geometry</span> <span class="kw">=</span> <span class="no">geom</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">.1</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">coord_sf</a></span>(<span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">2e5</span>,<span class="fl">7.5e5</span>), <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">66.3e5</span>, <span class="fl">77.7e5</span>), <span class="kw">expand</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">datum</span> <span class="kw">=</span> <span class="fl">NA</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotation_custom.html">annotation_custom</a></span>(
+    <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/ggplot_gtable.html">ggplotGrob</a></span>(<span class="no">tric_dat</span>$<span class="no">key</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">L</span> <span class="kw">=</span> <span class="st">"% Young\n(0-14)"</span>, <span class="kw">T</span> <span class="kw">=</span> <span class="st">" % Working age\n(15-64)"</span>, <span class="kw">R</span> <span class="kw">=</span> <span class="st">"% Elderly\n(65+)"</span>)) ,
+    <span class="kw">xmin</span> <span class="kw">=</span> -<span class="fl">7e5</span>, <span class="kw">xmax</span> <span class="kw">=</span> <span class="fl">1.7e5</span>, <span class="kw">ymin</span> <span class="kw">=</span> <span class="fl">68e5</span>, <span class="kw">ymax</span> <span class="kw">=</span> <span class="fl">77e5</span>
+  ) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_identity.html">scale_fill_identity</a></span>() +
+  <span class="fu"><a href="https://rdrr.io/pkg/ggtern/man/ggtern_themes.html">theme_void</a></span>() +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"Finnish population by municipalites"</span>,
+       <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Regional distibution of age groups in 2017."</span>,
+       <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Data by Statistics Finland"</span>)
+<span class="no">plot_pop</span></pre></body></html></div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#preparation">Preparation</a></li>
-      <li><a href="#download-and-prepare-datasets">Download and prepare datasets</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -270,7 +249,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

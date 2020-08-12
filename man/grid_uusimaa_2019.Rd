@@ -4,13 +4,15 @@
 \name{grid_uusimaa_2019}
 \alias{grid_uusimaa_2019}
 \title{custom geofacet grid for Uusimaa region as in 2019}
-\format{A data frame with 19 rows and 4 variables:
+\format{
+A data frame with 19 rows and 4 variables:
 \describe{
 \item{name}{Municipality name (kunta) in Finnish}
 \item{code}{Municipality code}
 \item{row}{Vertical location in grid}
 \item{col}{Horizontal location in grid}
-}}
+}
+}
 \usage{
 grid_uusimaa_2019
 }

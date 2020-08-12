@@ -4,47 +4,66 @@
 \name{municipality_key_2017}
 \alias{municipality_key_2017}
 \title{Municipality key table for 2017}
-\format{A data frame with 311 rows and 36 variables:
+\format{
+A data frame with 311 rows and 53 variables:
 \describe{
-\item{kunta}{Municipality code ie. kuntanumero}
-\item{kunta_name}{Municipality name in Finnish}
+\item{kunta}{Municipality code}
+\item{municipality_name_fi}{Municipality name in Finnish}
+\item{municipality_name_sv}{Municipality name in Swedish}
+\item{municipality_name_en}{Municipality name in English}
+\item{kuntaryhmitys_code}{Tilastollinen kuntaryhmitys (Statistical grouping) code}
+\item{kuntaryhmitys_name_fi}{Tilastollinen kuntaryhmitys (Statistical grouping) name in Finnish}
+\item{kuntaryhmitys_name_sv}{Tilastollinen kuntaryhmitys (Statistical grouping) name in Swedish}
+\item{kuntaryhmitys_name_en}{Tilastollinen kuntaryhmitys (Statistical grouping) name in English}
 \item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
-\item{avi_name}{Aluehallintovirasto name (Regional State Administrative Agencies)}
+\item{avi_name_fi}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
+\item{avi_name_sv}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
+\item{avi_name_en}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
 \item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
-\item{ely_name}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment)}
-\item{hp_code}{Hovioikeuspiirin code}
-\item{hp_name}{Hovioikeuspiirin name}
-\item{kr_code}{Tilastokeskuksen tilastollisen kuntaluokituksen code}
-\item{kr_name}{Tilastokeskuksen tilastollisen kuntaluokituksen name}
-\item{mk_code}{Maakunnan code (Regions of Finland NUTS 3)}
-\item{mk_name}{Maakunnan name (Regions of Finland NUTS 3)}
-\item{sa_code}{Suuralueen code (Large areas NUTS 2)}
-\item{sa_name}{Suuralueen name (Large areas NUTS 2)}
-\item{sk_code}{Seutukunnan code (Sub-Regions of Finland NUTS 3)}
-\item{sk_name}{Seutukunnan name (Sub-Regions of Finland NUTS 3)}
-\item{sp_code}{Sairaanhoitopiirin code (Health care regions)}
-\item{sp_name}{Sairaanhoitopiirin name (Health care regions)}
-\item{tk_code}{Työssäkäyntialueen code}
-\item{tk_name}{Työssäkäyntialueen name}
-\item{va_code}{Vaalipiirin code (Electoral district)}
-\item{va_name}{Vaalipiirin name (Electoral district)}
-\item{kela_vakuutuspiiri_name}{Kelan vakuutuspiirin name}
-\item{kela_vakuutuspiiri_code}{Kelan vakuutuspiirin koodi (epävirallinen)}
-\item{kela_asumistukialue_name}{Kelan asumistukialueen name}
-\item{kela_asumistukialue_code}{Kelan asumistukialueen koodi (epävirallinen)}
-\item{erva_name}{Erityisvastuualueen name}
-\item{erva_code}{Erityisvastuualueen koodi (epävirallinen)}
-\item{avi_name_sv}{Aluehallintovirasto name (Regional State Administrative Agencies) in Swedish}
-\item{ely_name_sv}{Elinkeino-, liikenne- ja ympäristökeskuksen name (Centre for Economic Development, Transport and the Environment) in Swedish}
-\item{kr_name_sv}{Tilastokeskuksen tilastollisen kuntaluokituksen name in Swedish}
-\item{mk_name_sv}{Maakunnan name (Regions of Finland NUTS 3) in Swedish}
-\item{sp_name_sv}{Sairaanhoitopiirin name (Health care regions) in Swedish}
-\item{kela_vakuutuspiiri_name_sv}{Kelan vakuutuspiirin name in Swedish}
-\item{name_sv}{municipality name in Swedish}
-\item{name_fi}{municipality name in Finnish}
-}}
+\item{ely_name_fi}{Elinkeino-, liikenne- ja ympäristökeskuksen name in Finnish (Centre for Economic Development, Transport and the Environment)}
+\item{ely_name_sv}{Elinkeino-, liikenne- ja ympäristökeskuksen name in Swedish (Centre for Economic Development, Transport and the Environment)}
+\item{ely_name_en}{Elinkeino-, liikenne- ja ympäristökeskuksen name in English (Centre for Economic Development, Transport and the Environment)}
+\item{maakunta_code}{Maakunta code (Regions of Finland)}
+\item{maakunta_name_fi}{Maakunta name in Finnish (Regions of Finland)}
+\item{maakunta_name_sv}{Maakunta name in Swedish (Regions of Finland)}
+\item{maakunta_name_en}{Maakunta name in English (Regions of Finland)}
+\item{kielisuhde_code}{Kielisuhde code (Language distribution 2020)}
+\item{kielisuhde_name_fi}{Kielisuhde name in Finnish (Language distribution 2020)}
+\item{kielisuhde_name_sv}{Kielisuhde name in Swedish (Language distribution 2020)}
+\item{kielisuhde_name_en}{Kielisuhde name in English (Language distribution 2020)}
+\item{seutukunta_code}{Seutukunta code (Sub-regions of Finland)}
+\item{seutukunta_name_fi}{Seutukunta name in Finnish (Sub-regions of Finland)}
+\item{seutukunta_name_sv}{Seutukunta name in Swedish (Sub-regions of Finland)}
+\item{seutukunta_name_en}{Seutukunta name in English (Sub-regions of Finland)}
+\item{year}{data year}
+\item{suuralue_code}{Suuralue code}
+\item{suuralue_name_fi}{Suuralueen nimi in Finnish (Large Areas)}
+\item{suuralue_name_sv}{Suuralueen nimi in Swedish (Large Areas)}
+\item{suuralue_name_en}{Suuralueen nimi in English (Large Areas)}
+\item{sairaanhoitop_code}{Sairaanhoitopiiri code (Health care districts)}
+\item{sairaanhoitop_name_fi}{Sairaanhoitopiiri name in Finnish (Health care districts)}
+\item{sairaanhoitop_name_sv}{Sairaanhoitopiiri name in Swedish (Health care districts)}
+\item{sairaanhoitop_name_en}{Sairaanhoitopiiri name in English (Health care districts)}
+\item{nuts1_code}{NUTS 2016 classification code (level 1)}
+\item{nuts1_name_fi}{NUTS 2016 classification name in Finnish (level 1)}
+\item{nuts1_name_sv}{NUTS 2016 classification name in Swedish (level 1)}
+\item{nuts1_name_en}{NUTS 2016 classification name in English (level 1)}
+\item{nuts2_code}{NUTS 2016 classification code (level 2)}
+\item{nuts2_name_fi}{NUTS 2016 classification name in Finnish (level 2)}
+\item{nuts2_name_sv}{NUTS 2016 classification name in Swedish (level 2)}
+\item{nuts2_name_en}{nuts2_name_en}
+\item{nuts3_code}{NUTS 2016 classification code (level 2)}
+\item{nuts3_name_fi}{NUTS 2016 classification name in Finnish (level 3)}
+\item{nuts3_name_sv}{NUTS 2016 classification name in Swedish (level 3)}
+\item{nuts3_name_en}{NUTS 2016 classification name in English (level 3)}
+\item{municipality_code}{Municipality code}
+\item{kunta_name}{Municipality name in Finnish}
+\item{name_fi}{Municipality name in Finnish}
+\item{name_sv}{Municipality name in Finnish}
+}
+}
 \source{
-\url{http://www.stat.fi/meta/luokitukset/kunta/001-2017/luokitusavaimet.html}
+\url{https://data.stat.fi/api/classifications/v2/classifications}
 }
 \usage{
 municipality_key_2017

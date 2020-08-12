@@ -2,23 +2,28 @@
 #'
 #' Grid table to be used with ggplot2 and geofacet
 #'
-#' @format A data frame with 19 rows and 4 variables:
+#' @format A data frame with 21 rows and 4 variables:
 #' \describe{
 #'   \item{name}{District name (Sairaanhoitopiiri) in Finnish}
 #'   \item{code}{District code}
 #'   \item{row}{Vertical location in grid}
 #'   \item{col}{Horizontal location in grid}
 #' }
-"grid_sp_2019"
+"grid_sairaanhoitop_2019"
 
-#' custom geofacet grid for regions as in 2020
 #'
+#' custom geofacet grid for regions as in 2019
+#'
+#' Grid table to be used with ggplot2 and geofacet
+
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
 #'   \item{name}{Region name (maakunta) in Finnish}
 #'   \item{code}{Region code}
 #'   \item{row}{Vertical location in grid}
 #'   \item{col}{Horizontal location in grid}
 #' }
-"grid_mk_2020"
+"grid_maakunta_2019"
 
 #' custom geofacet grid for Ahvenanmaa region as in 2020
 #'
@@ -266,20 +271,6 @@
 #'   \item{col}{Horizontal location in grid}
 #' }
 "grid_varsinais_suomi_2020"
-
-#' custom geofacet grid for regions as in 2019
->>>>>>> devel
-#'
-#' Grid table to be used with ggplot2 and geofacet
-#'
-#' @format A data frame with 19 rows and 4 variables:
-#' \describe{
-#'   \item{name}{Region name (maakunta) in Finnish}
-#'   \item{code}{Region code}
-#'   \item{row}{Vertical location in grid}
-#'   \item{col}{Horizontal location in grid}
-#' }
-"grid_mk_2019"
 
 #' custom geofacet grid for Ahvenanmaa region as in 2019
 #'

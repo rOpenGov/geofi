@@ -10,17 +10,19 @@ names(mygrid)[1:2] <- c("name","code")
 mygrid$col <- mygrid$col-2
 geofacet::grid_preview(mygrid)
 
-grid_mk_2019 <- mygrid
-save(grid_mk_2019, file = "./data/grid_mk_2019.rda",
+grid_maakunta_2019 <- mygrid
+save(grid_maakunta_2019, file = "./data/grid_maakunta_2019.rda",
      compress = "bzip2")
 
+
 library(geofi)
+library(dplyr)
 muni <- get_municipalities(year = 2019)
-muni %>% group_by(sp_name,sp_code) %>%
+muni %>% group_by(sairaanhoitop_name_fi,sairaanhoitop_code) %>%
   summarise() %>%
   ungroup() -> spd
-
-ggplot(spd, aes(label = paste(sp_name,sp_code, sep = "\n"))) +
+library(ggplot2)
+ggplot(spd, aes(label = paste(sairaanhoitop_name_fi,sairaanhoitop_code, sep = "\n"))) +
   geom_sf() + geom_sf_text()
 
 spd %>%
@@ -39,13 +41,12 @@ geofacet::grid_preview(mygrid)
 names(mygrid)[1:2] <- c("name","code")
 geofacet::grid_preview(mygrid)
 
-grid_sp_2019 <- mygrid
-
-save(grid_sp_2019, file = "./data/grid_sp_2019.rda",
+grid_sairaanhoitop_2019 <- mygrid
+save(grid_sairaanhoitop_2019, file = "./data/grid_sairaanhoitop_2019.rda",
      compress = "bzip2")
-grid_mk_2020 <- grid_mk_2019
-save(grid_mk_2020, file = "./data/grid_mk_2020.rda",
-     compress = "bzip2")
+# grid_mk_2020 <- grid_mk_2019
+# save(grid_mk_2020, file = "./data/grid_mk_2020.rda",
+#      compress = "bzip2")
 
 # Municipalities per region
 

@@ -276,7 +276,7 @@ library(ggplot2)
 
 ggplot(dat, aes(x = year, y = population/1000, group = name)) + 
   geom_line() + 
-  facet_geo(facets = ~name, grid = grid_mk_2019, scales = "free_y") +
+  facet_geo(facets = ~name, grid = grid_maakunta_2019, scales = "free_y") +
   theme(axis.text.x = element_text(size = 6)) +
   scale_x_discrete(breaks = seq.int(from = 1987, to = 2018, by = 5)) +
   labs(title = "Population 1987-2018", y = "population (1000)")

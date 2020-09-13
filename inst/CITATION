@@ -3,16 +3,16 @@ citHeader("Kindly cite the geofi R package as follows:")
 citEntry(entry="misc",
          title = "geofi R package",
          author = personList(
-     person(given ="Joona", family="Lehtomaki", email = "joona.lehtomaki@gmail.com"),
-     person(given ="Juuso", family="Parkkinen"),
-	   person(given ="Leo", family="Lahti"),
-     person(given ="Jussi", family="Jousimo"),
-	   person(given ="Janne", family="Aukia")
+           person(given ="Markus", family="Kainu", email = "markus.kainu@kapsi.fi"),
+           person(given ="Joona", family="Lehtomaki"),	   
+           person(given ="Juuso", family="Parkkinen"),
+           person(given ="Jani", family="Miettinen"),
+	   person(given ="Leo", family="Lahti")
          ),
 	 journal = "",
-	 year = "2015-2016",
+	 year = "2015-2020",
          textVersion =
-         paste("(C) Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo and Janne Aukia 2015-2016.",
+         paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Leo Lahti  2015-2020.",
                "geofi R package",
                sep=" ")
          )

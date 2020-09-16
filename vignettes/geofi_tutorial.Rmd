@@ -140,10 +140,9 @@ mk_data <- dat %>%
 
 ggplot(mk_data) + 
   geom_sf(aes(fill = vakiluku_2017)) +
-  geom_sf_text(aes(label = paste(maakunta_name_fi, "\n",vakiluku_2017)), 
+  geom_sf_text(aes(label = paste(maakunta_name_fi, "\n", vakiluku_2017)), 
                size = 3, 
                color = "white")
-
 ```
 
 

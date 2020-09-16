@@ -1,14 +1,17 @@
 ---
 title: "geofi tutorial"
-author: "Markus Kainu, Leo Lahti & Joona Lehtomäki"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
-  %\VignetteIndexEntry{geofi tutorial}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  chunk_output_type: console
+    %\VignetteIndexEntry{geofi tutorial}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteDepends{Cairo}
+    %\VignetteEncoding{UTF-8}
+    \usepackage[utf8]{inputenc}
+editor_options:
+    chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -45,7 +48,7 @@ ggplot(municipalities) +
 ## Zipcodes
 
 
-```{r zipcode_map, fig.height = 4, fig.width = 7}
+```{r zipcode_map, fig.height = 4, fig.width = 7, warning=FALSE}
 zipcodes <- get_zipcodes(year = 2020) 
 ggplot(zipcodes) + 
   geom_sf(aes(fill = as.integer(posti_alue)))
@@ -54,7 +57,7 @@ ggplot(zipcodes) +
 
 You can add variables from Paavo data (Statistics Finland) in following manner.
 
-```{r zipcode_with_statistics_finland, fig.height = 4, fig.width = 7}
+```{r zipcode_with_statistics_finland, fig.height = 4, fig.width = 7, warning=FALSE}
 library(pxweb)
 # lets get all zipcodes and all variables
 pxweb_query_list <- 
@@ -94,7 +97,7 @@ ggplot(zipcodes_new) +
 ## Joining municipality level data from Statistics Finland
 
 
-```{r municipalities_with_data}
+```{r municipalities_with_data, warning=FALSE}
 municipalities17 <- get_municipalities(year = 2017)
 
 # pull municipality data from Statistics Finland
@@ -128,7 +131,7 @@ dat[1:10,1:10]
 
 ## Aggregating municipality level data using internal municipality_key-files
 
-```{r municipalities_map, fig.height = 4, fig.width = 7}
+```{r municipalities_map, fig.height = 4, fig.width = 7, warning=FALSE}
 # Lets aggregate at maakunta level using column mk_name
 mk_data <- dat %>% 
   group_by(maakunta_name_fi,maakunta_code) %>% 
@@ -146,7 +149,7 @@ ggplot(mk_data) +
 
 Or if you prefer aggregating at seutukunta-level you can
 
-```{r vaalipiiri_map, fig.height = 4, fig.width = 7}
+```{r vaalipiiri_map, fig.height = 4, fig.width = 7, warning=FALSE}
 mk_data <- dat %>% 
   group_by(seutukunta_code,seutukunta_name_fi) %>% 
   # And compute population at maakunta level
@@ -163,7 +166,7 @@ ggplot(mk_data) +
 
 Or if you want the population at the national level aggregated up from municipality level you can: 
 
-```{r, national_map, fig.height = 4, fig.width = 7}
+```{r, national_map, fig.height = 4, fig.width = 7, warning=FALSE}
 mk_data <- dat %>% 
   summarise(vakiluku_2017 = sum(vakiluku_2017))
 
@@ -178,9 +181,7 @@ ggplot(mk_data) +
 
 ## Interactive maps using `leaflet`-package
 
-
-
-```{r leaflet, fig.height = 4, fig.width = 7}
+```{r leaflet, fig.height = 4, fig.width = 7, warning=FALSE}
 library(leaflet)
 library(geofi)
 library(dplyr)
@@ -205,7 +206,7 @@ leaflet(municipalities_lonlat) %>%
 
 ## Whole country at 5km by 5km
 
-```{r, population_grid_data, fig.height = 4, fig.width = 7}
+```{r, population_grid_data, fig.height = 4, fig.width = 7, warning=FALSE}
 pop_grid <- get_population_grid(year = 2018, resolution = 5)
 ggplot(pop_grid) + 
   geom_sf(aes(fill = vaesto), color = NA) +
@@ -214,7 +215,7 @@ ggplot(pop_grid) +
 
 ## Helsinki at 1km by 1km as interactive leaflet map
 
-```{r, population_grid_data2, fig.height = 4, fig.width = 7}
+```{r, population_grid_data2, fig.height = 4, fig.width = 7, warning=FALSE}
 pop_grid <- get_population_grid(year = 2018, resolution = 1)
 
 pop_grid_helsinki <- sf::st_transform(x = pop_grid %>% 
@@ -245,7 +246,7 @@ From Ryan Hafen's [blog](https://ryanhafen.com/blog/geofacet/):
 `geofi`-package contains custom grids to be used with various Finnish administrative breakdowns. Below is an example where population data at municipality level is pulled from Statistics Finland fom 1987 to 2018, then aggregated at the levels of regions (maakunta) and then plotted with ggplot2 using grid `geofi::grid_mk_2019`.
 
 
-```{r geofacet, fig.height = 6, fig.width = 7}
+```{r geofacet, fig.height = 6, fig.width = 7, warning=FALSE}
 
 # Let pull population data from Statistics Finland
 pxweb_query_list <- 
@@ -283,7 +284,7 @@ ggplot(dat, aes(x = year, y = population/1000, group = name)) +
 ```
 
 
-```{r geofacet2, fig.height = 6, fig.width = 7}
+```{r geofacet2, fig.height = 6, fig.width = 7, warning=FALSE}
 
 dat <- left_join(geofi::municipality_key_2019 %>% 
                    filter(maakunta_name_fi == "Ahvenanmaa") %>% 

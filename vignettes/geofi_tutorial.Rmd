@@ -30,7 +30,7 @@ remotes::install_github("ropengov/geofi")
 
 ## Municipalities
 
-```{r municipality_map, fig.height = 4, fig.width = 7}
+```{r municipality_map, fig.height = 4, fig.width = 7, warning=FALSE}
 library(geofi)
 library(ggplot2)
 library(dplyr)

@@ -50,7 +50,7 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows: 
 [Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani Miettinen, [Leo Lahti](https://github.com/antagomir)
-Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version 0.9.2900005. URL: [http://ropengov.github.io/geofi](http://ropengov.github.io/geofi)
+Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version 0.9.2900006. URL: [http://ropengov.github.io/geofi](http://ropengov.github.io/geofi)
 
 
 

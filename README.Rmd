@@ -40,7 +40,7 @@ R tools for spatial data in Finland.
 
 ### Installation and use
 
-For installation and usage, check the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_tutorial.html).
+For installation and usage, check the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_datasets.html).
 
 ### Contribute
 

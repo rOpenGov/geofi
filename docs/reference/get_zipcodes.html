@@ -96,9 +96,6 @@ Statistic Finland." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/geofi_tutorial.html">geofi tutorial</a>
-    </li>
-    <li>
       <a href="../articles/tricolore_tutorial.html">Creating ternary color coded maps</a>
     </li>
   </ul>
@@ -137,27 +134,32 @@ Statistic Finland." />
 <a href='https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html'>Statistic Finland</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_zipcodes</span>(<span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2017</span>)</pre>
+    <pre class="usage"><span class='fu'>get_zipcodes</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2017</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>year</th>
-      <td><p>A numeric for year of the administerative borders. Available are
-2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.</p></td>
+      <td><p>A numeric for year of the administrative borders. Years available from
+2015 onwards.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>sf object</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Markus Kainu <a href='mailto:markus.kainu@kela.fi'>markus.kainu@kela.fi</a>, Joona Lehtomäki <a href='mailto:joona.lehtomaki@iki.fi'>joona.lehtomaki@iki.fi</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>get_zipcodes</span>(<span class='kw'>year</span><span class='kw'>=</span><span class='fl'>2017</span>)
- <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>f</span>)
- }</div></pre>
+    <pre class="examples"><div class='input'> <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+ <span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'>get_zipcodes</span><span class='op'>(</span>year<span class='op'>=</span><span class='fl'>2017</span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
+ <span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -173,7 +175,7 @@ Statistic Finland." />
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

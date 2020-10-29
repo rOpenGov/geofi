@@ -3,6 +3,7 @@
 export(check_api_access)
 export(get_municipalities)
 export(get_population_grid)
+export(get_statistical_grid)
 export(get_zipcodes)
 export(wfs_api)
 importFrom(curl,curl_download)

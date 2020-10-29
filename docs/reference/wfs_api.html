@@ -95,7 +95,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/geofi_tutorial.html">geofi tutorial</a>
+      <a href="../articles/geofi_datasets.html">Datasets in geofi-package</a>
+    </li>
+    <li>
+      <a href="../articles/geofi_making_maps.html">Making maps using geofi-package</a>
+    </li>
+    <li>
+      <a href="../articles/geofi_spatial_analysis.html">Spatial analysis examples using R and `geofi`-package</a>
     </li>
     <li>
       <a href="../articles/tricolore_tutorial.html">Creating ternary color coded maps</a>
@@ -135,7 +141,7 @@
     <p>Requests to various WFS API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wfs_api</span>(<span class='kw'>base_url</span> <span class='kw'>=</span> <span class='st'>"http://geo.stat.fi/geoserver/wfs"</span>, <span class='no'>queries</span>)</pre>
+    <pre class="usage"><span class='fu'>wfs_api</span><span class='op'>(</span>base_url <span class='op'>=</span> <span class='st'>"http://geo.stat.fi/geoserver/wfs"</span>, <span class='va'>queries</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,7 +158,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>wfs_api (S3) object with the following attributes:</p><dl'>
+    <p>wfs_api (S3) object with the following attributes:</p><dl>
 <dt>content</dt><dd><p>XML payload.</p></dd>
 <dt>path</dt><dd><p>path provided to get the resonse.</p></dd>
 <dt>response</dt><dd><p>the original response object.</p></dd>
@@ -169,17 +175,21 @@ functions in the package.</p>
 <p>Note that GET requests are used using <code>httpcache</code> meaning that requests
 are cached. If you want clear cache, use <code><a href='https://enpiar.com/r/httpcache/reference/cache-management.html'>httpcache::clearCache()</a></code>. To turn
 the cache off completely, use <code><a href='https://enpiar.com/r/httpcache/reference/cache-management.html'>httpcache::cacheOff()</a></code></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Joona Lehtomäki <a href='mailto:joona.lehtomaki@iki.fi'>joona.lehtomaki@iki.fi</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'>wfs_api</span>(<span class='kw'>base_url</span> <span class='kw'>=</span> <span class='st'>"http://geo.stat.fi/geoserver/wfs"</span>,
-          <span class='kw'>queries</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"service"</span> <span class='kw'>=</span> <span class='st'>"WFS"</span>, <span class='st'>"version"</span> <span class='kw'>=</span> <span class='st'>"1.0.0"</span>),
-                <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>"getFeature"</span>,
-                     <span class='kw'>layer</span> <span class='kw'>=</span> <span class='st'>"tilastointialueet:kunta4500k_2017"</span>)))</div><div class='output co'>#&gt; <span class='message'>Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;layer=tilastointialueet%3Akunta4500k_2017</span></div><div class='output co'>#&gt; $url
+    <pre class="examples"><div class='input'>  <span class='fu'>wfs_api</span><span class='op'>(</span>base_url <span class='op'>=</span> <span class='st'>"http://geo.stat.fi/geoserver/wfs"</span>, 
+          queries <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"service"</span> <span class='op'>=</span> <span class='st'>"WFS"</span>, <span class='st'>"version"</span> <span class='op'>=</span> <span class='st'>"1.0.0"</span><span class='op'>)</span>, 
+                <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>request <span class='op'>=</span> <span class='st'>"getFeature"</span>, 
+                     layer <span class='op'>=</span> <span class='st'>"tilastointialueet:kunta4500k_2017"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;layer=tilastointialueet%3Akunta4500k_2017</span></div><div class='output co'>#&gt; $url
 #&gt; [1] "http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;layer=tilastointialueet%3Akunta4500k_2017"
 #&gt; 
 #&gt; $response
 #&gt; Response [http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;layer=tilastointialueet%3Akunta4500k_2017]
-#&gt;   Date: 2020-08-12 11:11
+#&gt;   Date: 2020-10-29 17:19
 #&gt;   Status: 200
 #&gt;   Content-Type: text/xml;charset=UTF-8
 #&gt;   Size: 450 B
@@ -215,7 +225,7 @@ the cache off completely, use <code><a href='https://enpiar.com/r/httpcache/refe
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

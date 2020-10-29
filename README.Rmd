@@ -43,7 +43,7 @@ Authors: [Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](http
 
 ### Installation and use
 
-For installation and usage, check the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_tutorial.html).
+For installation and usage, check the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_datasets.html).
 
 ### Contribute
 

@@ -96,7 +96,13 @@ and then immediately read back in into a sf object." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/geofi_tutorial.html">geofi tutorial</a>
+      <a href="../articles/geofi_datasets.html">Datasets in geofi-package</a>
+    </li>
+    <li>
+      <a href="../articles/geofi_making_maps.html">Making maps using geofi-package</a>
+    </li>
+    <li>
+      <a href="../articles/geofi_spatial_analysis.html">Spatial analysis examples using R and `geofi`-package</a>
     </li>
     <li>
       <a href="../articles/tricolore_tutorial.html">Creating ternary color coded maps</a>
@@ -137,7 +143,7 @@ and then immediately read back in into a sf object." />
 and then immediately read back in into a sf object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>to_sf</span>(<span class='no'>api_obj</span>)</pre>
+    <pre class="usage"><span class='fu'>to_sf</span><span class='op'>(</span><span class='va'>api_obj</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,15 +160,20 @@ and then immediately read back in into a sf object.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>For internal use, not exported.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Joona Lehtomäki <a href='mailto:joona.lehtomaki@iki.fi'>joona.lehtomaki@iki.fi</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-    <span class='no'>response</span> <span class='kw'>&lt;-</span> <span class='fu'>fmi_api</span>(<span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>"getFeature"</span>,
-                        <span class='kw'>storedquery_id</span> <span class='kw'>=</span> <span class='st'>"fmi::observations::weather::daily::timevaluepair"</span>,
-                        <span class='kw'>starttime</span> <span class='kw'>=</span> <span class='st'>"2019-01-01"</span>, <span class='kw'>endtime</span> <span class='kw'>=</span> <span class='st'>"2019-01-04"</span>,
-                        <span class='kw'>fmisid</span> <span class='kw'>=</span> <span class='fl'>100946</span>)
-    <span class='no'>sf_obj</span> <span class='kw'>&lt;-</span> <span class='fu'>to_sf</span>(<span class='no'>response</span>)
-  }</div></pre>
+    <pre class="examples"><div class='input'>  <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>response</span> <span class='op'>&lt;-</span> <span class='fu'>fmi_api</span><span class='op'>(</span>request <span class='op'>=</span> <span class='st'>"getFeature"</span>,
+                        storedquery_id <span class='op'>=</span> <span class='st'>"fmi::observations::weather::daily::timevaluepair"</span>,
+                        starttime <span class='op'>=</span> <span class='st'>"2019-01-01"</span>, endtime <span class='op'>=</span> <span class='st'>"2019-01-04"</span>,
+                        fmisid <span class='op'>=</span> <span class='fl'>100946</span><span class='op'>)</span>
+    <span class='va'>sf_obj</span> <span class='op'>&lt;-</span> <span class='fu'>to_sf</span><span class='op'>(</span><span class='va'>response</span><span class='op'>)</span>
+  <span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -178,7 +189,7 @@ and then immediately read back in into a sf object.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

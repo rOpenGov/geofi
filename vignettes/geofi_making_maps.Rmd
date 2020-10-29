@@ -1,10 +1,10 @@
 ---
-title: "geofi tutorial"
+title: "Making maps using geofi-package"
 author: "Markus Kainu, Leo Lahti & Joona Lehtomäki"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{geofi tutorial}
+  %\VignetteIndexEntry{Making maps using geofi-package}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -19,13 +19,18 @@ knitr::opts_chunk$set(
 ```
 
 
-## Installation
+**Installation**
 
 `geofi` is not yet in CRAN, but can be installed from Github using
 
 ```{r, eval = FALSE}
 remotes::install_github("ropengov/geofi")
 ```
+
+
+
+
+
 
 
 ## Municipalities
@@ -175,46 +180,11 @@ ggplot(mk_data) +
 
 ```
 
+Helsinki at 1km by 1km as interactive leaflet map
 
-## Interactive maps using `leaflet`-package
-
-
-
-```{r leaflet, fig.height = 4, fig.width = 7}
-library(leaflet)
-library(geofi)
-library(dplyr)
-
-municipalities <- get_municipalities(year = 2019)
-municipalities_lonlat <- sf::st_transform(x = municipalities, crs = "+proj=longlat +datum=WGS84")
-
-leaflet(municipalities_lonlat) %>% 
-  addTiles() %>% 
-  addPolygons(color = "coral", 
-              weight = 1,
-              smoothFactor = 0.5,
-              opacity = 1.0,
-              fillOpacity = 0.5,
-    label = ~nimi,
-    highlightOptions = highlightOptions(color = "white", weight = 2,
-      bringToFront = TRUE))
-
-```
-
-# Population grid data
-
-## Whole country at 5km by 5km
-
-```{r, population_grid_data, fig.height = 4, fig.width = 7}
-pop_grid <- get_population_grid(year = 2018, resolution = 5)
-ggplot(pop_grid) + 
-  geom_sf(aes(fill = vaesto), color = NA) +
-  scale_fill_viridis_c(trans = "sqrt", option = "plasma")
-```
-
-## Helsinki at 1km by 1km as interactive leaflet map
 
 ```{r, population_grid_data2, fig.height = 4, fig.width = 7}
+library(leaflet)
 pop_grid <- get_population_grid(year = 2018, resolution = 1)
 
 pop_grid_helsinki <- sf::st_transform(x = pop_grid %>% 
@@ -236,54 +206,8 @@ leaflet(pop_grid_helsinki) %>%
 ```
 
 
-# Using custom geofacet grids
 
-From Ryan Hafen's [blog](https://ryanhafen.com/blog/geofacet/):
-
->The [geofacet](https://hafen.github.io/geofacet/) package extends [ggplot2](http://ggplot2.tidyverse.org/) in a way that makes it easy to create geographically faceted visualizations in R. To geofacet is to take data representing different geographic entities and apply a visualization method to the data for each entity, with the resulting set of visualizations being laid out in a grid that mimics the original geographic topology as closely as possible.
-
-`geofi`-package contains custom grids to be used with various Finnish administrative breakdowns. Below is an example where population data at municipality level is pulled from Statistics Finland fom 1987 to 2018, then aggregated at the levels of regions (maakunta) and then plotted with ggplot2 using grid `geofi::grid_mk_2019`.
-
-
-```{r geofacet, fig.height = 6, fig.width = 7}
-
-# Let pull population data from Statistics Finland
-pxweb_query_list <- 
-  list("Alue 2019"=c("*"),
-       "Tiedot"=c("M411"),
-       "Vuosi"=c("1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018"))
-
-# Download data 
-px_data <- 
-  pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px",
-            query = pxweb_query_list)
-
-# Convert to data.frame 
-px_data <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
-names(px_data) <- c("kunta_name","var","year","value")
-
-# lets aggregate population data
-dat <- left_join(geofi::municipality_key_2019 %>% select(-year),
-                 px_data) %>% 
-  group_by(maakunta_code, maakunta_name_fi,year) %>% 
-  summarise(population = sum(value, na.rm = TRUE)) %>% 
-  na.omit() %>% 
-  ungroup() %>% 
-  rename(code = maakunta_code, name = maakunta_name_fi)
-
-library(geofacet)
-library(ggplot2)
-
-ggplot(dat, aes(x = year, y = population/1000, group = name)) + 
-  geom_line() + 
-  facet_geo(facets = ~name, grid = grid_maakunta_2019, scales = "free_y") +
-  theme(axis.text.x = element_text(size = 6)) +
-  scale_x_discrete(breaks = seq.int(from = 1987, to = 2018, by = 5)) +
-  labs(title = "Population 1987-2018", y = "population (1000)")
-```
-
-
-```{r geofacet2, fig.height = 6, fig.width = 7}
+```{r geofacet2, fig.height = 6, fig.width = 7, eval = FALSE}
 
 dat <- left_join(geofi::municipality_key_2019 %>% 
                    filter(maakunta_name_fi == "Ahvenanmaa") %>% 
@@ -302,4 +226,3 @@ ggplot(dat, aes(x = year, y = population/1000, group = name)) +
   scale_x_discrete(breaks = seq.int(from = 1987, to = 2018, by = 5)) +
   labs(title = "Population 1987-2018", y = "population (1000)")
 ```
-

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Finnish zip code (multi)polygons for different years. — get_population_grid • geofi</title>
+<title>Get Statistical grid data polygons at two different resolution — get_population_grid • geofi</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Get Finnish zip code (multi)polygons for different years. — get_population_grid" />
+<meta property="og:title" content="Get Statistical grid data polygons at two different resolution — get_population_grid" />
 <meta property="og:description" content="Thin wrapper around Finnish zip code areas provided by
 Statistic Finland." />
 
@@ -96,7 +96,13 @@ Statistic Finland." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/geofi_tutorial.html">geofi tutorial</a>
+      <a href="../articles/geofi_datasets.html">Datasets in geofi-package</a>
+    </li>
+    <li>
+      <a href="../articles/geofi_making_maps.html">Making maps using geofi-package</a>
+    </li>
+    <li>
+      <a href="../articles/geofi_spatial_analysis.html">Spatial analysis examples using R and `geofi`-package</a>
     </li>
     <li>
       <a href="../articles/tricolore_tutorial.html">Creating ternary color coded maps</a>
@@ -127,41 +133,46 @@ Statistic Finland." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Finnish zip code (multi)polygons for different years.</h1>
+    <h1>Get Statistical grid data polygons at two different resolution</h1>
     <small class="dont-index">Source: <a href='https://github.com/ropengov/geofi/blob/master/R/get_population_grid.R'><code>R/get_population_grid.R</code></a></small>
     <div class="hidden name"><code>get_population_grid.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Thin wrapper around Finnish zip code areas provided by
-<a href='https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html'>Statistic Finland</a>.</p>
+<a href='http://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html'>Statistic Finland</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_population_grid</span>(<span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2017</span>, <span class='kw'>resolution</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+    <pre class="usage"><span class='fu'>get_population_grid</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2017</span>, resolution <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>year</th>
-      <td><p>A numeric for year of the administerative borders. Available are
-2006, 2010, 2011, 2012, 2014, 2015, 2016, 2017.</p></td>
+      <td><p>A numeric for year of the administrative borders. Years available are
+2005 and 2010-2018.</p></td>
     </tr>
     <tr>
       <th>resolution</th>
-      <td><p>1 (1km x 1km) or 5 (5km x 5km)</p></td>
+      <td><p>A numeric 1 (1km x 1km) or 5 (5km x 5km)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>sf object</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Markus Kainu <a href='mailto:markus.kainu@kela.fi'>markus.kainu@kela.fi</a>, Joona Lehtomäki <a href='mailto:joona.lehtomaki@iki.fi'>joona.lehtomaki@iki.fi</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>get_population_grid</span>(<span class='kw'>year</span><span class='kw'>=</span><span class='fl'>2017</span>)
- <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>f</span>)
- }</div></pre>
+    <pre class="examples"><div class='input'> <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+ <span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'>get_population_grid</span><span class='op'>(</span>year<span class='op'>=</span><span class='fl'>2017</span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
+ <span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -177,7 +188,7 @@ Statistic Finland." />
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -1,0 +1,29 @@
+---
+title: "Spatial analysis examples using R and `geofi`-package"
+author: "Markus Kainu, Leo Lahti & Joona Lehtomäki"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Spatial analysis examples using R and `geofi`-package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+**Installation**
+
+`geofi` is not yet in CRAN, but can be installed from Github using
+
+```{r, eval = FALSE}
+remotes::install_github("ropengov/geofi")
+```
+

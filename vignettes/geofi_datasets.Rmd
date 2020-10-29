@@ -1,0 +1,160 @@
+---
+title: "Datasets in geofi-package"
+author: "Markus Kainu, Leo Lahti & Joona Lehtomäki"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Datasets in geofi-package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**\
+**`geofi`-package provides access to multiple dataset of different types and for different use. In this vignette we introduce the different datas and explain their use cases. Vignette *Making maps using `geofi`-package* provides multiple real-world examples of their usage. **\
+\
+Packages installation**
+
+`geofi` is not yet in CRAN, but can be installed from Github using
+
+```{r, eval = FALSE}
+remotes::install_github("ropengov/geofi")
+```
+
+## Municipality keys
+
+Official administrative regions in Finland are based on municipalities. In 2020 there are 310 municipalities in Finland and the number is decreasing over time through mergers.\
+\
+Each municipality belongs to a higher level regional classifications such as regions (maakunta) or health care districts (sairaanhoitopiiri). `municipality_key_`-datasets are based on Statistics Finland [Statistical classification](https://data.stat.fi/api/classifications/v2/) -api with few modification and provided on yearly basis.
+
+```{r municipality_keys}
+library(geofi)
+library(dplyr)
+d <- data(package = "geofi")
+as_tibble(d$results) %>% 
+  select(Item,Title) %>% 
+    filter(grepl("municipality_key", Item))
+```
+
+Looking at the names of \`municipality_key_2020\` there is 70 different variables from each municipality.
+
+```{r municipality_key_names}
+names(geofi::municipality_key_2020)
+```
+
+With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.\
+
+```{r municipality_key_maakunta}
+geofi::municipality_key_2020 %>% 
+  count(maakunta_code,maakunta_name_fi,maakunta_name_sv,maakunta_name_en)
+```
+
+Municipality keys are joined with the municipality spatial data by default.
+
+## Spatial data
+
+Spatial data is provided as administrative regions (polygons), population and statistical grids (polygons) and municipality centers (points).
+
+### Municipality borders
+
+Municipality borders are provided yearly from 2013 and in two resolution 1: 1 000 000 and 1:4 500 000. Use `1000` or `4500` as value for \`scale\`-argument, respectively.
+
+```{r municipality_map, fig.height = 4, fig.width = 7}
+municipalities <- get_municipalities(year = 2020, scale = 4500)
+plot(municipalities["municipality_name_fi"], border = NA)
+```
+
+### Zipcodes
+
+Zipcodes are provided in a single resolution from 2015.
+
+```{r zipcode_map, fig.height = 4, fig.width = 7}
+zipcodes <- get_zipcodes(year = 2015) 
+plot(zipcodes["nimi"], border = NA)
+```
+
+### Statistical grid
+
+Grid net for statistics both in 1 km x 1 km and 5 km x 5km covers whole of Finland. The grid net includes all grid squares in Finland. [[ttps://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html](ttps://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html)](https://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html){.uri}.\
+\
+Statistics Finland [proprietary grid database](https://www.stat.fi/tup/ruututietokanta/index_en.html) provides the attribute statistical data for these grid nets.
+
+```{r, statisticsl_grid_data, fig.height = 4, fig.width = 7}
+stat_grid <- get_statistical_grid(resolution = 5, auxiliary_data = TRUE)
+plot(stat_grid["euref_x"], border = NA)
+```
+
+### Population grid
+
+Number of population by both 1 km x 1 km and 5 km x 5 km grids. The number of population on the last day of the reference year (31 December) by age group. Data includes only inhabited grids. The statistical variables of the data are:\
+Total population (`vaesto`), number of men (`miehet`) and women (`naiset`), under 15 year olds (`ika_0_14`), 15-64 year olds (`ika_15_64`), and aged over 65 (`ika_65_`). Only the number of population is reported for grids of under 10 inhabitants. See [Population grid data](https://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/a901d40a-8a6b-4678-814c-79d2e2ab130c).\
+\
+The data describes the population distribution independent of administrative areas (such as municipal borders). The data is suitable for examination of population distribution and making various spatial analysis.
+
+```{r, population_grid_data, fig.height = 4, fig.width = 7}
+pop_grid <- get_population_grid(year = 2018, resolution = 5)
+plot(pop_grid["kunta"], border = NA)
+```
+
+## Custom geofacet grid data
+
+From Ryan Hafen's [blog](https://ryanhafen.com/blog/geofacet/):
+
+> The [geofacet](https://hafen.github.io/geofacet/) package extends [ggplot2](http://ggplot2.tidyverse.org/) in a way that makes it easy to create geographically faceted visualizations in R. To geofacet is to take data representing different geographic entities and apply a visualization method to the data for each entity, with the resulting set of visualizations being laid out in a grid that mimics the original geographic topology as closely as possible.
+
+`geofi`-package contains custom grids to be used with various Finnish administrative breakdowns as listed below.
+
+```{r geofacets}
+d <- data(package = "geofi")
+as_tibble(d$results) %>% 
+  select(Item,Title) %>% 
+    filter(grepl("grid", Item)) %>% 
+  print(n = 100)
+```
+
+Here is an example where population data at municipality level is pulled from Statistics Finland from 1987 to 2018, then aggregated at the levels of regions (`maakunta`) and then plotted with ggplot2 using grid `geofi::grid_mk_2019`.
+
+```{r geofacet, fig.height = 6, fig.width = 7}
+library(pxweb)
+# Let pull population data from Statistics Finland
+pxweb_query_list <- 
+  list("Alue 2019"=c("*"),
+       "Tiedot"=c("M411"),
+       "Vuosi"=c("1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018"))
+
+# Download data 
+px_data <- 
+  pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px",
+            query = pxweb_query_list)
+
+# Convert to data.frame 
+px_data <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
+names(px_data) <- c("kunta_name","var","year","value")
+
+# lets aggregate population data
+dat <- left_join(geofi::municipality_key_2019 %>% select(-year),
+                 px_data) %>% 
+  group_by(maakunta_code, maakunta_name_fi,year) %>% 
+  summarise(population = sum(value, na.rm = TRUE)) %>% 
+  na.omit() %>% 
+  ungroup() %>% 
+  rename(code = maakunta_code, name = maakunta_name_fi)
+
+library(geofacet)
+library(ggplot2)
+
+ggplot(dat, aes(x = year, y = population/1000, group = name)) + 
+  geom_line() + 
+  facet_geo(facets = ~name, grid = grid_maakunta_2019, scales = "free_y") +
+  theme(axis.text.x = element_text(size = 6)) +
+  scale_x_discrete(breaks = seq.int(from = 1987, to = 2018, by = 5)) +
+  labs(title = "Population 1987-2018", y = "population (1000)")
+```

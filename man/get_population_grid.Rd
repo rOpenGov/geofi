@@ -2,22 +2,21 @@
 % Please edit documentation in R/get_population_grid.R
 \name{get_population_grid}
 \alias{get_population_grid}
-\title{Get Statistical grid data polygons at two different resolution}
+\title{Get Finnish Statistics grid in two different resolutions for years 2010-2019}
 \usage{
 get_population_grid(year = 2017, resolution = 5)
 }
 \arguments{
-\item{year}{A numeric for year of the administrative borders. Years available are
-2005 and 2010-2018.}
+\item{year}{A numeric for year of the administrative borders. Years available 2010-2019.}
 
-\item{resolution}{A numeric 1 (1km x 1km) or 5 (5km x 5km)}
+\item{resolution}{1 (1km x 1km) or 5 (5km x 5km)}
 }
 \value{
 sf object
 }
 \description{
 Thin wrapper around Finnish zip code areas provided by
-\href{http://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html}{Statistic Finland}.
+\href{https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html}{Statistic Finland}.
 }
 \examples{
  \dontrun{

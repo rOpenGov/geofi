@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Statistical grid data polygons at two different resolution — get_population_grid • geofi</title>
+<title>Get Finnish Statistics grid in two different resolutions for years 2010-2019 — get_population_grid • geofi</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Get Statistical grid data polygons at two different resolution — get_population_grid" />
+<meta property="og:title" content="Get Finnish Statistics grid in two different resolutions for years 2010-2019 — get_population_grid" />
 <meta property="og:description" content="Thin wrapper around Finnish zip code areas provided by
 Statistic Finland." />
 
@@ -73,7 +73,7 @@ Statistic Finland." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2900004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2900006</span>
       </span>
     </div>
 
@@ -133,14 +133,14 @@ Statistic Finland." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Statistical grid data polygons at two different resolution</h1>
+    <h1>Get Finnish Statistics grid in two different resolutions for years 2010-2019</h1>
     <small class="dont-index">Source: <a href='https://github.com/ropengov/geofi/blob/master/R/get_population_grid.R'><code>R/get_population_grid.R</code></a></small>
     <div class="hidden name"><code>get_population_grid.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Thin wrapper around Finnish zip code areas provided by
-<a href='http://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html'>Statistic Finland</a>.</p>
+<a href='https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html'>Statistic Finland</a>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_population_grid</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2017</span>, resolution <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></pre>
@@ -150,12 +150,11 @@ Statistic Finland." />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>year</th>
-      <td><p>A numeric for year of the administrative borders. Years available are
-2005 and 2010-2018.</p></td>
+      <td><p>A numeric for year of the administrative borders. Years available 2010-2019.</p></td>
     </tr>
     <tr>
       <th>resolution</th>
-      <td><p>A numeric 1 (1km x 1km) or 5 (5km x 5km)</p></td>
+      <td><p>1 (1km x 1km) or 5 (5km x 5km)</p></td>
     </tr>
     </table>
 

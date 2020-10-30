@@ -38,9 +38,6 @@ geofi - Finland GIS R tools
 
 R tools for spatial data in Finland.
 
-Authors: [Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), [Leo Lahti](https://github.com/antagomir)
-
-
 ### Installation and use
 
 For installation and usage, check the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_datasets.html).
@@ -57,7 +54,11 @@ Contributions are very welcome:
 
 ### Acknowledgements
 
-**Kindly cite this work** as follows: Markus Kainu, Joona Lehtomäki, and Leo Lahti. Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version `r sessionInfo()$otherPkgs$geofi$Version`. URL: [http://ropengov.github.io/geofi](http://ropengov.github.io/geofi)
+**Kindly cite this work** as follows: 
+[Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani Miettinen, [Leo Lahti](https://github.com/antagomir)
+Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version `r sessionInfo()$otherPkgs$geofi$Version`. URL: [http://ropengov.github.io/geofi](http://ropengov.github.io/geofi)
+
+
 
 We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Juusi Parkkinen, Jussi Jousimo, Janne Aukia, Aaro Salosensaari and Jani Miettinen. This project is part of [rOpenGov](http://ropengov.github.io).
 

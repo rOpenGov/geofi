@@ -1,11 +1,11 @@
-#' Get Statistical grid data polygons at two different resolution
+#' Get Finnish Statistics grid in two different resolutions for years 2010-2019
+#
 #'
 #' Thin wrapper around Finnish zip code areas provided by
-#' [Statistic Finland](http://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html).
+#' [Statistic Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
 #'
-#' @param year A numeric for year of the administrative borders. Years available are
-#'             2005 and 2010-2018.
-#' @param resolution A numeric 1 (1km x 1km) or 5 (5km x 5km)
+#' @param year A numeric for year of the administrative borders. Years available 2010-2019.
+#' @param resolution 1 (1km x 1km) or 5 (5km x 5km)
 #'
 #' @return sf object
 #'

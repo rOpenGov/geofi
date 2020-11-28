@@ -141,8 +141,7 @@ plot_pop <- ggplot(finland_popu2017) +
   scale_fill_identity() +
   theme_void() +
   labs(title = "Finnish population by municipalites",
-       subtitle = "Regional distibution of age groups in 2017.",
-       caption = "Data by Statistics Finland")
+       subtitle = "Regional distibution of age groups in 2017.")
 plot_pop
 ```
 

@@ -26,7 +26,7 @@ langs <- c("fi","sv","en")
 
 # Lets loop over the years 2013-2020
 yearlist <- list()
-yrs <- 2013:2020
+yrs <- 2013:2021
 for (iii in seq_along(yrs)){
 
   kuntaclass <- paste0("kunta_1_",yrs[iii],"0101")
@@ -143,7 +143,7 @@ ddd3 <- ddd2 %>%
          name_sv = municipality_name_sv)
 
 # erva-regions can be found from sairaanhoitp <-> erva table
-res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20200101%23erva_3_20200101/maps?format=json")) %>%
+res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20210101%23erva_3_20210101/maps?format=json")) %>%
   as_tibble()
 vals <- sub("\\?format=json", "", sub("^.+maps/", "", res$value))
 keydat <- read.table(text = vals, sep="/") %>%
@@ -153,7 +153,7 @@ keydat <- read.table(text = vals, sep="/") %>%
 
 lst <- list()
 for (i in seq_along(langs)){
-  tmp <- get_classifications(class = "erva_3_20200101", lang = langs[i])
+  tmp <- get_classifications(class = "erva_3_20210101", lang = langs[i])
   if (is.null(tmp)) next()
   names(tmp) <- c("erva_code", paste0("erva_name_",langs[i]))
   lst[[i]] <- tmp
@@ -194,16 +194,17 @@ gsub("^.*Eteläinen", "", cont) %>%
   str_split(string = ., pattern = ",") %>%
   unlist() -> etelainen
 
-# etelainen <- c("Asikkala", "Askola", "Espoo", "Hamina", "Hanko", "Hartola",
-#   "Heinola", "Helsinki", "Hollola", "Hyvinkää", "Hämeenkoski",
-#   "Iitti", "Imatra", "Inkoo", "Järvenpää", "Karkkila", "Kauniainen",
-#   "Kerava", "Kirkkonummi", "Kotka", "Kouvola", "Kärkölä", "Lahti",
-#   "Lapinjärvi", "Lappeenranta", "Lemi", "Lohja", "Loviisa", "Luumäki",
-#   "Miehikkälä", "Myrskylä", "Mäntsälä", "Nastola", "Nurmijärvi",
-#   "Orimattila", "Padasjoki", "Parikkala", "Pornainen", "Porvoo",
-#   "Pukkila", "Pyhtää", "Raasepori", "Rautjärvi", "Ruokolahti",
-#   "Savitaipale", "Sipoo", "Siuntio", "Sysmä", "Taipalsaari", "Tuusula",
-#   "Vantaa", "Vihti", "Virolahti")
+dput(etelainen)
+etelainen <- c("Asikkala", "Askola", "Espoo", "Hamina", "Hanko", "Hartola",
+  "Heinola", "Helsinki", "Hollola", "Hyvinkää", "Hämeenkoski",
+  "Iitti", "Imatra", "Inkoo", "Järvenpää", "Karkkila", "Kauniainen",
+  "Kerava", "Kirkkonummi", "Kotka", "Kouvola", "Kärkölä", "Lahti",
+  "Lapinjärvi", "Lappeenranta", "Lemi", "Lohja", "Loviisa", "Luumäki",
+  "Miehikkälä", "Myrskylä", "Mäntsälä", "Nastola", "Nurmijärvi",
+  "Orimattila", "Padasjoki", "Parikkala", "Pornainen", "Porvoo",
+  "Pukkila", "Pyhtää", "Raasepori", "Rautjärvi", "Ruokolahti",
+  "Savitaipale", "Sipoo", "Siuntio", "Sysmä", "Taipalsaari", "Tuusula",
+  "Vantaa", "Vihti", "Virolahti")
 
 # Itäinen
 gsub("^.*Itäinen", "", cont) %>%
@@ -216,6 +217,7 @@ gsub("^.*Itäinen", "", cont) %>%
   str_split(string = ., pattern = ",") %>%
   unlist() -> itainen
 
+# dput(itainen)
 # itainen <- c("Enonkoski", "Hankasalmi", "Heinävesi", "Hirvensalmi", "Iisalmi",
 #              "Ilomantsi", "Joensuu", "Joroinen", "Joutsa", "Juankoski", "Juuka",
 #              "Juva", "Jyväskylä", "Jämsä", "Kaavi", "Kangasniemi", "Kannonkoski",
@@ -242,6 +244,7 @@ gsub("^.*Keskinen", "", cont) %>%
   str_split(string = ., pattern = ",") %>%
   unlist() -> keskinen
 
+# dput(keskinen)
 # keskinen <- c("Akaa", "Alajärvi", "Alavus", "Evijärvi", "Forssa", "Hattula",
 #               "Hausjärvi", "Humppila", "Hämeenkyrö", "Hämeenlinna", "Ikaalinen",
 #               "Ilmajoki", "Isojoki", "Isokyrö", "Janakkala", "Jokioinen",
@@ -268,6 +271,7 @@ lantinen <- lantinen[lantinen != "TL"]
 lantinen[lantinen == "Koski"] <- "Koski Tl"
 lantinen[lantinen == "Pedersören"] <- "Pedersören kunta"
 
+# dput(lantinen)
 # lantinen <- c("Aura", "Eura", "Eurajoki", "Harjavalta", "Honkajoki", "Huittinen",
 #               "Jämijärvi", "Kaarina", "Kankaanpää", "Karvia", "Kaskinen",
 #               "Kemiönsaari", "Kokemäki", "Korsnäs", "Koski Tl", "Kristiinankaupunki",
@@ -291,6 +295,7 @@ gsub("^.*Pohjoinen", "", cont) %>%
   str_split(string = ., pattern = ",") %>%
   unlist() -> pohjoinen
 
+# dput(pohjoinen)
 # pohjoinen <- c("Alavieska", "Enontekiö", "Hailuoto", "Haapajärvi", "Halsua",
 #                "Haapavesi", "Hyrynsalmi", "Ii", "Inari", "Kajaani", "Kalajoki",
 #                "Kannus", "Kaustinen", "Kemi", "Kempele", "Kemijärvi", "Keminmaa",
@@ -398,7 +403,7 @@ mutate(kela_asumistukialue_name_sv = case_when(
     kela_asumistukialue_name_fi == "IV kuntaryhmä" ~ "Municipality in category IV"
   )) %>%
   # Kela-spesific classifications only for year 2020 as there is no history available as open data
-  mutate(year = 2020)
+  mutate(year = 2021)
 
 
 # Lets rename the Finnish version of Maarianhamina

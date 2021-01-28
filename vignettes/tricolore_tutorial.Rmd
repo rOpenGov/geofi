@@ -129,7 +129,7 @@ plot_pop
 
 Legend for tertinary color is added by `ggtern` and `annotation_custom()`. Package `ggtern` is important to load afer `ggplot2` package.
 
-```{r plot_finalmap,  fig.height = 6, dpi=300, eval = FALSE}
+```{r plot_finalmap,  fig.height = 6, dpi=300, eval = TRUE}
 library(ggtern)
 plot_pop <- ggplot(finland_popu2017) +
   geom_sf(aes(fill = popu_rgb, geometry = geom), size = .1) +

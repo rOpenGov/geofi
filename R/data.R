@@ -1,3 +1,32 @@
+#' A simple feature point data containing locations of municipalities central localities
+#'
+#' Data is extracted from latest version (January 2021) of Topographic Database (Maastotietokanta) by National Land Survey of Finland (Maanmittauslaitos)
+#'
+#' @format A simple feature POINT data with 311 rows and 17 variables:
+#' \describe{
+#'   \item{id}{id}
+#'   \item{mtk_id}{mtk_id}
+#'   \item{sijaintitarkkuus}{location precision}
+#'   \item{aineistolahde}{data source}
+#'   \item{alkupvm}{start date}
+#'   \item{teksti}{Municipality name}
+#'   \item{suunta}{direction}
+#'   \item{dx}{dx}
+#'   \item{dy}{dy}
+#'   \item{kohdeluokka}{kohdeluokka}
+#'   \item{ladontatunnus}{ladontatunnus}
+#'   \item{kirjasintyyppikoodi}{kirjasintyyppikoodi}
+#'   \item{kirjasinkoko}{kirjasinkoko}
+#'   \item{kirjasinvarikoodi}{kirjasinvarikoodi}
+#'   \item{kirjasinkallistuskulma}{kirjasinkallistuskulma}
+#'   \item{kirjasinvalyskerroin}{kirjasinvalyskerroin}
+#'   \item{kuntatunnus}{municipality code}
+#'   \item{geom}{geom}
+#' }
+"municipality_central_localities"
+
+
+
 #' custom geofacet grid for health care districts as in 2019
 #'
 #' Grid table to be used with ggplot2 and geofacet

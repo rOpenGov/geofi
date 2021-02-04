@@ -31,7 +31,7 @@ remotes::install_github("ropengov/geofi")
 
 ## Municipality keys
 
-Official administrative regions in Finland are based on municipalities. In 2020 there are 310 municipalities in Finland and the number is decreasing over time through mergers.\
+Official administrative regions in Finland are based on municipalities. In 2021 there are 309 municipalities in Finland and the number is decreasing over time through mergers.\
 \
 Each municipality belongs to a higher level regional classifications such as regions (maakunta) or health care districts (sairaanhoitopiiri). `municipality_key_`-datasets are based on Statistics Finland [Statistical classification](https://data.stat.fi/api/classifications/v2/) -api with few modification and provided on yearly basis.
 
@@ -44,7 +44,7 @@ as_tibble(d$results) %>%
     filter(grepl("municipality_key", Item))
 ```
 
-Looking at the names of \`municipality_key_2020\` there is 70 different variables from each municipality.
+Looking at the names of \`municipality_key_2021\` there is 63 different variables from each municipality.
 
 ```{r municipality_key_names}
 names(geofi::municipality_key_2020)
@@ -53,7 +53,7 @@ names(geofi::municipality_key_2020)
 With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.\
 
 ```{r municipality_key_maakunta}
-geofi::municipality_key_2020 %>% 
+geofi::municipality_key_2021 %>% 
   count(maakunta_code,maakunta_name_fi,maakunta_name_sv,maakunta_name_en)
 ```
 
@@ -103,6 +103,16 @@ The data describes the population distribution independent of administrative are
 pop_grid <- get_population_grid(year = 2018, resolution = 5)
 plot(pop_grid["kunta"], border = NA)
 ```
+
+### Central localities of municipalities
+
+[National Land Survey of Finland](https://maanmittauslaitos.fi) maintains [Topological Database](https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database) that contains a wide range of layers from which you can access the locations of central localities of each municipality in Finland.
+
+```{r central_localities}
+plot(municipality_central_localities["teksti"])
+```
+
+### 
 
 ## Custom geofacet grid data
 

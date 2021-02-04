@@ -4,7 +4,7 @@
 #' Thin wrapper around Finnish zip code areas provided by
 #' [Statistic Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
 #'
-#' @param year A numeric for year of the administrative borders. Years available 2010-2019.
+#' @param year A numeric for year of the population grid. Years available 2010-2019.
 #' @param resolution 1 (1km x 1km) or 5 (5km x 5km)
 #'
 #' @return sf object

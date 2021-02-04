@@ -29,10 +29,6 @@ remotes::install_github("ropengov/geofi")
 
 
 
-
-
-
-
 ## Municipalities
 
 ```{r municipality_map, fig.height = 4, fig.width = 7}
@@ -46,6 +42,15 @@ municipalities <- get_municipalities(year = 2020, scale = 4500)
 ggplot(municipalities) + 
   geom_sf(aes(fill = as.integer(kunta)))
 ```
+
+You can add the locations of central locality of each municipality with 
+
+```{r}
+ggplot(municipalities) + 
+  geom_sf(aes(fill = as.integer(kunta))) +
+  geom_sf(data = municipality_central_localities, shape = 5, color = "white")
+```
+
 
 ## Zipcodes
 
@@ -96,7 +101,7 @@ ggplot(zipcodes_new) +
 
 
 
-## Joining municipality level data from Statistics Finland
+## Joining municipality level data from Statistics Finland pxweb-api
 
 
 ```{r municipalities_with_data}

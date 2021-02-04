@@ -4,11 +4,11 @@
 \alias{get_municipalities}
 \title{Get Finnish municipality (multi)polygons for different years and/or scales.}
 \usage{
-get_municipalities(year = 2020, scale = 4500)
+get_municipalities(year = 2021, scale = 4500)
 }
 \arguments{
 \item{year}{A numeric for year of the administerative borders. Available are
-2013, 2014, 2015, 2016, 2017, 2018 and 2019.}
+2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 and 2021.}
 
 \item{scale}{A scale or resolution of the shape. Two options: \code{1000}
 equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}

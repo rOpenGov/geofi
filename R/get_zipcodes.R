@@ -3,7 +3,7 @@
 #' Thin wrapper around Finnish zip code areas provided by
 #' [Statistic Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
 #'
-#' @param year A numeric for year of the zipcodes. Years available 2015-2020.
+#' @param year A numeric for year of the zipcodes. Years available 2015-2021.
 #'
 #' @return sf object
 #'
@@ -13,14 +13,14 @@
 #'
 #' @examples
 #'  \dontrun{
-#'  f <- get_zipcodes(year=2017)
+#'  f <- get_zipcodes(year=2021)
 #'  plot(f)
 #'  }
 #'
 #' @rdname get_zipcodes
 #' @export
 
-get_zipcodes <- function(year = 2017){
+get_zipcodes <- function(year = 2021){
 
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()){

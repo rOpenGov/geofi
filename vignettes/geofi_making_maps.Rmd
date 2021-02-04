@@ -38,7 +38,7 @@ library(dplyr)
 library(janitor)
 library(tidyr)
 
-municipalities <- get_municipalities(year = 2020, scale = 4500)
+municipalities <- get_municipalities(year = 2021, scale = 4500)
 ggplot(municipalities) + 
   geom_sf(aes(fill = as.integer(kunta)))
 ```
@@ -56,7 +56,7 @@ ggplot(municipalities) +
 
 
 ```{r zipcode_map, fig.height = 4, fig.width = 7}
-zipcodes <- get_zipcodes(year = 2020) 
+zipcodes <- get_zipcodes(year = 2021) 
 ggplot(zipcodes) + 
   geom_sf(aes(fill = as.integer(posti_alue)))
 ``` 

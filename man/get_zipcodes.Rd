@@ -4,10 +4,10 @@
 \alias{get_zipcodes}
 \title{Get Finnish zip code (multi)polygons for different years.}
 \usage{
-get_zipcodes(year = 2017)
+get_zipcodes(year = 2021)
 }
 \arguments{
-\item{year}{A numeric for year of the zipcodes. Years available 2015-2020.}
+\item{year}{A numeric for year of the zipcodes. Years available 2015-2021.}
 }
 \value{
 sf object
@@ -18,7 +18,7 @@ Thin wrapper around Finnish zip code areas provided by
 }
 \examples{
  \dontrun{
- f <- get_zipcodes(year=2017)
+ f <- get_zipcodes(year=2021)
  plot(f)
  }
 

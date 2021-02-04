@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2900009</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2900010</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
       <h1 data-toc-skip>Datasets in geofi-package</h1>
                         <h4 class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 class="date">2021-01-28</h4>
+            <h4 class="date">2021-02-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropengov/geofi/blob/master/vignettes/geofi_datasets.Rmd"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="hidden name"><code>geofi_datasets.Rmd</code></div>
@@ -111,7 +111,7 @@ Packages installation</strong></p>
 <div id="municipality-keys" class="section level2">
 <h2 class="hasAnchor">
 <a href="#municipality-keys" class="anchor"></a>Municipality keys</h2>
-<p>Official administrative regions in Finland are based on municipalities. In 2020 there are 310 municipalities in Finland and the number is decreasing over time through mergers.<br><br>
+<p>Official administrative regions in Finland are based on municipalities. In 2021 there are 309 municipalities in Finland and the number is decreasing over time through mergers.<br><br>
 Each municipality belongs to a higher level regional classifications such as regions (maakunta) or health care districts (sairaanhoitopiiri). <code>municipality_key_</code>-datasets are based on Statistics Finland <a href="https://data.stat.fi/api/classifications/v2/">Statistical classification</a> -api with few modification and provided on yearly basis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropengov/geofi">geofi</a></span><span class="op">)</span>
@@ -144,7 +144,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="co">#&gt;  8 municipality_key_2019 Municipality key table for 2019                      </span>
 <span class="co">#&gt;  9 municipality_key_2020 Municipality key table for 2020                      </span>
 <span class="co">#&gt; 10 municipality_key_2021 Municipality key table for 2021</span></code></pre></div>
-<p>Looking at the names of `municipality_key_2020` there is 70 different variables from each municipality.</p>
+<p>Looking at the names of `municipality_key_2021` there is 63 different variables from each municipality.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2020.html">municipality_key_2020</a></span><span class="op">)</span>
 <span class="co">#&gt;  [1] "kunta"                  "municipality_name_fi"   "municipality_name_sv"  </span>
@@ -170,30 +170,31 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="co">#&gt; [61] "erva_name_fi"           "erva_name_sv"           "erva_name_en"</span></code></pre></div>
 <p>With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.<br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2020.html">municipality_key_2020</a></span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">maakunta_code</span>,<span class="va">maakunta_name_fi</span>,<span class="va">maakunta_name_sv</span>,<span class="va">maakunta_name_en</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 19 x 5</span>
+<span class="co">#&gt; # A tibble: 20 x 5</span>
 <span class="co">#&gt;    maakunta_code maakunta_name_fi  maakunta_name_sv     maakunta_name_en       n</span>
 <span class="co">#&gt;            &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;                &lt;chr&gt;              &lt;int&gt;</span>
 <span class="co">#&gt;  1             1 Uusimaa           Nyland               Uusimaa               26</span>
 <span class="co">#&gt;  2             2 Varsinais-Suomi   Egentliga Finland    Southwest Finland     27</span>
-<span class="co">#&gt;  3             4 Satakunta         Satakunta            Satakunta             17</span>
+<span class="co">#&gt;  3             4 Satakunta         Satakunta            Satakunta             16</span>
 <span class="co">#&gt;  4             5 Kanta-Häme        Egentliga Tavastland Kanta-Häme            11</span>
 <span class="co">#&gt;  5             6 Pirkanmaa         Birkaland            Pirkanmaa             22</span>
-<span class="co">#&gt;  6             7 Päijät-Häme       Päijänne-Tavastland  Päijät-Häme            9</span>
-<span class="co">#&gt;  7             8 Kymenlaakso       Kymmenedalen         Kymenlaakso            7</span>
+<span class="co">#&gt;  6             7 Päijät-Häme       Päijänne-Tavastland  Päijät-Häme           10</span>
+<span class="co">#&gt;  7             8 Kymenlaakso       Kymmenedalen         Kymenlaakso            6</span>
 <span class="co">#&gt;  8             9 Etelä-Karjala     Södra Karelen        South Karelia          9</span>
-<span class="co">#&gt;  9            10 Etelä-Savo        Södra Savolax        South Savo            14</span>
-<span class="co">#&gt; 10            11 Pohjois-Savo      Norra Savolax        North Savo            18</span>
-<span class="co">#&gt; 11            12 Pohjois-Karjala   Norra Karelen        North Karelia         12</span>
-<span class="co">#&gt; 12            13 Keski-Suomi       Mellersta Finland    Central Finland       23</span>
-<span class="co">#&gt; 13            14 Etelä-Pohjanmaa   Södra Österbotten    South Ostrobothnia    17</span>
-<span class="co">#&gt; 14            15 Pohjanmaa         Österbotten          Ostrobothnia          15</span>
+<span class="co">#&gt;  9            10 Etelä-Savo        Södra Savolax        South Savo            12</span>
+<span class="co">#&gt; 10            11 Pohjois-Savo      Norra Savolax        North Savo            19</span>
+<span class="co">#&gt; 11            12 Pohjois-Karjala   Norra Karelen        North Karelia         13</span>
+<span class="co">#&gt; 12            13 Keski-Suomi       Mellersta Finland    Central Finland       22</span>
+<span class="co">#&gt; 13            14 Etelä-Pohjanmaa   Södra Österbotten    South Ostrobothnia    18</span>
+<span class="co">#&gt; 14            15 Pohjanmaa         Österbotten          Ostrobothnia          14</span>
 <span class="co">#&gt; 15            16 Keski-Pohjanmaa   Mellersta Österbott… Central Ostroboth…     8</span>
 <span class="co">#&gt; 16            17 Pohjois-Pohjanmaa Norra Österbotten    North Ostrobothnia    30</span>
 <span class="co">#&gt; 17            18 Kainuu            Kajanaland           Kainuu                 8</span>
 <span class="co">#&gt; 18            19 Lappi             Lappland             Lapland               21</span>
-<span class="co">#&gt; 19            21 Ahvenanmaa        Åland                Åland                 16</span></code></pre></div>
+<span class="co">#&gt; 19            21 Ahvenanmaa        Åland                Åland                 16</span>
+<span class="co">#&gt; 20            NA &lt;NA&gt;              &lt;NA&gt;                 &lt;NA&gt;                   1</span></code></pre></div>
 <p>Municipality keys are joined with the municipality spatial data by default.</p>
 </div>
 <div id="spatial-data" class="section level2">
@@ -252,6 +253,17 @@ The data describes the population distribution independent of administrative are
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pop_grid</span><span class="op">[</span><span class="st">"kunta"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/population_grid_data-1.png" width="672"></p>
 </div>
+<div id="central-localities-of-municipalities" class="section level3">
+<h3 class="hasAnchor">
+<a href="#central-localities-of-municipalities" class="anchor"></a>Central localities of municipalities</h3>
+<p><a href="https://maanmittauslaitos.fi">National Land Survey of Finland</a> maintains <a href="https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database">Topological Database</a> that contains a wide range of layers from which you can access the locations of central localities of each municipality in Finland.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">municipality_central_localities</span><span class="op">[</span><span class="st">"teksti"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<p><img src="geofi_datasets_files/figure-html/central_localities-1.png" width="700"></p>
+</div>
+<div id="section" class="section level3">
+<h3></h3>
+</div>
 </div>
 <div id="custom-geofacet-grid-data" class="section level2">
 <h2 class="hasAnchor">
@@ -261,7 +273,7 @@ The data describes the population distribution independent of administrative are
 <p>The <a href="https://hafen.github.io/geofacet/">geofacet</a> package extends <a href="http://ggplot2.tidyverse.org/">ggplot2</a> in a way that makes it easy to create geographically faceted visualizations in R. To geofacet is to take data representing different geographic entities and apply a visualization method to the data for each entity, with the resulting set of visualizations being laid out in a grid that mimics the original geographic topology as closely as possible.</p>
 </blockquote>
 <p><code>geofi</code>-package contains custom grids to be used with various Finnish administrative breakdowns as listed below.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"geofi"</span><span class="op">)</span>
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -311,7 +323,7 @@ The data describes the population distribution independent of administrative are
 <span class="co">#&gt; 39 grid_varsinais_suomi_20… custom geofacet grid for Varsinais-Suomi region as …</span>
 <span class="co">#&gt; 40 grid_varsinais_suomi_20… custom geofacet grid for Varsinais-Suomi region as …</span></code></pre></div>
 <p>Here is an example where population data at municipality level is pulled from Statistics Finland from 1987 to 2018, then aggregated at the levels of regions (<code>maakunta</code>) and then plotted with ggplot2 using grid <code>geofi::grid_mk_2019</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/">pxweb</a></span><span class="op">)</span>
 <span class="co">#&gt; pxweb: R tools for PX-WEB API.</span>
 <span class="co">#&gt; Copyright (C) 2014-2018 Mans Magnusson, Leo Lahti et al.</span>

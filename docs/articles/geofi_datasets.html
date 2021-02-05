@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Datasets in geofi-package • geofi</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2900010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2900011</span>
       </span>
     </div>
 
@@ -73,8 +73,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ropengov/geofi/">
-    <span class="fab fa-github fa-lg"></span>
+  <a href="https://github.com/rOpenGov/geofi">
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
       <h1 data-toc-skip>Datasets in geofi-package</h1>
                         <h4 class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 class="date">2021-02-04</h4>
+            <h4 class="date">2021-02-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropengov/geofi/blob/master/vignettes/geofi_datasets.Rmd"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="hidden name"><code>geofi_datasets.Rmd</code></div>
@@ -172,14 +172,14 @@ Each municipality belongs to a higher level regional classifications such as reg
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">maakunta_code</span>,<span class="va">maakunta_name_fi</span>,<span class="va">maakunta_name_sv</span>,<span class="va">maakunta_name_en</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 20 x 5</span>
+<span class="co">#&gt; # A tibble: 19 x 5</span>
 <span class="co">#&gt;    maakunta_code maakunta_name_fi  maakunta_name_sv     maakunta_name_en       n</span>
 <span class="co">#&gt;            &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;                &lt;chr&gt;              &lt;int&gt;</span>
 <span class="co">#&gt;  1             1 Uusimaa           Nyland               Uusimaa               26</span>
 <span class="co">#&gt;  2             2 Varsinais-Suomi   Egentliga Finland    Southwest Finland     27</span>
 <span class="co">#&gt;  3             4 Satakunta         Satakunta            Satakunta             16</span>
 <span class="co">#&gt;  4             5 Kanta-Häme        Egentliga Tavastland Kanta-Häme            11</span>
-<span class="co">#&gt;  5             6 Pirkanmaa         Birkaland            Pirkanmaa             22</span>
+<span class="co">#&gt;  5             6 Pirkanmaa         Birkaland            Pirkanmaa             23</span>
 <span class="co">#&gt;  6             7 Päijät-Häme       Päijänne-Tavastland  Päijät-Häme           10</span>
 <span class="co">#&gt;  7             8 Kymenlaakso       Kymmenedalen         Kymenlaakso            6</span>
 <span class="co">#&gt;  8             9 Etelä-Karjala     Södra Karelen        South Karelia          9</span>
@@ -193,8 +193,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="co">#&gt; 16            17 Pohjois-Pohjanmaa Norra Österbotten    North Ostrobothnia    30</span>
 <span class="co">#&gt; 17            18 Kainuu            Kajanaland           Kainuu                 8</span>
 <span class="co">#&gt; 18            19 Lappi             Lappland             Lapland               21</span>
-<span class="co">#&gt; 19            21 Ahvenanmaa        Åland                Åland                 16</span>
-<span class="co">#&gt; 20            NA &lt;NA&gt;              &lt;NA&gt;                 &lt;NA&gt;                   1</span></code></pre></div>
+<span class="co">#&gt; 19            21 Ahvenanmaa        Åland                Åland                 16</span></code></pre></div>
 <p>Municipality keys are joined with the municipality spatial data by default.</p>
 </div>
 <div id="spatial-data" class="section level2">

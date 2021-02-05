@@ -23,3 +23,5 @@ vignettes/.RData
 tests/testthat/geo.stat.fi/geoserver/
 
 ^\.github$
+^doc$
+^Meta$

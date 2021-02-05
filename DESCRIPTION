@@ -48,7 +48,7 @@ Suggests:
     geofacet,
     ggplot2,
     ggtern,
-    httptest,
+    httptest (>= 4.0.0),
     janitor,
     knitr,
     leaflet,

@@ -25,3 +25,4 @@ tests/testthat/geo.stat.fi/geoserver/
 ^\.github$
 ^doc$
 ^Meta$
+_pkgdown.yaml

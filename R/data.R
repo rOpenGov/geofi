@@ -782,14 +782,6 @@
 #'   \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_en}{Sairaanhoidon erityisvastuualueen name in English (Catchment areas for highly specialised medical care)}
-#'   \item{kela_vakuutuspiiri_name_fi}{Kelan vakuutuspiiri name in Finnish (Insurance District)}
-#'   \item{kela_vakuutuspiiri_code}{Kelan vakuutuspiiri unofficial code (Insurance District)}
-#'   \item{kela_vakuutuspiiri_name_sv}{Kelan vakuutuspiiri name in Swedish (Insurance District)}
-#'   \item{kela_vakuutuspiiri_name_en}{Kelan vakuutuspiiri name in English (Insurance District)}
-#'   \item{kela_asumistukialue_name_fi}{Kelan asumistuen kuntaryhmät name in Finnish (Municipality categories for housing allowance)}
-#'   \item{kela_asumistukialue_code}{Kelan asumistuen kuntaryhmät unofficial code (Municipality categories for housing allowance)}
-#'   \item{kela_asumistukialue_name_sv}{Kelan asumistuen kuntaryhmät name in Swedish (Municipality categories for housing allowance)}
-#'   \item{kela_asumistukialue_name_en}{Kelan asumistuen kuntaryhmät name in English (Municipality categories for housing allowance)}
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2020"

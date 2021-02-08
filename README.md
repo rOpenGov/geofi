@@ -7,16 +7,15 @@ output:
 
 <br>
 <!-- badges: start -->
-[![R build status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi//actions)
+[![R build
+ status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi//actions)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Build Status](https://api.travis-ci.org/rOpenGov/geofi.png)](https://travis-ci.org/rOpenGov/geofi)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/rOpenGov/geofi?branch=master&svg=true)](https://ci.appveyor.com/project/rOpenGov/geofi)
 [![codecov.io](https://codecov.io/github/rOpenGov/geofi/coverage.svg?branch=master)](https://codecov.io/github/rOpenGov/geofi?branch=master)
 [![Gitter](https://badges.gitter.im/rOpenGov/geofi.svg)](https://gitter.im/rOpenGov/geofi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
-[![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
+[![Watch on GitHub](https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/watchers)
+[![Star on GitHub](https://img.shields.io/github/stars/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/stargazers)
+[![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/rOpenGov)
 
 <!--[![CRAN published](http://www.r-pkg.org/badges/version/geofi)](http://www.r-pkg.org/pkg/geofi)-->
 <!--[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/geofi)](https://cran.r-project.org/package=geofi)-->
@@ -45,8 +44,8 @@ With `geofi`-package you can download geospatial data on municipalities, zipcode
 
 ```r
 library(geofi)
-d1 <- get_municipalities(year = 2021)
-d2 <- get_zipcodes(year = 2021)
+d1 <- get_municipalities(year = 2020)
+d2 <- get_zipcodes(year = 2020)
 d3 <- get_statistical_grid(resolution = 5)
 d4 <- get_population_grid(resolution = 5)
 

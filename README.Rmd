@@ -27,21 +27,23 @@ knitr::opts_chunk$set(
 
 <br>
 
-geofi - Finland GIS data for R
-======
+# geofi - Finnish geospatial data for R <img src="man/figures/logo.png" height = "200px" align="right" />
+
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Geospatial data from Finland for R. 
+Finnish geospatial data for R. 
 
-### Installation and use
+## Installation and use
 
 ```{r, eval = FALSE, message = FALSE, warning = FALSE}
 # Install development version from GitHub
 remotes::install_github("ropengov/geofi")
 ```
 
-With `geofi`-package you can download geospatial data on municipalities, zipcodes and population and statistical grids from Statistics Finland WFS-api. In addition, you have on-board municipality keys for aggregating municipality-level data  into higher level regional distributions based Statistics Finland classification API.
+With `geofi`-package you can download geospatial data on municipalities, zipcodes and population and statistical grids from Statistics Finland [WFS-api](https://www.stat.fi/org/avoindata/paikkatietoaineistot_en.html). In addition, you have on-board municipality keys for aggregating municipality-level data  into higher level regional distributions based Statistics Finland [classification API](https://data.stat.fi/api/classifications/v2/).
+
+Below are few examples of the data you can access using `geofi`. Please have a closer look at the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_datasets.html) for more comprehensive use cases. 
 
 ```{r readme_map, message = FALSE, warning = FALSE, fig.height=10}
 library(geofi)
@@ -74,9 +76,6 @@ wrap_plots(list(p1,p2,p3,p4,p5,p6), ncol = 3) +
 
 
 
-
-For installation and usage, check the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_datasets.html).
-
 ### Contribute
 
 Contributions are very welcome:
@@ -90,10 +89,10 @@ Contributions are very welcome:
 ### Acknowledgements
 
 **Kindly cite this work** as follows: 
-[Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani Miettinen, [Leo Lahti](https://github.com/antagomir)
+[Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version `r sessionInfo()$otherPkgs$geofi$Version`. URL: [http://ropengov.github.io/geofi](http://ropengov.github.io/geofi)
 
 
 
-We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Juusi Parkkinen, Jussi Jousimo, Janne Aukia, Aaro Salosensaari and Jani Miettinen. This project is part of [rOpenGov](http://ropengov.github.io).
+We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Juuso Parkkinen, Jussi Jousimo, Janne Aukia, Aaro Salosensaari and Jani Miettinen. This project is part of [rOpenGov](http://ropengov.github.io).
 

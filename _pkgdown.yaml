@@ -6,3 +6,84 @@ navbar:
   right:
      - icon: fa-github
        href: https://github.com/rOpenGov/geofi
+     - icon: fa-users
+       href: http://ropengov.org
+
+reference:
+  - title: "API calling functions"
+    desc: >
+      Functions for fetching spatial data from Statistics Finland WFS-api
+    contents:
+      - get_municipalities
+      - get_zipcodes
+      - get_population_grid
+      - get_statistical_grid
+  - title: "Data"
+    desc: >
+      geofi comes with a timeseries of built-in municipality keys that can be
+      used to aggregate municipality level data (`municipality_key_*`)
+      and `municipality_central_localities` data containing point locations
+      for cental locality of each municipality
+    contents:
+      - municipality_central_localities
+      - municipality_key
+      - municipality_key_2021
+      - municipality_key_2020
+      - municipality_key_2019
+      - municipality_key_2018
+      - municipality_key_2017
+      - municipality_key_2016
+      - municipality_key_2015
+      - municipality_key_2014
+      - municipality_key_2013
+  - title: "Geofacet grids"
+    desc: >
+      geofi comes with a timeseries of built-in
+    contents:
+      - grid_ahvenanmaa_2019
+      - grid_ahvenanmaa_2020
+      - grid_etela_karjala_2019
+      - grid_etela_karjala_2020
+      - grid_etela_pohjanmaa_2019
+      - grid_etela_pohjanmaa_2020
+      - grid_etela_savo_2019
+      - grid_etela_savo_2020
+      - grid_kainuu_2019
+      - grid_kainuu_2020
+      - grid_kanta_hame_2019
+      - grid_kanta_hame_2020
+      - grid_keski_pohjanmaa_2019
+      - grid_keski_pohjanmaa_2020
+      - grid_keski_suomi_2019
+      - grid_keski_suomi_2020
+      - grid_kymenlaakso_2019
+      - grid_kymenlaakso_2020
+      - grid_lappi_2019
+      - grid_lappi_2020
+      - grid_maakunta_2019
+      - grid_paijat_hame_2019
+      - grid_paijat_hame_2020
+      - grid_pirkanmaa_2019
+      - grid_pirkanmaa_2020
+      - grid_pohjanmaa_2019
+      - grid_pohjanmaa_2020
+      - grid_pohjois_karjala_2019
+      - grid_pohjois_karjala_2020
+      - grid_pohjois_pohjanmaa_2019
+      - grid_pohjois_pohjanmaa_2020
+      - grid_pohjois_savo_2019
+      - grid_pohjois_savo_2020
+      - grid_sairaanhoitop_2019
+      - grid_satakunta_2019
+      - grid_satakunta_2020
+      - grid_uusimaa_2019
+      - grid_uusimaa_2020
+      - grid_varsinais_suomi_2019
+      - grid_varsinais_suomi_2020
+  - title: "Miscellaneous"
+    desc: >
+      Functions extracting various quantities needed for plotting from different types of fitted model objects.
+    contents:
+      - check_api_access
+      - wfs_api
+      - to_sf

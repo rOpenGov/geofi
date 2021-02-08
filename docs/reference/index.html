@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2900011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2900012</span>
       </span>
     </div>
 
@@ -112,6 +112,12 @@
      
   </a>
 </li>
+<li>
+  <a href="http://ropengov.org">
+    <span class="fas fa-users"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -139,8 +145,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-api-calling-functions" class="hasAnchor"><a href="#section-api-calling-functions" class="anchor"></a>API calling functions</h2>
+          <p class="section-desc"><p>Functions for fetching spatial data from Statistics Finland WFS-api</p></p>
         </th>
       </tr>
       
@@ -151,15 +157,15 @@
       <tr>
         
         <td>
-          <p><code><a href="check_api_access.html">check_api_access()</a></code> </p>
-        </td>
-        <td><p>Check access to http://geo.stat.fi/geoserver/wfs</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="get_municipalities.html">get_municipalities()</a></code> </p>
         </td>
         <td><p>Get Finnish municipality (multi)polygons for different years and/or scales.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_zipcodes.html">get_zipcodes()</a></code> </p>
+        </td>
+        <td><p>Get Finnish zip code (multi)polygons for different years.</p></td>
       </tr><tr>
         
         <td>
@@ -172,13 +178,99 @@
           <p><code><a href="get_statistical_grid.html">get_statistical_grid()</a></code> </p>
         </td>
         <td><p>Get Statistical grid data polygons at two different resolution</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
+          <p class="section-desc"><p>geofi comes with a timeseries of built-in municipality keys that can be used to aggregate municipality level data (<code>municipality_key_*</code>) and <code>municipality_central_localities</code> data containing point locations for cental locality of each municipality</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="municipality_central_localities.html">municipality_central_localities</a></code> </p>
+        </td>
+        <td><p>A simple feature point data containing locations of municipalities central localities</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_zipcodes.html">get_zipcodes()</a></code> </p>
+          <p><code><a href="municipality_key.html">municipality_key</a></code> </p>
         </td>
-        <td><p>Get Finnish zip code (multi)polygons for different years.</p></td>
+        <td><p>Aggregated municipality key table for years 2013-2020</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2021.html">municipality_key_2021</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2021</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2020.html">municipality_key_2020</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2020</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2019.html">municipality_key_2019</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2019</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2018.html">municipality_key_2018</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2018</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2017.html">municipality_key_2017</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2017</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2016.html">municipality_key_2016</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2016</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2015.html">municipality_key_2015</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2015</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2014.html">municipality_key_2014</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2014</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="municipality_key_2013.html">municipality_key_2013</a></code> </p>
+        </td>
+        <td><p>Municipality key table for 2013</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-geofacet-grids" class="hasAnchor"><a href="#section-geofacet-grids" class="anchor"></a>Geofacet grids</h2>
+          <p class="section-desc"><p>geofi comes with a timeseries of built-in</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="grid_ahvenanmaa_2019.html">grid_ahvenanmaa_2019</a></code> </p>
@@ -418,84 +510,37 @@
           <p><code><a href="grid_varsinais_suomi_2020.html">grid_varsinais_suomi_2020</a></code> </p>
         </td>
         <td><p>custom geofacet grid for Varsinais-Suomi region as in 2020</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
+          <p class="section-desc"><p>Functions extracting various quantities needed for plotting from different types of fitted model objects.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="municipality_central_localities.html">municipality_central_localities</a></code> </p>
+          <p><code><a href="check_api_access.html">check_api_access()</a></code> </p>
         </td>
-        <td><p>A simple feature point data containing locations of municipalities central localities</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key.html">municipality_key</a></code> </p>
-        </td>
-        <td><p>Aggregated municipality key table for years 2013-2020</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2013.html">municipality_key_2013</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2013</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2014.html">municipality_key_2014</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2014</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2015.html">municipality_key_2015</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2015</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2016.html">municipality_key_2016</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2016</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2017.html">municipality_key_2017</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2017</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2018.html">municipality_key_2018</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2018</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2019.html">municipality_key_2019</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2019</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2020.html">municipality_key_2020</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2020</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="municipality_key_2021.html">municipality_key_2021</a></code> </p>
-        </td>
-        <td><p>Municipality key table for 2021</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="to_sf.html">to_sf()</a></code> </p>
-        </td>
-        <td><p>Transform a fmi_api object into a sf object.</p></td>
+        <td><p>Check access to http://geo.stat.fi/geoserver/wfs</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="wfs_api.html">wfs_api()</a></code> </p>
         </td>
         <td><p>WFS API</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="to_sf.html">to_sf()</a></code> </p>
+        </td>
+        <td><p>Transform a fmi_api object into a sf object.</p></td>
       </tr>
     </tbody>
     </table>

@@ -1,6 +1,6 @@
 
 .onAttach <- function(lib, pkg) {
-  packageStartupMessage("\ngeofi R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.github.io>.")
+  packageStartupMessage("\ngeofi R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.org>.")
 }
 
 # Create an empty environment to hold the WFS provider data

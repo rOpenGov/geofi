@@ -26,7 +26,7 @@
 #'
 to_sf <- function(api_obj) {
   if (!methods::is(api_obj, "wfs_api")) {
-    stop("Object provided must be of class fmi_api, not ", class(api_obj))
+    stop("Object provided must be of class wfs_api, not ", class(api_obj))
   }
   # Get response content
   content <- api_obj$content

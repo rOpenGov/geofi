@@ -3,6 +3,10 @@ status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](htt
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Build
+Status](https://api.travis-ci.org/rOpenGov/geofi.png)](https://travis-ci.org/rOpenGov/geofi)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/rOpenGov/geofi?branch=master&svg=true)](https://ci.appveyor.com/project/rOpenGov/geofi)
 [![codecov.io](https://codecov.io/github/rOpenGov/geofi/coverage.svg?branch=master)](https://codecov.io/github/rOpenGov/geofi?branch=master)
 [![Gitter](https://badges.gitter.im/rOpenGov/geofi.svg)](https://gitter.im/rOpenGov/geofi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on
@@ -42,8 +46,9 @@ distributions based Statistics Finland classification API.
     d4 <- get_population_grid(resolution = 5)
 
     library(ggplot2)
+    library(dplyr)
     theme_set(
-      theme_minimal() +
+      theme_minimal(base_family = "Open Sans") +
       theme(legend.position= "none",
             axis.text = element_blank(),
             axis.title = element_blank(),
@@ -51,15 +56,17 @@ distributions based Statistics Finland classification API.
             )
     )
     p1 <- ggplot(d1, aes(fill = kunta)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "municipalities")
-    p2 <- ggplot(d2, aes(fill = as.integer(posti_alue))) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "zipcodes")
-    p3 <- ggplot(d3, aes(fill = nro)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "statistical grid")
-    p4 <- ggplot(d4, aes(fill = id_nro)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "population grid")
+    p2 <- ggplot(d1 %>% count(maakunta_code), aes(fill = maakunta_code)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "Aggregated municipality data \nat region (maakunta) level \n(one of many!)")
+    p3 <- ggplot(d2, aes(fill = as.integer(posti_alue))) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "zipcodes")
+    p4 <- ggplot(d3, aes(fill = nro)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "statistical grid")
+    p5 <- ggplot(d4, aes(fill = id_nro)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "population grid")
+    p6 <- ggplot(municipality_central_localities, aes(color = as.integer(kuntatunnus))) + geom_sf() + labs(subtitle = "Central municipality localities")
 
     library(patchwork)
-    wrap_plots(list(p1,p2,p3,p4), ncol = 2) + 
+    wrap_plots(list(p1,p2,p3,p4,p5,p6), ncol = 3) + 
       patchwork::plot_annotation(title = "Spatial data in geofi-package")
 
-![](README-readme_map-1.png)
+![](man/figures/readme_map-1.png)
 
 For installation and usage, check the [tutorial
 page](https://ropengov.github.io/geofi/articles/geofi_datasets.html).
@@ -81,7 +88,7 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, [Leo Lahti](https://github.com/antagomir) Retrieval and
 analysis of open geospatial data from Finland with the geofi R package.
-R package version 0.9.2900011. URL: <http://ropengov.github.io/geofi>
+R package version 0.9.2900012. URL: <http://ropengov.github.io/geofi>
 
 We are grateful to all
 [contributors](https://github.com/rOpenGov/geofi/graphs/contributors),

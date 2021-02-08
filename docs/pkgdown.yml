@@ -1,10 +1,20 @@
+<<<<<<< HEAD
 pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
+=======
+pandoc: 2.9.2.1
+pkgdown: 1.6.1.9000
+pkgdown_sha: e1e46f2e13c7efdb17bc4eae40bc3779c2b0b517
+>>>>>>> 62e0bc6c95ebe6281d3ab3ee63e38a74ce64ff56
 articles:
   geofi_datasets: geofi_datasets.html
   geofi_making_maps: geofi_making_maps.html
   geofi_spatial_analysis: geofi_spatial_analysis.html
   tricolore_tutorial: tricolore_tutorial.html
+<<<<<<< HEAD
 last_built: 2021-02-08T15:00Z
+=======
+last_built: 2021-02-08T13:47Z
+>>>>>>> 62e0bc6c95ebe6281d3ab3ee63e38a74ce64ff56
 

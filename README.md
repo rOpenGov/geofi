@@ -13,8 +13,7 @@ status](https://ci.appveyor.com/api/projects/status/github/rOpenGov/geofi?branch
 GitHub](https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/watchers)
 [![Star on
 GitHub](https://img.shields.io/github/stars/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/stargazers)
-[![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
-
+[![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/rOpenGov)
 <!--[![CRAN published](http://www.r-pkg.org/badges/version/geofi)](http://www.r-pkg.org/pkg/geofi)-->
 <!--[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/geofi)](https://cran.r-project.org/package=geofi)-->
 <!--[![Downloads](http://cranlogs.r-pkg.org/badges/geofi)](https://cran.r-project.org/package=geofi)-->
@@ -40,8 +39,8 @@ aggregating municipality-level data into higher level regional
 distributions based Statistics Finland classification API.
 
     library(geofi)
-    d1 <- get_municipalities(year = 2021)
-    d2 <- get_zipcodes(year = 2021)
+    d1 <- get_municipalities(year = 2020)
+    d2 <- get_zipcodes(year = 2020)
     d3 <- get_statistical_grid(resolution = 5)
     d4 <- get_population_grid(resolution = 5)
 
@@ -88,7 +87,11 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, [Leo Lahti](https://github.com/antagomir) Retrieval and
 analysis of open geospatial data from Finland with the geofi R package.
+<<<<<<< HEAD
 R package version 0.9.2900012. URL: <http://ropengov.github.io/geofi>
+=======
+R package version 0.9.2900007. URL: <http://ropengov.github.io/geofi>
+>>>>>>> 62e0bc6c95ebe6281d3ab3ee63e38a74ce64ff56
 
 We are grateful to all
 [contributors](https://github.com/rOpenGov/geofi/graphs/contributors),

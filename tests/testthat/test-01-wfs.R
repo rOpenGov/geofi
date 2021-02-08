@@ -14,15 +14,13 @@ test_that("WFS API object is correctly created", {
 })
 
 httptest::with_mock_dir("wfs_responses",{
-  test_that("WFS API object is correctly created", {
-    skip_on_cran()
-    expect_true(methods::is(wfs_api(base_url = wfs_url, queries), "wfs_api"))
+  testthat::test_that("WFS API object is correctly created", {
+    testthat::skip_on_cran()
+    testthat::expect_true(methods::is(wfs_api(base_url = wfs_url, queries), "wfs_api"))
   })
 })
 
-# httpcache::clearCache() needed when generating new mock files
-
-# using different year 2019 generate a different mock file for modifying
+# using different year (2019) to generate a distinct mock file for modification
 wfs_layer <- paste0("tilastointialueet:kunta", 4500, "k_", 2019)
 queries <- append(base_queries, list(request = "getFeature", 
                                      typename = wfs_layer))
@@ -37,7 +35,7 @@ httptest::with_mock_dir("wfs_modified_responses",{
   })
 })
 
-# In case tests go wrong and need to be 
+# In case tests need to be rerun, e.g. to create new mockfiles
 # httpcache::clearCache()
 # unlink("./tests/testthat/wfs_modified_responses", recursive = TRUE)
 # unlink("./tests/testthat/wfs_responses", recursive = TRUE)

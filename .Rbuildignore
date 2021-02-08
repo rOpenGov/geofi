@@ -1,9 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
-# Travis scripts
-.travis.yml
-
 README.Rmd
 README.html
 docs
@@ -11,9 +8,16 @@ docs
 inst/extras/.RData
 .git
 inst/extras/...Rcheck
+inst/extras
+inst/extras/
+inst/extras/*
 
 # Vignettes
 vignettes/.RData
+vignettes/figure
+vignettes/figure/
+vignettes/geofi_tutorial_files
+vignettes/geofi_tutorial_files/
 
 ^codecov\.yml$
 .covrignore

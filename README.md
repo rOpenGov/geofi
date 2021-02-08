@@ -3,10 +3,6 @@ status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](htt
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Build
-Status](https://api.travis-ci.org/rOpenGov/geofi.png)](https://travis-ci.org/rOpenGov/geofi)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/rOpenGov/geofi?branch=master&svg=true)](https://ci.appveyor.com/project/rOpenGov/geofi)
 [![codecov.io](https://codecov.io/github/rOpenGov/geofi/coverage.svg?branch=master)](https://codecov.io/github/rOpenGov/geofi?branch=master)
 [![Gitter](https://badges.gitter.im/rOpenGov/geofi.svg)](https://gitter.im/rOpenGov/geofi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on

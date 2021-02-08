@@ -31,6 +31,7 @@ queries <- append(base_queries, list(request = "getFeature",
 httptest::with_mock_dir("wfs_modified_responses",{
   test_that("WFS API object is correctly created", {
     skip_on_cran()
+    skip_on_ci() #test requires manually modifying the test
     expect_error(wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", 
                          queries = queries))
   })

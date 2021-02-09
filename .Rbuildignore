@@ -3,6 +3,8 @@
 
 README.Rmd
 README.html
+README-readme_map-1.png
+pkgdown
 docs
 .gitignore
 inst/extras/.RData

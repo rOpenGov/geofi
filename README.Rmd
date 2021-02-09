@@ -43,7 +43,7 @@ remotes::install_github("ropengov/geofi")
 
 With `geofi`-package you can download geospatial data on municipalities, zipcodes and population and statistical grids from Statistics Finland [WFS-api](https://www.stat.fi/org/avoindata/paikkatietoaineistot_en.html). In addition, you have on-board municipality keys for aggregating municipality-level data  into higher level regional distributions based Statistics Finland [classification API](https://data.stat.fi/api/classifications/v2/).
 
-Below are few examples of the data you can access using `geofi`. Please have a closer look at the [tutorial page](https://ropengov.github.io/geofi/articles/geofi_datasets.html) for more comprehensive use cases. 
+Below are few examples of the data you can access using `geofi`. Please have a closer look at the [vignettes](https://ropengov.github.io/geofi/articles/index.html) for more comprehensive use cases. 
 
 ```{r readme_map, message = FALSE, warning = FALSE, fig.height=10}
 library(geofi)

@@ -1,10 +1,11 @@
-pandoc: 2.11.4
+pandoc: 2.11.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   geofi_datasets: geofi_datasets.html
+  geofi_joining_attribute_data: geofi_joining_attribute_data.html
   geofi_making_maps: geofi_making_maps.html
   geofi_spatial_analysis: geofi_spatial_analysis.html
   tricolore_tutorial: tricolore_tutorial.html
-last_built: 2021-02-08T19:06Z
+last_built: 2021-02-09T10:25Z
 

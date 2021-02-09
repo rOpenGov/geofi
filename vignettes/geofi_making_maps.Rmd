@@ -4,7 +4,7 @@ author: "Markus Kainu, Leo Lahti & Joona Lehtomäki"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Making maps using geofi-package}
+  # %\VignetteIndexEntry{Making maps using geofi-package}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -14,7 +14,11 @@ editor_options:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE, 
+  warning = FALSE,
+  fig.height = 10, 
+  fig.width = 7
 )
 ```
 
@@ -27,168 +31,125 @@ knitr::opts_chunk$set(
 remotes::install_github("ropengov/geofi")
 ```
 
+This vignettes gives an overview of different options for creating maps in R using the data from `geofi`-package. Vignette is divided in three sections: *packages for static maps*, *static maps using ggplot2* and *interactive maps*. But we begin with the datasets we want to plot.
 
+If you want more detailed explanation of how to plot `sf`-objects take a look at vignette [5. Plotting Simple Features](https://r-spatial.github.io/sf/articles/sf5.html).
 
-## Municipalities
+## Datasets
 
-```{r municipality_map, fig.height = 4, fig.width = 7}
+Lets start with latest municipality division from `get_municipalities()` with is a *POLYGON* data and with *POINT* data of `municipality_central_localities` that is shipped with the package.
+
+```{r municipality_map}
 library(geofi)
-library(ggplot2)
-library(dplyr)
-library(janitor)
-library(tidyr)
-
-municipalities <- get_municipalities(year = 2021, scale = 4500)
-ggplot(municipalities) + 
-  geom_sf(aes(fill = as.integer(kunta)))
+polygon <- get_municipalities(year = 2021, scale = 4500)
+point <- geofi::municipality_central_localities
+# municipality code into integer
+point$municipality_code <- as.integer(point$kuntatunnus)
+library(sf) # for spatial data operations later
 ```
 
-You can add the locations of central locality of each municipality with 
+They both come in same CRS `r sf::st_crs(point)$input` and can be plotted together without any further manipulation.
+
+## Static maps
+
+There are two main technologies for creating static graphics in R: base and [ggplot2](https://ggplot2.tidyverse.org/). Both can be used to plot spatial data ie. to create maps. In addition, [tmap : thematic maps in R](https://mtennekes.github.io/tmap/) is a great tool if you want to dig deeper into cartography in R.
+
+
+**base**
 
 ```{r}
-ggplot(municipalities) + 
-  geom_sf(aes(fill = as.integer(kunta))) +
-  geom_sf(data = municipality_central_localities, shape = 5, color = "white")
+# dev.off()
+plot(st_geometry(polygon["municipality_code"]))
+plot(polygon["municipality_code"], add = TRUE, border="white")
+plot(st_geometry(point["municipality_code"]), add = TRUE, color = "black")
 ```
 
+**ggplot2**
 
-## Zipcodes
+```{r}
+library(ggplot2)
+ggplot() + 
+  geom_sf(data = polygon, aes(fill = municipality_code)) +
+  geom_sf(data = point)
+```
+
+**tmap**
 
 
-```{r zipcode_map, fig.height = 4, fig.width = 7}
-zipcodes <- get_zipcodes(year = 2021) 
-ggplot(zipcodes) + 
-  geom_sf(aes(fill = as.integer(posti_alue)))
-``` 
+```{r}
+library(tmap)
+tm_shape(polygon) +
+  tm_polygons("municipality_code") +
+  tm_shape(point) +
+    tm_symbols(col = "black", scale = .5) 
+```
 
+As I am only fluent in using `ggplot2` the the more complex examples are using `ggplot2`-package.
 
-You can add variables from Paavo data (Statistics Finland) in following manner.
+## Static maps using ggplot2
 
-```{r zipcode_with_statistics_finland, fig.height = 4, fig.width = 7}
-library(pxweb)
-# lets get all zipcodes and all variables
-pxweb_query_list <- 
-  list("Postinumeroalue"=c("*"),
-                           "Tiedot"=c("*"))
+`ggplot2`-packages has three `sf`-class spesific functions: `geom_sf` plotting for points, lines and polygons, and `geom_sf_text` and `geom_sf_label` for labeling the maps. In the following examples we are using the Uusimaa region in Southern Finland.
 
-# Download data 
-px_data <- 
- pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
-           query = pxweb_query_list)
-
-# Convert to data.frame 
-tk_data_zip <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
-
+```{r uusimaa, fig.width=10, fig.height=5}
 library(dplyr)
-library(tidyr)
-tk_data_zip2 <- tk_data_zip %>%
-  as_tibble() %>% 
-  setNames(c("region","indicator","value")) %>% 
-  spread(indicator, value)
-tk_zipdata <- janitor::clean_names(tk_data_zip2)
-tk_zipdata$zipcode <- substr(x = tk_zipdata$region, start = 1, stop = 5)
-tk_zipdata$zipname <- gsub("^.{6}", "", tk_zipdata$region)
-
-
-# Lets join with spatial data and plot the area of each zipcode
-zipcodes19 <- get_zipcodes(year = 2019) 
-zipcodes_new <- left_join(zipcodes19, tk_zipdata, by = c("posti_alue" = "zipcode"))
-ggplot(zipcodes_new) + 
-  geom_sf(aes(fill = pinta_ala), color = alpha("white", 1/3))
+polygon_uusimaa <- polygon %>% filter(maakunta_name_fi %in% "Uusimaa")
+point_uusimaa <- point %>% filter(municipality_code %in% polygon_uusimaa$municipality_code)
+ggplot() + 
+  geom_sf(data = polygon_uusimaa) + 
+  geom_sf(data = point_uusimaa) + 
+  geom_sf_text(data = point_uusimaa, aes(label = teksti))
 ```
 
+### Label overlapping
 
+`geom_sf_label` or `geom_sf_text` cannot control the overlapping of labels which is a common issue when mapping objects of various shapes and sizes. You can [`ggrepel`](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html) you can solve the problem though it requires a bit of spatial data handling with `sf`-package.
 
-
-
-## Joining municipality level data from Statistics Finland pxweb-api
-
-
-```{r municipalities_with_data}
-municipalities17 <- get_municipalities(year = 2017)
-
-# pull municipality data from Statistics Finland
-library(pxweb)
-pxweb_query_list <-
-  list("Alue 2019"=c("*"),
-       "Tiedot"=c("M408","M411","M476","M391","M421","M478","M404","M410","M303","M297","M302","M44","M62","M70","M488","M486","M137","M140","M130","M162","M78","M485","M152","M72","M84","M106","M151","M499","M496","M495","M497","M498"),
-       "Vuosi"=c("2017"))
-
-px_data <-
-  pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px",
-            query = pxweb_query_list)
-
-# Convert to data.frame
-tk_data <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
-tk_data2 <- tk_data %>%
-  rename(name = `Alue 2019`) %>%
-  mutate(name = as.character(name),
-         # Paste Tiedot and Vuosi
-         Tiedot = paste(Tiedot, Vuosi)) %>%
-  select(-Vuosi) %>%
-  spread(Tiedot, `Kuntien avainluvut`) %>%
-  as_tibble()
-tk_data3 <- janitor::clean_names(tk_data2)
-
-# Join with Statistics Finland attribute data
-dat <- left_join(municipalities17, tk_data3)
-dat[1:10,1:10]
+```{r uusimaa_repel, fig.width=10, fig.height=5}
+ggplot() + 
+  geom_sf(data = polygon_uusimaa) + 
+  geom_sf(data = point_uusimaa) + 
+  ggrepel::geom_text_repel(data = point_uusimaa %>%
+                        sf::st_set_geometry(NULL) %>%
+                        bind_cols(point_uusimaa %>% 
+                                    sf::st_centroid() %>% 
+                                    sf::st_coordinates() %>% as_tibble()),
+                     aes(label = teksti, x = X, y = Y))
 ```
 
+### Faceting 
 
-## Aggregating municipality level data using internal municipality_key-files
+```{r}
+ggplot() + 
+  geom_sf(data = polygon_uusimaa)
 
-```{r municipalities_map, fig.height = 4, fig.width = 7}
-# Lets aggregate at maakunta level using column mk_name
-mk_data <- dat %>% 
-  group_by(maakunta_name_fi,maakunta_code) %>% 
-  # And compute population at maakunta level
-  summarise(vakiluku_2017 = sum(vakiluku_2017))
-
-ggplot(mk_data) + 
-  geom_sf(aes(fill = vakiluku_2017)) +
-  geom_sf_text(aes(label = paste(maakunta_name_fi, "\n",vakiluku_2017)), 
-               size = 3, 
-               color = "white")
 
 ```
 
 
-Or if you prefer aggregating at seutukunta-level you can
-
-```{r vaalipiiri_map, fig.height = 4, fig.width = 7}
-mk_data <- dat %>% 
-  group_by(seutukunta_code,seutukunta_name_fi) %>% 
-  # And compute population at maakunta level
-  summarise(vakiluku_2017 = sum(vakiluku_2017))
-
-ggplot(mk_data) + 
-  geom_sf(aes(fill = vakiluku_2017)) +
-  geom_sf_text(aes(label = paste(seutukunta_name_fi, "\n",vakiluku_2017)), 
-               size = 3, 
-               color = "white")
-
-```
+### Subsetting
 
 
-Or if you want the population at the national level aggregated up from municipality level you can: 
 
-```{r, national_map, fig.height = 4, fig.width = 7}
-mk_data <- dat %>% 
-  summarise(vakiluku_2017 = sum(vakiluku_2017))
+### Combining maps
 
-ggplot(mk_data) + 
-  geom_sf(aes(fill = vakiluku_2017)) +
-  geom_sf_text(aes(label = vakiluku_2017), 
-               size = 3, 
-               color = "white")
 
-```
+
+## Interactive maps
+
+
+
+
+
+
+
+
+
+
 
 Helsinki at 1km by 1km as interactive leaflet map
 
 
-```{r, population_grid_data2, fig.height = 4, fig.width = 7}
+```{r, population_grid_data2}
 library(leaflet)
 pop_grid <- get_population_grid(year = 2018, resolution = 1)
 

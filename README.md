@@ -37,8 +37,8 @@ Statistics Finland [classification
 API](https://data.stat.fi/api/classifications/v2/).
 
 Below are few examples of the data you can access using `geofi`. Please
-have a closer look at the [tutorial
-page](https://ropengov.github.io/geofi/articles/geofi_datasets.html) for
+have a closer look at the
+[vignettes](https://ropengov.github.io/geofi/articles/index.html) for
 more comprehensive use cases.
 
     library(geofi)
@@ -87,7 +87,7 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 0.9.2900012. URL:
+geofi R package. R package version 0.9.2900011. URL:
 <http://ropengov.github.io/geofi>
 
 We are grateful to all

@@ -64,6 +64,9 @@
       <a href="../articles/geofi_datasets.html">Datasets in geofi-package</a>
     </li>
     <li>
+      <a href="../articles/geofi_joining_attribute_data.html">Joining attribute data with geofi data</a>
+    </li>
+    <li>
       <a href="../articles/geofi_making_maps.html">Making maps using geofi-package</a>
     </li>
     <li>
@@ -107,7 +110,7 @@
       <h1 data-toc-skip>Datasets in geofi-package</h1>
                         <h4 class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 class="date">2021-02-08</h4>
+            <h4 class="date">2021-02-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropengov/geofi/blob/master/vignettes/geofi_datasets.Rmd"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="hidden name"><code>geofi_datasets.Rmd</code></div>
@@ -128,18 +131,7 @@ Packages installation</strong></p>
 Each municipality belongs to a higher level regional classifications such as regions (maakunta) or health care districts (sairaanhoitopiiri). <code>municipality_key_</code>-datasets are based on Statistics Finland <a href="https://data.stat.fi/api/classifications/v2/">Statistical classification</a> -api with few modification and provided on yearly basis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropengov/geofi">geofi</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; geofi R package: tools for open GIS data for Finland.</span>
-<span class="co">#&gt; Part of rOpenGov &lt;ropengov.org&gt;.</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"geofi"</span><span class="op">)</span>
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -207,7 +199,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="co">#&gt; 17            18 Kainuu            Kajanaland           Kainuu                 8</span>
 <span class="co">#&gt; 18            19 Lappi             Lappland             Lapland               21</span>
 <span class="co">#&gt; 19            21 Ahvenanmaa        Åland                Åland                 16</span></code></pre></div>
-<p>Municipality keys are joined with the municipality spatial data by default.</p>
+<p>Municipality keys are joined with the municipality spatial data by default, meaning that data returned by <code>get_municipality()</code> can be aggregated as it is.</p>
 </div>
 <div id="spatial-data" class="section level2">
 <h2 class="hasAnchor">
@@ -219,9 +211,6 @@ Each municipality belongs to a higher level regional classifications such as reg
 <p>Municipality borders are provided yearly from 2013 and in two resolution 1: 1 000 000 and 1:4 500 000. Use <code>1000</code> or <code>4500</code> as value for `scale`-argument, respectively.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">municipalities</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, scale <span class="op">=</span> <span class="fl">4500</span><span class="op">)</span>
-<span class="co">#&gt; Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=tilastointialueet%3Akunta4500k_2020</span>
-<span class="co">#&gt; Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</span>
-<span class="co">#&gt; Data is licensed under: Attribution 4.0 International (CC BY 4.0)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">municipalities</span><span class="op">[</span><span class="st">"municipality_name_fi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/municipality_map-1.png" width="672"></p>
 </div>
@@ -231,9 +220,6 @@ Each municipality belongs to a higher level regional classifications such as reg
 <p>Zipcodes are provided in a single resolution from 2015.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">zipcodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_zipcodes.html">get_zipcodes</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2015</span><span class="op">)</span> 
-<span class="co">#&gt; Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=postialue%3Apno_2015</span>
-<span class="co">#&gt; Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</span>
-<span class="co">#&gt; Data is licensed under: Attribution 4.0 International (CC BY 4.0)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">zipcodes</span><span class="op">[</span><span class="st">"nimi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/zipcode_map-1.png" width="672"></p>
 </div>
@@ -244,10 +230,6 @@ Each municipality belongs to a higher level regional classifications such as reg
 Statistics Finland <a href="https://www.stat.fi/tup/ruututietokanta/index_en.html">proprietary grid database</a> provides the attribute statistical data for these grid nets.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stat_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_statistical_grid.html">get_statistical_grid</a></span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">5</span>, auxiliary_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=tilastointialueet%3Ahila5km</span>
-<span class="co">#&gt; Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</span>
-<span class="co">#&gt; Joining, by = c("nro", "euref_x", "euref_y")</span>
-<span class="co">#&gt; Data is licensed under: Attribution 4.0 International (CC BY 4.0)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">stat_grid</span><span class="op">[</span><span class="st">"euref_x"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/statisticsl_grid_data-1.png" width="672"></p>
 </div>
@@ -259,9 +241,6 @@ Total population (<code>vaesto</code>), number of men (<code>miehet</code>) and 
 The data describes the population distribution independent of administrative areas (such as municipal borders). The data is suitable for examination of population distribution and making various spatial analysis.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pop_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_population_grid.html">get_population_grid</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, resolution <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="co">#&gt; Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=vaestoruutu%3Avaki2018_5km</span>
-<span class="co">#&gt; Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</span>
-<span class="co">#&gt; Data is licensed under: Attribution 4.0 International (CC BY 4.0)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pop_grid</span><span class="op">[</span><span class="st">"kunta"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/population_grid_data-1.png" width="672"></p>
 </div>
@@ -337,9 +316,6 @@ The data describes the population distribution independent of administrative are
 <p>Here is an example where population data at municipality level is pulled from Statistics Finland from 1987 to 2018, then aggregated at the levels of regions (<code>maakunta</code>) and then plotted with ggplot2 using grid <code>geofi::grid_mk_2019</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/">pxweb</a></span><span class="op">)</span>
-<span class="co">#&gt; pxweb: R tools for PX-WEB API.</span>
-<span class="co">#&gt; Copyright (C) 2014-2018 Mans Magnusson, Leo Lahti et al.</span>
-<span class="co">#&gt; https://github.com/ropengov/pxweb</span>
 <span class="co"># Let pull population data from Statistics Finland</span>
 <span class="va">pxweb_query_list</span> <span class="op">&lt;-</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"Alue 2019"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>,
@@ -363,8 +339,6 @@ The data describes the population distribution independent of administrative are
   <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>code <span class="op">=</span> <span class="va">maakunta_code</span>, name <span class="op">=</span> <span class="va">maakunta_name_fi</span><span class="op">)</span>
-<span class="co">#&gt; Joining, by = "kunta_name"</span>
-<span class="co">#&gt; `summarise()` has grouped output by 'maakunta_code', 'maakunta_name_fi'. You can override using the `.groups` argument.</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hafen/geofacet">geofacet</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
@@ -374,11 +348,7 @@ The data describes the population distribution independent of administrative are
   <span class="fu"><a href="https://rdrr.io/pkg/geofacet/man/facet_geo.html">facet_geo</a></span><span class="op">(</span>facets <span class="op">=</span> <span class="op">~</span><span class="va">name</span>, grid <span class="op">=</span> <span class="va">grid_maakunta_2019</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq.int</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1987</span>, to <span class="op">=</span> <span class="fl">2018</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Population 1987-2018"</span>, y <span class="op">=</span> <span class="st">"population (1000)"</span><span class="op">)</span>
-<span class="co">#&gt; Note: You provided a user-specified grid. If this is a generally-useful</span>
-<span class="co">#&gt;   grid, please consider submitting it to become a part of the geofacet</span>
-<span class="co">#&gt;   package. You can do this easily by calling:</span>
-<span class="co">#&gt;   grid_submit(__grid_df_name__)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Population 1987-2018"</span>, y <span class="op">=</span> <span class="st">"population (1000)"</span><span class="op">)</span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/geofacet-1.png" width="672"></p>
 </div>
   </div>

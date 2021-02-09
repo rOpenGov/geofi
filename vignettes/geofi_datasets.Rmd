@@ -14,7 +14,9 @@ editor_options:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE, 
+  warning = FALSE
 )
 ```
 
@@ -57,7 +59,7 @@ geofi::municipality_key_2021 %>%
   count(maakunta_code,maakunta_name_fi,maakunta_name_sv,maakunta_name_en)
 ```
 
-Municipality keys are joined with the municipality spatial data by default.
+Municipality keys are joined with the municipality spatial data by default, meaning that data returned by `get_municipality()` can be aggregated as it is.
 
 ## Spatial data
 

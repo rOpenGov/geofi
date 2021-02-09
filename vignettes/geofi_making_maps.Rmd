@@ -4,7 +4,7 @@ author: "Markus Kainu, Leo Lahti & Joona Lehtomäki"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  # %\VignetteIndexEntry{Making maps using geofi-package}
+  %\VignetteIndexEntry{Making maps using geofi-package}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
 remotes::install_github("ropengov/geofi")
 ```
 
-This vignettes gives an overview of different options for creating maps in R using the data from `geofi`-package. Vignette is divided in three sections: *packages for static maps*, *static maps using ggplot2* and *interactive maps*. But we begin with the datasets we want to plot.
+This vignettes gives an overview of different options for creating maps in R using the data from `geofi`-package. Vignette is divided in three sections: *R-packages for static maps*, *static maps using ggplot2* and *interactive maps*. But we begin with the datasets we want to plot.
 
 If you want more detailed explanation of how to plot `sf`-objects take a look at vignette [5. Plotting Simple Features](https://r-spatial.github.io/sf/articles/sf5.html).
 
@@ -50,7 +50,7 @@ library(sf) # for spatial data operations later
 
 They both come in same CRS `r sf::st_crs(point)$input` and can be plotted together without any further manipulation.
 
-## Static maps
+## R-packages for static maps
 
 There are two main technologies for creating static graphics in R: base and [ggplot2](https://ggplot2.tidyverse.org/). Both can be used to plot spatial data ie. to create maps. In addition, [tmap : thematic maps in R](https://mtennekes.github.io/tmap/) is a great tool if you want to dig deeper into cartography in R.
 
@@ -118,77 +118,159 @@ ggplot() +
 
 ### Faceting 
 
-```{r}
-ggplot() + 
-  geom_sf(data = polygon_uusimaa)
+If want to present multiple variables of same regions you can use facets. 
 
-
-```
 
 
 ### Subsetting
 
+You can subset data your plotting by subsetting your data in conventional way like I did above, or you can use geometric operations such as bounding box or you can limit the plot area manually in ggplot2.
+
+Lets imagine that we need a more detailed view of the metropolitan area of the Greater Helsinki that consist of the following municipalities: Espoo, Helsinki, Vantaa, Hyvinkää, Järvenpää, Kauniainen, Kerava, Kirkkonummi, Mäntsälä, Nurmijärvi, Pornainen, Sipoo, Tuusula and Vihti.
+
+**Subsetting**
+
+```{r}
+greater_helsinki <- c('Espoo','Helsinki','Vantaa','Hyvinkää',
+                      'Järvenpää','Kauniainen','Kerava','Kirkkonummi',
+                      'Mäntsälä','Nurmijärvi','Pornainen','Sipoo','Tuusula','Vihti')
+greater_helsinki_polygon <- polygon %>% filter(municipality_name_fi %in% greater_helsinki)
+ggplot(greater_helsinki_polygon) + 
+  geom_sf() +
+  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
+```
+
+**Bounding boxes**
+
+First, let's create bounding box from polygons.
+
+```{r}
+bounding_box_polygon <- st_as_sfc(st_bbox(polygon %>% filter(municipality_name_fi %in% greater_helsinki)))
+ggplot(st_intersection(bounding_box_polygon, polygon)) + 
+  geom_sf() +
+  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
+```
+
+Then, let's use the point data (municipality central localities) to create the bounding box
+
+```{r}
+bounding_box_point <- st_as_sfc(st_bbox(point %>% filter(teksti %in% toupper(greater_helsinki))))
+ggplot(st_intersection(bounding_box_polygon, polygon)) + 
+  geom_sf() +
+  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
+```
+
+**Limit the plotting area in ggplot2**
+
+```{r}
+ggplot(polygon) + 
+  geom_sf() +
+  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki))) +
+  xlim(c(st_bbox(greater_helsinki_polygon)$xmin,st_bbox(greater_helsinki_polygon)$xmax)) +
+  ylim(c(st_bbox(greater_helsinki_polygon)$ymin,st_bbox(greater_helsinki_polygon)$ymax))
+```
 
 
-### Combining maps
+### Facetting and combining maps
 
+[Facetting](https://ggplot2.tidyverse.org/reference/facet_wrap.html) is a useful way to present data on multiple variables covering the same region. This is usefull approach if you have, lets say, data on same indicator from two different time points and you want to have separate maps for separate times points, but have a shared scale. Below I create a random data for two year titled `population` and plot the data using `facet_wrap()`-function.
+
+```{r}
+pop_data <- bind_rows(
+  tibble(
+    municipality_code = polygon$municipality_code
+  ) %>% 
+    mutate(population = rnorm(n = nrow(.), mean = 2000, sd = 250),
+           time = 2020),
+  tibble(
+    municipality_code = polygon$municipality_code
+  ) %>% 
+    mutate(population = rnorm(n = nrow(.), mean = 2000, sd = 250),
+           time = 2021)
+  )
+pop_data
+```
+
+```{r, fig.height=7}
+pop_map <- right_join(polygon, pop_data)
+
+ggplot(pop_map, 
+       aes(fill = population)) +
+  geom_sf() +
+  facet_grid(~time)
+```
+
+However, often the indicators you want to compare either have different values (shared scale not ideal), are aggregated differently or cover non-overlapping geographic region. The you may find [patchwork](https://patchwork.data-imaginist.com/) useful as in the example below.
+
+```{r, fig.width = 10}
+library(patchwork)
+p_municipalities <- ggplot(polygon, aes(fill = municipality_code)) + 
+  geom_sf() + 
+  theme(legend.position = "top")
+p_regions <- ggplot(polygon %>% count(maakunta_code), aes(fill = maakunta_code)) + 
+  geom_sf() + 
+  theme(legend.position = "top")
+p_uusimaa <- ggplot(polygon_uusimaa, aes(fill = municipality_code)) + 
+  geom_sf() + 
+  theme(legend.position = "top")
+
+(p_municipalities | p_regions) /
+      p_uusimaa + plot_layout(nrow = 2, heights = c(1,0.6)) +
+  plot_annotation(title = "Combining multiple maps into a single (gg)plot")
+```
 
 
 ## Interactive maps
 
+As for interactive maps [Leaflet](https://rstudio.github.io/leaflet/) is not the only option. For exploring you datasets in almost any CRS you should to try out [mapview](https://r-spatial.github.io/mapview/). 
 
+```{r mapview, out.width="90%"}
+library(mapview)
+mapview(polygon)
+```
 
+As for larger datasets, you are probably safer with [WebGL](https://en.wikipedia.org/wiki/WebGL) based [mapdeck](https://symbolixau.github.io/mapdeck/articles/mapdeck.html).
 
+Again, I am most experienced with leaflet so the following example is using leaflet. Leaflet default projection is `EPSG:3857` or `WGS84`, also known as "Google Mercator" or "Web Mercator, and you have reproject your `geofi` data to plot it using leaflet.
 
+```{r leaflet, out.width="90%"}
+polygon_wgs84 <- sf::st_transform(x = polygon, crs = "+proj=longlat +datum=WGS84")
+point_wgs84 <- sf::st_transform(x = point, crs = "+proj=longlat +datum=WGS84")
 
-
-
-
-
-
-Helsinki at 1km by 1km as interactive leaflet map
-
-
-```{r, population_grid_data2}
 library(leaflet)
-pop_grid <- get_population_grid(year = 2018, resolution = 1)
+# lets create a palette for polygon fill (municipality codes)
+pal <- leaflet::colorNumeric(palette = "Blues", 
+                            domain = polygon_wgs84$municipality_code)
+# labels for localities
+labels <- sprintf(
+  "<strong>%s</strong> (%s)",
+  point_wgs84$teksti, point_wgs84$kuntatunnus
+) %>% lapply(htmltools::HTML)
 
-pop_grid_helsinki <- sf::st_transform(x = pop_grid %>% 
-                                        filter(kunta == "091"), crs = "+proj=longlat +datum=WGS84")
 
-
-
-leaflet(pop_grid_helsinki) %>% 
-  addTiles() %>% 
-  addPolygons(fillColor = ~colorQuantile("RdYlGn", vaesto)(vaesto),
-              color = "coral", 
+leaflet(polygon_wgs84) %>% 
+  addProviderTiles(provider = providers$CartoDB.Positron) %>%
+   addPolygons(fillColor = ~pal(municipality_code),
+              color = "white",
               weight = 1,
-              smoothFactor = 0.5,
-              opacity = 1.0,
-              fillOpacity = 0.5,
-    label = ~vaesto,
-    highlightOptions = highlightOptions(color = "white", weight = 2,
-      bringToFront = TRUE))
+              opacity = 1,
+              dashArray = "3",
+              fillOpacity = 0.4,
+              highlight = highlightOptions(
+                weight = 2,
+                color = "#666",
+                dashArray = "",
+                fillOpacity = 0.4,
+                bringToFront = TRUE)
+  )  %>% 
+  addMarkers(data = point_wgs84, 
+              label = labels,
+              labelOptions = labelOptions(opacity = .7,
+                                          style = list("font-weight" = "normal",
+                                                       padding = "2px 4px"),
+                                          textsize = "12px",
+                                          direction = "auto"))
+
+
 ```
 
-
-
-```{r geofacet2, fig.height = 6, fig.width = 7, eval = FALSE}
-
-dat <- left_join(geofi::municipality_key_2019 %>% 
-                   filter(maakunta_name_fi == "Ahvenanmaa") %>% 
-                   select(-year),
-                 px_data) %>% 
-  group_by(maakunta_code, maakunta_name_fi,year) %>% 
-  rename(code = kunta, name = kunta_name, population = value)
-
-library(geofacet)
-library(ggplot2)
-
-ggplot(dat, aes(x = year, y = population/1000, group = name)) + 
-  geom_line() + 
-  facet_geo(facets = ~name, grid = grid_ahvenanmaa_2019, scales = "free_y") +
-  theme(axis.text.x = element_text(size = 6)) +
-  scale_x_discrete(breaks = seq.int(from = 1987, to = 2018, by = 5)) +
-  labs(title = "Population 1987-2018", y = "population (1000)")
-```

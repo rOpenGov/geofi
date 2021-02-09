@@ -61,7 +61,13 @@ Suggests:
     testthat,
     tidyr,
     tmap,
-    tricolore
+    tricolore,
+    mapview,
+    patchwork,
+    ggrepel,
+    htmltools,
+    readr,
+    rmapshaper
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

@@ -224,7 +224,7 @@ p_uusimaa <- ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
 
 As for interactive maps [Leaflet](https://rstudio.github.io/leaflet/) is not the only option. For exploring you datasets in almost any CRS you should to try out [mapview](https://r-spatial.github.io/mapview/). 
 
-```{r mapview, out.width="90%"}
+```{r mapview, out.width="90%", eval = FALSE}
 library(mapview)
 mapview(polygon)
 ```

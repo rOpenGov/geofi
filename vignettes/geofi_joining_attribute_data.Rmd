@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from four different sources of which two are from [Statistics Finland PxWeb-api](https://pxnet2.stat.fi/PXWeb/pxweb/en/), namely [municipality key figures](https://pxnet2.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/) and [Paavo (Open data by postal code area)](https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/). Other two are from [Finnish institute for Health and Welfare (THL)](https://thl.fi/en/web/thlfi-en) more specifically [Statistical information on welfare and health (Sotkanet)](https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data#Sotkanet) and [Covid-19 tests and confirmed cases in Finland](https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-).
 
 **Installation**
 
@@ -31,20 +32,161 @@ knitr::opts_chunk$set(
 remotes::install_github("ropengov/geofi")
 ```
 
-This vignettes gives an overview of different options for creating maps in R using the data from `geofi`-package. Vignette is divided in two sections: Statics maps and interactive maps.
 
 ## Municipalities
 
+Municipality data provided by `get_municipalities()`-function contains 77 indicators variables from each of 309 municipalities. Variables can be used either for aggregating data or as keys for joining attribute data. 
+
+### PxWeb-data
+
+In this first example we join municipality level data from Statistics Finland [municipality key figures](https://pxnet2.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/)
+
 ```{r municipality_map}
 library(geofi)
-library(ggplot2)
+muni <- get_municipalities(year = 2019)
+
+library(pxweb)
+pxweb_query_list <-
+  list("Alue 2020"=c("*"),
+       "Tiedot"=c("*"),
+       "Vuosi"=c("2019"))
+
+px_raw <-
+  pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/en/Kuntien_avainluvut/2020/kuntien_avainluvut_2020_aikasarja.px",
+            query = pxweb_query_list)
+
 library(dplyr)
 library(janitor)
-library(tidyr)
-
+library(sf)
+px_data <- as_tibble(
+  as.data.frame(px_raw, 
+                column.name.type = "text", 
+                variable.value.type = "text")
+  ) %>% setNames(make_clean_names(names(.)))
+px_data
 ```
 
-You can add variables from Paavo data (Statistics Finland) in following manner.
+Once we have the data in long format we can observe the `region_2020`-column.
+
+```{r municipality_map2}
+count(px_data, region_2020)
+```
+
+This is not obvious to all, but have the municipality names in Finnish among other regional breakdowns which allows us to combine the data with spatial data using `municipality_name_fi`-variable. 
+
+```{r}
+map_data <- right_join(muni, px_data, by = c("municipality_name_fi" = "region_2020"))
+```
+
+Now we can plot a map showing `Share of Swedish-speakers of the population, %` and `Share of foreign citizens of the population, %` on two panels sharing a scale.
+
+```{r, fig.width = 10, fig.height = 6}
+library(ggplot2)
+map_data %>% 
+  filter(information %in% c('Share of Swedish-speakers of the population, %','Share of foreign citizens of the population, %')) %>% 
+  ggplot(aes(fill = municipal_key_figures)) + geom_sf() + facet_wrap(~information)
+```
+
+### Sotkanet data
+
+There is a dedicated CRAN-published R-package [Sotkanet](https://cran.r-project.org/web/packages/sotkanet/index.html) for accessing [Statistical information on welfare and health (Sotkanet)](https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data#Sotkanet) -api. Borrowing from package [vignette](https://cran.r-project.org/web/packages/sotkanet/vignettes/tutorial.html) we can formulate the following example.
+
+First we can list all the available indicator and subset it to share social assistance recipients within 25 - 64 years old  (Toimeentulotukea saaneet 25 - 64-vuotiaat).
+
+```{r}
+library(sotkanet)
+sotkanet.indicators <- SotkanetIndicators(type = "table") %>% 
+  as_tibble()
+
+social_assistance <- sotkanet.indicators[grepl("Toimeentulotukea saaneet 25 - 64-vuotiaat", sotkanet.indicators$indicator.title.fi, ignore.case = T),]
+social_assistance
+```
+
+Then we can download the indicator and filter the data to its latest year and region category KUNTA (municipality). 
+
+```{r}
+dat <- GetDataSotkanet(indicators = social_assistance$indicator)
+dat_latest <- dat %>% filter(year == max(year, na.rm = TRUE), 
+                             region.category == "KUNTA")
+as_tibble(dat_latest)
+```
+
+Now we can download the 2015 municipality division, join the social assistance data with it and plot the data on map.
+
+```{r}
+muni <- get_municipalities(year = 2015)
+muni_map <- left_join(muni, dat_latest %>% 
+                        mutate(region.code = as.integer(region.code)), 
+                      by = c("municipality_code" = "region.code"))
+ggplot(muni_map, aes(fill = primary.value)) + 
+  geom_sf() +
+  labs(fill = NULL, 
+       title = unique(dat_latest$indicator.title.fi))
+```
+
+
+## Health Districts
+
+in early 2021 we are still troubled by the COVID-19 and the health authorities are counting infections, deaths and vaccinated. Lets pull the daily data from API and compare the names of the health districts both in COVID-19 data and in municipality division from Statistics Finland. 
+
+```{r}
+library(readr)
+cols(
+  Area = col_character(),
+  Time = col_date(format = ""),
+  val = col_double()
+) -> cov_cols
+
+thl_korona_api <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek20200101-508804L&column=hcdmunicipality2020-445222L"
+status <- httr::status_code(httr::GET(thl_korona_api))
+if (status == 200){
+  xdf_raw <- read_csv2(thl_korona_api, col_types = cov_cols)
+  xdf <- xdf_raw %>% 
+    # filter(!grepl("Kaikki", Alue)) %>% 
+    rename(date = Time, 
+           shp = Area, 
+           day_cases = val) %>% 
+    group_by(shp) %>% 
+    arrange(shp,date) %>% 
+    filter(!is.na(day_cases)) %>% 
+    mutate(total_cases = cumsum(day_cases)) %>% 
+    ungroup() %>% 
+    group_by(shp) %>% 
+    filter(date == max(date, na.rm = TRUE)) %>% 
+    ungroup()
+  
+  xdf %>% 
+    count(shp)
+  
+  muni <- get_municipalities(year = 2021) 
+  muni %>% 
+    st_drop_geometry() %>% 
+    count(sairaanhoitop_name_en)
+} 
+```
+
+The names look identical so we can join the two datasets and plot a map.
+
+```{r}
+if (status == 200){
+  
+  muni %>% 
+    count(sairaanhoitop_name_en) %>% 
+    left_join(xdf, by = c("sairaanhoitop_name_en" = "shp")) %>% 
+    ggplot(aes(fill = total_cases)) +
+    geom_sf() +
+    geom_sf_text(aes(label = paste0(sairaanhoitop_name_en, "\n", total_cases)), 
+                 color = "white") +
+    labs(title = "Number of total COVID-19 cases reported since January 2020", 
+         fill = NULL)
+  
+}
+```
+
+
+## Zipcode level
+
+You can download data from [Paavo (Open data by postal code area)](https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/) using `pxweb`-package in a similar manner as in the first example.
 
 ```{r zipcode_with_statistics_finland}
 library(pxweb)
@@ -54,117 +196,32 @@ pxweb_query_list <-
                            "Tiedot"=c("*"))
 
 # Download data 
-px_data <- 
- pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
+px_raw <- 
+ pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/en/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
            query = pxweb_query_list)
 
-# Convert to data.frame 
-tk_data_zip <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
+px_data <- as_tibble(
+  as.data.frame(px_raw, 
+                column.name.type = "text", 
+                variable.value.type = "text")
+  ) %>% setNames(make_clean_names(names(.)))
+px_data %>% 
+  filter(postal_code_area != "Finland")
+```
 
-library(dplyr)
-library(tidyr)
-tk_data_zip2 <- tk_data_zip %>%
-  as_tibble() %>% 
-  setNames(c("region","indicator","value")) %>% 
-  spread(indicator, value)
-tk_zipdata <- janitor::clean_names(tk_data_zip2)
-tk_zipdata$zipcode <- substr(x = tk_zipdata$region, start = 1, stop = 5)
-tk_zipdata$zipname <- gsub("^.{6}", "", tk_zipdata$region)
+Before we can join the data, we must extract the numerical postal code from `postal_code_area`-variable.
 
+```{r}
+px_data$posti_alue <- sub(" .+$", "", px_data$postal_code_area)
 
 # Lets join with spatial data and plot the area of each zipcode
 zipcodes19 <- get_zipcodes(year = 2019) 
-zipcodes_new <- left_join(zipcodes19, tk_zipdata, by = c("posti_alue" = "zipcode"))
-ggplot(zipcodes_new) + 
-  geom_sf(aes(fill = pinta_ala), color = alpha("white", 1/3))
+zipcodes_map <- left_join(zipcodes19, 
+                          px_data %>% filter(data == "Average age of inhabitants, 2017 (HE)"))
+ggplot(zipcodes_map) + 
+  geom_sf(aes(fill = paavo_open_data_by_postal_code_area_2019), 
+          color  = alpha("white", 1/3)) +
+  labs(title = "Average age of inhabitants, 2017 (HE)", 
+       fill = NULL)
 ```
-
-
-
-
-
-## Joining municipality level data from Statistics Finland pxweb-api
-
-
-```{r municipalities_with_data}
-municipalities17 <- get_municipalities(year = 2017)
-
-# pull municipality data from Statistics Finland
-library(pxweb)
-pxweb_query_list <-
-  list("Alue 2019"=c("*"),
-       "Tiedot"=c("M408","M411","M476","M391","M421","M478","M404","M410","M303","M297","M302","M44","M62","M70","M488","M486","M137","M140","M130","M162","M78","M485","M152","M72","M84","M106","M151","M499","M496","M495","M497","M498"),
-       "Vuosi"=c("2017"))
-
-px_data <-
-  pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px",
-            query = pxweb_query_list)
-
-# Convert to data.frame
-tk_data <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
-tk_data2 <- tk_data %>%
-  rename(name = `Alue 2019`) %>%
-  mutate(name = as.character(name),
-         # Paste Tiedot and Vuosi
-         Tiedot = paste(Tiedot, Vuosi)) %>%
-  select(-Vuosi) %>%
-  spread(Tiedot, `Kuntien avainluvut`) %>%
-  as_tibble()
-tk_data3 <- janitor::clean_names(tk_data2)
-
-# Join with Statistics Finland attribute data
-dat <- left_join(municipalities17, tk_data3)
-dat[1:10,1:10]
-```
-
-
-## Aggregating municipality level data using internal municipality_key-files
-
-```{r municipalities_map}
-# Lets aggregate at maakunta level using column mk_name
-mk_data <- dat %>% 
-  group_by(maakunta_name_fi,maakunta_code) %>% 
-  # And compute population at maakunta level
-  summarise(vakiluku_2017 = sum(vakiluku_2017))
-
-ggplot(mk_data) + 
-  geom_sf(aes(fill = vakiluku_2017)) +
-  geom_sf_text(aes(label = paste(maakunta_name_fi, "\n",vakiluku_2017)), 
-               size = 3, 
-               color = "white")
-
-```
-
-
-Or if you prefer aggregating at seutukunta-level you can
-
-```{r vaalipiiri_map}
-mk_data <- dat %>% 
-  group_by(seutukunta_code,seutukunta_name_fi) %>% 
-  # And compute population at maakunta level
-  summarise(vakiluku_2017 = sum(vakiluku_2017))
-
-ggplot(mk_data) + 
-  geom_sf(aes(fill = vakiluku_2017)) +
-  geom_sf_text(aes(label = paste(seutukunta_name_fi, "\n",vakiluku_2017)), 
-               size = 3, 
-               color = "white")
-
-```
-
-
-Or if you want the population at the national level aggregated up from municipality level you can: 
-
-```{r, national_map}
-mk_data <- dat %>% 
-  summarise(vakiluku_2017 = sum(vakiluku_2017))
-
-ggplot(mk_data) + 
-  geom_sf(aes(fill = vakiluku_2017)) +
-  geom_sf_text(aes(label = vakiluku_2017), 
-               size = 3, 
-               color = "white")
-
-```
-
 

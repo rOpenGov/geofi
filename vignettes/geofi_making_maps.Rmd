@@ -155,7 +155,7 @@ Then, let's use the point data (municipality central localities) to create the b
 
 ```{r}
 bounding_box_point <- st_as_sfc(st_bbox(point %>% filter(teksti %in% toupper(greater_helsinki))))
-ggplot(st_intersection(bounding_box_polygon, polygon)) + 
+ggplot(st_intersection(bounding_box_point, polygon)) + 
   geom_sf() +
   geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
 ```
@@ -247,15 +247,22 @@ labels <- sprintf(
   point_wgs84$teksti, point_wgs84$kuntatunnus
 ) %>% lapply(htmltools::HTML)
 
+# popup for polygons
+popup <- sprintf(
+  "<strong>%s</strong> (%s)",
+  polygon_wgs84$municipality_name_fi, polygon_wgs84$municipality_code
+) %>% lapply(htmltools::HTML)
+
 
 leaflet(polygon_wgs84) %>% 
-  addProviderTiles(provider = providers$CartoDB.Positron) %>%
+  addProviderTiles(provider = providers$CartoDB.DarkMatter) %>%
    addPolygons(fillColor = ~pal(municipality_code),
               color = "white",
               weight = 1,
               opacity = 1,
               dashArray = "3",
               fillOpacity = 0.4,
+              popup = popup, 
               highlight = highlightOptions(
                 weight = 2,
                 color = "#666",

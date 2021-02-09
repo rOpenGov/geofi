@@ -57,6 +57,7 @@ Suggests:
     leaflet,
     pxweb,
     rmarkdown,
+    sotkanet,
     testthat,
     tidyr,
     tmap,

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spatial analysis examples using R and `geofi`-package • geofi</title>
+<title>Spatial data manipulation and analysis R and geofi-package • geofi</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Spatial analysis examples using R and `geofi`-package">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Spatial data manipulation and analysis R and geofi-package">
 <meta property="og:description" content="geofi">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -70,7 +70,7 @@
       <a href="../articles/geofi_making_maps.html">Making maps using geofi-package</a>
     </li>
     <li>
-      <a href="../articles/geofi_spatial_analysis.html">Spatial analysis examples using R and `geofi`-package</a>
+      <a href="../articles/geofi_spatial_analysis.html">Spatial data manipulation and analysis R and geofi-package</a>
     </li>
     <li>
       <a href="../articles/tricolore_tutorial.html">Creating ternary color coded maps</a>
@@ -107,7 +107,7 @@
       </header><script src="geofi_spatial_analysis_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Spatial analysis examples using R and <code>geofi</code>-package</h1>
+      <h1 data-toc-skip>Spatial data manipulation and analysis R and geofi-package</h1>
                         <h4 class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
             <h4 class="date">2021-02-09</h4>
@@ -119,15 +119,189 @@
 
     
     
+<p>Majority of the operations presented in this vignette derive from <a href="http://markokallio.fi/">Marko Kallio’s</a> course at <a href="https://www.csc.fi/en/home">CSC</a> in February 2020 <a href="https://www.csc.fi/web/training/-/r_spatial_2019">Spatial data analysis with R</a>.</p>
 <p><strong>Installation</strong></p>
 <p><code>geofi</code> is not yet in CRAN, but can be installed from Github using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"ropengov/geofi"</span><span class="op">)</span></code></pre></div>
+<div id="coordinate-reference-systems" class="section level2">
+<h2 class="hasAnchor">
+<a href="#coordinate-reference-systems" class="anchor"></a>Coordinate reference systems</h2>
+<p>Unlike many graphical GIS programs (e.g. ArcGIS, QGIS), R cannot transform objects on the fly. Therefore, having all data in the same CRS is important. Luckily, functions in ‘sf’ package will give an error if the CRS of input objects is not identical. Inspecting the CRS of an object can be done with <em>st_crs()</em> function. Here we load “rivers.gpkg”, which is a subset of HydroSheds river network, derived from 15 arc second DEM.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">basins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="st">"Data/basins.gpkg"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">rivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="st">"Data/rivers.gpkg"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">basins</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">rivers</span><span class="op">)</span>
+
+<span class="co"># 1st set csr</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_set_crs</a></span><span class="op">(</span><span class="va">rivers</span>, value <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">villages</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># 2nd st_transform</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">rivers</span>, crs <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">villages</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
+<p>If we know the CRS of our data, but it is missing from the object, we can set it using <em>st_set_crs()</em> function. Note that <strong>this will not transform the coordinates!</strong> Setting can be easily done either by using the EPSG code or proj.4 string.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># using EPSG SRID</span>
+<span class="va">basins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_set_crs</a></span><span class="op">(</span><span class="va">basins</span>, <span class="fl">4326</span><span class="op">)</span>
+
+<span class="co"># using proj.4 string</span>
+<span class="va">basins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_set_crs</a></span><span class="op">(</span><span class="va">basins</span>, <span class="st">"+init=epsg:4326"</span><span class="op">)</span>
+<span class="co"># basins &lt;- st_set_crs(basins, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")</span>
+
+<span class="co"># OR</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">basins</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">4326</span>
+<span class="co"># st_crs(basins) &lt;- "+init=epsg:4326"</span>
+<span class="co"># st_crs(basins) &lt;- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"</span></code></pre></div>
+<p>Coordinate transformations are likewise easy to achieve using <em>st_transform()</em> function. The input can be either the EPSG or proj.4 string, as with <em>st_set_crs()</em>. Here we transform basins to the same CRS as rivers (UTM zone 48N; EPSG:32648).</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">basins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">basins</span>, <span class="fl">32648</span><span class="op">)</span> 
+
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">basins</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="simplification-centroids-buffers-clipping-intersection" class="section level2">
+<h2 class="hasAnchor">
+<a href="#simplification-centroids-buffers-clipping-intersection" class="anchor"></a>Simplification, centroids, buffers, clipping, intersection…</h2>
+<p>Geometric operations include all operations which alter geometries, or result in new ones. Such commands include for instance simplifications, clipping, difference, intersection, computing centroids, buffers etc. ‘sf’ uses the OGC specifications for these operations, and therefore differ slightly from the terminology used in e.g. ArcGIS or QGIS.</p>
+<div id="union-dissolve" class="section level3">
+<h3 class="hasAnchor">
+<a href="#union-dissolve" class="anchor"></a>Union (Dissolve)</h3>
+<p>Here we create major basins from smaller ones by creating a union of the small geometries based on their attribute “MAIN_BAS”. This is equivalent to dissolving in ArcGIS and QGIS. There is no ready made function in ‘sf’ for this, but we can use the verbs provided in ‘dplyr’ package. Function st_union() from ‘sf’ creates a union of all objects in the input geometry (equals dissolving without attributes in ArcGIS or QGIS).</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The provided st_union() function creates a union of all geometries in the input</span>
+<span class="op">(</span> <span class="va">major_basins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="va">basins</span><span class="op">)</span> <span class="op">)</span>
+
+<span class="co"># dissolve to major basins again:</span>
+<span class="va">major_basins</span> <span class="op">&lt;-</span> <span class="va">basins</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">MAIN_BAS</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">major_basins</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="simplify" class="section level3">
+<h3 class="hasAnchor">
+<a href="#simplify" class="anchor"></a>Simplify</h3>
+<p>With the dissolved major basins, we can try simplification using st_simplify(). It operates on each individual geometry separately, and thus does not preserve uniform polygon borders. For polygon feature sets which share borders, we could use function ms_simplify() from ‘rmapshaper’ package.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># st_simplify() takes toleranse in the units of CRS. In our case it is UTM, so the unit is meters.</span>
+<span class="va">simplified_st</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="va">major_basins</span>, dTolerance <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">simplified_st</span><span class="op">)</span>
+
+<span class="co"># st_simplify() </span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ateucher/rmapshaper">rmapshaper</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co"># keep 1% of nodes. keep_shapes prevents small polygons from disappearing at high simplification</span>
+<span class="va">simplified_ms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="va">major_basins</span>, keep <span class="op">=</span> <span class="fl">0.01</span>, keep_shapes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">simplified_ms</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="centroids" class="section level3">
+<h3 class="hasAnchor">
+<a href="#centroids" class="anchor"></a>Centroids</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">centroids_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">basins</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">basins</span>, <span class="va">UP_AREA</span><span class="op">)</span>, reset <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Here using the dplyr::, because also raster package has a function named select(), and it creates conflict. the dplyr:: specifies that it is looking for the function in package 'dplyr'.</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">centroids_sf</span>, col<span class="op">=</span><span class="st">'white'</span>, pch<span class="op">=</span><span class="fl">16</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div id="buffers" class="section level4">
+<h4 class="hasAnchor">
+<a href="#buffers" class="anchor"></a>Buffers</h4>
+<p>Buffers can be taken from any ‘sf’ object. Here we take a fixed buffer of 5km from the centroid of each feature in major_basins.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">buffer_sf</span> <span class="op">&lt;-</span> <span class="va">major_basins</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span>dist <span class="op">=</span> <span class="fl">15000</span><span class="op">)</span>
+
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">buffer_sf</span><span class="op">)</span></code></pre></div>
+<p>Variable buffer are also possible by giving the input argument dist a vector of the same length as there are features in the ‘sf’ object. Here we take a random buffer 2-10km wide.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># random buffer distances</span>
+<span class="va">buf_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">major_basins</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">30000</span><span class="op">)</span>
+
+<span class="co"># sf</span>
+<span class="va">varbuf_sf</span> <span class="op">&lt;-</span> <span class="va">major_basins</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span>dist <span class="op">=</span> <span class="va">buf_dist</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">varbuf_sf</span>, reset <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">major_basins</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"LINESTRING"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">'black'</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+<div id="creating-regular-grids-fishnets" class="section level3">
+<h3 class="hasAnchor">
+<a href="#creating-regular-grids-fishnets" class="anchor"></a>Creating regular grids (fishnets)</h3>
+<p>Fishnets or regular grids of points can be created with <em>st_make_grid()</em> function. It creates a regular grid over bounding box of an ‘sf’ object. Can be given a certain cellsize, or number of cells in x and y directions. ‘what’ tells the function what kind of regular grid is wanted (polygons, corners, centers). Fishnets of lines rather than polygons can be created simply by casting the polygons as “LINESTRING”s. The resulting polygon grid is an ‘sfc’ object, so it needs to be made ‘sf’ in order for us to add the ID-attribute.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">grid_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_make_grid.html">st_make_grid</a></span><span class="op">(</span><span class="va">basins</span>, n<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span>, what<span class="op">=</span><span class="st">"polygons"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">grid_sf</span><span class="op">$</span><span class="va">ID</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">NROW</a></span><span class="op">(</span><span class="va">grid_sf</span><span class="op">)</span>
+
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">grid_sf</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropengov/geofi">geofi</a></span><span class="op">)</span>
+<span class="va">muni</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">fin</span> <span class="op">&lt;-</span> <span class="va">muni</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">grid_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_make_grid.html">st_make_grid</a></span><span class="op">(</span><span class="va">fin</span>, n<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">50</span><span class="op">)</span>, what<span class="op">=</span><span class="st">"polygons"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">grid_sf</span><span class="op">)</span>
+
+<span class="va">grid_clip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">grid_sf</span>, <span class="va">fin</span><span class="op">)</span>
+<span class="co"># plot(grid_clip, max.plot=2)</span>
+<span class="va">grid_clip</span><span class="op">$</span><span class="va">rank</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">grid_clip</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">grid_clip</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">rank</span><span class="op">)</span>, color <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org//reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span>
+  </code></pre></div>
+</div>
+<div id="intersection" class="section level3">
+<h3 class="hasAnchor">
+<a href="#intersection" class="anchor"></a>Intersection</h3>
+<p>Say we were interested in villages in a specific river basin. We can take an intersection of villages within that basin. First, let’s load the villages from the file, and then inspect it together with the basins.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">villages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="st">"Data/villages.gpkg"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">32648</span><span class="op">)</span>
+
+<span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">villages</span><span class="op">)</span> <span class="op">+</span> <span class="va">basins</span>
+<span class="va">map</span>
+
+<span class="co">#select a basin and get all villages intersecting</span>
+<span class="op">(</span> <span class="va">vil_sel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">basins</span>, <span class="va">HYBAS_ID</span> <span class="op">==</span> <span class="fl">4061080120</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">villages</span><span class="op">)</span> <span class="op">)</span>
+
+<span class="co"># If we only want HYBAS_ID from the basins data frame:</span>
+<span class="op">(</span> <span class="va">vil_sel</span> <span class="op">&lt;-</span> <span class="va">basins</span> <span class="op">%&gt;%</span> 
+    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">HYBAS_ID</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">HYBAS_ID</span> <span class="op">==</span> <span class="fl">4061080120</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">villages</span><span class="op">)</span> <span class="op">)</span>
+
+<span class="co"># we can use pipes inside functions as well</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">basins</span>, <span class="va">HYBAS_ID</span> <span class="op">==</span> <span class="fl">4061080120</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">HYBAS_ID</span><span class="op">)</span>, 
+     reset<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">vil_sel</span><span class="op">)</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1</span>, col<span class="op">=</span><span class="st">'white'</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="clipping" class="section level3">
+<h3 class="hasAnchor">
+<a href="#clipping" class="anchor"></a>Clipping</h3>
+<p>Clipping can be done with st_intersection as well. However, for proper clipping we need to have a single polygon feature geometry. For instance, if we wish to cut the polygon grid to the basins dataset, we need to take union of basins and use it to intersect the grid.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Does not clip proper</span>
+<span class="va">grid_clip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">grid_sf</span>, <span class="va">basins</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">grid_clip</span>, max.plot<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+
+<span class="co"># Clips proper</span>
+<span class="va">grid_clip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">grid_sf</span>, <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="va">basins</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">grid_clip</span>, max.plot<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

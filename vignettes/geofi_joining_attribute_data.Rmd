@@ -17,12 +17,13 @@ knitr::opts_chunk$set(
   comment = "#>",
   message = FALSE, 
   warning = FALSE,
+  # eval = FALSE,
   fig.height = 10, 
   fig.width = 7
 )
 ```
 
-This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from four different sources of which two are from [Statistics Finland PxWeb-api](https://pxnet2.stat.fi/PXWeb/pxweb/en/), namely [municipality key figures](https://pxnet2.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/) and [Paavo (Open data by postal code area)](https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/). Other two are from [Finnish institute for Health and Welfare (THL)](https://thl.fi/en/web/thlfi-en) more specifically [Statistical information on welfare and health (Sotkanet)](https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data#Sotkanet) and [Covid-19 tests and confirmed cases in Finland](https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-).
+This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from three different sources of which two are from [Statistics Finland PxWeb-api](https://pxnet2.stat.fi/PXWeb/pxweb/en/), namely [municipality key figures](https://pxnet2.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/) and [Paavo (Open data by postal code area)](https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/). Third is [Covid-19 tests and confirmed cases in Finland](https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-).
 
 **Installation**
 
@@ -85,43 +86,6 @@ library(ggplot2)
 map_data %>% 
   filter(grepl('Share of Swedish-speakers of the population|Share of foreign citizens of the population', information)) %>% 
   ggplot(aes(fill = municipal_key_figures)) + geom_sf() + facet_wrap(~information)
-```
-
-### Sotkanet data
-
-There is a dedicated CRAN-published R-package [Sotkanet](https://cran.r-project.org/web/packages/sotkanet/index.html) for accessing [Statistical information on welfare and health (Sotkanet)](https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data#Sotkanet) -api. Borrowing from package [vignette](https://cran.r-project.org/web/packages/sotkanet/vignettes/tutorial.html) we can formulate the following example.
-
-First we can list all the available indicator and subset it to share social assistance recipients within 25 - 64 years old  (Toimeentulotukea saaneet 25 - 64-vuotiaat).
-
-```{r}
-library(sotkanet)
-sotkanet.indicators <- SotkanetIndicators(type = "table") %>% 
-  as_tibble()
-
-social_assistance <- sotkanet.indicators[grepl("Toimeentulotukea saaneet 25 - 64-vuotiaat", sotkanet.indicators$indicator.title.fi, ignore.case = T),]
-social_assistance
-```
-
-Then we can download the indicator and filter the data to its latest year and region category KUNTA (municipality). 
-
-```{r}
-dat <- GetDataSotkanet(indicators = social_assistance$indicator)
-dat_latest <- dat %>% filter(year == max(year, na.rm = TRUE), 
-                             region.category == "KUNTA")
-as_tibble(dat_latest)
-```
-
-Now we can download the 2015 municipality division, join the social assistance data with it and plot the data on map.
-
-```{r}
-muni <- get_municipalities(year = 2015)
-muni_map <- left_join(muni, dat_latest %>% 
-                        mutate(region.code = as.integer(region.code)), 
-                      by = c("municipality_code" = "region.code"))
-ggplot(muni_map, aes(fill = primary.value)) + 
-  geom_sf() +
-  labs(fill = NULL, 
-       title = unique(dat_latest$indicator.title.fi))
 ```
 
 

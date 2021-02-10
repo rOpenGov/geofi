@@ -62,7 +62,6 @@ Suggests:
     tidyr,
     tmap,
     tricolore,
-    mapview,
     patchwork,
     ggrepel,
     htmltools,

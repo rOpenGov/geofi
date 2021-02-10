@@ -222,14 +222,7 @@ p_uusimaa <- ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
 
 ## Interactive maps
 
-As for interactive maps [Leaflet](https://rstudio.github.io/leaflet/) is not the only option. For exploring you datasets in almost any CRS you should to try out [mapview](https://r-spatial.github.io/mapview/). 
-
-```{r mapview, out.width="90%", eval = FALSE}
-library(mapview)
-mapview(polygon)
-```
-
-As for larger datasets, you are probably safer with [WebGL](https://en.wikipedia.org/wiki/WebGL) based [mapdeck](https://symbolixau.github.io/mapdeck/articles/mapdeck.html).
+As for interactive maps [Leaflet](https://rstudio.github.io/leaflet/) is not the only option. For exploring you datasets in almost any CRS you should to try out [mapview](https://r-spatial.github.io/mapview/). As for larger datasets, you are probably safer with [WebGL](https://en.wikipedia.org/wiki/WebGL) based [mapdeck](https://symbolixau.github.io/mapdeck/articles/mapdeck.html).
 
 Again, I am most experienced with leaflet so the following example is using leaflet. Leaflet default projection is `EPSG:3857` or `WGS84`, also known as "Google Mercator" or "Web Mercator, and you have reproject your `geofi` data to plot it using leaflet.
 

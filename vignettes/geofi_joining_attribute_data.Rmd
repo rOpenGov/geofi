@@ -83,7 +83,7 @@ Now we can plot a map showing `Share of Swedish-speakers of the population, %` a
 ```{r, fig.width = 10, fig.height = 6}
 library(ggplot2)
 map_data %>% 
-  filter(information %in% c('Share of Swedish-speakers of the population, %','Share of foreign citizens of the population, %')) %>% 
+  filter(grepl('Share of Swedish-speakers of the population|Share of foreign citizens of the population', information)) %>% 
   ggplot(aes(fill = municipal_key_figures)) + geom_sf() + facet_wrap(~information)
 ```
 

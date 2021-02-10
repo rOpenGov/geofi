@@ -1,4 +1,5 @@
 context("Basic WFS functionality1")
+library(httptest)
 
 # Define a test WFS (Statistics Finland)
 wfs_url <- geofi:::wfs_providers$Tilastokeskus$URL
@@ -22,7 +23,7 @@ httptest::with_mock_dir("wfs_responses",{
 
 # using different year (2019) to generate a distinct mock file for modification
 wfs_layer <- paste0("tilastointialueet:kunta", 4500, "k_", 2019)
-queries <- append(base_queries, list(request = "getFeature", 
+queries <- append(base_queries, list(request = "getFeature",
                                      typename = wfs_layer))
 
 # Modified response: $response$status_code changed from 200L to 400L
@@ -30,7 +31,7 @@ httptest::with_mock_dir("wfs_modified_responses",{
   test_that("WFS API object is correctly created", {
     skip_on_cran()
     skip_on_ci() #test requires manually modifying the test
-    expect_error(wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", 
+    expect_error(wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs",
                          queries = queries))
   })
 })

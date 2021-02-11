@@ -110,7 +110,7 @@
       <h1 data-toc-skip>Joining attribute data with geofi data</h1>
                         <h4 class="author">Markus Kainu</h4>
             
-            <h4 class="date">2021-02-09</h4>
+            <h4 class="date">2021-02-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropengov/geofi/blob/master/vignettes/geofi_joining_attribute_data.Rmd"><code>vignettes/geofi_joining_attribute_data.Rmd</code></a></small>
       <div class="hidden name"><code>geofi_joining_attribute_data.Rmd</code></div>
@@ -119,7 +119,7 @@
 
     
     
-<p>This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from four different sources of which two are from <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/">Statistics Finland PxWeb-api</a>, namely <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/">municipality key figures</a> and <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/">Paavo (Open data by postal code area)</a>. Other two are from <a href="https://thl.fi/en/web/thlfi-en">Finnish institute for Health and Welfare (THL)</a> more specifically <a href="https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data#Sotkanet">Statistical information on welfare and health (Sotkanet)</a> and <a href="https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-">Covid-19 tests and confirmed cases in Finland</a>.</p>
+<p>This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from three different sources of which two are from <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/">Statistics Finland PxWeb-api</a>, namely <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/">municipality key figures</a> and <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/">Paavo (Open data by postal code area)</a>. Third is <a href="https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-">Covid-19 tests and confirmed cases in Finland</a>.</p>
 <p><strong>Installation</strong></p>
 <p><code>geofi</code> is not yet in CRAN, but can be installed from Github using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -193,66 +193,16 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="va">map_data</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">information</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Share of Swedish-speakers of the population, %'</span>,<span class="st">'Share of foreign citizens of the population, %'</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">'Share of Swedish-speakers of the population|Share of foreign citizens of the population'</span>, <span class="va">information</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">municipal_key_figures</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">information</span><span class="op">)</span></code></pre></div>
 <p><img src="geofi_joining_attribute_data_files/figure-html/unnamed-chunk-3-1.png" width="960"></p>
-</div>
-<div id="sotkanet-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#sotkanet-data" class="anchor"></a>Sotkanet data</h3>
-<p>There is a dedicated CRAN-published R-package <a href="https://cran.r-project.org/web/packages/sotkanet/index.html">Sotkanet</a> for accessing <a href="https://thl.fi/en/web/thlfi-en/statistics/statistical-databases/open-data#Sotkanet">Statistical information on welfare and health (Sotkanet)</a> -api. Borrowing from package <a href="https://cran.r-project.org/web/packages/sotkanet/vignettes/tutorial.html">vignette</a> we can formulate the following example.</p>
-<p>First we can list all the available indicator and subset it to share social assistance recipients within 25 - 64 years old (Toimeentulotukea saaneet 25 - 64-vuotiaat).</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropengov/sotkanet">sotkanet</a></span><span class="op">)</span>
-<span class="va">sotkanet.indicators</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sotkanet/man/SotkanetIndicators.html">SotkanetIndicators</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"table"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">social_assistance</span> <span class="op">&lt;-</span> <span class="va">sotkanet.indicators</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Toimeentulotukea saaneet 25 - 64-vuotiaat"</span>, <span class="va">sotkanet.indicators</span><span class="op">$</span><span class="va">indicator.title.fi</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,<span class="op">]</span>
-<span class="va">social_assistance</span>
-<span class="co">#&gt; # A tibble: 1 x 4</span>
-<span class="co">#&gt;   indicator indicator.title.fi            indicator.organi… indicator.organizat…</span>
-<span class="co">#&gt;       &lt;dbl&gt; &lt;chr&gt;                                     &lt;dbl&gt; &lt;chr&gt;               </span>
-<span class="co">#&gt; 1         5 Toimeentulotukea saaneet 25 …                 2 Terveyden ja hyvinv…</span></code></pre></div>
-<p>Then we can download the indicator and filter the data to its latest year and region category KUNTA (municipality).</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sotkanet/man/GetDataSotkanet.html">GetDataSotkanet</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="va">social_assistance</span><span class="op">$</span><span class="va">indicator</span><span class="op">)</span>
-<span class="va">dat_latest</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">year</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, 
-                             <span class="va">region.category</span> <span class="op">==</span> <span class="st">"KUNTA"</span><span class="op">)</span>
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">dat_latest</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 306 x 11</span>
-<span class="co">#&gt;    region region.title.fi region.code region.category indicator indicator.title…</span>
-<span class="co">#&gt;     &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;           </span>
-<span class="co">#&gt;  1      2 Alajärvi        005         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt;  2      4 Alavieska       009         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt;  3      5 Alavus          010         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt;  4      9 Asikkala        016         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt;  5     11 Askola          018         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt;  6     12 Aura            019         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt;  7     13 Brändö          035         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt;  8     15 Eckerö          043         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt;  9     18 Enonkoski       046         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt; 10     19 Enontekiö       047         KUNTA                   5 Toimeentulotuke…</span>
-<span class="co">#&gt; # … with 296 more rows, and 5 more variables: year &lt;int&gt;, gender &lt;chr&gt;,</span>
-<span class="co">#&gt; #   primary.value &lt;dbl&gt;, absolute.value &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   indicator.organization.title.fi &lt;chr&gt;</span></code></pre></div>
-<p>Now we can download the 2015 municipality division, join the social assistance data with it and plot the data on map.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">muni</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2015</span><span class="op">)</span>
-<span class="va">muni_map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">muni</span>, <span class="va">dat_latest</span> <span class="op">%&gt;%</span> 
-                        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>region.code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">region.code</span><span class="op">)</span><span class="op">)</span>, 
-                      by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"municipality_code"</span> <span class="op">=</span> <span class="st">"region.code"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">muni_map</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">primary.value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NULL</span>, 
-       title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">dat_latest</span><span class="op">$</span><span class="va">indicator.title.fi</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="geofi_joining_attribute_data_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
 </div>
 <div id="health-districts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#health-districts" class="anchor"></a>Health Districts</h2>
 <p>in early 2021 we are still troubled by the COVID-19 and the health authorities are counting infections, deaths and vaccinated. Lets pull the daily data from API and compare the names of the health districts both in COVID-19 data and in municipality division from Statistics Finland.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
 <span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span><span class="op">(</span>
   Area <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_character</a></span><span class="op">(</span><span class="op">)</span>,
@@ -309,7 +259,7 @@
 <span class="co">#&gt; 20    Southwest Finland Hospital District 28</span>
 <span class="co">#&gt; 21                Vaasa Hospital District 13</span></code></pre></div>
 <p>The names look identical so we can join the two datasets and plot a map.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="va">status</span> <span class="op">==</span> <span class="fl">200</span><span class="op">)</span><span class="op">{</span>
   
   <span class="va">muni</span> <span class="op">%&gt;%</span> 
@@ -323,13 +273,13 @@
          fill <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
   
 <span class="op">}</span></code></pre></div>
-<p><img src="geofi_joining_attribute_data_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<p><img src="geofi_joining_attribute_data_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 </div>
 <div id="zipcode-level" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zipcode-level" class="anchor"></a>Zipcode level</h2>
 <p>You can download data from <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/">Paavo (Open data by postal code area)</a> using <code>pxweb</code>-package in a similar manner as in the first example.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/">pxweb</a></span><span class="op">)</span>
 <span class="co"># lets get all zipcodes and all variables</span>
 <span class="va">pxweb_query_list</span> <span class="op">&lt;-</span> 
@@ -363,7 +313,7 @@
 <span class="co">#&gt; 10 00100 Helsinki Keskusta - Etu… 18-19 years, 2017 …                        264</span>
 <span class="co">#&gt; # … with 72,614 more rows</span></code></pre></div>
 <p>Before we can join the data, we must extract the numerical postal code from <code>postal_code_area</code>-variable.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">px_data</span><span class="op">$</span><span class="va">posti_alue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">" .+$"</span>, <span class="st">""</span>, <span class="va">px_data</span><span class="op">$</span><span class="va">postal_code_area</span><span class="op">)</span>
 
 <span class="co"># Lets join with spatial data and plot the area of each zipcode</span>
@@ -375,7 +325,7 @@
           color  <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org//reference/alpha.html">alpha</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Average age of inhabitants, 2017 (HE)"</span>, 
        fill <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<p><img src="geofi_joining_attribute_data_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><img src="geofi_joining_attribute_data_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
   </div>
 

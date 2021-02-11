@@ -1,4 +1,8 @@
-## CHANGES IN VERSION 0.1 (2019-08-XX)
+## CHANGES IN VERSION 1.0 (2021-02-10)
+
++ 
+
+## CHANGES IN VERSION 0.1 (2019-08-08)
 
 + Reboot of `gisfin`, package renamed to `geofi`.
 

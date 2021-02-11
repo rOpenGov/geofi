@@ -122,55 +122,6 @@ If want to present multiple variables of same regions you can use facets.
 
 
 
-### Subsetting
-
-You can subset data your plotting by subsetting your data in conventional way like I did above, or you can use geometric operations such as bounding box or you can limit the plot area manually in ggplot2.
-
-Lets imagine that we need a more detailed view of the metropolitan area of the Greater Helsinki that consist of the following municipalities: Espoo, Helsinki, Vantaa, Hyvinkää, Järvenpää, Kauniainen, Kerava, Kirkkonummi, Mäntsälä, Nurmijärvi, Pornainen, Sipoo, Tuusula and Vihti.
-
-**Subsetting**
-
-```{r}
-greater_helsinki <- c('Espoo','Helsinki','Vantaa','Hyvinkää',
-                      'Järvenpää','Kauniainen','Kerava','Kirkkonummi',
-                      'Mäntsälä','Nurmijärvi','Pornainen','Sipoo','Tuusula','Vihti')
-greater_helsinki_polygon <- polygon %>% filter(municipality_name_fi %in% greater_helsinki)
-ggplot(greater_helsinki_polygon) + 
-  geom_sf() +
-  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
-```
-
-**Bounding boxes**
-
-First, let's create bounding box from polygons.
-
-```{r}
-bounding_box_polygon <- st_as_sfc(st_bbox(polygon %>% filter(municipality_name_fi %in% greater_helsinki)))
-ggplot(st_intersection(bounding_box_polygon, polygon)) + 
-  geom_sf() +
-  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
-```
-
-Then, let's use the point data (municipality central localities) to create the bounding box
-
-```{r}
-bounding_box_point <- st_as_sfc(st_bbox(point %>% filter(teksti %in% toupper(greater_helsinki))))
-ggplot(st_intersection(bounding_box_point, polygon)) + 
-  geom_sf() +
-  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
-```
-
-**Limit the plotting area in ggplot2**
-
-```{r}
-ggplot(polygon) + 
-  geom_sf() +
-  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki))) +
-  xlim(c(st_bbox(greater_helsinki_polygon)$xmin,st_bbox(greater_helsinki_polygon)$xmax)) +
-  ylim(c(st_bbox(greater_helsinki_polygon)$ymin,st_bbox(greater_helsinki_polygon)$ymax))
-```
-
-
 ### Facetting and combining maps
 
 [Facetting](https://ggplot2.tidyverse.org/reference/facet_wrap.html) is a useful way to present data on multiple variables covering the same region. This is usefull approach if you have, lets say, data on same indicator from two different time points and you want to have separate maps for separate times points, but have a shared scale. Below I create a random data for two year titled `population` and plot the data using `facet_wrap()`-function.

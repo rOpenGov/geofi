@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
   comment = "#>",
   message = FALSE, 
   warning = FALSE,
-  # eval = FALSE,
-  fig.height = 10, 
-  fig.width = 7
+  fig.height = 7, 
+  fig.width = 7,
+  dpi = 75
 )
 ```
 
@@ -81,11 +81,14 @@ map_data <- right_join(muni, px_data, by = c("municipality_name_fi" = "region_20
 
 Now we can plot a map showing `Share of Swedish-speakers of the population, %` and `Share of foreign citizens of the population, %` on two panels sharing a scale.
 
-```{r, fig.width = 10, fig.height = 6}
+```{r, fig.width = 10, fig.height = 7}
 library(ggplot2)
 map_data %>% 
   filter(grepl('Share of Swedish-speakers of the population|Share of foreign citizens of the population', information)) %>% 
-  ggplot(aes(fill = municipal_key_figures)) + geom_sf() + facet_wrap(~information)
+  ggplot(aes(fill = municipal_key_figures)) + 
+  geom_sf() + 
+  facet_wrap(~information) +
+  theme(legend.position = "top")
 ```
 
 

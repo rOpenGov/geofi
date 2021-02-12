@@ -4,10 +4,11 @@ template:
 
 navbar:
   right:
-     - icon: fa-github fa-lg
-       href: https://github.com/rOpenGov/geofi
      - icon: fa-users
        href: http://ropengov.org
+     - icon: fa-github
+       href: https://github.com/rOpenGov/geofi
+
 
 reference:
   - title: "API calling functions"
@@ -38,51 +39,32 @@ reference:
       - municipality_key_2013
   - title: "Geofacet grids"
     desc: >
-      geofi comes with a timeseries of built-in
+      geofi comes with a selection of built-in grids to used with geofacet-packages, a ggplot2 extension. All grids are based on the latest municipality breakdown
     contents:
-      - grid_ahvenanmaa_2019
-      - grid_ahvenanmaa_2020
-      - grid_etela_karjala_2019
-      - grid_etela_karjala_2020
-      - grid_etela_pohjanmaa_2019
-      - grid_etela_pohjanmaa_2020
-      - grid_etela_savo_2019
-      - grid_etela_savo_2020
-      - grid_kainuu_2019
-      - grid_kainuu_2020
-      - grid_kanta_hame_2019
-      - grid_kanta_hame_2020
-      - grid_keski_pohjanmaa_2019
-      - grid_keski_pohjanmaa_2020
-      - grid_keski_suomi_2019
-      - grid_keski_suomi_2020
-      - grid_kymenlaakso_2019
-      - grid_kymenlaakso_2020
-      - grid_lappi_2019
-      - grid_lappi_2020
-      - grid_maakunta_2019
-      - grid_paijat_hame_2019
-      - grid_paijat_hame_2020
-      - grid_pirkanmaa_2019
-      - grid_pirkanmaa_2020
-      - grid_pohjanmaa_2019
-      - grid_pohjanmaa_2020
-      - grid_pohjois_karjala_2019
-      - grid_pohjois_karjala_2020
-      - grid_pohjois_pohjanmaa_2019
-      - grid_pohjois_pohjanmaa_2020
-      - grid_pohjois_savo_2019
-      - grid_pohjois_savo_2020
-      - grid_sairaanhoitop_2019
-      - grid_satakunta_2019
-      - grid_satakunta_2020
-      - grid_uusimaa_2019
-      - grid_uusimaa_2020
-      - grid_varsinais_suomi_2019
-      - grid_varsinais_suomi_2020
+      - grid_ahvenanmaa
+      - grid_etela_karjala
+      - grid_etela_pohjanmaa
+      - grid_etela_savo
+      - grid_kainuu
+      - grid_kanta_hame
+      - grid_keski_pohjanmaa
+      - grid_keski_suomi
+      - grid_kymenlaakso
+      - grid_lappi
+      - grid_maakunta
+      - grid_paijat_hame
+      - grid_pirkanmaa
+      - grid_pohjanmaa
+      - grid_pohjois_karjala
+      - grid_pohjois_pohjanmaa
+      - grid_pohjois_savo
+      - grid_sairaanhoitop
+      - grid_satakunta
+      - grid_uusimaa
+      - grid_varsinais_suomi
   - title: "Miscellaneous"
     desc: >
-      Functions extracting various quantities needed for plotting from different types of fitted model objects.
+      Support functions for API functions and spatial data transformations
     contents:
       - check_api_access
       - wfs_api

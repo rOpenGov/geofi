@@ -11,7 +11,10 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.height = 7, 
+  fig.width = 7,
+  dpi = 75
 )
 ```
 
@@ -92,7 +95,7 @@ finland_popu2017$popu_rgb <- tric_dat$rgb
 
 Plot map by ggplot and use `scale_fill_identity()` option to make sure that each region is color coded by rgb-code.
 
-```{r plot_simplemap1, fig.height = 8, dpi=100, eval = TRUE}
+```{r plot_simplemap1, fig.width = 5}
 plot_pop <- ggplot(finland_popu2017) +
   geom_sf(aes(fill = popu_rgb, geometry = geom), size = .1) +
   scale_fill_identity() 
@@ -101,7 +104,7 @@ plot_pop
 
 Ternary colors can be adjusted to distinct municipalies differences better.
 
-```{r edit_tricolore, eval = TRUE}
+```{r edit_tricolore}
 tric_dat <- Tricolore(finland_popu2017,
                       p1 = 'over64',
                       p2 = 'y16_64', 
@@ -117,7 +120,7 @@ tric_dat <- Tricolore(finland_popu2017,
 finland_popu2017$popu_rgb <- tric_dat$rgb
 ```
 
-```{r plot_simplemap2, fig.height = 8, dpi=100, eval = TRUE}
+```{r plot_simplemap2, fig.width = 5}
 plot_pop <- ggplot(finland_popu2017) +
   geom_sf(aes(fill = popu_rgb, geometry = geom), size = .1) +
   scale_fill_identity() 
@@ -129,7 +132,7 @@ plot_pop
 
 Legend for tertinary color is added by `ggtern` and `annotation_custom()`. Package `ggtern` is important to load afer `ggplot2` package.
 
-```{r plot_finalmap,  fig.height = 6, dpi=300, eval = TRUE}
+```{r plot_finalmap,  fig.height = 10}
 library(ggtern)
 plot_pop <- ggplot(finland_popu2017) +
   geom_sf(aes(fill = popu_rgb, geometry = geom), size = .1) +

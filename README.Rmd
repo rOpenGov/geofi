@@ -94,5 +94,5 @@ Retrieval and analysis of open geospatial data from Finland with the geofi R pac
 
 
 
-We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Juuso Parkkinen, Jussi Jousimo, Janne Aukia, Aaro Salosensaari and Jani Miettinen. This project is part of [rOpenGov](http://ropengov.github.io).
+We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Jussi Jousimo, Janne Aukia and Aaro Salosensaari. This project is part of [rOpenGov](http://ropengov.github.io). <img src="http://ropengov.org/images/logo2020_black_orange.svg" height = "100px" align="right" />
 

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 <br>
 <!-- badges: start -->
   [![R build status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi//actions)
-  [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+  [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
   [![codecov.io](https://codecov.io/github/rOpenGov/geofi/coverage.svg?branch=master)](https://codecov.io/github/rOpenGov/geofi?branch=master)
   [![Gitter](https://badges.gitter.im/rOpenGov/geofi.svg)](https://gitter.im/rOpenGov/geofi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
   [![Watch on GitHub](https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/watchers)
@@ -55,7 +55,7 @@ d4 <- get_population_grid(resolution = 5)
 library(ggplot2)
 library(dplyr)
 theme_set(
-  theme_minimal(base_family = "Open Sans") +
+  theme_minimal(base_family = "Arial") +
   theme(legend.position= "none",
         axis.text = element_blank(),
         axis.title = element_blank(),
@@ -90,9 +90,9 @@ Contributions are very welcome:
 
 **Kindly cite this work** as follows: 
 [Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
-Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version `r sessionInfo()$otherPkgs$geofi$Version`. URL: [http://ropengov.github.io/geofi](http://ropengov.github.io/geofi)
+Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version `r sessionInfo()$otherPkgs$geofi$Version`. URL: [https://ropengov.github.io/geofi](https://ropengov.github.io/geofi)
 
 
 
-We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Jussi Jousimo, Janne Aukia and Aaro Salosensaari. This project is part of [rOpenGov](http://ropengov.github.io). <img src="http://ropengov.org/images/logo2020_black_orange.svg" height = "100px" align="right" />
+We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Jussi Jousimo, Janne Aukia and Aaro Salosensaari. This project is part of [rOpenGov](http://ropengov.org). <img src="http://ropengov.org/images/logo2020_black_orange.svg" height = "100px" align="right" />
 

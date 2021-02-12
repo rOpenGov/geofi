@@ -2,7 +2,7 @@
 status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi//actions)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![codecov.io](https://codecov.io/github/rOpenGov/geofi/coverage.svg?branch=master)](https://codecov.io/github/rOpenGov/geofi?branch=master)
 [![Gitter](https://badges.gitter.im/rOpenGov/geofi.svg)](https://gitter.im/rOpenGov/geofi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on
@@ -50,7 +50,7 @@ more comprehensive use cases.
     library(ggplot2)
     library(dplyr)
     theme_set(
-      theme_minimal(base_family = "Open Sans") +
+      theme_minimal(base_family = "Arial") +
       theme(legend.position= "none",
             axis.text = element_blank(),
             axis.title = element_blank(),
@@ -87,11 +87,11 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 0.9.2900011. URL:
-<http://ropengov.github.io/geofi>
+geofi R package. R package version 0.9.2900012. URL:
+<https://ropengov.github.io/geofi>
 
 We are grateful to all
 [contributors](https://github.com/rOpenGov/geofi/graphs/contributors),
-including Juuso Parkkinen, Jussi Jousimo, Janne Aukia, Aaro Salosensaari
-and Jani Miettinen. This project is part of
-[rOpenGov](http://ropengov.github.io).
+including Jussi Jousimo, Janne Aukia and Aaro Salosensaari. This project
+is part of [rOpenGov](http://ropengov.org).
+<img src="http://ropengov.org/images/logo2020_black_orange.svg" height = "100px" align="right" />

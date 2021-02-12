@@ -121,7 +121,7 @@ plot(municipality_central_localities["teksti"])
 
 From Ryan Hafen's [blog](https://ryanhafen.com/blog/geofacet/):
 
-> The [geofacet](https://hafen.github.io/geofacet/) package extends [ggplot2](http://ggplot2.tidyverse.org/) in a way that makes it easy to create geographically faceted visualizations in R. To geofacet is to take data representing different geographic entities and apply a visualization method to the data for each entity, with the resulting set of visualizations being laid out in a grid that mimics the original geographic topology as closely as possible.
+> The [geofacet](https://hafen.github.io/geofacet/) package extends [ggplot2](https://ggplot2.tidyverse.org/) in a way that makes it easy to create geographically faceted visualizations in R. To geofacet is to take data representing different geographic entities and apply a visualization method to the data for each entity, with the resulting set of visualizations being laid out in a grid that mimics the original geographic topology as closely as possible.
 
 `geofi`-package contains custom grids to be used with various Finnish administrative breakdowns as listed below.
 

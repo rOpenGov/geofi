@@ -104,7 +104,7 @@ ggplot() +
 
 ### Label overlapping
 
-`geom_sf_label` or `geom_sf_text` cannot control the overlapping of labels which is a common issue when mapping objects of various shapes and sizes. You can [`ggrepel`](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html) you can solve the problem though it requires a bit of spatial data handling with `sf`-package.
+`geom_sf_label` or `geom_sf_text` cannot control the overlapping of labels which is a common issue when mapping objects of various shapes and sizes. With [`ggrepel`](https://cran.r-project.org/package=ggrepel) you can solve the problem though it requires a bit of spatial data processing with `sf`-package.
 
 ```{r uusimaa_repel, fig.width=8, fig.height=4}
 ggplot() + 

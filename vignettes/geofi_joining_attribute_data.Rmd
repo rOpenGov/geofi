@@ -13,6 +13,7 @@ editor_options:
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
+  
   collapse = TRUE,
   comment = "#>",
   message = FALSE, 
@@ -97,16 +98,17 @@ map_data %>%
 in early 2021 we are still troubled by the COVID-19 and the health authorities are counting infections, deaths and vaccinated. Lets pull the daily data from API and compare the names of the health districts both in COVID-19 data and in municipality division from Statistics Finland. 
 
 ```{r}
-library(readr)
-cols(
-  Area = col_character(),
-  Time = col_date(format = ""),
-  val = col_double()
-) -> cov_cols
+if (FALSE){
+  library(readr)
+  cols(
+    Area = col_character(),
+    Time = col_date(format = ""),
+    val = col_double()
+  ) -> cov_cols
+  
+  thl_korona_api <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek20200101-508804L&column=hcdmunicipality2020-445222L"
+  status <- httr::status_code(httr::GET(thl_korona_api))
 
-thl_korona_api <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek20200101-508804L&column=hcdmunicipality2020-445222L"
-status <- httr::status_code(httr::GET(thl_korona_api))
-if (status == 200){
   xdf_raw <- read_csv2(thl_korona_api, col_types = cov_cols)
   xdf <- xdf_raw %>% 
     # filter(!grepl("Kaikki", Alue)) %>% 
@@ -121,33 +123,47 @@ if (status == 200){
     group_by(shp) %>% 
     filter(date == max(date, na.rm = TRUE)) %>% 
     ungroup()
-  
-  xdf %>% 
+} 
+xdf <- structure(list(shp = c("Åland", "All areas", "Central Finland Hospital District", 
+"Central Ostrobothnia Hospital District", "Helsinki and Uusimaa Hospital District", 
+"Itä-Savo Hospital District", "Kainuu Hospital District", "Kanta-Häme Hospital District", 
+"Kymenlaakso Hospital District", "Länsi-Pohja Hospital District", 
+"Lappi Hospital District", "North Karelia Hospital District", 
+"North Ostrobothnia Hospital District", "North Savo Hospital District", 
+"Päijät-Häme Hospital District", "Pirkanmaa Hospital District", 
+"Satakunta Hospital District", "South Karelia Hospital District", 
+"South Ostrobothnia Hospital District", "South Savo Hospital District", 
+"Southwest Finland Hospital District", "Vaasa Hospital District"
+), date = structure(c(18674, 18674, 18674, 18674, 18674, 18674, 
+18674, 18674, 18674, 18674, 18674, 18674, 18674, 18674, 18674, 
+18674, 18674, 18674, 18674, 18674, 18674, 18674), class = "Date"), 
+    day_cases = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0), total_cases = c(120, 51047, 1850, 177, 
+    29519, 141, 227, 873, 854, 478, 465, 516, 2265, 850, 1243, 
+    2662, 671, 348, 534, 573, 4803, 1878)), row.names = c(NA, 
+-22L), class = c("tbl_df", "tbl", "data.frame"))
+
+xdf %>% 
     count(shp)
   
-  muni <- get_municipalities(year = 2021) 
-  muni %>% 
-    st_drop_geometry() %>% 
-    count(sairaanhoitop_name_en)
-} 
+muni <- get_municipalities(year = 2021) 
+muni %>% 
+  st_drop_geometry() %>% 
+  count(sairaanhoitop_name_en)
 ```
 
 The names look identical so we can join the two datasets and plot a map.
 
 ```{r}
-if (status == 200){
-  
-  muni %>% 
-    count(sairaanhoitop_name_en) %>% 
-    left_join(xdf, by = c("sairaanhoitop_name_en" = "shp")) %>% 
-    ggplot(aes(fill = total_cases)) +
-    geom_sf() +
-    geom_sf_text(aes(label = paste0(sairaanhoitop_name_en, "\n", total_cases)), 
-                 color = "white") +
-    labs(title = "Number of total COVID-19 cases reported since January 2020", 
-         fill = NULL)
-  
-}
+muni %>% 
+  count(sairaanhoitop_name_en) %>% 
+  left_join(xdf, by = c("sairaanhoitop_name_en" = "shp")) %>% 
+  ggplot(aes(fill = total_cases)) +
+  geom_sf() +
+  geom_sf_text(aes(label = paste0(sairaanhoitop_name_en, "\n", total_cases)), 
+               color = "white") +
+  labs(title = "Number of total COVID-19 cases reported since January 2020", 
+       fill = NULL)
 ```
 
 

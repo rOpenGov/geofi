@@ -54,7 +54,7 @@ pxweb_query_list <-
        "Vuosi"=c("2019"))
 
 px_raw <-
-  pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/en/Kuntien_avainluvut/2020/kuntien_avainluvut_2020_aikasarja.px",
+  pxweb_get(url = "https://pxnet2.stat.fi/PXWeb/api/v1/en/Kuntien_avainluvut/2020/kuntien_avainluvut_2020_aikasarja.px",
             query = pxweb_query_list)
 
 library(dplyr)
@@ -180,7 +180,7 @@ pxweb_query_list <-
 
 # Download data 
 px_raw <- 
- pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/en/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
+ pxweb_get(url = "https://pxnet2.stat.fi/PXWeb/api/v1/en/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
            query = pxweb_query_list)
 
 px_data <- as_tibble(

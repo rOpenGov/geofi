@@ -145,7 +145,7 @@ pxweb_query_list <-
 
 # Download data 
 px_data <- 
-  pxweb_get(url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px",
+  pxweb_get(url = "https://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px",
             query = pxweb_query_list)
 
 # Convert to data.frame 

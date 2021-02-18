@@ -129,7 +129,7 @@ If want to present multiple variables of same regions you can use facets.
 
 ### Facetting and combining maps
 
-[Facetting](https://ggplot2.tidyverse.org/reference/facet_wrap.html) is a useful way to present data on multiple variables covering the same region. This is usefull approach if you have, lets say, data on same indicator from two different time points and you want to have separate maps for separate times points, but have a shared scale. Below I create a random data for two year titled `population` and plot the data using `facet_wrap()`-function.
+[Facetting](https://ggplot2.tidyverse.org/reference/facet_wrap.html) is a useful way to present data on multiple variables covering the same region. This is useful approach if you have, lets say, data on same indicator from two different time points and you want to have separate maps for separate times points, but have a shared scale. Below I create a random data for two year titled `population` and plot the data using `facet_wrap()`-function.
 
 ```{r}
 pop_data <- bind_rows(

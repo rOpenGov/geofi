@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-**`geofi`-package provides access to multiple dataset of different types and for different use. In this vignette we introduce the different datas and explain their use cases. Vignette *Making maps using `geofi`-package* provides multiple real-world examples of their usage. **
+**`geofi`-package provides access to multiple dataset of different types and for different use. In this vignette we introduce the different datas and explain their use cases. Vignette *Making maps using `geofi`-package* provides multiple real-world examples of their usage.**
 
 **Packages installation**
 

@@ -1,6 +1,10 @@
-## CHANGES IN VERSION 1.0 (2021-02-10)
+## CHANGES IN VERSION 1.0.0 (2021-02-18)
 
-+ 
++ first CRAN release
++ compatibility with 2021 mucipality and zipcode divide
++ new onboard dataset of municipality central locations as `municipality_central_localities`
++ api tests compatible with httptest v4.0.0
++ vignettes restructured
 
 ## CHANGES IN VERSION 0.1 (2019-08-08)
 

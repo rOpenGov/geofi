@@ -28,6 +28,9 @@ Finnish geospatial data for R.
 
 ## Installation and use
 
+    # install from CRAN
+    install.packages("geofi")
+
     # Install development version from GitHub
     remotes::install_github("ropengov/geofi")
 
@@ -90,11 +93,11 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 0.9.2900012. URL:
+geofi R package. R package version 1.0.0. URL:
 <https://ropengov.github.io/geofi/>
 
 We are grateful to all
 [contributors](https://github.com/rOpenGov/geofi/graphs/contributors),
 including Jussi Jousimo, Janne Aukia and Aaro Salosensaari. This project
 is part of [rOpenGov](http://ropengov.org).
-<img src="http://ropengov.org/images/logo2020_black_orange.svg" height = "100px" align="right" />
+<img src="http://ropengov.org/images/logo2020_black_orange.svg" width = "100px" align="right" />

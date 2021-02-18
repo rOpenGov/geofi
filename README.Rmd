@@ -39,6 +39,9 @@ Finnish geospatial data for R.
 ## Installation and use
 
 ```{r, eval = FALSE, message = FALSE, warning = FALSE}
+# install from CRAN
+install.packages("geofi")
+
 # Install development version from GitHub
 remotes::install_github("ropengov/geofi")
 ```
@@ -96,5 +99,5 @@ Retrieval and analysis of open geospatial data from Finland with the geofi R pac
 
 
 
-We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Jussi Jousimo, Janne Aukia and Aaro Salosensaari. This project is part of [rOpenGov](http://ropengov.org). <img src="http://ropengov.org/images/logo2020_black_orange.svg" height = "100px" align="right" />
+We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors), including Jussi Jousimo, Janne Aukia and Aaro Salosensaari. This project is part of [rOpenGov](http://ropengov.org). <img src="http://ropengov.org/images/logo2020_black_orange.svg" width = "100px" align="right" />
 

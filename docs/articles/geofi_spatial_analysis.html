@@ -104,13 +104,13 @@
 
       
 
-      </header><script src="geofi_spatial_analysis_files/header-attrs-2.6.6/header-attrs.js"></script><script src="geofi_spatial_analysis_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="geofi_spatial_analysis_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Spatial data manipulation and analysis R and geofi-package</h1>
                         <h4 class="author">Markus Kainu</h4>
             
-            <h4 class="date">2021-02-15</h4>
+            <h4 class="date">2021-02-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropengov/geofi/blob/master/vignettes/geofi_spatial_analysis.Rmd"><code>vignettes/geofi_spatial_analysis.Rmd</code></a></small>
       <div class="hidden name"><code>geofi_spatial_analysis.Rmd</code></div>
@@ -120,9 +120,13 @@
     
     
 <p><strong>Installation</strong></p>
-<p><code>geofi</code> is not yet in CRAN, but can be installed from Github using</p>
+<p><code>geofi</code> can be installed from CRAN using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"ropengov/geofi"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># install from CRAN</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"geofi"</span><span class="op">)</span>
+
+<span class="co"># Install development version from GitHub</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"ropengov/geofi"</span><span class="op">)</span></code></pre></div>
 <p>Manuel Gimonds <a href="https://mgimond.github.io/Spatial/">Intro to GIS and Spatial Analysis</a> and especially it’s <a href="https://mgimond.github.io/Spatial/app1-1.html">appendixes</a> provide a good introduction to working with spatial data in R.</p>
 <div id="coordinate-reference-systems" class="section level2">
 <h2 class="hasAnchor">

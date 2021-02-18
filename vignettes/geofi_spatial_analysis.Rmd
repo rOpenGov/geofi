@@ -27,9 +27,13 @@ knitr::opts_chunk$set(
 
 **Installation**
 
-`geofi` is not yet in CRAN, but can be installed from Github using
+`geofi` can be installed from CRAN using
 
 ```{r, eval = FALSE}
+# install from CRAN
+install.packages("geofi")
+
+# Install development version from GitHub
 remotes::install_github("ropengov/geofi")
 ```
 

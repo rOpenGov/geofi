@@ -32,3 +32,4 @@ tests/testthat/geo.stat.fi/geoserver/
 ^doc$
 ^Meta$
 _pkgdown.yaml
+^CRAN-RELEASE$

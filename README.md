@@ -93,7 +93,7 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 1.0.0. URL:
+geofi R package. R package version 0.9.2900013. URL:
 <https://ropengov.github.io/geofi/>
 
 We are grateful to all

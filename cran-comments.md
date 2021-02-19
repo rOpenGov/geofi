@@ -9,15 +9,6 @@
 
 ## R CMD check results
 
-There was 1 ERROR in windows-devel. https://win-builder.r-project.org/ZgBifjnyEvrj/00check.log
-
-* checking whether package 'geofi' can be installed ... ERROR
-
-  Error in library.dynam(lib, package, package.lib) : 
-    DLL 'vctrs' not found: maybe not installed for this architecture?
-  Calls: <Anonymous> ... loadNamespace -> namespaceImport -> loadNamespace -> library.dynam
-  Execution halted
-
 There was 1 NOTE:
 
   * checking CRAN incoming feasibility ... NOTE
@@ -29,9 +20,7 @@ There was 1 NOTE:
     Geospatial (3:16)
     geospatial (32:45)
 
-
-There were no WARNINGs.
-
+There were no ERRORs or WARNINGs.
 
 ## Downstream dependencies
 

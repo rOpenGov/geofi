@@ -5,7 +5,7 @@ README.Rmd
 README.html
 README-readme_map-1.png
 pkgdown
-docs
+^docs$
 .gitignore
 inst/extras/.RData
 .git
@@ -26,7 +26,9 @@ vignettes/geofi_tutorial_files/
 ^appveyor\.yml$
 
 # Tests
-tests/testthat/geo.stat.fi/geoserver/
+tests/testthat/statfi_responses/
+tests/testthat/wfs_modified_responses/
+tests/testthat/wfs_responses/
 
 ^\.github$
 ^doc$

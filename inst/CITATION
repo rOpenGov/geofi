@@ -1,7 +1,7 @@
 citHeader("Kindly cite the geofi R package as follows:")
 
 citEntry(entry="misc",
-         title = "geofi: Finnish Geospatial Data for R",
+         title = "geofi: Access Finnish Geospatial Data",
          author = personList(
            person(given ="Markus", family="Kainu", email = "markus.kainu@kapsi.fi"),
            person(given ="Joona", family="Lehtomaki"),	   
@@ -14,7 +14,7 @@ citEntry(entry="misc",
 	 year = "2015-2021",
          textVersion =
          paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Leo Lahti 2015-2021.",
-               "geofi: Finnish Geospatial Data for R",
+               "geofi: Access Finnish Geospatial Data",
                sep=" ")
          )
 

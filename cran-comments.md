@@ -9,7 +9,7 @@
 
 ## R CMD check results
 
-There was 2 NOTEs:
+There was 1 NOTE:
 
   * checking CRAN incoming feasibility ... NOTE
   Maintainer: 'Markus Kainu <markus.kainu@kapsi.fi>'
@@ -20,10 +20,6 @@ There was 2 NOTEs:
     Geospatial (3:16)
     geospatial (32:45)
     
-  * checking top-level files ... NOTE
-  Non-standard file/directory found at top level:
-    'cran-comments.md'  
-
 There were no ERRORs or WARNINGs.
 
 ## Downstream dependencies

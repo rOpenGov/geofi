@@ -2,7 +2,7 @@
 status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi//actions)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![codecov.io](https://codecov.io/github/rOpenGov/geofi/coverage.svg?branch=master)](https://codecov.io/github/rOpenGov/geofi?branch=master)
 [![Gitter](https://badges.gitter.im/rOpenGov/geofi.svg)](https://gitter.im/rOpenGov/geofi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on
@@ -24,6 +24,9 @@ GitHub](https://img.shields.io/github/stars/ropengov/eurostat.svg?style=social)]
 Access Finnish Geospatial Data.
 
 ## Installation and use
+
+    # install from CRAN
+    install.packages("geofi")
 
     # Install development version from GitHub
     remotes::install_github("ropengov/geofi")
@@ -88,7 +91,7 @@ Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
 geofi R package. R package version 1.0. URL:
-<https://ropengov.github.io/geofi>
+<https://ropengov.github.io/geofi/>
 
 We are grateful to all
 [contributors](https://github.com/rOpenGov/geofi/graphs/contributors),

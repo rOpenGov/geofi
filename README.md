@@ -9,7 +9,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 GitHub](https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/watchers)
 [![Star on
 GitHub](https://img.shields.io/github/stars/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/stargazers)
-[![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/rOpenGov)
+[![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/rOpenGov/)
 <!--[![CRAN published](http://www.r-pkg.org/badges/version/geofi)](http://www.r-pkg.org/pkg/geofi)-->
 <!--[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/geofi)](https://cran.r-project.org/package=geofi)-->
 <!--[![Downloads](http://cranlogs.r-pkg.org/badges/geofi)](https://cran.r-project.org/package=geofi)-->

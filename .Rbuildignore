@@ -37,3 +37,4 @@ _pkgdown.yaml
 ^CRAN-RELEASE$
 ^cran-comments.md$
 
+^cran-comments\.md$

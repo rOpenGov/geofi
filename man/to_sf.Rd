@@ -19,16 +19,6 @@ and then immediately read back in into a sf object.
 \note{
 For internal use, not exported.
 }
-\examples{
-  \dontrun{
-    response <- fmi_api(request = "getFeature",
-                        storedquery_id = "fmi::observations::weather::daily::timevaluepair",
-                        starttime = "2019-01-01", endtime = "2019-01-04",
-                        fmisid = 100946)
-    sf_obj <- to_sf(response)
-  }
-
-}
 \author{
 Joona Lehtomäki \href{mailto:joona.lehtomaki@iki.fi}{joona.lehtomaki@iki.fi}
 }

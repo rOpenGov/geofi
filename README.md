@@ -94,7 +94,6 @@ geofi R package. R package version 1.0. URL:
 <https://ropengov.github.io/geofi/>
 
 We are grateful to all
-[contributors](https://github.com/rOpenGov/geofi/graphs/contributors),
-including Jussi Jousimo, Janne Aukia and Aaro Salosensaari. This project
-is part of [rOpenGov](http://ropengov.org).
+[contributors](https://github.com/rOpenGov/geofi/graphs/contributors).
+This project is part of [rOpenGov](http://ropengov.org).
 <img src="http://ropengov.org/images/logo2020_black_orange.svg" height = "100px" align="right" />

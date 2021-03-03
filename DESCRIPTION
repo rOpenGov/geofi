@@ -64,7 +64,9 @@ Suggests:
     patchwork,
     ggrepel,
     htmltools,
-    readr
+    readr,
+    useful,
+    grid
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

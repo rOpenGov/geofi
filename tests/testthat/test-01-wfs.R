@@ -10,8 +10,7 @@ base_queries <- list("service" = "WFS", "version" = wfs_version)
 queries <- append(base_queries, list(request = "getFeature", typename = wfs_layer))
 
 test_that("WFS API object is correctly created", {
-  expect_error(wfs_api(base_url = "foobar", queries = "foobar"),
-               "^Invalid base URL")
+  expect_error(wfs_api(base_url = "foobar", queries = "foobar"),regexp = "^Invalid base URL")
 })
 
 httptest::with_mock_dir("wfs_responses",{

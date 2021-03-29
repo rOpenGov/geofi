@@ -1,3 +1,8 @@
+## CHANGES IN VERSION 1.0. (2021-03-29)
+
++ duplicated municipalities removed from municipality keys from year 2016
+
+
 ## CHANGES IN VERSION 1.0.0 (2021-02-18)
 
 + first CRAN release

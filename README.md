@@ -13,7 +13,7 @@ GitHub](https://img.shields.io/github/stars/ropengov/eurostat.svg?style=social)]
 [![CRAN
 published](http://www.r-pkg.org/badges/version/geofi)](http://www.r-pkg.org/pkg/geofi)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/geofi)](https://cran.r-project.org/package=geofi)
-&lt;[![Downloads](http://cranlogs.r-pkg.org/badges/geofi)](https://cran.r-project.org/package=geofi)
+[![Downloads](http://cranlogs.r-pkg.org/badges/geofi)](https://cran.r-project.org/package=geofi)
 <!-- badges: end -->
 
 <br>
@@ -91,7 +91,7 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 1.0. URL:
+geofi R package. R package version 1.0.00002. URL:
 <https://ropengov.github.io/geofi/>
 
 We are grateful to all

@@ -9,14 +9,11 @@
 
 ## Submission note
 
-* Examples removed from to_sf-function as it is for internal use and not to be exported 
-* Additional contributors removed from README.md
+* Duplicated items removed from two onboard datasets
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
-
-* This is a new release.
 
 ## Downstream dependencies
 

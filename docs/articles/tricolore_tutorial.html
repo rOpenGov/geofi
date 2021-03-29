@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.00002</span>
       </span>
     </div>
 
@@ -109,9 +109,9 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Creating ternary color coded maps</h1>
             
-            <h4 class="date">2021-02-25</h4>
+            <h4 class="date">2021-03-29</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ropengov/geofi/blob/master/vignettes/tricolore_tutorial.Rmd"><code>vignettes/tricolore_tutorial.Rmd</code></a></small>
+      
       <div class="hidden name"><code>tricolore_tutorial.Rmd</code></div>
 
     </div>
@@ -123,7 +123,7 @@
 <a href="#preparation" class="anchor"></a>Preparation</h2>
 <p>For this example geodata is joined with municipality level data from Statistics Finland. Load packages which are needed for data wrangling and plotting. For ternary color coded maps we are using <code>tricolore</code> packgage. Check more information of tricolore package in github <a href="https://github.com/jschoeley/tricolore" class="uri">https://github.com/jschoeley/tricolore</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropengov/geofi">geofi</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi">geofi</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; geofi R package: tools for open GIS data for Finland.</span>
 <span class="co">#&gt; Part of rOpenGov &lt;ropengov.org&gt;.</span>
@@ -154,7 +154,6 @@
 <span class="co">#&gt; Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;typename=tilastointialueet%3Akunta4500k_2017</span>
 <span class="co">#&gt; Warning: Coercing CRS to epsg:3067 (ETRS89 / TM35FIN)</span>
 <span class="co">#&gt; Data is licensed under: Attribution 4.0 International (CC BY 4.0)</span>
-
 <span class="co"># Pull municipalities and population data from Statistics Finland</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/">pxweb</a></span><span class="op">)</span>
 <span class="co">#&gt; pxweb: R tools for PX-WEB API.</span>
@@ -165,7 +164,6 @@
        <span class="st">"Vuosi"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2017"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">px_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pxweb/man/pxweb_get.html">pxweb_get</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px"</span>,
                      query <span class="op">=</span> <span class="va">pxweb_query_list</span><span class="op">)</span>
-
 <span class="co"># Convert to data.frame and wrangle dataset so that every row is municipality</span>
 <span class="va">tk_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">px_data</span>, 
                          column.name.type <span class="op">=</span> <span class="st">"text"</span>, 
@@ -179,7 +177,6 @@
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span><span class="op">(</span><span class="va">Tiedot</span>, <span class="va">`Kuntien avainluvut`</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">tk_data</span> <span class="op">&lt;-</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="va">tk_data</span><span class="op">)</span>
-
 <span class="co"># Rename variables in english</span>
 <span class="va">tk_data</span> <span class="op">&lt;-</span> <span class="va">tk_data</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>
@@ -188,12 +185,9 @@
     over64 <span class="op">=</span> <span class="va">yli_64_vuotiaiden_osuus_vaestosta_percent_2017</span>,
     popu2017 <span class="op">=</span> <span class="va">vakiluku_2017</span>
   <span class="op">)</span>
-
-
 <span class="co"># Join with Statistics Finland attribute data</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">municipalities17</span>, <span class="va">tk_data</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "name"</span>
-
 <span class="co"># Join the municipality level data with internal municipality_key_2017-data</span>
 <span class="va">finland_popu2017</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">municipality_key_2017</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span> <span class="op">=</span> <span class="st">"municipality_name_fi"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div id="calculating-color-code-to-the-dataset" class="section level3">
@@ -243,7 +237,7 @@
 <div id="building-legend-for-a-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#building-legend-for-a-plot" class="anchor"></a>Building legend for a plot</h3>
-<p>Legend for tertinary color is added by <code>ggtern</code> and <code><a href="https://ggplot2.tidyverse.org/reference/annotation_custom.html">annotation_custom()</a></code>. Package <code>ggtern</code> is important to load afer <code>ggplot2</code> package.</p>
+<p>Legend for tertinary color is added by <code>ggtern</code> and <code><a href="https://ggplot2.tidyverse.org/reference/annotation_custom.html">annotation_custom()</a></code>. Package <code>ggtern</code> is important to load after <code>ggplot2</code> package.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.ggtern.com">ggtern</a></span><span class="op">)</span>
 <span class="co">#&gt; --</span>
@@ -271,6 +265,23 @@
 <span class="va">plot_pop</span></code></pre></div>
 <p><img src="tricolore_tutorial_files/figure-html/plot_finalmap-1.png" width="525"></p>
 </div>
+</div>
+<div id="save-plot-as-png" class="section level2">
+<h2 class="hasAnchor">
+<a href="#save-plot-as-png" class="anchor"></a>Save plot as png</h2>
+<p>You can adjust plot to grid and save as png file</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jaredlander/useful">useful</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span><span class="st">"./plot_tricolore.png"</span>, width <span class="op">=</span> <span class="fl">800</span>, height <span class="op">=</span> <span class="fl">500</span>, units <span class="op">=</span> <span class="st">"px"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/grid/viewports.html">pushViewport</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grid/viewport.html">viewport</a></span><span class="op">(</span>layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/grid.layout.html">grid.layout</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grid/grid.rect.html">grid.rect</a></span><span class="op">(</span>gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">plot_pop</span>, vp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/useful/man/vplayout.html">vplayout</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; agg_png </span>
+<span class="co">#&gt;       2</span></code></pre></div>
+<p><img src="plot_tricolore.png"></p>
 </div>
   </div>
 

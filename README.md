@@ -1,17 +1,17 @@
 <br> <!-- badges: start --> [![R build
-status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi//actions)
+status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi/actions/)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![codecov.io](https://codecov.io/github/rOpenGov/geofi/coverage.svg?branch=master)](https://codecov.io/github/rOpenGov/geofi?branch=master)
 [![Gitter](https://badges.gitter.im/rOpenGov/geofi.svg)](https://gitter.im/rOpenGov/geofi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on
-GitHub](https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/watchers)
+GitHub](https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/watchers/)
 [![Star on
-GitHub](https://img.shields.io/github/stars/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/stargazers)
+GitHub](https://img.shields.io/github/stars/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/stargazers/)
 [![Follow](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/rOpenGov/)
 [![CRAN
-published](http://www.r-pkg.org/badges/version/geofi)](http://www.r-pkg.org/pkg/geofi)
+published](https://www.r-pkg.org/badges/version/geofi)](https://www.r-pkg.org/pkg/geofi)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/geofi)](https://cran.r-project.org/package=geofi)
 [![Downloads](http://cranlogs.r-pkg.org/badges/geofi)](https://cran.r-project.org/package=geofi)
 <!-- badges: end -->
@@ -81,8 +81,8 @@ Contributions are very welcome:
 -   [Use issue tracker](https://github.com/ropengov/geofi/issues) for
     feedback and bug reports.
 -   [Send pull requests](https://github.com/ropengov/geofi/)
--   [Star us on the Github page](https://github.com/ropengov/geofi)
--   [Join the discussion in Gitter](https://gitter.im/rOpenGov/geofi)
+-   [Star us on the Github page](https://github.com/ropengov/geofi/)
+-   [Join the discussion in Gitter](https://gitter.im/rOpenGov/geofi/)
 
 ### Acknowledgements
 

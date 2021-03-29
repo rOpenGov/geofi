@@ -9,11 +9,12 @@
 
 ## Submission note
 
-* Duplicated items removed from two onboard datasets
+* changed http -> https for www.r-pkg.org/pkg/geofi
+* added trailing slash for https://ropengov.github.io/geofi
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
 ## Downstream dependencies
 

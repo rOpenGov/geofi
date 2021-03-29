@@ -751,7 +751,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 319 rows and 37 variables:
+#' @format A data frame with 313 rows and 37 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}

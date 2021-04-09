@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.10001</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Creating ternary color coded maps</h1>
             
-            <h4 class="date">2021-03-29</h4>
+            <h4 class="date">2021-04-09</h4>
       
       
       <div class="hidden name"><code>tricolore_tutorial.Rmd</code></div>
@@ -196,9 +196,9 @@
 <p>Ternary color codes are calculated by <code><a href="https://rdrr.io/pkg/tricolore/man/Tricolore.html">Tricolore()</a></code>-function, which excepts variables which is used for color coding. Save rgb values to population dataset.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tric_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tricolore/man/Tricolore.html">Tricolore</a></span><span class="op">(</span><span class="va">finland_popu2017</span>,
-                      p1 <span class="op">=</span> <span class="st">'over64'</span>,
+                      p1 <span class="op">=</span> <span class="st">'under_15'</span>, 
                       p2 <span class="op">=</span> <span class="st">'y16_64'</span>, 
-                      p3 <span class="op">=</span> <span class="st">'under_15'</span>, 
+                      p3 <span class="op">=</span> <span class="st">'over64'</span>,
                       center <span class="op">=</span> <span class="cn">NA</span>,
                       crop <span class="op">=</span> <span class="cn">TRUE</span>
                       <span class="op">)</span>
@@ -214,9 +214,9 @@
 <p>Ternary colors can be adjusted to distinct municipalies differences better.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tric_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tricolore/man/Tricolore.html">Tricolore</a></span><span class="op">(</span><span class="va">finland_popu2017</span>,
-                      p1 <span class="op">=</span> <span class="st">'over64'</span>,
+                      p1 <span class="op">=</span> <span class="st">'under_15'</span>, 
                       p2 <span class="op">=</span> <span class="st">'y16_64'</span>, 
-                      p3 <span class="op">=</span> <span class="st">'under_15'</span>, 
+                      p3 <span class="op">=</span> <span class="st">'over64'</span>,
                       center <span class="op">=</span> <span class="cn">NA</span>,
                       crop <span class="op">=</span> <span class="cn">TRUE</span>,
                       spread <span class="op">=</span> <span class="fl">3</span>,

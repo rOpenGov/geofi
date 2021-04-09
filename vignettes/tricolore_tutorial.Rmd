@@ -78,9 +78,9 @@ Ternary color codes are calculated by `Tricolore()`-function, which excepts vari
 
 ```{r add_tricolore, eval = TRUE}
 tric_dat <- Tricolore(finland_popu2017,
-                      p1 = 'over64',
+                      p1 = 'under_15', 
                       p2 = 'y16_64', 
-                      p3 = 'under_15', 
+                      p3 = 'over64',
                       center = NA,
                       crop = TRUE
                       )
@@ -100,9 +100,9 @@ Ternary colors can be adjusted to distinct municipalies differences better.
 
 ```{r edit_tricolore}
 tric_dat <- Tricolore(finland_popu2017,
-                      p1 = 'over64',
+                      p1 = 'under_15', 
                       p2 = 'y16_64', 
-                      p3 = 'under_15', 
+                      p3 = 'over64',
                       center = NA,
                       crop = TRUE,
                       spread = 3,
@@ -159,4 +159,5 @@ dev.off()
 ```
 
 ![](./plot_tricolore.png)
+
 

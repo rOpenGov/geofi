@@ -1,5 +1,5 @@
 ## Test environments
-* local ubuntu 20.04 install, R 4.0.4
+* local ubuntu 20.04 install, R 4.1.0
 * win-builder (devel)
 * Github Actions with 
     * windows-latest (release)
@@ -9,8 +9,8 @@
 
 ## Submission note
 
-* changed http -> https for www.r-pkg.org/pkg/geofi
-* added trailing slash for https://ropengov.github.io/geofi
+* examples in vignettes that use pxweb-data from Statistical Finland fixed to match the changed data structure
+* http -> https changes in documentation urls
 
 ## R CMD check results
 

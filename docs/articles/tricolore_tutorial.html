@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.10001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -104,12 +104,12 @@
 
       
 
-      </header><script src="tricolore_tutorial_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="tricolore_tutorial_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Creating ternary color coded maps</h1>
             
-            <h4 class="date">2021-05-05</h4>
+            <h4 class="date">2021-06-07</h4>
       
       
       <div class="hidden name"><code>tricolore_tutorial.Rmd</code></div>
@@ -123,7 +123,7 @@
 <a href="#preparation" class="anchor"></a>Preparation</h2>
 <p>For this example geodata is joined with municipality level data from Statistics Finland. Load packages which are needed for data wrangling and plotting. For ternary color coded maps we are using <code>tricolore</code> packgage. Check more information of tricolore package in github <a href="https://github.com/jschoeley/tricolore" class="uri">https://github.com/jschoeley/tricolore</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi">geofi</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi/">geofi</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; geofi R package: tools for open GIS data for Finland.</span>
 <span class="co">#&gt; Part of rOpenGov &lt;ropengov.org&gt;.</span>
@@ -167,7 +167,8 @@
 <span class="co"># Convert to data.frame and wrangle dataset so that every row is municipality</span>
 <span class="va">tk_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">px_data</span>, 
                          column.name.type <span class="op">=</span> <span class="st">"text"</span>, 
-                         variable.value.type <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span>
+                         variable.value.type <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"Tiedot"</span>, values_to <span class="op">=</span> <span class="st">"Kuntien avainluvut"</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>
 <span class="va">tk_data</span> <span class="op">&lt;-</span> <span class="va">tk_data</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">`Alue 2019`</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span>,

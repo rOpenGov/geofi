@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.10001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -104,13 +104,13 @@
 
       
 
-      </header><script src="geofi_datasets_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="geofi_datasets_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Datasets in geofi-package</h1>
                         <h4 class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 class="date">2021-05-05</h4>
+            <h4 class="date">2021-06-07</h4>
       
       
       <div class="hidden name"><code>geofi_datasets.Rmd</code></div>
@@ -134,7 +134,7 @@
 <p>Official administrative regions in Finland are based on municipalities. In 2021 there are 309 municipalities in Finland and the number is decreasing over time through mergers.<br><br>
 Each municipality belongs to a higher level regional classifications such as regions (maakunta) or health care districts (sairaanhoitopiiri). <code>municipality_key_</code>-datasets are based on Statistics Finland <a href="https://data.stat.fi/api/classifications/v2/">Statistical classification</a> -api with few modification and provided on yearly basis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi">geofi</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi/">geofi</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"geofi"</span><span class="op">)</span>
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -302,7 +302,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="va">pxweb_query_list</span> <span class="op">&lt;-</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"Alue 2019"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>,
        <span class="st">"Tiedot"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"M411"</span><span class="op">)</span>,
-       <span class="st">"Vuosi"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1987"</span>,<span class="st">"1988"</span>,<span class="st">"1989"</span>,<span class="st">"1990"</span>,<span class="st">"1991"</span>,<span class="st">"1992"</span>,<span class="st">"1993"</span>,<span class="st">"1994"</span>,<span class="st">"1995"</span>,<span class="st">"1996"</span>,<span class="st">"1997"</span>,<span class="st">"1998"</span>,<span class="st">"1999"</span>,<span class="st">"2000"</span>,<span class="st">"2001"</span>,<span class="st">"2002"</span>,<span class="st">"2003"</span>,<span class="st">"2004"</span>,<span class="st">"2005"</span>,<span class="st">"2006"</span>,<span class="st">"2007"</span>,<span class="st">"2008"</span>,<span class="st">"2009"</span>,<span class="st">"2010"</span>,<span class="st">"2011"</span>,<span class="st">"2012"</span>,<span class="st">"2013"</span>,<span class="st">"2014"</span>,<span class="st">"2015"</span>,<span class="st">"2016"</span>,<span class="st">"2017"</span>,<span class="st">"2018"</span><span class="op">)</span><span class="op">)</span>
+       <span class="st">"Vuosi"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Download data </span>
 <span class="va">px_data</span> <span class="op">&lt;-</span> 
@@ -311,7 +311,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 
 <span class="co"># Convert to data.frame </span>
 <span class="va">px_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">px_data</span>, column.name.type <span class="op">=</span> <span class="st">"text"</span>, variable.value.type <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">px_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kunta_name"</span>,<span class="st">"var"</span>,<span class="st">"year"</span>,<span class="st">"value"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">px_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kunta_name"</span>,<span class="st">"year"</span>,<span class="st">"value"</span><span class="op">)</span>
 
 <span class="co"># lets aggregate population data</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">year</span><span class="op">)</span>,

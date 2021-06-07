@@ -4,8 +4,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Creating ternary color coded maps}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -47,7 +49,8 @@ px_data <- pxweb_get(url = "https://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avain
 # Convert to data.frame and wrangle dataset so that every row is municipality
 tk_data <- as.data.frame(px_data, 
                          column.name.type = "text", 
-                         variable.value.type = "text")
+                         variable.value.type = "text") %>% 
+  pivot_longer(names_to = "Tiedot", values_to = "Kuntien avainluvut", 3:6)
 tk_data <- tk_data %>% 
   rename(name = `Alue 2019`) %>%
   mutate(name = as.character(name),

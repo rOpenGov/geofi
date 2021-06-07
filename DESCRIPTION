@@ -1,8 +1,8 @@
 Type: Package
 Package: geofi
 Title: Access Finnish Geospatial Data
-Version: 1.0.10001
-Date: 2021-04-09
+Version: 1.0.2
+Date: 2021-06-07
 Authors@R: 
     c(person(given = "Markus",
              family = "Kainu",
@@ -31,7 +31,7 @@ Authors@R:
              comment = c(ORCID = "0000-0001-5537-637X")))
 Description: Tools for reading Finnish open geospatial data in R.
 License: BSD_2_clause + file LICENSE
-URL: https://ropengov.github.io/geofi
+URL: https://ropengov.github.io/geofi/
 Depends: 
     R (>= 3.5.0)
 Imports: 

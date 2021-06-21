@@ -1,7 +1,7 @@
 #' Get Finnish municipality (multi)polygons for different years and/or scales.
 #'
 #' Thin wrapper around Finnish zip code areas provided by
-#' [Statistic Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet_en.html).
+#' [Statistics Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet_en.html).
 #'
 #' @param year A numeric for year of the administerative borders. Available are
 #'             2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 and 2021.

@@ -1,7 +1,7 @@
 #' Get Finnish zip code (multi)polygons for different years.
 #'
 #' Thin wrapper around Finnish zip code areas provided by
-#' [Statistic Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
+#' [Statistics Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
 #'
 #' @param year A numeric for year of the zipcodes. Years available 2015-2021.
 #'

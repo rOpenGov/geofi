@@ -36,6 +36,18 @@ install.packages("geofi")
 remotes::install_github("ropengov/geofi")
 ```
 
+
+```{r}
+# Let's first create a function that checks if the suggested 
+# packages are available
+check_namespaces <- function(pkgs){
+  pkglst <- list()
+  for (i in seq_along(pkgs)) pkglst[[i]] <- requireNamespace(pkgs[i], 
+                                                             quietly = TRUE)
+  return(all(unlist(pkglst)))
+}
+```
+
 This vignettes gives an overview of different options for creating maps in R using the data from `geofi`-package. Vignette is divided in three sections: *R-packages for static maps*, *static maps using ggplot2* and *interactive maps*. But we begin with the datasets we want to plot.
 
 If you want more detailed explanation of how to plot `sf`-objects take a look at vignette [5. Plotting Simple Features](https://r-spatial.github.io/sf/articles/sf5.html).
@@ -72,10 +84,16 @@ plot(st_geometry(point["municipality_code"]), add = TRUE, color = "black")
 **ggplot2**
 
 ```{r gg, fig.width = 5}
+libs <- c("ggplot2")
+if (check_namespaces(pkgs = libs)) {
 library(ggplot2)
 ggplot() + 
   geom_sf(data = polygon, aes(fill = municipality_code)) +
   geom_sf(data = point)
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 **tmap**
@@ -89,6 +107,8 @@ As I am only fluent in using `ggplot2` the the more complex examples are using `
 `ggplot2`-packages has three `sf`-class spesific functions: `geom_sf` plotting for points, lines and polygons, and `geom_sf_text` and `geom_sf_label` for labeling the maps. In the following examples we are using the Uusimaa region in Southern Finland.
 
 ```{r uusimaa, fig.width=8, fig.height=4}
+libs <- c("ggplot2")
+if (check_namespaces(pkgs = libs)) {
 library(dplyr)
 polygon_uusimaa <- polygon %>% filter(maakunta_name_fi %in% "Uusimaa")
 point_uusimaa <- point %>% filter(municipality_code %in% polygon_uusimaa$municipality_code)
@@ -97,6 +117,10 @@ ggplot() +
   geom_sf(data = polygon_uusimaa, alpha = .3) + 
   geom_sf(data = point_uusimaa) + 
   geom_sf_text(data = point_uusimaa, aes(label = teksti))
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 ### Label overlapping
@@ -104,6 +128,8 @@ ggplot() +
 `geom_sf_label` or `geom_sf_text` cannot control the overlapping of labels which is a common issue when mapping objects of various shapes and sizes. With [`ggrepel`](https://cran.r-project.org/package=ggrepel) you can solve the problem though it requires a bit of spatial data processing with `sf`-package.
 
 ```{r uusimaa_repel, fig.width=8, fig.height=4}
+libs <- c("ggplot2")
+if (check_namespaces(pkgs = libs)) {
 ggplot() + 
   theme_light() +
   geom_sf(data = polygon_uusimaa, alpha = .3) + 
@@ -114,6 +140,10 @@ ggplot() +
                                     sf::st_centroid() %>% 
                                     sf::st_coordinates() %>% as_tibble()),
                      aes(label = teksti, x = X, y = Y))
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 ### Faceting 
@@ -143,15 +173,23 @@ pop_data
 ```{r facet,  fig.height=7}
 pop_map <- right_join(polygon, pop_data)
 
+libs <- c("ggplot2")
+if (check_namespaces(pkgs = libs)) {
 ggplot(pop_map, 
        aes(fill = population)) +
   geom_sf() +
   facet_grid(~time)
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 However, often the indicators you want to compare either have different values (shared scale not ideal), are aggregated differently or cover non-overlapping geographic region. The you may find [patchwork](https://patchwork.data-imaginist.com/) useful as in the example below.
 
 ```{r patchwork, fig.width = 8, fig.height=10}
+libs <- c("ggplot2","patchwork")
+if (check_namespaces(pkgs = libs)) {
 library(patchwork)
 p_municipalities <- ggplot(polygon, aes(fill = municipality_code)) + 
   geom_sf() + 
@@ -166,6 +204,10 @@ p_uusimaa <- ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
 (p_municipalities | p_regions) /
 p_uusimaa + plot_layout(nrow = 2, heights = c(1,0.6)) +
   plot_annotation(title = "Combining multiple maps into a single (gg)plot")
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -176,6 +218,8 @@ Creating informative and aesthetically pleasing maps is always a challenge and t
 You may want to get rid of the grid as well as axis-labels and -titles.  
 
 ```{r, fig.height = 5}
+libs <- c("ggplot2")
+if (check_namespaces(pkgs = libs)) {
 ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
   geom_sf(color = alpha("white", 1/3)) +
   scale_fill_fermenter(palette = "YlGnBu") +
@@ -187,6 +231,10 @@ ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
         ) +
   labs(title = "Municipality code", 
        fill = NULL)
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -197,6 +245,8 @@ As for interactive maps [Leaflet](https://rstudio.github.io/leaflet/) is not the
 Again, I am most experienced with leaflet so the following example is using leaflet. Leaflet default projection is `EPSG:3857` or `WGS84`, also known as "Google Mercator" or "Web Mercator, and you have reproject your `geofi` data to plot it using leaflet.
 
 ```{r leaflet, out.width="90%"}
+libs <- c("leaflet")
+if (check_namespaces(pkgs = libs)) {
 polygon_wgs84 <- sf::st_transform(x = polygon, crs = "+proj=longlat +datum=WGS84")
 point_wgs84 <- sf::st_transform(x = point, crs = "+proj=longlat +datum=WGS84")
 
@@ -241,7 +291,9 @@ leaflet(polygon_wgs84) %>%
                                                        padding = "2px 4px"),
                                           textsize = "12px",
                                           direction = "auto"))
-
-
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 

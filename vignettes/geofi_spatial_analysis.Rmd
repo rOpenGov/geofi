@@ -37,6 +37,17 @@ install.packages("geofi")
 remotes::install_github("ropengov/geofi")
 ```
 
+```{r}
+# Let's first create a function that checks if the suggested 
+# packages are available
+check_namespaces <- function(pkgs){
+  pkglst <- list()
+  for (i in seq_along(pkgs)) pkglst[[i]] <- requireNamespace(pkgs[i], 
+                                                             quietly = TRUE)
+  return(all(unlist(pkglst)))
+}
+```
+
 Manuel Gimonds [Intro to GIS and Spatial Analysis](https://mgimond.github.io/Spatial/) and especially it's  [appendixes](https://mgimond.github.io/Spatial/app1-1.html) provide a good introduction to working with spatial data in R. 
 
 ## Coordinate reference systems
@@ -49,7 +60,6 @@ When using spatial data in R it necessary to have all data in same coordinate re
 library(geofi)
 library(sf)
 library(dplyr)
-library(ggplot2)
 muni <- get_municipalities()
 point <- municipality_central_localities
 crs <- st_crs(muni)
@@ -64,6 +74,10 @@ muni_4326 <- st_transform(muni, "EPSG:4326")
 crs <- st_crs(muni_4326)
 crs$input
 
+libs <- c("ggplot2","patchwork")
+if (check_namespaces(pkgs = libs)) {
+library(ggplot2)
+  
 p1 <- ggplot(muni %>% st_union()) + 
   geom_sf() + 
   labs(subtitle = "EPSG:3067")
@@ -73,6 +87,10 @@ p2 <- ggplot(muni_4326 %>% st_union()) +
 library(patchwork)
 wrap_plots(list(p1,p2), nrow = 1) +
   plot_annotation(title = "Map of Finland in two different CRS")
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 You can see the that northern Finland is larger on the right and the grid below is different.
@@ -82,6 +100,8 @@ You can see the that northern Finland is larger on the right and the grid below 
 To compute the area of polygons (municipality in this case), ordering them by size and plotting largest/smalles 10 can be as this.
 
 ```{r largest, fig.width=5}
+libs <- c("ggplot2")
+if (check_namespaces(pkgs = libs)) {
 # compute area
 muni$area <- sf::st_area(muni)
 # largest
@@ -100,6 +120,10 @@ muni %>%
   geom_sf() + 
   geom_sf_label(aes(label = name_fi)) +
   labs(title = "smallest 10")
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -114,10 +138,16 @@ greater_helsinki <- c('Espoo','Helsinki','Vantaa','Hyvinkää',
                       'Järvenpää','Kauniainen','Kerava','Kirkkonummi',
                       'Mäntsälä','Nurmijärvi','Pornainen','Sipoo','Tuusula','Vihti')
 greater_helsinki_polygon <- muni %>% filter(municipality_name_fi %in% greater_helsinki)
+
+if (check_namespaces(pkgs = libs)) {
 ggplot(greater_helsinki_polygon) + 
   geom_sf() +
   geom_sf(data = point %>% 
             filter(teksti %in% toupper(greater_helsinki)))
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -127,18 +157,30 @@ First, let's create [bounding box](https://en.wikipedia.org/wiki/Minimum_boundin
 
 ```{r bb_poly}
 bounding_box_polygon <- st_as_sfc(st_bbox(muni %>% filter(municipality_name_fi %in% greater_helsinki)))
+
+if (check_namespaces(pkgs = libs)) {
 ggplot(st_intersection(bounding_box_polygon, muni)) + 
   geom_sf() +
   geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 Then, let's use the point data (municipality central localities) to create the bounding box
 
 ```{r bb_point}
 bounding_box_point <- st_as_sfc(st_bbox(point %>% filter(teksti %in% toupper(greater_helsinki))))
+
+if (check_namespaces(pkgs = libs)) {
 ggplot(st_intersection(bounding_box_point, muni)) + 
   geom_sf() +
   geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -150,9 +192,15 @@ Neighboring or intersecting objects can be found using `st_intersection()` in fo
 helsinki <- muni %>%  filter(municipality_name_fi == "Helsinki")
 neigbour_codes <- st_intersection(muni,helsinki) %>% 
   pull(municipality_code)
+
+if (check_namespaces(pkgs = libs)) {
 ggplot(muni %>% filter(municipality_code %in% neigbour_codes)) +
   geom_sf() +
   geom_sf_label(aes(label = municipality_name_fi))
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -165,21 +213,32 @@ Lets first plot the smallest category as a single multipolygon.
 ```{r unioin}
 muni$area_class <- cut_number(x = as.numeric(muni$area), n = 3)
 # 
+# 
+if (check_namespaces(pkgs = libs)) {
 muni %>% 
   filter(area_class == levels(muni$area_class)[1]) %>% 
   st_union() %>% 
   ggplot() +
   geom_sf()
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 To union all three into same data you can use `group_by` and `summarise`
 
 ```{r union2}
+if (check_namespaces(pkgs = libs)) {
 muni %>% 
   group_by(area_class) %>%
   summarise() %>% 
   ggplot() +
   geom_sf(aes(fill = area_class))
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -193,11 +252,17 @@ The following operarions derive from [Marko Kallio's](http://markokallio.fi/) co
 
 ```{r centroids, fig.width=5}
 muni_centroids <- st_centroid(muni)
+
+if (check_namespaces(pkgs = libs)) {
 ggplot() +
   geom_sf(data = muni) +
   geom_sf(data = muni_centroids, color = "blue") +
   # plot also the municipality_central_localities
   geom_sf(data = municipality_central_localities, color = "red")
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 ### Buffers
@@ -208,10 +273,15 @@ Buffers can be useful, for instance, calculating the share of [buildings](https:
 muni_centroids_buffer <- muni_centroids %>%
     st_buffer(dist = 15000)
 
+if (check_namespaces(pkgs = libs)) {
 ggplot() +
   geom_sf(data = muni) +
   geom_sf(data = muni_centroids_buffer) +
   geom_sf(data = muni_centroids, shape = 3)
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 ### Creating regular grids
@@ -236,10 +306,15 @@ grid_sf <- st_make_grid(muonio, cellsize = c(2000,4000), what="polygons") %>%
 grid_clip <- st_intersection(grid_sf, muonio)
 grid_clip$rank <- 1:nrow(grid_clip)
 
+if (check_namespaces(pkgs = libs)) {
 ggplot(grid_clip) +
   geom_sf(aes(fill = rank), color = alpha("white", 1/3), size = 3) +
   scale_fill_viridis_c() +
   theme_minimal()
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -261,6 +336,7 @@ muni_voronoi <- municipality_central_localities %>%
   st_intersection(st_union(muni)) %>% 
   mutate(rnk = 1:nrow(.))
 
+if (check_namespaces(pkgs = libs)) {
 ggplot(muni_voronoi) + 
   geom_sf(aes(fill = rnk)) +
   geom_sf(data = municipality_central_localities, shape = 4) +
@@ -270,5 +346,9 @@ ggplot(muni_voronoi) +
         axis.title = element_blank(),
         panel.grid = element_blank(),
         legend.position = "none")
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 

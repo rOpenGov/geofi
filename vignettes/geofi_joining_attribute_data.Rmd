@@ -38,6 +38,17 @@ install.packages("geofi")
 remotes::install_github("ropengov/geofi")
 ```
 
+```{r}
+# Let's first create a function that checks if the suggested 
+# packages are available
+check_namespaces <- function(pkgs){
+  pkglst <- list()
+  for (i in seq_along(pkgs)) pkglst[[i]] <- requireNamespace(pkgs[i], 
+                                                             quietly = TRUE)
+  return(all(unlist(pkglst)))
+}
+```
+
 
 ## Municipalities
 
@@ -51,6 +62,8 @@ In this first example we join municipality level data from Statistics Finland [m
 library(geofi)
 muni <- get_municipalities(year = 2019)
 
+libs <- c("pxweb","dplyr","tidyr","janitor","ggplot2")
+if (check_namespaces(pkgs = libs)) {
 library(pxweb)
 pxweb_query_list <-
   list("Alue 2020"=c("*"),
@@ -72,23 +85,40 @@ px_data <- as_tibble(
   ) %>% setNames(make_clean_names(names(.))) %>% 
   pivot_longer(names_to = "information", values_to = "municipal_key_figures", 3:ncol(.))
 px_data
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 Once we have the data in long format we can observe the `region_2020`-column.
 
 ```{r municipality_map2}
+if (check_namespaces(pkgs = libs)) {
 count(px_data, region_2020)
+  } else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 This is not obvious to all, but have the municipality names in Finnish among other regional breakdowns which allows us to combine the data with spatial data using `municipality_name_fi`-variable. 
 
 ```{r}
-map_data <- right_join(muni, px_data, by = c("municipality_name_fi" = "region_2020"))
+if (check_namespaces(pkgs = libs)) {
+map_data <- right_join(muni, 
+                       px_data, 
+                       by = c("municipality_name_fi" = "region_2020"))
+  } else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 Now we can plot a map showing `Share of Swedish-speakers of the population, %` and `Share of foreign citizens of the population, %` on two panels sharing a scale.
 
 ```{r, fig.width = 10, fig.height = 7}
+if (check_namespaces(pkgs = libs)) {
 library(ggplot2)
 map_data %>% 
   filter(grepl("swedish|foreign", information)) %>% 
@@ -96,6 +126,10 @@ map_data %>%
   geom_sf() + 
   facet_wrap(~information) +
   theme(legend.position = "top")
+  } else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -161,6 +195,8 @@ muni %>%
 The names look identical so we can join the two datasets and plot a map.
 
 ```{r}
+libs <- c("ggplot2")
+if (check_namespaces(pkgs = libs)) {
 muni %>% 
   count(sairaanhoitop_name_en) %>% 
   left_join(xdf, by = c("sairaanhoitop_name_en" = "shp")) %>% 
@@ -170,6 +206,10 @@ muni %>%
                color = "white") +
   labs(title = "Number of total COVID-19 cases reported since January 2020", 
        fill = NULL)
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 
@@ -178,6 +218,8 @@ muni %>%
 You can download data from [Paavo (Open data by postal code area)](https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/) using `pxweb`-package in a similar manner as in the first example.
 
 ```{r zipcode_with_statistics_finland}
+libs <- c("ggplot2","pxweb","janitor")
+if (check_namespaces(pkgs = libs)) {
 library(pxweb)
 # lets get all zipcodes and all variables
 pxweb_query_list <- 
@@ -196,11 +238,17 @@ px_data <- as_tibble(
   ) %>% setNames(make_clean_names(names(.)))
 px_data %>% 
   filter(postal_code_area != "Finland")
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 Before we can join the data, we must extract the numerical postal code from `postal_code_area`-variable.
 
 ```{r}
+libs <- c("ggplot2","pxweb","janitor")
+if (check_namespaces(pkgs = libs)) {
 px_data$posti_alue <- sub(" .+$", "", px_data$postal_code_area)
 
 # Lets join with spatial data and plot the area of each zipcode
@@ -212,5 +260,9 @@ ggplot(zipcodes_map) +
           color  = alpha("white", 1/3)) +
   labs(title = "Average age of inhabitants, 2017 (HE)", 
        fill = NULL)
+} else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 

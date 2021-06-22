@@ -43,9 +43,9 @@ convert_municipality_key_codes <- function(muni_key = geofi::municipality_key) {
 
 integers_as_character <- function(dat, varname){
   x <- dat[[varname]]
-  if (varname %in% c("municipality_code")){
+  if (varname %in% c("municipality_code","seutukunta_code")){
     y <- stringr::str_pad(string = x, width = 3, pad = "0")
-    } else if (grepl("kela", varname)){
+    } else if (grepl("kela", varname)|varname == "kunta"){
       y <- x
     } else {
       y <- stringr::str_pad(string = x, width = 2, pad = "0")

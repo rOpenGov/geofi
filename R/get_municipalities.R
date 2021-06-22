@@ -6,8 +6,11 @@
 #' @param year A numeric for year of the administrative borders. Available are
 #'             2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 and 2021.
 #' @param scale A scale or resolution of the shape. Two options: \code{1000}
-#'              equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
-#' @param codes_as_character A logical determining should
+#'             equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
+#' @param codes_as_character A logical determining if the region codes should
+#'             be returned as strings of equal width as originally provided by
+#'             Statistics Finland instead of integers.
+#'
 #'
 #' @return sf object
 #'
@@ -27,7 +30,7 @@
 #' @rdname get_municipalities
 #' @export
 
-get_municipalities <- function(year = 2021, scale = 4500){
+get_municipalities <- function(year = 2021, scale = 4500, codes_as_character = FALSE){
 
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()) {

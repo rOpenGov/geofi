@@ -3,10 +3,11 @@
 #' Thin wrapper around Finnish zip code areas provided by
 #' [Statistics Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet_en.html).
 #'
-#' @param year A numeric for year of the administerative borders. Available are
+#' @param year A numeric for year of the administrative borders. Available are
 #'             2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 and 2021.
 #' @param scale A scale or resolution of the shape. Two options: \code{1000}
 #'              equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
+#' @param codes_as_character A logical determining should
 #'
 #' @return sf object
 #'
@@ -56,10 +57,16 @@ Please check your connection, firewall settings and/or review your proxy setting
     library(geofi)
   }
 
+  if (codes_as_character){
+    muni_key <- convert_municipality_key_codes(get(paste0("municipality_key_", year)))
+  } else {
+    muni_key <- get(paste0("municipality_key_", year))
+    }
+
   # Join the attribute data
   sf_obj <- left_join(sf_obj %>%
                         mutate(kunta = as.integer(as.character(.data$kunta))),
-            get(paste0("municipality_key_", year)),
+            muni_key,
             by = c("kunta" = "kunta"))
 
   message("Data is licensed under: ", wfs_providers$Tilastokeskus$license)

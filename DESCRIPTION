@@ -1,8 +1,8 @@
 Type: Package
 Package: geofi
 Title: Access Finnish Geospatial Data
-Version: 1.0.2
-Date: 2021-06-07
+Version: 1.0.3
+Date: 2021-06-22
 Authors@R: 
     c(person(given = "Markus",
              family = "Kainu",
@@ -49,24 +49,18 @@ Suggests:
     covr,
     geofacet,
     ggplot2,
-    ggtern,
+    ggrepel,
     httptest (>= 4.0.0),
     janitor,
     knitr,
     leaflet,
     pxweb,
     rmarkdown,
-    sotkanet,
     testthat,
     tidyr,
-    tmap,
-    tricolore,
     patchwork,
-    ggrepel,
     htmltools,
-    readr,
-    useful,
-    grid
+    readr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

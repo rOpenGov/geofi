@@ -1,5 +1,5 @@
 ## Test environments
-* local ubuntu 20.04 install, R 4.0.4
+* local ubuntu 20.04 install, R 4.1.0
 * win-builder (devel)
 * Github Actions with 
     * windows-latest (release)
@@ -9,14 +9,12 @@
 
 ## Submission note
 
-* Examples removed from to_sf-function as it is for internal use and not to be exported 
-* Additional contributors removed from README.md
+* examples in vignettes that use pxweb-data from Statistical Finland fixed to match the changed data structure
+* http -> https changes in documentation urls
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+0 errors | 0 warnings | 0 note
 
 ## Downstream dependencies
 

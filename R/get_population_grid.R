@@ -1,8 +1,8 @@
-#' Get Finnish Statistics grid in two different resolutions for years 2010-2019
+#' Get Finnish Population grid in two different resolutions for years 2010-2019
 #
+#' Thin wrapper around Finnish population grid data provided by
+#' [Statistics Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
 #'
-#' Thin wrapper around Finnish zip code areas provided by
-#' [Statistic Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
 #'
 #' @param year A numeric for year of the population grid. Years available 2010-2019.
 #' @param resolution 1 (1km x 1km) or 5 (5km x 5km)

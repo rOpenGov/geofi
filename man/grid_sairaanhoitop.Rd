@@ -5,7 +5,7 @@
 \alias{grid_sairaanhoitop}
 \title{custom geofacet grid for health care districts}
 \format{
-A data frame with 19 rows and 4 variables:
+A data frame with 21 rows and 4 variables:
 \describe{
 \item{name}{District name (Sairaanhoitopiiri) in Finnish}
 \item{code}{District code}

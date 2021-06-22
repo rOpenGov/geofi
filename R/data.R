@@ -31,7 +31,7 @@
 #'
 #' Grid table to be used with ggplot2 and geofacet
 #'
-#' @format A data frame with 19 rows and 4 variables:
+#' @format A data frame with 21 rows and 4 variables:
 #' \describe{
 #'   \item{name}{District name (Sairaanhoitopiiri) in Finnish}
 #'   \item{code}{District code}

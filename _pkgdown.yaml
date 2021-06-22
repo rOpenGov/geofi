@@ -6,7 +6,7 @@ navbar:
   right:
      - icon: fa-users
        href: http://ropengov.org
-     - icon: fa-github
+     - icon: fab fa-github
        href: https://github.com/rOpenGov/geofi
 
 

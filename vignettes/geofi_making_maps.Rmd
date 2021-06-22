@@ -80,14 +80,7 @@ ggplot() +
 
 **tmap**
 
-
-```{r tmap, fig.width = 5}
-library(tmap)
-tm_shape(polygon) +
-  tm_polygons("municipality_code") +
-  tm_shape(point) +
-    tm_symbols(col = "black", scale = .5) 
-```
+[`tmap`](https://mtennekes.github.io/tmap/) is a versatile library for creating static thematic maps in R. It supports `sf`-class objects and is fully compatible with geospatial data available through `geofi`.
 
 As I am only fluent in using `ggplot2` the the more complex examples are using `ggplot2`-package.
 

@@ -4,7 +4,7 @@
 \alias{get_population_grid}
 \title{Get Finnish Population grid in two different resolutions for years 2010-2019
 Thin wrapper around Finnish population grid data provided by
-\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistic Finland}.}
+\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.}
 \usage{
 get_population_grid(year = 2017, resolution = 5)
 }
@@ -19,7 +19,7 @@ sf object
 \description{
 Get Finnish Population grid in two different resolutions for years 2010-2019
 Thin wrapper around Finnish population grid data provided by
-\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistic Finland}.
+\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.
 }
 \examples{
  \dontrun{

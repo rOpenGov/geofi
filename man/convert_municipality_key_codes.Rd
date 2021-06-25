@@ -24,5 +24,5 @@ using this function.
 
 }
 \author{
-Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}
+Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}, Pyry Kantanen
 }

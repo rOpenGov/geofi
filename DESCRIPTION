@@ -1,7 +1,7 @@
 Type: Package
 Package: geofi
 Title: Access Finnish Geospatial Data
-Version: 1.0.3
+Version: 1.0.200001
 Date: 2021-06-22
 Authors@R: 
     c(person(given = "Markus",
@@ -23,6 +23,9 @@ Authors@R:
              role = "ctb"),
       person(given = "Pyry",
              family = "Kantanen",
+             role = "ctb"),
+      person(given = "Sampo",
+             family = "Vesanen",
              role = "ctb"),
       person(given = "Leo",
              family = "Lahti",

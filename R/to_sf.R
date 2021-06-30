@@ -1,6 +1,6 @@
-#' Transform a fmi_api object into a sf object.
+#' Transform a wfs_api object into a sf object.
 #'
-#' FMI API response object's XML (GML) content is temporarily wrtitten on disk
+#' Statistics Finland WFS API response object's XML (GML) content is temporarily written on disk
 #' and then immediately read back in into a sf object.
 #'
 #' @param api_obj wfs api object

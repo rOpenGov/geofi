@@ -2,7 +2,7 @@
 % Please edit documentation in R/to_sf.R
 \name{to_sf}
 \alias{to_sf}
-\title{Transform a fmi_api object into a sf object.}
+\title{Transform a wfs_api object into a sf object.}
 \usage{
 to_sf(api_obj)
 }
@@ -13,7 +13,7 @@ to_sf(api_obj)
 sf object
 }
 \description{
-FMI API response object's XML (GML) content is temporarily wrtitten on disk
+Statistics Finland WFS API response object's XML (GML) content is temporarily written on disk
 and then immediately read back in into a sf object.
 }
 \note{

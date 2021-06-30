@@ -9,8 +9,8 @@
 
 ## Submission note
 
-* examples in vignettes that use pxweb-data from Statistical Finland fixed to match the changed data structure
-* http -> https changes in documentation urls
+* examples in vignettes that use suggested package now conditional to 
+availability of a package
 
 ## R CMD check results
 

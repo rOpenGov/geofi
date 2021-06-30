@@ -42,10 +42,7 @@ remotes::install_github("ropengov/geofi")
 # Let's first create a function that checks if the suggested 
 # packages are available
 check_namespaces <- function(pkgs){
-  pkglst <- list()
-  for (i in seq_along(pkgs)) pkglst[[i]] <- requireNamespace(pkgs[i], 
-                                                             quietly = TRUE)
-  return(all(unlist(pkglst)))
+  return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
 }
 ```
 

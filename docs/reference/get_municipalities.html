@@ -124,7 +124,7 @@ Statistics Finland." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://ropengov.org">
-    <span class="fa fa-users"></span>
+    <span class="fas fa-users"></span>
      
   </a>
 </li>
@@ -157,20 +157,26 @@ Statistics Finland." />
 <a href='https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet_en.html'>Statistics Finland</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_municipalities</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2021</span>, scale <span class='op'>=</span> <span class='fl'>4500</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_municipalities</span><span class='op'>(</span>year <span class='op'>=</span> <span class='fl'>2021</span>, scale <span class='op'>=</span> <span class='fl'>4500</span>, codes_as_character <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>year</th>
-      <td><p>A numeric for year of the administerative borders. Available are
+      <td><p>A numeric for year of the administrative borders. Available are
 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 and 2021.</p></td>
     </tr>
     <tr>
       <th>scale</th>
       <td><p>A scale or resolution of the shape. Two options: <code>1000</code>
 equals 1:1 000 000 and <code>4500</code> equals 1:4 500 000.</p></td>
+    </tr>
+    <tr>
+      <th>codes_as_character</th>
+      <td><p>A logical determining if the region codes should
+be returned as strings of equal width as originally provided by
+Statistics Finland instead of integers.</p></td>
     </tr>
     </table>
 

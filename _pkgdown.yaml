@@ -66,6 +66,7 @@ reference:
     desc: >
       Support functions for API functions and spatial data transformations
     contents:
+      - convert_municipality_key_codes
       - check_api_access
       - wfs_api
       - to_sf

@@ -1,5 +1,17 @@
 # geofi (development version)
 
+# CHANGES IN VERSION 1.0.3 (2021-07-30)
+
+- new convert_municipality_key_codes-function that can be used convert regional 
+codes  in on-board municipality key data sets into variable width characters as
+originally provided by Statistics Finland
+- new codes_as_characters argument added to get_municipalities-function that uses
+convert_municipality_key_codes-function to convert region codes to characters of
+variable widths. Defaults in FALSE
+- examples in vignettes that use suggested package now conditional to 
+availability of a package
+
+
 # CHANGES IN VERSION 1.0.2 (2021-07-06)
 
 - examples in vignettes that use pxweb-data from Statistical Finland fixed to match the changed data structure

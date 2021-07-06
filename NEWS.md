@@ -1,6 +1,4 @@
-# geofi (development version)
-
-# CHANGES IN VERSION 1.0.3 (2021-07-30)
+# geofi 1.0.3
 
 - new convert_municipality_key_codes-function that can be used convert regional 
 codes  in on-board municipality key data sets into variable width characters as
@@ -10,21 +8,22 @@ convert_municipality_key_codes-function to convert region codes to characters of
 variable widths. Defaults in FALSE
 - examples in vignettes that use suggested package now conditional to 
 availability of a package
+- tricolore vignette removed due to complex dependencies
 
 
-# CHANGES IN VERSION 1.0.2 (2021-07-06)
+# geofi 1.0.2
 
 - examples in vignettes that use pxweb-data from Statistical Finland fixed to match the changed data structure
 - http -> https changes in documentation urls
 
 
-# CHANGES IN VERSION 1.0.1 (2021-03-29)
+# geofi 1.0.1
 
 - duplicated municipalities removed from municipality keys from year 2016
 - tricolore_tutorial.Rmd vignette now provides a proper method for producing the final map
 
 
-## CHANGES IN VERSION 1.0.0 (2021-02-18)
+# geofi 1.0.0
 
 - first CRAN release
 - compatibility with 2021 mucipality and zipcode divide
@@ -32,7 +31,7 @@ availability of a package
 - api tests compatible with httptest v4.0.0
 - vignettes restructured
 
-# CHANGES IN VERSION 0.1 (2019-08-08)
+# geofi 0.1 (development version)
 
 - Reboot of `gisfin`, package renamed to `geofi`.
 

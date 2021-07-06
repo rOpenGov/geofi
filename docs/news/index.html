@@ -122,7 +122,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://ropengov.org">
-    <span class="fas fa-users"></span>
+    <span class="fa fa-users"></span>
      
   </a>
 </li>
@@ -149,10 +149,75 @@
       
     </div>
 
-    <div id="geofi-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#geofi-development-version" class="anchor"></a>geofi (development version)<small> Unreleased </small>
+    <div id="geofi-103" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.3">
+<a href="#geofi-103" class="anchor"></a>geofi 1.0.3<small> 2021-07-01 </small>
 </h1>
+<ul>
+<li>new convert_municipality_key_codes-function that can be used convert regional codes in on-board municipality key data sets into variable width characters as originally provided by Statistics Finland</li>
+<li>new codes_as_characters argument added to get_municipalities-function that uses convert_municipality_key_codes-function to convert region codes to characters of variable widths. Defaults in FALSE</li>
+<li>examples in vignettes that use suggested package now conditional to availability of a package</li>
+<li>tricolore vignette removed due to complex dependencies</li>
+</ul>
+</div>
+    <div id="geofi-102" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.2">
+<a href="#geofi-102" class="anchor"></a>geofi 1.0.2<small> 2021-06-07 </small>
+</h1>
+<ul>
+<li>examples in vignettes that use pxweb-data from Statistical Finland fixed to match the changed data structure</li>
+<li>http -&gt; https changes in documentation urls</li>
+</ul>
+</div>
+    <div id="geofi-101" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.1">
+<a href="#geofi-101" class="anchor"></a>geofi 1.0.1<small> 2021-03-29 </small>
+</h1>
+<ul>
+<li>duplicated municipalities removed from municipality keys from year 2016</li>
+<li>tricolore_tutorial.Rmd vignette now provides a proper method for producing the final map</li>
+</ul>
+</div>
+    <div id="geofi-100" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.0">
+<a href="#geofi-100" class="anchor"></a>geofi 1.0.0<small> 2021-02-25 </small>
+</h1>
+<ul>
+<li>first CRAN release</li>
+<li>compatibility with 2021 mucipality and zipcode divide</li>
+<li>new onboard dataset of municipality central locations as <code>municipality_central_localities</code>
+</li>
+<li>api tests compatible with httptest v4.0.0</li>
+<li>vignettes restructured</li>
+</ul>
+</div>
+    <div id="geofi-01-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="0.1">
+<a href="#geofi-01-development-version" class="anchor"></a>geofi 0.1 (development version)<small> Unreleased </small>
+</h1>
+<ul>
+<li>Reboot of <code>gisfin</code>, package renamed to <code>geofi</code>.</li>
+</ul>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>All WFSs (provider, URL, version) are now listed in <code>inst/extdata/wfs_providers.yaml</code>. This separation of data and code hopefully makes it easier to manage the data and to use it consistently in different parts of the package (e.g. actual code and tests). Package internally, these data are parsed to an environment <code>wfs_providers</code>.</li>
+<li>
+<code><a href="../reference/get_municipalities.html">get_municipalities()</a></code> and <code><a href="../reference/get_zipcodes.html">get_zipcodes()</a></code> can now pass extra-arguments (<code>...</code>) to underlying <code>get_wfs_layer()</code>.</li>
+<li>Basic testing harness is in place using <code>testthat</code> and <code>httptest</code>.</li>
+</ul>
+</div>
+<div id="development-related" class="section level2">
+<h2 class="hasAnchor">
+<a href="#development-related" class="anchor"></a>Development related</h2>
+<ul>
+<li>Municipal key rda files in <code>data</code> dir are now saved with <code>compress = "bzip2"</code> to reduce the size of the rda files.</li>
+<li>Decreased version number down to 0.1.0.9004 as this is a new package now.</li>
+<li>Decreased R version requirement to 3.5.0 as check was complaining about the previous version number (3.5.2).</li>
+<li>DESCRIPTION now defines <code>knitr</code> as the VignetteEngine for the package.</li>
+</ul>
+</div>
 </div>
   </div>
 

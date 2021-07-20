@@ -27,7 +27,11 @@ langs <- c("fi","sv","en")
 # Lets loop over the years 2013-2020
 yearlist <- list()
 yrs <- 2013:2021
-for (iii in seq_along(yrs)){
+for (iii in 9){
+# for (iii in seq_along(yrs)){
+
+  print(yrs[iii])
+  Sys.sleep(20)
 
   kuntaclass <- paste0("kunta_1_",yrs[iii],"0101")
 
@@ -409,6 +413,8 @@ mutate(kela_asumistukialue_name_sv = case_when(
 # Lets rename the Finnish version of Maarianhamina
 municipality_key <- left_join(ddd4,kuntaluokitusavain_kela)
 
+
+
 # per year municipality keys
 yrs <- unique(municipality_key$year)
 for (i in seq_along(yrs)){
@@ -423,3 +429,96 @@ for (i in seq_along(yrs)){
 save(municipality_key, file = "./data/municipality_key.rda",
      compress = "bzip2")
 
+# Hyvinvointialueet - a temporary fix as stat.fi api is not working properly
+load("./data/municipality_key_2021.rda")
+
+hyvinvointialue <- municipality_key_2021 %>%
+mutate(hyvinvointialue_name_fi = case_when(
+  maakunta_name_fi == "Varsinais-Suomi" ~ "Varsinais-Suomen hyvinvointialue",
+  maakunta_name_fi == "Satakunta" ~ "Satakunnan hyvinvointialue",
+  maakunta_name_fi == "Kanta-Häme" ~ "Kanta-Hämeen hyvinvointialue",
+  maakunta_name_fi == "Pirkanmaa" ~ "Pirkanmaan hyvinvointialue",
+  maakunta_name_fi == "Päijät-Häme" ~ "Päijät-Hämeen hyvinvointialue",
+  maakunta_name_fi == "Kymenlaakso" ~ "Kymenlaakson hyvinvointialue",
+  maakunta_name_fi == "Etelä-Karjala" ~ "Etelä-Karjalan hyvinvointialue",
+  maakunta_name_fi == "Etelä-Savo" ~ "Etelä-Savon hyvinvointialue",
+  maakunta_name_fi == "Pohjois-Savo" ~ "Pohjois-Savon hyvinvointialue",
+  maakunta_name_fi == "Pohjois-Karjala" ~ "Pohjois-Karjalan hyvinvointialue",
+  maakunta_name_fi == "Keski-Suomi" ~ "Keski-Suomen hyvinvointialue",
+  maakunta_name_fi == "Etelä-Pohjanmaa" ~ "Etelä-Pohjanmaan hyvinvointialue",
+  maakunta_name_fi == "Pohjanmaa" ~ "Pohjanmaan hyvinvointialue",
+  maakunta_name_fi == "Keski-Pohjanmaa" ~ "Keski-Pohjanmaan hyvinvointialue",
+  maakunta_name_fi == "Pohjois-Pohjanmaa" ~ "Pohjois-Pohjanmaan hyvinvointialue",
+  maakunta_name_fi == "Kainuu" ~ "Kainuun hyvinvointialue",
+  maakunta_name_fi == "Lappi" ~ "Lapin hyvinvointialue",
+  municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "Itä-Uudenmaan hyvinvointialue",
+  municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Keski-Uudenmaan hyvinvointialue",
+  municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "Länsi-Uudenmaan hyvinvointialue",
+  municipality_name_fi %in% c("Vantaa","Kerava") ~ "Vantaan ja Keravan hyvinvointialue",
+  municipality_name_fi %in% c("Helsinki") ~ "Helsingin hyvinvointialue",
+  maakunta_name_fi == "Ahvenanmaa" ~ "Ahvenanmaan hyvinvointialue"
+)) %>%
+  mutate(hyvinvointialue_name_sv = case_when(
+    maakunta_name_fi == "Varsinais-Suomi" ~ "Egentliga Finlands vårdlandskap",
+    maakunta_name_fi == "Satakunta" ~ "Satakunta vårdlandskap",
+    maakunta_name_fi == "Kanta-Häme" ~ "Egentliga Tavastlands vårdlandskap",
+    maakunta_name_fi == "Pirkanmaa" ~ "Birkalands vårdlandskap",
+    maakunta_name_fi == "Päijät-Häme" ~ "Päijänne-Tavastlands vårdlandskap",
+    maakunta_name_fi == "Kymenlaakso" ~ "Kymmenedalens vårdlandskap",
+    maakunta_name_fi == "Etelä-Karjala" ~ "Södra Karelens vårdlandskap",
+    maakunta_name_fi == "Etelä-Savo" ~ "Södra Savolax vårdlandskap",
+    maakunta_name_fi == "Pohjois-Savo" ~ "Norra Savolax vårdlandskap",
+    maakunta_name_fi == "Pohjois-Karjala" ~ "Norra Karelens vårdlandskap",
+    maakunta_name_fi == "Keski-Suomi" ~ "Mellersta Finlands vårdlandskap",
+    maakunta_name_fi == "Etelä-Pohjanmaa" ~ "Södra Österbottens vårdlandskap",
+    maakunta_name_fi == "Pohjanmaa" ~ "Österbottens vårdlandskap",
+    maakunta_name_fi == "Keski-Pohjanmaa" ~ "Mellersta Österbottens vårdlandskap",
+    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ "Norra Österbottens vårdlandskap",
+    maakunta_name_fi == "Kainuu" ~ "Kajanalands vårdlandskap",
+    maakunta_name_fi == "Lappi" ~ "Lapplands vårdlandskap",
+    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "Östra Nylands vårdlandskap",
+    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Mellersta Nylands vårdlandskap",
+    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "Västra Nylands vårdlandskap",
+    municipality_name_fi %in% c("Vantaa","Kerava") ~ "Vanda-Kervo vårdlandskap",
+    municipality_name_fi %in% c("Helsinki") ~ "Helsingfors vårdlandskap",
+    maakunta_name_fi == "Ahvenanmaa" ~ "Ålands vårdlandskap"
+  )) %>%
+  mutate(hyvinvointialue_code = case_when(
+    maakunta_name_fi == "Varsinais-Suomi" ~ 1,
+    maakunta_name_fi == "Satakunta" ~ 2,
+    maakunta_name_fi == "Kanta-Häme" ~ 3,
+    maakunta_name_fi == "Pirkanmaa" ~ 4,
+    maakunta_name_fi == "Päijät-Häme" ~ 5,
+    maakunta_name_fi == "Kymenlaakso" ~ 6,
+    maakunta_name_fi == "Etelä-Karjala" ~ 7,
+    maakunta_name_fi == "Etelä-Savo" ~ 8,
+    maakunta_name_fi == "Pohjois-Savo" ~ 9,
+    maakunta_name_fi == "Pohjois-Karjala" ~ 10,
+    maakunta_name_fi == "Keski-Suomi" ~ 11,
+    maakunta_name_fi == "Etelä-Pohjanmaa" ~ 12,
+    maakunta_name_fi == "Pohjanmaa" ~ 13,
+    maakunta_name_fi == "Keski-Pohjanmaa" ~ 14,
+    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ 15,
+    maakunta_name_fi == "Kainuu" ~ 16,
+    maakunta_name_fi == "Lappi" ~ 17,
+    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ 18,
+    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ 19,
+    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ 20,
+    municipality_name_fi %in% c("Vantaa","Kerava") ~ 21,
+    municipality_name_fi %in% c("Helsinki") ~ 22,
+    maakunta_name_fi == "Ahvenanmaa" ~ 23
+  ))
+
+municipality_key_2021 <- hyvinvointialue
+
+save(municipality_key_2021, file = "./data/municipality_key_2021.rda",
+     compress = "bzip2")
+
+load("./data/municipality_key.rda")
+
+municipality_key_without_2021 <- municipality_key %>% filter(year != 2021)
+
+municipality_key_new <- bind_rows(municipality_key_without_2021,municipality_key_2021)
+municipality_key <- municipality_key_new
+save(municipality_key, file = "./data/municipality_key.rda",
+     compress = "bzip2")

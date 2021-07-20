@@ -27,8 +27,7 @@ langs <- c("fi","sv","en")
 # Lets loop over the years 2013-2020
 yearlist <- list()
 yrs <- 2013:2021
-for (iii in 9){
-# for (iii in seq_along(yrs)){
+for (iii in seq_along(yrs)){
 
   print(yrs[iii])
   Sys.sleep(20)

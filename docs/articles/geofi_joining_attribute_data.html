@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://ropengov.org">
+  <a href="https://ropengov.org">
     <span class="fa fa-users"></span>
      
   </a>
@@ -107,7 +107,7 @@
       <h1 data-toc-skip>Joining attribute data with geofi data</h1>
                         <h4 class="author">Markus Kainu</h4>
             
-            <h4 class="date">2021-07-06</h4>
+            <h4 class="date">2021-08-18</h4>
       
       
       <div class="hidden name"><code>geofi_joining_attribute_data.Rmd</code></div>
@@ -170,7 +170,7 @@
   <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, 
           <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; # A tibble: 12,800 x 4</span>
+<span class="co">#&gt; # A tibble: 12,800 × 4</span>
 <span class="co">#&gt;    region_2020   year  information                            municipal_key_fig…</span>
 <span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;                                               &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 WHOLE COUNTRY 2019  degree_of_urbanisation_percent                       86.4</span>
@@ -192,7 +192,7 @@
   <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, 
           <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; # A tibble: 400 x 2</span>
+<span class="co">#&gt; # A tibble: 400 × 2</span>
 <span class="co">#&gt;    region_2020                            n</span>
 <span class="co">#&gt;    &lt;chr&gt;                              &lt;int&gt;</span>
 <span class="co">#&gt;  1 Äänekoski                             32</span>
@@ -285,7 +285,7 @@
 
 <span class="va">xdf</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">shp</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 22 x 2</span>
+<span class="co">#&gt; # A tibble: 22 × 2</span>
 <span class="co">#&gt;    shp                                        n</span>
 <span class="co">#&gt;    &lt;chr&gt;                                  &lt;int&gt;</span>
 <span class="co">#&gt;  1 Åland                                      1</span>
@@ -374,19 +374,19 @@
   <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, 
           <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; # A tibble: 72,624 x 3</span>
-<span class="co">#&gt;    postal_code_area               data                paavo_open_data_by_postal…</span>
-<span class="co">#&gt;    &lt;chr&gt;                          &lt;chr&gt;                                    &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 00100 Helsinki Keskusta - Etu… Inhabitants, total…                      18284</span>
-<span class="co">#&gt;  2 00100 Helsinki Keskusta - Etu… Females, 2017 (HE)                        9613</span>
-<span class="co">#&gt;  3 00100 Helsinki Keskusta - Etu… Males, 2017 (HE)                          8671</span>
-<span class="co">#&gt;  4 00100 Helsinki Keskusta - Etu… Average age of inh…                         41</span>
-<span class="co">#&gt;  5 00100 Helsinki Keskusta - Etu… 0-2 years, 2017 (H…                        434</span>
-<span class="co">#&gt;  6 00100 Helsinki Keskusta - Etu… 3-6 years, 2017 (H…                        521</span>
-<span class="co">#&gt;  7 00100 Helsinki Keskusta - Etu… 7-12 years, 2017 (…                        711</span>
-<span class="co">#&gt;  8 00100 Helsinki Keskusta - Etu… 13-15 years, 2017 …                        274</span>
-<span class="co">#&gt;  9 00100 Helsinki Keskusta - Etu… 16-17 years, 2017 …                        185</span>
-<span class="co">#&gt; 10 00100 Helsinki Keskusta - Etu… 18-19 years, 2017 …                        264</span>
+<span class="co">#&gt; # A tibble: 72,624 × 3</span>
+<span class="co">#&gt;    postal_code_area                                data      paavo_open_data_by…</span>
+<span class="co">#&gt;    &lt;chr&gt;                                           &lt;chr&gt;                   &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki Inhabita…               18284</span>
+<span class="co">#&gt;  2 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki Females,…                9613</span>
+<span class="co">#&gt;  3 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki Males, 2…                8671</span>
+<span class="co">#&gt;  4 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki Average …                  41</span>
+<span class="co">#&gt;  5 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki 0-2 year…                 434</span>
+<span class="co">#&gt;  6 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki 3-6 year…                 521</span>
+<span class="co">#&gt;  7 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki 7-12 yea…                 711</span>
+<span class="co">#&gt;  8 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki 13-15 ye…                 274</span>
+<span class="co">#&gt;  9 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki 16-17 ye…                 185</span>
+<span class="co">#&gt; 10 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki 18-19 ye…                 264</span>
 <span class="co">#&gt; # … with 72,614 more rows</span></code></pre></div>
 <p>Before we can join the data, we must extract the numerical postal code from <code>postal_code_area</code>-variable.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">geofi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://ropengov.org">
+  <a href="https://ropengov.org">
     <span class="fa fa-users"></span>
      
   </a>
@@ -107,7 +107,7 @@
       <h1 data-toc-skip>Datasets in geofi-package</h1>
                         <h4 class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 class="date">2021-07-06</h4>
+            <h4 class="date">2021-08-18</h4>
       
       
       <div class="hidden name"><code>geofi_datasets.Rmd</code></div>
@@ -143,7 +143,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"municipality_key"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 2</span>
+<span class="co">#&gt; # A tibble: 10 × 2</span>
 <span class="co">#&gt;    Item                  Title                                                </span>
 <span class="co">#&gt;    &lt;chr&gt;                 &lt;chr&gt;                                                </span>
 <span class="co">#&gt;  1 municipality_key      Aggregated municipality key table for years 2013-2021</span>
@@ -184,7 +184,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">maakunta_code</span>,<span class="va">maakunta_name_fi</span>,<span class="va">maakunta_name_sv</span>,<span class="va">maakunta_name_en</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 19 x 5</span>
+<span class="co">#&gt; # A tibble: 19 × 5</span>
 <span class="co">#&gt;    maakunta_code maakunta_name_fi  maakunta_name_sv     maakunta_name_en       n</span>
 <span class="co">#&gt;            &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;                &lt;chr&gt;              &lt;int&gt;</span>
 <span class="co">#&gt;  1             1 Uusimaa           Nyland               Uusimaa               26</span>
@@ -274,7 +274,7 @@ Each municipality belongs to a higher level regional classifications such as reg
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"grid"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 21 x 2</span>
+<span class="co">#&gt; # A tibble: 21 × 2</span>
 <span class="co">#&gt;    Item                   Title                                                 </span>
 <span class="co">#&gt;    &lt;chr&gt;                  &lt;chr&gt;                                                 </span>
 <span class="co">#&gt;  1 grid_ahvenanmaa        custom geofacet grid for Ahvenanmaa region            </span>

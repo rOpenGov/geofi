@@ -1,5 +1,5 @@
 ## Test environments
-* local ubuntu 20.04 install, R 4.1.0
+* local ubuntu 20.04 install, R 4.1.1
 * win-builder (devel)
 * Github Actions with 
     * windows-latest (release)
@@ -9,8 +9,7 @@
 
 ## Submission note
 
-* examples in vignettes that use suggested package now conditional to 
-availability of a package
+* new regional classification added to municipality key datasets
 
 ## R CMD check results
 

@@ -1,3 +1,7 @@
+# geofi 1.0.4
+
+- new regional classification: upcoming Wellbeing services counties, added to municipality keys files
+
 # geofi 1.0.3
 
 - new convert_municipality_key_codes-function that can be used convert regional 

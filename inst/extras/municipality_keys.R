@@ -541,11 +541,50 @@ municipality_key_2021 <- hyvinvointialue
 save(municipality_key_2021, file = "./data/municipality_key_2021.rda",
      compress = "bzip2")
 
+# lisätään hyvinvointialuetieto myös vuosille 2018-2020
+
+hyvinvointi_columns <- municipality_key_2021 %>% select(municipality_code, contains("hyvinvointialue"))
+
+# 2020
+load("./data/municipality_key_2020.rda")
+hyvinvointialue <- municipality_key_2020 %>%
+  select(-contains("hyvinvointialue")) %>%
+  left_join(hyvinvointi_columns)
+
+municipality_key_2020 <- hyvinvointialue
+save(municipality_key_2020, file = "./data/municipality_key_2020.rda",
+     compress = "bzip2")
+
+# 2019
+load("./data/municipality_key_2019.rda")
+hyvinvointialue <- municipality_key_2019 %>%
+  select(-contains("hyvinvointialue")) %>%
+  left_join(hyvinvointi_columns)
+
+municipality_key_2019 <- hyvinvointialue
+save(municipality_key_2019, file = "./data/municipality_key_2019.rda",
+     compress = "bzip2")
+
+# 2018
+load("./data/municipality_key_2018.rda")
+hyvinvointialue <- municipality_key_2018 %>%
+  select(-contains("hyvinvointialue")) %>%
+  left_join(hyvinvointi_columns)
+
+municipality_key_2018 <- hyvinvointialue
+save(municipality_key_2018, file = "./data/municipality_key_2018.rda",
+     compress = "bzip2")
+
+# the whole lot
 load("./data/municipality_key.rda")
 
-municipality_key_without_2021 <- municipality_key %>% filter(year != 2021)
+municipality_key_without_2018_2021 <- municipality_key %>% filter(!year %in% 2018:2021)
 
-municipality_key_new <- bind_rows(municipality_key_without_2021,municipality_key_2021)
+municipality_key_new <- bind_rows(municipality_key_without_2018_2021,
+                                  municipality_key_2018,
+                                  municipality_key_2019,
+                                  municipality_key_2020,
+                                  municipality_key_2021)
 municipality_key <- municipality_key_new
 save(municipality_key, file = "./data/municipality_key.rda",
      compress = "bzip2")

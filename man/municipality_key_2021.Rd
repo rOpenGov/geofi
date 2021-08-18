@@ -5,7 +5,7 @@
 \alias{municipality_key_2021}
 \title{Municipality key table for 2021}
 \format{
-A data frame with 309 rows and 74 variables:
+A data frame with 309 rows and 75 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}
@@ -78,9 +78,10 @@ A data frame with 309 rows and 74 variables:
 \item{kela_asumistukialue_code}{Kelan asumistuen kuntaryhmät unofficial code (Municipality categories for housing allowance)}
 \item{kela_asumistukialue_name_sv}{Kelan asumistuen kuntaryhmät name in Swedish (Municipality categories for housing allowance)}
 \item{kela_asumistukialue_name_en}{Kelan asumistuen kuntaryhmät name in English (Municipality categories for housing allowance)}
-\item{hyvinvointialue_name_fi}{Hyvinvointialue name in Finnish (health and social services counties)}
-\item{hyvinvointialue_name_sv}{Hyvinvointialue name in Swedish (health and social services counties)}
-\item{hyvinvointialue_code}{Hyvinvointialue code (health and social services counties)}
+\item{hyvinvointialue_name_fi}{Hyvinvointialue name in Finnish (Wellbeing services counties)}
+\item{hyvinvointialue_name_sv}{Hyvinvointialue name in Swedish (Wellbeing services counties)}
+\item{hyvinvointialue_name_en}{Hyvinvointialue name in English (Wellbeing services counties)}
+\item{hyvinvointialue_code}{Hyvinvointialue code (Wellbeing services counties)}
 }
 }
 \source{

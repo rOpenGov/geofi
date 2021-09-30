@@ -16,16 +16,16 @@ get_buildings <- function(){
   
   library(dplyr)
   library(sp)
-  library(sf)
+  # library(sf)
   library(archive)
   tmpfile <- tempfile()
   tmpdir <- tempdir()
-  download.file("https://www.avoindata.fi/data/dataset/cf9208dc-63a9-44a2-9312-bbd2c3952596/resource/ae13f168-e835-4412-8661-355ea6c4c468/download/suomi_osoitteet_2020-05-15.7z",
+  download.file("https://www.avoindata.fi/data/dataset/cf9208dc-63a9-44a2-9312-bbd2c3952596/resource/ae13f168-e835-4412-8661-355ea6c4c468/download/suomi_osoitteet_2021-08-16.7z",
                 destfile = tmpfile)
   archive::archive_extract(tmpfile,
-        dir = tmpdir)
+                           dir = tmpdir)
   
-  opt <- read.csv(glue::glue("{tmpdir}/Suomi_osoitteet_2020-05-15.OPT"), fileEncoding = "latin1",
+  opt <- read.csv(glue::glue("{tmpdir}/Suomi_osoitteet_2021-08-16.OPT"), fileEncoding = "latin1",
                   sep = ";", 
                   # nrows = 50000,
                   stringsAsFactors = FALSE, 
@@ -39,19 +39,15 @@ get_buildings <- function(){
                   "postinumer", "vaalipiirikoodi",
                   "vaalipiirinimi","tyhja",
                   "idx", "date")
-
-  sp.data <- SpatialPointsDataFrame(opt[, c("CoordX", "CoordY")], 
-                                    opt, 
-                                    proj4string = CRS("+init=epsg:3067"))
   
-  # Project the spatial data to lat/lon
-  # sp.data <- spTransform(sp.data, CRS("+proj=longlat +datum=WGS84"))
-  
-  shape <- st_as_sf(sp.data)
-  
-  # st_coordinates(shape)
-  
-  # shape %>% select(rakennustu) %>% plot()
+  opt_sf <- st_as_sf(opt, coords = c("CoordX", "CoordY"),
+           ## laitetaan sama CRS kuin kiinteistöillä
+           crs = "EPSG:3067"
+  ) 
+shape <- opt_sf %>% sf::st_transform(crs = "+proj=longlat +datum=WGS84")
+#saveRDS(opt_sf, "./rakennukset_20210816_3067.RDS")
+#saveRDS(shape, "./rakennukset_20210816_WGS84.RDS")
   
   return(shape)
 }
+

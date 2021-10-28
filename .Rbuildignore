@@ -38,3 +38,9 @@ _pkgdown.yaml
 ^cran-comments.md$
 
 ^cran-comments\.md$
+^\._pkgdown\.yml$
+^pkgdown$
+^_pkgdown\.yml$
+^geofi\.Rcheck$
+^geofi.*\.tar\.gz$
+^geofi.*\.tgz$

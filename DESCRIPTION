@@ -3,38 +3,23 @@ Package: geofi
 Title: Access Finnish Geospatial Data
 Version: 1.0.4
 Date: 2021-08-18
-Authors@R: 
-    c(person(given = "Markus",
-             family = "Kainu",
-             role = c("aut", "cre"),
-             email = "markus.kainu@kapsi.fi",
-             comment = c(ORCID = "0000-0003-1376-503X")),
-      person(given = "Joona",
-             family = "Lehtomaki",
-             role = "aut",
-             email = "joona.lehtomaki@iki.fi",
-             comment = c(ORCID = "0000-0002-7891-0843")),
-      person(given = "Juuso",
-             family = "Parkkinen",
-             role = "ctb",
-             comment = c(ORCID = "0000-0002-7818-5901")),
-      person(given = "Jani",
-             family = "Miettinen",
-             role = "ctb"),
-      person(given = "Pyry",
-             family = "Kantanen",
-             role = "ctb"),
-      person(given = "Sampo",
-             family = "Vesanen",
-             role = "ctb"),
-      person(given = "Leo",
-             family = "Lahti",
-             role = "aut",
-             email = "leo.lahti@iki.fi",
-             comment = c(ORCID = "0000-0001-5537-637X")))
+Authors@R: c(
+    person("Markus", "Kainu", , "markus.kainu@kapsi.fi", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-1376-503X")),
+    person("Joona", "Lehtomaki", , "joona.lehtomaki@iki.fi", role = "aut",
+           comment = c(ORCID = "0000-0002-7891-0843")),
+    person("Juuso", "Parkkinen", role = "ctb",
+           comment = c(ORCID = "0000-0002-7818-5901")),
+    person("Jani", "Miettinen", role = "ctb"),
+    person("Pyry", "Kantanen", role = "ctb"),
+    person("Sampo", "Vesanen", role = "ctb"),
+    person("Leo", "Lahti", , "leo.lahti@iki.fi", role = "aut",
+           comment = c(ORCID = "0000-0001-5537-637X"))
+  )
 Description: Tools for reading Finnish open geospatial data in R.
 License: BSD_2_clause + file LICENSE
-URL: https://ropengov.github.io/geofi/
+URL: https://ropengov.github.io/geofi/, https://github.com/rOpenGov/geofi
+BugReports: https://github.com/rOpenGov/geofi/issues
 Depends: 
     R (>= 3.5.0)
 Imports: 
@@ -53,20 +38,22 @@ Suggests:
     geofacet,
     ggplot2,
     ggrepel,
+    htmltools,
     httptest (>= 4.0.0),
     janitor,
     knitr,
     leaflet,
+    patchwork,
     pxweb,
+    readr,
     rmarkdown,
     testthat,
-    tidyr,
-    patchwork,
-    htmltools,
-    readr
+    tidyr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
+X-schema.org-isPartOf: http://ropengov.org/
+X-schema.org-keywords: ropengov

@@ -1,3 +1,9 @@
+# geofi 1.0.5
+
+- English names for wellbeing services counties corrected
+- New ropengov template added for website
+
+
 # geofi 1.0.4
 
 - new regional classification: upcoming Wellbeing services counties, added to municipality keys files

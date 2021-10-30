@@ -1,0 +1,69 @@
+navbar:
+  right:
+  - icon: fa-users
+    href: https://ropengov.org
+  - icon: fab fa-github
+    href: https://github.com/rOpenGov/geofi
+reference:
+- title: API calling functions
+  desc: |
+    Functions for fetching spatial data from Statistics Finland WFS-api
+  contents:
+  - get_municipalities
+  - get_zipcodes
+  - get_population_grid
+  - get_statistical_grid
+- title: Data
+  desc: |
+    geofi comes with a timeseries of built-in municipality keys that can be used to aggregate municipality level data (`municipality_key_*`) and `municipality_central_localities` data containing point locations for cental locality of each municipality
+  contents:
+  - municipality_central_localities
+  - municipality_key
+  - municipality_key_2021
+  - municipality_key_2020
+  - municipality_key_2019
+  - municipality_key_2018
+  - municipality_key_2017
+  - municipality_key_2016
+  - municipality_key_2015
+  - municipality_key_2014
+  - municipality_key_2013
+- title: Geofacet grids
+  desc: |
+    geofi comes with a selection of built-in grids to used with geofacet-packages, a ggplot2 extension. All grids are based on the latest municipality breakdown
+  contents:
+  - grid_ahvenanmaa
+  - grid_etela_karjala
+  - grid_etela_pohjanmaa
+  - grid_etela_savo
+  - grid_kainuu
+  - grid_kanta_hame
+  - grid_keski_pohjanmaa
+  - grid_keski_suomi
+  - grid_kymenlaakso
+  - grid_lappi
+  - grid_maakunta
+  - grid_paijat_hame
+  - grid_pirkanmaa
+  - grid_pohjanmaa
+  - grid_pohjois_karjala
+  - grid_pohjois_pohjanmaa
+  - grid_pohjois_savo
+  - grid_sairaanhoitop
+  - grid_satakunta
+  - grid_uusimaa
+  - grid_varsinais_suomi
+- title: Miscellaneous
+  desc: |
+    Support functions for API functions and spatial data transformations
+  contents:
+  - convert_municipality_key_codes
+  - check_api_access
+  - wfs_api
+  - to_sf
+url: https://ropengov.github.io/geofi/
+template:
+  package: rogtemplate
+  opengraph:
+    twitter:
+      site: '@rOpenGov'

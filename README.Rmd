@@ -1,6 +1,5 @@
 ---
-output: 
-  md_document
+output: github_document
 ---
 
 ```{r, echo = FALSE}
@@ -11,8 +10,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-<br>
 <!-- badges: start -->
+  [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
   [![R build status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi/actions/)
   [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
   [![codecov](https://codecov.io/gh/rOpenGov/geofi/branch/master/graph/badge.svg?token=yJSHHMSSKs)](https://app.codecov.io/gh/rOpenGov/geofi)
@@ -25,9 +24,9 @@ knitr::opts_chunk$set(
 [![Downloads](http://cranlogs.r-pkg.org/badges/geofi)](https://cran.r-project.org/package=geofi)
 <!-- badges: end -->
 
-<br>
 
-# geofi - Access Finnish Geospatial Data <img src="man/figures/logo.png" height = "200px" align="right" />
+
+# geofi - Access Finnish Geospatial Data <a href='https://ropengov.github.io/geofi/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->

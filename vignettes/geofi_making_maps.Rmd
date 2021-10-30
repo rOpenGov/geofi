@@ -66,7 +66,7 @@ They both come in same CRS `r sf::st_crs(point)$input` and can be plotted togeth
 
 ## R-packages for static maps
 
-There are two main technologies for creating static graphics in R: base and [ggplot2](https://ggplot2.tidyverse.org/). Both can be used to plot spatial data ie. to create maps. In addition, [tmap : thematic maps in R](https://mtennekes.github.io/tmap/) is a great tool if you want to dig deeper into cartography in R.
+There are two main technologies for creating static graphics in R: base and [ggplot2](https://ggplot2.tidyverse.org/). Both can be used to plot spatial data ie. to create maps. In addition, [tmap : thematic maps in R](https://r-tmap.github.io/tmap/) is a great tool if you want to dig deeper into cartography in R.
 
 
 **base**
@@ -95,7 +95,7 @@ ggplot() +
 
 **tmap**
 
-[`tmap`](https://mtennekes.github.io/tmap/) is a versatile library for creating static thematic maps in R. It supports `sf`-class objects and is fully compatible with geospatial data available through `geofi`.
+[`tmap`](https://r-tmap.github.io/tmap/) is a versatile library for creating static thematic maps in R. It supports `sf`-class objects and is fully compatible with geospatial data available through `geofi`.
 
 As I am only fluent in using `ggplot2` the the more complex examples are using `ggplot2`-package.
 

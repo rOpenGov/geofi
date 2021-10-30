@@ -45,7 +45,7 @@ check_namespaces <- function(pkgs){
 }
 ```
 
-Manuel Gimonds [Intro to GIS and Spatial Analysis](https://mgimond.github.io/Spatial/) and especially it's  [appendixes](https://mgimond.github.io/Spatial/app1-1.html) provide a good introduction to working with spatial data in R. 
+Manuel Gimonds [Intro to GIS and Spatial Analysis](https://mgimond.github.io/Spatial/index.html) and especially it's  appendixes provide a good introduction to working with spatial data in R. 
 
 ## Coordinate reference systems
 

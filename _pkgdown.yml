@@ -1,7 +1,7 @@
 navbar:
   right:
   - icon: fa-users
-    href: https://ropengov.org
+    href: http://ropengov.org
   - icon: fab fa-github
     href: https://github.com/rOpenGov/geofi
 reference:

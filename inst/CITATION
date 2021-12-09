@@ -4,13 +4,14 @@ citEntry(entry="misc",
          title = "geofi: Access Finnish Geospatial Data",
          author = personList(
            person(given ="Markus", family="Kainu", email = "markus.kainu@kapsi.fi"),
-           person(given ="Joona", family="Lehtomaki"),	   
+           person(given ="Joona", family="Lehtomaki"),
            person(given ="Juuso", family="Parkkinen"),
            person(given ="Jani", family="Miettinen"),
            person(given ="Pyry", family="Kantanen"),
 	   person(given ="Leo", family="Lahti")
          ),
 	 journal = "",
+	 url = "https://doi.org/10.5281/zenodo.5770779",
 	 year = "2015-2021",
          textVersion =
          paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Leo Lahti 2015-2021.",

@@ -1,12 +1,12 @@
 pandoc: 2.7.3
-pkgdown: 1.9000.9000.9000
-pkgdown_sha: 27c2be85d26c6d82b84b4f4077ab644276b0a9ad
+pkgdown: 2.0.1
+pkgdown_sha: ~
 articles:
   geofi_datasets: geofi_datasets.html
   geofi_joining_attribute_data: geofi_joining_attribute_data.html
   geofi_making_maps: geofi_making_maps.html
   geofi_spatial_analysis: geofi_spatial_analysis.html
-last_built: 2021-10-31T12:11Z
+last_built: 2021-12-09T19:35Z
 urls:
   reference: https://ropengov.github.io/geofi/reference
   article: https://ropengov.github.io/geofi/articles

@@ -24,9 +24,9 @@ get_classifications <- function(class = "kunta_1_20200101", lang = "fi"){
 # Municipalities
 langs <- c("fi","sv","en")
 
-# Lets loop over the years 2013-2020
+# Lets loop over the years 2013-2022
 yearlist <- list()
-yrs <- 2013:2021
+yrs <- 2013:2022
 for (iii in seq_along(yrs)){
 
   print(yrs[iii])
@@ -146,7 +146,7 @@ ddd3 <- ddd2 %>%
          name_sv = municipality_name_sv)
 
 # erva-regions can be found from sairaanhoitp <-> erva table
-res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20210101%23erva_3_20210101/maps?format=json")) %>%
+res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20220101%23erva_3_20210101/maps?format=json")) %>%
   as_tibble()
 vals <- sub("\\?format=json", "", sub("^.+maps/", "", res$value))
 keydat <- read.table(text = vals, sep="/") %>%
@@ -451,9 +451,9 @@ mutate(hyvinvointialue_name_fi = case_when(
   maakunta_name_fi == "Pohjois-Pohjanmaa" ~ "Pohjois-Pohjanmaan hyvinvointialue",
   maakunta_name_fi == "Kainuu" ~ "Kainuun hyvinvointialue",
   maakunta_name_fi == "Lappi" ~ "Lapin hyvinvointialue",
-  municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "Itä-Uusimaan hyvinvointialue",
-  municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Keski-Uusimaan hyvinvointialue",
-  municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "Länsi-Uusimaan hyvinvointialue",
+  municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "Itä-Uudenmaan hyvinvointialue",
+  municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Keski-Uudenmaan hyvinvointialue",
+  municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "Länsi-Uudenmaan hyvinvointialue",
   municipality_name_fi %in% c("Vantaa","Kerava") ~ "Vantaa-Keravan hyvinvointialue",
   municipality_name_fi %in% c("Helsinki") ~ "Helsingin kaupunki",
   maakunta_name_fi == "Ahvenanmaa" ~ "Ahvenanmaa"
@@ -486,54 +486,54 @@ mutate(hyvinvointialue_name_fi = case_when(
   )) %>%
   # https://soteuudistus.fi/en/what-is-the-health-and-social-services-reform-
   mutate(hyvinvointialue_name_en = case_when(
-    maakunta_name_fi == "Varsinais-Suomi" ~ "Wellbeing services county of Southwest Finland",
-    maakunta_name_fi == "Satakunta" ~ "Wellbeing services county of Satakunta",
-    maakunta_name_fi == "Kanta-Häme" ~ "Wellbeing services county of Kanta-Häme",
-    maakunta_name_fi == "Pirkanmaa" ~ "Wellbeing services county of Pirkanmaa",
-    maakunta_name_fi == "Päijät-Häme" ~ "Wellbeing services county of Päijät-Häme",
-    maakunta_name_fi == "Kymenlaakso" ~ "Wellbeing services county of Kymenlaakso",
-    maakunta_name_fi == "Etelä-Karjala" ~ "Wellbeing services county of South Karelia",
-    maakunta_name_fi == "Etelä-Savo" ~ "Wellbeing services county of South Savo",
-    maakunta_name_fi == "Pohjois-Savo" ~ "Wellbeing services county of North Savo",
-    maakunta_name_fi == "Pohjois-Karjala" ~ "Wellbeing services county of North Karelia",
-    maakunta_name_fi == "Keski-Suomi" ~ "Wellbeing services county of Central Finland",
-    maakunta_name_fi == "Etelä-Pohjanmaa" ~ "Wellbeing services county of South Ostrobothnia",
-    maakunta_name_fi == "Pohjanmaa" ~ "Wellbeing services county of Ostrobothnia",
-    maakunta_name_fi == "Keski-Pohjanmaa" ~ "Wellbeing services county of Central Ostrobothnia",
-    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ "Wellbeing services county of North Ostrobothnia",
-    maakunta_name_fi == "Kainuu" ~ "Wellbeing services county of Kainuu",
-    maakunta_name_fi == "Lappi" ~ "Wellbeing services county of Lapland",
-    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "Wellbeing services county of East Uusimaa",
-    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Wellbeing services county of Central Uusimaa",
-    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "Wellbeing services county of West Uusimaa",
-    municipality_name_fi %in% c("Vantaa","Kerava") ~ "Wellbeing services county of Vantaa and Kerava",
+    maakunta_name_fi == "Varsinais-Suomi" ~ "Southwest Finland wellbeing services county",
+    maakunta_name_fi == "Satakunta" ~ "Satakunta wellbeing services county",
+    maakunta_name_fi == "Kanta-Häme" ~ "Kanta-Häme wellbeing services county",
+    maakunta_name_fi == "Pirkanmaa" ~ "Pirkanmaa wellbeing services county",
+    maakunta_name_fi == "Päijät-Häme" ~ "Päijät-Häme wellbeing services county",
+    maakunta_name_fi == "Kymenlaakso" ~ "Kymenlaakso wellbeing services county",
+    maakunta_name_fi == "Etelä-Karjala" ~ "South Karelia wellbeing services county",
+    maakunta_name_fi == "Etelä-Savo" ~ "South Savo wellbeing services county",
+    maakunta_name_fi == "Pohjois-Savo" ~ "North Savo wellbeing services county",
+    maakunta_name_fi == "Pohjois-Karjala" ~ "North Karelia wellbeing services county",
+    maakunta_name_fi == "Keski-Suomi" ~ "Central Finland wellbeing services county",
+    maakunta_name_fi == "Etelä-Pohjanmaa" ~ "South Ostrobothnia wellbeing services county",
+    maakunta_name_fi == "Pohjanmaa" ~ "Ostrobothnia wellbeing services county",
+    maakunta_name_fi == "Keski-Pohjanmaa" ~ "Central Ostrobothnia wellbeing services county",
+    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ "North Ostrobothnia wellbeing services county",
+    maakunta_name_fi == "Kainuu" ~ "Kainuu wellbeing services county",
+    maakunta_name_fi == "Lappi" ~ "Lapland wellbeing services county",
+    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "East Uusimaa wellbeing services county",
+    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Central Uusimaa wellbeing services county",
+    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "West Uusimaa wellbeing services county",
+    municipality_name_fi %in% c("Vantaa","Kerava") ~ "Vantaa and Kerava wellbeing services county",
     municipality_name_fi %in% c("Helsinki") ~ "City of Helsinki",
-    maakunta_name_fi == "Ahvenanmaa" ~ "Wellbeing services county of Ålands"
+    maakunta_name_fi == "Ahvenanmaa" ~ "Åland"
   )) %>%
   mutate(hyvinvointialue_code = case_when(
-    maakunta_name_fi == "Varsinais-Suomi" ~ 1,
-    maakunta_name_fi == "Satakunta" ~ 2,
-    maakunta_name_fi == "Kanta-Häme" ~ 3,
-    maakunta_name_fi == "Pirkanmaa" ~ 4,
-    maakunta_name_fi == "Päijät-Häme" ~ 5,
-    maakunta_name_fi == "Kymenlaakso" ~ 6,
-    maakunta_name_fi == "Etelä-Karjala" ~ 7,
-    maakunta_name_fi == "Etelä-Savo" ~ 8,
-    maakunta_name_fi == "Pohjois-Savo" ~ 9,
-    maakunta_name_fi == "Pohjois-Karjala" ~ 10,
-    maakunta_name_fi == "Keski-Suomi" ~ 11,
-    maakunta_name_fi == "Etelä-Pohjanmaa" ~ 12,
-    maakunta_name_fi == "Pohjanmaa" ~ 13,
-    maakunta_name_fi == "Keski-Pohjanmaa" ~ 14,
-    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ 15,
-    maakunta_name_fi == "Kainuu" ~ 16,
-    maakunta_name_fi == "Lappi" ~ 17,
-    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ 18,
-    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ 19,
-    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ 20,
-    municipality_name_fi %in% c("Vantaa","Kerava") ~ 21,
-    municipality_name_fi %in% c("Helsinki") ~ 22,
-    maakunta_name_fi == "Ahvenanmaa" ~ 23
+    maakunta_name_fi == "Varsinais-Suomi" ~ 5,
+    maakunta_name_fi == "Satakunta" ~ 6,
+    maakunta_name_fi == "Kanta-Häme" ~ 7,
+    maakunta_name_fi == "Pirkanmaa" ~ 8,
+    maakunta_name_fi == "Päijät-Häme" ~ 9,
+    maakunta_name_fi == "Kymenlaakso" ~ 10,
+    maakunta_name_fi == "Etelä-Karjala" ~ 11,
+    maakunta_name_fi == "Etelä-Savo" ~ 12,
+    maakunta_name_fi == "Pohjois-Savo" ~ 13,
+    maakunta_name_fi == "Pohjois-Karjala" ~ 14,
+    maakunta_name_fi == "Keski-Suomi" ~ 15,
+    maakunta_name_fi == "Etelä-Pohjanmaa" ~ 16,
+    maakunta_name_fi == "Pohjanmaa" ~ 17,
+    maakunta_name_fi == "Keski-Pohjanmaa" ~ 18,
+    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ 19,
+    maakunta_name_fi == "Kainuu" ~ 20,
+    maakunta_name_fi == "Lappi" ~ 21,
+    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ 1,
+    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ 2,
+    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ 3,
+    municipality_name_fi %in% c("Vantaa","Kerava") ~ 4,
+    municipality_name_fi %in% c("Helsinki") ~ 90,
+    maakunta_name_fi == "Ahvenanmaa" ~ 91
   ))
 
 municipality_key_2021 <- hyvinvointialue
@@ -579,6 +579,11 @@ save(municipality_key_2018, file = "./data/municipality_key_2018.rda",
 load("./data/municipality_key.rda")
 
 municipality_key_without_2018_2021 <- municipality_key %>% filter(!year %in% 2018:2021)
+
+# In case hyvinvointialue_code is turned to chr ("03") instead of integer (3)
+# This is necessary to prevent the following error: 
+# "Can't combine `..1$hyvinvointialue_code` <integer> and `..2$hyvinvointialue_code` <character>."
+# municipality_key_without_2018_2021$hyvinvointialue_code <- as.character(municipality_key_without_2018_2021$hyvinvointialue_code)
 
 municipality_key_new <- bind_rows(municipality_key_without_2018_2021,
                                   municipality_key_2018,

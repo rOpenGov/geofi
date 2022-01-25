@@ -3,7 +3,8 @@
 #' Thin wrapper around Finnish zip code areas provided by
 #' [Statistics Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
 #'
-#' @param year A numeric for year of the zipcodes. Years available 2015-2021.
+#' @param year A numeric for year of the zipcodes. Years available 2015-2022.
+#' @param extend_to_sea_areas A logical. Extend the data to show also the sea areas.
 #'
 #' @return sf object
 #'
@@ -13,14 +14,14 @@
 #'
 #' @examples
 #'  \dontrun{
-#'  f <- get_zipcodes(year=2021)
+#'  f <- get_zipcodes(year=2022)
 #'  plot(f)
 #'  }
 #'
 #' @rdname get_zipcodes
 #' @export
 
-get_zipcodes <- function(year = 2021){
+get_zipcodes <- function(year = 2022, extend_to_sea_areas = FALSE){
 
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()){
@@ -30,7 +31,11 @@ Please check your connection, firewall settings and/or review your proxy setting
 
   # Standard and compulsory query parameters
   base_queries <- list("service" = "WFS", "version" = wfs_providers$Tilastokeskus$version)
-  layer <-  paste0(wfs_providers$Tilastokeskus$layer_typename$get_zipcodes, year)
+  if (extend_to_sea_areas){
+    layer <-  paste0(wfs_providers$Tilastokeskus$layer_typename$get_zipcodes,"meri_", year)
+  } else {
+    layer <-  paste0(wfs_providers$Tilastokeskus$layer_typename$get_zipcodes, year)
+  }
   # Note that there should be at least one parameter: request type.
   queries <- append(base_queries, list(request = "getFeature", typename = layer))
 

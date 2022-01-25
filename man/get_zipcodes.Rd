@@ -4,10 +4,12 @@
 \alias{get_zipcodes}
 \title{Get Finnish zip code (multi)polygons for different years.}
 \usage{
-get_zipcodes(year = 2021)
+get_zipcodes(year = 2022, extend_to_sea_areas = FALSE)
 }
 \arguments{
-\item{year}{A numeric for year of the zipcodes. Years available 2015-2021.}
+\item{year}{A numeric for year of the zipcodes. Years available 2015-2022.}
+
+\item{extend_to_sea_areas}{A logical. Extend the data to show also the sea areas.}
 }
 \value{
 sf object
@@ -18,7 +20,7 @@ Thin wrapper around Finnish zip code areas provided by
 }
 \examples{
  \dontrun{
- f <- get_zipcodes(year=2021)
+ f <- get_zipcodes(year=2022)
  plot(f)
  }
 

@@ -13,6 +13,7 @@ reference:
   - get_zipcodes
   - get_population_grid
   - get_statistical_grid
+  - get_municipality_pop
 - title: Data
   desc: |
     geofi comes with a timeseries of built-in municipality keys that can be used to aggregate municipality level data (`municipality_key_*`) and `municipality_central_localities` data containing point locations for cental locality of each municipality

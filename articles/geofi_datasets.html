@@ -40,14 +40,14 @@
     
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -88,12 +88,15 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="geofi_datasets_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Datasets in geofi-package</h1>
                         <h4 data-toc-skip class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 data-toc-skip class="date">2021-12-09</h4>
+            <h4 data-toc-skip class="date">2022-01-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/HEAD/vignettes/geofi_datasets.Rmd" class="external-link"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_datasets.Rmd</code></div>
@@ -128,10 +131,10 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"municipality_key"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 2</span></span>
 <span class="co">#&gt;    Item                  Title                                                </span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> municipality_key      Aggregated municipality key table for years 2013-2021</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> municipality_key      Aggregated municipality key table for years 2013-2022</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> municipality_key_2013 Municipality key table for 2013                      </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> municipality_key_2014 Municipality key table for 2014                      </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> municipality_key_2015 Municipality key table for 2015                      </span>
@@ -140,7 +143,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> municipality_key_2018 Municipality key table for 2018                      </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> municipality_key_2019 Municipality key table for 2019                      </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> municipality_key_2020 Municipality key table for 2020                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> municipality_key_2021 Municipality key table for 2021</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> municipality_key_2021 Municipality key table for 2021                      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> municipality_key_2022 Municipality key table for 2022</span></code></pre></div>
 <p>Looking at the names of `municipality_key_2021` there is 63 different variables from each municipality.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2020.html">municipality_key_2020</a></span><span class="op">)</span>
@@ -175,9 +179,9 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span class="co">#&gt; [57] "kunta_name"              "name_fi"                </span>
 <span class="co">#&gt; [59] "name_sv"                 "erva_code"              </span>
 <span class="co">#&gt; [61] "erva_name_fi"            "erva_name_sv"           </span>
-<span class="co">#&gt; [63] "erva_name_en"            "hyvinvointialue_name_fi"</span>
-<span class="co">#&gt; [65] "hyvinvointialue_name_sv" "hyvinvointialue_name_en"</span>
-<span class="co">#&gt; [67] "hyvinvointialue_code"</span></code></pre></div>
+<span class="co">#&gt; [63] "erva_name_en"            "hyvinvointialue_code"   </span>
+<span class="co">#&gt; [65] "hyvinvointialue_name_fi" "hyvinvointialue_name_sv"</span>
+<span class="co">#&gt; [67] "hyvinvointialue_name_en"</span></code></pre></div>
 <p>With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.<br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -272,30 +276,31 @@ Each municipality belongs to a higher level regional classifications such as reg
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"grid"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 21 × 2</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 22 × 2</span></span>
 <span class="co">#&gt;    Item                   Title                                                 </span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> grid_ahvenanmaa        custom geofacet grid for Ahvenanmaa region            </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> grid_etela_karjala     custom geofacet grid for Etelä-Karjala region as in 2…</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> grid_etela_pohjanmaa   custom geofacet grid for Etelä-Pohjanmaa              </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> grid_etela_savo        custom geofacet grid for Etelä-Savo                   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> grid_kainuu            custom geofacet grid for Kainuu region                </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> grid_kanta_hame        custom geofacet grid for Kanta-Häme region            </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> grid_keski_pohjanmaa   custom geofacet grid for Keski-Pohjanmaa region       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> grid_keski_suomi       custom geofacet grid for Keski-Suomi region as in 2020</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> grid_kymenlaakso       custom geofacet grid for Kymenlaakso region           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> grid_lappi             custom geofacet grid for Lappi region as in 2020      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> grid_maakunta          custom geofacet grid for regions                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> grid_paijat_hame       custom geofacet grid for Päijät-Häme region           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> grid_pirkanmaa         custom geofacet grid for Pirkanmaa region             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> grid_pohjanmaa         custom geofacet grid for Pohjanmaa region             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> grid_pohjois_karjala   custom geofacet grid for Pohjois-Karjala region       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> grid_pohjois_pohjanmaa custom geofacet grid for Pohjois-Pohjanmaa region     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> grid_pohjois_savo      custom geofacet grid for Pohjois-Savo region          </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> grid_sairaanhoitop     custom geofacet grid for health care districts        </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> grid_satakunta         custom geofacet grid for Satakunta region             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">20</span> grid_uusimaa           custom geofacet grid for Uusimaa region               </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">21</span> grid_varsinais_suomi   custom geofacet grid for Varsinais-Suomi region</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> grid_hyvinvointialue   custom geofacet grid for Wellbeing services counties  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> grid_kainuu            custom geofacet grid for Kainuu region                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> grid_kanta_hame        custom geofacet grid for Kanta-Häme region            </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> grid_keski_pohjanmaa   custom geofacet grid for Keski-Pohjanmaa region       </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> grid_keski_suomi       custom geofacet grid for Keski-Suomi region as in 2020</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> grid_kymenlaakso       custom geofacet grid for Kymenlaakso region           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> grid_lappi             custom geofacet grid for Lappi region as in 2020      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> grid_maakunta          custom geofacet grid for regions                      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> grid_paijat_hame       custom geofacet grid for Päijät-Häme region           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> grid_pirkanmaa         custom geofacet grid for Pirkanmaa region             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> grid_pohjanmaa         custom geofacet grid for Pohjanmaa region             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> grid_pohjois_karjala   custom geofacet grid for Pohjois-Karjala region       </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> grid_pohjois_pohjanmaa custom geofacet grid for Pohjois-Pohjanmaa region     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> grid_pohjois_savo      custom geofacet grid for Pohjois-Savo region          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> grid_sairaanhoitop     custom geofacet grid for health care districts        </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">20</span> grid_satakunta         custom geofacet grid for Satakunta region             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">21</span> grid_uusimaa           custom geofacet grid for Uusimaa region               </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">22</span> grid_varsinais_suomi   custom geofacet grid for Varsinais-Suomi region</span></code></pre></div>
 <p>Here is an example where population data at municipality level is pulled from Statistics Finland from 1987 to 2018, then aggregated at the levels of regions (<code>maakunta</code>) and then plotted with ggplot2 using grid <code><a href="../reference/grid_maakunta.html">geofi::grid_maakunta</a></code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pxweb"</span>,<span class="st">"geofacet"</span>,<span class="st">"ggplot2"</span><span class="op">)</span>
@@ -352,7 +357,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>

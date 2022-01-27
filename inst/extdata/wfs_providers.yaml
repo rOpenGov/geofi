@@ -6,6 +6,7 @@ Tilastokeskus:
       get_zipcodes: "postialue:pno_"
       get_population_grid: "vaestoruutu:vaki"
       get_statistical_grid: "tilastointialueet:hila"
+      get_municipality_pop: "vaestoalue:kunta_vaki"
   license: "Attribution 4.0 International (CC BY 4.0)"
 Paituli:
   URL: http://avaa.tdata.fi/geoserver/paituli/wfs

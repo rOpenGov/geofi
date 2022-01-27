@@ -3,6 +3,7 @@
 export(check_api_access)
 export(convert_municipality_key_codes)
 export(get_municipalities)
+export(get_municipality_pop)
 export(get_population_grid)
 export(get_statistical_grid)
 export(get_zipcodes)

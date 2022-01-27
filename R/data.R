@@ -59,10 +59,10 @@
 #'
 #' Grid table to be used with ggplot2 and geofacet
 
-#' @format A data frame with 19 rows and 4 variables:
+#' @format A data frame with 23 rows and 4 variables:
 #' \describe{
-#'   \item{name}{Region name (maakunta) in Finnish}
-#'   \item{code}{Region code}
+#'   \item{name}{Wellbeing services county name (hyvinvointialue) in Finnish}
+#'   \item{code}{Wellbeing services counties code}
 #'   \item{row}{Vertical location in grid}
 #'   \item{col}{Horizontal location in grid}
 #' }

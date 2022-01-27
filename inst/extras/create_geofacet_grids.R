@@ -17,6 +17,49 @@ grid_maakunta <- mygrid
 save(grid_maakunta, file = "./data/grid_maakunta.rda",
      compress = "bzip2")
 
+# create regions (hyvinvointialue) grid
+library(geofi)
+library(dplyr)
+muni <- get_municipalities(year =2021)
+muni %>% group_by(hyvinvointialue_name_fi,hyvinvointialue_code) %>%
+  summarise() %>%
+  ungroup() -> spd
+library(ggplot2)
+ggplot(spd, aes(label = paste(hyvinvointialue_name_fi,hyvinvointialue_code, sep = "\n"))) +
+  geom_sf() + geom_sf_text(size = 3)
+
+
+mygrid <- data.frame(
+  name = c("Lapin hyvinvointialue", "Kainuun hyvinvointialue", "Pohjois-Pohjanmaan hyvinvointialue",
+           "Keski-Pohjanmaan hyvinvointialue", "Pohjanmaan hyvinvointialue", "Etelä-Pohjanmaan hyvinvointialue",
+           "Pohjois-Savon hyvinvointialue", "Keski-Suomen hyvinvointialue", "Pohjois-Karjalan hyvinvointialue",
+           "Pirkanmaan hyvinvointialue", "Satakunnan hyvinvointialue", "Etelä-Savon hyvinvointialue",
+           "Päijät-Hämeen hyvinvointialue", "Kanta-Hämeen hyvinvointialue", "Etelä-Karjalan hyvinvointialue",
+           "Kymenlaakson hyvinvointialue", "Varsinais-Suomen hyvinvointialue", "Ahvenanmaa",
+
+           "Länsi-Uudenmaan hyvinvointialue","Keski-Uudenmaan hyvinvointialue","Itä-Uudenmaan hyvinvointialue",
+           "Vantaan ja Keravan hyvinvointialue","Helsingin kaupunki"),
+  code = c("21", "20", "19",
+           "18", "17", "16",
+           "13", "15", "14",
+           "8", "6", "12",
+           "9", "7", "11",
+           "10", "5", "91",
+
+           "3","2", "1",
+           "4","90"),
+  row = c(1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7),
+  col = c(5, 6, 5, 4, 3, 3, 5, 4, 6, 4, 3, 6, 5, 4, 6, 5, 3, 3, 4, 5, 6, 5, 4),
+  stringsAsFactors = FALSE
+)
+mygrid$col <- mygrid$col-2
+geofacet::grid_preview(mygrid)
+
+grid_hyvinvointialue <- mygrid
+save(grid_hyvinvointialue, file = "./data/grid_hyvinvointialue.rda",
+     compress = "bzip2")
+
+
 
 library(geofi)
 library(dplyr)

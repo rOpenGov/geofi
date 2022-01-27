@@ -54,6 +54,20 @@
 #' }
 "grid_maakunta"
 
+#'
+#' custom geofacet grid for Wellbeing services counties
+#'
+#' Grid table to be used with ggplot2 and geofacet
+
+#' @format A data frame with 19 rows and 4 variables:
+#' \describe{
+#'   \item{name}{Region name (maakunta) in Finnish}
+#'   \item{code}{Region code}
+#'   \item{row}{Vertical location in grid}
+#'   \item{col}{Horizontal location in grid}
+#' }
+"grid_hyvinvointialue"
+
 #' custom geofacet grid for Ahvenanmaa region
 #'
 #' Grid table to be used with ggplot2 and geofacet
@@ -302,11 +316,11 @@
 "grid_varsinais_suomi"
 
 
-#' Aggregated municipality key table for years 2013-2021
+#' Aggregated municipality key table for years 2013-2022
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 2519 rows and 75 variables:
+#' @format A data frame with 3131 rows and 75 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -391,7 +405,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 309 rows and 75 variables:
+#' @format A data frame with 309 rows and 73 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -442,8 +456,6 @@
 #'   \item{nuts3_name_fi}{NUTS 2016 classification name in Finnish (level 3)}
 #'   \item{nuts3_name_sv}{NUTS 2016 classification name in Swedish (level 3)}
 #'   \item{nuts3_name_en}{NUTS 2016 classification name in English (level 3)}
-#'   \item{tyossakayntial_code}{Työssäkäyntialue code}
-#'   \item{tyossakayntial_name_fi}{Työssäkäyntialue name in Finnish}
 #'   \item{vaalipiiri_code}{Vaalipiiri code (Constituencies)}
 #'   \item{vaalipiiri_name_fi}{Vaalipiiri name in Finnish (Constituencies)}
 #'   \item{vaalipiiri_name_sv}{Vaalipiiri name in Swedish (Constituencies)}
@@ -476,7 +488,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 309 rows and 75 variables:
+#' @format A data frame with 309 rows and 67 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}
@@ -541,14 +553,6 @@
 #'   \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}
 #'   \item{erva_name_en}{Sairaanhoidon erityisvastuualueen name in English (Catchment areas for highly specialised medical care)}
-#'   \item{kela_vakuutuspiiri_name_fi}{Kelan vakuutuspiiri name in Finnish (Insurance District)}
-#'   \item{kela_vakuutuspiiri_code}{Kelan vakuutuspiiri unofficial code (Insurance District)}
-#'   \item{kela_vakuutuspiiri_name_sv}{Kelan vakuutuspiiri name in Swedish (Insurance District)}
-#'   \item{kela_vakuutuspiiri_name_en}{Kelan vakuutuspiiri name in English (Insurance District)}
-#'   \item{kela_asumistukialue_name_fi}{Kelan asumistuen kuntaryhmät name in Finnish (Municipality categories for housing allowance)}
-#'   \item{kela_asumistukialue_code}{Kelan asumistuen kuntaryhmät unofficial code (Municipality categories for housing allowance)}
-#'   \item{kela_asumistukialue_name_sv}{Kelan asumistuen kuntaryhmät name in Swedish (Municipality categories for housing allowance)}
-#'   \item{kela_asumistukialue_name_en}{Kelan asumistuen kuntaryhmät name in English (Municipality categories for housing allowance)}
 #'   \item{hyvinvointialue_name_fi}{Hyvinvointialue name in Finnish (Wellbeing services counties)}
 #'   \item{hyvinvointialue_name_sv}{Hyvinvointialue name in Swedish (Wellbeing services counties)}
 #'   \item{hyvinvointialue_name_en}{Hyvinvointialue name in English (Wellbeing services counties)}
@@ -564,7 +568,7 @@
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'
-#' @format A data frame with 310 rows and 75 variables:
+#' @format A data frame with 310 rows and 67 variables:
 #' \describe{
 #'   \item{kunta}{Municipality code}
 #'   \item{municipality_name_fi}{Municipality name in Finnish}

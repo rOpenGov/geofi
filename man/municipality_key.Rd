@@ -3,9 +3,9 @@
 \docType{data}
 \name{municipality_key}
 \alias{municipality_key}
-\title{Aggregated municipality key table for years 2013-2021}
+\title{Aggregated municipality key table for years 2013-2022}
 \format{
-A data frame with 2519 rows and 75 variables:
+A data frame with 3131 rows and 75 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}

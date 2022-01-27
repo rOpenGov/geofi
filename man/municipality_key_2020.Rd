@@ -5,7 +5,7 @@
 \alias{municipality_key_2020}
 \title{Municipality key table for 2020}
 \format{
-A data frame with 310 rows and 75 variables:
+A data frame with 310 rows and 67 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}

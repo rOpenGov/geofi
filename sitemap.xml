@@ -40,6 +40,9 @@
     <loc>https://ropengov.github.io/geofi/reference/get_municipalities.html</loc>
   </url>
   <url>
+    <loc>https://ropengov.github.io/geofi/reference/get_municipality_pop.html</loc>
+  </url>
+  <url>
     <loc>https://ropengov.github.io/geofi/reference/get_population_grid.html</loc>
   </url>
   <url>

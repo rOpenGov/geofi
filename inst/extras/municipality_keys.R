@@ -21,6 +21,30 @@ get_classifications <- function(class = "kunta_1_20200101", lang = "fi"){
   return(dd)
 }
 
+#' Document an internal data
+#'
+#' @param dat data.frame
+#' @param neim string name of the data
+#' @param description Description of the data
+#'
+#' @export
+document_data <- function(dat, neim, description = "Data is data"){
+
+  rivit <- vector()
+  rivit <- c(rivit,
+             neim,"",
+             description,"",
+             paste0("@format A data frame with ",nrow(dat)," rows and ",ncol(dat)," variables:"),
+             "\\describe{")
+  nms <- names(dat)
+  nms_rivit <- vector()
+  for (i in seq_along(nms)) nms_rivit <- c(nms_rivit,paste0("\\item{",nms[i],"}{",nms[i],"}"))
+  rivit <- c(rivit,nms_rivit,"}")
+  rivit <- paste0("#' ", rivit)
+  rivit <- c(rivit,paste0('"',neim,'"'))
+  cat(rivit, sep = "\n")
+}
+
 # Municipalities
 langs <- c("fi","sv","en")
 
@@ -146,7 +170,9 @@ ddd3 <- ddd2 %>%
          name_sv = municipality_name_sv)
 
 # erva-regions can be found from sairaanhoitp <-> erva table
-res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20220101%23erva_3_20210101/maps?format=json")) %>%
+# lets use the 2021 version as there has been no changes
+## https://www2.stat.fi/fi/luokitukset/luokitustiedotteet/
+res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20220101%23erva_3_20220101/maps?format=json")) %>%
   as_tibble()
 vals <- sub("\\?format=json", "", sub("^.+maps/", "", res$value))
 keydat <- read.table(text = vals, sep="/") %>%
@@ -156,7 +182,7 @@ keydat <- read.table(text = vals, sep="/") %>%
 
 lst <- list()
 for (i in seq_along(langs)){
-  tmp <- get_classifications(class = "erva_3_20210101", lang = langs[i])
+  tmp <- get_classifications(class = "erva_3_20220101", lang = langs[i])
   if (is.null(tmp)) next()
   names(tmp) <- c("erva_code", paste0("erva_name_",langs[i]))
   lst[[i]] <- tmp
@@ -171,9 +197,8 @@ ddd4 <- ddd3 %>%
   mutate_at(.vars = vars(kunta,ends_with("_code")),
             .funs = function(x) ifelse(grepl("[A-Za-z]", x), x, as.integer(x))) %>%
   # erva only applies to years 2018 onwards
-  mutate_at(.vars = vars(contains("erva")), .funs = function(x) ifelse(.$year < 2018, NA, x)) #%>%
-  # filter(year == 2018) %>%
-  # select(kunta_name,contains("erva"))
+  mutate_at(.vars = vars(contains("erva")), .funs = function(x) ifelse(.$year < 2018, NA, x))
+
 
 # Case Maarianhamina
 ddd4$kunta_name[ddd4$kunta_name == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
@@ -181,6 +206,7 @@ ddd4$municipality_name_fi[ddd4$municipality_name_fi == "Maarianhamina - Marieham
 
 
 # adding Kela vakuutuspiirit
+## Last checked 20220127
 library(httr)
 library(stringr)
 res <- httr::GET("https://www.kela.fi/vakuutuspiirit")
@@ -220,20 +246,20 @@ gsub("^.*Itäinen", "", cont) %>%
   str_split(string = ., pattern = ",") %>%
   unlist() -> itainen
 
-# dput(itainen)
-# itainen <- c("Enonkoski", "Hankasalmi", "Heinävesi", "Hirvensalmi", "Iisalmi",
-#              "Ilomantsi", "Joensuu", "Joroinen", "Joutsa", "Juankoski", "Juuka",
-#              "Juva", "Jyväskylä", "Jämsä", "Kaavi", "Kangasniemi", "Kannonkoski",
-#              "Karstula", "Keitele", "Keuruu", "Kinnula", "Kitee", "Kiuruvesi",
-#              "Kivijärvi", "Konnevesi", "Kontiolahti", "Kuhmoinen", "Kuopio",
-#              "Kyyjärvi", "Lapinlahti", "Laukaa", "Leppävirta", "Lieksa",
-#              "Liperi", "Luhanka", "Mikkeli", "Multia", "Muurame", "Mäntyharju",
-#              "Nurmes", "Outokumpu", "Pihtipudas", "Pertunmaa", "Petäjävesi",
-#              "Pieksämäki", "Pielavesi", "Puumala", "Polvijärvi", "Rantasalmi",
-#              "Rautalampi", "Rautavaara", "Rääkkylä", "Saarijärvi", "Savonlinna",
-#              "Siilinjärvi", "Sonkajärvi", "Sulkava", "Suonenjoki", "Tervo",
-#              "Tohmajärvi", "Toivakka", "Tuusniemi", "Uurainen", "Varkaus",
-#              "Vesanto", "Vieremä", "Viitasaari", "Äänekoski")
+dput(itainen)
+itainen <- c("Enonkoski", "Hankasalmi", "Heinävesi", "Hirvensalmi", "Iisalmi",
+             "Ilomantsi", "Joensuu", "Joroinen", "Joutsa", "Juankoski", "Juuka",
+             "Juva", "Jyväskylä", "Jämsä", "Kaavi", "Kangasniemi", "Kannonkoski",
+             "Karstula", "Keitele", "Keuruu", "Kinnula", "Kitee", "Kiuruvesi",
+             "Kivijärvi", "Konnevesi", "Kontiolahti", "Kuhmoinen", "Kuopio",
+             "Kyyjärvi", "Lapinlahti", "Laukaa", "Leppävirta", "Lieksa",
+             "Liperi", "Luhanka", "Mikkeli", "Multia", "Muurame", "Mäntyharju",
+             "Nurmes", "Outokumpu", "Pihtipudas", "Pertunmaa", "Petäjävesi",
+             "Pieksämäki", "Pielavesi", "Puumala", "Polvijärvi", "Rantasalmi",
+             "Rautalampi", "Rautavaara", "Rääkkylä", "Saarijärvi", "Savonlinna",
+             "Siilinjärvi", "Sonkajärvi", "Sulkava", "Suonenjoki", "Tervo",
+             "Tohmajärvi", "Toivakka", "Tuusniemi", "Uurainen", "Varkaus",
+             "Vesanto", "Vieremä", "Viitasaari", "Äänekoski")
 
 
 # Keskinen
@@ -247,17 +273,17 @@ gsub("^.*Keskinen", "", cont) %>%
   str_split(string = ., pattern = ",") %>%
   unlist() -> keskinen
 
-# dput(keskinen)
-# keskinen <- c("Akaa", "Alajärvi", "Alavus", "Evijärvi", "Forssa", "Hattula",
-#               "Hausjärvi", "Humppila", "Hämeenkyrö", "Hämeenlinna", "Ikaalinen",
-#               "Ilmajoki", "Isojoki", "Isokyrö", "Janakkala", "Jokioinen",
-#               "Juupajoki", "Kangasala", "Karijoki", "Kauhajoki", "Kauhava",
-#               "Kihniö", "Kuortane", "Kurikka", "Lappajärvi", "Lapua", "Lempäälä",
-#               "Loppi", "Mänttä-Vilppula", "Nokia", "Orivesi", "Parkano",
-#               "Pirkkala", "Punkalaidun", "Pälkäne", "Riihimäki", "Ruovesi",
-#               "Sastamala", "Seinäjoki", "Soini", "Tammela", "Tampere", "Teuva",
-#               "Urjala", "Valkeakoski", "Vesilahti", "Vimpeli", "Virrat", "Ylöjärvi",
-#               "Ypäjä", "Ähtäri")
+dput(keskinen)
+keskinen <- c("Akaa", "Alajärvi", "Alavus", "Evijärvi", "Forssa", "Hattula",
+              "Hausjärvi", "Humppila", "Hämeenkyrö", "Hämeenlinna", "Ikaalinen",
+              "Ilmajoki", "Isojoki", "Isokyrö", "Janakkala", "Jokioinen",
+              "Juupajoki", "Kangasala", "Karijoki", "Kauhajoki", "Kauhava",
+              "Kihniö", "Kuortane", "Kurikka", "Lappajärvi", "Lapua", "Lempäälä",
+              "Loppi", "Mänttä-Vilppula", "Nokia", "Orivesi", "Parkano",
+              "Pirkkala", "Punkalaidun", "Pälkäne", "Riihimäki", "Ruovesi",
+              "Sastamala", "Seinäjoki", "Soini", "Tammela", "Tampere", "Teuva",
+              "Urjala", "Valkeakoski", "Vesilahti", "Vimpeli", "Virrat", "Ylöjärvi",
+              "Ypäjä", "Ähtäri")
 
 # Läntinen
 gsub("^.*Läntinen", "", cont) %>%
@@ -274,18 +300,18 @@ lantinen <- lantinen[lantinen != "TL"]
 lantinen[lantinen == "Koski"] <- "Koski Tl"
 lantinen[lantinen == "Pedersören"] <- "Pedersören kunta"
 
-# dput(lantinen)
-# lantinen <- c("Aura", "Eura", "Eurajoki", "Harjavalta", "Honkajoki", "Huittinen",
-#               "Jämijärvi", "Kaarina", "Kankaanpää", "Karvia", "Kaskinen",
-#               "Kemiönsaari", "Kokemäki", "Korsnäs", "Koski Tl", "Kristiinankaupunki",
-#               "Kustavi", "Köyliö", "Laihia", "Laitila", "Lavia", "Lieto",
-#               "Loimaa", "Luoto", "Luvia", "Maalahti", "Maarianhamina", "Marttila",
-#               "Masku", "Merikarvia", "Mustasaari", "Mynämäki", "Naantali",
-#               "Nakkila", "Nousiainen", "Närpiö", "Oripää", "Paimio", "Parainen",
-#               "Pedersören kunta", "Pietarsaari", "Pomarkku", "Pori", "Pyhäranta",
-#               "Pöytyä", "Raisio", "Rauma", "Rusko", "Salo", "Sauvo", "Siikainen",
-#               "Somero", "Sund", "Säkylä", "Taivassalo", "Turku", "Ulvila",
-#               "Uusikaarlepyy", "Uusikaupunki", "Vaasa", "Vehmaa", "Vöyri")
+dput(lantinen)
+lantinen <- c("Aura", "Eura", "Eurajoki", "Harjavalta", "Honkajoki", "Huittinen",
+              "Jämijärvi", "Kaarina", "Kankaanpää", "Karvia", "Kaskinen",
+              "Kemiönsaari", "Kokemäki", "Korsnäs", "Koski Tl", "Kristiinankaupunki",
+              "Kustavi", "Köyliö", "Laihia", "Laitila", "Lavia", "Lieto",
+              "Loimaa", "Luoto", "Luvia", "Maalahti", "Maarianhamina", "Marttila",
+              "Masku", "Merikarvia", "Mustasaari", "Mynämäki", "Naantali",
+              "Nakkila", "Nousiainen", "Närpiö", "Oripää", "Paimio", "Parainen",
+              "Pedersören kunta", "Pietarsaari", "Pomarkku", "Pori", "Pyhäranta",
+              "Pöytyä", "Raisio", "Rauma", "Rusko", "Salo", "Sauvo", "Siikainen",
+              "Somero", "Sund", "Säkylä", "Taivassalo", "Turku", "Ulvila",
+              "Uusikaarlepyy", "Uusikaupunki", "Vaasa", "Vehmaa", "Vöyri")
 
 # Pohjoinen
 gsub("^.*Pohjoinen", "", cont) %>%
@@ -298,19 +324,19 @@ gsub("^.*Pohjoinen", "", cont) %>%
   str_split(string = ., pattern = ",") %>%
   unlist() -> pohjoinen
 
-# dput(pohjoinen)
-# pohjoinen <- c("Alavieska", "Enontekiö", "Hailuoto", "Haapajärvi", "Halsua",
-#                "Haapavesi", "Hyrynsalmi", "Ii", "Inari", "Kajaani", "Kalajoki",
-#                "Kannus", "Kaustinen", "Kemi", "Kempele", "Kemijärvi", "Keminmaa",
-#                "Kittilä", "Kokkola", "Kolari", "Kruunupyy", "Kuhmo", "Kuusamo",
-#                "Kärsämäki", "Lestijärvi", "Liminka", "Lumijoki", "Merijärvi",
-#                "Muonio", "Muhos", "Nivala", "Oulu", "Oulainen", "Paltamo", "Pelkosenniemi",
-#                "Pello", "Perho", "Posio", "Pudasjärvi", "Puolanka", "Pyhäjoki",
-#                "Pyhäjärvi", "Pyhäntä", "Raahe", "Ranua", "Reisjärvi", "Ristijärvi",
-#                "Rovaniemi", "Salla", "Savukoski", "Sievi", "Siikajoki", "Siikalatva",
-#                "Simo", "Sodankylä", "Sotkamo", "Suomussalmi", "Taivalkoski",
-#                "Tervola", "Toholampi", "Tornio", "Tyrnävä", "Utajärvi", "Utsjoki",
-#                "Vaala", "Veteli", "Ylivieska", "Ylitornio")
+dput(pohjoinen)
+pohjoinen <- c("Alavieska", "Enontekiö", "Hailuoto", "Haapajärvi", "Halsua",
+               "Haapavesi", "Hyrynsalmi", "Ii", "Inari", "Kajaani", "Kalajoki",
+               "Kannus", "Kaustinen", "Kemi", "Kempele", "Kemijärvi", "Keminmaa",
+               "Kittilä", "Kokkola", "Kolari", "Kruunupyy", "Kuhmo", "Kuusamo",
+               "Kärsämäki", "Lestijärvi", "Liminka", "Lumijoki", "Merijärvi",
+               "Muonio", "Muhos", "Nivala", "Oulu", "Oulainen", "Paltamo", "Pelkosenniemi",
+               "Pello", "Perho", "Posio", "Pudasjärvi", "Puolanka", "Pyhäjoki",
+               "Pyhäjärvi", "Pyhäntä", "Raahe", "Ranua", "Reisjärvi", "Ristijärvi",
+               "Rovaniemi", "Salla", "Savukoski", "Sievi", "Siikajoki", "Siikalatva",
+               "Simo", "Sodankylä", "Sotkamo", "Suomussalmi", "Taivalkoski",
+               "Tervola", "Toholampi", "Tornio", "Tyrnävä", "Utajärvi", "Utsjoki",
+               "Vaala", "Veteli", "Ylivieska", "Ylitornio")
 
 # Kelan kela_vakuutuspiirit
 key <- ddd4 %>% distinct(kunta_name)
@@ -363,6 +389,7 @@ kuntaluokitusavain <- key %>%
   ))
 
 # manually extracted from https://www.kela.fi/asunto-ja-asumismenot
+## Last checked 20220127
 kuntaluokitusavain$kela_asumistukialue_name_fi <- NA
 kuntaluokitusavain$kela_asumistukialue_name_fi <- ifelse(kuntaluokitusavain$kunta_name %in%c("Helsinki"),
                                                       "I kuntaryhmä",
@@ -405,8 +432,8 @@ mutate(kela_asumistukialue_name_sv = case_when(
     kela_asumistukialue_name_fi == "III kuntaryhmä" ~ "Municipality in category III",
     kela_asumistukialue_name_fi == "IV kuntaryhmä" ~ "Municipality in category IV"
   )) %>%
-  # Kela-spesific classifications only for year 2020 as there is no history available as open data
-  mutate(year = 2021)
+  # Kela-spesific classifications only for latest year as there is no history available as open data
+  mutate(year = 2022)
 
 
 # Lets rename the Finnish version of Maarianhamina
@@ -428,122 +455,9 @@ for (i in seq_along(yrs)){
 save(municipality_key, file = "./data/municipality_key.rda",
      compress = "bzip2")
 
-# Hyvinvointialueet - a temporary fix as stat.fi api is not working properly
-load("./data/municipality_key_2021.rda")
+# Lisätään hyvinvointialuetieto myös vuosille 2018-2020
 
-hyvinvointialue <- municipality_key_2021 %>%
-  select(-contains("hyvinvointialue")) %>%
-mutate(hyvinvointialue_name_fi = case_when(
-  maakunta_name_fi == "Varsinais-Suomi" ~ "Varsinais-Suomen hyvinvointialue",
-  maakunta_name_fi == "Satakunta" ~ "Satakunnan hyvinvointialue",
-  maakunta_name_fi == "Kanta-Häme" ~ "Kanta-Hämeen hyvinvointialue",
-  maakunta_name_fi == "Pirkanmaa" ~ "Pirkanmaan hyvinvointialue",
-  maakunta_name_fi == "Päijät-Häme" ~ "Päijät-Hämeen hyvinvointialue",
-  maakunta_name_fi == "Kymenlaakso" ~ "Kymenlaakson hyvinvointialue",
-  maakunta_name_fi == "Etelä-Karjala" ~ "Etelä-Karjalan hyvinvointialue",
-  maakunta_name_fi == "Etelä-Savo" ~ "Etelä-Savon hyvinvointialue",
-  maakunta_name_fi == "Pohjois-Savo" ~ "Pohjois-Savon hyvinvointialue",
-  maakunta_name_fi == "Pohjois-Karjala" ~ "Pohjois-Karjalan hyvinvointialue",
-  maakunta_name_fi == "Keski-Suomi" ~ "Keski-Suomen hyvinvointialue",
-  maakunta_name_fi == "Etelä-Pohjanmaa" ~ "Etelä-Pohjanmaan hyvinvointialue",
-  maakunta_name_fi == "Pohjanmaa" ~ "Pohjanmaan hyvinvointialue",
-  maakunta_name_fi == "Keski-Pohjanmaa" ~ "Keski-Pohjanmaan hyvinvointialue",
-  maakunta_name_fi == "Pohjois-Pohjanmaa" ~ "Pohjois-Pohjanmaan hyvinvointialue",
-  maakunta_name_fi == "Kainuu" ~ "Kainuun hyvinvointialue",
-  maakunta_name_fi == "Lappi" ~ "Lapin hyvinvointialue",
-  municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "Itä-Uudenmaan hyvinvointialue",
-  municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Keski-Uudenmaan hyvinvointialue",
-  municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "Länsi-Uudenmaan hyvinvointialue",
-  municipality_name_fi %in% c("Vantaa","Kerava") ~ "Vantaa-Keravan hyvinvointialue",
-  municipality_name_fi %in% c("Helsinki") ~ "Helsingin kaupunki",
-  maakunta_name_fi == "Ahvenanmaa" ~ "Ahvenanmaa"
-)) %>%
-  # https://soteuudistus.fi/sv/om-social-och-halsovardsreformen-
-  mutate(hyvinvointialue_name_sv = case_when(
-    maakunta_name_fi == "Varsinais-Suomi" ~ "Egentliga Finlands välfärdsområde",
-    maakunta_name_fi == "Satakunta" ~ "Satakunta välfärdsområde",
-    maakunta_name_fi == "Kanta-Häme" ~ "Egentliga Tavastlands välfärdsområde",
-    maakunta_name_fi == "Pirkanmaa" ~ "Birkalands välfärdsområde",
-    maakunta_name_fi == "Päijät-Häme" ~ "Päijänne-Tavastlands välfärdsområde",
-    maakunta_name_fi == "Kymenlaakso" ~ "Kymmenedalens välfärdsområde",
-    maakunta_name_fi == "Etelä-Karjala" ~ "Södra Karelens välfärdsområde",
-    maakunta_name_fi == "Etelä-Savo" ~ "Södra Savolax välfärdsområde",
-    maakunta_name_fi == "Pohjois-Savo" ~ "Norra Savolax välfärdsområde",
-    maakunta_name_fi == "Pohjois-Karjala" ~ "Norra Karelens välfärdsområde",
-    maakunta_name_fi == "Keski-Suomi" ~ "Mellersta Finlands välfärdsområde",
-    maakunta_name_fi == "Etelä-Pohjanmaa" ~ "Södra Österbottens välfärdsområde",
-    maakunta_name_fi == "Pohjanmaa" ~ "Österbottens välfärdsområde",
-    maakunta_name_fi == "Keski-Pohjanmaa" ~ "Mellersta Österbottens välfärdsområde",
-    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ "Norra Österbottens välfärdsområde",
-    maakunta_name_fi == "Kainuu" ~ "Kajanalands välfärdsområde",
-    maakunta_name_fi == "Lappi" ~ "Lapplands välfärdsområde",
-    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "Östra Nylands välfärdsområde",
-    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Mellersta Nylands välfärdsområde",
-    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "Västra Nylands välfärdsområde",
-    municipality_name_fi %in% c("Vantaa","Kerava") ~ "Vanda-Kervo välfärdsområde",
-    municipality_name_fi %in% c("Helsinki") ~ "Helsingfors stad",
-    maakunta_name_fi == "Ahvenanmaa" ~ "Åland"
-  )) %>%
-  # https://soteuudistus.fi/en/what-is-the-health-and-social-services-reform-
-  mutate(hyvinvointialue_name_en = case_when(
-    maakunta_name_fi == "Varsinais-Suomi" ~ "Southwest Finland wellbeing services county",
-    maakunta_name_fi == "Satakunta" ~ "Satakunta wellbeing services county",
-    maakunta_name_fi == "Kanta-Häme" ~ "Kanta-Häme wellbeing services county",
-    maakunta_name_fi == "Pirkanmaa" ~ "Pirkanmaa wellbeing services county",
-    maakunta_name_fi == "Päijät-Häme" ~ "Päijät-Häme wellbeing services county",
-    maakunta_name_fi == "Kymenlaakso" ~ "Kymenlaakso wellbeing services county",
-    maakunta_name_fi == "Etelä-Karjala" ~ "South Karelia wellbeing services county",
-    maakunta_name_fi == "Etelä-Savo" ~ "South Savo wellbeing services county",
-    maakunta_name_fi == "Pohjois-Savo" ~ "North Savo wellbeing services county",
-    maakunta_name_fi == "Pohjois-Karjala" ~ "North Karelia wellbeing services county",
-    maakunta_name_fi == "Keski-Suomi" ~ "Central Finland wellbeing services county",
-    maakunta_name_fi == "Etelä-Pohjanmaa" ~ "South Ostrobothnia wellbeing services county",
-    maakunta_name_fi == "Pohjanmaa" ~ "Ostrobothnia wellbeing services county",
-    maakunta_name_fi == "Keski-Pohjanmaa" ~ "Central Ostrobothnia wellbeing services county",
-    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ "North Ostrobothnia wellbeing services county",
-    maakunta_name_fi == "Kainuu" ~ "Kainuu wellbeing services county",
-    maakunta_name_fi == "Lappi" ~ "Lapland wellbeing services county",
-    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ "East Uusimaa wellbeing services county",
-    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ "Central Uusimaa wellbeing services county",
-    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ "West Uusimaa wellbeing services county",
-    municipality_name_fi %in% c("Vantaa","Kerava") ~ "Vantaa and Kerava wellbeing services county",
-    municipality_name_fi %in% c("Helsinki") ~ "City of Helsinki",
-    maakunta_name_fi == "Ahvenanmaa" ~ "Åland"
-  )) %>%
-  mutate(hyvinvointialue_code = case_when(
-    maakunta_name_fi == "Varsinais-Suomi" ~ 5,
-    maakunta_name_fi == "Satakunta" ~ 6,
-    maakunta_name_fi == "Kanta-Häme" ~ 7,
-    maakunta_name_fi == "Pirkanmaa" ~ 8,
-    maakunta_name_fi == "Päijät-Häme" ~ 9,
-    maakunta_name_fi == "Kymenlaakso" ~ 10,
-    maakunta_name_fi == "Etelä-Karjala" ~ 11,
-    maakunta_name_fi == "Etelä-Savo" ~ 12,
-    maakunta_name_fi == "Pohjois-Savo" ~ 13,
-    maakunta_name_fi == "Pohjois-Karjala" ~ 14,
-    maakunta_name_fi == "Keski-Suomi" ~ 15,
-    maakunta_name_fi == "Etelä-Pohjanmaa" ~ 16,
-    maakunta_name_fi == "Pohjanmaa" ~ 17,
-    maakunta_name_fi == "Keski-Pohjanmaa" ~ 18,
-    maakunta_name_fi == "Pohjois-Pohjanmaa" ~ 19,
-    maakunta_name_fi == "Kainuu" ~ 20,
-    maakunta_name_fi == "Lappi" ~ 21,
-    municipality_name_fi %in% c("Askola","Lapinjärvi","Loviisa","Myrskylä","Porvoo","Pukkila","Sipoo") ~ 1,
-    municipality_name_fi %in% c("Hyvinkää","Järvenpää","Nurmijärvi","Mäntsälä","Tuusula","Pornainen") ~ 2,
-    municipality_name_fi %in% c("Espoo","Hanko","Inkoo","Karkkila","Kauniainen","Kirkkonummi","Lohja","Raasepori","Siuntio","Vihti") ~ 3,
-    municipality_name_fi %in% c("Vantaa","Kerava") ~ 4,
-    municipality_name_fi %in% c("Helsinki") ~ 90,
-    maakunta_name_fi == "Ahvenanmaa" ~ 91
-  ))
-
-municipality_key_2021 <- hyvinvointialue
-
-save(municipality_key_2021, file = "./data/municipality_key_2021.rda",
-     compress = "bzip2")
-
-# lisätään hyvinvointialuetieto myös vuosille 2018-2020
-
-hyvinvointi_columns <- municipality_key_2021 %>% select(municipality_code, contains("hyvinvointialue"))
+hyvinvointi_columns <- municipality_key_2022 %>% select(municipality_code, contains("hyvinvointialue"))
 
 # 2020
 load("./data/municipality_key_2020.rda")
@@ -578,18 +492,31 @@ save(municipality_key_2018, file = "./data/municipality_key_2018.rda",
 # the whole lot
 load("./data/municipality_key.rda")
 
-municipality_key_without_2018_2021 <- municipality_key %>% filter(!year %in% 2018:2021)
+municipality_key_without_2018_2020 <- municipality_key %>% filter(!year %in% 2018:2020)
 
 # In case hyvinvointialue_code is turned to chr ("03") instead of integer (3)
-# This is necessary to prevent the following error: 
+# This is necessary to prevent the following error:
 # "Can't combine `..1$hyvinvointialue_code` <integer> and `..2$hyvinvointialue_code` <character>."
 # municipality_key_without_2018_2021$hyvinvointialue_code <- as.character(municipality_key_without_2018_2021$hyvinvointialue_code)
 
-municipality_key_new <- bind_rows(municipality_key_without_2018_2021,
+municipality_key_new <- bind_rows(municipality_key_without_2018_2020,
                                   municipality_key_2018,
                                   municipality_key_2019,
-                                  municipality_key_2020,
-                                  municipality_key_2021)
+                                  municipality_key_2020)
 municipality_key <- municipality_key_new
 save(municipality_key, file = "./data/municipality_key.rda",
      compress = "bzip2")
+
+
+# lets create boilerplates for data documentation for data.R using document_data()
+if (FALSE){
+  document_data(dat = municipality_key_2021,
+                neim = "municipality_key_2022",
+                description = "Table for aggregating municipality level data to various regional groupings")
+
+  document_data(dat = municipality_key_2022,
+                neim = "municipality_key_2013",
+                description = "Table for aggregating municipality level data to various regional groupings")
+}
+
+

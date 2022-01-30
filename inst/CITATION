@@ -12,9 +12,9 @@ citEntry(entry="misc",
          ),
 	 journal = "",
 	 url = "https://doi.org/10.5281/zenodo.5770779",
-	 year = "2015-2021",
+	 year = "2015-2022",
          textVersion =
-         paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Leo Lahti 2015-2021.",
+         paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Leo Lahti 2015-2022.",
                "geofi: Access Finnish Geospatial Data",
                sep=" ")
          )

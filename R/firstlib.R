@@ -1,6 +1,9 @@
 
 .onAttach <- function(lib, pkg) {
-  packageStartupMessage("\ngeofi R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.org>.")
+  packageStartupMessage("\ngeofi R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.org>.\n
+**************\n
+Please note that the content of variables 'hyvinvointialue_name_*' and 'hyvinvointialue_code' has changed in 1.0.6 release.\nNew content follows the classification by Statistics Finland.\n
+**************")
 }
 
 # Create an empty environment to hold the WFS provider data

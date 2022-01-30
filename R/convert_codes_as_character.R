@@ -22,10 +22,12 @@ convert_municipality_key_codes <- function(muni_key = geofi::municipality_key) {
 
   width_3 <- c("municipality_code", "seutukunta_code")
   width_2 <- c("maakunta_code", "ely_code", "sairaanhoitop_code",
-               "tyossakayntial_code", "vaalipiiri_code")
+               # "tyossakayntial_code",
+               "vaalipiiri_code")
   integer_columns <- c("kunta", "kuntaryhmitys_code", "kielisuhde_code", "avi_code",
-                "suuralue_code", "kela_vakuutuspiiri_code",
-                "kela_asumistukialue_code","hyvinvointialue_code")
+                "suuralue_code",
+                # "kela_vakuutuspiiri_code", "kela_asumistukialue_code",
+                "hyvinvointialue_code")
 
   muni_key[, width_3] <- sapply(muni_key[, width_3],
                                 formatC, flag = "0", width = 3)

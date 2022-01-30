@@ -99,25 +99,31 @@ The statistical variables in the data are: total population (vaesto), share of t
 To plot men's share at the municipality level in 2020 (2021 municipality borders) you can simply to this. 
 
 ```{r muni_pop_map1, fig.height = 7, fig.width = 4}
-get_municipality_pop(year = 2020) |> subset(select = miehet_p) |> plot()
+get_municipality_pop(year = 2020) %>%  
+  subset(select = miehet_p) %>% 
+  plot()
 ```
 
 Aggregating the absolute population numbers is straightforward: to plot population at Wellbeing service county level you can do. 
 
 
 ```{r muni_pop_map2, fig.height = 7, fig.width = 4}
-get_municipality_pop(year = 2020) |> dplyr::group_by(hyvinvointialue_name_fi) |> summarise(vaesto = sum(vaesto)) |> subset(select = vaesto) |> plot()
+get_municipality_pop(year = 2020) %>%  
+  group_by(hyvinvointialue_name_fi) %>%  
+  summarise(vaesto = sum(vaesto)) %>%  
+  subset(select = vaesto) %>% 
+  plot()
 ```
 
 To plot the men's share at wellbeing service country level you have to add one more step
 
 ```{r muni_pop_map3, fig.height = 7, fig.width = 4}
-get_municipality_pop(year = 2020) |> 
-  dplyr::group_by(hyvinvointialue_name_fi) |> 
+get_municipality_pop(year = 2020) %>%  
+  dplyr::group_by(hyvinvointialue_name_fi) %>% 
   summarise(vaesto = sum(vaesto),
-            miehet = sum(miehet)) |>
-  mutate(share = miehet/vaesto*100) |>
-  subset(select = share) |> 
+            miehet = sum(miehet)) %>% 
+  mutate(share = miehet/vaesto*100) %>% 
+  subset(select = share) %>% 
   plot()
 ```
 

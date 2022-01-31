@@ -96,7 +96,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Datasets in geofi-package</h1>
                         <h4 data-toc-skip class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 data-toc-skip class="date">2022-01-30</h4>
+            <h4 data-toc-skip class="date">2022-01-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/HEAD/vignettes/geofi_datasets.Rmd" class="external-link"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_datasets.Rmd</code></div>
@@ -277,7 +277,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 <h3 id="population-grid">Population grid<a class="anchor" aria-label="anchor" href="#population-grid"></a>
 </h3>
 <p>Number of population by both 1 km x 1 km and 5 km x 5 km grids. The number of population on the last day of the reference year (31 December) by age group. Data includes only inhabited grids. The statistical variables of the data are:</p>
-<p>Total population (<code>vaesto</code>), number of men (<code>miehet</code>) and women (<code>naiset</code>), under 15 year olds (<code>ika_0_14</code>), 15-64 year olds (<code>ika_15_64</code>), and aged over 65 (<code>ika_65_</code>). Only the number of population is reported for grids of under 10 inhabitants. See <a href="https://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/a901d40a-8a6b-4678-814c-79d2e2ab130c" class="external-link">Population grid data</a>.</p>
+<p>Total population (<code>vaesto</code>), number of men (<code>miehet</code>) and women (<code>naiset</code>), under 15 year olds (<code>ika_0_14</code>), 15-64 year olds (<code>ika_15_64</code>), and aged over 65 (<code>ika_65_</code>). Only the number of population is reported for grids of under 10 inhabitants. See <a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_5km_en.html" class="external-link">Population grid data</a>.</p>
 <p>The data describes the population distribution independent of administrative areas (such as municipal borders). The data is suitable for examination of population distribution and making various spatial analysis.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pop_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_population_grid.html">get_population_grid</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, resolution <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>

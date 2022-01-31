@@ -44,3 +44,4 @@ _pkgdown.yaml
 ^geofi\.Rcheck$
 ^geofi.*\.tar\.gz$
 ^geofi.*\.tgz$
+^CRAN-SUBMISSION$

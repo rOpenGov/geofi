@@ -349,3 +349,95 @@ ggplot(muni_voronoi) +
 }
 ```
 
+
+## Calculating distances
+
+Calculating distances is certainly at the core of geospatial analysis. In this exercise we are interested on calculating distances between municipality central localities in Finland. As expected, we are talking great circle distances here, ie. *as the crow flies* type of distances.
+
+You can calculate distance matrices using [`st_distance()`](https://r-spatial.github.io/sf/reference/geos_measures.html)-function from [sf](https://r-spatial.github.io/sf/index.html)-package that computes distances between pairs of geometries. `geofi`-package contains an internal data [`municipality_central_localities`](https://ropengov.github.io/geofi/articles/geofi_datasets.html#central-localities-of-municipalities) that we use to calculate distances between points.
+
+First we need to subset the data and replace original municipality name column (`teksti`) with *better* from latest municipality key.
+
+```{r}
+library(geofi)
+library(sf)
+library(dplyr)
+
+kunta <- geofi::municipality_central_localities %>%  
+  select(teksti,kuntatunnus) %>%
+  mutate(kuntatunnus = as.integer(kuntatunnus)) %>%
+  select(-teksti) %>%
+  left_join(geofi::municipality_key_2022 %>% select(municipality_code, municipality_name_fi),
+            by = c("kuntatunnus" = "municipality_code")) %>%
+  rename(teksti = municipality_name_fi)
+kunta
+```
+
+Let's aim at a data structure as below with both municipality name and code both from origin and destination.
+
+| origin_name  | origin_code | destination_name | destination_code | dist_m |
+| ------------ | ----------- | ---------------- | ---------------- | ------ |
+|  Helsinki    | 91          | Espoo            | 92               | 15000  |
+|  Vantaa      | 93          | Espoo            | 92               | 18000  |
+|  Espoo       | 92          | Espoo            | 92               |     0  |
+
+
+To get there lets create a for loop that calculates distance matrices from each municipality to all municipalities, assign each data to a list and finally bind the data frames into a single data.
+
+```{r}
+d_list <- list()
+kuntadatan_teksti_ja_kuntatunnus <- sf::st_drop_geometry(kunta) %>%
+  select(teksti,kuntatunnus)
+for (i in 1:nrow(kunta)){
+  dist_tmp <- sf::st_distance(x = kunta[i,], y =  kunta)
+  tibble(origin_name = kunta[i,]$teksti,
+         origin_code = kunta[i,]$kuntatunnus) %>%
+    bind_cols(kuntadatan_teksti_ja_kuntatunnus %>% rename(destination_name = teksti,
+                                                          destination_code = kuntatunnus)) %>%
+    mutate(dist = dist_tmp[1,]) -> d_list[[i]]
+}
+kunta_dist <- do.call("bind_rows", d_list) %>%
+  mutate(dist = as.numeric(dist))
+```
+
+Finally we can draw two plots to verify our results. First let's draw a bar plot of 20 municipality central localities nearest to Helsinki
+
+```{r}
+library(ggplot2)
+ggplot(kunta_dist %>%
+         filter(origin_name == "Helsinki") %>%
+         arrange(dist) %>% slice(1:20),
+       aes(x = dist, y = reorder(destination_name, dist), label = round(dist))) +
+         geom_col() + geom_text(aes(x = 1000), color = "white", hjust = 0) +
+  labs(title = "Nearest 20 municipality localities to Helsinki", x = "distance in meters")
+```
+
+Then, lets find the municipality central locality that is nearest to the center of Finland.
+
+```{r}
+# We firt need the country map as a single polygon
+geofi::get_municipalities() %>% 
+  sf::st_union() %>% 
+  # then we need to compute the centroid of that polygon
+  sf::st_centroid() -> fin_centroid
+
+# The let's find the nearest neighbour with
+distance <- st_distance(x = fin_centroid, y = kunta)
+kuntadatan_teksti_ja_kuntatunnus %>% 
+  mutate(dist = as.numeric(distance)) %>% 
+  arrange(dist) -> closest_to_center
+head(closest_to_center)
+```
+
+And finally lets draw a bar plot of 20 furthest localities
+
+```{r}
+ggplot(kunta_dist %>%
+         filter(origin_name == closest_to_center[1,]$teksti) %>%
+         arrange(desc(dist)) %>% slice(1:20),
+       aes(x = dist, y = reorder(destination_name, dist), label = round(dist))) +
+  geom_col() + geom_text(aes(x = 10000), color = "white", hjust = 0) +
+  labs(title = paste("Furthest 20 municipality localities \nfrom the most central locality of ", closest_to_center[1,]$teksti), x = "distance in meters")
+```
+
+

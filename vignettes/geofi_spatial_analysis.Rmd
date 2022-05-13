@@ -358,10 +358,6 @@ You can calculate distance matrices using [`st_distance()`](https://r-spatial.gi
 First we need to subset the data and replace original municipality name column (`teksti`) with *better* from latest municipality key.
 
 ```{r}
-library(geofi)
-library(sf)
-library(dplyr)
-
 kunta <- geofi::municipality_central_localities %>%  
   select(teksti,kuntatunnus) %>%
   mutate(kuntatunnus = as.integer(kuntatunnus)) %>%
@@ -397,18 +393,23 @@ for (i in 1:nrow(kunta)){
 }
 kunta_dist <- do.call("bind_rows", d_list) %>%
   mutate(dist = as.numeric(dist))
+head(kunta_dist)
 ```
 
 Finally we can draw two plots to verify our results. First let's draw a bar plot of 20 municipality central localities nearest to Helsinki
 
 ```{r}
-library(ggplot2)
+if (check_namespaces(pkgs = libs)) {
 ggplot(kunta_dist %>%
          filter(origin_name == "Helsinki") %>%
          arrange(dist) %>% slice(1:20),
        aes(x = dist, y = reorder(destination_name, dist), label = round(dist))) +
          geom_col() + geom_text(aes(x = 1000), color = "white", hjust = 0) +
   labs(title = "Nearest 20 municipality localities to Helsinki", x = "distance in meters")
+  } else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 Then, lets find the municipality central locality that is nearest to the center of Finland.
@@ -431,12 +432,18 @@ head(closest_to_center)
 And finally lets draw a bar plot of 20 furthest localities
 
 ```{r}
+if (check_namespaces(pkgs = libs)) {
 ggplot(kunta_dist %>%
          filter(origin_name == closest_to_center[1,]$teksti) %>%
          arrange(desc(dist)) %>% slice(1:20),
        aes(x = dist, y = reorder(destination_name, dist), label = round(dist))) +
   geom_col() + geom_text(aes(x = 10000), color = "white", hjust = 0) +
   labs(title = paste("Furthest 20 municipality localities \nfrom the most central locality of ", closest_to_center[1,]$teksti), x = "distance in meters")
+  } else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
+
 ```
 
 

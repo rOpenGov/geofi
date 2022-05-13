@@ -263,8 +263,12 @@ popup <- sprintf(
   polygon_wgs84$municipality_name_fi, polygon_wgs84$municipality_code
 ) %>% lapply(htmltools::HTML)
 
+EPSG3067 <- leaflet::leafletCRS(crsClass = "L.Proj.CRS",
+                                code = "EPSG:3067", 
+                                proj4def = "+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
+                                resolutions = 1.5^(25:15))
 
-leaflet(polygon_wgs84) %>% 
+leaflet(polygon_wgs84, options = leafletOptions(worldCopyJump = F, crs = EPSG3067)) %>% 
   addProviderTiles(provider = providers$CartoDB.Positron) %>%
    addPolygons(fillColor = ~pal(municipality_code),
               color = "black",

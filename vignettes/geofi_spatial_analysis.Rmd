@@ -24,7 +24,6 @@ knitr::opts_chunk$set(
 ```
 
 
-
 **Installation**
 
 `geofi` can be installed from CRAN using

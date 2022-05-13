@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   message = FALSE, 
   warning = FALSE,
-  fig.height = 7, 
+  fig.height = 7,  
   fig.width = 7,
   dpi = 75
 )
@@ -432,10 +432,11 @@ head(closest_to_center)
 And finally lets draw a bar plot of 20 furthest localities
 
 ```{r}
-if (check_namespaces(pkgs = libs)) {
-ggplot(kunta_dist %>%
+furthest20 <- kunta_dist %>%
          filter(origin_name == closest_to_center[1,]$teksti) %>%
-         arrange(desc(dist)) %>% slice(1:20),
+         arrange(desc(dist)) %>% slice(1:20)
+if (check_namespaces(pkgs = libs)) {
+ggplot(furthest20,
        aes(x = dist, y = reorder(destination_name, dist), label = round(dist))) +
   geom_col() + geom_text(aes(x = 10000), color = "white", hjust = 0) +
   labs(title = paste("Furthest 20 municipality localities \nfrom the most central locality of ", closest_to_center[1,]$teksti), x = "distance in meters")
@@ -443,7 +444,39 @@ ggplot(kunta_dist %>%
   message("One or more of the following packages is not available: ", 
           paste(libs, collapse = ", "))
 }
+```
 
+And at very last, we need to show those distances also on a map.
+
+```{r}
+sf_lahto <- kunta %>% 
+  filter(teksti %in% closest_to_center[1,]$teksti) %>%
+  select(teksti)
+sf_paate <- kunta %>% 
+  filter(teksti %in% furthest20$destination_name) %>% 
+  select(teksti)
+
+triplst <- list()
+for (i in 1:nrow(sf_paate)){
+triplst[[i]] <- rbind(
+  sf_lahto,
+  sf_paate[i,]
+) %>% 
+  summarize(m = mean(row_number()),do_union=FALSE) %>% 
+  st_cast("LINESTRING")
+}
+trips <- do.call("rbind", triplst)
+
+if (check_namespaces(pkgs = libs)) {
+ggplot() +
+  geom_sf(data = muni %>% st_union(), alpha = .3) +
+  geom_sf(data = trips, color = "dim grey") +
+  geom_sf_label(data = sf_lahto, aes(label = teksti)) +
+  geom_sf_text(data = sf_paate, aes(label = teksti))
+  } else {
+  message("One or more of the following packages is not available: ", 
+          paste(libs, collapse = ", "))
+}
 ```
 
 

@@ -11,7 +11,7 @@ citEntry(entry="misc",
 	   person(given ="Leo", family="Lahti")
          ),
 	 journal = "",
-	 url = "https://doi.org/10.5281/zenodo.5770779",
+	 url = "https://doi.org/10.5281/zenodo.7148138",
 	 year = "2015-2022",
          textVersion =
          paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Leo Lahti 2015-2022.",

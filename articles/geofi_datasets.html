@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Roboto%20Mono-0.4.1/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Roboto_Mono-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Datasets in geofi-package">
@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="http://ropengov.org">
+  <a class="external-link nav-link" href="https://ropengov.org">
     <span class="fa fa-users"></span>
      
   </a>
@@ -93,11 +93,11 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Datasets in geofi-package</h1>
                         <h4 data-toc-skip class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 data-toc-skip class="date">2022-05-13</h4>
+            <h4 data-toc-skip class="date">2022-10-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/HEAD/vignettes/geofi_datasets.Rmd" class="external-link"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_datasets.Rmd</code></div>
@@ -109,106 +109,106 @@
 <p><strong>Packages installation</strong></p>
 <p><code>geofi</code> can be installed from CRAN using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install from CRAN</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"geofi"</span><span class="op">)</span>
-
-<span class="co"># Install development version from GitHub</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ropengov/geofi"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install from CRAN</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"geofi"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Install development version from GitHub</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ropengov/geofi"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Let's first create a function that checks if the suggested </span>
-<span class="co"># packages are available</span>
-<span class="va">check_namespaces</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pkgs</span><span class="op">)</span><span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">pkgs</span>, <span class="va">requireNamespace</span>,quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Let's first create a function that checks if the suggested </span></span>
+<span><span class="co"># packages are available</span></span>
+<span><span class="va">check_namespaces</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pkgs</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">pkgs</span>, <span class="va">requireNamespace</span>,quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="municipality-keys">Municipality keys<a class="anchor" aria-label="anchor" href="#municipality-keys"></a>
 </h2>
 <p>Official administrative regions in Finland are based on municipalities. In 2021 there are 309 municipalities in Finland and the number is decreasing over time through mergers.<br><br>
 Each municipality belongs to a higher level regional classifications such as regions (maakunta) or health care districts (sairaanhoitopiiri). <code>municipality_key_</code>-datasets are based on Statistics Finland <a href="https://data.stat.fi/api/classifications/v2/" class="external-link">Statistical classification</a> -api with few modification and provided on yearly basis.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi/">geofi</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-<span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"geofi"</span><span class="op">)</span>
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"municipality_key"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 2</span></span>
-<span class="co">#&gt;    Item                  Title                                                </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> municipality_key      Aggregated municipality key table for years 2013-2022</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> municipality_key_2013 Municipality key table for 2013                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> municipality_key_2014 Municipality key table for 2014                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> municipality_key_2015 Municipality key table for 2015                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> municipality_key_2016 Municipality key table for 2016                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> municipality_key_2017 Municipality key table for 2017                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> municipality_key_2018 Municipality key table for 2018                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> municipality_key_2019 Municipality key table for 2019                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> municipality_key_2020 Municipality key table for 2020                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> municipality_key_2021 Municipality key table for 2021                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> municipality_key_2022 Municipality key table for 2022</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi/">geofi</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"geofi"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"municipality_key"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 2</span></span></span>
+<span><span class="co">#&gt;    Item                  Title                                                </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> municipality_key      Aggregated municipality key table for years 2013-2022</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> municipality_key_2013 Municipality key table for 2013                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> municipality_key_2014 Municipality key table for 2014                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> municipality_key_2015 Municipality key table for 2015                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> municipality_key_2016 Municipality key table for 2016                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> municipality_key_2017 Municipality key table for 2017                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> municipality_key_2018 Municipality key table for 2018                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> municipality_key_2019 Municipality key table for 2019                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> municipality_key_2020 Municipality key table for 2020                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> municipality_key_2021 Municipality key table for 2021                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> municipality_key_2022 Municipality key table for 2022</span></span></code></pre></div>
 <p>Looking at the names of `municipality_key_2021` there is 63 different variables from each municipality.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2020.html">municipality_key_2020</a></span><span class="op">)</span>
-<span class="co">#&gt;  [1] "kunta"                   "municipality_name_fi"   </span>
-<span class="co">#&gt;  [3] "municipality_name_sv"    "municipality_name_en"   </span>
-<span class="co">#&gt;  [5] "kuntaryhmitys_code"      "kuntaryhmitys_name_fi"  </span>
-<span class="co">#&gt;  [7] "kuntaryhmitys_name_sv"   "kuntaryhmitys_name_en"  </span>
-<span class="co">#&gt;  [9] "avi_code"                "avi_name_fi"            </span>
-<span class="co">#&gt; [11] "avi_name_sv"             "avi_name_en"            </span>
-<span class="co">#&gt; [13] "ely_code"                "ely_name_fi"            </span>
-<span class="co">#&gt; [15] "ely_name_sv"             "ely_name_en"            </span>
-<span class="co">#&gt; [17] "maakunta_code"           "maakunta_name_fi"       </span>
-<span class="co">#&gt; [19] "maakunta_name_sv"        "maakunta_name_en"       </span>
-<span class="co">#&gt; [21] "kielisuhde_code"         "kielisuhde_name_fi"     </span>
-<span class="co">#&gt; [23] "kielisuhde_name_sv"      "kielisuhde_name_en"     </span>
-<span class="co">#&gt; [25] "seutukunta_code"         "seutukunta_name_fi"     </span>
-<span class="co">#&gt; [27] "seutukunta_name_sv"      "seutukunta_name_en"     </span>
-<span class="co">#&gt; [29] "year"                    "suuralue_code"          </span>
-<span class="co">#&gt; [31] "suuralue_name_fi"        "suuralue_name_sv"       </span>
-<span class="co">#&gt; [33] "suuralue_name_en"        "sairaanhoitop_code"     </span>
-<span class="co">#&gt; [35] "sairaanhoitop_name_fi"   "sairaanhoitop_name_sv"  </span>
-<span class="co">#&gt; [37] "sairaanhoitop_name_en"   "nuts1_code"             </span>
-<span class="co">#&gt; [39] "nuts1_name_fi"           "nuts1_name_sv"          </span>
-<span class="co">#&gt; [41] "nuts1_name_en"           "nuts2_code"             </span>
-<span class="co">#&gt; [43] "nuts2_name_fi"           "nuts2_name_sv"          </span>
-<span class="co">#&gt; [45] "nuts2_name_en"           "nuts3_code"             </span>
-<span class="co">#&gt; [47] "nuts3_name_fi"           "nuts3_name_sv"          </span>
-<span class="co">#&gt; [49] "nuts3_name_en"           "tyossakayntial_code"    </span>
-<span class="co">#&gt; [51] "tyossakayntial_name_fi"  "vaalipiiri_code"        </span>
-<span class="co">#&gt; [53] "vaalipiiri_name_fi"      "vaalipiiri_name_sv"     </span>
-<span class="co">#&gt; [55] "vaalipiiri_name_en"      "municipality_code"      </span>
-<span class="co">#&gt; [57] "kunta_name"              "name_fi"                </span>
-<span class="co">#&gt; [59] "name_sv"                 "erva_code"              </span>
-<span class="co">#&gt; [61] "erva_name_fi"            "erva_name_sv"           </span>
-<span class="co">#&gt; [63] "erva_name_en"            "hyvinvointialue_code"   </span>
-<span class="co">#&gt; [65] "hyvinvointialue_name_fi" "hyvinvointialue_name_sv"</span>
-<span class="co">#&gt; [67] "hyvinvointialue_name_en"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2020.html">municipality_key_2020</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "kunta"                   "municipality_name_fi"   </span></span>
+<span><span class="co">#&gt;  [3] "municipality_name_sv"    "municipality_name_en"   </span></span>
+<span><span class="co">#&gt;  [5] "kuntaryhmitys_code"      "kuntaryhmitys_name_fi"  </span></span>
+<span><span class="co">#&gt;  [7] "kuntaryhmitys_name_sv"   "kuntaryhmitys_name_en"  </span></span>
+<span><span class="co">#&gt;  [9] "avi_code"                "avi_name_fi"            </span></span>
+<span><span class="co">#&gt; [11] "avi_name_sv"             "avi_name_en"            </span></span>
+<span><span class="co">#&gt; [13] "ely_code"                "ely_name_fi"            </span></span>
+<span><span class="co">#&gt; [15] "ely_name_sv"             "ely_name_en"            </span></span>
+<span><span class="co">#&gt; [17] "maakunta_code"           "maakunta_name_fi"       </span></span>
+<span><span class="co">#&gt; [19] "maakunta_name_sv"        "maakunta_name_en"       </span></span>
+<span><span class="co">#&gt; [21] "kielisuhde_code"         "kielisuhde_name_fi"     </span></span>
+<span><span class="co">#&gt; [23] "kielisuhde_name_sv"      "kielisuhde_name_en"     </span></span>
+<span><span class="co">#&gt; [25] "seutukunta_code"         "seutukunta_name_fi"     </span></span>
+<span><span class="co">#&gt; [27] "seutukunta_name_sv"      "seutukunta_name_en"     </span></span>
+<span><span class="co">#&gt; [29] "year"                    "suuralue_code"          </span></span>
+<span><span class="co">#&gt; [31] "suuralue_name_fi"        "suuralue_name_sv"       </span></span>
+<span><span class="co">#&gt; [33] "suuralue_name_en"        "sairaanhoitop_code"     </span></span>
+<span><span class="co">#&gt; [35] "sairaanhoitop_name_fi"   "sairaanhoitop_name_sv"  </span></span>
+<span><span class="co">#&gt; [37] "sairaanhoitop_name_en"   "nuts1_code"             </span></span>
+<span><span class="co">#&gt; [39] "nuts1_name_fi"           "nuts1_name_sv"          </span></span>
+<span><span class="co">#&gt; [41] "nuts1_name_en"           "nuts2_code"             </span></span>
+<span><span class="co">#&gt; [43] "nuts2_name_fi"           "nuts2_name_sv"          </span></span>
+<span><span class="co">#&gt; [45] "nuts2_name_en"           "nuts3_code"             </span></span>
+<span><span class="co">#&gt; [47] "nuts3_name_fi"           "nuts3_name_sv"          </span></span>
+<span><span class="co">#&gt; [49] "nuts3_name_en"           "tyossakayntial_code"    </span></span>
+<span><span class="co">#&gt; [51] "tyossakayntial_name_fi"  "vaalipiiri_code"        </span></span>
+<span><span class="co">#&gt; [53] "vaalipiiri_name_fi"      "vaalipiiri_name_sv"     </span></span>
+<span><span class="co">#&gt; [55] "vaalipiiri_name_en"      "municipality_code"      </span></span>
+<span><span class="co">#&gt; [57] "kunta_name"              "name_fi"                </span></span>
+<span><span class="co">#&gt; [59] "name_sv"                 "erva_code"              </span></span>
+<span><span class="co">#&gt; [61] "erva_name_fi"            "erva_name_sv"           </span></span>
+<span><span class="co">#&gt; [63] "erva_name_en"            "hyvinvointialue_code"   </span></span>
+<span><span class="co">#&gt; [65] "hyvinvointialue_name_fi" "hyvinvointialue_name_sv"</span></span>
+<span><span class="co">#&gt; [67] "hyvinvointialue_name_en"</span></span></code></pre></div>
 <p>With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.<br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">maakunta_code</span>,<span class="va">maakunta_name_fi</span>,<span class="va">maakunta_name_sv</span>,<span class="va">maakunta_name_en</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 19 × 5</span></span>
-<span class="co">#&gt;    maakunta_code maakunta_name_fi  maakunta_name_sv      maakunta_name_en      n</span>
-<span class="co">#&gt;            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>             1 Uusimaa           Nyland                Uusimaa              26</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>             2 Varsinais-Suomi   Egentliga Finland     Southwest Finland    27</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>             4 Satakunta         Satakunta             Satakunta            16</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>             5 Kanta-Häme        Egentliga Tavastland  Kanta-Häme           11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>             6 Pirkanmaa         Birkaland             Pirkanmaa            23</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>             7 Päijät-Häme       Päijänne-Tavastland   Päijät-Häme          10</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>             8 Kymenlaakso       Kymmenedalen          Kymenlaakso           6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>             9 Etelä-Karjala     Södra Karelen         South Karelia         9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>            10 Etelä-Savo        Södra Savolax         South Savo           12</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>            11 Pohjois-Savo      Norra Savolax         North Savo           19</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span>            12 Pohjois-Karjala   Norra Karelen         North Karelia        13</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span>            13 Keski-Suomi       Mellersta Finland     Central Finland      22</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">13</span>            14 Etelä-Pohjanmaa   Södra Österbotten     South Ostrobothn…    18</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">14</span>            15 Pohjanmaa         Österbotten           Ostrobothnia         14</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">15</span>            16 Keski-Pohjanmaa   Mellersta Österbotten Central Ostrobot…     8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">16</span>            17 Pohjois-Pohjanmaa Norra Österbotten     North Ostrobothn…    30</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">17</span>            18 Kainuu            Kajanaland            Kainuu                8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">18</span>            19 Lappi             Lappland              Lapland              21</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">19</span>            21 Ahvenanmaa        Åland                 Åland                16</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">maakunta_code</span>,<span class="va">maakunta_name_fi</span>,<span class="va">maakunta_name_sv</span>,<span class="va">maakunta_name_en</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 19 × 5</span></span></span>
+<span><span class="co">#&gt;    maakunta_code maakunta_name_fi  maakunta_name_sv      maakunta_name_en      n</span></span>
+<span><span class="co">#&gt;            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>             1 Uusimaa           Nyland                Uusimaa              26</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>             2 Varsinais-Suomi   Egentliga Finland     Southwest Finland    27</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>             4 Satakunta         Satakunta             Satakunta            16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>             5 Kanta-Häme        Egentliga Tavastland  Kanta-Häme           11</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>             6 Pirkanmaa         Birkaland             Pirkanmaa            23</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>             7 Päijät-Häme       Päijänne-Tavastland   Päijät-Häme          10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>             8 Kymenlaakso       Kymmenedalen          Kymenlaakso           6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>             9 Etelä-Karjala     Södra Karelen         South Karelia         9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>            10 Etelä-Savo        Södra Savolax         South Savo           12</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>            11 Pohjois-Savo      Norra Savolax         North Savo           19</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>            12 Pohjois-Karjala   Norra Karelen         North Karelia        13</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>            13 Keski-Suomi       Mellersta Finland     Central Finland      22</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>            14 Etelä-Pohjanmaa   Södra Österbotten     South Ostrobothn…    18</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>            15 Pohjanmaa         Österbotten           Ostrobothnia         14</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>            16 Keski-Pohjanmaa   Mellersta Österbotten Central Ostrobot…     8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>            17 Pohjois-Pohjanmaa Norra Österbotten     North Ostrobothn…    30</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>            18 Kainuu            Kajanaland            Kainuu                8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>            19 Lappi             Lappland              Lapland              21</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>            21 Ahvenanmaa        Åland                 Åland                16</span></span></code></pre></div>
 <p>Municipality keys are joined with the municipality spatial data by default, meaning that data returned by <code>get_municipality()</code> can be aggregated as it is.</p>
 </div>
 <div class="section level2">
@@ -220,8 +220,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 </h3>
 <p>Municipality borders are provided yearly from 2013 and in two scales 1: 1 000 000 and 1:4 500 000. Use <code>1000</code> or <code>4500</code> as value for <code>scale</code>-argument, respectively.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">municipalities</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, scale <span class="op">=</span> <span class="fl">4500</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">municipalities</span><span class="op">[</span><span class="st">"municipality_name_fi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">municipalities</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, scale <span class="op">=</span> <span class="fl">4500</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">municipalities</span><span class="op">[</span><span class="st">"municipality_name_fi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/municipality_map-1.png" width="300"></p>
 </div>
 <div class="section level3">
@@ -232,27 +232,27 @@ Each municipality belongs to a higher level regional classifications such as reg
 <p>The statistical variables in the data are: total population (vaesto), share of the total population (vaesto_p), number of men (miehet), men’s share of the population in an area (miehet_p) and women (naiset), women’s share (naiset_p), those aged under 15: number (ika_0_14), share (ika_0_14p), those aged 15 to 64: number (ika_15_64), share (ika_15_64p), and aged 65 or over: number (ika_65_), share (ika_65_p).</p>
 <p>To plot men’s share at the municipality level in 2020 (2021 municipality borders) you can simply to this.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">miehet_p</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">miehet_p</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/muni_pop_map1-1.png" width="300"></p>
 <p>Aggregating the absolute population numbers is straightforward: to plot population at Wellbeing service county level you can do.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyvinvointialue_name_fi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>vaesto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">vaesto</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">vaesto</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyvinvointialue_name_fi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>vaesto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">vaesto</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">vaesto</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/muni_pop_map2-1.png" width="300"></p>
 <p>To plot the men’s share at wellbeing service country level you have to add one more step</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyvinvointialue_name_fi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>vaesto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">vaesto</span><span class="op">)</span>,
-            miehet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">miehet</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>share <span class="op">=</span> <span class="va">miehet</span><span class="op">/</span><span class="va">vaesto</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">share</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyvinvointialue_name_fi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>vaesto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">vaesto</span><span class="op">)</span>,</span>
+<span>            miehet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">miehet</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>share <span class="op">=</span> <span class="va">miehet</span><span class="op">/</span><span class="va">vaesto</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">share</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/muni_pop_map3-1.png" width="300"></p>
 </div>
 <div class="section level3">
@@ -260,8 +260,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 </h3>
 <p>Zipcodes are provided in a single resolution from 2015.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">zipcodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_zipcodes.html">get_zipcodes</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2015</span><span class="op">)</span> 
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">zipcodes</span><span class="op">[</span><span class="st">"nimi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">zipcodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_zipcodes.html">get_zipcodes</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2015</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">zipcodes</span><span class="op">[</span><span class="st">"nimi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/zipcode_map-1.png" width="300"></p>
 </div>
 <div class="section level3">
@@ -270,8 +270,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 <p><a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html" class="external-link">Grid net for statistics</a> both in 1 km x 1 km and 5 km x 5km covers whole of Finland. The grid net includes all grid squares in Finland.</p>
 <p>Statistics Finland <a href="https://www.stat.fi/tup/ruututietokanta/index_en.html" class="external-link">proprietary grid database</a> provides the attribute statistical data for these grid nets.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stat_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_statistical_grid.html">get_statistical_grid</a></span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">5</span>, auxiliary_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">stat_grid</span><span class="op">[</span><span class="st">"euref_x"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">stat_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_statistical_grid.html">get_statistical_grid</a></span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">5</span>, auxiliary_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">stat_grid</span><span class="op">[</span><span class="st">"euref_x"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/statisticsl_grid_data-1.png" width="300"></p>
 </div>
 <div class="section level3">
@@ -281,8 +281,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 <p>Total population (<code>vaesto</code>), number of men (<code>miehet</code>) and women (<code>naiset</code>), under 15 year olds (<code>ika_0_14</code>), 15-64 year olds (<code>ika_15_64</code>), and aged over 65 (<code>ika_65_</code>). Only the number of population is reported for grids of under 10 inhabitants. See <a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_5km_en.html" class="external-link">Population grid data</a>.</p>
 <p>The data describes the population distribution independent of administrative areas (such as municipal borders). The data is suitable for examination of population distribution and making various spatial analysis.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pop_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_population_grid.html">get_population_grid</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, resolution <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pop_grid</span><span class="op">[</span><span class="st">"kunta"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pop_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_population_grid.html">get_population_grid</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, resolution <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pop_grid</span><span class="op">[</span><span class="st">"kunta"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/population_grid_data-1.png" width="300"></p>
 </div>
 <div class="section level3">
@@ -290,7 +290,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 </h3>
 <p><a href="https://maanmittauslaitos.fi" class="external-link">National Land Survey of Finland</a> maintains <a href="https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database" class="external-link">Topological Database</a> that contains a wide range of layers from which you can access the locations of central localities of each municipality in Finland.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">municipality_central_localities</span><span class="op">[</span><span class="st">"teksti"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">municipality_central_localities</span><span class="op">[</span><span class="st">"teksti"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/central_localities-1.png" width="300"></p>
 </div>
 </div>
@@ -303,77 +303,77 @@ Each municipality belongs to a higher level regional classifications such as reg
 </blockquote>
 <p><code>geofi</code>-package contains custom grids to be used with various Finnish administrative breakdowns as listed below.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"geofi"</span><span class="op">)</span>
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"grid"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 22 × 2</span></span>
-<span class="co">#&gt;    Item                   Title                                                 </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> grid_ahvenanmaa        custom geofacet grid for Ahvenanmaa region            </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> grid_etela_karjala     custom geofacet grid for Etelä-Karjala region as in 2…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> grid_etela_pohjanmaa   custom geofacet grid for Etelä-Pohjanmaa              </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> grid_etela_savo        custom geofacet grid for Etelä-Savo                   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> grid_hyvinvointialue   custom geofacet grid for Wellbeing services counties  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> grid_kainuu            custom geofacet grid for Kainuu region                </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> grid_kanta_hame        custom geofacet grid for Kanta-Häme region            </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> grid_keski_pohjanmaa   custom geofacet grid for Keski-Pohjanmaa region       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> grid_keski_suomi       custom geofacet grid for Keski-Suomi region as in 2020</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> grid_kymenlaakso       custom geofacet grid for Kymenlaakso region           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> grid_lappi             custom geofacet grid for Lappi region as in 2020      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> grid_maakunta          custom geofacet grid for regions                      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> grid_paijat_hame       custom geofacet grid for Päijät-Häme region           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> grid_pirkanmaa         custom geofacet grid for Pirkanmaa region             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> grid_pohjanmaa         custom geofacet grid for Pohjanmaa region             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> grid_pohjois_karjala   custom geofacet grid for Pohjois-Karjala region       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> grid_pohjois_pohjanmaa custom geofacet grid for Pohjois-Pohjanmaa region     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> grid_pohjois_savo      custom geofacet grid for Pohjois-Savo region          </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> grid_sairaanhoitop     custom geofacet grid for health care districts        </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">20</span> grid_satakunta         custom geofacet grid for Satakunta region             </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">21</span> grid_uusimaa           custom geofacet grid for Uusimaa region               </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">22</span> grid_varsinais_suomi   custom geofacet grid for Varsinais-Suomi region</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"geofi"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"grid"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 22 × 2</span></span></span>
+<span><span class="co">#&gt;    Item                   Title                                                 </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> grid_ahvenanmaa        custom geofacet grid for Ahvenanmaa region            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> grid_etela_karjala     custom geofacet grid for Etelä-Karjala region as in 2…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> grid_etela_pohjanmaa   custom geofacet grid for Etelä-Pohjanmaa              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> grid_etela_savo        custom geofacet grid for Etelä-Savo                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> grid_hyvinvointialue   custom geofacet grid for Wellbeing services counties  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> grid_kainuu            custom geofacet grid for Kainuu region                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> grid_kanta_hame        custom geofacet grid for Kanta-Häme region            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> grid_keski_pohjanmaa   custom geofacet grid for Keski-Pohjanmaa region       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> grid_keski_suomi       custom geofacet grid for Keski-Suomi region as in 2020</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> grid_kymenlaakso       custom geofacet grid for Kymenlaakso region           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> grid_lappi             custom geofacet grid for Lappi region as in 2020      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> grid_maakunta          custom geofacet grid for regions                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> grid_paijat_hame       custom geofacet grid for Päijät-Häme region           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> grid_pirkanmaa         custom geofacet grid for Pirkanmaa region             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> grid_pohjanmaa         custom geofacet grid for Pohjanmaa region             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> grid_pohjois_karjala   custom geofacet grid for Pohjois-Karjala region       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> grid_pohjois_pohjanmaa custom geofacet grid for Pohjois-Pohjanmaa region     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> grid_pohjois_savo      custom geofacet grid for Pohjois-Savo region          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> grid_sairaanhoitop     custom geofacet grid for health care districts        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> grid_satakunta         custom geofacet grid for Satakunta region             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">21</span> grid_uusimaa           custom geofacet grid for Uusimaa region               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">22</span> grid_varsinais_suomi   custom geofacet grid for Varsinais-Suomi region</span></span></code></pre></div>
 <p>Here is an example where population data at municipality level is pulled from Statistics Finland from 1987 to 2018, then aggregated at the levels of regions (<code>maakunta</code>) and then plotted with ggplot2 using grid <code><a href="../reference/grid_maakunta.html">geofi::grid_maakunta</a></code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pxweb"</span>,<span class="st">"geofacet"</span>,<span class="st">"ggplot2"</span><span class="op">)</span>
-<span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/" class="external-link">pxweb</a></span><span class="op">)</span>
-  <span class="co"># Let pull population data from Statistics Finland</span>
-  <span class="va">pxweb_query_list</span> <span class="op">&lt;-</span> 
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Alue 2019"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>,
-         <span class="st">"Tiedot"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M411"</span><span class="op">)</span>,
-         <span class="st">"Vuosi"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span><span class="op">)</span>
-  
-  <span class="co"># Download data </span>
-  <span class="va">px_data</span> <span class="op">&lt;-</span> 
-    <span class="fu"><a href="https://ropengov.github.io/pxweb/reference/pxweb_get.html" class="external-link">pxweb_get</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://pxnet2.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px"</span>,
-              query <span class="op">=</span> <span class="va">pxweb_query_list</span><span class="op">)</span>
-  
-  <span class="co"># Convert to data.frame </span>
-  <span class="va">px_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">px_data</span>, column.name.type <span class="op">=</span> <span class="st">"text"</span>, variable.value.type <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">px_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kunta_name"</span>,<span class="st">"year"</span>,<span class="st">"value"</span><span class="op">)</span>
-  
-  <span class="co"># lets aggregate population data</span>
-  <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">year</span><span class="op">)</span>,
-                   <span class="va">px_data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">maakunta_code</span>, <span class="va">maakunta_name_fi</span>,<span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">value</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-    <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>code <span class="op">=</span> <span class="va">maakunta_code</span>, name <span class="op">=</span> <span class="va">maakunta_name_fi</span><span class="op">)</span>
-  
-  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hafen/geofacet" class="external-link">geofacet</a></span><span class="op">)</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-  
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">population</span><span class="op">/</span><span class="fl">1000</span>, group <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
-    <span class="fu"><a href="https://rdrr.io/pkg/geofacet/man/facet_geo.html" class="external-link">facet_geo</a></span><span class="op">(</span>facets <span class="op">=</span> <span class="op">~</span><span class="va">name</span>, grid <span class="op">=</span> <span class="va">grid_maakunta</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_x_discrete</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq.int</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1987</span>, to <span class="op">=</span> <span class="fl">2018</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Population 1987-2018"</span>, y <span class="op">=</span> <span class="st">"population (1000)"</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"'pxweb' not available"</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pxweb"</span>,<span class="st">"geofacet"</span>,<span class="st">"ggplot2"</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/" class="external-link">pxweb</a></span><span class="op">)</span></span>
+<span>  <span class="co"># Let pull population data from Statistics Finland</span></span>
+<span>  <span class="va">pxweb_query_list</span> <span class="op">&lt;-</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Alue 2019"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>,</span>
+<span>         <span class="st">"Tiedot"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M411"</span><span class="op">)</span>,</span>
+<span>         <span class="st">"Vuosi"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Download data </span></span>
+<span>  <span class="va">px_data</span> <span class="op">&lt;-</span> </span>
+<span>    <span class="fu"><a href="https://ropengov.github.io/pxweb/reference/pxweb_get.html" class="external-link">pxweb_get</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://pxdata.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px"</span>,</span>
+<span>              query <span class="op">=</span> <span class="va">pxweb_query_list</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Convert to data.frame </span></span>
+<span>  <span class="va">px_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">px_data</span>, column.name.type <span class="op">=</span> <span class="st">"text"</span>, variable.value.type <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">px_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kunta_name"</span>,<span class="st">"year"</span>,<span class="st">"value"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># lets aggregate population data</span></span>
+<span>  <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">year</span><span class="op">)</span>,</span>
+<span>                   <span class="va">px_data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">maakunta_code</span>, <span class="va">maakunta_name_fi</span>,<span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">value</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>code <span class="op">=</span> <span class="va">maakunta_code</span>, name <span class="op">=</span> <span class="va">maakunta_name_fi</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hafen/geofacet" class="external-link">geofacet</a></span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">population</span><span class="op">/</span><span class="fl">1000</span>, group <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/geofacet/man/facet_geo.html" class="external-link">facet_geo</a></span><span class="op">(</span>facets <span class="op">=</span> <span class="op">~</span><span class="va">name</span>, grid <span class="op">=</span> <span class="va">grid_maakunta</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_x_discrete</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq.int</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1987</span>, to <span class="op">=</span> <span class="fl">2018</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Population 1987-2018"</span>, y <span class="op">=</span> <span class="st">"population (1000)"</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"'pxweb' not available"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/geofacet-1.png" width="750"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -389,7 +389,7 @@ Each municipality belongs to a higher level regional classifications such as reg
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

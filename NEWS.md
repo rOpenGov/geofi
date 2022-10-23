@@ -1,3 +1,7 @@
+# geofi 1.0.7
+
++ Links in vignettes pinting to Statistics Finland database that started with `pxnet2.stat.fi` changed to start with `pxdata.stat.fi` to match stat.fi new naming scheme.
+
 # geofi 1.0.6
 
 + The content of variables in municipality keys related to hyvinvointialue (Wellbeing Service Counties) is changed and matches now the classification by Statistics Finland

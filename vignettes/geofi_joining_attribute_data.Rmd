@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from three different sources of which two are from [Statistics Finland PxWeb-api](https://pxnet2.stat.fi/PXWeb/pxweb/en/), namely [municipality key figures](https://pxnet2.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/) and [Paavo (Open data by postal code area)](https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/). Third is [Covid-19 tests and confirmed cases in Finland](https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-).
+This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from three different sources of which two are from [Statistics Finland PxWeb-api](https://pxdata.stat.fi/PXWeb/pxweb/en/), namely [municipality key figures](https://pxdata.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/) and [Paavo (Open data by postal code area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/). Third is [Covid-19 tests and confirmed cases in Finland](https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-).
 
 **Installation**
 
@@ -53,7 +53,7 @@ Municipality data provided by `get_municipalities()`-function contains 77 indica
 
 ### PxWeb-data
 
-In this first example we join municipality level data from Statistics Finland [municipality key figures](https://pxnet2.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/)
+In this first example we join municipality level data from Statistics Finland [municipality key figures](https://pxdata.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/)
 
 ```{r municipality_map}
 library(geofi)
@@ -68,7 +68,7 @@ pxweb_query_list <-
        "Vuosi"=c("2019"))
 
 px_raw <-
-  pxweb_get(url = "https://pxnet2.stat.fi/PXWeb/api/v1/en/Kuntien_avainluvut/2020/kuntien_avainluvut_2020_aikasarja.px",
+  pxweb_get(url = "https://pxdata.stat.fi/PXWeb/api/v1/en/Kuntien_avainluvut/2020/kuntien_avainluvut_2020_aikasarja.px",
             query = pxweb_query_list)
 
 library(dplyr)
@@ -212,7 +212,7 @@ muni %>%
 
 ## Zipcode level
 
-You can download data from [Paavo (Open data by postal code area)](https://pxnet2.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/) using `pxweb`-package in a similar manner as in the first example.
+You can download data from [Paavo (Open data by postal code area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/) using `pxweb`-package in a similar manner as in the first example.
 
 ```{r zipcode_with_statistics_finland}
 libs <- c("ggplot2","pxweb","janitor")
@@ -225,7 +225,7 @@ pxweb_query_list <-
 
 # Download data 
 px_raw <- 
- pxweb_get(url = "https://pxnet2.stat.fi/PXWeb/api/v1/en/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
+ pxweb_get(url = "https://pxdata.stat.fi/PXWeb/api/v1/en/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
            query = pxweb_query_list)
 
 px_data <- as_tibble(

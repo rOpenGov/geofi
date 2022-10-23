@@ -1,7 +1,7 @@
 
 <!-- badges: start -->
 
-[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](http://ropengov.org/)
+[![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
 [![R build
 status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi/actions/)
 [![Project Status: Active - The project has reached a stable, usable
@@ -97,9 +97,9 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 1.0.4. URL:
+geofi R package. R package version 1.0.6. URL:
 <https://ropengov.github.io/geofi/>
 
 We are grateful to all
 [contributors](https://github.com/rOpenGov/geofi/graphs/contributors).
-This project is part of [rOpenGov](http://ropengov.org).
+This project is part of [rOpenGov](https://ropengov.org).

@@ -1,5 +1,5 @@
 ## Test environments
-* local ubuntu 20.04 install, R 4.1.2
+* local ubuntu 20.04 install, R 4.2.1
 * win-builder (devel)
 * Github Actions with 
     * windows-latest (release)
@@ -9,9 +9,7 @@
 
 ## Submission note
 
-* The content of variables in municipality keys related to hyvinvointialue (Wellbeing Service Counties) is changed and matches now the classification by Statistics Finland
-* New function `get_municipality_pop()` added for getting population numbers with spatial data of Finnish municipalities from years 2010-2020
-* Function `get_zipcodes()` has a new argument `extend_to_sea_areas` in case you need spatial data the extend further than the coastline
+* Links in vignettes pinting to Statistics Finland database that started with `pxnet2.stat.fi` changed to start with `pxdata.stat.fi` to match stat.fi new naming scheme.
 
 ## R CMD check results
 
@@ -20,6 +18,4 @@
 ## Downstream dependencies
 
 There are currently no downstream dependencies for this package.
-
-
 

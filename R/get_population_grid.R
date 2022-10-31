@@ -4,14 +4,15 @@
 #' [Statistics Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
 #'
 #'
-#' @param year A numeric for year of the population grid. Years available 2010-2020.
+#' @param year A numeric for year of the population grid. Years available 2005 and 2010-2021.
 #' @param resolution 1 (1km x 1km) or 5 (5km x 5km)
 #'
 #' @return sf object
 #'
 #' @author Markus Kainu <markus.kainu@@kela.fi>, Joona Lehtomäki <joona.lehtomaki@@iki.fi>
 #'
-#' @export
+#' @details
+#' More information about the dataset from [Paikkatietohakemisto](https://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/a901d40a-8a6b-4678-814c-79d2e2ab130c)
 #'
 #' @examples
 #'  \dontrun{

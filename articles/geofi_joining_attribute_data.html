@@ -95,9 +95,10 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Joining attribute data with geofi data</h1>
-                        <h4 data-toc-skip class="author">Markus Kainu</h4>
+                        <h4 data-toc-skip class="author">Markus
+Kainu</h4>
             
-            <h4 data-toc-skip class="date">2022-10-23</h4>
+            <h4 data-toc-skip class="date">2022-11-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/HEAD/vignettes/geofi_joining_attribute_data.Rmd" class="external-link"><code>vignettes/geofi_joining_attribute_data.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_joining_attribute_data.Rmd</code></div>
@@ -105,7 +106,13 @@
 
     
     
-<p>This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from three different sources of which two are from <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/" class="external-link">Statistics Finland PxWeb-api</a>, namely <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/" class="external-link">municipality key figures</a> and <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/" class="external-link">Paavo (Open data by postal code area)</a>. Third is <a href="https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-" class="external-link">Covid-19 tests and confirmed cases in Finland</a>.</p>
+<p>This vignettes provides few examples on how to join attribute data
+from common sources of attribute data. Here we are using data from three
+different sources of which two are from <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/" class="external-link">Statistics Finland
+PxWeb-api</a>, namely <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/" class="external-link">municipality
+key figures</a> and <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/" class="external-link">Paavo
+(Open data by postal code area)</a>. Third is <a href="https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-" class="external-link">Covid-19
+tests and confirmed cases in Finland</a>.</p>
 <p><strong>Installation</strong></p>
 <p><code>geofi</code> can be installed from CRAN using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -123,11 +130,16 @@
 <div class="section level2">
 <h2 id="municipalities">Municipalities<a class="anchor" aria-label="anchor" href="#municipalities"></a>
 </h2>
-<p>Municipality data provided by <code><a href="../reference/get_municipalities.html">get_municipalities()</a></code>-function contains 77 indicators variables from each of 309 municipalities. Variables can be used either for aggregating data or as keys for joining attribute data.</p>
+<p>Municipality data provided by
+<code><a href="../reference/get_municipalities.html">get_municipalities()</a></code>-function contains 77 indicators
+variables from each of 309 municipalities. Variables can be used either
+for aggregating data or as keys for joining attribute data.</p>
 <div class="section level3">
 <h3 id="pxweb-data">PxWeb-data<a class="anchor" aria-label="anchor" href="#pxweb-data"></a>
 </h3>
-<p>In this first example we join municipality level data from Statistics Finland <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/" class="external-link">municipality key figures</a></p>
+<p>In this first example we join municipality level data from Statistics
+Finland <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/" class="external-link">municipality
+key figures</a></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi/">geofi</a></span><span class="op">)</span></span>
 <span><span class="va">muni</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
@@ -173,7 +185,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> WHOLE COUNTRY 2019  excess_of_births_persons                         -<span style="color: #BB0000;">8.34</span><span style="color: #949494;">e</span>+3</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> WHOLE COUNTRY 2019  intermunicipal_migration_gain_loss_persons        0   <span style="color: #949494;"> </span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 12,790 more rows, and abbreviated variable name ¹​municipal_key_figures</span></span></span></code></pre></div>
-<p>Once we have the data in long format we can observe the <code>region_2020</code>-column.</p>
+<p>Once we have the data in long format we can observe the
+<code>region_2020</code>-column.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">px_data</span>, <span class="va">region_2020</span><span class="op">)</span></span>
@@ -195,7 +208,10 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Ålands skärgård sub-regional unit     32</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Alavieska                             32</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 390 more rows</span></span></span></code></pre></div>
-<p>This is not obvious to all, but have the municipality names in Finnish among other regional breakdowns which allows us to combine the data with spatial data using <code>municipality_name_fi</code>-variable.</p>
+<p>This is not obvious to all, but have the municipality names in
+Finnish among other regional breakdowns which allows us to combine the
+data with spatial data using
+<code>municipality_name_fi</code>-variable.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span><span class="va">map_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">right_join</a></span><span class="op">(</span><span class="va">muni</span>, </span>
@@ -205,7 +221,10 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, </span>
 <span>          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>Now we can plot a map showing <code>Share of Swedish-speakers of the population, %</code> and <code>Share of foreign citizens of the population, %</code> on two panels sharing a scale.</p>
+<p>Now we can plot a map showing
+<code>Share of Swedish-speakers of the population, %</code> and
+<code>Share of foreign citizens of the population, %</code> on two
+panels sharing a scale.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -225,7 +244,11 @@
 <div class="section level2">
 <h2 id="health-districts">Health Districts<a class="anchor" aria-label="anchor" href="#health-districts"></a>
 </h2>
-<p>in early 2021 we are still troubled by the COVID-19 and the health authorities are counting infections, deaths and vaccinated. Lets pull the daily data from API and compare the names of the health districts both in COVID-19 data and in municipality division from Statistics Finland.</p>
+<p>in early 2021 we are still troubled by the COVID-19 and the health
+authorities are counting infections, deaths and vaccinated. Lets pull
+the daily data from API and compare the names of the health districts
+both in COVID-19 data and in municipality division from Statistics
+Finland.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
@@ -315,7 +338,8 @@
 <span><span class="co">#&gt; 19           South Savo Hospital District  9</span></span>
 <span><span class="co">#&gt; 20    Southwest Finland Hospital District 28</span></span>
 <span><span class="co">#&gt; 21                Vaasa Hospital District 13</span></span></code></pre></div>
-<p>The names look identical so we can join the two datasets and plot a map.</p>
+<p>The names look identical so we can join the two datasets and plot a
+map.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -337,7 +361,9 @@
 <div class="section level2">
 <h2 id="zipcode-level">Zipcode level<a class="anchor" aria-label="anchor" href="#zipcode-level"></a>
 </h2>
-<p>You can download data from <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/" class="external-link">Paavo (Open data by postal code area)</a> using <code>pxweb</code>-package in a similar manner as in the first example.</p>
+<p>You can download data from <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/" class="external-link">Paavo
+(Open data by postal code area)</a> using <code>pxweb</code>-package in
+a similar manner as in the first example.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>,<span class="st">"pxweb"</span>,<span class="st">"janitor"</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -378,7 +404,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 00100 Helsinki Keskusta - Etu-Töölö   (Helsinki 18-19 years, 2017 (H…     264</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 72,614 more rows, and abbreviated variable name</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ¹​paavo_open_data_by_postal_code_area_2019</span></span></span></code></pre></div>
-<p>Before we can join the data, we must extract the numerical postal code from <code>postal_code_area</code>-variable.</p>
+<p>Before we can join the data, we must extract the numerical postal
+code from <code>postal_code_area</code>-variable.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>,<span class="st">"pxweb"</span>,<span class="st">"janitor"</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>

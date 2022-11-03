@@ -95,9 +95,10 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Datasets in geofi-package</h1>
-                        <h4 data-toc-skip class="author">Markus Kainu, Leo Lahti &amp; Joona Lehtomäki</h4>
+                        <h4 data-toc-skip class="author">Markus Kainu,
+Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 data-toc-skip class="date">2022-10-23</h4>
+            <h4 data-toc-skip class="date">2022-11-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/HEAD/vignettes/geofi_datasets.Rmd" class="external-link"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_datasets.Rmd</code></div>
@@ -105,7 +106,11 @@
 
     
     
-<p><strong><code>geofi</code>-package provides access to multiple dataset of different types and for different use. In this vignette we introduce the different datas and explain their use cases. Vignette <em>Making maps using <code>geofi</code>-package</em> provides multiple real-world examples of their usage.</strong></p>
+<p><strong><code>geofi</code>-package provides access to multiple
+dataset of different types and for different use. In this vignette we
+introduce the different datas and explain their use cases. Vignette
+<em>Making maps using <code>geofi</code>-package</em> provides multiple
+real-world examples of their usage.</strong></p>
 <p><strong>Packages installation</strong></p>
 <p><code>geofi</code> can be installed from CRAN using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -123,8 +128,15 @@
 <div class="section level2">
 <h2 id="municipality-keys">Municipality keys<a class="anchor" aria-label="anchor" href="#municipality-keys"></a>
 </h2>
-<p>Official administrative regions in Finland are based on municipalities. In 2021 there are 309 municipalities in Finland and the number is decreasing over time through mergers.<br><br>
-Each municipality belongs to a higher level regional classifications such as regions (maakunta) or health care districts (sairaanhoitopiiri). <code>municipality_key_</code>-datasets are based on Statistics Finland <a href="https://data.stat.fi/api/classifications/v2/" class="external-link">Statistical classification</a> -api with few modification and provided on yearly basis.</p>
+<p>Official administrative regions in Finland are based on
+municipalities. In 2021 there are 309 municipalities in Finland and the
+number is decreasing over time through mergers.<br><br>
+Each municipality belongs to a higher level regional classifications
+such as regions (maakunta) or health care districts (sairaanhoitopiiri).
+<code>municipality_key_</code>-datasets are based on Statistics Finland
+<a href="https://data.stat.fi/api/classifications/v2/" class="external-link">Statistical
+classification</a> -api with few modification and provided on yearly
+basis.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi/">geofi</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -146,7 +158,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> municipality_key_2020 Municipality key table for 2020                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> municipality_key_2021 Municipality key table for 2021                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> municipality_key_2022 Municipality key table for 2022</span></span></code></pre></div>
-<p>Looking at the names of `municipality_key_2021` there is 63 different variables from each municipality.</p>
+<p>Looking at the names of `municipality_key_2021` there is 63 different
+variables from each municipality.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2020.html">municipality_key_2020</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "kunta"                   "municipality_name_fi"   </span></span>
@@ -183,7 +196,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span><span class="co">#&gt; [63] "erva_name_en"            "hyvinvointialue_code"   </span></span>
 <span><span class="co">#&gt; [65] "hyvinvointialue_name_fi" "hyvinvointialue_name_sv"</span></span>
 <span><span class="co">#&gt; [67] "hyvinvointialue_name_en"</span></span></code></pre></div>
-<p>With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.<br></p>
+<p>With these municipality keys you can easily aggregate municipalities
+for plotting or you can list different regional breakdowns.<br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_key_2021.html">municipality_key_2021</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">maakunta_code</span>,<span class="va">maakunta_name_fi</span>,<span class="va">maakunta_name_sv</span>,<span class="va">maakunta_name_en</span><span class="op">)</span></span>
@@ -209,16 +223,22 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>            18 Kainuu            Kajanaland            Kainuu                8</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>            19 Lappi             Lappland              Lapland              21</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>            21 Ahvenanmaa        Åland                 Åland                16</span></span></code></pre></div>
-<p>Municipality keys are joined with the municipality spatial data by default, meaning that data returned by <code>get_municipality()</code> can be aggregated as it is.</p>
+<p>Municipality keys are joined with the municipality spatial data by
+default, meaning that data returned by <code>get_municipality()</code>
+can be aggregated as it is.</p>
 </div>
 <div class="section level2">
 <h2 id="spatial-data">Spatial data<a class="anchor" aria-label="anchor" href="#spatial-data"></a>
 </h2>
-<p>Spatial data is provided as administrative regions (polygons), population and statistical grids (polygons) and municipality centers (points).</p>
+<p>Spatial data is provided as administrative regions (polygons),
+population and statistical grids (polygons) and municipality centers
+(points).</p>
 <div class="section level3">
 <h3 id="municipality-borders">Municipality borders<a class="anchor" aria-label="anchor" href="#municipality-borders"></a>
 </h3>
-<p>Municipality borders are provided yearly from 2013 and in two scales 1: 1 000 000 and 1:4 500 000. Use <code>1000</code> or <code>4500</code> as value for <code>scale</code>-argument, respectively.</p>
+<p>Municipality borders are provided yearly from 2013 and in two scales
+1: 1 000 000 and 1:4 500 000. Use <code>1000</code> or <code>4500</code>
+as value for <code>scale</code>-argument, respectively.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">municipalities</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, scale <span class="op">=</span> <span class="fl">4500</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">municipalities</span><span class="op">[</span><span class="st">"municipality_name_fi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
@@ -227,16 +247,27 @@ Each municipality belongs to a higher level regional classifications such as reg
 <div class="section level3">
 <h3 id="municipality-borders-with-population">Municipality borders with population<a class="anchor" aria-label="anchor" href="#municipality-borders-with-population"></a>
 </h3>
-<p>In 2022 a new data source is introduced that provides you municipality borders with municipality population data. Spatial data is provided in 1:4 500 000 scale.</p>
-<p>Calling the function with year = 2019 returns population data from 2019-12-31 with spatial data on borders from 2020.</p>
-<p>The statistical variables in the data are: total population (vaesto), share of the total population (vaesto_p), number of men (miehet), men’s share of the population in an area (miehet_p) and women (naiset), women’s share (naiset_p), those aged under 15: number (ika_0_14), share (ika_0_14p), those aged 15 to 64: number (ika_15_64), share (ika_15_64p), and aged 65 or over: number (ika_65_), share (ika_65_p).</p>
-<p>To plot men’s share at the municipality level in 2020 (2021 municipality borders) you can simply to this.</p>
+<p>In 2022 a new data source is introduced that provides you
+municipality borders with municipality population data. Spatial data is
+provided in 1:4 500 000 scale.</p>
+<p>Calling the function with year = 2019 returns population data from
+2019-12-31 with spatial data on borders from 2020.</p>
+<p>The statistical variables in the data are: total population (vaesto),
+share of the total population (vaesto_p), number of men (miehet), men’s
+share of the population in an area (miehet_p) and women (naiset),
+women’s share (naiset_p), those aged under 15: number (ika_0_14), share
+(ika_0_14p), those aged 15 to 64: number (ika_15_64), share
+(ika_15_64p), and aged 65 or over: number (ika_65_), share
+(ika_65_p).</p>
+<p>To plot men’s share at the municipality level in 2020 (2021
+municipality borders) you can simply to this.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">miehet_p</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/muni_pop_map1-1.png" width="300"></p>
-<p>Aggregating the absolute population numbers is straightforward: to plot population at Wellbeing service county level you can do.</p>
+<p>Aggregating the absolute population numbers is straightforward: to
+plot population at Wellbeing service county level you can do.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyvinvointialue_name_fi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
@@ -244,7 +275,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">vaesto</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/muni_pop_map2-1.png" width="300"></p>
-<p>To plot the men’s share at wellbeing service country level you have to add one more step</p>
+<p>To plot the men’s share at wellbeing service country level you have
+to add one more step</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyvinvointialue_name_fi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -267,8 +299,12 @@ Each municipality belongs to a higher level regional classifications such as reg
 <div class="section level3">
 <h3 id="statistical-grid">Statistical grid<a class="anchor" aria-label="anchor" href="#statistical-grid"></a>
 </h3>
-<p><a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html" class="external-link">Grid net for statistics</a> both in 1 km x 1 km and 5 km x 5km covers whole of Finland. The grid net includes all grid squares in Finland.</p>
-<p>Statistics Finland <a href="https://www.stat.fi/tup/ruututietokanta/index_en.html" class="external-link">proprietary grid database</a> provides the attribute statistical data for these grid nets.</p>
+<p><a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html" class="external-link">Grid
+net for statistics</a> both in 1 km x 1 km and 5 km x 5km covers whole
+of Finland. The grid net includes all grid squares in Finland.</p>
+<p>Statistics Finland <a href="https://www.stat.fi/tup/ruututietokanta/index_en.html" class="external-link">proprietary
+grid database</a> provides the attribute statistical data for these grid
+nets.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stat_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_statistical_grid.html">get_statistical_grid</a></span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">5</span>, auxiliary_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">stat_grid</span><span class="op">[</span><span class="st">"euref_x"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
@@ -277,9 +313,20 @@ Each municipality belongs to a higher level regional classifications such as reg
 <div class="section level3">
 <h3 id="population-grid">Population grid<a class="anchor" aria-label="anchor" href="#population-grid"></a>
 </h3>
-<p>Number of population by both 1 km x 1 km and 5 km x 5 km grids. The number of population on the last day of the reference year (31 December) by age group. Data includes only inhabited grids. The statistical variables of the data are:</p>
-<p>Total population (<code>vaesto</code>), number of men (<code>miehet</code>) and women (<code>naiset</code>), under 15 year olds (<code>ika_0_14</code>), 15-64 year olds (<code>ika_15_64</code>), and aged over 65 (<code>ika_65_</code>). Only the number of population is reported for grids of under 10 inhabitants. See <a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_5km_en.html" class="external-link">Population grid data</a>.</p>
-<p>The data describes the population distribution independent of administrative areas (such as municipal borders). The data is suitable for examination of population distribution and making various spatial analysis.</p>
+<p>Number of population by both 1 km x 1 km and 5 km x 5 km grids. The
+number of population on the last day of the reference year (31 December)
+by age group. Data includes only inhabited grids. The statistical
+variables of the data are:</p>
+<p>Total population (<code>vaesto</code>), number of men
+(<code>miehet</code>) and women (<code>naiset</code>), under 15 year
+olds (<code>ika_0_14</code>), 15-64 year olds (<code>ika_15_64</code>),
+and aged over 65 (<code>ika_65_</code>). Only the number of population
+is reported for grids of under 10 inhabitants. See <a href="https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_5km_en.html" class="external-link">Population
+grid data</a>.</p>
+<p>The data describes the population distribution independent of
+administrative areas (such as municipal borders). The data is suitable
+for examination of population distribution and making various spatial
+analysis.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pop_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_population_grid.html">get_population_grid</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, resolution <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pop_grid</span><span class="op">[</span><span class="st">"kunta"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
@@ -288,7 +335,11 @@ Each municipality belongs to a higher level regional classifications such as reg
 <div class="section level3">
 <h3 id="central-localities-of-municipalities">Central localities of municipalities<a class="anchor" aria-label="anchor" href="#central-localities-of-municipalities"></a>
 </h3>
-<p><a href="https://maanmittauslaitos.fi" class="external-link">National Land Survey of Finland</a> maintains <a href="https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database" class="external-link">Topological Database</a> that contains a wide range of layers from which you can access the locations of central localities of each municipality in Finland.</p>
+<p><a href="https://maanmittauslaitos.fi" class="external-link">National Land Survey of
+Finland</a> maintains <a href="https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database" class="external-link">Topological
+Database</a> that contains a wide range of layers from which you can
+access the locations of central localities of each municipality in
+Finland.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">municipality_central_localities</span><span class="op">[</span><span class="st">"teksti"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="geofi_datasets_files/figure-html/central_localities-1.png" width="300"></p>
@@ -299,9 +350,16 @@ Each municipality belongs to a higher level regional classifications such as reg
 </h2>
 <p>From Ryan Hafen’s <a href="https://ryanhafen.com/blog/geofacet/" class="external-link">blog</a>:</p>
 <blockquote>
-<p>The <a href="https://hafen.github.io/geofacet/" class="external-link">geofacet</a> package extends <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a> in a way that makes it easy to create geographically faceted visualizations in R. To geofacet is to take data representing different geographic entities and apply a visualization method to the data for each entity, with the resulting set of visualizations being laid out in a grid that mimics the original geographic topology as closely as possible.</p>
+<p>The <a href="https://hafen.github.io/geofacet/" class="external-link">geofacet</a> package
+extends <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a> in a way
+that makes it easy to create geographically faceted visualizations in R.
+To geofacet is to take data representing different geographic entities
+and apply a visualization method to the data for each entity, with the
+resulting set of visualizations being laid out in a grid that mimics the
+original geographic topology as closely as possible.</p>
 </blockquote>
-<p><code>geofi</code>-package contains custom grids to be used with various Finnish administrative breakdowns as listed below.</p>
+<p><code>geofi</code>-package contains custom grids to be used with
+various Finnish administrative breakdowns as listed below.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"geofi"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -333,7 +391,10 @@ Each municipality belongs to a higher level regional classifications such as reg
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> grid_satakunta         custom geofacet grid for Satakunta region             </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">21</span> grid_uusimaa           custom geofacet grid for Uusimaa region               </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">22</span> grid_varsinais_suomi   custom geofacet grid for Varsinais-Suomi region</span></span></code></pre></div>
-<p>Here is an example where population data at municipality level is pulled from Statistics Finland from 1987 to 2018, then aggregated at the levels of regions (<code>maakunta</code>) and then plotted with ggplot2 using grid <code><a href="../reference/grid_maakunta.html">geofi::grid_maakunta</a></code>.</p>
+<p>Here is an example where population data at municipality level is
+pulled from Statistics Finland from 1987 to 2018, then aggregated at the
+levels of regions (<code>maakunta</code>) and then plotted with ggplot2
+using grid <code><a href="../reference/grid_maakunta.html">geofi::grid_maakunta</a></code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pxweb"</span>,<span class="st">"geofacet"</span>,<span class="st">"ggplot2"</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>

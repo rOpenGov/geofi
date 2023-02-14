@@ -221,12 +221,13 @@ library(pxweb)
 # lets get all zipcodes and all variables
 pxweb_query_list <- 
   list("Postinumeroalue"=c("*"),
-                           "Tiedot"=c("*"))
+       "Tiedot"=c("he_vakiy"),
+       "Vuosi"=c("2021"))
 
-# Download data 
 px_raw <- 
- pxweb_get(url = "https://pxdata.stat.fi/PXWeb/api/v1/en/Postinumeroalueittainen_avoin_tieto/2019/paavo_1_he_2019.px",
-           query = pxweb_query_list)
+  pxweb_get(url = "https://statfin.stat.fi/PXWeb/api/v1/en/Postinumeroalueittainen_avoin_tieto/uusin/paavo_pxt_12ey.px",
+            query = pxweb_query_list)
+
 
 px_data <- as_tibble(
   as.data.frame(px_raw, 
@@ -251,11 +252,11 @@ px_data$posti_alue <- sub(" .+$", "", px_data$postal_code_area)
 # Lets join with spatial data and plot the area of each zipcode
 zipcodes19 <- get_zipcodes(year = 2019) 
 zipcodes_map <- left_join(zipcodes19, 
-                          px_data %>% filter(data == "Average age of inhabitants, 2017 (HE)"))
+                          px_data)
 ggplot(zipcodes_map) + 
-  geom_sf(aes(fill = paavo_open_data_by_postal_code_area_2019), 
+  geom_sf(aes(fill = inhabitants_total_he), 
           color  = alpha("white", 1/3)) +
-  labs(title = "Average age of inhabitants, 2017 (HE)", 
+  labs(title = "Total number of inhabitants, 2021", 
        fill = NULL)
 } else {
   message("One or more of the following packages is not available: ", 

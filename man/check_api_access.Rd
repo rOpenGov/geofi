@@ -4,7 +4,7 @@
 \alias{check_api_access}
 \title{Check access to http://geo.stat.fi/geoserver/wfs}
 \usage{
-check_api_access()
+check_api_access(which_api = "statfi_wfs")
 }
 \value{
 a logical.

@@ -2,6 +2,8 @@
 
 export(check_api_access)
 export(convert_municipality_key_codes)
+export(geocode)
+export(geocode_reverse)
 export(get_municipalities)
 export(get_municipality_pop)
 export(get_population_grid)

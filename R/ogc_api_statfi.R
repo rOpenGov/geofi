@@ -1,5 +1,10 @@
-
-fetch_ogc_api_statfi <- function(api_url = "https://geo.stat.fi/inspire/ogc/api/pd/collections/StatisticalValue_by_StatisticalGridCell_RES_5000m_EPSG_3067_2019/items?f=json&limit=10000",
+#' A internal helper
+#'
+#' @param api_url
+#'
+#' @author Markus Kainu <markus.kainu@@kapsi.fi>
+#'
+fetch_ogc_api_statfi <- function(api_url,
                           limitti){
 
   # Set the user agent
@@ -72,6 +77,10 @@ fetch_ogc_api_statfi <- function(api_url = "https://geo.stat.fi/inspire/ogc/api/
   return(all_features)
 
 }
+
+#
+
+
 
 
 #' Get Finnish municipality (multi)polygons for different years and/or scales.
@@ -151,22 +160,10 @@ ogc_get_statfi_area <- function(year = 2022,
   urls <- paste0(base_url, queries)
 
   # Fetch all the features
-  all_features <- fetch_ogc_api(api_url = urls, limitti = limit)
+  all_features <- fetch_ogc_api_statfi(api_url = urls, limitti = limit)
 
   return(all_features)
 }
-
-
-# ff <- ogc_get_statfi_area(tessellation = NULL, scale = 4500, output_crs = 4326,
-#                           # bbox = lappi_bbox,
-#                           limit=NULL)
-# dim(ff)
-# ggplot(ff) + geom_sf()
-
-
-
-
-
 
 #' Get Finnish municipality (multi)polygons with population for different years and/or scales.
 #'
@@ -215,15 +212,10 @@ ogc_get_statfi_area_pop <- function(year = 2021,
   if (!is.null(bbox)){
     queries <- paste0(queries,"&bbox=",bbox)
   }
-  # if (!is.null(limit)){
-  #   queries <- paste0(queries,"&limit=",limit)
-  # } else {
-  #   queries <- paste0(queries,"&limit=10000")
-  # }
 
   # Construct the query URL
   urls <- paste0(base_url, queries)
-  all_features <- fetch_ogc_api(api_url = urls, limitti = limit)
+  all_features <- fetch_ogc_api_statfi(api_url = urls, limitti = limit)
 
   if (nrow(all_features) == 0){
     return()
@@ -240,21 +232,6 @@ ogc_get_statfi_area_pop <- function(year = 2021,
   dat <- query_geocode(urls)
   return(dat)
 }
-
-# ff <- ogc_get_statfi_area_pop(year = 2021,
-#                               # bbox = helsinki_bbox,
-#                               output_crs = 3067,
-#                               # limit = 22
-#                               )
-# dim(ff)
-# ggplot(data = ff) + geom_sf()
-# ggplot(data = ff[grepl("^kunta", ff$areaStatisticalUnit_inspireId_localId),]) + geom_sf()
-#
-#
-# ff <- ogc_get_statfi_area_pop(year = 2021,
-#                               output_crs = 4326
-# )
-# ggplot(data = ff[grepl("^kunta", ff$areaStatisticalUnit_inspireId_localId),], aes(fill = female_percentage)) + geom_sf()
 
 
 #' Get Finnish municipality (multi)polygons with population for different years and/or scales.
@@ -304,7 +281,7 @@ ogc_get_statfi_statistical_grid <- function(year = 2021,
 
   base_url = paste0("https://geo.stat.fi/inspire/ogc/api/pd/collections/",queries)
 
-  all_features <- fetch_ogc_api(api_url = base_url, limitti = limit)
+  all_features <- fetch_ogc_api_statfi(api_url = base_url, limitti = limit)
 
   if (nrow(all_features) == 0){
     return()
@@ -318,27 +295,3 @@ ogc_get_statfi_statistical_grid <- function(year = 2021,
   }
 }
 
-# helsinki <- geofi::get_municipalities() |>
-#   dplyr::filter(municipality_code == 91) |>
-#   sf::st_transform(4326)
-# helsinki_bbox <- paste0(sf::st_bbox(helsinki),collapse = ",")
-#
-# lappi <- get_ogc_municipalities(tessellation = "maakunta", output_crs = 4326) |>
-#   dplyr::filter(geographicalName_fin == "Lappi")
-# lappi_bbox <- paste0(sf::st_bbox(lappi),collapse = ",")
-#
-# #
-# #
-# grid5000 <- ogc_get_statfi_statistical_grid(resolution = 5000,
-#                                             bbox = helsinki_bbox,
-#                                             limit = 6
-#                                             )
-# mapview::mapview(grid5000)
-# #
-# # grid1000 <- get_ogc_statistical_grid(resolution = 1000)
-# #
-# # get_ogc_municipalities_pop(bbox = lappi_bbox)
-# #
-# #
-# #
-# #

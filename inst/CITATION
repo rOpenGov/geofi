@@ -1,22 +1,29 @@
 citHeader("Kindly cite the geofi R package as follows:")
 
-citEntry(entry="misc",
+bibentry(bibtype = "Manual",
+         header = "To cite package ‘geofi’ in publications use:",
          title = "geofi: Access Finnish Geospatial Data",
-         author = personList(
-           person(given ="Markus", family="Kainu", email = "markus.kainu@kapsi.fi"),
-           person(given ="Joona", family="Lehtomaki"),
-           person(given ="Juuso", family="Parkkinen"),
-           person(given ="Jani", family="Miettinen"),
-           person(given ="Pyry", family="Kantanen"),
-	   person(given ="Leo", family="Lahti")
-         ),
-	 journal = "",
-	 url = "https://doi.org/10.5281/zenodo.7148138",
-	 year = "2015-2022",
+         author = c(
+                    person("Markus", "Kainu", , "markus.kainu@kapsi.fi", role = c("aut", "cre"),
+                           comment = c(ORCID = "0000-0003-1376-503X")),
+                    person("Joona", "Lehtomaki", , "joona.lehtomaki@iki.fi", role = "aut",
+                           comment = c(ORCID = "0000-0002-7891-0843")),
+                    person("Juuso", "Parkkinen", role = "ctb",
+                           comment = c(ORCID = "0000-0002-7818-5901")),
+                    person("Jani", "Miettinen", role = "ctb"),
+                    person("Pyry", "Kantanen", role = "ctb"),
+                    person("Sampo", "Vesanen", role = "ctb"),
+                    person("Leo", "Lahti", , "leo.lahti@iki.fi", role = "aut",
+                           comment = c(ORCID = "0000-0001-5537-637X"))
+                  ),
+         year = "2023",
+         note = "R package version 1.0.8",
+         url = "https://github.com/rOpenGov/geofi",
          textVersion =
-         paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Leo Lahti 2015-2022.",
-               "geofi: Access Finnish Geospatial Data",
+         paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Sampo Vesanen, Leo Lahti 2015-2023.",
+               "geofi: Access Finnish Geospatial Data, <doi:10.5281/zenodo.7148138>",
                sep=" ")
          )
+
 
 citFooter("\nMany thanks for all contributors! For more info, see: https://github.com/rOpenGov/geofi")

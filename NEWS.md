@@ -1,3 +1,8 @@
+# geofi 1.0.8
+
++ Links in vignettes pointing to Statistics Finland database updated to match new naming scheme.
+
+
 # geofi 1.0.7
 
 + Links in vignettes pinting to Statistics Finland database that started with `pxnet2.stat.fi` changed to start with `pxdata.stat.fi` to match stat.fi new naming scheme.

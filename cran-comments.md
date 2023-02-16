@@ -2,15 +2,10 @@
 * local ubuntu 22.04 install, R 4.2.2
 * win-builder (devel)
 * r-hub.io
-* Github Actions with 
-    * windows-latest (release)
-    * macOS-latest (release)
-    * ubuntu-22.04 (release)
-    * ubuntu-22.04 (devel)
 
 ## Submission note
 
-* Links in vignettes pointing to Statistics Finland database updated to match new naming scheme.
+* Citation file corrected
 
 ## R CMD check results
 

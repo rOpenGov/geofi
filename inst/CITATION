@@ -1,20 +1,20 @@
 citHeader("Kindly cite the geofi R package as follows:")
 
-citEntry(entry="misc",
+bibentry(entry="misc",
          title = "geofi: Access Finnish Geospatial Data",
-         author = personList(
+         author = c(
            person(given ="Markus", family="Kainu", email = "markus.kainu@kapsi.fi"),
            person(given ="Joona", family="Lehtomaki"),
            person(given ="Juuso", family="Parkkinen"),
            person(given ="Jani", family="Miettinen"),
            person(given ="Pyry", family="Kantanen"),
-	   person(given ="Leo", family="Lahti")
+	         person(given ="Leo", family="Lahti")
          ),
 	 journal = "",
 	 url = "https://doi.org/10.5281/zenodo.7148138",
-	 year = "2015-2022",
+	 year = "2015-2023",
          textVersion =
-         paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Leo Lahti 2015-2022.",
+         paste("(C) Markus Kainu, Joona Lehtomaki, Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, Leo Lahti 2015-2023.",
                "geofi: Access Finnish Geospatial Data",
                sep=" ")
          )

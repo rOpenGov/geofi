@@ -1,0 +1,32 @@
+---
+title: "Publications using the geofi R package"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(geofi)
+```
+
+You can send us a note via the [issue tracker](https://github.com/rOpenGov/geofi/issues) if you would like to add a publication on this list. The format we use:
+
+Lastname, F. & Lastname, F. (2020). Name of the article, *Name of the journal*, volume(number). Place of publication: Publisher. URL/DOI
+
+# Articles citing the geofi package
+
+-   Räsänen, T., Miettinen, A., Mustonen, J., Saarikallio-Torp, M. & Österbacka, E. (2023). Lasten yksityisen hoidon tuen kaksi vuosikymmenta, *Työpapereita 174*. Helsinki: Kela. <http://urn.fi/URN:NBN:fi-fe2022121672077>
+
+-   Kokko, M., Wikman, E., Hyvärinen, A. & Reinikainen, L. (2022). Apteekkien tilinpäätösanalyysi vuosilta 2017--2020, Lääkealan turvallisuus- ja kehittämiskeskus Fimea: *Fimea kehittää, arvioi ja informoi*, 10/2022. Kuopio: Lääkealan turvallisuus- ja kehittämiskeskus Fimea. <https://urn.fi/URN:ISBN:978-952-7299-40-1>
+
+-   Reinikainen, L., Hyvärinen, A., Kokko, M., Jauhonen, H. M. & Happonen, P. (2021). Apteekkien tilinpäätösanalyysi vuosilta 2016--2019, *Fimea kehittää, arvioi ja informoi*, 7/2021. Kuopio: Lääkealan turvallisuus- ja kehittämiskeskus Fimea. <https://urn.fi/URN:ISBN:978-952-7299-22-7>
+
+-   Vuori, M. (2020). ADHD-lääkkeiden käytön yleisyys pojilla ja tytöillä sairaanhoitopiireissä ja kunnissa vuonna 2018 (Prevalence of ADHD medication use among boys and girls in hospital districts and municipalities, 2018), *Lääkärilehti*, 75(22). Helsinki: Suomen lääkäriliitto. URL: <https://www.laakarilehti.fi/tieteessa/alkuperaistutkimukset/adhd-laakkeiden-kayton-yleisyys-pojilla-ja-tytoilla-sairaanhoitopiireissa-ja-kunnissa-vuonna-2018/>
+
+# Other writings using the geofi package
+
+-   Oksanen, J. (2021). Semparl -- Cities in parliament, *Helsinki Digital Humanities Hackathon*. URL: <https://dhhackathon.wordpress.com/2021/05/28/semparl-cities-in-parliament/>

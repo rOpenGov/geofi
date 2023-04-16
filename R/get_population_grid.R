@@ -23,7 +23,7 @@
 #' @rdname get_population_grid
 #' @export
 
-get_population_grid <- function(year = 2020, resolution = 5){
+get_population_grid <- function(year = 2021, resolution = 5){
 
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()){

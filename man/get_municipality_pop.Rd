@@ -4,11 +4,11 @@
 \alias{get_municipality_pop}
 \title{Get Number of population by Finnish municipality (multi)polygons for different years.}
 \usage{
-get_municipality_pop(year = 2020, codes_as_character = FALSE)
+get_municipality_pop(year = 2021, codes_as_character = FALSE)
 }
 \arguments{
 \item{year}{A numeric for year of the administrative borders. Available are
-2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019 and 2020.}
+2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 and 2021.}
 
 \item{codes_as_character}{A logical determining if the region codes should
 be returned as strings of equal width as originally provided by

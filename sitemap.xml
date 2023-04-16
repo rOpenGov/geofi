@@ -7,6 +7,9 @@
     <loc>https://ropengov.github.io/geofi/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>https://ropengov.github.io/geofi/articles/Publications-using-the-geofi-R-package.html</loc>
+  </url>
+  <url>
     <loc>https://ropengov.github.io/geofi/articles/geofi_datasets.html</loc>
   </url>
   <url>
@@ -155,6 +158,9 @@
   </url>
   <url>
     <loc>https://ropengov.github.io/geofi/reference/municipality_key_2022.html</loc>
+  </url>
+  <url>
+    <loc>https://ropengov.github.io/geofi/reference/municipality_key_2023.html</loc>
   </url>
   <url>
     <loc>https://ropengov.github.io/geofi/reference/to_sf.html</loc>

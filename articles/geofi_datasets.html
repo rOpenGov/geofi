@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +55,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Publications-using-the-geofi-R-package.html">Publications using the geofi R package</a>
     <a class="dropdown-item" href="../articles/geofi_datasets.html">Datasets in geofi-package</a>
     <a class="dropdown-item" href="../articles/geofi_joining_attribute_data.html">Joining attribute data with geofi data</a>
     <a class="dropdown-item" href="../articles/geofi_making_maps.html">Making maps using geofi-package</a>
@@ -98,7 +99,7 @@
                         <h4 data-toc-skip class="author">Markus Kainu,
 Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 data-toc-skip class="date">2023-02-16</h4>
+            <h4 data-toc-skip class="date">2023-04-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/HEAD/vignettes/geofi_datasets.Rmd" class="external-link"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_datasets.Rmd</code></div>
@@ -144,10 +145,10 @@ basis.</p>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">results</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Item</span>,<span class="va">Title</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"municipality_key"</span>, <span class="va">Item</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 2</span></span></span>
 <span><span class="co">#&gt;    Item                  Title                                                </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> municipality_key      Aggregated municipality key table for years 2013-2022</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> municipality_key      Aggregated municipality key table for years 2013-2023</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> municipality_key_2013 Municipality key table for 2013                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> municipality_key_2014 Municipality key table for 2014                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> municipality_key_2015 Municipality key table for 2015                      </span></span>
@@ -157,7 +158,8 @@ basis.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> municipality_key_2019 Municipality key table for 2019                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> municipality_key_2020 Municipality key table for 2020                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> municipality_key_2021 Municipality key table for 2021                      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> municipality_key_2022 Municipality key table for 2022</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> municipality_key_2022 Municipality key table for 2022                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> municipality_key_2023 Municipality key table for 2023</span></span></code></pre></div>
 <p>Looking at the names of `municipality_key_2021` there is 63 different
 variables from each municipality.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">

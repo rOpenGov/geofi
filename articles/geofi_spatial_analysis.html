@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +55,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Publications-using-the-geofi-R-package.html">Publications using the geofi R package</a>
     <a class="dropdown-item" href="../articles/geofi_datasets.html">Datasets in geofi-package</a>
     <a class="dropdown-item" href="../articles/geofi_joining_attribute_data.html">Joining attribute data with geofi data</a>
     <a class="dropdown-item" href="../articles/geofi_making_maps.html">Making maps using geofi-package</a>
@@ -98,7 +99,7 @@
                         <h4 data-toc-skip class="author">Markus
 Kainu</h4>
             
-            <h4 data-toc-skip class="date">2023-02-16</h4>
+            <h4 data-toc-skip class="date">2023-04-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/HEAD/vignettes/geofi_spatial_analysis.Rmd" class="external-link"><code>vignettes/geofi_spatial_analysis.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_spatial_analysis.Rmd</code></div>
@@ -499,17 +500,17 @@ municipality key.</p>
 <span><span class="co">#&gt; Bounding box:  xmin: 91954.76 ymin: 6638646 xmax: 701036.8 ymax: 7755601</span></span>
 <span><span class="co">#&gt; Projected CRS: ETRS89 / TM35FIN(E,N)</span></span>
 <span><span class="co">#&gt; First 10 features:</span></span>
-<span><span class="co">#&gt;    kuntatunnus        teksti                     geom</span></span>
-<span><span class="co">#&gt; 1          478 Maarianhamina   POINT (108054 6683064)</span></span>
-<span><span class="co">#&gt; 2           51      Eurajoki POINT (217467.8 6797006)</span></span>
-<span><span class="co">#&gt; 3          578       Paltamo POINT (540087.8 7142933)</span></span>
-<span><span class="co">#&gt; 4          423         Lieto POINT (250416.5 6716555)</span></span>
-<span><span class="co">#&gt; 5          749   Siilinjärvi POINT (533390.1 6994111)</span></span>
-<span><span class="co">#&gt; 6          529      Naantali   POINT (226598 6713685)</span></span>
-<span><span class="co">#&gt; 7          284      Koski Tl POINT (288730.3 6730134)</span></span>
-<span><span class="co">#&gt; 8          561        Oripää   POINT (265926 6753450)</span></span>
-<span><span class="co">#&gt; 9          102     Huittinen POINT (268830.4 6790126)</span></span>
-<span><span class="co">#&gt; 10         536         Nokia POINT (313894.1 6820874)</span></span></code></pre></div>
+<span><span class="co">#&gt;    kuntatunnus    teksti                 geometry</span></span>
+<span><span class="co">#&gt; 1          890   Utsjoki POINT (501086.5 7755601)</span></span>
+<span><span class="co">#&gt; 2          498    Muonio   POINT (360886 7542117)</span></span>
+<span><span class="co">#&gt; 3          148     Inari POINT (522136.3 7616266)</span></span>
+<span><span class="co">#&gt; 4           47 Enontekiö POINT (362091.4 7589569)</span></span>
+<span><span class="co">#&gt; 5          273    Kolari POINT (362088.2 7471921)</span></span>
+<span><span class="co">#&gt; 6          976 Ylitornio POINT (350962.8 7359884)</span></span>
+<span><span class="co">#&gt; 7          732     Salla POINT (573395.9 7413832)</span></span>
+<span><span class="co">#&gt; 8          698 Rovaniemi   POINT (443256 7375804)</span></span>
+<span><span class="co">#&gt; 9          854     Pello POINT (366564.7 7409490)</span></span>
+<span><span class="co">#&gt; 10         320 Kemijärvi   POINT (519078 7399655)</span></span></code></pre></div>
 <p>Let’s aim at a data structure as below with both municipality name
 and code both from origin and destination.</p>
 <table class="table">
@@ -570,14 +571,14 @@ and finally bind the data frames into a single data.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">dist</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">kunta_dist</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
-<span><span class="co">#&gt;   origin_name   origin_code destination_name destination_code    dist</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Maarianhamina         478 Maarianhamina                 478      0 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Maarianhamina         478 Eurajoki                       51 <span style="text-decoration: underline;">157</span>968.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Maarianhamina         478 Paltamo                       578 <span style="text-decoration: underline;">630</span>977.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Maarianhamina         478 Lieto                         423 <span style="text-decoration: underline;">146</span>249.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Maarianhamina         478 Siilinjärvi                   749 <span style="text-decoration: underline;">526</span>935.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Maarianhamina         478 Naantali                      529 <span style="text-decoration: underline;">122</span>435.</span></span></code></pre></div>
+<span><span class="co">#&gt;   origin_name origin_code destination_name destination_code    dist</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Utsjoki             890 Utsjoki                       890      0 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Utsjoki             890 Muonio                        498 <span style="text-decoration: underline;">255</span>404.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Utsjoki             890 Inari                         148 <span style="text-decoration: underline;">140</span>915.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Utsjoki             890 Enontekiö                      47 <span style="text-decoration: underline;">216</span>532.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Utsjoki             890 Kolari                        273 <span style="text-decoration: underline;">315</span>903.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Utsjoki             890 Ylitornio                     976 <span style="text-decoration: underline;">423</span>236.</span></span></code></pre></div>
 <p>Finally we can draw two plots to verify our results. First let’s draw
 a bar plot of 20 municipality central localities nearest to Helsinki</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -609,12 +610,12 @@ the center of Finland.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">dist</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">closest_to_center</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">closest_to_center</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       teksti kuntatunnus     dist</span></span>
-<span><span class="co">#&gt; 1 Siikalatva         791 13945.36</span></span>
+<span><span class="co">#&gt; 1 Siikalatva         791 13582.66</span></span>
 <span><span class="co">#&gt; 2    Pyhäntä         630 17512.41</span></span>
 <span><span class="co">#&gt; 3  Kärsämäki         317 33270.89</span></span>
 <span><span class="co">#&gt; 4  Haapavesi          71 38730.91</span></span>
-<span><span class="co">#&gt; 5      Vaala         785 50150.04</span></span>
-<span><span class="co">#&gt; 6   Utajärvi         889 61041.42</span></span></code></pre></div>
+<span><span class="co">#&gt; 5      Vaala         785 50150.05</span></span>
+<span><span class="co">#&gt; 6   Utajärvi         889 61041.41</span></span></code></pre></div>
 <p>And finally lets draw a bar plot of 20 furthest localities</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">furthest20</span> <span class="op">&lt;-</span> <span class="va">kunta_dist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>

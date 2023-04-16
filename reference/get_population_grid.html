@@ -18,7 +18,7 @@ Statistics Finland."><meta property="og:image" content="https://ropengov.github.
     
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,7 @@ Statistics Finland."><meta property="og:image" content="https://ropengov.github.
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Publications-using-the-geofi-R-package.html">Publications using the geofi R package</a>
     <a class="dropdown-item" href="../articles/geofi_datasets.html">Datasets in geofi-package</a>
     <a class="dropdown-item" href="../articles/geofi_joining_attribute_data.html">Joining attribute data with geofi data</a>
     <a class="dropdown-item" href="../articles/geofi_making_maps.html">Making maps using geofi-package</a>
@@ -78,13 +79,13 @@ Thin wrapper around Finnish population grid data provided by
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_population_grid</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, resolution <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_population_grid</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, resolution <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
-<dd><p>A numeric for year of the population grid. Years available 2010-2020.</p></dd>
+<dd><p>A numeric for year of the population grid. Years available 2005 and 2010-2021.</p></dd>
 
 
 <dt>resolution</dt>
@@ -96,6 +97,10 @@ Thin wrapper around Finnish population grid data provided by
     
 
 <p>sf object</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>More information about the dataset from <a href="https://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/a901d40a-8a6b-4678-814c-79d2e2ab130c" class="external-link">Paikkatietohakemisto</a></p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

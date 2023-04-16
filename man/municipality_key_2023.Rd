@@ -5,7 +5,7 @@
 \alias{municipality_key_2023}
 \title{Municipality key table for 2023}
 \format{
-A data frame with 309 rows and 73 variables:
+A data frame with 309 rows and 69 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}
@@ -40,10 +40,6 @@ A data frame with 309 rows and 73 variables:
 \item{suuralue_name_fi}{Suuralueen nimi in Finnish (Large Areas)}
 \item{suuralue_name_sv}{Suuralueen nimi in Swedish (Large Areas)}
 \item{suuralue_name_en}{Suuralueen nimi in English (Large Areas)}
-\item{sairaanhoitop_code}{Sairaanhoitopiiri code (Health care districts)}
-\item{sairaanhoitop_name_fi}{Sairaanhoitopiiri name in Finnish (Health care districts)}
-\item{sairaanhoitop_name_sv}{Sairaanhoitopiiri name in Swedish (Health care districts)}
-\item{sairaanhoitop_name_en}{Sairaanhoitopiiri name in English (Health care districts)}
 \item{nuts1_code}{NUTS 2016 classification code (level 1)}
 \item{nuts1_name_fi}{NUTS 2016 classification name in Finnish (level 1)}
 \item{nuts1_name_sv}{NUTS 2016 classification name in Swedish (level 1)}
@@ -64,10 +60,10 @@ A data frame with 309 rows and 73 variables:
 \item{kunta_name}{Municipality name in Finnish}
 \item{name_fi}{Municipality name in Finnish}
 \item{name_sv}{Municipality name in Finnish}
-\item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
-\item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
-\item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}
-\item{erva_name_en}{Sairaanhoidon erityisvastuualueen name in English (Catchment areas for highly specialised medical care)}
+\item{tyossakayntial_code}{Työssäkäyntialue code}
+\item{tyossakayntial_name_fi}{Työssäkäyntialue name in Finnish}
+\item{tyossakayntial_name_sv}{Työssäkäyntialue name in Swedish}
+\item{tyossakayntial_name_en}{Työssäkäyntialue name in English}
 \item{kela_vakuutuspiiri_name_fi}{Kelan vakuutuspiiri name in Finnish (Insurance District)}
 \item{kela_vakuutuspiiri_code}{Kelan vakuutuspiiri unofficial code (Insurance District)}
 \item{kela_vakuutuspiiri_name_sv}{Kelan vakuutuspiiri name in Swedish (Insurance District)}

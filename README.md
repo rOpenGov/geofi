@@ -8,7 +8,6 @@ status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](htt
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![codecov](https://codecov.io/gh/rOpenGov/geofi/branch/master/graph/badge.svg?token=yJSHHMSSKs)](https://app.codecov.io/gh/rOpenGov/geofi)
-[![Gitter](https://badges.gitter.im/rOpenGov/geofi.svg)](https://gitter.im/rOpenGov/geofi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Watch on
 GitHub](https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/watchers/)
 [![Star on
@@ -51,8 +50,8 @@ more comprehensive use cases.
 
 ``` r
 library(geofi)
-d1 <- get_municipalities(year = 2020)
-d2 <- get_zipcodes(year = 2020)
+d1 <- get_municipalities(year = 2023)
+d2 <- get_zipcodes(year = 2023)
 d3 <- get_statistical_grid(resolution = 5)
 d4 <- get_population_grid(resolution = 5)
 
@@ -84,11 +83,10 @@ wrap_plots(list(p1,p2,p3,p4,p5,p6), ncol = 3) +
 
 Contributions are very welcome:
 
--   [Use issue tracker](https://github.com/ropengov/geofi/issues) for
-    feedback and bug reports.
--   [Send pull requests](https://github.com/ropengov/geofi/)
--   [Star us on the Github page](https://github.com/ropengov/geofi/)
--   [Join the discussion in Gitter](https://gitter.im/rOpenGov/geofi/)
+- [Use issue tracker](https://github.com/ropengov/geofi/issues) for
+  feedback and bug reports.
+- [Send pull requests](https://github.com/ropengov/geofi/)
+- [Star us on the Github page](https://github.com/ropengov/geofi/)
 
 ### Acknowledgements
 
@@ -97,7 +95,7 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 1.0.6. URL:
+geofi R package. R package version 1.0.9. URL:
 <https://ropengov.github.io/geofi/>
 
 We are grateful to all

@@ -9,7 +9,7 @@ Thin wrapper around Finnish population grid data provided by
 get_population_grid(year = 2020, resolution = 5)
 }
 \arguments{
-\item{year}{A numeric for year of the population grid. Years available 2010-2020.}
+\item{year}{A numeric for year of the population grid. Years available 2005 and 2010-2021.}
 
 \item{resolution}{1 (1km x 1km) or 5 (5km x 5km)}
 }
@@ -20,6 +20,9 @@ sf object
 Get Finnish Population grid in two different resolutions for years 2010-2020
 Thin wrapper around Finnish population grid data provided by
 \href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.
+}
+\details{
+More information about the dataset from \href{https://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/a901d40a-8a6b-4678-814c-79d2e2ab130c}{Paikkatietohakemisto}
 }
 \examples{
  \dontrun{

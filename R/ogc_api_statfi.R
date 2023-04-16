@@ -96,7 +96,9 @@ fetch_ogc_api_statfi <- function(api_url,
 #'             equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
 
 #' @author Markus Kainu <markus.kainu@@kapsi.fi>
-
+#'
+#' @export
+#'
 #' @return sf object
 #' @examples
 #' get_ogc_municipalities(year = 2020,
@@ -176,9 +178,11 @@ ogc_get_statfi_area <- function(year = 2022,
 #'             equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
 #' @param tessellation A scale or resolution of the shape. Two options: \code{1000}
 #'             equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
-
+#'
 #' @author Markus Kainu <markus.kainu@@kapsi.fi>
-
+#'
+#' @export
+#'
 #' @return sf object
 #' @examples
 #' get_ogc_municipalities_pop(year = 2020,
@@ -245,9 +249,10 @@ ogc_get_statfi_area_pop <- function(year = 2021,
 #'             equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
 #' @param tessellation A scale or resolution of the shape. Two options: \code{1000}
 #'             equals 1:1 000 000 and \code{4500} equals 1:4 500 000.
-
 #' @author Markus Kainu <markus.kainu@@kapsi.fi>
-
+#'
+#' @export
+#'
 #' @return sf object
 #' @examples
 #' get_ogc_municipalities_pop(year = 2020,

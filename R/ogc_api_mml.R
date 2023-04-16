@@ -8,6 +8,8 @@
 #' @author Markus Kainu <markus.kainu@@kapsi.fi>
 #'
 #' @return data.frame
+#' @export
+#'
 #' @examples
 #' ogc_get_maastotietokanta_collections()
 #'
@@ -123,6 +125,8 @@ fetch_ogc_api_mml <- function(api_url,
 #'
 #' @author Markus Kainu <markus.kainu@@kapsi.fi>
 #'
+#' @export
+#'
 #' @return sf object
 #' @examples
 #' ogc_get_maastotietokanta(collection = "hautausmaa", output_crs = 3067)
@@ -174,6 +178,8 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 #'
 #' @author Markus Kainu <markus.kainu@@kapsi.fi>
 #'
+#' @export
+#'
 #' @return data.frame
 #' @examples
 #' ogc_get_buildings_collections()
@@ -208,6 +214,8 @@ ogc_get_buildings_collections <- function(api_key = getOption("geofi_mml_api_key
 #' @param api_key A string An [api key](https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje) is required to use NLS api services.
 #'
 #' @author Markus Kainu <markus.kainu@@kapsi.fi>
+#'
+#' @export
 #'
 #' @return sf object
 #' @examples
@@ -262,6 +270,8 @@ ogc_get_buildings <- function(collection = "buildings",
 #' @param api_key A string An [api key](https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje) is required to use NLS api services.
 #'
 #' @author Markus Kainu <markus.kainu@@kapsi.fi>
+#'
+#' @export
 #'
 #' @return sf object
 #' @examples

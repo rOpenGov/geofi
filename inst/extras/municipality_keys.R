@@ -50,7 +50,7 @@ langs <- c("fi","sv","en")
 
 # Lets loop over the years 2013-2022
 yearlist <- list()
-yrs <- 2013:2022
+yrs <- 2013:2023
 for (iii in seq_along(yrs)){
 
   print(yrs[iii])
@@ -206,24 +206,26 @@ ddd4$municipality_name_fi[ddd4$municipality_name_fi == "Maarianhamina - Marieham
 
 
 # adding Kela vakuutuspiirit
-## Last checked 20220127
-library(httr)
-library(stringr)
-res <- httr::GET("https://www.kela.fi/vakuutuspiirit")
-cont <- content(x = res, "text")
+## Last checked 20230416
+## HUOM! KELAN VERKKOSIVUT UUDISTUNEET EIKÄ NIITÄ VOI ENÄÄ SKREIPATA ENTISEEN TAPAAN!!
+## SKREIPPAUSKOODIT KOMMENTOITU POIS, LISTAT TÄYTYY KÄSIN PÄIVITTÄÄ
+# library(httr)
+# library(stringr)
+# res <- httr::GET("https://www.kela.fi/vakuutuspiirit")
+# cont <- content(x = res, "text")
 
 # Eteläinen
-gsub("^.*Eteläinen", "", cont) %>%
-  gsub("</p>.*$", "", .) %>%
-  gsub("^.*<p>", "", .) %>%
-  gsub(" ja", ",", .) %>%
-  gsub("\\.", "", .) %>%
-  gsub(", ", ",", .) %>%
-  gsub(" ", ",", .) %>%
-  str_split(string = ., pattern = ",") %>%
-  unlist() -> etelainen
-
-dput(etelainen)
+# gsub("^.*Eteläinen", "", cont) %>%
+#   gsub("</p>.*$", "", .) %>%
+#   gsub("^.*<p>", "", .) %>%
+#   gsub(" ja", ",", .) %>%
+#   gsub("\\.", "", .) %>%
+#   gsub(", ", ",", .) %>%
+#   gsub(" ", ",", .) %>%
+#   str_split(string = ., pattern = ",") %>%
+#   unlist() -> etelainen
+#
+# dput(etelainen)
 etelainen <- c("Asikkala", "Askola", "Espoo", "Hamina", "Hanko", "Hartola",
   "Heinola", "Helsinki", "Hollola", "Hyvinkää", "Hämeenkoski",
   "Iitti", "Imatra", "Inkoo", "Järvenpää", "Karkkila", "Kauniainen",
@@ -236,17 +238,17 @@ etelainen <- c("Asikkala", "Askola", "Espoo", "Hamina", "Hanko", "Hartola",
   "Vantaa", "Vihti", "Virolahti")
 
 # Itäinen
-gsub("^.*Itäinen", "", cont) %>%
-  gsub("</p>.*$", "", .) %>%
-  gsub("^.*<p>", "", .) %>%
-  gsub(" ja", ",", .) %>%
-  gsub("\\.", "", .) %>%
-  gsub(", ", ",", .) %>%
-  gsub(" ", ",", .) %>%
-  str_split(string = ., pattern = ",") %>%
-  unlist() -> itainen
-
-dput(itainen)
+# gsub("^.*Itäinen", "", cont) %>%
+#   gsub("</p>.*$", "", .) %>%
+#   gsub("^.*<p>", "", .) %>%
+#   gsub(" ja", ",", .) %>%
+#   gsub("\\.", "", .) %>%
+#   gsub(", ", ",", .) %>%
+#   gsub(" ", ",", .) %>%
+#   str_split(string = ., pattern = ",") %>%
+#   unlist() -> itainen
+#
+# dput(itainen)
 itainen <- c("Enonkoski", "Hankasalmi", "Heinävesi", "Hirvensalmi", "Iisalmi",
              "Ilomantsi", "Joensuu", "Joroinen", "Joutsa", "Juankoski", "Juuka",
              "Juva", "Jyväskylä", "Jämsä", "Kaavi", "Kangasniemi", "Kannonkoski",
@@ -263,17 +265,17 @@ itainen <- c("Enonkoski", "Hankasalmi", "Heinävesi", "Hirvensalmi", "Iisalmi",
 
 
 # Keskinen
-gsub("^.*Keskinen", "", cont) %>%
-  gsub("</p>.*$", "", .) %>%
-  gsub("^.*<p>", "", .) %>%
-  gsub(" ja", ",", .) %>%
-  gsub("\\.", "", .) %>%
-  gsub(", ", ",", .) %>%
-  gsub(" ", ",", .) %>%
-  str_split(string = ., pattern = ",") %>%
-  unlist() -> keskinen
-
-dput(keskinen)
+# gsub("^.*Keskinen", "", cont) %>%
+#   gsub("</p>.*$", "", .) %>%
+#   gsub("^.*<p>", "", .) %>%
+#   gsub(" ja", ",", .) %>%
+#   gsub("\\.", "", .) %>%
+#   gsub(", ", ",", .) %>%
+#   gsub(" ", ",", .) %>%
+#   str_split(string = ., pattern = ",") %>%
+#   unlist() -> keskinen
+#
+# dput(keskinen)
 keskinen <- c("Akaa", "Alajärvi", "Alavus", "Evijärvi", "Forssa", "Hattula",
               "Hausjärvi", "Humppila", "Hämeenkyrö", "Hämeenlinna", "Ikaalinen",
               "Ilmajoki", "Isojoki", "Isokyrö", "Janakkala", "Jokioinen",
@@ -286,21 +288,21 @@ keskinen <- c("Akaa", "Alajärvi", "Alavus", "Evijärvi", "Forssa", "Hattula",
               "Ypäjä", "Ähtäri")
 
 # Läntinen
-gsub("^.*Läntinen", "", cont) %>%
-  gsub("</p>.*$", "", .) %>%
-  gsub("^.*<p>", "", .) %>%
-  gsub(" ja", ",", .) %>%
-  gsub("\\.", "", .) %>%
-  gsub(", ", ",", .) %>%
-  gsub(" ", ",", .) %>%
-  str_split(string = ., pattern = ",") %>%
-  unlist() -> lantinen
+# gsub("^.*Läntinen", "", cont) %>%
+#   gsub("</p>.*$", "", .) %>%
+#   gsub("^.*<p>", "", .) %>%
+#   gsub(" ja", ",", .) %>%
+#   gsub("\\.", "", .) %>%
+#   gsub(", ", ",", .) %>%
+#   gsub(" ", ",", .) %>%
+#   str_split(string = ., pattern = ",") %>%
+#   unlist() -> lantinen
+#
+# lantinen <- lantinen[lantinen != "TL"]
+# lantinen[lantinen == "Koski"] <- "Koski Tl"
+# lantinen[lantinen == "Pedersören"] <- "Pedersören kunta"
 
-lantinen <- lantinen[lantinen != "TL"]
-lantinen[lantinen == "Koski"] <- "Koski Tl"
-lantinen[lantinen == "Pedersören"] <- "Pedersören kunta"
-
-dput(lantinen)
+# dput(lantinen)
 lantinen <- c("Aura", "Eura", "Eurajoki", "Harjavalta", "Honkajoki", "Huittinen",
               "Jämijärvi", "Kaarina", "Kankaanpää", "Karvia", "Kaskinen",
               "Kemiönsaari", "Kokemäki", "Korsnäs", "Koski Tl", "Kristiinankaupunki",
@@ -314,17 +316,17 @@ lantinen <- c("Aura", "Eura", "Eurajoki", "Harjavalta", "Honkajoki", "Huittinen"
               "Uusikaarlepyy", "Uusikaupunki", "Vaasa", "Vehmaa", "Vöyri")
 
 # Pohjoinen
-gsub("^.*Pohjoinen", "", cont) %>%
-  gsub("</p>.*$", "", .) %>%
-  gsub("^.*<p>", "", .) %>%
-  gsub(" ja", ",", .) %>%
-  gsub("\\.", "", .) %>%
-  gsub(", ", ",", .) %>%
-  gsub(" ", ",", .) %>%
-  str_split(string = ., pattern = ",") %>%
-  unlist() -> pohjoinen
-
-dput(pohjoinen)
+# gsub("^.*Pohjoinen", "", cont) %>%
+#   gsub("</p>.*$", "", .) %>%
+#   gsub("^.*<p>", "", .) %>%
+#   gsub(" ja", ",", .) %>%
+#   gsub("\\.", "", .) %>%
+#   gsub(", ", ",", .) %>%
+#   gsub(" ", ",", .) %>%
+#   str_split(string = ., pattern = ",") %>%
+#   unlist() -> pohjoinen
+#
+# dput(pohjoinen)
 pohjoinen <- c("Alavieska", "Enontekiö", "Hailuoto", "Haapajärvi", "Halsua",
                "Haapavesi", "Hyrynsalmi", "Ii", "Inari", "Kajaani", "Kalajoki",
                "Kannus", "Kaustinen", "Kemi", "Kempele", "Kemijärvi", "Keminmaa",
@@ -433,7 +435,7 @@ mutate(kela_asumistukialue_name_sv = case_when(
     kela_asumistukialue_name_fi == "IV kuntaryhmä" ~ "Municipality in category IV"
   )) %>%
   # Kela-spesific classifications only for latest year as there is no history available as open data
-  mutate(year = 2022)
+  mutate(year = 2023)
 
 
 # Lets rename the Finnish version of Maarianhamina

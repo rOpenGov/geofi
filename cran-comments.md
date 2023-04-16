@@ -1,11 +1,11 @@
 ## Test environments
-* local ubuntu 22.04 install, R 4.2.2
+* local ubuntu 22.04 install, R 4.2.3
 * win-builder (devel)
 * r-hub.io
 
 ## Submission note
 
-* Citation file corrected
+* Package updated for 2023 administrative regional classifications
 
 ## R CMD check results
 

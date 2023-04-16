@@ -1,3 +1,7 @@
+# geofi 1.0.9
+
++ 2023 regional classifications updated. Two classifications: University Hospital specific catchment area (Erva-alue) and Hospital District (sairaanhoitopiirit) dropped as they are no longer operation but replaced with wellbeing service counties (hyvinvointialueet)
+
 # geofi 1.0.8
 
 + Links in vignettes pointing to Statistics Finland database updated to match new naming scheme.

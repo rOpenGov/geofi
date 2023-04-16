@@ -6,7 +6,7 @@
 Thin wrapper around Finnish population grid data provided by
 \href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.}
 \usage{
-get_population_grid(year = 2020, resolution = 5)
+get_population_grid(year = 2021, resolution = 5)
 }
 \arguments{
 \item{year}{A numeric for year of the population grid. Years available 2005 and 2010-2021.}

@@ -57,31 +57,16 @@ In this first example we join municipality level data from Statistics Finland [m
 
 ```{r municipality_map}
 library(geofi)
-muni <- get_municipalities(year = 2019)
+muni <- get_municipalities(year = 2023)
 
-libs <- c("pxweb","dplyr","tidyr","janitor","ggplot2")
+libs <- c("sotkanet","dplyr","tidyr","janitor","ggplot2")
 if (check_namespaces(pkgs = libs)) {
-library(pxweb)
-pxweb_query_list <-
-  list("Alue 2020"=c("*"),
-       "Tiedot"=c("*"),
-       "Vuosi"=c("2019"))
 
-px_raw <-
-  pxweb_get(url = "https://pxdata.stat.fi/PXWeb/api/v1/en/Kuntien_avainluvut/2020/kuntien_avainluvut_2020_aikasarja.px",
-            query = pxweb_query_list)
-
-library(dplyr)
-library(tidyr)
-library(janitor)
-library(sf)
-px_data <- as_tibble(
-  as.data.frame(px_raw, 
-                column.name.type = "text", 
-                variable.value.type = "text")
-  ) %>% setNames(make_clean_names(names(.))) %>% 
-  pivot_longer(names_to = "information", values_to = "municipal_key_figures", 3:ncol(.))
-px_data
+library(sotkanet)
+sotkadata <- GetDataSotkanet(indicators = 7, years = 2010:2020) %>% 
+  # subset to container only current municipalities
+  filter(region %in% geofi::municipality_key_2023$municipality_code) %>% 
+  rename(municipality_code = region)
 } else {
   message("One or more of the following packages is not available: ", 
           paste(libs, collapse = ", "))
@@ -91,12 +76,12 @@ px_data
 Once we have the data in long format we can observe the `region_2020`-column.
 
 ```{r municipality_map2}
-if (check_namespaces(pkgs = libs)) {
-count(px_data, region_2020)
-  } else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
+# if (check_namespaces(pkgs = libs)) {
+# count(px_data, region_2020)
+#   } else {
+#   message("One or more of the following packages is not available: ", 
+#           paste(libs, collapse = ", "))
+# }
 ```
 
 This is not obvious to all, but have the municipality names in Finnish among other regional breakdowns which allows us to combine the data with spatial data using `municipality_name_fi`-variable. 
@@ -104,8 +89,8 @@ This is not obvious to all, but have the municipality names in Finnish among oth
 ```{r}
 if (check_namespaces(pkgs = libs)) {
 map_data <- right_join(muni, 
-                       px_data, 
-                       by = c("municipality_name_fi" = "region_2020"))
+                       sotkadata, 
+                       by = c("municipality_code" = "municipality_code"))
   } else {
   message("One or more of the following packages is not available: ", 
           paste(libs, collapse = ", "))
@@ -118,10 +103,10 @@ Now we can plot a map showing `Share of Swedish-speakers of the population, %` a
 if (check_namespaces(pkgs = libs)) {
 library(ggplot2)
 map_data %>% 
-  filter(grepl("swedish|foreign", information)) %>% 
-  ggplot(aes(fill = municipal_key_figures)) + 
+  # filter(grepl("swedish|foreign", information)) %>% 
+  ggplot(aes(fill = primary.value)) + 
   geom_sf() + 
-  facet_wrap(~information) +
+  # facet_wrap(~information) +
   theme(legend.position = "top")
   } else {
   message("One or more of the following packages is not available: ", 

@@ -1,8 +1,8 @@
 Type: Package
 Package: geofi
 Title: Access Finnish Geospatial Data
-Version: 1.0.9
-Date: 2023-04-16
+Version: 1.0.10
+Date: 2023-10-31
 Authors@R: c(
     person("Markus", "Kainu", , "markus.kainu@kapsi.fi", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1376-503X")),
@@ -47,6 +47,7 @@ Suggests:
     pxweb,
     readr,
     rmarkdown,
+    sotkanet,
     testthat,
     tidyr
 VignetteBuilder: 

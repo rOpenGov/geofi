@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -60,16 +60,16 @@ as_tibble(d$results) %>%
     filter(grepl("municipality_key", Item))
 ```
 
-Looking at the names of \`municipality_key_2021\` there is 63 different variables from each municipality.
+Looking at the names of \`municipality_key_2023\` there is 69 different variables from each municipality.
 
 ```{r municipality_key_names}
-names(geofi::municipality_key_2020)
+names(geofi::municipality_key_2023)
 ```
 
 With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.\
 
 ```{r municipality_key_maakunta}
-geofi::municipality_key_2021 %>% 
+geofi::municipality_key_2023 %>% 
   count(maakunta_code,maakunta_name_fi,maakunta_name_sv,maakunta_name_en)
 ```
 
@@ -84,7 +84,7 @@ Spatial data is provided as administrative regions (polygons), population and st
 Municipality borders are provided yearly from 2013 and in two scales 1: 1 000 000 and 1:4 500 000. Use `1000` or `4500` as value for `scale`-argument, respectively.
 
 ```{r municipality_map, fig.height = 7, fig.width = 4}
-municipalities <- get_municipalities(year = 2020, scale = 4500)
+municipalities <- get_municipalities(year = 2023, scale = 4500)
 plot(municipalities["municipality_name_fi"], border = NA)
 ```
 
@@ -99,7 +99,7 @@ The statistical variables in the data are: total population (vaesto), share of t
 To plot men's share at the municipality level in 2020 (2021 municipality borders) you can simply to this. 
 
 ```{r muni_pop_map1, fig.height = 7, fig.width = 4}
-get_municipality_pop(year = 2020) %>%  
+get_municipality_pop(year = 2022) %>%  
   subset(select = miehet_p) %>% 
   plot()
 ```
@@ -108,22 +108,22 @@ Aggregating the absolute population numbers is straightforward: to plot populati
 
 
 ```{r muni_pop_map2, fig.height = 7, fig.width = 4}
-get_municipality_pop(year = 2020) %>%  
+get_municipality_pop(year = 2022) %>%  
   group_by(hyvinvointialue_name_fi) %>%  
   summarise(vaesto = sum(vaesto)) %>%  
-  subset(select = vaesto) %>% 
+  select(vaesto) %>% 
   plot()
 ```
 
 To plot the men's share at wellbeing service country level you have to add one more step
 
 ```{r muni_pop_map3, fig.height = 7, fig.width = 4}
-get_municipality_pop(year = 2020) %>%  
+get_municipality_pop(year = 2022) %>%  
   dplyr::group_by(hyvinvointialue_name_fi) %>% 
   summarise(vaesto = sum(vaesto),
             miehet = sum(miehet)) %>% 
   mutate(share = miehet/vaesto*100) %>% 
-  subset(select = share) %>% 
+  select(share) %>% 
   plot()
 ```
 
@@ -134,7 +134,7 @@ get_municipality_pop(year = 2020) %>%
 Zipcodes are provided in a single resolution from 2015.
 
 ```{r zipcode_map, fig.height = 7, fig.width = 4}
-zipcodes <- get_zipcodes(year = 2015) 
+zipcodes <- get_zipcodes(year = 2023) 
 plot(zipcodes["nimi"], border = NA)
 ```
 
@@ -186,32 +186,22 @@ as_tibble(d$results) %>%
   print(n = 100)
 ```
 
-Here is an example where population data at municipality level is pulled from Statistics Finland from 1987 to 2018, then aggregated at the levels of regions (`maakunta`) and then plotted with ggplot2 using grid `geofi::grid_maakunta`.
+Here is an example where population data at municipality level is pulled from THL from 2000 to 2022, then aggregated at the levels of regions (`maakunta`) and then plotted with ggplot2 using grid `geofi::grid_maakunta`.
 
 ```{r geofacet, fig.height = 8, fig.width = 10}
-libs <- c("pxweb","geofacet","ggplot2")
+libs <- c("sotkanet","geofacet","ggplot2")
 if (check_namespaces(pkgs = libs)) {
-  library(pxweb)
-  # Let pull population data from Statistics Finland
-  pxweb_query_list <- 
-    list("Alue 2019"=c("*"),
-         "Tiedot"=c("M411"),
-         "Vuosi"=c("*"))
-  
-  # Download data 
-  px_data <- 
-    pxweb_get(url = "https://pxdata.stat.fi/PXWeb/api/v1/fi/Kuntien_avainluvut/2019/kuntien_avainluvut_2019_aikasarja.px",
-              query = pxweb_query_list)
-  
-  # Convert to data.frame 
-  px_data <- as.data.frame(px_data, column.name.type = "text", variable.value.type = "text")
-  names(px_data) <- c("kunta_name","year","value")
+  # Let pull population data from THL
+  library(sotkanet)
+  sotkadata <- GetDataSotkanet(indicators = 127, years = 2000:2022) %>% 
+    filter(region.category == "KUNTA") %>% 
+    mutate(municipality_code = as.integer(region.code))
   
   # lets aggregate population data
-  dat <- left_join(geofi::municipality_key_2021 %>% select(-year),
-                   px_data) %>% 
+  dat <- left_join(geofi::municipality_key_2023 %>% select(-year),
+                   sotkadata) %>% 
     group_by(maakunta_code, maakunta_name_fi,year) %>% 
-    summarise(population = sum(value, na.rm = TRUE)) %>% 
+    summarise(population = sum(primary.value, na.rm = TRUE)) %>% 
     na.omit() %>% 
     ungroup() %>% 
     rename(code = maakunta_code, name = maakunta_name_fi)
@@ -223,8 +213,8 @@ if (check_namespaces(pkgs = libs)) {
     geom_line() + 
     facet_geo(facets = ~name, grid = grid_maakunta, scales = "free_y") +
     theme(axis.text.x = element_text(size = 6)) +
-    scale_x_discrete(breaks = seq.int(from = 1987, to = 2018, by = 5)) +
-    labs(title = "Population 1987-2018", y = "population (1000)")
+    scale_x_discrete(breaks = seq.int(from = 2000, to = 2023, by = 5)) +
+    labs(title = unique(sotkadata$indicator.title.fi), y = "%")
 } else {
   message("'pxweb' not available")
 }

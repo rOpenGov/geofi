@@ -47,6 +47,7 @@ Suggests:
     pxweb,
     readr,
     rmarkdown,
+    sotkanet,
     testthat,
     tidyr
 VignetteBuilder: 

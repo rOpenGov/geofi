@@ -1,5 +1,6 @@
 # geofi 1.0.10
 
++ convert_municipality_key_codes-function fixed, thanks @pitkant
 + Examples in vignettes that use pxweb-data from Statistical Finland changed to use Sotkanet instead due to more stable api
 
 # geofi 1.0.9

@@ -1,18 +1,21 @@
 ## Test environments
-* local ubuntu 22.04 install, R 4.2.3
+* local ubuntu 22.04 install, R 4.3.1
 * win-builder (devel)
 * r-hub.io
 
 ## Submission note
 
-* Package updated for 2023 administrative regional classifications
+* convert_municipality_key_codes-function fixed
+* Examples in vignettes that use pxweb-data from Statistical Finland changed to use Sotkanet instead due to more stable api
+
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
 
-Found the following files/directories:
-    'lastMiKTeXException'
+New submission
+
+Package was archived on CRAN
 
 ## Downstream dependencies
 

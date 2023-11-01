@@ -38,12 +38,15 @@ install.packages("geofi")
 remotes::install_github("ropengov/geofi")
 ```
 
-```{r}
+```{r include = FALSE, eval = TRUE}
 # Let's first create a function that checks if the suggested 
 # packages are available
 check_namespaces <- function(pkgs){
   return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
 }
+apiacc <- geofi::check_api_access()
+pkginst <- check_namespaces(c("sotkanet","dplyr","tidyr","janitor","ggplot2"))
+apiacc_pkginst <- all(apiacc,pkginst)
 ```
 
 
@@ -55,63 +58,43 @@ Municipality data provided by `get_municipalities()`-function contains 77 indica
 
 In this first example we join municipality level indicators of *Swedish-speaking population at year end* from Sotkanet [population data](https://sotkanet.fi/sotkanet/en/haku?g=219), 
 
-```{r municipality_map}
+```{r municipality_map, eval = apiacc_pkginst}
 library(geofi)
 muni <- get_municipalities(year = 2023)
-
-libs <- c("sotkanet","dplyr","tidyr","janitor","ggplot2")
-if (check_namespaces(pkgs = libs)) {
 
 library(sotkanet)
 library(dplyr)
 sotkadata_swedish_speaking_pop <- GetDataSotkanet(indicators = 2433, years = 2000:2022) %>% 
   filter(region.category == "KUNTA") %>% 
   mutate(municipality_code = as.integer(region.code))
-
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 This is not obvious to all, but have the municipality names in Finnish among other regional breakdowns which allows us to combine the data with spatial data using `municipality_name_fi`-variable. 
 
-```{r}
-if (check_namespaces(pkgs = libs)) {
+```{r, bind_data, eval = apiacc_pkginst}
 map_data <- right_join(muni, 
                        sotkadata_swedish_speaking_pop, 
                        by = c("municipality_code" = "municipality_code"))
-  } else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 Now we can plot a map showing `Share of Swedish-speakers of the population, %` and `Share of foreign citizens of the population, %` on two panels sharing a scale.
 
-```{r, fig.width = 10, fig.height = 7}
-if (check_namespaces(pkgs = libs)) {
+```{r plot1, fig.width = 10, fig.height = 7, eval = apiacc_pkginst}
+
 library(ggplot2)
 map_data %>% 
   ggplot(aes(fill = primary.value)) + 
   geom_sf() + 
   labs(title = unique(sotkadata_swedish_speaking_pop$indicator.title.fi)) +
   theme(legend.position = "top")
-  } else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
-
 
 
 ## Zipcode level
 
 You can download data from [Paavo (Open data by postal code area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/) using `pxweb`-package in a similar manner as in the first example.
 
-```{r zipcode_with_statistics_finland}
-libs <- c("ggplot2","pxweb","janitor")
-if (check_namespaces(pkgs = libs)) {
+```{r zipcode_with_statistics_finland, eval = apiacc_pkginst}
 library(pxweb)
 # lets get all zipcodes and all variables
 pxweb_query_list <- 
@@ -131,17 +114,11 @@ px_data <- as_tibble(
   ) %>% setNames(janitor::make_clean_names(names(.)))
 px_data %>% 
   filter(postal_code_area != "Finland")
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 Before we can join the data, we must extract the numerical postal code from `postal_code_area`-variable.
 
-```{r}
-libs <- c("ggplot2","pxweb","janitor")
-if (check_namespaces(pkgs = libs)) {
+```{r get_zipcodes, eval = apiacc_pkginst}
 px_data$posti_alue <- sub(" .+$", "", px_data$postal_code_area)
 
 # Lets join with spatial data and plot the area of each zipcode
@@ -153,9 +130,5 @@ ggplot(zipcodes_map) +
           color  = alpha("white", 1/3)) +
   labs(title = "Total number of inhabitants, 2021", 
        fill = NULL)
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 

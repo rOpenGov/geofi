@@ -37,12 +37,15 @@ install.packages("geofi")
 remotes::install_github("ropengov/geofi")
 ```
 
-```{r}
+```{r include = FALSE, eval = TRUE}
 # Let's first create a function that checks if the suggested 
 # packages are available
 check_namespaces <- function(pkgs){
   return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
 }
+apiacc <- geofi::check_api_access()
+pkginst <- check_namespaces(c("sotkanet","geofacet","ggplot2","dplyr"))
+apiacc_pkginst <- all(apiacc,pkginst)
 ```
 
 ## Municipality keys
@@ -51,7 +54,7 @@ Official administrative regions in Finland are based on municipalities. In 2021 
 \
 Each municipality belongs to a higher level regional classifications such as regions (maakunta) or health care districts (sairaanhoitopiiri). `municipality_key_`-datasets are based on Statistics Finland [Statistical classification](https://data.stat.fi/api/classifications/v2/) -api with few modification and provided on yearly basis.
 
-```{r municipality_keys}
+```{r municipality_keys, eval = pkginst}
 library(geofi)
 library(dplyr)
 d <- data(package = "geofi")
@@ -62,13 +65,13 @@ as_tibble(d$results) %>%
 
 Looking at the names of \`municipality_key_2023\` there is 69 different variables from each municipality.
 
-```{r municipality_key_names}
+```{r municipality_key_names, eval = TRUE}
 names(geofi::municipality_key_2023)
 ```
 
 With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.\
 
-```{r municipality_key_maakunta}
+```{r municipality_key_maakunta, eval = pkginst}
 geofi::municipality_key_2023 %>% 
   count(maakunta_code,maakunta_name_fi,maakunta_name_sv,maakunta_name_en)
 ```
@@ -83,7 +86,7 @@ Spatial data is provided as administrative regions (polygons), population and st
 
 Municipality borders are provided yearly from 2013 and in two scales 1: 1 000 000 and 1:4 500 000. Use `1000` or `4500` as value for `scale`-argument, respectively.
 
-```{r municipality_map, fig.height = 7, fig.width = 4}
+```{r municipality_map, fig.height = 7, fig.width = 4, eval = apiacc}
 municipalities <- get_municipalities(year = 2023, scale = 4500)
 plot(municipalities["municipality_name_fi"], border = NA)
 ```
@@ -98,7 +101,7 @@ The statistical variables in the data are: total population (vaesto), share of t
 
 To plot men's share at the municipality level in 2020 (2021 municipality borders) you can simply to this. 
 
-```{r muni_pop_map1, fig.height = 7, fig.width = 4}
+```{r muni_pop_map1, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 get_municipality_pop(year = 2022) %>%  
   subset(select = miehet_p) %>% 
   plot()
@@ -107,7 +110,7 @@ get_municipality_pop(year = 2022) %>%
 Aggregating the absolute population numbers is straightforward: to plot population at Wellbeing service county level you can do. 
 
 
-```{r muni_pop_map2, fig.height = 7, fig.width = 4}
+```{r muni_pop_map2, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 get_municipality_pop(year = 2022) %>%  
   group_by(hyvinvointialue_name_fi) %>%  
   summarise(vaesto = sum(vaesto)) %>%  
@@ -117,7 +120,7 @@ get_municipality_pop(year = 2022) %>%
 
 To plot the men's share at wellbeing service country level you have to add one more step
 
-```{r muni_pop_map3, fig.height = 7, fig.width = 4}
+```{r muni_pop_map3, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 get_municipality_pop(year = 2022) %>%  
   dplyr::group_by(hyvinvointialue_name_fi) %>% 
   summarise(vaesto = sum(vaesto),
@@ -133,7 +136,7 @@ get_municipality_pop(year = 2022) %>%
 
 Zipcodes are provided in a single resolution from 2015.
 
-```{r zipcode_map, fig.height = 7, fig.width = 4}
+```{r zipcode_map, fig.height = 7, fig.width = 4, eval = apiacc}
 zipcodes <- get_zipcodes(year = 2023) 
 plot(zipcodes["nimi"], border = NA)
 ```
@@ -144,7 +147,7 @@ plot(zipcodes["nimi"], border = NA)
 
 Statistics Finland [proprietary grid database](https://www.stat.fi/tup/ruututietokanta/index_en.html) provides the attribute statistical data for these grid nets.
 
-```{r statisticsl_grid_data, fig.height = 7, fig.width = 4}
+```{r statisticsl_grid_data, fig.height = 7, fig.width = 4, eval = apiacc}
 stat_grid <- get_statistical_grid(resolution = 5, auxiliary_data = TRUE)
 plot(stat_grid["euref_x"], border = NA)
 ```
@@ -157,7 +160,7 @@ Total population (`vaesto`), number of men (`miehet`) and women (`naiset`), unde
 
 The data describes the population distribution independent of administrative areas (such as municipal borders). The data is suitable for examination of population distribution and making various spatial analysis.
 
-```{r population_grid_data, fig.height = 7, fig.width = 4}
+```{r population_grid_data, fig.height = 7, fig.width = 4, eval = apiacc}
 pop_grid <- get_population_grid(year = 2018, resolution = 5)
 plot(pop_grid["kunta"], border = NA)
 ```
@@ -166,7 +169,7 @@ plot(pop_grid["kunta"], border = NA)
 
 [National Land Survey of Finland](https://maanmittauslaitos.fi) maintains [Topological Database](https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database) that contains a wide range of layers from which you can access the locations of central localities of each municipality in Finland.
 
-```{r central_localities, fig.height = 7, fig.width = 4}
+```{r central_localities, fig.height = 7, fig.width = 4, eval = TRUE}
 plot(municipality_central_localities["teksti"])
 ```
 
@@ -178,7 +181,7 @@ From Ryan Hafen's [blog](https://ryanhafen.com/blog/geofacet/):
 
 `geofi`-package contains custom grids to be used with various Finnish administrative breakdowns as listed below.
 
-```{r geofacets}
+```{r geofacets, eval = TRUE}
 d <- data(package = "geofi")
 as_tibble(d$results) %>% 
   select(Item,Title) %>% 
@@ -188,34 +191,30 @@ as_tibble(d$results) %>%
 
 Here is an example where population data at municipality level is pulled from THL from 2000 to 2022, then aggregated at the levels of regions (`maakunta`) and then plotted with ggplot2 using grid `geofi::grid_maakunta`.
 
-```{r geofacet, fig.height = 8, fig.width = 10}
-libs <- c("sotkanet","geofacet","ggplot2")
-if (check_namespaces(pkgs = libs)) {
-  # Let pull population data from THL
-  library(sotkanet)
-  sotkadata <- GetDataSotkanet(indicators = 127, years = 2000:2022) %>% 
-    filter(region.category == "KUNTA") %>% 
-    mutate(municipality_code = as.integer(region.code))
-  
-  # lets aggregate population data
-  dat <- left_join(geofi::municipality_key_2023 %>% select(-year),
-                   sotkadata) %>% 
-    group_by(maakunta_code, maakunta_name_fi,year) %>% 
-    summarise(population = sum(primary.value, na.rm = TRUE)) %>% 
-    na.omit() %>% 
-    ungroup() %>% 
-    rename(code = maakunta_code, name = maakunta_name_fi)
-  
-  library(geofacet)
-  library(ggplot2)
-  
-  ggplot(dat, aes(x = year, y = population/1000, group = name)) + 
-    geom_line() + 
-    facet_geo(facets = ~name, grid = grid_maakunta, scales = "free_y") +
-    theme(axis.text.x = element_text(size = 6)) +
-    scale_x_discrete(breaks = seq.int(from = 2000, to = 2023, by = 5)) +
-    labs(title = unique(sotkadata$indicator.title.fi), y = "%")
-} else {
-  message("'pxweb' not available")
-}
+```{r geofacet, fig.height = 8, fig.width = 10, eval = apiacc_pkginst}
+# Let pull population data from THL
+library(sotkanet)
+sotkadata <- GetDataSotkanet(indicators = 127, years = 2000:2022) %>% 
+  filter(region.category == "KUNTA") %>% 
+  mutate(municipality_code = as.integer(region.code))
+
+# lets aggregate population data
+dat <- left_join(geofi::municipality_key_2023 %>% select(-year),
+                 sotkadata) %>% 
+  group_by(maakunta_code, maakunta_name_fi,year) %>% 
+  summarise(population = sum(primary.value, na.rm = TRUE)) %>% 
+  na.omit() %>% 
+  ungroup() %>% 
+  rename(code = maakunta_code, name = maakunta_name_fi)
+
+library(geofacet)
+library(ggplot2)
+
+ggplot(dat, aes(x = year, y = population/1000, group = name)) + 
+  geom_line() + 
+  facet_geo(facets = ~name, grid = grid_maakunta, scales = "free_y") +
+  theme(axis.text.x = element_text(size = 6)) +
+  scale_x_discrete(breaks = seq.int(from = 2000, to = 2023, by = 5)) +
+  labs(title = unique(sotkadata$indicator.title.fi), y = "%")
+
 ```

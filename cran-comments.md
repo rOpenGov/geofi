@@ -5,9 +5,7 @@
 
 ## Submission note
 
-* convert_municipality_key_codes-function fixed
-* Examples in vignettes that use pxweb-data from Statistical Finland changed to use Sotkanet instead due to more stable api
-
+* More verbose description field that better describes what the package does and why it may be useful
 
 ## R CMD check results
 

@@ -5,6 +5,7 @@
 
 ## Submission note
 
+* Vignettes made more robust against missing dependencies or internet resources
 * More verbose description field that better describes what the package does and why it may be useful
 
 ## R CMD check results

@@ -118,12 +118,6 @@ from common sources of attribute data. Here we are using data from <a href="http
 <span></span>
 <span><span class="co"># Install development version from GitHub</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ropengov/geofi"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Let's first create a function that checks if the suggested </span></span>
-<span><span class="co"># packages are available</span></span>
-<span><span class="va">check_namespaces</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pkgs</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">pkgs</span>, <span class="va">requireNamespace</span>,quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="municipalities">Municipalities<a class="anchor" aria-label="anchor" href="#municipalities"></a>
 </h2>
@@ -137,53 +131,36 @@ for aggregating data or as keys for joining attribute data.</p>
 <p>In this first example we join municipality level indicators of
 <em>Swedish-speaking population at year end</em> from Sotkanet <a href="https://sotkanet.fi/sotkanet/en/haku?g=219" class="external-link">population
 data</a>,</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/geofi" class="external-link">geofi</a></span><span class="op">)</span></span>
 <span><span class="va">muni</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2023</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sotkanet"</span>,<span class="st">"dplyr"</span>,<span class="st">"tidyr"</span>,<span class="st">"janitor"</span>,<span class="st">"ggplot2"</span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/sotkanet/" class="external-link">sotkanet</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">sotkadata_swedish_speaking_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ropengov.github.io/sotkanet/reference/GetDataSotkanet.html" class="external-link">GetDataSotkanet</a></span><span class="op">(</span>indicators <span class="op">=</span> <span class="fl">2433</span>, years <span class="op">=</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">region.category</span> <span class="op">==</span> <span class="st">"KUNTA"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>municipality_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">region.code</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, </span>
-<span>          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>municipality_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">region.code</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>This is not obvious to all, but have the municipality names in
 Finnish among other regional breakdowns which allows us to combine the
 data with spatial data using
 <code>municipality_name_fi</code>-variable.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span><span class="va">map_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">right_join</a></span><span class="op">(</span><span class="va">muni</span>, </span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">map_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">right_join</a></span><span class="op">(</span><span class="va">muni</span>, </span>
 <span>                       <span class="va">sotkadata_swedish_speaking_pop</span>, </span>
-<span>                       by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"municipality_code"</span> <span class="op">=</span> <span class="st">"municipality_code"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, </span>
-<span>          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<span>                       by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"municipality_code"</span> <span class="op">=</span> <span class="st">"municipality_code"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Now we can plot a map showing
 <code>Share of Swedish-speakers of the population, %</code> and
 <code>Share of foreign citizens of the population, %</code> on two
 panels sharing a scale.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">map_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">primary.value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">sotkadata_swedish_speaking_pop</span><span class="op">$</span><span class="va">indicator.title.fi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, </span>
-<span>          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p><img src="geofi_joining_attribute_data_files/figure-html/unnamed-chunk-4-1.png" width="750"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="geofi_joining_attribute_data_files/figure-html/plot1-1.png" width="750"></p>
 </div>
 </div>
 <div class="section level2">
@@ -192,10 +169,8 @@ panels sharing a scale.</p>
 <p>You can download data from <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/" class="external-link">Paavo
 (Open data by postal code area)</a> using <code>pxweb</code>-package in
 a similar manner as in the first example.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>,<span class="st">"pxweb"</span>,<span class="st">"janitor"</span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/" class="external-link">pxweb</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/" class="external-link">pxweb</a></span><span class="op">)</span></span>
 <span><span class="co"># lets get all zipcodes and all variables</span></span>
 <span><span class="va">pxweb_query_list</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Postinumeroalue"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>,</span>
@@ -214,10 +189,6 @@ a similar manner as in the first example.</p>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/make_clean_names.html" class="external-link">make_clean_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">px_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">postal_code_area</span> <span class="op">!=</span> <span class="st">"Finland"</span><span class="op">)</span></span>
-<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, </span>
-<span>          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,027 × 3</span></span></span>
 <span><span class="co">#&gt;    postal_code_area                                year  inhabitants_total_he</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -234,10 +205,8 @@ a similar manner as in the first example.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3,017 more rows</span></span></span></code></pre></div>
 <p>Before we can join the data, we must extract the numerical postal
 code from <code>postal_code_area</code>-variable.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ggplot2"</span>,<span class="st">"pxweb"</span>,<span class="st">"janitor"</span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="fu">check_namespaces</span><span class="op">(</span>pkgs <span class="op">=</span> <span class="va">libs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span><span class="va">px_data</span><span class="op">$</span><span class="va">posti_alue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">" .+$"</span>, <span class="st">""</span>, <span class="va">px_data</span><span class="op">$</span><span class="va">postal_code_area</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">px_data</span><span class="op">$</span><span class="va">posti_alue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">" .+$"</span>, <span class="st">""</span>, <span class="va">px_data</span><span class="op">$</span><span class="va">postal_code_area</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Lets join with spatial data and plot the area of each zipcode</span></span>
 <span><span class="va">zipcodes19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_zipcodes.html">get_zipcodes</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span> </span>
@@ -247,12 +216,8 @@ code from <code>postal_code_area</code>-variable.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">inhabitants_total_he</span><span class="op">)</span>, </span>
 <span>          color  <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html" class="external-link">alpha</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Total number of inhabitants, 2021"</span>, </span>
-<span>       fill <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"One or more of the following packages is not available: "</span>, </span>
-<span>          <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">libs</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<p><img src="geofi_joining_attribute_data_files/figure-html/unnamed-chunk-5-1.png" width="525"></p>
+<span>       fill <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<p><img src="geofi_joining_attribute_data_files/figure-html/get_zipcodes-1.png" width="525"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

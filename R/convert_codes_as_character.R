@@ -29,11 +29,18 @@ convert_municipality_key_codes <- function(muni_key = geofi::municipality_key) {
                 # "kela_vakuutuspiiri_code", "kela_asumistukialue_code",
                 "hyvinvointialue_code")
 
-  muni_key[, width_3] <- sapply(muni_key[, width_3],
-                                formatC, flag = "0", width = 3)
-  muni_key[, width_2] <- sapply(muni_key[, width_2],
-                                formatC, flag = "0", width = 2)
-  muni_key[, integer_columns] <- sapply(muni_key[, integer_columns], as.integer)
+  muni_key[, names(muni_key) %in% width_3] <- 
+    sapply(
+      X = muni_key[, names(muni_key) %in% width_3],
+      FUN = formatC, flag = "0", width = 3)
+  muni_key[, names(muni_key) %in% width_2] <- 
+    sapply(
+      X = muni_key[, names(muni_key) %in% width_2],
+      FUN = formatC, flag = "0", width = 2)
+  muni_key[, names(muni_key) %in% integer_columns] <- 
+    sapply(
+      X = muni_key[, names(muni_key) %in% integer_columns],
+      FUN = as.integer)
 
   return(muni_key)
 }

@@ -1,3 +1,8 @@
+# geofi 1.0.10
+
++ convert_municipality_key_codes-function fixed, thanks @pitkant
++ Examples in vignettes that use pxweb-data from Statistical Finland changed to use Sotkanet instead due to more stable api
+
 # geofi 1.0.9
 
 + 2023 regional classifications updated. Two classifications: University Hospital specific catchment area (Erva-alue) and Hospital District (sairaanhoitopiirit) dropped as they are no longer operation but replaced with wellbeing service counties (hyvinvointialueet)

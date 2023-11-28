@@ -37,12 +37,15 @@ remotes::install_github("ropengov/geofi")
 ```
 
 
-```{r}
+```{r include = FALSE, eval = TRUE}
 # Let's first create a function that checks if the suggested 
 # packages are available
 check_namespaces <- function(pkgs){
   return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
 }
+apiacc <- geofi::check_api_access()
+pkginst <- check_namespaces(c("sf","dplyr","patchwork","leaflet","ggplot2"))
+apiacc_pkginst <- all(apiacc,pkginst)
 ```
 
 This vignettes gives an overview of different options for creating maps in R using the data from `geofi`-package. Vignette is divided in three sections: *R-packages for static maps*, *static maps using ggplot2* and *interactive maps*. But we begin with the datasets we want to plot.
@@ -53,16 +56,15 @@ If you want more detailed explanation of how to plot `sf`-objects take a look at
 
 Lets start with latest municipality division from `get_municipalities()` with is a *POLYGON* data and with *POINT* data of `municipality_central_localities` that is shipped with the package.
 
-```{r municipality_map, fig.width = 5}
+```{r municipality_map, fig.width = 5, eval = apiacc}
 library(geofi)
 polygon <- get_municipalities(year = 2021, scale = 4500)
 point <- geofi::municipality_central_localities
 # municipality code into integer
 point$municipality_code <- as.integer(point$kuntatunnus)
-library(sf) # for spatial data operations later
 ```
 
-They both come in same CRS `r sf::st_crs(point)$input` and can be plotted together without any further manipulation.
+They both come in same CRS `EPSG:3067` and can be plotted together without any further manipulation.
 
 ## R-packages for static maps
 
@@ -71,8 +73,8 @@ There are two main technologies for creating static graphics in R: base and [ggp
 
 **base**
 
-```{r base, fig.width = 5}
-# dev.off()
+```{r base, fig.width = 5, eval = apiacc_pkginst}
+library(sf)
 plot(st_geometry(polygon["municipality_code"]))
 plot(polygon["municipality_code"], add = TRUE, border="white")
 plot(st_geometry(point["municipality_code"]), add = TRUE, color = "black")
@@ -80,17 +82,11 @@ plot(st_geometry(point["municipality_code"]), add = TRUE, color = "black")
 
 **ggplot2**
 
-```{r gg, fig.width = 5}
-libs <- c("ggplot2")
-if (check_namespaces(pkgs = libs)) {
+```{r gg, fig.width = 5, eval = apiacc_pkginst}
 library(ggplot2)
 ggplot() + 
   geom_sf(data = polygon, aes(fill = municipality_code)) +
   geom_sf(data = point)
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 **tmap**
@@ -103,9 +99,7 @@ As I am only fluent in using `ggplot2` the the more complex examples are using `
 
 `ggplot2`-packages has three `sf`-class spesific functions: `geom_sf` plotting for points, lines and polygons, and `geom_sf_text` and `geom_sf_label` for labeling the maps. In the following examples we are using the Uusimaa region in Southern Finland.
 
-```{r uusimaa, fig.width=8, fig.height=4}
-libs <- c("ggplot2")
-if (check_namespaces(pkgs = libs)) {
+```{r uusimaa, fig.width=8, fig.height=4, eval = apiacc_pkginst}
 library(dplyr)
 polygon_uusimaa <- polygon %>% filter(maakunta_name_fi %in% "Uusimaa")
 point_uusimaa <- point %>% filter(municipality_code %in% polygon_uusimaa$municipality_code)
@@ -114,19 +108,13 @@ ggplot() +
   geom_sf(data = polygon_uusimaa, alpha = .3) + 
   geom_sf(data = point_uusimaa) + 
   geom_sf_text(data = point_uusimaa, aes(label = teksti))
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 ### Label overlapping
 
 `geom_sf_label` or `geom_sf_text` cannot control the overlapping of labels which is a common issue when mapping objects of various shapes and sizes. With [`ggrepel`](https://cran.r-project.org/package=ggrepel) you can solve the problem though it requires a bit of spatial data processing with `sf`-package.
 
-```{r uusimaa_repel, fig.width=8, fig.height=4}
-libs <- c("ggplot2")
-if (check_namespaces(pkgs = libs)) {
+```{r uusimaa_repel, fig.width=8, fig.height=4, eval = apiacc_pkginst}
 ggplot() + 
   theme_light() +
   geom_sf(data = polygon_uusimaa, alpha = .3) + 
@@ -137,10 +125,6 @@ ggplot() +
                                     sf::st_centroid() %>% 
                                     sf::st_coordinates() %>% as_tibble()),
                      aes(label = teksti, x = X, y = Y))
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 ### Faceting 
@@ -151,7 +135,7 @@ If want to present multiple variables of same regions you can use facets.
 
 [Facetting](https://ggplot2.tidyverse.org/reference/facet_wrap.html) is a useful way to present data on multiple variables covering the same region. This is useful approach if you have, lets say, data on same indicator from two different time points and you want to have separate maps for separate times points, but have a shared scale. Below I create a random data for two year titled `population` and plot the data using `facet_wrap()`-function.
 
-```{r}
+```{r create_popdata, eval = apiacc_pkginst}
 pop_data <- bind_rows(
   tibble(
     municipality_code = polygon$municipality_code
@@ -167,26 +151,18 @@ pop_data <- bind_rows(
 pop_data
 ```
 
-```{r facet,  fig.height=7}
+```{r facet,  fig.height=7, eval = apiacc_pkginst}
 pop_map <- right_join(polygon, pop_data)
 
-libs <- c("ggplot2")
-if (check_namespaces(pkgs = libs)) {
 ggplot(pop_map, 
        aes(fill = population)) +
   geom_sf() +
   facet_grid(~time)
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 However, often the indicators you want to compare either have different values (shared scale not ideal), are aggregated differently or cover non-overlapping geographic region. The you may find [patchwork](https://patchwork.data-imaginist.com/) useful as in the example below.
 
-```{r patchwork, fig.width = 8, fig.height=10}
-libs <- c("ggplot2","patchwork")
-if (check_namespaces(pkgs = libs)) {
+```{r patchwork, fig.width = 8, fig.height=10, eval = apiacc_pkginst}
 library(patchwork)
 p_municipalities <- ggplot(polygon, aes(fill = municipality_code)) + 
   geom_sf() + 
@@ -201,10 +177,6 @@ p_uusimaa <- ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
 (p_municipalities | p_regions) /
 p_uusimaa + plot_layout(nrow = 2, heights = c(1,0.6)) +
   plot_annotation(title = "Combining multiple maps into a single (gg)plot")
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 
@@ -214,9 +186,7 @@ Creating informative and aesthetically pleasing maps is always a challenge and t
 
 You may want to get rid of the grid as well as axis-labels and -titles.  
 
-```{r, fig.height = 5}
-libs <- c("ggplot2")
-if (check_namespaces(pkgs = libs)) {
+```{r, fig.height = 5, eval = apiacc_pkginst}
 ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
   geom_sf(color = alpha("white", 1/3)) +
   scale_fill_fermenter(palette = "YlGnBu") +
@@ -228,10 +198,6 @@ ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
         ) +
   labs(title = "Municipality code", 
        fill = NULL)
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 
@@ -241,9 +207,7 @@ As for interactive maps [Leaflet](https://rstudio.github.io/leaflet/) is not the
 
 Again, I am most experienced with leaflet so the following example is using leaflet. Leaflet default projection is `EPSG:3857` or `WGS84`, also known as "Google Mercator" or "Web Mercator, and you have reproject your `geofi` data to plot it using leaflet.
 
-```{r leaflet, out.width="90%"}
-libs <- c("leaflet")
-if (check_namespaces(pkgs = libs)) {
+```{r leaflet, out.width="90%", eval = apiacc_pkginst}
 polygon_wgs84 <- sf::st_transform(x = polygon, crs = "+proj=longlat +datum=WGS84")
 point_wgs84 <- sf::st_transform(x = point, crs = "+proj=longlat +datum=WGS84")
 
@@ -292,9 +256,5 @@ leaflet(polygon_wgs84, options = leafletOptions(worldCopyJump = F, crs = EPSG306
                                                        padding = "2px 4px"),
                                           textsize = "12px",
                                           direction = "auto"))
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 

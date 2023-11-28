@@ -45,3 +45,4 @@ _pkgdown.yaml
 ^geofi.*\.tar\.gz$
 ^geofi.*\.tgz$
 ^CRAN-SUBMISSION$
+^vignettes/articles$

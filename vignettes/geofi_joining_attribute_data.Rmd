@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from three different sources of which two are from [Statistics Finland PxWeb-api](https://pxdata.stat.fi/PXWeb/pxweb/en/), namely [municipality key figures](https://pxdata.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/) and [Paavo (Open data by postal code area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/). Third is [Covid-19 tests and confirmed cases in Finland](https://thl.fi/fi/tilastot-ja-data/aineistot-ja-palvelut/avoin-data/varmistetut-koronatapaukset-suomessa-covid-19-).
+This vignettes provides few examples on how to join attribute data from common sources of attribute data. Here we are using data from [THL Sotkanet](https://sotkanet.fi/sotkanet/en/index) and [Paavo (Open data by postal code area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/).
 
 **Installation**
 
@@ -38,12 +38,15 @@ install.packages("geofi")
 remotes::install_github("ropengov/geofi")
 ```
 
-```{r}
+```{r include = FALSE, eval = TRUE}
 # Let's first create a function that checks if the suggested 
 # packages are available
 check_namespaces <- function(pkgs){
   return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
 }
+apiacc <- geofi::check_api_access()
+pkginst <- check_namespaces(c("sotkanet","dplyr","tidyr","janitor","ggplot2"))
+apiacc_pkginst <- all(apiacc,pkginst)
 ```
 
 
@@ -51,162 +54,39 @@ check_namespaces <- function(pkgs){
 
 Municipality data provided by `get_municipalities()`-function contains 77 indicators variables from each of 309 municipalities. Variables can be used either for aggregating data or as keys for joining attribute data. 
 
-### PxWeb-data
+### Population data from Sotkanet
 
-In this first example we join municipality level data from Statistics Finland [municipality key figures](https://pxdata.stat.fi/PXWeb/pxweb/en/Kuntien_avainluvut/)
+In this first example we join municipality level indicators of *Swedish-speaking population at year end* from Sotkanet [population data](https://sotkanet.fi/sotkanet/en/haku?g=219), 
 
-```{r municipality_map}
+```{r municipality_map, eval = apiacc_pkginst}
 library(geofi)
-muni <- get_municipalities(year = 2019)
+muni <- get_municipalities(year = 2023)
 
-libs <- c("pxweb","dplyr","tidyr","janitor","ggplot2")
-if (check_namespaces(pkgs = libs)) {
-library(pxweb)
-pxweb_query_list <-
-  list("Alue 2020"=c("*"),
-       "Tiedot"=c("*"),
-       "Vuosi"=c("2019"))
-
-px_raw <-
-  pxweb_get(url = "https://pxdata.stat.fi/PXWeb/api/v1/en/Kuntien_avainluvut/2020/kuntien_avainluvut_2020_aikasarja.px",
-            query = pxweb_query_list)
-
+library(sotkanet)
 library(dplyr)
-library(tidyr)
-library(janitor)
-library(sf)
-px_data <- as_tibble(
-  as.data.frame(px_raw, 
-                column.name.type = "text", 
-                variable.value.type = "text")
-  ) %>% setNames(make_clean_names(names(.))) %>% 
-  pivot_longer(names_to = "information", values_to = "municipal_key_figures", 3:ncol(.))
-px_data
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
-```
-
-Once we have the data in long format we can observe the `region_2020`-column.
-
-```{r municipality_map2}
-if (check_namespaces(pkgs = libs)) {
-count(px_data, region_2020)
-  } else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
+sotkadata_swedish_speaking_pop <- GetDataSotkanet(indicators = 2433, years = 2000:2022) %>% 
+  filter(region.category == "KUNTA") %>% 
+  mutate(municipality_code = as.integer(region.code))
 ```
 
 This is not obvious to all, but have the municipality names in Finnish among other regional breakdowns which allows us to combine the data with spatial data using `municipality_name_fi`-variable. 
 
-```{r}
-if (check_namespaces(pkgs = libs)) {
+```{r, bind_data, eval = apiacc_pkginst}
 map_data <- right_join(muni, 
-                       px_data, 
-                       by = c("municipality_name_fi" = "region_2020"))
-  } else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
+                       sotkadata_swedish_speaking_pop, 
+                       by = c("municipality_code" = "municipality_code"))
 ```
 
 Now we can plot a map showing `Share of Swedish-speakers of the population, %` and `Share of foreign citizens of the population, %` on two panels sharing a scale.
 
-```{r, fig.width = 10, fig.height = 7}
-if (check_namespaces(pkgs = libs)) {
+```{r plot1, fig.width = 10, fig.height = 7, eval = apiacc_pkginst}
+
 library(ggplot2)
 map_data %>% 
-  filter(grepl("swedish|foreign", information)) %>% 
-  ggplot(aes(fill = municipal_key_figures)) + 
+  ggplot(aes(fill = primary.value)) + 
   geom_sf() + 
-  facet_wrap(~information) +
+  labs(title = unique(sotkadata_swedish_speaking_pop$indicator.title.fi)) +
   theme(legend.position = "top")
-  } else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
-```
-
-
-## Health Districts
-
-in early 2021 we are still troubled by the COVID-19 and the health authorities are counting infections, deaths and vaccinated. Lets pull the daily data from API and compare the names of the health districts both in COVID-19 data and in municipality division from Statistics Finland. 
-
-```{r}
-if (FALSE){
-  library(readr)
-  cols(
-    Area = col_character(),
-    Time = col_date(format = ""),
-    val = col_double()
-  ) -> cov_cols
-  
-  thl_korona_api <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek20200101-508804L&column=hcdmunicipality2020-445222L"
-  status <- httr::status_code(httr::GET(thl_korona_api))
-
-  xdf_raw <- read_csv2(thl_korona_api, col_types = cov_cols)
-  xdf <- xdf_raw %>% 
-    # filter(!grepl("Kaikki", Alue)) %>% 
-    rename(date = Time, 
-           shp = Area, 
-           day_cases = val) %>% 
-    group_by(shp) %>% 
-    arrange(shp,date) %>% 
-    filter(!is.na(day_cases)) %>% 
-    mutate(total_cases = cumsum(day_cases)) %>% 
-    ungroup() %>% 
-    group_by(shp) %>% 
-    filter(date == max(date, na.rm = TRUE)) %>% 
-    ungroup()
-} 
-xdf <- structure(list(shp = c("Åland", "All areas", "Central Finland Hospital District", 
-"Central Ostrobothnia Hospital District", "Helsinki and Uusimaa Hospital District", 
-"Itä-Savo Hospital District", "Kainuu Hospital District", "Kanta-Häme Hospital District", 
-"Kymenlaakso Hospital District", "Länsi-Pohja Hospital District", 
-"Lappi Hospital District", "North Karelia Hospital District", 
-"North Ostrobothnia Hospital District", "North Savo Hospital District", 
-"Päijät-Häme Hospital District", "Pirkanmaa Hospital District", 
-"Satakunta Hospital District", "South Karelia Hospital District", 
-"South Ostrobothnia Hospital District", "South Savo Hospital District", 
-"Southwest Finland Hospital District", "Vaasa Hospital District"
-), date = structure(c(18674, 18674, 18674, 18674, 18674, 18674, 
-18674, 18674, 18674, 18674, 18674, 18674, 18674, 18674, 18674, 
-18674, 18674, 18674, 18674, 18674, 18674, 18674), class = "Date"), 
-    day_cases = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0), total_cases = c(120, 51047, 1850, 177, 
-    29519, 141, 227, 873, 854, 478, 465, 516, 2265, 850, 1243, 
-    2662, 671, 348, 534, 573, 4803, 1878)), row.names = c(NA, 
--22L), class = c("tbl_df", "tbl", "data.frame"))
-
-xdf %>% 
-    count(shp)
-  
-muni <- get_municipalities(year = 2021) 
-muni %>% 
-  st_drop_geometry() %>% 
-  count(sairaanhoitop_name_en)
-```
-
-The names look identical so we can join the two datasets and plot a map.
-
-```{r}
-libs <- c("ggplot2")
-if (check_namespaces(pkgs = libs)) {
-muni %>% 
-  count(sairaanhoitop_name_en) %>% 
-  left_join(xdf, by = c("sairaanhoitop_name_en" = "shp")) %>% 
-  ggplot(aes(fill = total_cases)) +
-  geom_sf() +
-  geom_sf_text(aes(label = paste0(sairaanhoitop_name_en, "\n", total_cases)), 
-               color = "white") +
-  labs(title = "Number of total COVID-19 cases reported since January 2020", 
-       fill = NULL)
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 
@@ -214,9 +94,7 @@ muni %>%
 
 You can download data from [Paavo (Open data by postal code area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/) using `pxweb`-package in a similar manner as in the first example.
 
-```{r zipcode_with_statistics_finland}
-libs <- c("ggplot2","pxweb","janitor")
-if (check_namespaces(pkgs = libs)) {
+```{r zipcode_with_statistics_finland, eval = apiacc_pkginst}
 library(pxweb)
 # lets get all zipcodes and all variables
 pxweb_query_list <- 
@@ -233,20 +111,14 @@ px_data <- as_tibble(
   as.data.frame(px_raw, 
                 column.name.type = "text", 
                 variable.value.type = "text")
-  ) %>% setNames(make_clean_names(names(.)))
+  ) %>% setNames(janitor::make_clean_names(names(.)))
 px_data %>% 
   filter(postal_code_area != "Finland")
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 
 Before we can join the data, we must extract the numerical postal code from `postal_code_area`-variable.
 
-```{r}
-libs <- c("ggplot2","pxweb","janitor")
-if (check_namespaces(pkgs = libs)) {
+```{r get_zipcodes, eval = apiacc_pkginst}
 px_data$posti_alue <- sub(" .+$", "", px_data$postal_code_area)
 
 # Lets join with spatial data and plot the area of each zipcode
@@ -258,9 +130,5 @@ ggplot(zipcodes_map) +
           color  = alpha("white", 1/3)) +
   labs(title = "Total number of inhabitants, 2021", 
        fill = NULL)
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
 ```
 

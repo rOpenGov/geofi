@@ -1,3 +1,7 @@
+# geofi 1.0.11
+
++ Vignettes made more robust agains missing suggested dependencies
+
 # geofi 1.0.10
 
 + convert_municipality_key_codes-function fixed, thanks @pitkant

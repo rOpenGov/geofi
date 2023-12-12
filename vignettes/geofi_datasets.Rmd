@@ -86,7 +86,7 @@ Spatial data is provided as administrative regions (polygons), population and st
 
 Municipality borders are provided yearly from 2013 and in two scales 1: 1 000 000 and 1:4 500 000. Use `1000` or `4500` as value for `scale`-argument, respectively.
 
-```{r municipality_map, fig.height = 7, fig.width = 4, eval = apiacc}
+```{r municipality_map, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 municipalities <- get_municipalities(year = 2023, scale = 4500)
 plot(municipalities["municipality_name_fi"], border = NA)
 ```
@@ -136,7 +136,7 @@ get_municipality_pop(year = 2022) %>%
 
 Zipcodes are provided in a single resolution from 2015.
 
-```{r zipcode_map, fig.height = 7, fig.width = 4, eval = apiacc}
+```{r zipcode_map, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 zipcodes <- get_zipcodes(year = 2023) 
 plot(zipcodes["nimi"], border = NA)
 ```
@@ -147,7 +147,7 @@ plot(zipcodes["nimi"], border = NA)
 
 Statistics Finland [proprietary grid database](https://www.stat.fi/tup/ruututietokanta/index_en.html) provides the attribute statistical data for these grid nets.
 
-```{r statisticsl_grid_data, fig.height = 7, fig.width = 4, eval = apiacc}
+```{r statisticsl_grid_data, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 stat_grid <- get_statistical_grid(resolution = 5, auxiliary_data = TRUE)
 plot(stat_grid["euref_x"], border = NA)
 ```
@@ -160,16 +160,16 @@ Total population (`vaesto`), number of men (`miehet`) and women (`naiset`), unde
 
 The data describes the population distribution independent of administrative areas (such as municipal borders). The data is suitable for examination of population distribution and making various spatial analysis.
 
-```{r population_grid_data, fig.height = 7, fig.width = 4, eval = apiacc}
+```{r population_grid_data, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 pop_grid <- get_population_grid(year = 2018, resolution = 5)
 plot(pop_grid["kunta"], border = NA)
 ```
 
 ### Central localities of municipalities
 
-[National Land Survey of Finland](https://maanmittauslaitos.fi) maintains [Topological Database](https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database) that contains a wide range of layers from which you can access the locations of central localities of each municipality in Finland.
+[National Land Survey of Finland](https://maanmittauslaitos.fi) maintains [Topological Database](https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/topographic-database) that contains a wide range of layers from which you can access the locations of central localities of each municipality in Finland.
 
-```{r central_localities, fig.height = 7, fig.width = 4, eval = TRUE}
+```{r central_localities, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 plot(municipality_central_localities["teksti"])
 ```
 
@@ -181,7 +181,7 @@ From Ryan Hafen's [blog](https://ryanhafen.com/blog/geofacet/):
 
 `geofi`-package contains custom grids to be used with various Finnish administrative breakdowns as listed below.
 
-```{r geofacets, eval = TRUE}
+```{r geofacets, eval = apiacc_pkginst}
 d <- data(package = "geofi")
 as_tibble(d$results) %>% 
   select(Item,Title) %>% 

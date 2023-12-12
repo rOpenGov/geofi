@@ -1,8 +1,8 @@
 Type: Package
 Package: geofi
 Title: Access Finnish Geospatial Data
-Version: 1.0.10
-Date: 2023-11-01
+Version: 1.0.11
+Date: 2023-12-12
 Authors@R: c(
     person("Markus", "Kainu", , "markus.kainu@kapsi.fi", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1376-503X")),
@@ -36,9 +36,9 @@ Imports:
     yaml
 Suggests: 
     covr,
-    geofacet,
     ggplot2,
     ggrepel,
+    geofacet,
     htmltools,
     httptest (>= 4.0.0),
     janitor,

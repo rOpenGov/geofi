@@ -5,7 +5,7 @@
 
 ## Submission note
 
-* Vignettes made more robust against missing dependencies or internet resources
+* Tests made more robust against missing Suggest packages
 
 ## R CMD check results
 

@@ -1,3 +1,7 @@
+# geofi 1.0.12
+
++ Vignettes made more robust agains missing suggested dependencies, pxweb in this case
+
 # geofi 1.0.11
 
 + Vignettes made more robust agains missing suggested dependencies

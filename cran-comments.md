@@ -5,7 +5,8 @@
 
 ## Submission note
 
-* Vignettes made more robust against missing Suggest packages
++ pxweb removed from suggested packages list.
++ WFS api url fixed in Description
 
 ## R CMD check results
 

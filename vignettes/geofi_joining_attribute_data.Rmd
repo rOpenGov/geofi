@@ -45,7 +45,7 @@ check_namespaces <- function(pkgs){
   return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
 }
 apiacc <- geofi::check_api_access()
-pkginst <- check_namespaces(c("sotkanet","dplyr","tidyr","janitor","ggplot2"))
+pkginst <- check_namespaces(c("sotkanet","dplyr","tidyr","janitor","ggplot2","pxweb"))
 apiacc_pkginst <- all(apiacc,pkginst)
 ```
 

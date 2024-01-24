@@ -5,15 +5,11 @@
 
 ## Submission note
 
-* Tests made more robust against missing Suggest packages
+* Vignettes made more robust against missing Suggest packages
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
-
-New submission
-
-Package was archived on CRAN
 
 ## Downstream dependencies
 

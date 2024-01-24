@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.12</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.13</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -167,53 +167,23 @@ panels sharing a scale.</p>
 <h2 id="zipcode-level">Zipcode level<a class="anchor" aria-label="anchor" href="#zipcode-level"></a>
 </h2>
 <p>You can download data from <a href="https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/" class="external-link">Paavo
-(Open data by postal code area)</a> using <code>pxweb</code>-package in
-a similar manner as in the first example.</p>
+(Open data by postal code area)</a> using <a href="https://ropengov.github.io/pxweb/" class="external-link"><code>pxweb</code></a>-package.
+In this example we will download preformatted population data in
+<code>csv</code> format directly from Statistics Finland and process it
+to match with spatial zipcode data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rOpenGov/pxweb/" class="external-link">pxweb</a></span><span class="op">)</span></span>
-<span><span class="co"># lets get all zipcodes and all variables</span></span>
-<span><span class="va">pxweb_query_list</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Postinumeroalue"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span><span class="op">)</span>,</span>
-<span>       <span class="st">"Tiedot"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"he_vakiy"</span><span class="op">)</span>,</span>
-<span>       <span class="st">"Vuosi"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">px_raw</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://ropengov.github.io/pxweb/reference/pxweb_get.html" class="external-link">pxweb_get</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://statfin.stat.fi/PXWeb/api/v1/en/Postinumeroalueittainen_avoin_tieto/uusin/paavo_pxt_12ey.px"</span>,</span>
-<span>            query <span class="op">=</span> <span class="va">pxweb_query_list</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">px_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">px_raw</span>, </span>
-<span>                column.name.type <span class="op">=</span> <span class="st">"text"</span>, </span>
-<span>                variable.value.type <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/make_clean_names.html" class="external-link">make_clean_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">px_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">postal_code_area</span> <span class="op">!=</span> <span class="st">"Finland"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,027 × 3</span></span></span>
-<span><span class="co">#&gt;    postal_code_area                                year  inhabitants_total_he</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> WHOLE COUNTRY                                   2021               5<span style="text-decoration: underline;">548</span>241</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 00100  Helsinki keskusta - Etu-Töölö (Helsinki) 2021                 <span style="text-decoration: underline;">17</span>893</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 00120  Punavuori - Bulevardi (Helsinki)         2021                  <span style="text-decoration: underline;">7</span>230</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 00130  Kaartinkaupunki (Helsinki)               2021                  <span style="text-decoration: underline;">1</span>716</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 00140  Kaivopuisto - Ullanlinna (Helsinki)      2021                  <span style="text-decoration: underline;">7</span>845</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 00150  Punavuori - Eira - Hernesaari (Helsinki) 2021                  <span style="text-decoration: underline;">9</span>368</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 00160  Katajanokka (Helsinki)                   2021                  <span style="text-decoration: underline;">4</span>932</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 00170  Kruununhaka (Helsinki)                   2021                  <span style="text-decoration: underline;">7</span>191</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 00180  Kamppi - Ruoholahti (Helsinki)           2021                 <span style="text-decoration: underline;">14</span>440</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 00190  Suomenlinna (Helsinki)                   2021                   694</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3,017 more rows</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">px_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"https://pxdata.stat.fi:443/PxWeb/sq/43d3d0aa-636e-4a4b-bbe1-decae45fc2b4"</span>, </span>
+<span>                    header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">";"</span>, fileEncoding <span class="op">=</span> <span class="st">"Latin1"</span><span class="op">)</span></span>
+<span><span class="va">px_data</span><span class="op">$</span><span class="va">posti_alue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">" .+$"</span>, <span class="st">""</span>, <span class="va">px_data</span><span class="op">$</span><span class="va">Postinumeroalue</span><span class="op">)</span></span></code></pre></div>
 <p>Before we can join the data, we must extract the numerical postal
 code from <code>postal_code_area</code>-variable.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">px_data</span><span class="op">$</span><span class="va">posti_alue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">" .+$"</span>, <span class="st">""</span>, <span class="va">px_data</span><span class="op">$</span><span class="va">postal_code_area</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Lets join with spatial data and plot the area of each zipcode</span></span>
+<code class="sourceCode R"><span><span class="co"># Lets join with spatial data and plot the area of each zipcode</span></span>
 <span><span class="va">zipcodes19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_zipcodes.html">get_zipcodes</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span> </span>
 <span><span class="va">zipcodes_map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">zipcodes19</span>, </span>
 <span>                          <span class="va">px_data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">zipcodes_map</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">inhabitants_total_he</span><span class="op">)</span>, </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">X2021</span><span class="op">)</span>, </span>
 <span>          color  <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html" class="external-link">alpha</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Total number of inhabitants, 2021"</span>, </span>
 <span>       fill <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>

@@ -1,8 +1,8 @@
 Type: Package
 Package: geofi
 Title: Access Finnish Geospatial Data
-Version: 1.0.11
-Date: 2023-12-12
+Version: 1.0.13
+Date: 2024-01-24
 Authors@R: c(
     person("Markus", "Kainu", , "markus.kainu@kapsi.fi", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1376-503X")),
@@ -16,7 +16,7 @@ Authors@R: c(
     person("Leo", "Lahti", , "leo.lahti@iki.fi", role = "aut",
            comment = c(ORCID = "0000-0001-5537-637X"))
   )
-Description: Designed to simplify geospatial data access from the Statistics Finland Web Feature Service API <http://geo.stat.fi/geoserver/wfs>, the geofi package offers researchers and analysts a set of tools to obtain and harmonize administrative spatial data for a wide range of applications, from urban planning to environmental research. The package contains annually updated time series of municipality key datasets that can be used for data aggregation and language translations.
+Description: Designed to simplify geospatial data access from the Statistics Finland Web Feature Service API <https://geo.stat.fi/geoserver/index.html>, the geofi package offers researchers and analysts a set of tools to obtain and harmonize administrative spatial data for a wide range of applications, from urban planning to environmental research. The package contains annually updated time series of municipality key datasets that can be used for data aggregation and language translations.
 License: BSD_2_clause + file LICENSE
 URL: https://github.com/rOpenGov/geofi
 BugReports: https://github.com/rOpenGov/geofi/issues
@@ -45,7 +45,6 @@ Suggests:
     knitr,
     leaflet,
     patchwork,
-    pxweb,
     readr,
     rmarkdown,
     sotkanet,

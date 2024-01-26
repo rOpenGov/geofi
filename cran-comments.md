@@ -5,15 +5,12 @@
 
 ## Submission note
 
-* Vignettes made more robust against missing dependencies or internet resources
++ pxweb removed from suggested packages list.
++ WFS api url fixed in Description
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
-
-New submission
-
-Package was archived on CRAN
 
 ## Downstream dependencies
 

@@ -1,3 +1,8 @@
+# geofi 1.0.12
+
++ pxweb removed from suggested packages list.
++ WFS api url fixed in Description
+
 # geofi 1.0.11
 
 + Vignettes made more robust agains missing suggested dependencies

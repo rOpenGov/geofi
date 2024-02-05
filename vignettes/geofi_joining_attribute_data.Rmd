@@ -108,9 +108,9 @@ zipcodes19 <- get_zipcodes(year = 2019)
 zipcodes_map <- left_join(zipcodes19, 
                           px_data)
 ggplot(zipcodes_map) + 
-  geom_sf(aes(fill = X2021), 
+  geom_sf(aes(fill = X2022), 
           color  = alpha("white", 1/3)) +
-  labs(title = "Total number of inhabitants, 2021", 
+  labs(title = "Total number of inhabitants, 2022", 
        fill = NULL)
 ```
 

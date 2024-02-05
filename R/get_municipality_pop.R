@@ -9,7 +9,7 @@
 #' The statistical variables in the data are: total population (vaesto), share of the total population (vaesto_p), number of men (miehet), men's share of the population in an area (miehet_p) and women (naiset), women's share (naiset_p), those aged under 15: number (ika_0_14), share (ika_0_14p), those aged 15 to 64: number (ika_15_64), share (ika_15_64p), and aged 65 or over: number (ika_65_), share (ika_65_p).
 #'
 #' @param year A numeric for year of the administrative borders. Available are
-#'             2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 and 2021.
+#'             2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 and 2022.
 #' @param codes_as_character A logical determining if the region codes should
 #'             be returned as strings of equal width as originally provided by
 #'             Statistics Finland instead of integers.
@@ -32,7 +32,7 @@
 #' @rdname get_municipality_pop
 #' @export
 
-get_municipality_pop <- function(year = 2021, codes_as_character = FALSE){
+get_municipality_pop <- function(year = 2022, codes_as_character = FALSE){
 
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()) {

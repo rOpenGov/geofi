@@ -7,7 +7,7 @@
 get_zipcodes(year = 2023, extend_to_sea_areas = FALSE)
 }
 \arguments{
-\item{year}{A numeric for year of the zipcodes. Years available 2015-2023.}
+\item{year}{A numeric for year of the zipcodes. Years available 2015-2024.}
 
 \item{extend_to_sea_areas}{A logical. Extend the data to show also the sea areas.}
 }

@@ -5,12 +5,11 @@
 
 ## Submission note
 
-+ pxweb removed from suggested packages list.
-+ WFS api url fixed in Description
++ Failing vignette fixed
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
 ## Downstream dependencies
 

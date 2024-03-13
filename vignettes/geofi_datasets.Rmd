@@ -44,7 +44,7 @@ check_namespaces <- function(pkgs){
   return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
 }
 apiacc <- geofi::check_api_access()
-pkginst <- check_namespaces(c("sotkanet","geofacet","ggplot2","dplyr"))
+pkginst <- check_namespaces(c("geofacet","ggplot2","dplyr"))
 apiacc_pkginst <- all(apiacc,pkginst)
 ```
 
@@ -189,14 +189,11 @@ as_tibble(d$results) %>%
   print(n = 100)
 ```
 
-Here is an example where population data at municipality level is pulled from THL from 2000 to 2022, then aggregated at the levels of regions (`maakunta`) and then plotted with ggplot2 using grid `geofi::grid_maakunta`.
+Here is an example where population data at municipality level is pulled from THL from 2000 to 2022, then aggregated at the levels of regions (`maakunta`) and then plotted with ggplot2 using grid `geofi::grid_maakunta`. Population data is provided as part of geofi package as `geofi::sotkadata_population`.
 
 ```{r geofacet, fig.height = 8, fig.width = 10, eval = apiacc_pkginst}
 # Let pull population data from THL
-library(sotkanet)
-sotkadata <- GetDataSotkanet(indicators = 127, years = 2000:2022) %>% 
-  filter(region.category == "KUNTA") %>% 
-  mutate(municipality_code = as.integer(region.code))
+sotkadata <- geofi::sotkadata_population
 
 # lets aggregate population data
 dat <- left_join(geofi::municipality_key_2023 %>% select(-year),

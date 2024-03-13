@@ -45,7 +45,7 @@ check_namespaces <- function(pkgs){
   return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
 }
 apiacc <- geofi::check_api_access()
-pkginst <- check_namespaces(c("sotkanet","dplyr","tidyr","janitor","ggplot2"))
+pkginst <- check_namespaces(c("dplyr","tidyr","janitor","ggplot2"))
 apiacc_pkginst <- all(apiacc,pkginst)
 ```
 
@@ -56,17 +56,14 @@ Municipality data provided by `get_municipalities()`-function contains 77 indica
 
 ### Population data from Sotkanet
 
-In this first example we join municipality level indicators of *Swedish-speaking population at year end* from Sotkanet [population data](https://sotkanet.fi/sotkanet/en/haku?g=219), 
+In this first example we join municipality level indicators of *Swedish-speaking population at year end* from Sotkanet [population data](https://sotkanet.fi/sotkanet/en/haku?g=219), Dataset is provided as part of geofi package as `geofi::sotkadata_swedish_speaking_pop`.
 
 ```{r municipality_map, eval = apiacc_pkginst}
 library(geofi)
 muni <- get_municipalities(year = 2023)
 
-library(sotkanet)
 library(dplyr)
-sotkadata_swedish_speaking_pop <- GetDataSotkanet(indicators = 2433, years = 2000:2022) %>% 
-  filter(region.category == "KUNTA") %>% 
-  mutate(municipality_code = as.integer(region.code))
+sotkadata_swedish_speaking_pop <- geofi::sotkadata_swedish_speaking_pop
 ```
 
 This is not obvious to all, but have the municipality names in Finnish among other regional breakdowns which allows us to combine the data with spatial data using `municipality_name_fi`-variable. 
@@ -92,12 +89,10 @@ map_data %>%
 
 ## Zipcode level
 
-You can download data from [Paavo (Open data by postal code area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/) using [`pxweb`](https://ropengov.github.io/pxweb/)-package. In this example we will download preformatted population data in `csv` format directly from Statistics Finland and process it to match with spatial zipcode data.
+You can download data from [Paavo (Open data by postal code area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto/) using [`pxweb`](https://ropengov.github.io/pxweb/)-package. In this example we use dataset that can be downloaded preformatted in `csv` format directly from Statistics Finland. Population data is provided as part of geofi package as `geofi::statfi_zipcode_population`.
 
 ```{r zipcode_with_statistics_finland, eval = apiacc_pkginst}
-px_data <- read.csv("https://pxdata.stat.fi:443/PxWeb/sq/43d3d0aa-636e-4a4b-bbe1-decae45fc2b4", 
-                    header = TRUE, sep = ";", fileEncoding = "Latin1")
-px_data$posti_alue <- sub(" .+$", "", px_data$Postinumeroalue)
+statfi_zipcode_population <- geofi::statfi_zipcode_population
 ```
 
 Before we can join the data, we must extract the numerical postal code from `postal_code_area`-variable.
@@ -106,7 +101,7 @@ Before we can join the data, we must extract the numerical postal code from `pos
 # Lets join with spatial data and plot the area of each zipcode
 zipcodes19 <- get_zipcodes(year = 2019) 
 zipcodes_map <- left_join(zipcodes19, 
-                          px_data)
+                          statfi_zipcode_population)
 ggplot(zipcodes_map) + 
   geom_sf(aes(fill = X2022), 
           color  = alpha("white", 1/3)) +

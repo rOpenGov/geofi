@@ -1192,3 +1192,40 @@
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2013"
+
+
+#' Municipality level population data from Sotkanet
+#'
+#' This dataset contains population data at municipality level pulled from THL (Sotkanet) from 2000 to 2022
+#'
+#' @format A data frame with 7107 rows and 3 variables:
+#' \describe{
+#' \item{municipality_code}{municipality_code}
+#' \item{primary.value}{primary.value}
+#' \item{year}{year}
+#' }
+"sotkadata_population"
+
+#' Municipality level Swedish speaking population numbers from Sotkanet
+#'
+#' This dataset contains Swedish speaking population figures at municipality level pulled from THL (Sotkanet) from 2000 to 2022
+#'
+#' @format A data frame with 5761 rows and 3 variables:
+#' \describe{
+#' \item{municipality_code}{municipality_code}
+#' \item{indicator.title.fi}{indicator.title.fi}
+#' \item{primary.value}{primary.value}
+#' }
+"sotkadata_swedish_speaking_pop"
+
+#' Zipcode level population data from Statistics Finland
+#'
+#' This dataset contains population for each zipcode in Finland. Data is downloaded from Statistics Finland
+#'
+#' @format A data frame with 3027 rows and 2 variables:
+#' \describe{
+#' \item{posti_alue}{posti_alue}
+#' \item{X2022}{X2022}
+#' }
+"statfi_zipcode_population"
+

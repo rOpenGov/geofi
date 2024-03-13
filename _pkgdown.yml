@@ -20,6 +20,7 @@ reference:
   contents:
   - municipality_central_localities
   - municipality_key
+  - municipality_key_2024
   - municipality_key_2023
   - municipality_key_2022
   - municipality_key_2021
@@ -57,6 +58,13 @@ reference:
   - grid_satakunta
   - grid_uusimaa
   - grid_varsinais_suomi
+- title: Attribute data
+  desc: |
+    geofi comes with a three statistical datasets that are used in vignettes
+  contents:
+  - sotkadata_population
+  - sotkadata_swedish_speaking_pop
+  - statfi_zipcode_population
 - title: Miscellaneous
   desc: |
     Support functions for API functions and spatial data transformations
@@ -65,6 +73,7 @@ reference:
   - check_api_access
   - wfs_api
   - to_sf
+
 url: https://ropengov.github.io/geofi/
 template:
   package: rogtemplate

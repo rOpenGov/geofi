@@ -31,7 +31,7 @@ Thin wrapper around Finnish statistical area units OGC API by
 \href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet_en.html}{Statistics Finland}.
 }
 \examples{
-get_ogc_municipalities(year = 2020,
+ogc_get_statfi_area(year = 2020,
             tessellation = "maakunta",
             output_crs = 4326,
             limit = 10)

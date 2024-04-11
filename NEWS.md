@@ -1,3 +1,13 @@
+# geofi 1.0.15
+
++ Attibute datasets previously downloaded from internet, now included with package
+
+# geofi 1.0.14
+
++ 2024 regional classifications updated.
++ geofi_joining_attribute_data vignette fixed
+
+
 # geofi 1.0.12
 
 + pxweb removed from suggested packages list.

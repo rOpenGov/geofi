@@ -1,10 +1,10 @@
-#' Get Finnish Population grid in two different resolutions for years 2010-2020
+#' Get Finnish Population grid in two different resolutions for years 2010-2022
 #
 #' Thin wrapper around Finnish population grid data provided by
 #' [Statistics Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
 #'
 #'
-#' @param year A numeric for year of the population grid. Years available 2005 and 2010-2021.
+#' @param year A numeric for year of the population grid. Years available 2005 and 2010-2022.
 #' @param resolution 1 (1km x 1km) or 5 (5km x 5km)
 #'
 #' @return sf object
@@ -23,7 +23,7 @@
 #' @rdname get_population_grid
 #' @export
 
-get_population_grid <- function(year = 2021, resolution = 5){
+get_population_grid <- function(year = 2022, resolution = 5){
 
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()){

@@ -64,14 +64,6 @@ A data frame with 309 rows and 69 variables:
 \item{tyossakayntial_name_fi}{Työssäkäyntialue name in Finnish}
 \item{tyossakayntial_name_sv}{Työssäkäyntialue name in Swedish}
 \item{tyossakayntial_name_en}{Työssäkäyntialue name in English}
-\item{kela_vakuutuspiiri_name_fi}{Kelan vakuutuspiiri name in Finnish (Insurance District)}
-\item{kela_vakuutuspiiri_code}{Kelan vakuutuspiiri unofficial code (Insurance District)}
-\item{kela_vakuutuspiiri_name_sv}{Kelan vakuutuspiiri name in Swedish (Insurance District)}
-\item{kela_vakuutuspiiri_name_en}{Kelan vakuutuspiiri name in English (Insurance District)}
-\item{kela_asumistukialue_name_fi}{Kelan asumistuen kuntaryhmät name in Finnish (Municipality categories for housing allowance)}
-\item{kela_asumistukialue_code}{Kelan asumistuen kuntaryhmät unofficial code (Municipality categories for housing allowance)}
-\item{kela_asumistukialue_name_sv}{Kelan asumistuen kuntaryhmät name in Swedish (Municipality categories for housing allowance)}
-\item{kela_asumistukialue_name_en}{Kelan asumistuen kuntaryhmät name in English (Municipality categories for housing allowance)}
 \item{hyvinvointialue_name_fi}{Hyvinvointialue name in Finnish (Wellbeing services counties)}
 \item{hyvinvointialue_name_sv}{Hyvinvointialue name in Swedish (Wellbeing services counties)}
 \item{hyvinvointialue_name_en}{Hyvinvointialue name in English (Wellbeing services counties)}

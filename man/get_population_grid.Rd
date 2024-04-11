@@ -2,14 +2,14 @@
 % Please edit documentation in R/get_population_grid.R
 \name{get_population_grid}
 \alias{get_population_grid}
-\title{Get Finnish Population grid in two different resolutions for years 2010-2020
+\title{Get Finnish Population grid in two different resolutions for years 2010-2022
 Thin wrapper around Finnish population grid data provided by
 \href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.}
 \usage{
-get_population_grid(year = 2021, resolution = 5)
+get_population_grid(year = 2022, resolution = 5)
 }
 \arguments{
-\item{year}{A numeric for year of the population grid. Years available 2005 and 2010-2021.}
+\item{year}{A numeric for year of the population grid. Years available 2005 and 2010-2022.}
 
 \item{resolution}{1 (1km x 1km) or 5 (5km x 5km)}
 }
@@ -17,7 +17,7 @@ get_population_grid(year = 2021, resolution = 5)
 sf object
 }
 \description{
-Get Finnish Population grid in two different resolutions for years 2010-2020
+Get Finnish Population grid in two different resolutions for years 2010-2022
 Thin wrapper around Finnish population grid data provided by
 \href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.
 }

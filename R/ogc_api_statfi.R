@@ -101,7 +101,7 @@ fetch_ogc_api_statfi <- function(api_url,
 #'
 #' @return sf object
 #' @examples
-#' get_ogc_municipalities(year = 2020,
+#' ogc_get_statfi_area(year = 2020,
 #'             tessellation = "maakunta",
 #'             output_crs = 4326,
 #'             limit = 10)

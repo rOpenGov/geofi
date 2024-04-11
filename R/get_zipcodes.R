@@ -3,7 +3,7 @@
 #' Thin wrapper around Finnish zip code areas provided by
 #' [Statistics Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
 #'
-#' @param year A numeric for year of the zipcodes. Years available 2015-2023.
+#' @param year A numeric for year of the zipcodes. Years available 2015-2024.
 #' @param extend_to_sea_areas A logical. Extend the data to show also the sea areas.
 #'
 #' @return sf object

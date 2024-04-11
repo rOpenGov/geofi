@@ -50,7 +50,7 @@ langs <- c("fi","sv","en")
 
 # Lets loop over the years 2013-2022
 yearlist <- list()
-yrs <- 2013:2023
+yrs <- 2013:2024
 for (iii in seq_along(yrs)){
 
   print(yrs[iii])
@@ -435,7 +435,7 @@ mutate(kela_asumistukialue_name_sv = case_when(
     kela_asumistukialue_name_fi == "IV kuntaryhmä" ~ "Municipality in category IV"
   )) %>%
   # Kela-spesific classifications only for latest year as there is no history available as open data
-  mutate(year = 2023)
+  mutate(year = 2024)
 
 
 # Lets rename the Finnish version of Maarianhamina

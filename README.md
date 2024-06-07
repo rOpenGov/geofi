@@ -9,9 +9,9 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![codecov](https://codecov.io/gh/rOpenGov/geofi/branch/master/graph/badge.svg?token=yJSHHMSSKs)](https://app.codecov.io/gh/rOpenGov/geofi)
 [![Watch on
-GitHub](https://img.shields.io/github/watchers/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/watchers/)
+GitHub](https://img.shields.io/github/watchers/ropengov/geofi.svg?style=social)](https://github.com/ropengov/geofi/watchers/)
 [![Star on
-GitHub](https://img.shields.io/github/stars/ropengov/eurostat.svg?style=social)](https://github.com/ropengov/eurostat/stargazers/)
+GitHub](https://img.shields.io/github/stars/ropengov/geofi.svg?style=social)](https://github.com/ropengov/geofi/stargazers/)
 [![CRAN
 published](https://www.r-pkg.org/badges/version/geofi)](https://www.r-pkg.org/pkg/geofi)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/geofi)](https://cran.r-project.org/package=geofi)
@@ -94,7 +94,7 @@ Kainu](https://github.com/muuankarski), [Joona
 Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
 Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
 Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 1.0.14. URL:
+geofi R package. R package version 1.0.15. URL:
 <https://ropengov.github.io/geofi/>
 
 We are grateful to all

@@ -1,3 +1,8 @@
+# geofi 1.0.16
+
++ Municipality keys updated to match with latest changes in stat.fi classification API
+
+
 # geofi 1.0.15
 
 + Attibute datasets previously downloaded from internet, now included with package

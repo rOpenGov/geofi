@@ -4,7 +4,7 @@
 \alias{get_population_grid}
 \title{Get Finnish Population grid in two different resolutions for years 2010-2022
 Thin wrapper around Finnish population grid data provided by
-\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.}
+\href{https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.}
 \usage{
 get_population_grid(year = 2022, resolution = 5)
 }
@@ -19,7 +19,7 @@ sf object
 \description{
 Get Finnish Population grid in two different resolutions for years 2010-2022
 Thin wrapper around Finnish population grid data provided by
-\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.
+\href{https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html}{Statistics Finland}.
 }
 \details{
 More information about the dataset from \href{https://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/a901d40a-8a6b-4678-814c-79d2e2ab130c}{Paikkatietohakemisto}

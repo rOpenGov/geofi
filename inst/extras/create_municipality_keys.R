@@ -28,7 +28,7 @@
 #'   # kunta_avi_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("10","11","12","13","14","15","16","17","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/avi/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/avi/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -40,7 +40,7 @@
 #'   # kunta_ely_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("10","11","12","13","14","15","16","17","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/ely/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/ely/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -52,7 +52,7 @@
 #'   # kunta_kunta_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("08","09","10","11","12","13","14","16","17","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/kunta/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/kunta/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -64,7 +64,7 @@
 #'   # kunta_kr_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("09","10","11","13","14","15","16","17")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/kuntaryhmitys/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/kuntaryhmitys/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -76,7 +76,7 @@
 #'   # kunta_mk_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("08","09","10","11","12","13","14","15","16","17","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/maakunta/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/maakunta/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -88,7 +88,7 @@
 #'   # kunta_sa_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("09","10","11","12","13","14","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/suuralue/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/suuralue/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -100,7 +100,7 @@
 #'   # kunta_sk_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("08","09","10","11","13","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/seutukunta/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/seutukunta/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -112,7 +112,7 @@
 #'   # kunta_sp_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("10","11","12","13","14","15","16","17","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/sairaanhoitop/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/sairaanhoitop/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -124,7 +124,7 @@
 #'   # kunta_nimi_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("08","09","10","11","12","13","14","16","17","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/kunta/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/kunta/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -136,7 +136,7 @@
 #'   # kunta_va_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("11","12","13","15","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/vaalipiiri/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/vaalipiiri/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)
@@ -149,7 +149,7 @@
 #'   # kunta_va_teksti,
 #'   dat <- data_frame()
 #'   for (y in c("11","12","13","15","18")){
-#'     tmp <- read.table(paste0("https://www.stat.fi/meta/luokitukset/vaalipiiri/001-20",y,"/tekstitiedosto_sv.txt"),
+#'     tmp <- read.table(paste0("https://stat.fi/meta/luokitukset/vaalipiiri/001-20",y,"/tekstitiedosto_sv.txt"),
 #'                       header = TRUE, sep = "\t", skip = 3, fileEncoding = "windows-1252", stringsAsFactors = FALSE)
 #'     # names(tmp) <- c("kuntanro","kuntanimi","avi_koodi","avi_nimi")
 #'     tmp$vuosi <- paste0("20",y)

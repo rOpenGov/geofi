@@ -201,7 +201,7 @@ muni %>%
 
 ## Centroids, buffers, grids and voronois
 
-The following operarions derive from [Marko Kallio's](http://markokallio.fi/) course at [CSC](https://www.csc.fi/en/home) in February 2020 [Spatial data analysis with R](https://www.csc.fi/web/training/-/r_spatial_2019). 
+The following operations derive from [Marko Kallio's](http://markokallio.fi/) course at [CSC](https://csc.fi/en/) in February 2020 [Spatial data analysis with R](https://github.com/csc-training/r-spatial-course). 
 
 ### Polygon centroids
 
@@ -238,7 +238,7 @@ You can download predefined grids from Statistics Finland using `get_statistical
 
 However, you may need to create your own custom grid, for instance to aggregate your own point data,  which can be created with `st_make_grid()` function. 
 
-As describes by Marko Kallio in [Spatial data analysis with R](https://www.csc.fi/web/training/-/r_spatial_2019).
+As describes by Marko Kallio in [Spatial data analysis with R](https://github.com/csc-training/r-spatial-course).
 
 >It creates a regular grid over bounding box of an 'sf' object. Can be given a certain cell size, or number of cells in x and y directions. 'what' tells the function what kind of regular grid is wanted (polygons, corners, centers). Fishnets of lines rather than polygons can be created simply by casting the polygons as "LINESTRING"s.
 The resulting polygon grid is an 'sfc' object, so it needs to be made 'sf' in order for us to add the ID-attribute.

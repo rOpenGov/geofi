@@ -1,7 +1,7 @@
 #' Get Finnish Population grid in two different resolutions for years 2010-2022
 #
 #' Thin wrapper around Finnish population grid data provided by
-#' [Statistics Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
+#' [Statistics Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
 #'
 #'
 #' @param year A numeric for year of the population grid. Years available 2005 and 2010-2022.

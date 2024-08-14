@@ -1,7 +1,7 @@
 #' Get Number of population by Finnish municipality (multi)polygons for different years.
 #'
 #' Thin wrapper around Finnish zip code areas provided by
-#' [Statistics Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaesto_tilastointialueittain_en.html).
+#' [Statistics Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaesto_tilastointialueittain_en.html).
 #'
 #' The number of population on the last day of the reference year combined with municipality borders from year after.
 #' Calling the function with year = 2019 returns population data from 2019-12-31 with spatial data from 2020.

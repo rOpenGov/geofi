@@ -3,9 +3,9 @@
 \docType{data}
 \name{municipality_key}
 \alias{municipality_key}
-\title{Aggregated municipality key table for years 2013-2023}
+\title{Aggregated municipality key table for years 2013-2024}
 \format{
-A data frame with 3440 rows and 77 variables:
+A data frame with 3440 rows and 81 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}
@@ -68,6 +68,10 @@ A data frame with 3440 rows and 77 variables:
 \item{kunta_name}{Municipality name in Finnish}
 \item{name_fi}{Municipality name in Finnish}
 \item{name_sv}{Municipality name in Finnish}
+\item{yhteistyoalue_code}{Sosiaali- ja terveydenhuollon yhteistyöalueiden koodi (Collaborative areas for healthcare and social welfare codes)}
+\item{yhteistyoalue_name_fi}{Sosiaali- ja terveydenhuollon yhteistyöalueet}
+\item{yhteistyoalue_name_sv}{Samarbetsområden för social- och hälsovården}
+\item{yhteistyoalue_name_en}{Collaborative areas for healthcare and social welfare}
 \item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
 \item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
 \item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}

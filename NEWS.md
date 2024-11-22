@@ -1,3 +1,8 @@
+# geofi 1.0.17
+
++ Municipality keys updated to match Kela current classification
+
+
 # geofi 1.0.16
 
 + Municipality keys updated to match with latest changes in stat.fi classification API

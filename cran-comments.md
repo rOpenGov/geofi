@@ -5,7 +5,7 @@
 
 ## Submission note
 
-+ Municipality keys updated to match with latest changes in stat.fi classification API
++ Municipality keys updated to match Kela current classification
 
 ## R CMD check results
 

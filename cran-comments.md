@@ -1,5 +1,5 @@
 ## Test environments
-* local ubuntu 22.04 install, R 4.4.1
+* local Ubuntu 22.04.5 install, R 4.4.2
 * win-builder (devel)
 * r-hub.io
 

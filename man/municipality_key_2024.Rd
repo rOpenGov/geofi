@@ -68,6 +68,10 @@ A data frame with 309 rows and 65 variables:
 \item{kela_asumistukialue_code}{Kelan asumistuen kuntaryhmät unofficial code (Municipality categories for housing allowance)}
 \item{kela_asumistukialue_name_sv}{Kelan asumistuen kuntaryhmät name in Swedish (Municipality categories for housing allowance)}
 \item{kela_asumistukialue_name_en}{Kelan asumistuen kuntaryhmät name in English (Municipality categories for housing allowance)}
+\item{kielisuhde_code}{Kielisuhde code (Language distribution 2024)}
+\item{kielisuhde_name_fi}{Kielisuhde name in Finnish (Language distribution 2024)}
+\item{kielisuhde_name_sv}{Kielisuhde name in Swedish (Language distribution 2024)}
+\item{kielisuhde_name_en}{Kielisuhde name in English (Language distribution 2024)}
 \item{hyvinvointialue_name_fi}{Hyvinvointialue name in Finnish (Wellbeing services counties)}
 \item{hyvinvointialue_name_sv}{Hyvinvointialue name in Swedish (Wellbeing services counties)}
 \item{hyvinvointialue_name_en}{Hyvinvointialue name in English (Wellbeing services counties)}

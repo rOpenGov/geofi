@@ -226,16 +226,7 @@ ddd4$municipality_name_fi[ddd4$municipality_name_fi == "Maarianhamina - Marieham
 #   unlist() -> etelainen
 #
 # dput(etelainen)
-etelainen <- c("Asikkala", "Askola", "Espoo", "Hamina", "Hanko", "Hartola",
-  "Heinola", "Helsinki", "Hollola", "Hyvinkää", "Hämeenkoski",
-  "Iitti", "Imatra", "Inkoo", "Järvenpää", "Karkkila", "Kauniainen",
-  "Kerava", "Kirkkonummi", "Kotka", "Kouvola", "Kärkölä", "Lahti",
-  "Lapinjärvi", "Lappeenranta", "Lemi", "Lohja", "Loviisa", "Luumäki",
-  "Miehikkälä", "Myrskylä", "Mäntsälä", "Nastola", "Nurmijärvi",
-  "Orimattila", "Padasjoki", "Parikkala", "Pornainen", "Porvoo",
-  "Pukkila", "Pyhtää", "Raasepori", "Rautjärvi", "Ruokolahti",
-  "Savitaipale", "Sipoo", "Siuntio", "Sysmä", "Taipalsaari", "Tuusula",
-  "Vantaa", "Vihti", "Virolahti")
+etelainen <- c("Asikkala","Askola","Espoo","Hamina","Hanko","Hartola","Heinola","Helsinki","Hollola","Hyvinkää","Iitti","Imatra","Inkoo","Järvenpää","Karkkila","Kauniainen","Kerava","Kirkkonummi","Kotka","Kouvola","Kärkölä","Lahti","Lapinjärvi","Lappeenranta","Lemi","Lohja","Loviisa","Luumäki","Miehikkälä","Myrskylä","Mäntsälä","Nurmijärvi","Orimattila","Padasjoki","Parikkala","Pornainen","Porvoo","Pukkila","Pyhtää","Raasepori","Rautjärvi","Ruokolahti","Savitaipale","Sipoo","Siuntio","Sysmä","Taipalsaari","Tuusula","Vantaa","Vihti","Virolahti")
 
 # Itäinen
 # gsub("^.*Itäinen", "", cont) %>%
@@ -249,19 +240,7 @@ etelainen <- c("Asikkala", "Askola", "Espoo", "Hamina", "Hanko", "Hartola",
 #   unlist() -> itainen
 #
 # dput(itainen)
-itainen <- c("Enonkoski", "Hankasalmi", "Heinävesi", "Hirvensalmi", "Iisalmi",
-             "Ilomantsi", "Joensuu", "Joroinen", "Joutsa", "Juankoski", "Juuka",
-             "Juva", "Jyväskylä", "Jämsä", "Kaavi", "Kangasniemi", "Kannonkoski",
-             "Karstula", "Keitele", "Keuruu", "Kinnula", "Kitee", "Kiuruvesi",
-             "Kivijärvi", "Konnevesi", "Kontiolahti", "Kuhmoinen", "Kuopio",
-             "Kyyjärvi", "Lapinlahti", "Laukaa", "Leppävirta", "Lieksa",
-             "Liperi", "Luhanka", "Mikkeli", "Multia", "Muurame", "Mäntyharju",
-             "Nurmes", "Outokumpu", "Pihtipudas", "Pertunmaa", "Petäjävesi",
-             "Pieksämäki", "Pielavesi", "Puumala", "Polvijärvi", "Rantasalmi",
-             "Rautalampi", "Rautavaara", "Rääkkylä", "Saarijärvi", "Savonlinna",
-             "Siilinjärvi", "Sonkajärvi", "Sulkava", "Suonenjoki", "Tervo",
-             "Tohmajärvi", "Toivakka", "Tuusniemi", "Uurainen", "Varkaus",
-             "Vesanto", "Vieremä", "Viitasaari", "Äänekoski")
+itainen <- c("Enonkoski","Heinävesi","Hirvensalmi","Iisalmi","Ilomantsi Joensuu","Joroinen","Juankoski","Juuka","Juva","Kaavi","Kangasniemi","Keitele","Kitee","Kiuruvesi","Kontiolahti","Kuopio","Lapinlahti","Leppävirta","Lieksa","Liperi","Mikkeli","Mäntyharju","Nurmes","Outokumpu","Pertunmaa","Pieksämäki","Pielavesi","Puumala","Polvijärvi","Rantasalmi","Rautalampi","Rautavaara","Rääkkylä","Savonlinna","Siilinjärvi","Sonkajärvi","Sulkava","Suonenjoki","Tervo","Tohmajärvi","Tuusniemi","Varkaus","Vesanto","Vieremä")
 
 
 # Keskinen
@@ -276,16 +255,7 @@ itainen <- c("Enonkoski", "Hankasalmi", "Heinävesi", "Hirvensalmi", "Iisalmi",
 #   unlist() -> keskinen
 #
 # dput(keskinen)
-keskinen <- c("Akaa", "Alajärvi", "Alavus", "Evijärvi", "Forssa", "Hattula",
-              "Hausjärvi", "Humppila", "Hämeenkyrö", "Hämeenlinna", "Ikaalinen",
-              "Ilmajoki", "Isojoki", "Isokyrö", "Janakkala", "Jokioinen",
-              "Juupajoki", "Kangasala", "Karijoki", "Kauhajoki", "Kauhava",
-              "Kihniö", "Kuortane", "Kurikka", "Lappajärvi", "Lapua", "Lempäälä",
-              "Loppi", "Mänttä-Vilppula", "Nokia", "Orivesi", "Parkano",
-              "Pirkkala", "Punkalaidun", "Pälkäne", "Riihimäki", "Ruovesi",
-              "Sastamala", "Seinäjoki", "Soini", "Tammela", "Tampere", "Teuva",
-              "Urjala", "Valkeakoski", "Vesilahti", "Vimpeli", "Virrat", "Ylöjärvi",
-              "Ypäjä", "Ähtäri")
+keskinen <- c("Akaa","Alajärvi","Alavus","Evijärvi","Forssa","Hankasalmi","Hattula","Hausjärvi","Humppila","Hämeenkyrö","Hämeenlinna","Ikaalinen","Ilmajoki","Isojoki","Isokyrö","Janakkala","Jokioinen","Joutsa","Juupajoki","Jyväskylä","Jämsä","Kangasala","Kannonkoski","Karijoki","Karstula","Kauhajoki","Kauhava","Keuruu","Kihniö","Kinnula","Kivijärvi","Konnevesi","Kuhmoinen","Kuortane","Kurikka","Kyyjärvi","Lappajärvi","Lapua","Laukaa","Lempäälä","Loppi","Luhanka","Multia","Muurame","Mänttä-Vilppula","Nokia","Orivesi","Parkano","Petäjävesi","Pihtipudas","Pirkkala","Punkalaidun","Pälkäne","Riihimäki","Ruovesi","Saarijärvi","Sastamala","Seinäjoki","Soini","Tammela","Tampere","Teuva","Toivakka","Urjala","Uurainen","Valkeakoski","Vesilahti","Viitasaari","Vimpeli","Virrat","Ylöjärvi","Ypäjä","Ähtäri","Äänekoski")
 
 # Läntinen
 # gsub("^.*Läntinen", "", cont) %>%
@@ -303,17 +273,7 @@ keskinen <- c("Akaa", "Alajärvi", "Alavus", "Evijärvi", "Forssa", "Hattula",
 # lantinen[lantinen == "Pedersören"] <- "Pedersören kunta"
 
 # dput(lantinen)
-lantinen <- c("Aura", "Eura", "Eurajoki", "Harjavalta", "Honkajoki", "Huittinen",
-              "Jämijärvi", "Kaarina", "Kankaanpää", "Karvia", "Kaskinen",
-              "Kemiönsaari", "Kokemäki", "Korsnäs", "Koski Tl", "Kristiinankaupunki",
-              "Kustavi", "Köyliö", "Laihia", "Laitila", "Lavia", "Lieto",
-              "Loimaa", "Luoto", "Luvia", "Maalahti", "Maarianhamina", "Marttila",
-              "Masku", "Merikarvia", "Mustasaari", "Mynämäki", "Naantali",
-              "Nakkila", "Nousiainen", "Närpiö", "Oripää", "Paimio", "Parainen",
-              "Pedersören kunta", "Pietarsaari", "Pomarkku", "Pori", "Pyhäranta",
-              "Pöytyä", "Raisio", "Rauma", "Rusko", "Salo", "Sauvo", "Siikainen",
-              "Somero", "Sund", "Säkylä", "Taivassalo", "Turku", "Ulvila",
-              "Uusikaarlepyy", "Uusikaupunki", "Vaasa", "Vehmaa", "Vöyri")
+lantinen <- c("Aura","Eura","Eurajoki","Halsua","Harjavalta","Huittinen","Jämijärvi","Kaarina","Kankaanpää","Kannus","Kaustinen","Karvia","Kaskinen","Kemiönsaari","Kokemäki","Kokkola","Korsnäs","Koski TL","Kristiinankaupunki","Kustavi","Köyliö","Laihia","Laitila","Lestijärvi","Lieto","Loimaa","Luoto","Maalahti","Marttila","Masku","Merikarvia","Mustasaari","Mynämäki Naantali","Nakkila","Nousiainen","Närpiö","Oripää","Paimio","Parainen","Pedersören kunta","Perho","Pietarsaari","Pomarkku","Pori","Pyhäranta","Pöytyä","Raisio","Rauma","Rusko","Salo","Sauvo","Siikainen","Somero","Säkylä","Taivassalo","Toholampi","Turku","Ulvila","Uusikaarlepyy","Uusikaupunki","Vaasa","Vehmaa","Veteli","Vöyri")
 
 # Pohjoinen
 # gsub("^.*Pohjoinen", "", cont) %>%
@@ -327,18 +287,7 @@ lantinen <- c("Aura", "Eura", "Eurajoki", "Harjavalta", "Honkajoki", "Huittinen"
 #   unlist() -> pohjoinen
 #
 # dput(pohjoinen)
-pohjoinen <- c("Alavieska", "Enontekiö", "Hailuoto", "Haapajärvi", "Halsua",
-               "Haapavesi", "Hyrynsalmi", "Ii", "Inari", "Kajaani", "Kalajoki",
-               "Kannus", "Kaustinen", "Kemi", "Kempele", "Kemijärvi", "Keminmaa",
-               "Kittilä", "Kokkola", "Kolari", "Kruunupyy", "Kuhmo", "Kuusamo",
-               "Kärsämäki", "Lestijärvi", "Liminka", "Lumijoki", "Merijärvi",
-               "Muonio", "Muhos", "Nivala", "Oulu", "Oulainen", "Paltamo", "Pelkosenniemi",
-               "Pello", "Perho", "Posio", "Pudasjärvi", "Puolanka", "Pyhäjoki",
-               "Pyhäjärvi", "Pyhäntä", "Raahe", "Ranua", "Reisjärvi", "Ristijärvi",
-               "Rovaniemi", "Salla", "Savukoski", "Sievi", "Siikajoki", "Siikalatva",
-               "Simo", "Sodankylä", "Sotkamo", "Suomussalmi", "Taivalkoski",
-               "Tervola", "Toholampi", "Tornio", "Tyrnävä", "Utajärvi", "Utsjoki",
-               "Vaala", "Veteli", "Ylivieska", "Ylitornio")
+pohjoinen <- c("Alavieska","Enontekiö","Hailuoto","Haapajärvi","Haapavesi","Hyrynsalmi","Ii","Inari","Kajaani","Kalajoki","Kemi","Kempele","Kemijärvi","Keminmaa","Kittilä","Kolari","Kuhmo","Kuusamo","Kärsämäki","Liminka","Lumijoki","Merijärvi","Muonio","Muhos","Nivala","Oulu","Oulainen","Paltamo","Pelkosenniemi","Pello","Posio","Pudasjärvi","Puolanka","Pyhäjoki","Pyhäjärvi","Pyhäntä","Raahe","Ranua","Reisjärvi","Ristijärvi","Rovaniemi","Salla","Savukoski","Sievi","Siikajoki","Siikalatva","Simo","Sodankylä","Sotkamo","Suomussalmi","Taivalkoski","Tervola","Tornio","Tyrnävä","Utajärvi","Utsjoki","Vaala","Ylivieska","Ylitornio")
 
 # Kelan kela_vakuutuspiirit
 key <- ddd4 %>% distinct(kunta_name)

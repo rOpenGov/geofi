@@ -5,89 +5,89 @@
 \alias{municipality_key}
 \title{Aggregated municipality key table for years 2013-2024}
 \format{
-A data frame with 3440 rows and 81 variables:
+A data frame with 4057 rows and 81 variables:
 \describe{
-\item{kunta}{Municipality code}
-\item{municipality_name_fi}{Municipality name in Finnish}
-\item{municipality_name_sv}{Municipality name in Swedish}
-\item{municipality_name_en}{Municipality name in English}
-\item{kuntaryhmitys_code}{Tilastollinen kuntaryhmitys (Statistical grouping) code}
-\item{kuntaryhmitys_name_fi}{Tilastollinen kuntaryhmitys (Statistical grouping) name in Finnish}
-\item{kuntaryhmitys_name_sv}{Tilastollinen kuntaryhmitys (Statistical grouping) name in Swedish}
-\item{kuntaryhmitys_name_en}{Tilastollinen kuntaryhmitys (Statistical grouping) name in English}
-\item{avi_code}{Aluehallintovirasto code (Regional State Administrative Agencies)}
-\item{avi_name_fi}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
-\item{avi_name_sv}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
-\item{avi_name_en}{Aluehallintovirasto name in Finnish (Regional State Administrative Agencies)}
-\item{ely_code}{Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic Development, Transport and the Environment)}
-\item{ely_name_fi}{Elinkeino-, liikenne- ja ympäristökeskuksen name in Finnish (Centre for Economic Development, Transport and the Environment)}
-\item{ely_name_sv}{Elinkeino-, liikenne- ja ympäristökeskuksen name in Swedish (Centre for Economic Development, Transport and the Environment)}
-\item{ely_name_en}{Elinkeino-, liikenne- ja ympäristökeskuksen name in English (Centre for Economic Development, Transport and the Environment)}
-\item{maakunta_code}{Maakunta code (Regions of Finland)}
-\item{maakunta_name_fi}{Maakunta name in Finnish (Regions of Finland)}
-\item{maakunta_name_sv}{Maakunta name in Swedish (Regions of Finland)}
-\item{maakunta_name_en}{Maakunta name in English (Regions of Finland)}
-\item{kielisuhde_code}{Kielisuhde code (Language distribution 2020)}
-\item{kielisuhde_name_fi}{Kielisuhde name in Finnish (Language distribution 2020)}
-\item{kielisuhde_name_sv}{Kielisuhde name in Swedish (Language distribution 2020)}
-\item{kielisuhde_name_en}{Kielisuhde name in English (Language distribution 2020)}
-\item{seutukunta_code}{Seutukunta code (Sub-regions of Finland)}
-\item{seutukunta_name_fi}{Seutukunta name in Finnish (Sub-regions of Finland)}
-\item{seutukunta_name_sv}{Seutukunta name in Swedish (Sub-regions of Finland)}
-\item{seutukunta_name_en}{Seutukunta name in English (Sub-regions of Finland)}
-\item{year}{data year}
-\item{suuralue_code}{Suuralue code}
-\item{suuralue_name_fi}{Suuralueen nimi in Finnish (Large Areas)}
-\item{suuralue_name_sv}{Suuralueen nimi in Swedish (Large Areas)}
-\item{suuralue_name_en}{Suuralueen nimi in English (Large Areas)}
-\item{sairaanhoitop_code}{Sairaanhoitopiiri code (Health care districts)}
-\item{sairaanhoitop_name_fi}{Sairaanhoitopiiri name in Finnish (Health care districts)}
-\item{sairaanhoitop_name_sv}{Sairaanhoitopiiri name in Swedish (Health care districts)}
-\item{sairaanhoitop_name_en}{Sairaanhoitopiiri name in English (Health care districts)}
-\item{nuts1_code}{NUTS 2016 classification code (level 1)}
-\item{nuts1_name_fi}{NUTS 2016 classification name in Finnish (level 1)}
-\item{nuts1_name_sv}{NUTS 2016 classification name in Swedish (level 1)}
-\item{nuts1_name_en}{NUTS 2016 classification name in English (level 1)}
-\item{nuts2_code}{NUTS 2016 classification code (level 2)}
-\item{nuts2_name_fi}{NUTS 2016 classification name in Finnish (level 2)}
-\item{nuts2_name_sv}{NUTS 2016 classification name in Swedish (level 2)}
+\item{kunta}{kunta}
+\item{municipality_name_fi}{municipality_name_fi}
+\item{municipality_name_sv}{municipality_name_sv}
+\item{municipality_name_en}{municipality_name_en}
+\item{kuntaryhmitys_code}{kuntaryhmitys_code}
+\item{kuntaryhmitys_name_fi}{kuntaryhmitys_name_fi}
+\item{kuntaryhmitys_name_sv}{kuntaryhmitys_name_sv}
+\item{kuntaryhmitys_name_en}{kuntaryhmitys_name_en}
+\item{avi_code}{avi_code}
+\item{avi_name_fi}{avi_name_fi}
+\item{avi_name_sv}{avi_name_sv}
+\item{avi_name_en}{avi_name_en}
+\item{ely_code}{ely_code}
+\item{ely_name_fi}{ely_name_fi}
+\item{ely_name_sv}{ely_name_sv}
+\item{ely_name_en}{ely_name_en}
+\item{kielisuhde_code}{kielisuhde_code}
+\item{kielisuhde_name_fi}{kielisuhde_name_fi}
+\item{kielisuhde_name_sv}{kielisuhde_name_sv}
+\item{kielisuhde_name_en}{kielisuhde_name_en}
+\item{tyossakayntial_code}{tyossakayntial_code}
+\item{tyossakayntial_name_fi}{tyossakayntial_name_fi}
+\item{maakunta_code}{maakunta_code}
+\item{maakunta_name_fi}{maakunta_name_fi}
+\item{maakunta_name_sv}{maakunta_name_sv}
+\item{maakunta_name_en}{maakunta_name_en}
+\item{seutukunta_code}{seutukunta_code}
+\item{seutukunta_name_fi}{seutukunta_name_fi}
+\item{seutukunta_name_sv}{seutukunta_name_sv}
+\item{seutukunta_name_en}{seutukunta_name_en}
+\item{year}{year}
+\item{suuralue_code}{suuralue_code}
+\item{suuralue_name_fi}{suuralue_name_fi}
+\item{suuralue_name_sv}{suuralue_name_sv}
+\item{suuralue_name_en}{suuralue_name_en}
+\item{sairaanhoitop_code}{sairaanhoitop_code}
+\item{sairaanhoitop_name_fi}{sairaanhoitop_name_fi}
+\item{sairaanhoitop_name_sv}{sairaanhoitop_name_sv}
+\item{sairaanhoitop_name_en}{sairaanhoitop_name_en}
+\item{nuts1_code}{nuts1_code}
+\item{nuts1_name_fi}{nuts1_name_fi}
+\item{nuts1_name_sv}{nuts1_name_sv}
+\item{nuts1_name_en}{nuts1_name_en}
+\item{nuts2_code}{nuts2_code}
+\item{nuts2_name_fi}{nuts2_name_fi}
+\item{nuts2_name_sv}{nuts2_name_sv}
 \item{nuts2_name_en}{nuts2_name_en}
-\item{nuts3_code}{NUTS 2016 classification code (level 2)}
-\item{nuts3_name_fi}{NUTS 2016 classification name in Finnish (level 3)}
-\item{nuts3_name_sv}{NUTS 2016 classification name in Swedish (level 3)}
-\item{nuts3_name_en}{NUTS 2016 classification name in English (level 3)}
-\item{tyossakayntial_code}{Työssäkäyntialue code}
-\item{tyossakayntial_name_fi}{Työssäkäyntialue name in Finnish}
-\item{tyossakayntial_name_sv}{Työssäkäyntialue name in Swedish}
-\item{tyossakayntial_name_en}{Työssäkäyntialue name in English}
-\item{vaalipiiri_code}{Vaalipiiri code (Constituencies)}
-\item{vaalipiiri_name_fi}{Vaalipiiri name in Finnish (Constituencies)}
-\item{vaalipiiri_name_sv}{Vaalipiiri name in Swedish (Constituencies)}
-\item{vaalipiiri_name_en}{Vaalipiiri name in English (Constituencies)}
-\item{municipality_code}{Municipality code}
-\item{kunta_name}{Municipality name in Finnish}
-\item{name_fi}{Municipality name in Finnish}
-\item{name_sv}{Municipality name in Finnish}
-\item{yhteistyoalue_code}{Sosiaali- ja terveydenhuollon yhteistyöalueiden koodi (Collaborative areas for healthcare and social welfare codes)}
-\item{yhteistyoalue_name_fi}{Sosiaali- ja terveydenhuollon yhteistyöalueet}
-\item{yhteistyoalue_name_sv}{Samarbetsområden för social- och hälsovården}
-\item{yhteistyoalue_name_en}{Collaborative areas for healthcare and social welfare}
-\item{erva_code}{Sairaanhoidon erityisvastuualueen code (Catchment areas for highly specialised medical care)}
-\item{erva_name_fi}{Sairaanhoidon erityisvastuualueen name in Finnish (Catchment areas for highly specialised medical care)}
-\item{erva_name_sv}{Sairaanhoidon erityisvastuualueen name in Swedish (Catchment areas for highly specialised medical care)}
-\item{erva_name_en}{Sairaanhoidon erityisvastuualueen name in English (Catchment areas for highly specialised medical care)}
-\item{kela_vakuutuspiiri_name_fi}{Kelan vakuutuspiiri name in Finnish (Insurance District)}
-\item{kela_vakuutuspiiri_code}{Kelan vakuutuspiiri unofficial code (Insurance District)}
-\item{kela_vakuutuspiiri_name_sv}{Kelan vakuutuspiiri name in Swedish (Insurance District)}
-\item{kela_vakuutuspiiri_name_en}{Kelan vakuutuspiiri name in English (Insurance District)}
-\item{kela_asumistukialue_name_fi}{Kelan asumistuen kuntaryhmät name in Finnish (Municipality categories for housing allowance)}
-\item{kela_asumistukialue_code}{Kelan asumistuen kuntaryhmät unofficial code (Municipality categories for housing allowance)}
-\item{kela_asumistukialue_name_sv}{Kelan asumistuen kuntaryhmät name in Swedish (Municipality categories for housing allowance)}
-\item{kela_asumistukialue_name_en}{Kelan asumistuen kuntaryhmät name in English (Municipality categories for housing allowance)}
-\item{hyvinvointialue_name_fi}{Hyvinvointialue name in Finnish (Wellbeing services counties)}
-\item{hyvinvointialue_name_sv}{Hyvinvointialue name in Swedish (Wellbeing services counties)}
-\item{hyvinvointialue_name_en}{Hyvinvointialue name in English (Wellbeing services counties)}
-\item{hyvinvointialue_code}{Hyvinvointialue code (Wellbeing services counties)}
+\item{nuts3_code}{nuts3_code}
+\item{nuts3_name_fi}{nuts3_name_fi}
+\item{nuts3_name_sv}{nuts3_name_sv}
+\item{nuts3_name_en}{nuts3_name_en}
+\item{vaalipiiri_code}{vaalipiiri_code}
+\item{vaalipiiri_name_fi}{vaalipiiri_name_fi}
+\item{vaalipiiri_name_sv}{vaalipiiri_name_sv}
+\item{vaalipiiri_name_en}{vaalipiiri_name_en}
+\item{hyvinvointialue_code}{hyvinvointialue_code}
+\item{hyvinvointialue_name_fi}{hyvinvointialue_name_fi}
+\item{hyvinvointialue_name_sv}{hyvinvointialue_name_sv}
+\item{hyvinvointialue_name_en}{hyvinvointialue_name_en}
+\item{tyossakayntial_name_sv}{tyossakayntial_name_sv}
+\item{tyossakayntial_name_en}{tyossakayntial_name_en}
+\item{yhteistyoalue_code}{yhteistyoalue_code}
+\item{yhteistyoalue_name_fi}{yhteistyoalue_name_fi}
+\item{yhteistyoalue_name_sv}{yhteistyoalue_name_sv}
+\item{yhteistyoalue_name_en}{yhteistyoalue_name_en}
+\item{tyollisyysalue_code}{tyollisyysalue_code}
+\item{tyollisyysalue_name_fi}{tyollisyysalue_name_fi}
+\item{tyollisyysalue_name_sv}{tyollisyysalue_name_sv}
+\item{tyollisyysalue_name_en}{tyollisyysalue_name_en}
+\item{municipality_code}{municipality_code}
+\item{kunta_name}{kunta_name}
+\item{name_fi}{name_fi}
+\item{name_sv}{name_sv}
+\item{kela_palvelualue_name_fi}{kela_palvelualue_name_fi}
+\item{kela_palvelualue_code}{kela_palvelualue_code}
+\item{kela_palvelualue_name_sv}{kela_palvelualue_name_sv}
+\item{kela_palvelualue_name_en}{kela_palvelualue_name_en}
+\item{kela_asumistukialue_name_fi}{kela_asumistukialue_name_fi}
+\item{kela_asumistukialue_code}{kela_asumistukialue_code}
+\item{kela_asumistukialue_name_sv}{kela_asumistukialue_name_sv}
+\item{kela_asumistukialue_name_en}{kela_asumistukialue_name_en}
 }
 }
 \source{

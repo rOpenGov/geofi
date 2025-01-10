@@ -5,7 +5,7 @@
 \alias{grid_etela_savo}
 \title{custom geofacet grid for Etelä-Savo}
 \format{
-A data frame with 12 rows and 4 variables:
+A data frame with 11 rows and 4 variables:
 \describe{
 \item{name}{Municipality name (kunta) in Finnish}
 \item{code}{Municipality code}

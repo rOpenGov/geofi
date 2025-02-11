@@ -3,7 +3,7 @@
 \docType{data}
 \name{municipality_key}
 \alias{municipality_key}
-\title{Aggregated municipality key table for years 2013-2024}
+\title{Aggregated municipality key table for years 2013-2025}
 \format{
 A data frame with 4057 rows and 81 variables:
 \describe{

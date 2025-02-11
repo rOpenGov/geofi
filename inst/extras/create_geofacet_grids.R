@@ -20,7 +20,8 @@ save(grid_maakunta, file = "./data/grid_maakunta.rda",
 # create regions (hyvinvointialue) grid
 library(geofi)
 library(dplyr)
-muni <- get_municipalities(year =2024)
+library(sf)
+muni <- get_municipalities(year =2025)
 muni %>% group_by(hyvinvointialue_name_fi,hyvinvointialue_code) %>%
   summarise() %>%
   ungroup() -> spd
@@ -371,22 +372,22 @@ save(grid_uusimaa, file = "./data/grid_uusimaa.rda",
      compress = "bzip2")
 
 # use the code below as geograhical reference map
-geofi::municipality_key %>%
-  filter(grepl("^Pohjois-Sa", mk_name)) %>%
-  count(kunta,kunta_name) %>%
-  select(-n) %>%
-  setNames(c("code","name")) -> tmp
-write.csv(tmp, "tmp.csv", row.names = FALSE)
-file.edit("./tmp.csv")
-grid_design()
-
-muni <- get_municipalities(year = 2021)
-muni %>%
-  mutate(kunta = as.integer(sub("^0+", "", kunta))) %>%
-  filter(kunta %in% tmp$code) %>%
-  ggplot() +
-  geom_sf() +
-  geom_sf_text(aes(label = name))
+# geofi::municipality_key %>%
+#   filter(grepl("^Pohjois-Sa", mk_name)) %>%
+#   count(kunta,kunta_name) %>%
+#   select(-n) %>%
+#   setNames(c("code","name")) -> tmp
+# write.csv(tmp, "tmp.csv", row.names = FALSE)
+# file.edit("./tmp.csv")
+# grid_design()
+#
+# muni <- get_municipalities(year = 2021)
+# muni %>%
+#   mutate(kunta = as.integer(sub("^0+", "", kunta))) %>%
+#   filter(kunta %in% tmp$code) %>%
+#   ggplot() +
+#   geom_sf() +
+#   geom_sf_text(aes(label = name))
 
 
 

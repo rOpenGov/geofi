@@ -320,7 +320,7 @@
 "grid_varsinais_suomi"
 
 
-#' Aggregated municipality key table for years 2013-2024
+#' Aggregated municipality key table for years 2013-2025
 #'
 #' Table for aggregating municipality level data to various regional groupings
 #'

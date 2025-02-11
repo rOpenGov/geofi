@@ -1,11 +1,12 @@
 ## Test environments
-* local Ubuntu 22.04.5 install, R 4.4.2
+* local Ubuntu 24.04.1 install, R 4.4.2
 * win-builder (devel)
 * r-hub.io
 
 ## Submission note
 
-+ Municipality keys updated to match Kela current classification
++ 2025 regional classifications updated to match with latest changes in stat.fi classification API
+
 
 ## R CMD check results
 

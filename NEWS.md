@@ -1,3 +1,7 @@
+# geofi 1.0.18
+
++ 2025 regional classifications updated to match with latest changes in stat.fi classification API
+
 # geofi 1.0.17
 
 + Municipality keys updated to match Kela current classification

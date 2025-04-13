@@ -1,8 +1,8 @@
 
 # check if PROJ-version is lower than 9.6.0 and assign a logical value
-is_lower_than_960 <- package_version(sf::sf_extSoftVersion()["PROJ"]) < as.package_version("9.6.0")
+proj_lower_than_960 <- package_version(sf::sf_extSoftVersion()["PROJ"]) < as.package_version("9.6.0")
 
-.onAttach <- function(lib, pkg, proj_lower_than_960 = is_lower_than_960) {
+.onAttach <- function(lib, pkg) {
   #   packageStartupMessage("\ngeofi R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.org>.\n
   # **************\n
   # Please note that the content of variables 'hyvinvointialue_name_*' and 'hyvinvointialue_code' has changed in 1.0.6 release.\nNew content follows the classification by Statistics Finland.\n
@@ -27,7 +27,7 @@ municipality_central_localities <- NULL
 #' @importFrom purrr map2
 #' @importFrom sf st_transform
 
-.onLoad <- function(lib, pkg, proj_lower_than_960 = is_lower_than_960) {
+.onLoad <- function(lib, pkg) {
   
   # Read the WFS providers definition data from YAML file in inst/extdata
   wfs_data <- yaml::read_yaml(system.file("extdata", "wfs_providers.yaml",
@@ -35,11 +35,11 @@ municipality_central_localities <- NULL
   # Map the providers and their data (URL, WFS version) to the environment
   purrr::map2(names(wfs_data), wfs_data, assign, envir = wfs_providers)
   
-  if (proj_lower_than_960){
+  if (!proj_lower_than_960){
     # Load the dataset into the package environment
     utils::data("municipality_central_localities", package = "geofi", envir = pkg_env)
     # Set CRS to 3067 that will vary whether user has PROJ < 9.6.0 or >= 9.6.0
-    pkg_env$municipality_central_localities <- sf::st_transform(pkg_env$municipality_central_localities, 3067)
+    suppressWarnings(sf::st_crs(pkg_env$municipality_central_localities) <- sf::st_crs("EPSG:3067"))
     # assing the modified data to global environment
     assign("municipality_central_localities", pkg_env$municipality_central_localities, envir = .GlobalEnv)
   }

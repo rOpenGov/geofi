@@ -89,13 +89,34 @@ Contributions are very welcome:
 
 ### Acknowledgements
 
-**Kindly cite this work** as follows: [Markus
-Kainu](https://github.com/muuankarski), [Joona
-Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani
-Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
-Retrieval and analysis of open geospatial data from Finland with the
-geofi R package. R package version 1.0.18. URL:
-<https://ropengov.github.io/geofi/>
+**Kindly cite this work** as follows:
+
+``` text
+citation("geofi")
+Kindly cite the geofi R package as follows:
+
+To cite 'geofi' in publications use:
+
+  Kainu M, Lehtomaki J, Parkkinen J, Miettinen J, Kantanen P, Vesanen
+  S, Lahti L (2025). geofi: Access Finnish Geospatial Data.
+  doi:10.32614/CRAN.package.geofi, R package version 1.0.18, URL:
+  https://github.com/rOpenGov/geofi
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{R-geofi,
+    title = {{geofi: Access Finnish Geospatial Data}},
+    doi = {10.32614/CRAN.package.geofi},
+    author = {Markus Kainu and Joona Lehtomaki and Juuso Parkkinen and Jani Miettinen and Pyry Kantanen and Sampo Vesanen and Leo Lahti},
+    year = {2025},
+    version = {1.0.18},
+    note = {R package version 1.0.18},
+    url = {https://github.com/rOpenGov/geofi},
+  }
+
+Many thanks for all contributors! For more info, see:
+https://github.com/rOpenGov/geofi
+```
 
 We are grateful to all
 [contributors](https://github.com/rOpenGov/geofi/graphs/contributors).

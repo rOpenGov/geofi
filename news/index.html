@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.18</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,11 @@
       <small>Source: <a href="https://github.com/rOpenGov/geofi/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="geofi-110">geofi 1.1.0<a class="anchor" aria-label="anchor" href="#geofi-110"></a></h2>
+<ul><li>PROJ 9.6.0 (announced here <a href="https://lists.osgeo.org/pipermail/proj/2025-March/011738.html" class="external-link uri">https://lists.osgeo.org/pipermail/proj/2025-March/011738.html</a>) added support for EUREF-FIN in Finish transformations in their new NKG transformations. This resulted in issues with on-board <code>municipality_central_localities</code> in systems where <code>sf</code> is built with PROJ-version &gt;= 9.6.0. This is now addressed so that <code>municipality_central_localities</code> is created using proj 9.6.0 and therefore ‘EUREF-FIN / TM35FIN(E,N)’ ESPG:3067. If user has PROJ version lower than 9.6.0, CRS of municipality_central_localities will be modified to <code>ETRS89/TM35FIN(E,N)</code> at package load and user is prompted accordingly. See also: <a href="https://lists.osgeo.org/pipermail/proj/2025-March/011774.html" class="external-link uri">https://lists.osgeo.org/pipermail/proj/2025-March/011774.html</a>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.18" id="geofi-1018">geofi 1.0.18<a class="anchor" aria-label="anchor" href="#geofi-1018"></a></h2><p class="text-muted">CRAN release: 2025-02-11</p>
 <ul><li>2025 regional classifications updated to match with latest changes in stat.fi classification API</li>

@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.18</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,7 +111,7 @@ that is shipped with the package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/geofi/">geofi</a></span><span class="op">)</span></span>
 <span><span class="va">polygon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, scale <span class="op">=</span> <span class="fl">4500</span><span class="op">)</span></span>
-<span><span class="va">point</span> <span class="op">&lt;-</span> <span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_central_localities.html">municipality_central_localities</a></span></span>
+<span><span class="va">point</span> <span class="op">&lt;-</span> <span class="va">municipality_central_localities</span></span>
 <span><span class="co"># municipality code into integer</span></span>
 <span><span class="va">point</span><span class="op">$</span><span class="va">municipality_code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">point</span><span class="op">$</span><span class="va">kuntatunnus</span><span class="op">)</span></span></code></pre></div>
 <p>They both come in same CRS <code>EPSG:3067</code> and can be plotted

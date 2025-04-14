@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.18</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -268,10 +268,9 @@ analysis with R</a>.</p>
 <h3 id="polygon-centroids">Polygon centroids<a class="anchor" aria-label="anchor" href="#polygon-centroids"></a>
 </h3>
 <p><code>geofi</code> contains data on municipality central locations
-(<code><a href="../reference/municipality_central_localities.html">geofi::municipality_central_localities</a></code>). Instead of those
-you may need the actual geographical centers ie. centroids of a polygon
-that can be computed using <code>st_centroid</code> and plotted with
-ggplot.</p>
+(<code>municipality_central_localities</code>). Instead of those you may
+need the actual geographical centers ie. centroids of a polygon that can
+be computed using <code>st_centroid</code> and plotted with ggplot.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">muni_centroids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_centroid</a></span><span class="op">(</span><span class="va">muni</span><span class="op">)</span></span>
 <span></span>
@@ -285,10 +284,10 @@ ggplot.</p>
 <div class="section level3">
 <h3 id="buffers">Buffers<a class="anchor" aria-label="anchor" href="#buffers"></a>
 </h3>
-<p>Buffers can be useful, for instance, calculating the share of <a href="https://www.avoindata.fi/data/en_GB/dataset/postcodes" class="external-link">buildings</a>
-that are within certain radius from central localities. That example is
-not explained here, but we only show how to create 15km radius around
-polygon centroids.</p>
+<p>Buffers can be useful, for instance, calculating the share of
+buildings that are within certain radius from central localities. That
+example is not explained here, but we only show how to create 15km
+radius around polygon centroids.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">muni_centroids_buffer</span> <span class="op">&lt;-</span> <span class="va">muni_centroids</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_buffer</a></span><span class="op">(</span>dist <span class="op">=</span> <span class="fl">15000</span><span class="op">)</span></span>
@@ -392,7 +391,7 @@ that we use to calculate distances between points.</p>
 name column (<code>teksti</code>) with <em>better</em> from latest
 municipality key.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">kunta</span> <span class="op">&lt;-</span> <span class="fu">geofi</span><span class="fu">::</span><span class="va"><a href="../reference/municipality_central_localities.html">municipality_central_localities</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
+<code class="sourceCode R"><span><span class="va">kunta</span> <span class="op">&lt;-</span> <span class="va">municipality_central_localities</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">teksti</span>,<span class="va">kuntatunnus</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>kuntatunnus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">kuntatunnus</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">teksti</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>

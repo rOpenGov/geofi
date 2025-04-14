@@ -205,7 +205,7 @@ The following operations derive from [Marko Kallio's](http://markokallio.fi/) co
 
 ### Polygon centroids
 
-`geofi` contains data on municipality central locations (`geofi::municipality_central_localities`). Instead of those you may need the actual geographical centers ie. centroids of a polygon that can be computed using `st_centroid` and plotted with ggplot.
+`geofi` contains data on municipality central locations (`municipality_central_localities`). Instead of those you may need the actual geographical centers ie. centroids of a polygon that can be computed using `st_centroid` and plotted with ggplot.
 
 ```{r centroids, fig.width=5, eval = apiacc_pkginst}
 muni_centroids <- st_centroid(muni)
@@ -300,7 +300,7 @@ You can calculate distance matrices using [`st_distance()`](https://r-spatial.gi
 First we need to subset the data and replace original municipality name column (`teksti`) with *better* from latest municipality key.
 
 ```{r kunnat, eval = apiacc_pkginst}
-kunta <- geofi::municipality_central_localities %>%  
+kunta <- municipality_central_localities %>%  
   select(teksti,kuntatunnus) %>%
   mutate(kuntatunnus = as.integer(kuntatunnus)) %>%
   select(-teksti) %>%

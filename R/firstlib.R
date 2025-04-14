@@ -7,10 +7,7 @@ proj_lower_than_960 <- package_version(sf::sf_extSoftVersion()["PROJ"]) < as.pac
   # **************\n
   # Please note that the content of variables 'hyvinvointialue_name_*' and 'hyvinvointialue_code' has changed in 1.0.6 release.\nNew content follows the classification by Statistics Finland.\n
   # **************")
-  
-  
   if (proj_lower_than_960){
-    # assign("municipality_central_localities", pkg_env$municipality_central_localities, envir = .GlobalEnv)
     packageStartupMessage("**************\nPROJ-version < 9.6.0 detected.\nCRS of municipality_central_localities changed to ETRS89/TM35FIN(E,N) ESPG:3067 to match user PROJ-version\nPlease look https://github.com/rOpenGov/geofi/blob/master/NEWS.md for more information\n**************")
   }
 }
@@ -28,13 +25,13 @@ municipality_central_localities <- NULL
 #' @importFrom sf st_transform
 
 .onLoad <- function(lib, pkg) {
-  
+
   # Read the WFS providers definition data from YAML file in inst/extdata
   wfs_data <- yaml::read_yaml(system.file("extdata", "wfs_providers.yaml",
                                           package = "geofi"))
   # Map the providers and their data (URL, WFS version) to the environment
   purrr::map2(names(wfs_data), wfs_data, assign, envir = wfs_providers)
-  
+
   if (!proj_lower_than_960){
     # Load the dataset into the package environment
     utils::data("municipality_central_localities", package = "geofi", envir = pkg_env)

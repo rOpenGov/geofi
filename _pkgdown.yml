@@ -5,7 +5,7 @@ navbar:
   - icon: fab fa-github
     href: https://github.com/rOpenGov/geofi
 reference:
-- title: API calling functions
+- title: API calling functions for Statistics Finland
   desc: |
     Functions for fetching spatial data from Statistics Finland WFS-api
   contents:
@@ -14,11 +14,15 @@ reference:
   - get_population_grid
   - get_statistical_grid
   - get_municipality_pop
+- title: API calling functions for NLS
+  desc: |
+    Functions for fetching spatial data from National Land Survey of Finland WFS-api
+  contents:
+  - municipality_central_localities
 - title: Data
   desc: |
     geofi comes with a timeseries of built-in municipality keys that can be used to aggregate municipality level data (`municipality_key_*`) and `municipality_central_localities` data containing point locations for cental locality of each municipality
   contents:
-  - municipality_central_localities
   - municipality_key
   - municipality_key_2025
   - municipality_key_2024

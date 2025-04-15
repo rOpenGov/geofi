@@ -1,8 +1,8 @@
-#' A simple feature point data containing locations of municipalities central localities
+#' A data frame containing locations of municipalities central localities
 #'
-#' Data is extracted from latest version (April 2023) of Topographic Database (Maastotietokanta) by National Land Survey of Finland (Maanmittauslaitos)
+#' Data is extracted from latest version (April 2025) of Topographic Database (Maastotietokanta) by National Land Survey of Finland (Maanmittauslaitos)
 #'
-#' @format A simple feature POINT data with 311 rows and 21 variables:
+#' @format A data.frame with 309 rows and 19 variables:
 #' \describe{
 #'   \item{mtk_id}{mtk_id}
 #'   \item{sijaintitarkkuus}{location precision}
@@ -21,13 +21,10 @@
 #'   \item{kirjasinkallistuskulma}{kirjasinkallistuskulma}
 #'   \item{kirjasinvalyskerroin}{kirjasinvalyskerroin}
 #'   \item{kuntatunnus}{municipality code}
-#'   \item{municipality_code}{municipality code}
-#'   \item{municipality_name_fi}{municipality name in Finnish}
-#'   \item{municipality_name_sv}{municipality name in Swedish}
-#'   \item{municipality_name_en}{municipality name in English}
-#'   \item{geometry}{geometry}
+#'   \item{X}{longitude}
+#'   \item{Y}{latitude}
 #' }
-"municipality_central_localities"
+"municipality_central_localities_df"
 
 
 

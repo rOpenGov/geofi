@@ -54,12 +54,12 @@ If you want more detailed explanation of how to plot `sf`-objects take a look at
 
 ## Datasets
 
-Lets start with latest municipality division from `get_municipalities()` with is a *POLYGON* data and with *POINT* data of `municipality_central_localities` that is shipped with the package.
+Lets start with latest municipality division from `get_municipalities()` with is a *POLYGON* data and with *POINT* data of returned by `municipality_central_localities()` function.
 
 ```{r municipality_map, fig.width = 5, eval = apiacc}
 library(geofi)
 polygon <- get_municipalities(year = 2021, scale = 4500)
-point <- geofi::municipality_central_localities
+point <- geofi::municipality_central_localities()
 # municipality code into integer
 point$municipality_code <- as.integer(point$kuntatunnus)
 ```

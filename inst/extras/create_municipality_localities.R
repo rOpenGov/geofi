@@ -1,5 +1,5 @@
 library(sf)
-# library(dplyr)
+library(dplyr)
 # download.file("https://tiedostopalvelu.maanmittauslaitos.fi/tp/tilaus/rgg3h0a0bulgd50k7ij4d9lh9l?lang=fi",
 #               "~/Downloads/mtkmaasto.zip")
 # unzip(zipfile = "~/Downloads/mtkmaasto.zip", exdir = "~/Downloads")
@@ -24,8 +24,16 @@ mml_api_key <- Sys.getenv("MML_API_KEY")
 url <- paste0("https://avoin-paikkatieto.maanmittauslaitos.fi/maastotiedot/features/v1/collections/kunnanhallintokeskus/items?f=json&limit=500&api-key=", mml_api_key)
 kunnanhallintokeskus <- sf::st_read(url)
 kunnanhallintokeskus$sijainti_piste <- NULL
+municipality_central_localities_df <- bind_cols(st_drop_geometry(kunnanhallintokeskus),
+                                                st_coordinates(kunnanhallintokeskus))
+save(municipality_central_localities_df, file = "./data/municipality_central_localities_df.rda",
+     compress = "bzip2")
+usethis::use_data(municipality_central_localities_df, overwrite = TRUE)
+
 municipality_central_localities <- sf::st_transform(kunnanhallintokeskus, 3067) %>%
   left_join(municipality_key_2022 %>% select(kunta,municipality_code,municipality_name_fi,municipality_name_sv,municipality_name_en),
             by = c("kuntatunnus" = "kunta"))
 save(municipality_central_localities, file = "./data/municipality_central_localities.rda",
      compress = "bzip2")
+
+

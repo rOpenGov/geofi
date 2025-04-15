@@ -60,12 +60,12 @@ library(geofi)
 library(sf)
 library(dplyr)
 muni <- get_municipalities()
-point <- municipality_central_localities
+point <- municipality_central_localities()
 crs <- st_crs(muni)
 crs$input
 ```
 
-However, sometimes data is not correctly projected and you have to reproject it using `st_transform`. Web maps like Google maps or Leaflet use *WGS 1984 geographic (long/lat) coordinate system* which is fine with added interactive feature, but should be avoided when plotting data on maps elsewhere. This is especially the case with large northern countries like Finland. To demonstrate the effect lets reproject the municipality data to WGS 1984 (usin EPSG code equivalent `4326`) and plot it side to side with `EPSG:3067`
+However, sometimes data is not correctly projected and you have to reproject it using `st_transform`. Web maps like Google maps or Leaflet use *WGS 1984 geographic (long/lat) coordinate system* which is fine with added interactive feature, but should be avoided when plotting data on maps elsewhere. This is especially the case with large northern countries like Finland. To demonstrate the effect lets reproject the municipality data to WGS 1984 (using EPSG code equivalent `4326`) and plot it side to side with `EPSG:3067`
 
 
 ```{r crss, eval = apiacc_pkginst}
@@ -205,7 +205,7 @@ The following operations derive from [Marko Kallio's](http://markokallio.fi/) co
 
 ### Polygon centroids
 
-`geofi` contains data on municipality central locations (`geofi::municipality_central_localities`). Instead of those you may need the actual geographical centers ie. centroids of a polygon that can be computed using `st_centroid` and plotted with ggplot.
+`geofi` contains a function for retrieving municipality central locations (`geofi::municipality_central_localities()`). Instead of those you may need the actual geographical centers ie. centroids of a polygon that can be computed using `st_centroid` and plotted with ggplot.
 
 ```{r centroids, fig.width=5, eval = apiacc_pkginst}
 muni_centroids <- st_centroid(muni)
@@ -214,7 +214,7 @@ ggplot() +
   geom_sf(data = muni) +
   geom_sf(data = muni_centroids, color = "blue") +
   # plot also the municipality_central_localities
-  geom_sf(data = municipality_central_localities, color = "red")
+  geom_sf(data = municipality_central_localities(), color = "red")
 
 ```
 
@@ -271,7 +271,7 @@ Perhaps not the most useful operation, but worth taking a look as readily availa
 library(geofi)
 library(sf)
 
-muni_voronoi <- municipality_central_localities %>% 
+muni_voronoi <- municipality_central_localities() %>% 
   st_union() %>%
   st_voronoi() %>% 
   st_cast() %>% 
@@ -281,7 +281,7 @@ muni_voronoi <- municipality_central_localities %>%
 
 ggplot(muni_voronoi) + 
   geom_sf(aes(fill = rnk)) +
-  geom_sf(data = municipality_central_localities, shape = 4) +
+  geom_sf(data = municipality_central_localities(), shape = 4) +
   scale_fill_fermenter(palette = "YlGnBu") +
   theme_minimal() +
   theme(axis.text = element_blank(),
@@ -295,12 +295,12 @@ ggplot(muni_voronoi) +
 
 Calculating distances is certainly at the core of geospatial analysis. In this exercise we are interested on calculating distances between municipality central localities in Finland. As expected, we are talking great circle distances here, ie. *as the crow flies* type of distances.
 
-You can calculate distance matrices using [`st_distance()`](https://r-spatial.github.io/sf/reference/geos_measures.html)-function from [sf](https://r-spatial.github.io/sf/index.html)-package that computes distances between pairs of geometries. `geofi`-package contains an internal data [`municipality_central_localities`](https://ropengov.github.io/geofi/articles/geofi_datasets.html#central-localities-of-municipalities) that we use to calculate distances between points.
+You can calculate distance matrices using [`st_distance()`](https://r-spatial.github.io/sf/reference/geos_measures.html)-function from [sf](https://r-spatial.github.io/sf/index.html)-package that computes distances between pairs of geometries. `geofi`-package contains a function [`municipality_central_localities()`](https://ropengov.github.io/geofi/articles/geofi_datasets.html#central-localities-of-municipalities) that we use to calculate distances between points.
 
 First we need to subset the data and replace original municipality name column (`teksti`) with *better* from latest municipality key.
 
 ```{r kunnat, eval = apiacc_pkginst}
-kunta <- geofi::municipality_central_localities %>%  
+kunta <- geofi::municipality_central_localities() %>%  
   select(teksti,kuntatunnus) %>%
   mutate(kuntatunnus = as.integer(kuntatunnus)) %>%
   select(-teksti) %>%

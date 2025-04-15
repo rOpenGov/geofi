@@ -170,7 +170,7 @@ plot(pop_grid["kunta"], border = NA)
 [National Land Survey of Finland](https://maanmittauslaitos.fi) maintains [Topological Database](https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/topographic-database) that contains a wide range of layers from which you can access the locations of central localities of each municipality in Finland.
 
 ```{r central_localities, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
-plot(municipality_central_localities["teksti"])
+plot(municipality_central_localities()["teksti"])
 ```
 
 ## Custom geofacet grid data

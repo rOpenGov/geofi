@@ -1,7 +1,7 @@
 Type: Package
 Package: geofi
 Title: Access Finnish Geospatial Data
-Version: 1.0.18
+Version: 1.0.2.0001
 Date: 2025-02-11
 Authors@R: c(
     person("Markus", "Kainu", , "markus.kainu@kapsi.fi", role = c("aut", "cre"),

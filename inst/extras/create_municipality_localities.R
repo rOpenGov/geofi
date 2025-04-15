@@ -30,8 +30,8 @@ save(municipality_central_localities_df, file = "./data/municipality_central_loc
      compress = "bzip2")
 usethis::use_data(municipality_central_localities_df, overwrite = TRUE)
 
-municipality_central_localities <- sf::st_transform(kunnanhallintokeskus, 3067) %>%
-  left_join(municipality_key_2022 %>% select(kunta,municipality_code,municipality_name_fi,municipality_name_sv,municipality_name_en),
+municipality_central_localities <- sf::st_transform(kunnanhallintokeskus, 3067) |>
+  left_join(municipality_key_2022 |> select(kunta,municipality_code,municipality_name_fi,municipality_name_sv,municipality_name_en),
             by = c("kuntatunnus" = "kunta"))
 save(municipality_central_localities, file = "./data/municipality_central_localities.rda",
      compress = "bzip2")

@@ -22,8 +22,8 @@ library(geofi)
 library(dplyr)
 library(sf)
 muni <- get_municipalities(year =2025)
-muni %>% group_by(hyvinvointialue_name_fi,hyvinvointialue_code) %>%
-  summarise() %>%
+muni |> group_by(hyvinvointialue_name_fi,hyvinvointialue_code) |>
+  summarise() |>
   ungroup() -> spd
 library(ggplot2)
 ggplot(spd, aes(label = paste(hyvinvointialue_name_fi,hyvinvointialue_code, sep = "\n"))) +
@@ -65,15 +65,15 @@ save(grid_hyvinvointialue, file = "./data/grid_hyvinvointialue.rda",
 library(geofi)
 library(dplyr)
 muni <- get_municipalities(year =2021)
-muni %>% group_by(sairaanhoitop_name_fi,sairaanhoitop_code) %>%
-  summarise() %>%
+muni |> group_by(sairaanhoitop_name_fi,sairaanhoitop_code) |>
+  summarise() |>
   ungroup() -> spd
 library(ggplot2)
 ggplot(spd, aes(label = paste(sairaanhoitop_name_fi,sairaanhoitop_code, sep = "\n"))) +
   geom_sf() + geom_sf_text()
 
-spd %>%
-  st_set_geometry(NULL) %>%
+spd |>
+  st_set_geometry(NULL) |>
   write.csv("temp.csv")
 
 # create regions (sairaanhoitopiiri) grid for
@@ -162,7 +162,7 @@ mygrid <- data.frame(
   row = c(1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6),
   col = c(3, 2, 4, 3, 2, 3, 2, 1, 4, 3, 2, 1, 2, 1, 2),
   stringsAsFactors = FALSE
-) %>% filter(code != 152) # isokyro
+) |> filter(code != 152) # isokyro
 geofacet::grid_preview(mygrid)
 
 grid_pohjanmaa <- mygrid
@@ -191,7 +191,7 @@ mygrid <- data.frame(
   row = c(1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6),
   col = c(3, 4, 2, 5, 4, 3, 2, 5, 2, 3, 4, 5, 4, 2, 1, 3, 4, 1, 2, 3, 4, 2, 3),
   stringsAsFactors = FALSE
-) %>% filter(name != "Kuhmoinen") # kuhmoinen
+) |> filter(name != "Kuhmoinen") # kuhmoinen
 geofacet::grid_preview(mygrid)
 
 grid_keski_suomi <- mygrid
@@ -277,7 +277,7 @@ mygrid <- data.frame(
   row = c(1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4),
   col = c(5, 5, 3, 1, 2, 4, 5, 3, 2, 1, 4, 3, 2),
   stringsAsFactors = FALSE
-) %>% filter(!name %in% c("Joroinen","Heinävesi"))
+) |> filter(!name %in% c("Joroinen","Heinävesi"))
 geofacet::grid_preview(mygrid)
 
 grid_etela_savo <- mygrid
@@ -320,7 +320,7 @@ mygrid <- data.frame(
   row = c(1, 1, 1, 2, 2, 2, 2),
   col = c(1, 2, 4, 1, 2, 3, 4),
   stringsAsFactors = FALSE
-) %>% filter(name != "Iitti")
+) |> filter(name != "Iitti")
 geofacet::grid_preview(mygrid)
 
 grid_kymenlaakso <- mygrid
@@ -372,19 +372,19 @@ save(grid_uusimaa, file = "./data/grid_uusimaa.rda",
      compress = "bzip2")
 
 # use the code below as geograhical reference map
-# geofi::municipality_key %>%
-#   filter(grepl("^Pohjois-Sa", mk_name)) %>%
-#   count(kunta,kunta_name) %>%
-#   select(-n) %>%
+# geofi::municipality_key |>
+#   filter(grepl("^Pohjois-Sa", mk_name)) |>
+#   count(kunta,kunta_name) |>
+#   select(-n) |>
 #   setNames(c("code","name")) -> tmp
 # write.csv(tmp, "tmp.csv", row.names = FALSE)
 # file.edit("./tmp.csv")
 # grid_design()
 #
 # muni <- get_municipalities(year = 2021)
-# muni %>%
-#   mutate(kunta = as.integer(sub("^0+", "", kunta))) %>%
-#   filter(kunta %in% tmp$code) %>%
+# muni |>
+#   mutate(kunta = as.integer(sub("^0+", "", kunta))) |>
+#   filter(kunta %in% tmp$code) |>
 #   ggplot() +
 #   geom_sf() +
 #   geom_sf_text(aes(label = name))

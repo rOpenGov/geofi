@@ -58,8 +58,8 @@ Each municipality belongs to a higher level regional classifications such as reg
 library(geofi)
 library(dplyr)
 d <- data(package = "geofi")
-as_tibble(d$results) %>% 
-  select(Item,Title) %>% 
+as_tibble(d$results) |> 
+  select(Item,Title) |> 
     filter(grepl("municipality_key", Item))
 ```
 
@@ -72,7 +72,7 @@ names(geofi::municipality_key_2023)
 With these municipality keys you can easily aggregate municipalities for plotting or you can list different regional breakdowns.\
 
 ```{r municipality_key_maakunta, eval = pkginst}
-geofi::municipality_key_2023 %>% 
+geofi::municipality_key_2023 |> 
   count(maakunta_code,maakunta_name_fi,maakunta_name_sv,maakunta_name_en)
 ```
 
@@ -102,8 +102,8 @@ The statistical variables in the data are: total population (vaesto), share of t
 To plot men's share at the municipality level in 2020 (2021 municipality borders) you can simply to this. 
 
 ```{r muni_pop_map1, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
-get_municipality_pop(year = 2022) %>%  
-  subset(select = miehet_p) %>% 
+get_municipality_pop(year = 2022) |>  
+  subset(select = miehet_p) |> 
   plot()
 ```
 
@@ -111,22 +111,22 @@ Aggregating the absolute population numbers is straightforward: to plot populati
 
 
 ```{r muni_pop_map2, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
-get_municipality_pop(year = 2022) %>%  
-  group_by(hyvinvointialue_name_fi) %>%  
-  summarise(vaesto = sum(vaesto)) %>%  
-  select(vaesto) %>% 
+get_municipality_pop(year = 2022) |>  
+  group_by(hyvinvointialue_name_fi) |>  
+  summarise(vaesto = sum(vaesto)) |>  
+  select(vaesto) |> 
   plot()
 ```
 
 To plot the men's share at wellbeing service country level you have to add one more step
 
 ```{r muni_pop_map3, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
-get_municipality_pop(year = 2022) %>%  
-  dplyr::group_by(hyvinvointialue_name_fi) %>% 
+get_municipality_pop(year = 2022) |>  
+  dplyr::group_by(hyvinvointialue_name_fi) |> 
   summarise(vaesto = sum(vaesto),
-            miehet = sum(miehet)) %>% 
-  mutate(share = miehet/vaesto*100) %>% 
-  select(share) %>% 
+            miehet = sum(miehet)) |> 
+  mutate(share = miehet/vaesto*100) |> 
+  select(share) |> 
   plot()
 ```
 
@@ -183,9 +183,9 @@ From Ryan Hafen's [blog](https://ryanhafen.com/blog/geofacet/):
 
 ```{r geofacets, eval = apiacc_pkginst}
 d <- data(package = "geofi")
-as_tibble(d$results) %>% 
-  select(Item,Title) %>% 
-    filter(grepl("grid", Item)) %>% 
+as_tibble(d$results) |> 
+  select(Item,Title) |> 
+    filter(grepl("grid", Item)) |> 
   print(n = 100)
 ```
 
@@ -196,12 +196,12 @@ Here is an example where population data at municipality level is pulled from TH
 sotkadata <- geofi::sotkadata_population
 
 # lets aggregate population data
-dat <- left_join(geofi::municipality_key_2023 %>% select(-year),
-                 sotkadata) %>% 
-  group_by(maakunta_code, maakunta_name_fi,year) %>% 
-  summarise(population = sum(primary.value, na.rm = TRUE)) %>% 
-  na.omit() %>% 
-  ungroup() %>% 
+dat <- left_join(geofi::municipality_key_2023 |> select(-year),
+                 sotkadata) |> 
+  group_by(maakunta_code, maakunta_name_fi,year) |> 
+  summarise(population = sum(primary.value, na.rm = TRUE)) |> 
+  na.omit() |> 
+  ungroup() |> 
   rename(code = maakunta_code, name = maakunta_name_fi)
 
 library(geofacet)

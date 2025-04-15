@@ -2,9 +2,9 @@
 
 library(sotkanet)
 library(dplyr)
-sotkadata_population <- GetDataSotkanet(indicators = 127, years = 2000:2022) %>%
-  filter(region.category == "KUNTA") %>%
-  mutate(municipality_code = as.integer(region.code)) %>%
+sotkadata_population <- GetDataSotkanet(indicators = 127, years = 2000:2022) |>
+  filter(region.category == "KUNTA") |>
+  mutate(municipality_code = as.integer(region.code)) |>
   select(municipality_code,primary.value,year)
 
 save(sotkadata_population, file = "./data/sotkadata_population.rda",
@@ -16,9 +16,9 @@ karttasovellus::document_data(dat = sotkadata_population,
 
 
 # ******************
-sotkadata_swedish_speaking_pop <- GetDataSotkanet(indicators = 2433, years = 2000:2022) %>%
-  filter(region.category == "KUNTA") %>%
-  mutate(municipality_code = as.integer(region.code)) %>%
+sotkadata_swedish_speaking_pop <- GetDataSotkanet(indicators = 2433, years = 2000:2022) |>
+  filter(region.category == "KUNTA") |>
+  mutate(municipality_code = as.integer(region.code)) |>
   select(municipality_code,indicator.title.fi,primary.value)
 
 save(sotkadata_swedish_speaking_pop, file = "./data/sotkadata_swedish_speaking_pop.rda",
@@ -34,7 +34,7 @@ library(pxweb)
 px_data <- read.csv("https://pxdata.stat.fi:443/PxWeb/sq/43d3d0aa-636e-4a4b-bbe1-decae45fc2b4",
                     header = TRUE, sep = ";", fileEncoding = "Latin1")
 px_data$posti_alue <- sub(" .+$", "", px_data$Postinumeroalue)
-statfi_zipcode_population <- px_data %>% select(posti_alue,X2022)
+statfi_zipcode_population <- px_data |> select(posti_alue,X2022)
 
 save(statfi_zipcode_population, file = "./data/statfi_zipcode_population.rda",
      compress = "bzip2")

@@ -17,7 +17,6 @@
 #' @return sf object
 #'
 #' @importFrom dplyr left_join
-#' @importFrom dplyr %>%
 #' @importFrom dplyr mutate
 #' @importFrom rlang .data
 #'
@@ -69,7 +68,7 @@ Please check your connection, firewall settings and/or review your proxy setting
     }
 
   # Join the attribute data
-  sf_obj <- left_join(sf_obj %>%
+  sf_obj <- left_join(sf_obj |>
                         mutate(kunta = as.integer(as.character(.data$kunta))),
             muni_key,
             by = c("kunta" = "kunta"))

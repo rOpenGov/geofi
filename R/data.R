@@ -788,7 +788,7 @@
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2021"
-# names(municipality_key_2021) %>% paste0("#'   \\item{",.,"}{",.,"}\n") %>% cat(., file = "tmp.txt")
+# names(municipality_key_2021) |> paste0("#'   \\item{",.,"}{",.,"}\n") |> cat(., file = "tmp.txt")
 
 
 
@@ -864,7 +864,7 @@
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2020"
-# names(municipality_key_2020) %>% paste0("#'   \\item{",.,"}{",.,"}\n") %>% cat(., file = "tmp.txt")
+# names(municipality_key_2020) |> paste0("#'   \\item{",.,"}{",.,"}\n") |> cat(., file = "tmp.txt")
 
 #' Municipality key table for 2019
 #'
@@ -1007,7 +1007,7 @@
 #' }
 #' @source \url{https://data.stat.fi/api/classifications/v2/classifications}
 "municipality_key_2018"
-# names(municipality_key_2017) %>% paste0("#'   \\item{",.,"}{",.,"}\n") %>% cat(., file = "tmp.txt")
+# names(municipality_key_2017) |> paste0("#'   \\item{",.,"}{",.,"}\n") |> cat(., file = "tmp.txt")
 
 #' municipality_key_2017
 #'

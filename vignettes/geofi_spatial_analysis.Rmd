@@ -75,10 +75,10 @@ crs$input
 
 library(ggplot2)
   
-p1 <- ggplot(muni %>% st_union()) + 
+p1 <- ggplot(muni |> st_union()) + 
   geom_sf() + 
   labs(subtitle = "EPSG:3067")
-p2 <- ggplot(muni_4326 %>% st_union()) + 
+p2 <- ggplot(muni_4326 |> st_union()) + 
   geom_sf() +
   labs(subtitle = "EPSG:4326")
 library(patchwork)
@@ -96,17 +96,17 @@ To compute the area of polygons (municipality in this case), ordering them by si
 # compute area
 muni$area <- sf::st_area(muni)
 # largest
-muni %>% 
-  arrange(desc(area)) %>% 
-  slice(1:10) %>% 
+muni |> 
+  arrange(desc(area)) |> 
+  slice(1:10) |> 
   ggplot() + 
   geom_sf() + 
   geom_sf_label(aes(label = name_fi)) +
   labs(title = "largest 10")
   # smallest
-muni %>% 
-  arrange(area) %>% 
-  slice(1:10) %>% 
+muni |> 
+  arrange(area) |> 
+  slice(1:10) |> 
   ggplot() + 
   geom_sf() + 
   geom_sf_label(aes(label = name_fi)) +
@@ -125,11 +125,11 @@ Lets imagine that we need a more detailed view of the metropolitan area of the G
 greater_helsinki <- c('Espoo','Helsinki','Vantaa','Hyvinkää',
                       'Järvenpää','Kauniainen','Kerava','Kirkkonummi',
                       'Mäntsälä','Nurmijärvi','Pornainen','Sipoo','Tuusula','Vihti')
-greater_helsinki_polygon <- muni %>% filter(municipality_name_fi %in% greater_helsinki)
+greater_helsinki_polygon <- muni |> filter(municipality_name_fi %in% greater_helsinki)
 
 ggplot(greater_helsinki_polygon) + 
   geom_sf() +
-  geom_sf(data = point %>% 
+  geom_sf(data = point |> 
             filter(teksti %in% toupper(greater_helsinki)))
 ```
 
@@ -139,21 +139,21 @@ ggplot(greater_helsinki_polygon) +
 First, let's create [bounding box](https://en.wikipedia.org/wiki/Minimum_bounding_rectangle) from greater Helsinki polygons.
 
 ```{r bb_poly, eval = apiacc_pkginst}
-bounding_box_polygon <- st_as_sfc(st_bbox(muni %>% filter(municipality_name_fi %in% greater_helsinki)))
+bounding_box_polygon <- st_as_sfc(st_bbox(muni |> filter(municipality_name_fi %in% greater_helsinki)))
 
 ggplot(st_intersection(bounding_box_polygon, muni)) + 
   geom_sf() +
-  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
+  geom_sf(data = point |> filter(teksti %in% toupper(greater_helsinki)))
 ```
 
 Then, let's use the point data (municipality central localities) to create the bounding box
 
 ```{r bb_point, eval = apiacc_pkginst}
-bounding_box_point <- st_as_sfc(st_bbox(point %>% filter(teksti %in% toupper(greater_helsinki))))
+bounding_box_point <- st_as_sfc(st_bbox(point |> filter(teksti %in% toupper(greater_helsinki))))
 
 ggplot(st_intersection(bounding_box_point, muni)) + 
   geom_sf() +
-  geom_sf(data = point %>% filter(teksti %in% toupper(greater_helsinki)))
+  geom_sf(data = point |> filter(teksti %in% toupper(greater_helsinki)))
 ```
 
 
@@ -162,11 +162,11 @@ ggplot(st_intersection(bounding_box_point, muni)) +
 Neighboring or intersecting objects can be found using `st_intersection()` in following manner where we plot Helsinki and it's neighbors.
 
 ```{r neighbours,  fig.height = 5, eval = apiacc_pkginst}
-helsinki <- muni %>%  filter(municipality_name_fi == "Helsinki")
-neigbour_codes <- st_intersection(muni,helsinki) %>% 
+helsinki <- muni |>  filter(municipality_name_fi == "Helsinki")
+neigbour_codes <- st_intersection(muni,helsinki) |> 
   pull(municipality_code)
 
-ggplot(muni %>% filter(municipality_code %in% neigbour_codes)) +
+ggplot(muni |> filter(municipality_code %in% neigbour_codes)) +
   geom_sf() +
   geom_sf_label(aes(label = municipality_name_fi))
 ```
@@ -181,9 +181,9 @@ Lets first plot the smallest category as a single multipolygon.
 ```{r unioin, eval = apiacc_pkginst}
 muni$area_class <- cut_number(x = as.numeric(muni$area), n = 3)
 
-muni %>% 
-  filter(area_class == levels(muni$area_class)[1]) %>% 
-  st_union() %>% 
+muni |> 
+  filter(area_class == levels(muni$area_class)[1]) |> 
+  st_union() |> 
   ggplot() +
   geom_sf()
 ```
@@ -191,9 +191,9 @@ muni %>%
 To union all three into same data you can use `group_by` and `summarise`
 
 ```{r union2, eval = apiacc_pkginst}
-muni %>% 
-  group_by(area_class) %>%
-  summarise() %>% 
+muni |> 
+  group_by(area_class) |>
+  summarise() |> 
   ggplot() +
   geom_sf(aes(fill = area_class))
 ```
@@ -223,7 +223,7 @@ ggplot() +
 Buffers can be useful, for instance, calculating the share of [buildings](https://www.avoindata.fi/data/en_GB/dataset/postcodes) that are within certain radius from central localities. That example is not explained here, but we only show how to create 15km radius around polygon centroids.
 
 ```{r buffers, fig.width=5, eval = apiacc_pkginst}
-muni_centroids_buffer <- muni_centroids %>%
+muni_centroids_buffer <- muni_centroids |>
     st_buffer(dist = 15000)
 
 ggplot() +
@@ -246,9 +246,9 @@ The resulting polygon grid is an 'sfc' object, so it needs to be made 'sf' in or
 For this example we pick northern Muonio municipality and create a custom 2km*4km grid on top of it. Afterward we could aggregate the number of reindeer for each grid cell if we would have the data.
 
 ```{r muonio, fig.width=5, eval = apiacc_pkginst}
-muonio <- muni %>% filter(municipality_name_fi == "Muonio")
+muonio <- muni |> filter(municipality_name_fi == "Muonio")
 
-grid_sf <- st_make_grid(muonio, cellsize = c(2000,4000), what="polygons") %>%
+grid_sf <- st_make_grid(muonio, cellsize = c(2000,4000), what="polygons") |>
     st_sf()
 
 grid_clip <- st_intersection(grid_sf, muonio)
@@ -271,13 +271,13 @@ Perhaps not the most useful operation, but worth taking a look as readily availa
 library(geofi)
 library(sf)
 
-muni_voronoi <- municipality_central_localities() %>% 
-  st_union() %>%
-  st_voronoi() %>% 
-  st_cast() %>% 
-  st_sf() %>% 
-  st_intersection(st_union(muni)) %>% 
-  mutate(rnk = 1:nrow(.))
+muni_voronoi <- municipality_central_localities() |> 
+  st_union() |>
+  st_voronoi() |> 
+  st_cast() |> 
+  st_sf() |> 
+  st_intersection(st_union(muni)) |> 
+  mutate(rnk = 1:n())
 
 ggplot(muni_voronoi) + 
   geom_sf(aes(fill = rnk)) +
@@ -300,12 +300,12 @@ You can calculate distance matrices using [`st_distance()`](https://r-spatial.gi
 First we need to subset the data and replace original municipality name column (`teksti`) with *better* from latest municipality key.
 
 ```{r kunnat, eval = apiacc_pkginst}
-kunta <- geofi::municipality_central_localities() %>%  
-  select(teksti,kuntatunnus) %>%
-  mutate(kuntatunnus = as.integer(kuntatunnus)) %>%
-  select(-teksti) %>%
-  left_join(geofi::municipality_key_2022 %>% select(municipality_code, municipality_name_fi),
-            by = c("kuntatunnus" = "municipality_code")) %>%
+kunta <- geofi::municipality_central_localities() |>  
+  select(teksti,kuntatunnus) |>
+  mutate(kuntatunnus = as.integer(kuntatunnus)) |>
+  select(-teksti) |>
+  left_join(geofi::municipality_key_2025 |> select(municipality_code, municipality_name_fi),
+            by = c("kuntatunnus" = "municipality_code")) |>
   rename(teksti = municipality_name_fi)
 kunta
 ```
@@ -323,17 +323,17 @@ To get there lets create a for loop that calculates distance matrices from each 
 
 ```{r dmatrix, eval = apiacc_pkginst}
 d_list <- list()
-kuntadatan_teksti_ja_kuntatunnus <- sf::st_drop_geometry(kunta) %>%
+kuntadatan_teksti_ja_kuntatunnus <- sf::st_drop_geometry(kunta) |>
   select(teksti,kuntatunnus)
 for (i in 1:nrow(kunta)){
   dist_tmp <- sf::st_distance(x = kunta[i,], y =  kunta)
   tibble(origin_name = kunta[i,]$teksti,
-         origin_code = kunta[i,]$kuntatunnus) %>%
-    bind_cols(kuntadatan_teksti_ja_kuntatunnus %>% rename(destination_name = teksti,
-                                                          destination_code = kuntatunnus)) %>%
+         origin_code = kunta[i,]$kuntatunnus) |>
+    bind_cols(kuntadatan_teksti_ja_kuntatunnus |> rename(destination_name = teksti,
+                                                          destination_code = kuntatunnus)) |>
     mutate(dist = dist_tmp[1,]) -> d_list[[i]]
 }
-kunta_dist <- do.call("bind_rows", d_list) %>%
+kunta_dist <- do.call("bind_rows", d_list) |>
   mutate(dist = as.numeric(dist))
 head(kunta_dist)
 ```
@@ -341,9 +341,9 @@ head(kunta_dist)
 Finally we can draw two plots to verify our results. First let's draw a bar plot of 20 municipality central localities nearest to Helsinki
 
 ```{r nearest, eval = apiacc_pkginst}
-ggplot(kunta_dist %>%
-         filter(origin_name == "Helsinki") %>%
-         arrange(dist) %>% slice(1:20),
+ggplot(kunta_dist |>
+         filter(origin_name == "Helsinki") |>
+         arrange(dist) |> slice(1:20),
        aes(x = dist, y = reorder(destination_name, dist), label = round(dist))) +
          geom_col() + geom_text(aes(x = 1000), color = "white", hjust = 0) +
   labs(title = "Nearest 20 municipality localities to Helsinki", x = "distance in meters")
@@ -353,15 +353,15 @@ Then, lets find the municipality central locality that is nearest to the center 
 
 ```{r dist0, eval = apiacc_pkginst}
 # We firt need the country map as a single polygon
-geofi::get_municipalities() %>% 
-  sf::st_union() %>% 
+geofi::get_municipalities() |> 
+  sf::st_union() |> 
   # then we need to compute the centroid of that polygon
   sf::st_centroid() -> fin_centroid
 
 # The let's find the nearest neighbour with
 distance <- st_distance(x = fin_centroid, y = kunta)
-kuntadatan_teksti_ja_kuntatunnus %>% 
-  mutate(dist = as.numeric(distance)) %>% 
+kuntadatan_teksti_ja_kuntatunnus |> 
+  mutate(dist = as.numeric(distance)) |> 
   arrange(dist) -> closest_to_center
 head(closest_to_center)
 ```
@@ -369,9 +369,9 @@ head(closest_to_center)
 And finally lets draw a bar plot of 20 furthest localities
 
 ```{r dist1, eval = apiacc_pkginst}
-furthest20 <- kunta_dist %>%
-         filter(origin_name == closest_to_center[1,]$teksti) %>%
-         arrange(desc(dist)) %>% slice(1:20)
+furthest20 <- kunta_dist |>
+         filter(origin_name == closest_to_center[1,]$teksti) |>
+         arrange(desc(dist)) |> slice(1:20)
 ggplot(furthest20,
        aes(x = dist, y = reorder(destination_name, dist), label = round(dist))) +
   geom_col() + geom_text(aes(x = 10000), color = "white", hjust = 0) +
@@ -381,11 +381,11 @@ ggplot(furthest20,
 And at very last, we need to show those distances also on a map.
 
 ```{r dist2, eval = apiacc_pkginst}
-sf_lahto <- kunta %>% 
-  filter(teksti %in% closest_to_center[1,]$teksti) %>%
+sf_lahto <- kunta |> 
+  filter(teksti %in% closest_to_center[1,]$teksti) |>
   select(teksti)
-sf_paate <- kunta %>% 
-  filter(teksti %in% furthest20$destination_name) %>% 
+sf_paate <- kunta |> 
+  filter(teksti %in% furthest20$destination_name) |> 
   select(teksti)
 
 triplst <- list()
@@ -393,14 +393,14 @@ for (i in 1:nrow(sf_paate)){
 triplst[[i]] <- rbind(
   sf_lahto,
   sf_paate[i,]
-) %>% 
-  summarize(m = mean(row_number()),do_union=FALSE) %>% 
+) |> 
+  summarize(m = mean(row_number()),do_union=FALSE) |> 
   st_cast("LINESTRING")
 }
 trips <- do.call("rbind", triplst)
 
 ggplot() +
-  geom_sf(data = muni %>% st_union(), alpha = .3) +
+  geom_sf(data = muni |> st_union(), alpha = .3) +
   geom_sf(data = trips, color = "dim grey") +
   geom_sf_label(data = sf_lahto, aes(label = teksti)) +
   geom_sf_text(data = sf_paate, aes(label = teksti))

@@ -39,6 +39,11 @@ Geocode Finnish place names or street addresses using Finnish National Land Surv
 Thin wrapper around geocoding REST -api by \href{https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/ammattilaiskayttajille/paikkatietojen-rajapintapalvelut/geokoodauspalvelu}{National Land Survey} documented at
 \href{https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/ammattilaiskayttajille/paikkatietojen-rajapintapalvelut/geokoodauspalvelu}{technical description geocoding service REST}.
 }
+\examples{
+geocode(search_string = "Suomenlinna",
+            source = "geographic-names",
+            api_key = Sys.getenv("MML_API_KEY"))
+}
 \author{
 Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}
 }

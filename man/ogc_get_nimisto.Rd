@@ -2,21 +2,7 @@
 % Please edit documentation in R/ogc_api_mml.R
 \name{ogc_get_nimisto}
 \alias{ogc_get_nimisto}
-\title{#' Get all buildings related collections  \href{https://www.maanmittauslaitos.fi/rakennusten-kyselypalvelu/tekninen-kuvaus}{}
-#'
-#' Thin wrapper around OGC API for \href{https://www.maanmittauslaitos.fi/rakennusten-kyselypalvelu/tekninen-kuvaus}{buildings data} (In Finnish) provided by
-#' \href{https://www.maanmittauslaitos.fi/en}{National Land Survey of Finland} (NLS).
-#'
-#' @param api_key A string An \href{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}{api key} is required to use NLS api services.
-#'
-#' @author Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}
-#'
-#' @export
-#'
-#' @return data.frame
-#' @examples
-#' ogc_get_buildings_collections()
-#'}
+\title{Query Geographic Names (Nimistö) from the National Land Survey of Finland}
 \usage{
 ogc_get_nimisto(
   search_string = NULL,
@@ -57,31 +43,32 @@ OGC API. Defaults to the value stored in
 \code{options("geofi_mml_api_key")}. You can obtain an API key from the
 National Land Survey of Finland website (see
 \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}).}
-
-\item{collection}{A string}
 }
 \value{
-sf object
-
 An \code{sf} object containing the spatial features (place names) from
 the Geographic Names dataset, transformed to the requested \code{crs}.
 If no features are found, a warning is issued, and an empty \code{sf} object
 may be returned.
 }
 \description{
-
-}
-\details{
-
-}
-\examples{
-ogc_get_maastotietokanta(collection = "hautausmaa", crs = 3067)
-
-Query Geographic Names (Nimistö) from the National Land Survey of Finland
-
 Queries the Geographic Names (Nimistö) OGC API to retrieve spatial data on
 place names provided by the National Land Survey of Finland (NLS).
+}
+\details{
+This function retrieves spatial data on place names from the Geographic Names
+(Nimistö) OGC API, provided by the National Land Survey of Finland (NLS). It
+supports filtering by a search string (case-insensitive), spatial filtering
+using a bounding box, and limiting the number of returned features.
 
+Key features:
+\itemize{
+\item Supports pagination for large datasets when \code{limit=NULL}.
+\item Applies spatial filtering using a bounding box (\code{bbox}).
+\item Transforms the output to the specified CRS (\code{crs}).
+\item Validates inputs to prevent common errors.
+}
+}
+\examples{
 \dontrun{
 # Set your API key
 options(geofi_mml_api_key = "your_api_key_here")
@@ -114,7 +101,5 @@ for more information on the Geographic Names dataset.
 instructions on obtaining an API key.
 }
 \author{
-Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}
-
 Markus Kainu \email{markus.kainu@kapsi.fi}
 }

@@ -17,9 +17,9 @@
 #'
 #' @return sf object
 #' @examples
-# geocode(search_string = "Suomenlinna",
-#             source = "geographic-names",
-#             api_key = Sys.getenv("MML_API_KEY"))
+#' geocode(search_string = "Suomenlinna",
+#'             source = "geographic-names",
+#'             api_key = Sys.getenv("MML_API_KEY"))
 geocode2 <- function(search_string,
                     source = "interpolated-road-addresses",
                     crs = 3067,

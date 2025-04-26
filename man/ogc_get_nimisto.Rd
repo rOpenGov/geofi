@@ -95,7 +95,7 @@ print(all_places)
 
 }
 \seealso{
-\url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/geographic-names}
+\url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/geographic-names}
 for more information on the Geographic Names dataset.
 \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for
 instructions on obtaining an API key.

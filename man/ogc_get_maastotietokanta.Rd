@@ -118,7 +118,7 @@ print(cemeteries_limited)
 }
 \seealso{
 \code{\link{ogc_get_maastotietokanta_collections}} to list available collections.
-\url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database}
+\url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/topographic-database}
 for more information on the Maastotietokanta.
 \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for
 instructions on obtaining an API key.

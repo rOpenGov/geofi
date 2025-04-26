@@ -43,7 +43,7 @@
 #' print(collections)
 #' }
 #'
-#' @seealso \url{https://www.maanmittauslaitos.fi/en/opendata} for more information
+#' @seealso \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for more information
 #' on the Maastotietokanta OGC API and how to obtain an API key.
 #'
 #' @importFrom httr2 request req_perform req_retry resp_body_json
@@ -416,7 +416,7 @@ fetch_ogc_api_mml <- function(api_url,
 #'
 #' @seealso
 #' \code{\link{ogc_get_maastotietokanta_collections}} to list available collections.
-#' \url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database}
+#' \url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/topographic-database}
 #' for more information on the Maastotietokanta.
 #' \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for
 #' instructions on obtaining an API key.
@@ -610,7 +610,7 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 #' }
 #'
 #' @seealso
-#' \url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/geographic-names}
+#' \url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/geographic-names}
 #' for more information on the Geographic Names dataset.
 #' \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for
 #' instructions on obtaining an API key.

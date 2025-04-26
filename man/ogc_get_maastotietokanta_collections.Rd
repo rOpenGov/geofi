@@ -53,6 +53,6 @@ print(collections)
 
 }
 \seealso{
-\url{https://www.maanmittauslaitos.fi/en/opendata} for more information
+\url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for more information
 on the Maastotietokanta OGC API and how to obtain an API key.
 }

@@ -2,24 +2,57 @@
 % Please edit documentation in R/ogc_api_mml.R
 \name{ogc_get_maastotietokanta_collections}
 \alias{ogc_get_maastotietokanta_collections}
-\title{Get all collections provided by Maastotietokanta (Topographic Database)}
+\title{Fetch Maastotietokanta Collections}
 \usage{
 ogc_get_maastotietokanta_collections(api_key = getOption("geofi_mml_api_key"))
 }
 \arguments{
-\item{api_key}{A string An \href{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}{api key} is required to use NLS api services.}
+\item{api_key}{Character. \href{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}{API key} for authenticating with the Maastotietokanta
+OGC API. Defaults to the value stored in \code{options("geofi_mml_api_key")}.
+You can obtain an API key from the Maanmittauslaitos (National Land Survey
+of Finland) website.}
 }
 \value{
-data.frame
+A data frame with two columns:
+\itemize{
+\item \code{id}: The title of each collection.
+\item \code{description}: A brief description of each collection.
+}
 }
 \description{
-Thin wrapper around OGC API for \href{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/product-descriptions/topographic-database}{Topographic database} provided by
-\href{https://www.maanmittauslaitos.fi/en}{National Land Survey of Finland} (NLS).
+Retrieves a list of available collections from the Maastotietokanta (Topographic Database) OGC API,
+including their titles and descriptions.
+}
+\details{
+This function queries the Maastotietokanta OGC API to retrieve metadata about
+available collections of spatial data. The API is provided by the National Land
+Survey of Finland (Maanmittauslaitos). The function requires a valid API key,
+which can be provided directly or set via \code{options("geofi_mml_api_key")}.
+
+The function includes error handling:
+\itemize{
+\item It retries failed requests up to 3 times in case of transient network
+issues.
+\item It handles rate limits (HTTP 429) by respecting the \code{Retry-After} header.
+\item It validates the API response to ensure the expected data is present.
+}
 }
 \examples{
-ogc_get_maastotietokanta_collections()
+\dontrun{
+# Set your API key
+options(geofi_mml_api_key = "your_api_key_here")
+
+# Fetch the list of collections
+collections <- ogc_get_maastotietokanta_collections()
+print(collections)
+
+# Alternatively, provide the API key directly
+collections <- ogc_get_maastotietokanta_collections(api_key = "your_api_key_here")
+print(collections)
+}
 
 }
-\author{
-Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}
+\seealso{
+\url{https://www.maanmittauslaitos.fi/en/opendata} for more information
+on the Maastotietokanta OGC API and how to obtain an API key.
 }

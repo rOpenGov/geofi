@@ -2,16 +2,25 @@
 % Please edit documentation in R/ogc_api_statfi.R
 \name{fetch_ogc_api_statfi}
 \alias{fetch_ogc_api_statfi}
-\title{A internal helper}
+\title{Fetch data from Statistics Finland OGC API}
 \usage{
-fetch_ogc_api_statfi(api_url, limitti)
+fetch_ogc_api_statfi(api_url, limit = NULL, crs)
 }
 \arguments{
-\item{api_url}{}
+\item{api_url}{Character. The API URL to query.}
+
+\item{limit}{Integer or NULL. Number of features to retrieve. If NULL, fetches all available features (max 10000 per request).}
+
+\item{crs}{Integer. Coordinate Reference System (EPSG code). Options: 3067 (ETRS89 / TM35FIN), 4326 (WGS84).}
+}
+\value{
+An \code{sf} object containing the requested spatial data, or NULL if no data is retrieved.
 }
 \description{
-A internal helper
+Internal helper function to retrieve spatial data from Statistics Finland's OGC API.
+Handles pagination for large datasets and single requests with specified limits.
 }
 \author{
 Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}
 }
+\keyword{internal}

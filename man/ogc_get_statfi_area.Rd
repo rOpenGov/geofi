@@ -2,40 +2,54 @@
 % Please edit documentation in R/ogc_api_statfi.R
 \name{ogc_get_statfi_area}
 \alias{ogc_get_statfi_area}
-\title{Get Finnish municipality (multi)polygons for different years and/or scales.}
+\title{Retrieve Finnish Administrative Area Polygons}
 \usage{
 ogc_get_statfi_area(
   year = 2022,
   scale = 4500,
   tessellation = NULL,
-  output_crs = 3067,
+  crs = 3067,
   limit = NULL,
   bbox = NULL
 )
 }
 \arguments{
-\item{year}{A numeric for year of the administrative borders. Available are
-2020, 2021 and 2022.}
+\item{year}{Integer. Year of the administrative borders. Options: 2020, 2021, 2022. Default: 2022.}
 
-\item{scale}{A scale or resolution of the shape. Two options: \code{1000}
-equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}
+\item{scale}{Integer. Map scale/resolution. Options: 1000 (1:1,000,000), 4500 (1:4,500,000). Default: 4500.}
 
-\item{tessellation}{A scale or resolution of the shape. Two options: \code{1000}
-equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}
+\item{tessellation}{Character or NULL. Type of administrative unit. Options: "avi", "ely", "hyvinvointialue",
+"kunta", "maakunta", "seutukunta", "suuralue", "tyossakayntialue", "vaalipiiri". If NULL, retrieves all units.
+Default: NULL.}
+
+\item{crs}{Integer. Coordinate Reference System (EPSG code). Options: 3067 (ETRS89 / TM35FIN), 4326 (WGS84).
+Default: 3067.}
+
+\item{limit}{Integer or NULL. Maximum number of features to retrieve. If NULL, retrieves all available features.
+Default: NULL.}
+
+\item{bbox}{Character or NULL. Bounding box for spatial filtering in format "xmin,ymin,xmax,ymax" (in the specified CRS).
+Default: NULL.}
 }
 \value{
-sf object
+An \code{sf} object containing the requested spatial data, or NULL if no data is retrieved.
 }
 \description{
-Thin wrapper around Finnish statistical area units OGC API by
-\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet_en.html}{Statistics Finland}.
+Retrieves municipality or other administrative (multi)polygons from Statistics Finland's OGC API.
+Supports different years, scales, and tessellation types for Finnish administrative boundaries.
 }
 \examples{
-ogc_get_statfi_area(year = 2020,
-            tessellation = "maakunta",
-            output_crs = 4326,
-            limit = 10)
+\dontrun{
+# Get all municipalities for 2020 at 1:4,500,000 scale
+munis <- ogc_get_statfi_area(year = 2020, scale = 4500, tessellation = "kunta")
 
+# Get wellbeing areas for 2022 with a limit of 10 features
+wellbeing <- ogc_get_statfi_area(year = 2022, tessellation = "hyvinvointialue", limit = 10)
+
+# Get data within a bounding box
+bbox <- "200000,6600000,500000,6900000"
+data <- ogc_get_statfi_area(year = 2021, bbox = bbox, crs = 3067)
+}
 }
 \author{
 Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}

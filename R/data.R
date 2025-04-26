@@ -1,24 +1,3 @@
-#' A simple feature point data of Finnish land borders in 1:4500 resolution in EPSG:3067 coordinate system
-#'
-#' @format A simple feature MULTIPOLYGON data with 1 row and 3 variables:
-#' \describe{
-#'   \item{name_fi{Name in Finnish}
-#'   \item{name_fen{Name in Swedish}
-#'   \item{name_en}{Name in English}
-#' }
-"fin_4500_3067"
-
-#' A simple feature point data of Finnish land borders in 1:4500 resolution in EPSG:4326 coordinate system
-#'
-#' @format A simple feature MULTIPOLYGON data with 1 row and 3 variables:
-#' \describe{
-#'   \item{name_fi{Name in Finnish}
-#'   \item{name_fen{Name in Swedish}
-#'   \item{name_en}{Name in English}
-#' }
-"fin_4500_4326"
-
-
 
 #' A simple feature point data containing locations of municipalities central localities
 #'

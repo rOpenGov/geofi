@@ -56,44 +56,43 @@ options("geofi_mml_api_key" = Sys.getenv("MML_API_KEY"))
 Finland. To demonstrate the effect lets reproject the municipality data to WGS 1984 (usin EPSG code equivalent `4326`) and plot it side to side with `EPSG:3067`
 
 ```{r crss}
-libs <- c("ggplot2","patchwork")
-if (check_namespaces(pkgs = libs)) {
-library(ggplot2)
-  
-library(sf)
-library(mapview)
-library(dplyr)
-library(leaflet)
-places_named_nokia <- geocode(search_string = "Nokia", 
-                    lang = "en", 
-                    source = "geographic-names",
-                    output_crs = "EPSG:3067", 
-                    size = 300)
-
-subset(places_named_nokia, select = -c(name, query))
-
-} else {
-  message("One or more of the following packages is not available: ", 
-          paste(libs, collapse = ", "))
-}
+# libs <- c("ggplot2","patchwork")
+# if (check_namespaces(pkgs = libs)) {
+# library(ggplot2)
+# library(sf)
+# library(mapview)
+# library(dplyr)
+# library(leaflet)
+# places_named_nokia <- geocode(search_string = "Nokia", 
+#                     lang = "en", 
+#                     source = "geographic-names",
+#                     output_crs = "EPSG:3067", 
+#                     size = 300)
+# 
+# subset(places_named_nokia, select = -c(name, query))
+# 
+# } else {
+#   message("One or more of the following packages is not available: ", 
+#           paste(libs, collapse = ", "))
+# }
 ```
 
 
 ```{r}
-library(ggplot2)
-ggplot() +
-  geom_sf(data = fin_4500_3067) +
-  geom_sf_label(data = places_named_nokia, 
-                aes(label = paste0(label, "\n", label.placeType)), alpha = .3) +
-  theme_minimal()
+# library(ggplot2)
+# ggplot() +
+#   geom_sf(data = fin_4500_3067) +
+#   geom_sf_label(data = places_named_nokia, 
+#                 aes(label = paste0(label, "\n", label.placeType)), alpha = .3) +
+#   theme_minimal()
 ```
 
 
 ```{r}
-nokia_4326 <- places_named_nokia[1,] %>% st_transform(4326)
-items_around_nokia <- geocode_reverse(point = nokia_4326, 
-                                      boundary_circle_radius = 2000)
-mapview::mapview(items_around_nokia)
+# nokia_4326 <- places_named_nokia[1,] %>% st_transform(4326)
+# items_around_nokia <- geocode_reverse(point = nokia_4326, 
+#                                       boundary_circle_radius = 2000)
+# mapview::mapview(items_around_nokia)
 ```
 
 

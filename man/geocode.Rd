@@ -2,14 +2,12 @@
 % Please edit documentation in R/geocode.R
 \name{geocode}
 \alias{geocode}
-\title{Geocode Finnish place names or street addresses using Finnish National Land Survey geocoding service
-Thin wrapper around geocoding REST -api by \href{https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/ammattilaiskayttajille/paikkatietojen-rajapintapalvelut/geokoodauspalvelu}{National Land Survey} documented at
-\href{https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/ammattilaiskayttajille/paikkatietojen-rajapintapalvelut/geokoodauspalvelu}{technical description geocoding service REST}.}
+\title{Geocode Finnish Place Names or Street Addresses}
 \usage{
 geocode(
   search_string,
   source = "interpolated-road-addresses",
-  output_crs = "EPSG:3067",
+  crs = 3067,
   lang = "fi",
   size = NULL,
   options = NULL,
@@ -17,28 +15,81 @@ geocode(
 )
 }
 \arguments{
-\item{search_string}{string place name or an address}
+\item{search_string}{Character. The place name or street address to geocode
+(e.g., \code{"Suomenlinna"} or \code{"Mannerheimintie 100, Helsinki"}).}
 
-\item{source}{string Source of data. One of 'interpolated-road-addresses','geographic-names', 'addresses','mapsheets-tm35' and 'cadastral-units'}
+\item{source}{Character. The data source to search in. Must be one of:
+\code{"interpolated-road-addresses"} (default), \code{"geographic-names"},
+\code{"addresses"}, \code{"mapsheets-tm35"}, or \code{"cadastral-units"}.}
 
-\item{output_crs}{string CRS of the output sf object. One of 'EPSG:3067' or 'EPSG:4326'}
+\item{crs}{Character. The coordinate reference system (CRS) for the
+output data, specified as an EPSG code. Must be one of \code{"EPSG:3067"}
+(ETRS-TM35FIN, default) or \code{"EPSG:4326"} (WGS84).}
 
-\item{lang}{string language for values in classification api fi, sv, en}
+\item{lang}{Character. The language for the API response labels. Must be one of
+\code{"fi"} (Finnish, default), \code{"sv"} (Swedish), or \code{"en"} (English).}
 
-\item{size}{numeric Number of hits returned}
+\item{size}{Numeric or NULL. The maximum number of results to return. Must be a
+positive integer. If \code{NULL} (default), the API’s default size is used.}
 
-\item{options}{options}
+\item{options}{Character or NULL. Additional options to pass to the API, specified
+as a single string (e.g., \code{"focus.point.lat=60.1699&focus.point.lon=24.9384"}).
+If \code{NULL} (default), no additional options are included. See the NLS
+geocoding API documentation for valid options.}
 
-\item{api_key}{MML api key}
+\item{api_key}{Character. API key for authenticating with the NLS geocoding API.
+Defaults to the value stored in \code{options("geofi_mml_api_key")}. You can
+obtain an API key from the National Land Survey of Finland website (see
+\url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}).}
 }
 \value{
-sf object
+An \code{sf} object containing the geocoded locations as points in the
+specified \code{crs}. If no results are found, a warning is issued, and
+an empty \code{sf} object is returned.
 }
 \description{
-Geocode Finnish place names or street addresses using Finnish National Land Survey geocoding service
-Thin wrapper around geocoding REST -api by \href{https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/ammattilaiskayttajille/paikkatietojen-rajapintapalvelut/geokoodauspalvelu}{National Land Survey} documented at
-\href{https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/ammattilaiskayttajille/paikkatietojen-rajapintapalvelut/geokoodauspalvelu}{technical description geocoding service REST}.
+Geocodes Finnish place names or street addresses using the National Land Survey
+of Finland (NLS) geocoding REST API. This function converts textual location
+descriptions into spatial coordinates.
+}
+\details{
+This function uses the NLS geocoding REST API to convert place names or street
+addresses into spatial coordinates. It supports multiple data sources, including
+interpolated road addresses, geographic names, and cadastral units. The function
+includes robust error handling:
+\itemize{
+\item Retries failed requests up to 3 times for transient network issues.
+\item Handles HTTP errors and rate limits (HTTP 429).
+\item Validates inputs to prevent common errors.
+}
+}
+\examples{
+\dontrun{
+# Set your API key
+options(geofi_mml_api_key = "your_api_key_here")
+
+# Geocode a place name
+locations <- geocode(search_string = "Suomenlinna", source = "geographic-names")
+print(locations)
+
+# Geocode a street address with a custom size and output CRS
+addresses <- geocode(
+  search_string = "Mannerheimintie 100, Helsinki",
+  source = "addresses",
+  crs = "EPSG:4326",
+  size = 5
+)
+print(addresses)
+}
+
+}
+\seealso{
+\code{\link{geocode_reverse}} for reverse geocoding.
+\url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for
+instructions on obtaining an API key.
+\url{https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/ammattilaiskayttajille/paikkatietojen-rajapintapalvelut/geokoodauspalvelu}
+for more information on the NLS geocoding API.
 }
 \author{
-Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}
+Markus Kainu \email{markus.kainu@kapsi.fi}
 }

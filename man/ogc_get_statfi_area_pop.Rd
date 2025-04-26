@@ -2,38 +2,38 @@
 % Please edit documentation in R/ogc_api_statfi.R
 \name{ogc_get_statfi_area_pop}
 \alias{ogc_get_statfi_area_pop}
-\title{Get Finnish municipality (multi)polygons with population for different years and/or scales.}
+\title{Retrieve Finnish Administrative Area Polygons with Population Data}
 \usage{
-ogc_get_statfi_area_pop(
-  year = 2021,
-  output_crs = 3067,
-  limit = NULL,
-  bbox = NULL
-)
+ogc_get_statfi_area_pop(year = 2023, crs = 3067, limit = NULL, bbox = NULL)
 }
 \arguments{
-\item{year}{A numeric for year of the administrative borders. Available are
-2020, 2021 and 2022.}
+\item{year}{Integer. Year of the administrative borders and population data. Options: 2019, 2020, 2021. Default: 2021.}
 
-\item{scale}{A scale or resolution of the shape. Two options: \code{1000}
-equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}
+\item{crs}{Integer. Coordinate Reference System (EPSG code). Options: 3067 (ETRS89 / TM35FIN), 4326 (WGS84). Default: 3067.}
 
-\item{tessellation}{A scale or resolution of the shape. Two options: \code{1000}
-equals 1:1 000 000 and \code{4500} equals 1:4 500 000.}
+\item{limit}{Integer or NULL. Maximum number of features to retrieve. If NULL, retrieves all available features. Default: NULL.}
+
+\item{bbox}{Character or NULL. Bounding box for spatial filtering in format "xmin,ymin,xmax,ymax" (in the specified CRS). Default: NULL.}
 }
 \value{
-sf object
+An \code{sf} object containing spatial data and population statistics, pivoted to wide format with variables as columns, or NULL if no data is retrieved.
 }
 \description{
-Thin wrapper around Finnish statistical area units OGC API by
-\href{https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet_en.html}{Statistics Finland}.
+Retrieves municipality or other administrative (multi)polygons with population data from Statistics Finland's OGC API.
+Supports different years and coordinate reference systems for Finnish administrative boundaries at a fixed scale of 1:4,500,000.
 }
 \examples{
-get_ogc_municipalities_pop(year = 2020,
-            tessellation = "maakunta",
-            output_crs = 4326,
-            limit = 10)
+\dontrun{
+# Get population data for 2020
+pop_data <- ogc_get_statfi_area_pop(year = 2020, crs = 3067)
 
+# Get population data within a bounding box
+bbox <- "200000,6600000,500000,6900000"
+pop_data <- ogc_get_statfi_area_pop(year = 2021, bbox = bbox, crs = 3067)
+
+# Limit to 10 features
+pop_data <- ogc_get_statfi_area_pop(year = 2019, limit = 10, crs = 4326)
+}
 }
 \author{
 Markus Kainu \href{mailto:markus.kainu@kapsi.fi}{markus.kainu@kapsi.fi}

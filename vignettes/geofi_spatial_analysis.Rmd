@@ -201,11 +201,11 @@ muni %>%
 
 ## Centroids, buffers, grids and voronois
 
-The following operarions derive from [Marko Kallio's](http://markokallio.fi/) course at [CSC](https://www.csc.fi/en/home) in February 2020 [Spatial data analysis with R](https://www.csc.fi/web/training/-/r_spatial_2019). 
+The following operations derive from [Marko Kallio's](http://markokallio.fi/) course at [CSC](https://csc.fi/en/) in February 2020 [Spatial data analysis with R](https://github.com/csc-training/r-spatial-course). 
 
 ### Polygon centroids
 
-`geofi` contains data on municipality central locations (`geofi::municipality_central_localities`). Instead of those you may need the actual geographical centers ie. centroids of a polygon that can be computed using `st_centroid` and plotted with ggplot.
+`geofi` contains data on municipality central locations (`municipality_central_localities`). Instead of those you may need the actual geographical centers ie. centroids of a polygon that can be computed using `st_centroid` and plotted with ggplot.
 
 ```{r centroids, fig.width=5, eval = apiacc_pkginst}
 muni_centroids <- st_centroid(muni)
@@ -220,7 +220,7 @@ ggplot() +
 
 ### Buffers
 
-Buffers can be useful, for instance, calculating the share of [buildings](https://www.avoindata.fi/data/en_GB/dataset/postcodes) that are within certain radius from central localities. That example is not explained here, but we only show how to create 15km radius around polygon centroids.
+Buffers can be useful, for instance, calculating the share of buildings that are within certain radius from central localities. That example is not explained here, but we only show how to create 15km radius around polygon centroids.
 
 ```{r buffers, fig.width=5, eval = apiacc_pkginst}
 muni_centroids_buffer <- muni_centroids %>%
@@ -238,7 +238,7 @@ You can download predefined grids from Statistics Finland using `get_statistical
 
 However, you may need to create your own custom grid, for instance to aggregate your own point data,  which can be created with `st_make_grid()` function. 
 
-As describes by Marko Kallio in [Spatial data analysis with R](https://www.csc.fi/web/training/-/r_spatial_2019).
+As describes by Marko Kallio in [Spatial data analysis with R](https://github.com/csc-training/r-spatial-course).
 
 >It creates a regular grid over bounding box of an 'sf' object. Can be given a certain cell size, or number of cells in x and y directions. 'what' tells the function what kind of regular grid is wanted (polygons, corners, centers). Fishnets of lines rather than polygons can be created simply by casting the polygons as "LINESTRING"s.
 The resulting polygon grid is an 'sfc' object, so it needs to be made 'sf' in order for us to add the ID-attribute.
@@ -300,7 +300,7 @@ You can calculate distance matrices using [`st_distance()`](https://r-spatial.gi
 First we need to subset the data and replace original municipality name column (`teksti`) with *better* from latest municipality key.
 
 ```{r kunnat, eval = apiacc_pkginst}
-kunta <- geofi::municipality_central_localities %>%  
+kunta <- municipality_central_localities %>%  
   select(teksti,kuntatunnus) %>%
   mutate(kuntatunnus = as.integer(kuntatunnus)) %>%
   select(-teksti) %>%

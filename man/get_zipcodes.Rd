@@ -4,10 +4,10 @@
 \alias{get_zipcodes}
 \title{Get Finnish zip code (multi)polygons for different years.}
 \usage{
-get_zipcodes(year = 2023, extend_to_sea_areas = FALSE)
+get_zipcodes(year = 2025, extend_to_sea_areas = FALSE)
 }
 \arguments{
-\item{year}{A numeric for year of the zipcodes. Years available 2015-2024.}
+\item{year}{A numeric for year of the zipcodes. Years available 2015-2025.}
 
 \item{extend_to_sea_areas}{A logical. Extend the data to show also the sea areas.}
 }
@@ -16,7 +16,7 @@ sf object
 }
 \description{
 Thin wrapper around Finnish zip code areas provided by
-\href{https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html}{Statistics Finland}.
+\href{https://stat.fi/tup/karttaaineistot/postinumeroalueet.html}{Statistics Finland}.
 }
 \examples{
  \dontrun{

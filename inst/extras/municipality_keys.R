@@ -50,7 +50,7 @@ langs <- c("fi","sv","en")
 
 # Lets loop over the years 2013-2022
 yearlist <- list()
-yrs <- 2013:2024
+yrs <- 2013:2025
 for (iii in seq_along(yrs)){
 
   print(yrs[iii])
@@ -172,28 +172,28 @@ ddd3 <- ddd2 %>%
 # erva-regions can be found from sairaanhoitp <-> erva table
 # lets use the 2021 version as there has been no changes
 ## https://www2.stat.fi/fi/luokitukset/luokitustiedotteet/
-res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20220101%23erva_3_20220101/maps?format=json")) %>%
-  as_tibble()
-vals <- sub("\\?format=json", "", sub("^.+maps/", "", res$value))
-keydat <- read.table(text = vals, sep="/") %>%
-  setNames(c("sairaanhoitop_code", "erva_code")) %>%
-  as_tibble() %>%
-  mutate_all(as.character)
-
-lst <- list()
-for (i in seq_along(langs)){
-  tmp <- get_classifications(class = "erva_3_20220101", lang = langs[i])
-  if (is.null(tmp)) next()
-  names(tmp) <- c("erva_code", paste0("erva_name_",langs[i]))
-  lst[[i]] <- tmp
-}
-
-class_dat <- Reduce(function(...) merge(..., by="erva_code", all.x=TRUE), lst)
-ddx <- left_join(keydat,class_dat) #%>%
+# res <- fromJSON(paste0("https://data.stat.fi/api/classifications/v2/correspondenceTables/sairaanhoitop_1_20220101%23erva_3_20220101/maps?format=json")) %>%
+#   as_tibble()
+# vals <- sub("\\?format=json", "", sub("^.+maps/", "", res$value))
+# keydat <- read.table(text = vals, sep="/") %>%
+#   setNames(c("sairaanhoitop_code", "erva_code")) %>%
+#   as_tibble() %>%
+#   mutate_all(as.character)
+#
+# lst <- list()
+# for (i in seq_along(langs)){
+#   tmp <- get_classifications(class = "erva_3_20220101", lang = langs[i])
+#   if (is.null(tmp)) next()
+#   names(tmp) <- c("erva_code", paste0("erva_name_",langs[i]))
+#   lst[[i]] <- tmp
+# }
+#
+# class_dat <- Reduce(function(...) merge(..., by="erva_code", all.x=TRUE), lst)
+# ddx <- left_join(keydat,class_dat) #%>%
 
 
 ddd4 <- ddd3 %>%
-  left_join(ddx) %>%
+  # left_join(ddx) %>%
   mutate_at(.vars = vars(kunta,ends_with("_code")),
             .funs = function(x) ifelse(grepl("[A-Za-z]", x), x, as.integer(x))) %>%
   # erva only applies to years 2018 onwards
@@ -205,157 +205,35 @@ ddd4$kunta_name[ddd4$kunta_name == "Maarianhamina - Mariehamn"] <- "Maarianhamin
 ddd4$municipality_name_fi[ddd4$municipality_name_fi == "Maarianhamina - Mariehamn"] <- "Maarianhamina"
 
 
-# adding Kela vakuutuspiirit
-## Last checked 20230416
-## HUOM! KELAN VERKKOSIVUT UUDISTUNEET EIKÄ NIITÄ VOI ENÄÄ SKREIPATA ENTISEEN TAPAAN!!
-## SKREIPPAUSKOODIT KOMMENTOITU POIS, LISTAT TÄYTYY KÄSIN PÄIVITTÄÄ
-# library(httr)
-# library(stringr)
-# res <- httr::GET("https://www.kela.fi/vakuutuspiirit")
-# cont <- content(x = res, "text")
+# adding Kela palvelualueet
+## Last checked 20240111
+# https://www.kela.fi/palvelualueet#pohjoisen-asiakaspalveluyksikon-palvelualue
+etelainen <- c("Asikkala","Askola","Espoo","Hamina","Hanko","Hartola","Heinola","Helsinki","Hollola","Hyvinkää","Iitti","Imatra","Inkoo","Järvenpää","Karkkila","Kauniainen","Kerava","Kirkkonummi","Kotka","Kouvola","Kärkölä","Lahti","Lapinjärvi","Lappeenranta","Lemi","Lohja","Loviisa","Luumäki","Miehikkälä","Myrskylä","Mäntsälä","Nurmijärvi","Orimattila","Padasjoki","Parikkala","Pornainen","Porvoo","Pukkila","Pyhtää","Raasepori","Rautjärvi","Ruokolahti","Savitaipale","Sipoo","Siuntio","Sysmä","Taipalsaari","Tuusula","Vantaa","Vihti","Virolahti")
+itainen <- c("Enonkoski","Heinävesi","Hirvensalmi","Iisalmi","Ilomantsi Joensuu","Joroinen","Juankoski","Juuka","Juva","Kaavi","Kangasniemi","Keitele","Kitee","Kiuruvesi","Kontiolahti","Kuopio","Lapinlahti","Leppävirta","Lieksa","Liperi","Mikkeli","Mäntyharju","Nurmes","Outokumpu","Pertunmaa","Pieksämäki","Pielavesi","Puumala","Polvijärvi","Rantasalmi","Rautalampi","Rautavaara","Rääkkylä","Savonlinna","Siilinjärvi","Sonkajärvi","Sulkava","Suonenjoki","Tervo","Tohmajärvi","Tuusniemi","Varkaus","Vesanto","Vieremä")
+keskinen <- c("Akaa","Alajärvi","Alavus","Evijärvi","Forssa","Hankasalmi","Hattula","Hausjärvi","Humppila","Hämeenkyrö","Hämeenlinna","Ikaalinen","Ilmajoki","Isojoki","Isokyrö","Janakkala","Jokioinen","Joutsa","Juupajoki","Jyväskylä","Jämsä","Kangasala","Kannonkoski","Karijoki","Karstula","Kauhajoki","Kauhava","Keuruu","Kihniö","Kinnula","Kivijärvi","Konnevesi","Kuhmoinen","Kuortane","Kurikka","Kyyjärvi","Lappajärvi","Lapua","Laukaa","Lempäälä","Loppi","Luhanka","Multia","Muurame","Mänttä-Vilppula","Nokia","Orivesi","Parkano","Petäjävesi","Pihtipudas","Pirkkala","Punkalaidun","Pälkäne","Riihimäki","Ruovesi","Saarijärvi","Sastamala","Seinäjoki","Soini","Tammela","Tampere","Teuva","Toivakka","Urjala","Uurainen","Valkeakoski","Vesilahti","Viitasaari","Vimpeli","Virrat","Ylöjärvi","Ypäjä","Ähtäri","Äänekoski")
+lantinen <- c("Aura","Eura","Eurajoki","Halsua","Harjavalta","Huittinen","Jämijärvi","Kaarina","Kankaanpää","Kannus","Kaustinen","Karvia","Kaskinen","Kemiönsaari","Kokemäki","Kokkola","Korsnäs","Koski TL","Kristiinankaupunki","Kustavi","Köyliö","Laihia","Laitila","Lestijärvi","Lieto","Loimaa","Luoto","Maalahti","Marttila","Masku","Merikarvia","Mustasaari","Mynämäki Naantali","Nakkila","Nousiainen","Närpiö","Oripää","Paimio","Parainen","Pedersöre","Perho","Pietarsaari","Pomarkku","Pori","Pyhäranta","Pöytyä","Raisio","Rauma","Rusko","Salo","Sauvo","Siikainen","Somero","Säkylä","Taivassalo","Toholampi","Turku","Ulvila","Uusikaarlepyy","Uusikaupunki","Vaasa","Vehmaa","Veteli","Vöyri")
 
-# Eteläinen
-# gsub("^.*Eteläinen", "", cont) %>%
-#   gsub("</p>.*$", "", .) %>%
-#   gsub("^.*<p>", "", .) %>%
-#   gsub(" ja", ",", .) %>%
-#   gsub("\\.", "", .) %>%
-#   gsub(", ", ",", .) %>%
-#   gsub(" ", ",", .) %>%
-#   str_split(string = ., pattern = ",") %>%
-#   unlist() -> etelainen
-#
-# dput(etelainen)
-etelainen <- c("Asikkala", "Askola", "Espoo", "Hamina", "Hanko", "Hartola",
-  "Heinola", "Helsinki", "Hollola", "Hyvinkää", "Hämeenkoski",
-  "Iitti", "Imatra", "Inkoo", "Järvenpää", "Karkkila", "Kauniainen",
-  "Kerava", "Kirkkonummi", "Kotka", "Kouvola", "Kärkölä", "Lahti",
-  "Lapinjärvi", "Lappeenranta", "Lemi", "Lohja", "Loviisa", "Luumäki",
-  "Miehikkälä", "Myrskylä", "Mäntsälä", "Nastola", "Nurmijärvi",
-  "Orimattila", "Padasjoki", "Parikkala", "Pornainen", "Porvoo",
-  "Pukkila", "Pyhtää", "Raasepori", "Rautjärvi", "Ruokolahti",
-  "Savitaipale", "Sipoo", "Siuntio", "Sysmä", "Taipalsaari", "Tuusula",
-  "Vantaa", "Vihti", "Virolahti")
+lantinen[lantinen == "Koski TL"] <- "Koski Tl"
+lantinen[lantinen == "Pedersöre"] <- "Pedersören kunta"
 
-# Itäinen
-# gsub("^.*Itäinen", "", cont) %>%
-#   gsub("</p>.*$", "", .) %>%
-#   gsub("^.*<p>", "", .) %>%
-#   gsub(" ja", ",", .) %>%
-#   gsub("\\.", "", .) %>%
-#   gsub(", ", ",", .) %>%
-#   gsub(" ", ",", .) %>%
-#   str_split(string = ., pattern = ",") %>%
-#   unlist() -> itainen
-#
-# dput(itainen)
-itainen <- c("Enonkoski", "Hankasalmi", "Heinävesi", "Hirvensalmi", "Iisalmi",
-             "Ilomantsi", "Joensuu", "Joroinen", "Joutsa", "Juankoski", "Juuka",
-             "Juva", "Jyväskylä", "Jämsä", "Kaavi", "Kangasniemi", "Kannonkoski",
-             "Karstula", "Keitele", "Keuruu", "Kinnula", "Kitee", "Kiuruvesi",
-             "Kivijärvi", "Konnevesi", "Kontiolahti", "Kuhmoinen", "Kuopio",
-             "Kyyjärvi", "Lapinlahti", "Laukaa", "Leppävirta", "Lieksa",
-             "Liperi", "Luhanka", "Mikkeli", "Multia", "Muurame", "Mäntyharju",
-             "Nurmes", "Outokumpu", "Pihtipudas", "Pertunmaa", "Petäjävesi",
-             "Pieksämäki", "Pielavesi", "Puumala", "Polvijärvi", "Rantasalmi",
-             "Rautalampi", "Rautavaara", "Rääkkylä", "Saarijärvi", "Savonlinna",
-             "Siilinjärvi", "Sonkajärvi", "Sulkava", "Suonenjoki", "Tervo",
-             "Tohmajärvi", "Toivakka", "Tuusniemi", "Uurainen", "Varkaus",
-             "Vesanto", "Vieremä", "Viitasaari", "Äänekoski")
+pohjoinen <- c("Alavieska","Enontekiö","Hailuoto","Haapajärvi","Haapavesi","Hyrynsalmi","Ii","Inari","Kajaani","Kalajoki","Kemi","Kempele","Kemijärvi","Keminmaa","Kittilä","Kolari","Kuhmo","Kuusamo","Kärsämäki","Liminka","Lumijoki","Merijärvi","Muonio","Muhos","Nivala","Oulu","Oulainen","Paltamo","Pelkosenniemi","Pello","Posio","Pudasjärvi","Puolanka","Pyhäjoki","Pyhäjärvi","Pyhäntä","Raahe","Ranua","Reisjärvi","Ristijärvi","Rovaniemi","Salla","Savukoski","Sievi","Siikajoki","Siikalatva","Simo","Sodankylä","Sotkamo","Suomussalmi","Taivalkoski","Tervola","Tornio","Tyrnävä","Utajärvi","Utsjoki","Vaala","Ylivieska","Ylitornio")
 
-
-# Keskinen
-# gsub("^.*Keskinen", "", cont) %>%
-#   gsub("</p>.*$", "", .) %>%
-#   gsub("^.*<p>", "", .) %>%
-#   gsub(" ja", ",", .) %>%
-#   gsub("\\.", "", .) %>%
-#   gsub(", ", ",", .) %>%
-#   gsub(" ", ",", .) %>%
-#   str_split(string = ., pattern = ",") %>%
-#   unlist() -> keskinen
-#
-# dput(keskinen)
-keskinen <- c("Akaa", "Alajärvi", "Alavus", "Evijärvi", "Forssa", "Hattula",
-              "Hausjärvi", "Humppila", "Hämeenkyrö", "Hämeenlinna", "Ikaalinen",
-              "Ilmajoki", "Isojoki", "Isokyrö", "Janakkala", "Jokioinen",
-              "Juupajoki", "Kangasala", "Karijoki", "Kauhajoki", "Kauhava",
-              "Kihniö", "Kuortane", "Kurikka", "Lappajärvi", "Lapua", "Lempäälä",
-              "Loppi", "Mänttä-Vilppula", "Nokia", "Orivesi", "Parkano",
-              "Pirkkala", "Punkalaidun", "Pälkäne", "Riihimäki", "Ruovesi",
-              "Sastamala", "Seinäjoki", "Soini", "Tammela", "Tampere", "Teuva",
-              "Urjala", "Valkeakoski", "Vesilahti", "Vimpeli", "Virrat", "Ylöjärvi",
-              "Ypäjä", "Ähtäri")
-
-# Läntinen
-# gsub("^.*Läntinen", "", cont) %>%
-#   gsub("</p>.*$", "", .) %>%
-#   gsub("^.*<p>", "", .) %>%
-#   gsub(" ja", ",", .) %>%
-#   gsub("\\.", "", .) %>%
-#   gsub(", ", ",", .) %>%
-#   gsub(" ", ",", .) %>%
-#   str_split(string = ., pattern = ",") %>%
-#   unlist() -> lantinen
-#
-# lantinen <- lantinen[lantinen != "TL"]
-# lantinen[lantinen == "Koski"] <- "Koski Tl"
-# lantinen[lantinen == "Pedersören"] <- "Pedersören kunta"
-
-# dput(lantinen)
-lantinen <- c("Aura", "Eura", "Eurajoki", "Harjavalta", "Honkajoki", "Huittinen",
-              "Jämijärvi", "Kaarina", "Kankaanpää", "Karvia", "Kaskinen",
-              "Kemiönsaari", "Kokemäki", "Korsnäs", "Koski Tl", "Kristiinankaupunki",
-              "Kustavi", "Köyliö", "Laihia", "Laitila", "Lavia", "Lieto",
-              "Loimaa", "Luoto", "Luvia", "Maalahti", "Maarianhamina", "Marttila",
-              "Masku", "Merikarvia", "Mustasaari", "Mynämäki", "Naantali",
-              "Nakkila", "Nousiainen", "Närpiö", "Oripää", "Paimio", "Parainen",
-              "Pedersören kunta", "Pietarsaari", "Pomarkku", "Pori", "Pyhäranta",
-              "Pöytyä", "Raisio", "Rauma", "Rusko", "Salo", "Sauvo", "Siikainen",
-              "Somero", "Sund", "Säkylä", "Taivassalo", "Turku", "Ulvila",
-              "Uusikaarlepyy", "Uusikaupunki", "Vaasa", "Vehmaa", "Vöyri")
-
-# Pohjoinen
-# gsub("^.*Pohjoinen", "", cont) %>%
-#   gsub("</p>.*$", "", .) %>%
-#   gsub("^.*<p>", "", .) %>%
-#   gsub(" ja", ",", .) %>%
-#   gsub("\\.", "", .) %>%
-#   gsub(", ", ",", .) %>%
-#   gsub(" ", ",", .) %>%
-#   str_split(string = ., pattern = ",") %>%
-#   unlist() -> pohjoinen
-#
-# dput(pohjoinen)
-pohjoinen <- c("Alavieska", "Enontekiö", "Hailuoto", "Haapajärvi", "Halsua",
-               "Haapavesi", "Hyrynsalmi", "Ii", "Inari", "Kajaani", "Kalajoki",
-               "Kannus", "Kaustinen", "Kemi", "Kempele", "Kemijärvi", "Keminmaa",
-               "Kittilä", "Kokkola", "Kolari", "Kruunupyy", "Kuhmo", "Kuusamo",
-               "Kärsämäki", "Lestijärvi", "Liminka", "Lumijoki", "Merijärvi",
-               "Muonio", "Muhos", "Nivala", "Oulu", "Oulainen", "Paltamo", "Pelkosenniemi",
-               "Pello", "Perho", "Posio", "Pudasjärvi", "Puolanka", "Pyhäjoki",
-               "Pyhäjärvi", "Pyhäntä", "Raahe", "Ranua", "Reisjärvi", "Ristijärvi",
-               "Rovaniemi", "Salla", "Savukoski", "Sievi", "Siikajoki", "Siikalatva",
-               "Simo", "Sodankylä", "Sotkamo", "Suomussalmi", "Taivalkoski",
-               "Tervola", "Toholampi", "Tornio", "Tyrnävä", "Utajärvi", "Utsjoki",
-               "Vaala", "Veteli", "Ylivieska", "Ylitornio")
-
-# Kelan kela_vakuutuspiirit
+# Kelan kela_palvelualueet
 key <- ddd4 %>% distinct(kunta_name)
 
 
 kuntaluokitusavain <- key %>%
   mutate(
-    kela_vakuutuspiiri_name_fi = case_when(
-      kunta_name %in% etelainen ~ "Eteläinen vakuutuspiiri",
-      kunta_name %in% itainen ~ "Itäinen vakuutuspiiri",
-      kunta_name %in% keskinen ~ "Keskinen vakuutuspiiri",
-      kunta_name %in% lantinen ~ "Läntinen vakuutuspiiri",
-      kunta_name %in% pohjoinen ~ "Pohjoinen vakuutuspiiri",
+    kela_palvelualue_name_fi = case_when(
+      kunta_name %in% etelainen ~ "Eteläisen asiakaspalveluyksikön palvelualue",
+      kunta_name %in% itainen ~ "Itäisen asiakaspalveluyksikön palvelualue",
+      kunta_name %in% keskinen ~ "Keskisen asiakaspalveluyksikön palvelualue",
+      kunta_name %in% lantinen ~ "Läntisen asiakaspalveluyksikön palvelualue",
+      kunta_name %in% pohjoinen ~ "Pohjoisen asiakaspalveluyksikön palvelualue",
       TRUE ~ ""
     )) %>%
   mutate(
-    kela_vakuutuspiiri_code = case_when(
+    kela_palvelualue_code = case_when(
       kunta_name %in% etelainen ~ 1,
       kunta_name %in% itainen ~ 4,
       kunta_name %in% keskinen ~ 3,
@@ -363,79 +241,65 @@ kuntaluokitusavain <- key %>%
       kunta_name %in% pohjoinen ~ 5,
       TRUE ~ 0
     ),
-    kela_vakuutuspiiri_code = ifelse(kela_vakuutuspiiri_code == 0, NA, kela_vakuutuspiiri_code),
-    kela_vakuutuspiiri_name_fi = ifelse(kela_vakuutuspiiri_name_fi == "", NA, kela_vakuutuspiiri_name_fi)) %>%
+    kela_palvelualue_code = ifelse(kela_palvelualue_code == 0, NA, kela_palvelualue_code),
+    kela_palvelualue_name_fi = ifelse(kela_palvelualue_name_fi == "", NA, kela_palvelualue_name_fi)) %>%
   as_tibble() %>%
-  # Puuttuvat ovat Ahvenanmaalta ja kuuluvat läntiseen vakuutuspiiriin
-  mutate(kela_vakuutuspiiri_name_fi = ifelse(is.na(kela_vakuutuspiiri_name_fi),
-                                             "Läntinen vakuutuspiiri",
-                                             kela_vakuutuspiiri_name_fi),
-         kela_vakuutuspiiri_code = ifelse(is.na(kela_vakuutuspiiri_code),
+  # Puuttuvat ovat Ahvenanmaalta ja kuuluvat läntiseen palvelualuein
+  mutate(kela_palvelualue_name_fi = ifelse(is.na(kela_palvelualue_name_fi),
+                                             "Läntisen asiakaspalveluyksikön palvelualue",
+                                             kela_palvelualue_name_fi),
+         kela_palvelualue_code = ifelse(is.na(kela_palvelualue_code),
                                           2,
-                                          kela_vakuutuspiiri_code)) %>%
+                                          kela_palvelualue_code)) %>%
   # på Svenska - manually copied from https://www.kela.fi/web/sv/forsakringsdistrikten
-  mutate(kela_vakuutuspiiri_name_sv = case_when(
-    kela_vakuutuspiiri_name_fi == "Eteläinen vakuutuspiiri" ~ "Södra försäkringsdistriktet",
-    kela_vakuutuspiiri_name_fi == "Itäinen vakuutuspiiri" ~ "Östra försäkringsdistriktet",
-    kela_vakuutuspiiri_name_fi == "Keskinen vakuutuspiiri" ~ "Mellersta försäkringsdistriktet",
-    kela_vakuutuspiiri_name_fi == "Läntinen vakuutuspiiri" ~ "Västra försäkringsdistriktet",
-    kela_vakuutuspiiri_name_fi == "Pohjoinen vakuutuspiiri" ~ "Norra försäkringsdistriktet"
+  mutate(kela_palvelualue_name_sv = case_when(
+    kela_palvelualue_name_fi == "Eteläisen asiakaspalveluyksikön palvelualue" ~ "Södra kundserviceenhetens serviceområden",
+    kela_palvelualue_name_fi == "Itäisen asiakaspalveluyksikön palvelualue" ~ "Östra kundserviceenhetens serviceområden",
+    kela_palvelualue_name_fi == "Keskisen asiakaspalveluyksikön palvelualue" ~ "Mellersta serviceenhetens serviceområden",
+    kela_palvelualue_name_fi == "Läntisen asiakaspalveluyksikön palvelualue" ~ "Västra kundserviceenhetens serviceområden",
+    kela_palvelualue_name_fi == "Pohjoisen asiakaspalveluyksikön palvelualue" ~ "Norra kundserviceenhetens serviceområden"
   )) %>%
   # In English - manually copied from https://www.kela.fi/web/en/business-units-insurance-districts
-  mutate(kela_vakuutuspiiri_name_en = case_when(
-    kela_vakuutuspiiri_name_fi == "Eteläinen vakuutuspiiri" ~ "Southern Insurance District",
-    kela_vakuutuspiiri_name_fi == "Itäinen vakuutuspiiri" ~ "Eastern Insurance District",
-    kela_vakuutuspiiri_name_fi == "Keskinen vakuutuspiiri" ~ "Central Insurance District",
-    kela_vakuutuspiiri_name_fi == "Läntinen vakuutuspiiri" ~ "Western Insurance District",
-    kela_vakuutuspiiri_name_fi == "Pohjoinen vakuutuspiiri" ~ "Northern Insurance District"
+  mutate(kela_palvelualue_name_en = case_when(
+    kela_palvelualue_name_fi == "Eteläisen asiakaspalveluyksikön palvelualue" ~ "Service area of Southern customer service unit",
+    kela_palvelualue_name_fi == "Itäisen asiakaspalveluyksikön palvelualue" ~ "Service area of Eastern customer service unit",
+    kela_palvelualue_name_fi == "Keskisen asiakaspalveluyksikön palvelualue" ~ "Service area of Central customer service unit",
+    kela_palvelualue_name_fi == "Läntisen asiakaspalveluyksikön palvelualue" ~ "Service area of Western customer service unit",
+    kela_palvelualue_name_fi == "Pohjoisen asiakaspalveluyksikön palvelualue" ~ "Service area of Northern customer service unit"
   ))
 
-# manually extracted from https://www.kela.fi/asunto-ja-asumismenot
-## Last checked 20220127
+# manually extracted from https://finlex.fi/fi/laki/ajantasa/2014/20140938#L2P10
+## Last checked 20250110
 kuntaluokitusavain$kela_asumistukialue_name_fi <- NA
-kuntaluokitusavain$kela_asumistukialue_name_fi <- ifelse(kuntaluokitusavain$kunta_name %in%c("Helsinki"),
+kuntaluokitusavain$kela_asumistukialue_name_fi <- ifelse(kuntaluokitusavain$kunta_name %in%c("Helsinki","Espoo", "Kauniainen", "Vantaa"),
                                                       "I kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name_fi)
-kuntaluokitusavain$kela_asumistukialue_name_fi <- ifelse(kuntaluokitusavain$kunta_name %in%c("Espoo", "Kauniainen", "Vantaa"),
+kuntaluokitusavain$kela_asumistukialue_name_fi <- ifelse(kuntaluokitusavain$kunta_name %in%c("Hyvinkää","Hämeenlinna","Joensuu","Jyväskylä","Järvenpää","Kerava","Kirkkonummi","Kuopio","Lahti","Lohja","Nokia","Nurmijärvi","Oulu","Porvoo","Raisio","Riihimäki","Rovaniemi","Seinäjoki","Sipoo","Siuntio","Tampere","Turku","Tuusula","Vihti"),
                                                       "II kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name_fi)
-kuntaluokitusavain$kela_asumistukialue_name_fi <- ifelse(kuntaluokitusavain$kunta_name %in%c("Hyvinkää", "Hämeenlinna", "Joensuu",
-                                                                                          "Jyväskylä", "Järvenpää", "Kajaani",
-                                                                                          "Kerava", "Kirkkonummi", "Kouvola",
-                                                                                          "Kuopio", "Lahti", "Lappeenranta",
-                                                                                          "Lohja", "Mikkeli", "Nokia", "Nurmijärvi",
-                                                                                          "Oulu", "Pori", "Porvoo", "Raisio",
-                                                                                          "Riihimäki", "Rovaniemi", "Seinäjoki",
-                                                                                          "Sipoo", "Siuntio", "Tampere", "Turku",
-                                                                                          "Tuusula", "Vaasa", "Vihti"),
-                                                      "III kuntaryhmä",
-                                                      kuntaluokitusavain$kela_asumistukialue_name_fi)
 kuntaluokitusavain$kela_asumistukialue_name_fi <- ifelse(is.na(kuntaluokitusavain$kela_asumistukialue_name_fi),
-                                                      "IV kuntaryhmä",
+                                                      "III kuntaryhmä",
                                                       kuntaluokitusavain$kela_asumistukialue_name_fi)
 
 kuntaluokitusavain$kela_asumistukialue_code[kuntaluokitusavain$kela_asumistukialue_name_fi == "I kuntaryhmä"] <- 1
 kuntaluokitusavain$kela_asumistukialue_code[kuntaluokitusavain$kela_asumistukialue_name_fi == "II kuntaryhmä"] <- 2
 kuntaluokitusavain$kela_asumistukialue_code[kuntaluokitusavain$kela_asumistukialue_name_fi == "III kuntaryhmä"] <- 3
-kuntaluokitusavain$kela_asumistukialue_code[kuntaluokitusavain$kela_asumistukialue_name_fi == "IV kuntaryhmä"] <- 4
 
 kuntaluokitusavain_kela <- kuntaluokitusavain %>%
   # manually extracted from https://www.kela.fi/web/sv/bostad-och-boendeutgifter
 mutate(kela_asumistukialue_name_sv = case_when(
   kela_asumistukialue_name_fi == "I kuntaryhmä" ~ "Kommungrupp I",
   kela_asumistukialue_name_fi == "II kuntaryhmä" ~ "Kommungrupp II",
-  kela_asumistukialue_name_fi == "III kuntaryhmä" ~ "Kommungrupp III",
-  kela_asumistukialue_name_fi == "IV kuntaryhmä" ~ "Kommungrupp IV"
+  kela_asumistukialue_name_fi == "III kuntaryhmä" ~ "Kommungrupp III"
 )) %>%
   # manually extracted from https://www.kela.fi/web/en/housing-costs-and-types-of-homes
   mutate(kela_asumistukialue_name_en = case_when(
     kela_asumistukialue_name_fi == "I kuntaryhmä" ~ "Municipality in category I",
     kela_asumistukialue_name_fi == "II kuntaryhmä" ~ "Municipality in category II",
-    kela_asumistukialue_name_fi == "III kuntaryhmä" ~ "Municipality in category III",
-    kela_asumistukialue_name_fi == "IV kuntaryhmä" ~ "Municipality in category IV"
+    kela_asumistukialue_name_fi == "III kuntaryhmä" ~ "Municipality in category III"
   )) %>%
   # Kela-spesific classifications only for latest year as there is no history available as open data
-  mutate(year = 2024)
+  mutate(year = 2025)
 
 
 # Lets rename the Finnish version of Maarianhamina
@@ -512,8 +376,8 @@ save(municipality_key, file = "./data/municipality_key.rda",
 
 # lets create boilerplates for data documentation for data.R using document_data()
 if (FALSE){
-  document_data(dat = municipality_key_2021,
-                neim = "municipality_key_2022",
+  document_data(dat = municipality_key,
+                neim = "municipality_key",
                 description = "Table for aggregating municipality level data to various regional groupings")
 
   document_data(dat = municipality_key_2022,

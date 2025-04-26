@@ -1,7 +1,7 @@
 #' Get Statistical grid data polygons at two different resolution
 #'
 #' Thin wrapper around Finnish statistical grid data provided by
-#' [Statistics Finland](https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
+#' [Statistics Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
 #'
 #' @param resolution integer 1 (1km x 1km) or 5 (5km x 5km)
 #' @param auxiliary_data logical Whether to include auxiliary data containing municipality membership data. Default \code{FALSE}

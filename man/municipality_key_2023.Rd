@@ -5,7 +5,7 @@
 \alias{municipality_key_2023}
 \title{Municipality key table for 2023}
 \format{
-A data frame with 309 rows and 69 variables:
+A data frame with 309 rows and 74 variables:
 \describe{
 \item{kunta}{Municipality code}
 \item{municipality_name_fi}{Municipality name in Finnish}
@@ -60,6 +60,10 @@ A data frame with 309 rows and 69 variables:
 \item{kunta_name}{Municipality name in Finnish}
 \item{name_fi}{Municipality name in Finnish}
 \item{name_sv}{Municipality name in Finnish}
+\item{yhteistyoalue_code}{Sosiaali- ja terveydenhuollon yhteistyöalueiden koodi (Collaborative areas for healthcare and social welfare codes)}
+\item{yhteistyoalue_name_fi}{Sosiaali- ja terveydenhuollon yhteistyöalueet}
+\item{yhteistyoalue_name_sv}{Samarbetsområden för social- och hälsovården}
+\item{yhteistyoalue_name_en}{Collaborative areas for healthcare and social welfare}
 \item{tyossakayntial_code}{Työssäkäyntialue code}
 \item{tyossakayntial_name_fi}{Työssäkäyntialue name in Finnish}
 \item{tyossakayntial_name_sv}{Työssäkäyntialue name in Swedish}

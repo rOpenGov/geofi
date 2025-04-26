@@ -20,7 +20,8 @@ save(grid_maakunta, file = "./data/grid_maakunta.rda",
 # create regions (hyvinvointialue) grid
 library(geofi)
 library(dplyr)
-muni <- get_municipalities(year =2021)
+library(sf)
+muni <- get_municipalities(year =2025)
 muni %>% group_by(hyvinvointialue_name_fi,hyvinvointialue_code) %>%
   summarise() %>%
   ungroup() -> spd
@@ -271,10 +272,10 @@ save(grid_paijat_hame, file = "./data/grid_paijat_hame.rda",
 
 # Etelä-Savo ---------------------------------------------- |
 mygrid <- data.frame(
-  code = c("90", "46", "171", "213", "593", "681", "740", "178", "491", "97", "768", "623", "507", "588"),
-  name = c("Heinävesi", "Enonkoski", "Joroinen", "Kangasniemi", "Pieksämäki", "Rantasalmi", "Savonlinna", "Juva", "Mikkeli", "Hirvensalmi", "Sulkava", "Puumala", "Mäntyharju", "Pertunmaa"),
-  row = c(1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4),
-  col = c(5, 5, 3, 1, 2, 4, 5, 3, 2, 1, 4, 3, 2, 1),
+  code = c("90", "46", "171", "213", "593", "681", "740", "178", "491", "97", "768", "623", "507"),
+  name = c("Heinävesi", "Enonkoski", "Joroinen", "Kangasniemi", "Pieksämäki", "Rantasalmi", "Savonlinna", "Juva", "Mikkeli", "Hirvensalmi", "Sulkava", "Puumala", "Mäntyharju"),
+  row = c(1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4),
+  col = c(5, 5, 3, 1, 2, 4, 5, 3, 2, 1, 4, 3, 2),
   stringsAsFactors = FALSE
 ) %>% filter(!name %in% c("Joroinen","Heinävesi"))
 geofacet::grid_preview(mygrid)
@@ -371,22 +372,22 @@ save(grid_uusimaa, file = "./data/grid_uusimaa.rda",
      compress = "bzip2")
 
 # use the code below as geograhical reference map
-geofi::municipality_key %>%
-  filter(grepl("^Pohjois-Sa", mk_name)) %>%
-  count(kunta,kunta_name) %>%
-  select(-n) %>%
-  setNames(c("code","name")) -> tmp
-write.csv(tmp, "tmp.csv", row.names = FALSE)
-file.edit("./tmp.csv")
-grid_design()
-
-muni <- get_municipalities()
-muni %>%
-  mutate(kunta = as.integer(sub("^0+", "", kunta))) %>%
-  filter(kunta %in% tmp$code) %>%
-  ggplot() +
-  geom_sf() +
-  geom_sf_text(aes(label = name))
+# geofi::municipality_key %>%
+#   filter(grepl("^Pohjois-Sa", mk_name)) %>%
+#   count(kunta,kunta_name) %>%
+#   select(-n) %>%
+#   setNames(c("code","name")) -> tmp
+# write.csv(tmp, "tmp.csv", row.names = FALSE)
+# file.edit("./tmp.csv")
+# grid_design()
+#
+# muni <- get_municipalities(year = 2021)
+# muni %>%
+#   mutate(kunta = as.integer(sub("^0+", "", kunta))) %>%
+#   filter(kunta %in% tmp$code) %>%
+#   ggplot() +
+#   geom_sf() +
+#   geom_sf_text(aes(label = name))
 
 
 

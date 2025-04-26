@@ -59,7 +59,7 @@ Lets start with latest municipality division from `get_municipalities()` with is
 ```{r municipality_map, fig.width = 5, eval = apiacc}
 library(geofi)
 polygon <- get_municipalities(year = 2021, scale = 4500)
-point <- geofi::municipality_central_localities
+point <- municipality_central_localities
 # municipality code into integer
 point$municipality_code <- as.integer(point$kuntatunnus)
 ```

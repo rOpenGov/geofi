@@ -143,9 +143,9 @@ plot(zipcodes["nimi"], border = NA)
 
 ### Statistical grid
 
-[Grid net for statistics](https://www.stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html) both in 1 km x 1 km and 5 km x 5km covers whole of Finland. The grid net includes all grid squares in Finland.
+[Grid net for statistics](https://stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html) both in 1 km x 1 km and 5 km x 5km covers whole of Finland. The grid net includes all grid squares in Finland.
 
-Statistics Finland [proprietary grid database](https://www.stat.fi/tup/ruututietokanta/index_en.html) provides the attribute statistical data for these grid nets.
+Statistics Finland [proprietary grid database](https://stat.fi/tup/ruututietokanta/index_en.html) provides the attribute statistical data for these grid nets.
 
 ```{r statisticsl_grid_data, fig.height = 7, fig.width = 4, eval = apiacc_pkginst}
 stat_grid <- get_statistical_grid(resolution = 5, auxiliary_data = TRUE)
@@ -156,7 +156,7 @@ plot(stat_grid["euref_x"], border = NA)
 
 Number of population by both 1 km x 1 km and 5 km x 5 km grids. The number of population on the last day of the reference year (31 December) by age group. Data includes only inhabited grids. The statistical variables of the data are:
 
-Total population (`vaesto`), number of men (`miehet`) and women (`naiset`), under 15 year olds (`ika_0_14`), 15-64 year olds (`ika_15_64`), and aged over 65 (`ika_65_`). Only the number of population is reported for grids of under 10 inhabitants. See [Population grid data](https://www.stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_5km_en.html).
+Total population (`vaesto`), number of men (`miehet`) and women (`naiset`), under 15 year olds (`ika_0_14`), 15-64 year olds (`ika_15_64`), and aged over 65 (`ika_65_`). Only the number of population is reported for grids of under 10 inhabitants. See [Population grid data](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_5km_en.html).
 
 The data describes the population distribution independent of administrative areas (such as municipal borders). The data is suitable for examination of population distribution and making various spatial analysis.
 

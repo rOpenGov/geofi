@@ -41,7 +41,7 @@ install.packages("geofi")
 remotes::install_github("ropengov/geofi")
 ```
 
-With `geofi`-package you can download geospatial data on municipalities, zipcodes and population and statistical grids from Statistics Finland [WFS-api](https://www.stat.fi/org/avoindata/paikkatietoaineistot_en.html). In addition, you have on-board municipality keys for aggregating municipality-level data  into higher level regional distributions based Statistics Finland [classification API](https://data.stat.fi/api/classifications/v2/).
+With `geofi`-package you can download geospatial data on municipalities, zipcodes and population and statistical grids from Statistics Finland [WFS-api](https://stat.fi/org/avoindata/paikkatietoaineistot_en.html). In addition, you have on-board municipality keys for aggregating municipality-level data  into higher level regional distributions based Statistics Finland [classification API](https://data.stat.fi/api/classifications/v2/).
 
 Below are few examples of the data you can access using `geofi`. Please have a closer look at the [vignettes](https://ropengov.github.io/geofi/articles/index.html) for more comprehensive use cases. 
 
@@ -88,8 +88,11 @@ Contributions are very welcome:
 ### Acknowledgements
 
 **Kindly cite this work** as follows: 
-[Markus Kainu](https://github.com/muuankarski), [Joona Lehtomäki](https://github.com/jlehtoma), Juuso Parkkinen, Jani Miettinen, Pyry Kantanen, [Leo Lahti](https://github.com/antagomir)
-Retrieval and analysis of open geospatial data from Finland with the geofi R package. R package version `r sessionInfo()$otherPkgs$geofi$Version`. URL: [https://ropengov.github.io/geofi/](https://ropengov.github.io/geofi/)
+
+```{r, comment = "", highlight=FALSE}
+citation("geofi")
+
+```
 
 We are grateful to all [contributors](https://github.com/rOpenGov/geofi/graphs/contributors). This project is part of [rOpenGov](https://ropengov.org).
 

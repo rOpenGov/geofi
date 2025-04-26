@@ -1,3 +1,21 @@
+# geofi 1.1.0
+
++ PROJ 9.6.0 (announced here https://lists.osgeo.org/pipermail/proj/2025-March/011738.html) added support for EUREF-FIN in Finish transformations in their new NKG transformations. This resulted in issues with on-board `municipality_central_localities` in systems where `sf` is built with PROJ-version >= 9.6.0. This is now addressed so that `municipality_central_localities` is created using proj 9.6.0 and therefore 'EUREF-FIN / TM35FIN(E,N)' ESPG:3067. If user has PROJ version lower than 9.6.0, CRS of municipality_central_localities will be modified to `ETRS89/TM35FIN(E,N)` at package load and user is prompted accordingly. See also: https://lists.osgeo.org/pipermail/proj/2025-March/011774.html
+
+# geofi 1.0.18
+
++ 2025 regional classifications updated to match with latest changes in stat.fi classification API
+
+# geofi 1.0.17
+
++ Municipality keys updated to match Kela current classification
+
+
+# geofi 1.0.16
+
++ Municipality keys updated to match with latest changes in stat.fi classification API
+
+
 # geofi 1.0.15
 
 + Attibute datasets previously downloaded from internet, now included with package

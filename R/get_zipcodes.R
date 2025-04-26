@@ -1,9 +1,9 @@
 #' Get Finnish zip code (multi)polygons for different years.
 #'
 #' Thin wrapper around Finnish zip code areas provided by
-#' [Statistics Finland](https://www.tilastokeskus.fi/tup/karttaaineistot/postinumeroalueet.html).
+#' [Statistics Finland](https://stat.fi/tup/karttaaineistot/postinumeroalueet.html).
 #'
-#' @param year A numeric for year of the zipcodes. Years available 2015-2024.
+#' @param year A numeric for year of the zipcodes. Years available 2015-2025.
 #' @param extend_to_sea_areas A logical. Extend the data to show also the sea areas.
 #'
 #' @return sf object
@@ -21,7 +21,7 @@
 #' @rdname get_zipcodes
 #' @export
 
-get_zipcodes <- function(year = 2023, extend_to_sea_areas = FALSE){
+get_zipcodes <- function(year = 2025, extend_to_sea_areas = FALSE){
 
   # Check if you have access to http://geo.stat.fi/geoserver/wfs
   if (!check_api_access()){

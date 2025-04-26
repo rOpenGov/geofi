@@ -102,7 +102,7 @@ To cite 'geofi' in publications use:
   S, Lahti L (2025). _geofi: Access Finnish Geospatial Data_.
   doi:10.32614/CRAN.package.geofi
   <https://doi.org/10.32614/CRAN.package.geofi>, R package version
-  1.0.2.0001, <https://github.com/rOpenGov/geofi>.
+  1.1.0, <https://github.com/rOpenGov/geofi>.
 
 A BibTeX entry for LaTeX users is
 
@@ -111,8 +111,8 @@ A BibTeX entry for LaTeX users is
     doi = {10.32614/CRAN.package.geofi},
     author = {Markus Kainu and Joona Lehtomaki and Juuso Parkkinen and Jani Miettinen and Pyry Kantanen and Sampo Vesanen and Leo Lahti},
     year = {2025},
-    version = {1.0.2.0001},
-    note = {R package version 1.0.2.0001},
+    version = {1.1.0},
+    note = {R package version 1.1.0},
     url = {https://github.com/rOpenGov/geofi},
   }
 

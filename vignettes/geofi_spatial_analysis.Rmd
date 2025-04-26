@@ -220,7 +220,7 @@ ggplot() +
 
 ### Buffers
 
-Buffers can be useful, for instance, calculating the share of [buildings](https://www.avoindata.fi/data/en_GB/dataset/postcodes) that are within certain radius from central localities. That example is not explained here, but we only show how to create 15km radius around polygon centroids.
+Buffers can be useful, for instance, calculating the share of buildings that are within certain radius from central localities. That example is not explained here, but we only show how to create 15km radius around polygon centroids.
 
 ```{r buffers, fig.width=5, eval = apiacc_pkginst}
 muni_centroids_buffer <- muni_centroids |>

@@ -24,10 +24,11 @@ BugReports: https://github.com/rOpenGov/geofi/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    curl,
     dplyr,
     httpcache,
     httr,
+    httr2,
+    jsonlite,
     methods,
     purrr,
     rlang,

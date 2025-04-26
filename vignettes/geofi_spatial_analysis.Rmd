@@ -1,5 +1,5 @@
 ---
-title: "Spatial data manipulation and analysis R and geofi-package"
+title: "Spatial data manipulation and analysis using R and geofi-package"
 author: "Markus Kainu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

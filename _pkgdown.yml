@@ -5,9 +5,9 @@ navbar:
   - icon: fab fa-github
     href: https://github.com/rOpenGov/geofi
 reference:
-- title: API calling functions for Statistics Finland
+- title: Statistics Finland API functions
   desc: |
-    Functions for fetching spatial data from Statistics Finland WFS-api
+    Functions for using Statistics Finland WFS and OGC API features services
   contents:
   - get_municipalities
   - get_zipcodes
@@ -19,6 +19,20 @@ reference:
     Functions for fetching spatial data from National Land Survey of Finland WFS-api
   contents:
   - municipality_central_localities
+  - ogc_get_statfi_area
+  - ogc_get_statfi_area_pop
+  - ogc_get_statfi_statistical_grid
+  - fetch_ogc_api_statfi
+- title: National Land Survey API functions
+  desc: |
+    Functions for using National Land survey OGC API features services
+  contents:
+  - ogc_get_maastotietokanta_collections
+  - ogc_get_maastotietokanta
+  - ogc_get_nimisto
+  - geocode
+  - geocode_reverse
+  - fetch_ogc_api_mml
 - title: Data
   desc: |
     geofi comes with a timeseries of built-in municipality keys that can be used to aggregate municipality level data (`municipality_key_*`) and `municipality_central_localities` data containing point locations for cental locality of each municipality

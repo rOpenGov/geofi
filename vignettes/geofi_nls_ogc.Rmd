@@ -40,7 +40,7 @@ options(geofi_mml_api_key = "your_api_key_here")
 
 
 ```{r, include = FALSE}
-options("geofi_mml_api_key" = Sys.getenv("MML_API_KEY"))
+options(geofi_mml_api_key = Sys.getenv("MML_API_KEY"))
 ```
 
 

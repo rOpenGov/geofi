@@ -8,7 +8,7 @@ ogc_get_maastotietokanta_collections(api_key = getOption("geofi_mml_api_key"))
 }
 \arguments{
 \item{api_key}{Character. \href{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}{API key} for authenticating with the Maastotietokanta
-OGC API. Defaults to the value stored in \code{options("geofi_mml_api_key")}.
+OGC API. Defaults to the value stored in \code{options(geofi_mml_api_key)}.
 You can obtain an API key from the Maanmittauslaitos (National Land Survey
 of Finland) website.}
 }
@@ -27,7 +27,7 @@ including their titles and descriptions.
 This function queries the Maastotietokanta OGC API to retrieve metadata about
 available collections of spatial data. The API is provided by the National Land
 Survey of Finland (Maanmittauslaitos). The function requires a valid API key,
-which can be provided directly or set via \code{options("geofi_mml_api_key")}.
+which can be provided directly or set via \code{options(geofi_mml_api_key)}.
 
 The function includes error handling:
 \itemize{

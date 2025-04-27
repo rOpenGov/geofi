@@ -24,7 +24,7 @@ a default limit of 10,000 per request if the no-paging request fails.}
 to the API URL (not currently used in the function).}
 
 \item{mml_apikey}{Character. API key for authentication. Defaults to the value
-stored in \code{options("geofi_mml_api_key")}.}
+stored in \code{options(geofi_mml_api_key)}.}
 
 \item{max_pages}{Numeric. The maximum number of pages to fetch during pagination
 when \code{limitti} is NULL. Defaults to 100. Increase this value for very large

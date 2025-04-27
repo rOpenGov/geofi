@@ -4,7 +4,7 @@
 #' including their titles and descriptions.
 #'
 #' @param api_key Character. [API key](https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje) for authenticating with the Maastotietokanta
-#'   OGC API. Defaults to the value stored in `options("geofi_mml_api_key")`.
+#'   OGC API. Defaults to the value stored in `options(geofi_mml_api_key)`.
 #'   You can obtain an API key from the Maanmittauslaitos (National Land Survey
 #'   of Finland) website.
 #'
@@ -19,7 +19,7 @@
 #' This function queries the Maastotietokanta OGC API to retrieve metadata about
 #' available collections of spatial data. The API is provided by the National Land
 #' Survey of Finland (Maanmittauslaitos). The function requires a valid API key,
-#' which can be provided directly or set via `options("geofi_mml_api_key")`.
+#' which can be provided directly or set via `options(geofi_mml_api_key)`.
 #'
 #' The function includes error handling:
 #' \itemize{
@@ -344,7 +344,7 @@ fetch_ogc_api_mml <- function(api_url,
 #'   parameters are included.
 #' @param api_key Character. API key for authenticating with the Maastotietokanta
 #'   OGC API. Defaults to the value stored in
-#'   \code{options("geofi_mml_api_key")}. You can obtain an API key from the
+#'   \code{options(geofi_mml_api_key)}. You can obtain an API key from the
 #'   National Land Survey of Finland website (see
 #'   \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}).
 #'
@@ -557,7 +557,7 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 #'   parameters are included.
 #' @param api_key Character. API key for authenticating with the Geographic Names
 #'   OGC API. Defaults to the value stored in
-#'   \code{options("geofi_mml_api_key")}. You can obtain an API key from the
+#'   \code{options(geofi_mml_api_key)}. You can obtain an API key from the
 #'   National Land Survey of Finland website (see
 #'   \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}).
 #'

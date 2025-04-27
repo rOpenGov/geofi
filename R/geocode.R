@@ -23,7 +23,7 @@
 #'   If \code{NULL} (default), no additional options are included. See the NLS
 #'   geocoding API documentation for valid options.
 #' @param api_key Character. API key for authenticating with the NLS geocoding API.
-#'   Defaults to the value stored in \code{options("geofi_mml_api_key")}. You can
+#'   Defaults to the value stored in \code{options(geofi_mml_api_key)}. You can
 #'   obtain an API key from the National Land Survey of Finland website (see
 #'   \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}).
 #'
@@ -265,7 +265,7 @@ geocode <- function(search_string,
 #'   \code{"sf"} (default, returns an \code{sf} object) or \code{"json"} (returns
 #'   a list of raw JSON responses).
 #' @param api_key Character. API key for authenticating with the NLS geocoding API.
-#'   Defaults to the value stored in \code{options("geofi_mml_api_key")}. You can
+#'   Defaults to the value stored in \code{options(geofi_mml_api_key)}. You can
 #'   obtain an API key from the National Land Survey of Finland website (see
 #'   \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje}).
 #'

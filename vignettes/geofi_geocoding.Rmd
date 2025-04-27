@@ -58,10 +58,13 @@ library(ggplot2)
 
 Set your API key using the `options()` function. Replace "`your_api_key_here`" with your actual API key:
 
-```{r}
-
+```{r, eval = FALSE}
 options(geofi_mml_api_key = "your_api_key_here")
+```
 
+
+```{r, include = FALSE}
+options(geofi_mml_api_key = Sys.getenv("MML_API_KEY"))
 ```
 
 Alternatively, you can pass the API key directly to the `api_key` parameter in each function call, but setting it globally is more convenient.

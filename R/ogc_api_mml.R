@@ -140,8 +140,6 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
 #'   a default limit of 10,000 per request if the no-paging request fails.
 #' @param custom_params Character or NULL. Additional query parameters to append
 #'   to the API URL (not currently used in the function).
-#' @param mml_apikey Character. API key for authentication. Defaults to the value
-#'   stored in `options("geofi_mml_api_key")`.
 #' @param max_pages Numeric. The maximum number of pages to fetch during pagination
 #'   when `limitti` is NULL. Defaults to 100. Increase this value for very large
 #'   datasets, but be cautious of long runtimes.
@@ -166,7 +164,6 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
 fetch_ogc_api_mml <- function(api_url,
                               limitti = NULL,
                               custom_params = NULL,
-                              mml_apikey = getOption("geofi_mml_api_key"),
                               max_pages = 100) {
   # Input validation
   if (!is.character(api_url) || !nzchar(api_url)) {
@@ -174,9 +171,6 @@ fetch_ogc_api_mml <- function(api_url,
   }
   if (!is.null(limitti) && (!is.numeric(limitti) || limitti <= 0)) {
     stop("limitti must be a positive number or NULL", call. = FALSE)
-  }
-  if (is.null(mml_apikey)) {
-    stop("mml_apikey is missing. Set it via options(geofi_mml_api_key)", call. = FALSE)
   }
   if (!is.numeric(max_pages) || max_pages <= 0) {
     stop("max_pages must be a positive number", call. = FALSE)
@@ -489,7 +483,7 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 
   # Fetch the features using fetch_ogc_api_mml
   all_features <- tryCatch(
-    fetch_ogc_api_mml(api_url = api_url, limitti = limit, custom_params = NULL, mml_apikey = api_key, max_pages = max_pages),
+    fetch_ogc_api_mml(api_url = api_url, limitti = limit, custom_params = NULL, max_pages = max_pages),
     error = function(e) {
       stop(
         sprintf(

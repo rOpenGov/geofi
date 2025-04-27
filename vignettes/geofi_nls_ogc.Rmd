@@ -111,7 +111,7 @@ ggplot(cemeteries_helsinki) +
 
 For large collections like "`suo`" (bogs/marshes), you may need to increase `max_pages` to fetch all features:
 
-```{r}
+```{r, eval = FALSE}
 bogs <- ogc_get_maastotietokanta(
   collection = "suo",
   max_pages = 15
@@ -143,14 +143,14 @@ Visualize the results:
 ```{r}
 ggplot(kainu_places) +
   geom_sf() +
-  geom_sf_text(aes(label = name), size = 3, check_overlap = TRUE) +
+  geom_sf_text(aes(label = spelling), size = 3, check_overlap = TRUE) +
   theme_minimal() +
   labs(title = "Place Names Containing 'Kainu'")
 ```
 
 ### Example: Combining Search and Spatial Filtering
 
-Search for "kainu*" within a bounding box covering most part of Kainuu-region:
+Search for "kainu\*" (with \* wildcard) within a bounding box covering most part of Kainuu-region:
 
 ```{r}
 kainu_bbox <- ogc_get_nimisto(
@@ -181,7 +181,7 @@ Function `ogc_get_nimisto()` support `custom_params` for advanced API queries. F
 
 ```{r}
 swimming_beaches_filtered_by_municipality_number <- ogc_get_nimisto(
-  search_string = "*uimaranta",
+  search_string = "*uimaranta*",
   custom_params = "municipality=091"
 )
 swimming_beaches_filtered_by_municipality_number

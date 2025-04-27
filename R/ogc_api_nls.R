@@ -8,7 +8,6 @@
 #'   You can obtain an API key from the Maanmittauslaitos (National Land Survey
 #'   of Finland) website.
 #'
-#'
 #' @return A data frame with two columns:
 #'   \itemize{
 #'     \item \code{id}: The title of each collection.
@@ -23,8 +22,8 @@
 #'
 #' The function includes error handling:
 #' \itemize{
-#'   \item It retries failed requests up to 3 times in case of transient network
-#'         issues.
+#'   \item It retries failed requests up to 3 times for transient network issues
+#'         or server errors (HTTP 500–599) with exponential backoff.
 #'   \item It handles rate limits (HTTP 429) by respecting the `Retry-After` header.
 #'   \item It validates the API response to ensure the expected data is present.
 #' }
@@ -46,7 +45,7 @@
 #' @seealso \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for more information
 #' on the Maastotietokanta OGC API and how to obtain an API key.
 #'
-#' @importFrom httr2 request req_perform req_retry resp_body_json
+#' @importFrom httr2 request req_perform resp_body_json
 #' @importFrom purrr modify
 #' @export
 ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_api_key")) {
@@ -54,41 +53,77 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
   if (!is.character(api_key) || is.null(api_key) || api_key == "") {
     stop("api_key must be a non-empty character string", call. = FALSE)
   }
-
+  
   # Construct the API URL
   url <- paste0(
     "https://avoin-paikkatieto.maanmittauslaitos.fi/maastotiedot/features/v1/collections",
     "?api-key=", api_key, "&f=json"
   )
-
-  # Perform the request with retry logic
-  req <- httr2::request(url) |>
-    httr2::req_retry(max_tries = 3, max_seconds = 10)
-  resp <- tryCatch(
-    httr2::req_perform(req),
-    error = function(e) {
-      stop("Failed to perform API request: ", e$message, call. = FALSE)
-    }
-  )
-
-  # Handle HTTP errors, including rate limits (429)
-  if (resp$status_code >= 400) {
-    if (resp$status_code == 429) {
-      retry_after <- as.numeric(resp$headers$`Retry-After`) %||% 5  # Default to 5 seconds
-      Sys.sleep(retry_after)
-      resp <- httr2::req_perform(req)
-    } else {
-      stop(
-        sprintf(
-          "OGC API request to %s failed\n[%s]",
-          url,
-          httr::http_status(resp$status_code)$message
-        ),
-        call. = FALSE
+  
+  # Helper function to perform request with retries
+  perform_request_with_retries <- function(req, max_retries = 3) {
+    for (attempt in 1:max_retries) {
+      resp <- tryCatch(
+        httr2::req_perform(req),
+        error = function(e) {
+          message(sprintf("Request failed: %s", e$message))
+          return(NULL)
+        }
       )
+      
+      # Check if response is valid and status code
+      if (!is.null(resp)) {
+        if (resp$status_code >= 500 && resp$status_code < 600) {
+          if (attempt < max_retries) {
+            # Exponential backoff: 2^(attempt-1) seconds
+            sleep_time <- 2^(attempt - 1)
+            message(sprintf("500 error (attempt %d/%d). Retrying after %d seconds...", attempt, max_retries, sleep_time))
+            Sys.sleep(sleep_time)
+            next
+          } else {
+            stop(
+              sprintf(
+                "OGC API request failed after %d retries for %s\n[%s]",
+                max_retries,
+                req$url,
+                httr::http_status(resp$status_code)$message
+              ),
+              call. = FALSE
+            )
+          }
+        } else if (resp$status_code == 429) {
+          # Handle rate limit
+          retry_after <- as.numeric(resp$headers$`Retry-After`) %||% 5  # Default to 5 seconds
+          message(sprintf("Rate limit (429) hit. Waiting %d seconds...", retry_after))
+          Sys.sleep(retry_after)
+          next
+        } else if (resp$status_code >= 400) {
+          stop(
+            sprintf(
+              "OGC API request to %s failed\n[%s]",
+              req$url,
+              httr::http_status(resp$status_code)$message
+            ),
+            call. = FALSE
+          )
+        } else {
+          return(resp)
+        }
+      } else if (attempt < max_retries) {
+        # Retry on network errors
+        sleep_time <- 2^(attempt - 1)
+        message(sprintf("Network error (attempt %d/%d). Retrying after %d seconds...", attempt, max_retries, sleep_time))
+        Sys.sleep(sleep_time)
+      } else {
+        stop(sprintf("Request failed after %d retries.", max_retries), call. = FALSE)
+      }
     }
   }
-
+  
+  # Perform the request
+  req <- httr2::request(url)
+  resp <- perform_request_with_retries(req)
+  
   # Parse the JSON response
   resp_list <- tryCatch(
     httr2::resp_body_json(resp),
@@ -96,12 +131,12 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
       stop("Failed to parse API response as JSON: ", e$message, call. = FALSE)
     }
   )
-
+  
   # Extract titles and descriptions, with safety checks
   if (!"collections" %in% names(resp_list) || length(resp_list$collections) == 0) {
     stop("No collections found in the API response", call. = FALSE)
   }
-
+  
   ids <- tryCatch(
     resp_list$collections |> purrr::modify(c("title")) |> unlist(),
     error = function(e) {
@@ -114,16 +149,17 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
       stop("Failed to extract collection descriptions: ", e$message, call. = FALSE)
     }
   )
-
+  
   # Validate extracted data
   if (length(ids) == 0 || length(descriptions) == 0 || length(ids) != length(descriptions)) {
     stop("Mismatch or empty data in extracted titles and descriptions", call. = FALSE)
   }
-
+  
   # Create and return the data frame
   dat <- data.frame(id = ids, description = descriptions)
   return(dat)
 }
+
 
 
 #' Fetch Data from OGC API (Internal)

@@ -21,41 +21,81 @@ fetch_ogc_api_statfi <- function(api_url, limit = NULL, crs) {
   if (!is.numeric(crs) || !crs %in% c(3067, 4326)) {
     stop("`crs` must be one of: 3067, 4326", call. = FALSE)
   }
-
+  
   # Set user agent
   query_ua <- httr::user_agent("https://github.com/rOpenGov/geofi")
-
+  
+  # Helper function to perform request with retries
+  perform_request_with_retries <- function(req, max_retries = 3) {
+    for (attempt in 1:max_retries) {
+      resp <- tryCatch(
+        httr2::req_perform(req),
+        error = function(e) {
+          message(sprintf("Request failed: %s", e$message))
+          return(NULL)
+        }
+      )
+      
+      # Check if response is valid and status code
+      if (!is.null(resp)) {
+        if (resp$status_code >= 500 && resp$status_code < 600) {
+          if (attempt < max_retries) {
+            # Exponential backoff: 2^(attempt-1) seconds
+            sleep_time <- 2^(attempt - 1)
+            message(sprintf("500 error (attempt %d/%d). Retrying after %d seconds...", attempt, max_retries, sleep_time))
+            Sys.sleep(sleep_time)
+            next
+          } else {
+            stop(
+              sprintf(
+                "OGC API request failed after %d retries for %s\n[%s]",
+                max_retries,
+                req$url,
+                httr::http_status(resp$status_code)$message
+              ),
+              call. = FALSE
+            )
+          }
+        } else if (resp$status_code >= 400) {
+          stop(
+            sprintf(
+              "OGC API request failed for %s\n[%s]",
+              req$url,
+              httr::http_status(resp$status_code)$message
+            ),
+            call. = FALSE
+          )
+        } else {
+          return(resp)
+        }
+      } else if (attempt < max_retries) {
+        # Retry on network errors
+        sleep_time <- 2^(attempt - 1)
+        message(sprintf("Network error (attempt %d/%d). Retrying after %d seconds...", attempt, max_retries, sleep_time))
+        Sys.sleep(sleep_time)
+      } else {
+        stop(sprintf("Request failed after %d retries.", max_retries), call. = FALSE)
+      }
+    }
+  }
+  
   # Handle pagination if limit is NULL
   if (is.null(limit)) {
     api_url <- paste0(api_url, "&limit=10000")
     data_list <- list()
     next_exists <- TRUE
     i <- 1
-
+    
     while (next_exists) {
       message(sprintf("Requesting (query %d) from: %s", i, api_url))
       req <- httr2::request(api_url) |> httr2::req_user_agent(query_ua$options$useragent)
-      resp <- tryCatch(
-        httr2::req_perform(req),
-        error = function(e) stop("Failed to perform request: ", e$message, call. = FALSE)
-      )
-
-      if (resp$status_code >= 400) {
-        stop(
-          sprintf(
-            "OGC API request failed for %s\n[%s]",
-            api_url,
-            httr::http_status(resp$status_code)$message
-          ),
-          call. = FALSE
-        )
-      }
-
+      resp <- perform_request_with_retries(req)
+      
       # Read response into sf object with specified CRS
       data_list[[i]] <- suppressWarnings(suppressMessages(
         sf::st_read(httr2::resp_body_string(resp), quiet = TRUE, crs = crs)
       ))
-
+      
       # Check for next page
       resp_json <- httr2::resp_body_json(resp)
       link_rels <- purrr::map_chr(resp_json$links, "rel")
@@ -71,49 +111,35 @@ fetch_ogc_api_statfi <- function(api_url, limit = NULL, crs) {
       }
       i <- i + 1
     }
-
+    
     # Filter out empty sf objects (those with zero rows)
     data_list <- data_list[purrr::map_lgl(data_list, ~ nrow(.x) > 0)]
-
+    
     # Combine results
     if (length(data_list) == 0) {
       warning("No data retrieved from the API.", call. = FALSE)
       return(NULL)
     }
     all_features <- do.call(rbind, data_list)
-
+    
   } else {
     # Single request with specified limit
     api_url <- paste0(api_url, "&limit=", limit)
     message(sprintf("Requesting from: %s", api_url))
     req <- httr2::request(api_url) |> httr2::req_user_agent(query_ua$options$useragent)
-    resp <- tryCatch(
-      httr2::req_perform(req),
-      error = function(e) stop("Failed to perform request: ", e$message, call. = FALSE)
-    )
-
-    if (resp$status_code >= 400) {
-      stop(
-        sprintf(
-          "OGC API request failed for %s\n[%s]",
-          api_url,
-          httr::http_status(resp$status_code)$message
-        ),
-        call. = FALSE
-      )
-    }
-
+    resp <- perform_request_with_retries(req)
+    
     # Read response into sf object with specified CRS
     all_features <- suppressWarnings(suppressMessages(
       sf::st_read(httr2::resp_body_string(resp), quiet = TRUE, crs = crs)
     ))
   }
-
+  
   if (is.null(all_features) || nrow(all_features) == 0) {
     warning("No features retrieved from the API.", call. = FALSE)
     return(NULL)
   }
-
+  
   return(all_features)
 }
 

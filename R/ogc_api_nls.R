@@ -138,8 +138,6 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
 #'   per request. If NULL, the function first attempts to fetch all available features
 #'   without pagination (limit=-1) for speed, falling back to pagination with
 #'   a default limit of 10,000 per request if the no-paging request fails.
-#' @param custom_params Character or NULL. Additional query parameters to append
-#'   to the API URL (not currently used in the function).
 #' @param max_pages Numeric. The maximum number of pages to fetch during pagination
 #'   when `limitti` is NULL. Defaults to 100. Increase this value for very large
 #'   datasets, but be cautious of long runtimes.
@@ -163,7 +161,6 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
 #' @keywords internal
 fetch_ogc_api_mml <- function(api_url,
                               limitti = NULL,
-                              custom_params = NULL,
                               max_pages = 100) {
   # Input validation
   if (!is.character(api_url) || !nzchar(api_url)) {
@@ -338,10 +335,6 @@ fetch_ogc_api_mml <- function(api_url,
 #'   a string in the format \code{"minx,miny,maxx,maxy"} (e.g.,
 #'   \code{"24.5,60.1,25.5,60.5"}). Coordinates must be in the same CRS as the
 #'   API (EPSG:4326). If \code{NULL} (default), no spatial filter is applied.
-#' @param custom_params Character or NULL. Additional query parameters to append
-#'   to the API URL, specified as a single string (e.g.,
-#'   \code{"filter=attribute='value'"}). If \code{NULL} (default), no additional
-#'   parameters are included.
 #' @param api_key Character. API key for authenticating with the Maastotietokanta
 #'   OGC API. Defaults to the value stored in
 #'   \code{options(geofi_mml_api_key)}. You can obtain an API key from the
@@ -426,7 +419,7 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
                                      limit = NULL,
                                      max_pages = 100,
                                      bbox = NULL,
-                                     custom_params = NULL,
+                                     # custom_params = NULL,
                                      api_key = getOption("geofi_mml_api_key")) {
   # Input validation
   if (!is.character(collection) || collection == "") {
@@ -456,11 +449,11 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
       stop("bbox must satisfy minx < maxx and miny < maxy", call. = FALSE)
     }
   }
-  if (!is.null(custom_params)) {
-    if (!is.character(custom_params) || custom_params == "") {
-      stop("custom_params must be a non-empty character string (e.g., 'filter=attribute=value')", call. = FALSE)
-    }
-  }
+  # if (!is.null(custom_params)) {
+  #   if (!is.character(custom_params) || custom_params == "") {
+  #     stop("custom_params must be a non-empty character string (e.g., 'attribute=value')", call. = FALSE)
+  #   }
+  # }
 
   # Construct the base URL
   base_url <- paste0(
@@ -474,16 +467,16 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
   if (!is.null(bbox)) {
     queries <- paste0(queries, "&bbox=", bbox)
   }
-  if (!is.null(custom_params)) {
-    queries <- paste0(queries, "&", custom_params)
-  }
+  # if (!is.null(custom_params)) {
+  #   queries <- paste0(queries, "&", custom_params)
+  # }
 
   # Combine base URL and query parameters
   api_url <- paste0(base_url, queries)
 
   # Fetch the features using fetch_ogc_api_mml
   all_features <- tryCatch(
-    fetch_ogc_api_mml(api_url = api_url, limitti = limit, custom_params = NULL, max_pages = max_pages),
+    fetch_ogc_api_mml(api_url = api_url, limitti = limit, max_pages = max_pages),
     error = function(e) {
       stop(
         sprintf(
@@ -540,6 +533,9 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 #'   (e.g., \code{"kainu"}). The search is case-insensitive. If \code{NULL}
 #'   (default), no search filter is applied, and all place names are retrieved
 #'   (subject to the \code{limit} parameter).
+#' @param collection Character or NULL. The name of collection for places, place names and map names of the 
+#' Geographic Names Register provided by the National Land Survey of Finland where the search if performed from. 
+#' Supported values are \code{placenames}, \code{mapnames}, and \code{placenames_simple}
 #' @param crs Numeric or Character. The coordinate reference system (CRS)
 #'   for the output data, specified as an EPSG code. Supported values are
 #'   \code{3067} (ETRS-TM35FIN, default) and \code{4326} (WGS84). The returned
@@ -553,7 +549,7 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 #'   API (EPSG:4326). If \code{NULL} (default), no spatial filter is applied.
 #' @param custom_params Character or NULL. Additional query parameters to append
 #'   to the API URL, specified as a single string (e.g.,
-#'   \code{"filter=attribute='value'"}). If \code{NULL} (default), no additional
+#'   \code{"attribute='value'"}). If \code{NULL} (default), no additional
 #'   parameters are included.
 #' @param api_key Character. API key for authenticating with the Geographic Names
 #'   OGC API. Defaults to the value stored in
@@ -606,7 +602,7 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 #' }
 #'
 #' @seealso
-#' \url{https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/geographic-names}
+#' \url{https://www.maanmittauslaitos.fi/nimiston-kyselypalvelu-ogc-api/tekninen-kuvaus}
 #' for more information on the Geographic Names dataset.
 #' \url{https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje} for
 #' instructions on obtaining an API key.
@@ -618,6 +614,7 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 #' @importFrom purrr modify keep compact
 #' @export
 ogc_get_nimisto <- function(search_string = NULL,
+                            collection = "placenames",
                             crs = 3067,
                             limit = NULL,
                             bbox = NULL,
@@ -632,6 +629,9 @@ ogc_get_nimisto <- function(search_string = NULL,
   }
   if (!crs %in% c(3067, 4326)) {
     stop("crs must be one of 3067 (ETRS-TM35FIN) or 4326 (WGS84)", call. = FALSE)
+  }
+  if (!collection %in% c("placenames", "mapnames", "placenames_simple")) {
+    stop("collection must be one of placenames, mapnames or placenames_simple", call. = FALSE)
   }
   if (!is.null(limit) && (!is.numeric(limit) || limit <= 0)) {
     stop("limit must be a positive number or NULL", call. = FALSE)
@@ -650,12 +650,12 @@ ogc_get_nimisto <- function(search_string = NULL,
   }
   if (!is.null(custom_params)) {
     if (!is.character(custom_params) || custom_params == "") {
-      stop("custom_params must be a non-empty character string (e.g., 'filter=attribute=value')", call. = FALSE)
+      stop("custom_params must be a non-empty character string (e.g., 'attribute=value')", call. = FALSE)
     }
   }
 
   # Construct the base URL
-  base_url <- "https://avoin-paikkatieto.maanmittauslaitos.fi/geographic-names/features/v1/collections/placenames/items?f=json"
+  base_url <- paste0("https://avoin-paikkatieto.maanmittauslaitos.fi/geographic-names/features/v1/collections/",collection,"/items")
 
   # Construct query parameters
   queries <- paste0("api-key=", api_key)
@@ -675,11 +675,11 @@ ogc_get_nimisto <- function(search_string = NULL,
   }
 
   # Combine base URL and query parameters
-  api_url <- paste0(base_url, "&", queries)
+  api_url <- paste0(base_url, "?", queries)
 
   # Fetch the features using fetch_ogc_api_mml
   all_features <- tryCatch(
-    fetch_ogc_api_mml(api_url = api_url, limitti = limit, custom_params = NULL, mml_apikey = api_key),
+    fetch_ogc_api_mml(api_url = api_url, limitti = limit),
     error = function(e) {
       stop(
         sprintf(
@@ -720,6 +720,8 @@ ogc_get_nimisto <- function(search_string = NULL,
       }
     )
   }
+  # remove  parallelName
+  all_features$parallelName <- NULL
 
   return(all_features)
 }

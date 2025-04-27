@@ -140,16 +140,16 @@ The `geocode_reverse()` function converts geographic coordinates (as `sf` POINT 
 
 ### Example 3: Reverse Geocoding a Single Point
 
-Reverse geocode the coordinates of Suomenlinna (approximately 60.1725°N, 24.933333°E):
+Reverse geocode the coordinates of Parliament House, Helsinki (approximately 60.1725°N, 24.933333°E):
 
 ```{r}
 # Create an sf point
-eduskunta_point <- data.frame(lon = 24.933333, lat = 60.1725) |>
+parliament_point <- data.frame(lon = 24.933333, lat = 60.1725) |>
   sf::st_as_sf(coords = c("lon", "lat"), crs = 4326)
 
 # Reverse geocode
 places <- geocode_reverse(
-  point = eduskunta_point,
+  point = parliament_point,
   sources = "geographic-names"
 )
 print(places)
@@ -157,35 +157,14 @@ print(places)
 
 This returns an `sf` object with the place name and coordinates in EPSG:4326.
 
-### Example 4: Reverse Geocoding Multiple Points with a Search Radius
 
-Reverse geocode multiple points with a 1 km search radius:
-
-
-```{r}
-# Create multiple points
-points <- data.frame(
-  lon = c(24.933333, 24.9384),
-  lat = c(60.1725, 60.1699)
-) |>
-  sf::st_as_sf(coords = c("lon", "lat"), crs = 4326)
-
-# Reverse geocode with radius
-results <- geocode_reverse(
-  point = points,
-  boundary_circle_radius = 1000,
-  sources = "addresses"
-)
-print(results)
-```
-
-# Example 5: Returning Raw JSON
+# Example 4: Returning Raw JSON
 
 For debugging or custom processing, return raw JSON responses:
 
 ```{r}
 json_results <- geocode_reverse(
-  point = eduskunta_point,
+  point = parliament_point,
   boundary_circle_radius = 1,
   return = "json"
 )
@@ -199,7 +178,7 @@ Plot the reverse geocoded results alongside the input points:
 
 ```{r}
 ggplot() +
-  geom_sf(data = eduskunta_point, color = "red", size = 3, shape = 17) +
+  geom_sf(data = parliament_point, color = "red", size = 3, shape = 17) +
   geom_sf(data = places, color = "blue", size = 3) +
   labs(
     title = "Reverse Geocoded Location: Eduskuntatalo",

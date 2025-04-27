@@ -150,12 +150,12 @@ ggplot(kainu_places) +
 
 ### Example: Combining Search and Spatial Filtering
 
-Search for "kainu" within a bounding box:
+Search for "kainu*" within a bounding box covering most part of Kainuu-region:
 
 ```{r}
 kainu_bbox <- ogc_get_nimisto(
-  search_string = "kainu",
-  bbox = "24.5,60.1,25.5,60.5",
+  search_string = "kainu*",
+  bbox = "27.515259,63.450509,30.531006,64.524823",
   crs = 4326
 )
 ```
@@ -177,13 +177,14 @@ The package includes robust error handling:
 
 ### Custom Parameters
 
-Both `ogc_get_maastotietokanta()` and `ogc_get_nimisto()` support `custom_params` for advanced API queries. For example:
+Function `ogc_get_nimisto()` support `custom_params` for advanced API queries. For example:
 
 ```{r}
-cemeteries_filtered <- ogc_get_maastotietokanta(
-  collection = "hautausmaa",
-  custom_params = "filter=attribute='value'"
+swimming_beaches_filtered_by_municipality_number <- ogc_get_nimisto(
+  search_string = "*uimaranta",
+  custom_params = "municipality=091"
 )
+swimming_beaches_filtered_by_municipality_number
 ```
 
 Consult the [NLS OGC API documentation](https://www.maanmittauslaitos.fi/en/rajapinnat) for valid parameters.

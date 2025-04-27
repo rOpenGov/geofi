@@ -230,6 +230,7 @@ geocode <- function(search_string,
     empty_sf <- sf::st_sf(geometry = sf::st_sfc(crs = as.integer(sub("EPSG:", "", crs))))
     return(empty_sf)
   }
+  dat$name <- NULL
 
   return(dat)
 }
@@ -243,7 +244,7 @@ geocode <- function(search_string,
 #'
 #' @param point An \code{sf} object with POINT geometries, representing the
 #'   locations to reverse geocode. The input must be in EPSG:4326 (WGS84) CRS.
-#' @param boundary_circle_radius Numeric or NULL. The radius (in kilometers) of a
+#' @param boundary_circle_radius Numeric or NULL. The radius (in meters) of a
 #'   circular boundary around each point to limit the search area. Must be a
 #'   positive number. If \code{NULL} (default), no boundary radius is applied.
 #' @param size Numeric or NULL. The maximum number of results to return per point.
@@ -258,9 +259,6 @@ geocode <- function(search_string,
 #'   one or more of \code{"interpolated-road-addresses"}, \code{"geographic-names"},
 #'   \code{"addresses"}, \code{"mapsheets-tm35"}, or \code{"cadastral-units"}.
 #'   If \code{NULL} (default), the API’s default sources are used.
-#' @param boundary_country Character or NULL. The country to limit the search to,
-#'   specified as an ISO 3166-1 alpha-3 code (e.g., \code{"FIN"} for Finland).
-#'   If \code{NULL} (default), no country boundary is applied.
 #' @param return Character. The format of the returned data. Must be one of
 #'   \code{"sf"} (default, returns an \code{sf} object) or \code{"json"} (returns
 #'   a list of raw JSON responses).
@@ -291,20 +289,20 @@ geocode <- function(search_string,
 #' options(geofi_mml_api_key = "your_api_key_here")
 #'
 #' # Create a point for Suomenlinna (in EPSG:4326)
-#' suomenlinna <- data.frame(lon = 24.933333, lat = 60.1725) |>
-#'   sf::st_as_sf(coords = c("lon", "lat"), crs = 4326)
+# suomenlinna <- data.frame(lon = 24.984444, lat = 60.143611) |>
+#   sf::st_as_sf(coords = c("lon", "lat"), crs = 4326)
 #'
 #' # Reverse geocode to get place names
-#' places <- geocode_reverse(
-#'   point = suomenlinna,
-#'   sources = "geographic-names"
-#' )
+# places <- geocode_reverse(
+#   point = suomenlinna,
+#   sources = "geographic-names"
+# )
 #' print(places)
 #'
 #' # Reverse geocode with a search radius and return raw JSON
 #' places_json <- geocode_reverse(
 #'   point = suomenlinna,
-#'   boundary_circle_radius = 1,
+#'   boundary_circle_radius = 1000,
 #'   return = "json"
 #' )
 #' print(places_json)
@@ -329,7 +327,6 @@ geocode_reverse <- function(point,
                             size = NULL,
                             layers = NULL,
                             sources = NULL,
-                            boundary_country = NULL,
                             return = "sf",
                             api_key = getOption("geofi_mml_api_key")) {
   # Input validation
@@ -364,9 +361,6 @@ geocode_reverse <- function(point,
       )
     }
   }
-  if (!is.null(boundary_country) && (!is.character(boundary_country) || boundary_country == "" || !grepl("^[A-Z]{3}$", boundary_country))) {
-    stop("boundary_country must be a 3-letter ISO 3166-1 alpha-3 code (e.g., 'FIN') or NULL", call. = FALSE)
-  }
   if (!is.character(return) || !return %in% c("sf", "json")) {
     stop("return must be one of 'sf' or 'json'", call. = FALSE)
   }
@@ -393,9 +387,6 @@ geocode_reverse <- function(point,
     }
     if (!is.null(sources)) {
       query <- paste0(query, "&sources=", sources)
-    }
-    if (!is.null(boundary_country)) {
-      query <- paste0(query, "&boundary.country=", boundary_country)
     }
     return(query)
   }

@@ -1,5 +1,5 @@
 ---
-title: "Accessing Spatial Data from Maastotietokanta and Geographic Names with geofi"
+title: "Accessing Spatial Data from NLS OGC apis with geofi"
 author: "Markus Kainu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -38,6 +38,13 @@ To use the package, you need an **API key** from the National Land Survey of Fin
 options(geofi_mml_api_key = "your_api_key_here")
 ```
 
+
+```{r, include = FALSE}
+options("geofi_mml_api_key" = Sys.getenv("MML_API_KEY"))
+```
+
+
+
 ## Package Overview
 
 The `geofi` package includes the following key functions:
@@ -55,7 +62,7 @@ To explore the datasets available in the Maastotietokanta, use `ogc_get_maastoti
 
 ```{r}
 collections <- ogc_get_maastotietokanta_collections()
-print(collections)
+head(collections)
 ```
 
 This list helps you identify the `collection` parameter needed for `ogc_get_maastotietokanta()`.
@@ -75,8 +82,8 @@ The `ogc_get_maastotietokanta()` function downloads a specific collection as an 
 Let's download the "`hautausmaa`" collection in the default CRS (EPSG:3067):
 
 ```{r}
-cemeteries <- ogc_get_maastotietokanta(collection = "hautausmaa")
-print(cemeteries)
+cemeteries <- ogc_get_maastotietokanta(collection = "hautausmaa", crs = 4326)
+cemeteries
 ```
 
 ### Example: Spatial Filtering with a Bounding Box
@@ -107,7 +114,7 @@ For large collections like "`suo`" (bogs/marshes), you may need to increase `max
 ```{r}
 bogs <- ogc_get_maastotietokanta(
   collection = "suo",
-  max_pages = 500
+  max_pages = 15
 )
 ```
 

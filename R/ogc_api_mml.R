@@ -530,6 +530,8 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
       }
     )
   }
+  # remove sijaintipiste
+  all_features$sijainti_piste <- NULL
 
   return(all_features)
 }

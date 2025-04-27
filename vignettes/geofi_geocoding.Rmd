@@ -16,25 +16,28 @@ knitr::opts_chunk$set(
 ```
 
 
-Introduction
-The geofi package provides tools for geocoding and reverse geocoding Finnish place names, street addresses, and geographic coordinates using the National Land Survey of Finland (NLS) geocoding REST API. This vignette demonstrates how to use the geocode() and geocode_reverse() functions to:
-Geocode: Convert textual location descriptions (e.g., place names or street addresses) into spatial coordinates.
+## Introduction
 
-Reverse Geocode: Convert geographic coordinates into textual location descriptions (e.g., place names or addresses).
+The geofi package provides tools for geocoding and reverse geocoding Finnish place names, street addresses, and geographic coordinates using the National Land Survey of Finland (NLS) geocoding REST API. This vignette demonstrates how to use the `geocode()` and `geocode_reverse()` functions to:
+
+* **Geocode**: Convert textual location descriptions (e.g., place names or street addresses) into spatial coordinates.
+* **Reverse Geocode**: Convert geographic coordinates into textual location descriptions (e.g., place names or addresses).
 
 These functions are designed for researchers, analysts, and developers working with spatial data in Finland, offering robust error handling and integration with the sf package for spatial data manipulation.
 
-Prerequisites
-Obtaining an API Key
+## Prerequisites
+
+### Obtaining an API Key
+
 To use the NLS geocoding API, you need an API key from the National Land Survey of Finland. Follow these steps:
-Visit the NLS API key instructions page.
 
-Register or log in to obtain your personal API key.
+* Visit the NLS API key instructions page.
+* Register or log in to obtain your personal API key.
+* Store the API key securely, as it will be used to authenticate your requests.
 
-Store the API key securely, as it will be used to authenticate your requests.
+### Installing the geofi Package
 
-Installing the geofi Package
-Install the geofi package from GitHub (or CRAN, if available):
+Install the `geofi` package from GitHub (or CRAN, if available):
 
 ```{r}
 # Install from GitHub
@@ -42,8 +45,6 @@ Install the geofi package from GitHub (or CRAN, if available):
 ```
 
 Load the package and required dependencies:
-
-
 
 ```{r}
 
@@ -53,9 +54,9 @@ library(ggplot2)
 
 ```
 
-Setting the API Key
-Set your API key using the options() function. Replace "your_api_key_here" with your actual API key:
+### Setting the API Key
 
+Set your API key using the `options()` function. Replace "`your_api_key_here`" with your actual API key:
 
 ```{r}
 
@@ -63,12 +64,15 @@ options(geofi_mml_api_key = "your_api_key_here")
 
 ```
 
-Alternatively, you can pass the API key directly to the api_key parameter in each function call, but setting it globally is more convenient.
-Geocoding with geocode()
-The geocode() function converts place names or street addresses into spatial coordinates, returning an sf object with point geometries. It supports multiple data sources (e.g., geographic names, addresses) and output coordinate reference systems (CRS: EPSG:3067 or EPSG:4326).
-Example 1: Geocoding a Place Name
-Let's geocode the place name "Suomenlinna," a famous sea fortress in Helsinki, using the geographic-names source:
+Alternatively, you can pass the API key directly to the `api_key` parameter in each function call, but setting it globally is more convenient.
 
+## Geocoding with `geocode()`
+
+The `geocode()` function converts place names or street addresses into spatial coordinates, returning an `sf` object with point geometries. It supports multiple data sources (e.g., geographic names, addresses) and output coordinate reference systems (CRS: EPSG:3067 or EPSG:4326).
+
+### Example 1: Geocoding a Place Name
+
+Let's geocode the place name "Suomenlinna," a famous sea fortress in Helsinki, using the `geographic-names` source:
 
 
 ```{r}
@@ -80,10 +84,11 @@ suomenlinna <- geocode(
 print(suomenlinna)
 ```
 
-This returns an sf object with the coordinates of Suomenlinna in EPSG:4326 (WGS84). If no results are found, an empty sf object is returned with a warning.
-Example 2: Geocoding a Street Address
-Geocode a specific street address, "Mannerheimintie 100, Helsinki," with a limit of 5 results:
+This returns an `sf` object with the coordinates of Suomenlinna in EPSG:4326 (WGS84). If no results are found, an empty `sf` object is returned with a warning.
 
+### Example 2: Geocoding a Street Address
+
+Geocode a specific street address, "*Mannerheimintie 100, Helsinki*" with a limit of 5 results:
 
 
 ```{r}
@@ -96,12 +101,11 @@ address <- geocode(
 print(address)
 ```
 
-This returns an sf object in EPSG:3067 (ETRS-TM35FIN), suitable for Finnish spatial data analysis.
-Visualizing Geocoded Results
-Visualize the geocoded address on a map using ggplot2:
+This returns an `sf` object in EPSG:3067 (ETRS-TM35FIN), suitable for Finnish spatial data analysis.
 
+### Visualizing Geocoded Results
 
-
+Visualize the geocoded address on a map using `ggplot2`:
 
 ```{r}
 ggplot(data = address) +
@@ -113,13 +117,12 @@ ggplot(data = address) +
   theme_minimal()
 ```
 
-Advanced Options
+### Advanced Options
+
 You can refine the geocoding results using additional parameters:
-lang: Set the response language ("fi", "sv", or "en").
 
-options: Pass custom API options, such as focusing the search near a specific point:
-
-
+* `lang`: Set the response language ("`fi`", "`sv`", or "`en`").
+* `options`: Pass custom API options, such as focusing the search near a specific point:
 
 ```{r}
 focused <- geocode(
@@ -128,13 +131,13 @@ focused <- geocode(
   options = "focus.point.lat=60.1699&focus.point.lon=24.9384"
 )
 ```
+## Reverse Geocoding with geocode_reverse()
 
-Reverse Geocoding with geocode_reverse()
-The geocode_reverse() function converts geographic coordinates (as sf POINT objects in EPSG:4326) into place names or addresses. It supports multiple points, customizable search radii, and different output formats (sf or JSON).
-Example 3: Reverse Geocoding a Single Point
+The `geocode_reverse()` function converts geographic coordinates (as `sf` POINT objects in EPSG:4326) into place names or addresses. It supports multiple points, customizable search radii, and different output formats (`sf` or JSON).
+
+### Example 3: Reverse Geocoding a Single Point
+
 Reverse geocode the coordinates of Suomenlinna (approximately 60.1725°N, 24.933333°E):
-
-
 
 ```{r}
 # Create an sf point
@@ -149,10 +152,11 @@ places <- geocode_reverse(
 print(places)
 ```
 
-This returns an sf object with the place name and coordinates in EPSG:4326.
-Example 4: Reverse Geocoding Multiple Points with a Search Radius
-Reverse geocode multiple points with a 1 km search radius:
+This returns an `sf` object with the place name and coordinates in EPSG:4326.
 
+### Example 4: Reverse Geocoding Multiple Points with a Search Radius
+
+Reverse geocode multiple points with a 1 km search radius:
 
 
 ```{r}
@@ -166,16 +170,15 @@ points <- data.frame(
 # Reverse geocode with radius
 results <- geocode_reverse(
   point = points,
-  boundary_circle_radius = 100,
+  boundary_circle_radius = 1000,
   sources = "addresses"
 )
 print(results)
 ```
 
-Example 5: Returning Raw JSON
+# Example 5: Returning Raw JSON
+
 For debugging or custom processing, return raw JSON responses:
-
-
 
 ```{r}
 json_results <- geocode_reverse(
@@ -186,9 +189,9 @@ json_results <- geocode_reverse(
 print(json_results)
 ```
 
-Visualizing Reverse Geocoded Results
-Plot the reverse geocoded results alongside the input points:
+### Visualizing Reverse Geocoded Results
 
+Plot the reverse geocoded results alongside the input points:
 
 
 ```{r}
@@ -204,36 +207,30 @@ ggplot() +
 
 
 
-Tips and Best Practices
-API Key Security: Store your API key in an environment variable or secure configuration file rather than hardcoding it in scripts.
+## Tips and Best Practices
 
-Rate Limits: The NLS API may impose rate limits. Both functions handle HTTP 429 errors by retrying after a delay, but avoid excessive requests.
+* **API Key Security**: Store your API key in an environment variable or secure configuration file rather than hardcoding it in scripts.
+* **Rate Limits**: The NLS API may impose rate limits. Both functions handle HTTP 429 errors by retrying after a delay, but avoid excessive requests.
+* **Input Validation**: Ensure inputs are correctly formatted (e.g., sf objects for geocode_reverse() must be in EPSG:4326).
+* **CRS Considerations**: Use EPSG:3067 for Finnish spatial analysis and EPSG:4326 for global compatibility or web mapping.
+* **Combining Functions**: You can chain geocode() and geocode_reverse() for round-trip testing (e.g., geocode an address, then reverse geocode the coordinates).
 
-Input Validation: Ensure inputs are correctly formatted (e.g., sf objects for geocode_reverse() must be in EPSG:4326).
+## Limitations
 
-CRS Considerations: Use EPSG:3067 for Finnish spatial analysis and EPSG:4326 for global compatibility or web mapping.
+* **API Dependency**: The functions rely on the NLS geocoding API, which requires an internet connection and a valid API key.
+* **Coverage**: Results are limited to Finland and depend on the API's data sources (e.g., geographic names, addresses).
+* **Precision**: Geocoding accuracy varies by source and input specificity. Use `size` and `boundary_circle_radius` to refine results.
+* **Performance**: Reverse geocoding multiple points can be slow due to individual API requests. Consider batch processing for large datasets.
 
-Combining Functions: You can chain geocode() and geocode_reverse() for round-trip testing (e.g., geocode an address, then reverse geocode the coordinates).
+## Further Resources
 
-Limitations
-API Dependency: The functions rely on the NLS geocoding API, which requires an internet connection and a valid API key.
+* **NLS Geocoding API Documentation**: https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/aineistot-ja-rajapinnat/paikkatietojen-rajapintapalvelut/geokoodauspalvelu
+* **API Key Instructions**: https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje
+* `geofi` Package Repository: https://github.com/rOpenGov/geofi
+* **sf Package**: For advanced spatial data manipulation ([CRAN](https://cran.r-project.org/package=sf)).
 
-Coverage: Results are limited to Finland and depend on the API's data sources (e.g., geographic names, addresses).
+## Conclusion
 
-Precision: Geocoding accuracy varies by source and input specificity. Use size and boundary_circle_radius to refine results.
+The `geofi` package simplifies geocoding and reverse geocoding for Finnish spatial data, leveraging the NLS geocoding API. With `geocode()` and `geocode_reverse()`, users can seamlessly convert between textual locations and coordinates, enabling applications in urban planning, geographic analysis, and more. Try the examples above with your own data, and explore the package's flexibility to suit your needs.
 
-Performance: Reverse geocoding multiple points can be slow due to individual API requests. Consider batch processing for large datasets.
-
-Further Resources
-NLS Geocoding API Documentation: https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/aineistot-ja-rajapinnat/paikkatietojen-rajapintapalvelut/geokoodauspalvelu
-
-API Key Instructions: https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje
-
-geofi Package Repository: https://github.com/rOpenGov/geofi
-
-sf Package: For advanced spatial data manipulation (CRAN).
-
-Conclusion
-The geofi package simplifies geocoding and reverse geocoding for Finnish spatial data, leveraging the NLS geocoding API. With geocode() and geocode_reverse(), users can seamlessly convert between textual locations and coordinates, enabling applications in urban planning, geographic analysis, and more. Try the examples above with your own data, and explore the package's flexibility to suit your needs.
-For questions or contributions, visit the geofi GitHub repository.
 

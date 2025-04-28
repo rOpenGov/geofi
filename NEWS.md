@@ -1,7 +1,7 @@
-# geofi 2.0.0
+# geofi 1.1.0
 
-+ Object `municipality_central_localities` is depracated and replaced with function `municipality_central_localities()`. Relates to changes in latest PROJ version 9.6.0 regarding added support for EUREF-FIN in Finish transformations https://lists.osgeo.org/pipermail/proj/2025-March/011738.html\n
-+ New functions for interacting both with National Land Survey and Statistics Finlands OCG API-services. See three new vignettes for examples.\n
++ Object `municipality_central_localities` is depracated and replaced with function `municipality_central_localities()`. Relates to changes in latest PROJ version 9.6.0 regarding added support for EUREF-FIN in Finish transformations https://lists.osgeo.org/pipermail/proj/2025-March/011738.html
++ New functions for interacting both with National Land Survey and Statistics Finland OCG API-services. See three new vignettes for examples.
 
 
 # geofi 1.0.18

@@ -5,11 +5,13 @@
 
 ## Submission note
 
-+ PROJ 9.6.0 (announced here https://lists.osgeo.org/pipermail/proj/2025-March/011738.html) added support for EUREF-FIN in Finish transformations in their new NKG transformations. This resulted in issues with on-board `municipality_central_localities` in systems where `sf` is built with PROJ-version >= 9.6.0. This is now addressed so that `municipality_central_localities` is created using proj 9.6.0 and therefore 'EUREF-FIN / TM35FIN(E,N)' ESPG:3067. If user has PROJ version lower than 9.6.0, CRS of municipality_central_localities will be modified to `ETRS89/TM35FIN(E,N)` at package load and user is prompted accordingly.
++ Object `municipality_central_localities` is depracated and replaced with function `municipality_central_localities()`. Relates to changes in latest PROJ version 9.6.0 regarding added support for EUREF-FIN in Finish transformations https://lists.osgeo.org/pipermail/proj/2025-March/011738.html
++ New functions for interacting both with National Land Survey and Statistics Finland OCG API-services.
+
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
 ## Downstream dependencies
 

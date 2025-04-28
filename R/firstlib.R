@@ -2,9 +2,9 @@
 .onAttach <- function(lib, pkg) {
      packageStartupMessage("\ngeofi R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.org>.\n
 **************
-Changes in version 2.0.0:
+Changes in version 1.1.0:
 - Object `municipality_central_localities` is depracated and replaced with function `municipality_central_localities()`. More at https://github.com/rOpenGov/geofi/blob/master/NEWS.md
-- New functions for interacting with both National Land Survey and Statistics Finlands OCG API-services. See three new vignettes for examples.
+- New functions for interacting with both National Land Survey and Statistics Finland OCG API-services. See three new vignettes for examples.
 **************")
 }
 

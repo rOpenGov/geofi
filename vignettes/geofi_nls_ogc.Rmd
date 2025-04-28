@@ -187,7 +187,7 @@ swimming_beaches_filtered_by_municipality_number <- ogc_get_nimisto(
 swimming_beaches_filtered_by_municipality_number
 ```
 
-Consult the [NLS OGC API documentation](https://www.maanmittauslaitos.fi/en/rajapinnat) for valid parameters.
+Consult the [NLS OGC API documentation](https://www.maanmittauslaitos.fi/nimiston-kyselypalvelu-ogc-api/tekninen-kuvaus) for valid parameters.
 
 ## Best Practices
 

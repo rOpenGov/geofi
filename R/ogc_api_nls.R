@@ -53,13 +53,13 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
   if (!is.character(api_key) || is.null(api_key) || api_key == "") {
     stop("api_key must be a non-empty character string", call. = FALSE)
   }
-  
+
   # Construct the API URL
   url <- paste0(
     "https://avoin-paikkatieto.maanmittauslaitos.fi/maastotiedot/features/v1/collections",
     "?api-key=", api_key, "&f=json"
   )
-  
+
   # Helper function to perform request with retries
   perform_request_with_retries <- function(req, max_retries = 3) {
     for (attempt in 1:max_retries) {
@@ -70,7 +70,7 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
           return(NULL)
         }
       )
-      
+
       # Check if response is valid and status code
       if (!is.null(resp)) {
         if (resp$status_code >= 500 && resp$status_code < 600) {
@@ -119,11 +119,11 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
       }
     }
   }
-  
+
   # Perform the request
   req <- httr2::request(url)
   resp <- perform_request_with_retries(req)
-  
+
   # Parse the JSON response
   resp_list <- tryCatch(
     httr2::resp_body_json(resp),
@@ -131,12 +131,12 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
       stop("Failed to parse API response as JSON: ", e$message, call. = FALSE)
     }
   )
-  
+
   # Extract titles and descriptions, with safety checks
   if (!"collections" %in% names(resp_list) || length(resp_list$collections) == 0) {
     stop("No collections found in the API response", call. = FALSE)
   }
-  
+
   ids <- tryCatch(
     resp_list$collections |> purrr::modify(c("title")) |> unlist(),
     error = function(e) {
@@ -149,12 +149,12 @@ ogc_get_maastotietokanta_collections <- function(api_key = getOption("geofi_mml_
       stop("Failed to extract collection descriptions: ", e$message, call. = FALSE)
     }
   )
-  
+
   # Validate extracted data
   if (length(ids) == 0 || length(descriptions) == 0 || length(ids) != length(descriptions)) {
     stop("Mismatch or empty data in extracted titles and descriptions", call. = FALSE)
   }
-  
+
   # Create and return the data frame
   dat <- data.frame(id = ids, description = descriptions)
   return(dat)
@@ -428,13 +428,6 @@ fetch_ogc_api_mml <- function(api_url,
 #' )
 #' print(cemeteries_bbox)
 #'
-#' # Download with a custom limit and additional query parameters
-#' cemeteries_limited <- ogc_get_maastotietokanta(
-#'   collection = "hautausmaa",
-#'   limit = 100,
-#'   custom_params = "filter=attribute='value'"
-#' )
-#' print(cemeteries_limited)
 #' }
 #'
 #' @seealso
@@ -569,8 +562,8 @@ ogc_get_maastotietokanta <- function(collection = "hautausmaa",
 #'   (e.g., \code{"kainu"}). The search is case-insensitive. If \code{NULL}
 #'   (default), no search filter is applied, and all place names are retrieved
 #'   (subject to the \code{limit} parameter).
-#' @param collection Character or NULL. The name of collection for places, place names and map names of the 
-#' Geographic Names Register provided by the National Land Survey of Finland where the search if performed from. 
+#' @param collection Character or NULL. The name of collection for places, place names and map names of the
+#' Geographic Names Register provided by the National Land Survey of Finland where the search if performed from.
 #' Supported values are \code{placenames}, \code{mapnames}, and \code{placenames_simple}
 #' @param crs Numeric or Character. The coordinate reference system (CRS)
 #'   for the output data, specified as an EPSG code. Supported values are

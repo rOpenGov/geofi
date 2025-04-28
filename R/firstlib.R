@@ -1,9 +1,11 @@
 
 .onAttach <- function(lib, pkg) {
-  #   packageStartupMessage("\ngeofi R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.org>.\n
-  # **************\n
-  # Please note that the content of variables 'hyvinvointialue_name_*' and 'hyvinvointialue_code' has changed in 1.0.6 release.\nNew content follows the classification by Statistics Finland.\n
-  # **************")
+     packageStartupMessage("\ngeofi R package: tools for open GIS data for Finland.\nPart of rOpenGov <ropengov.org>.\n
+   **************\n
+   Changes in version 2.0:\n
+   - Object `municipality_central_localities` is depracated and replaced with function `municipality_central_localities()`. Relates to changes in latest PROJ version 9.6.0 regarding added support for EUREF-FIN in Finish transformations https://lists.osgeo.org/pipermail/proj/2025-March/011738.html\n
+   - New functions for interacting both National Land Survey and Statistics Finlands OCG API-services. See three new vignettes for examples.\n
+   **************")
 }
 
 # Create an empty environment to hold the WFS provider data

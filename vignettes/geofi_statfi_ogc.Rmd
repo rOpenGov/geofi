@@ -223,7 +223,7 @@ The `bbox` parameter allows spatial filtering to focus on specific regions. Ensu
 
 ## Additional Resources
 
-* [Statistics Finland Geoserver](https://geo.stat.fi/inspire/ogc/api/): Documentation for the OGC API.
+* [Statistics Finland Geoserver](https://geo.stat.fi/inspire/): Documentation for the OGC API.
 * [geofi GitHub Repository](https://github.com/rOpenGov/geofi): Source code and issue tracker.
 * [sf Package Documentation](https://r-spatial.github.io/sf/): For working with sf objects.
 * [ggplot2 Documentation](https://ggplot2.tidyverse.org/): For visualizing spatial data.

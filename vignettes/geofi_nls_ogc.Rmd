@@ -38,13 +38,6 @@ To use the package, you need an **API key** from the National Land Survey of Fin
 options(geofi_mml_api_key = "your_api_key_here")
 ```
 
-
-```{r, include = FALSE}
-options(geofi_mml_api_key = Sys.getenv("MML_API_KEY"))
-```
-
-
-
 ## Package Overview
 
 The `geofi` package includes the following key functions:

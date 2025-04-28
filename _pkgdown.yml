@@ -14,15 +14,9 @@ reference:
   - get_population_grid
   - get_statistical_grid
   - get_municipality_pop
-- title: API calling functions for NLS
-  desc: |
-    Functions for fetching spatial data from National Land Survey of Finland WFS-api
-  contents:
-  - municipality_central_localities
   - ogc_get_statfi_area
   - ogc_get_statfi_area_pop
   - ogc_get_statfi_statistical_grid
-  - fetch_ogc_api_statfi
 - title: National Land Survey API functions
   desc: |
     Functions for using National Land survey OGC API features services
@@ -32,7 +26,6 @@ reference:
   - ogc_get_nimisto
   - geocode
   - geocode_reverse
-  - fetch_ogc_api_mml
 - title: Data
   desc: |
     geofi comes with a timeseries of built-in municipality keys that can be used to aggregate municipality level data (`municipality_key_*`) and `municipality_central_localities` data containing point locations for cental locality of each municipality

@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = TRUE
+  eval = FALSE
 )
 ```
 
@@ -41,7 +41,9 @@ Install the `geofi` package from GitHub (or CRAN, if available):
 
 ```{r}
 # Install from GitHub
-# devtools::install_github("rOpenGov/geofi")
+devtools::install_github("rOpenGov/geofi")
+# Install from CRAN
+install.packages("geofi")
 ```
 
 Load the package and required dependencies:
@@ -62,10 +64,6 @@ Set your API key using the `options()` function. Replace "`your_api_key_here`" w
 options(geofi_mml_api_key = "your_api_key_here")
 ```
 
-
-```{r, include = FALSE}
-options(geofi_mml_api_key = Sys.getenv("MML_API_KEY"))
-```
 
 Alternatively, you can pass the API key directly to the `api_key` parameter in each function call, but setting it globally is more convenient.
 

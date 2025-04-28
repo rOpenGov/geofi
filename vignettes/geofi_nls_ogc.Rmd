@@ -4,7 +4,7 @@ author: "Markus Kainu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Accessing Spatial Data with geofi}
+  %\VignetteIndexEntry{Accessing Spatial Data from NLS OGC apis with geofi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

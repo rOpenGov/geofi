@@ -1,10 +1,10 @@
 ---
-title: "Accessing Finnish Spatial and Population Data with geofi"
+title: "Accessing Spatial and Population Data from Statistics Finland OGC api"
 author: "Markus Kainu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Accessing Statistics Finland Data with geofi}
+  %\VignetteIndexEntry{Accessing Spatial and Population Data from Statistics Finland OGC api}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

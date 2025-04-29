@@ -21,6 +21,7 @@ reference:
   desc: |
     Functions for using National Land survey OGC API features services
   contents:
+  - municipality_central_localities
   - ogc_get_maastotietokanta_collections
   - ogc_get_maastotietokanta
   - ogc_get_nimisto
@@ -77,6 +78,7 @@ reference:
   - sotkadata_population
   - sotkadata_swedish_speaking_pop
   - statfi_zipcode_population
+  - municipality_central_localities_df
 - title: Miscellaneous
   desc: |
     Support functions for API functions and spatial data transformations

@@ -19,9 +19,12 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/geofi_datasets.html">Datasets in geofi-package</a></li>
+    <li><a class="dropdown-item" href="../articles/geofi_geocoding.html">Geocoding and Reverse Geocoding with the geofi Package</a></li>
     <li><a class="dropdown-item" href="../articles/geofi_joining_attribute_data.html">Joining attribute data with geofi data</a></li>
     <li><a class="dropdown-item" href="../articles/geofi_making_maps.html">Making maps using geofi-package</a></li>
-    <li><a class="dropdown-item" href="../articles/geofi_spatial_analysis.html">Spatial data manipulation and analysis R and geofi-package</a></li>
+    <li><a class="dropdown-item" href="../articles/geofi_nls_ogc.html">Accessing Spatial Data from NLS OGC apis with geofi</a></li>
+    <li><a class="dropdown-item" href="../articles/geofi_spatial_analysis.html">Spatial data manipulation and analysis using R and geofi-package</a></li>
+    <li><a class="dropdown-item" href="../articles/geofi_statfi_ogc.html">Accessing Spatial and Population Data from Statistics Finland OGC api</a></li>
     <li><a class="dropdown-item" href="../articles/Publications-using-the-geofi-R-package.html">Publications using the geofi R package</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -40,8 +43,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="geofi-110">geofi 1.1.0<a class="anchor" aria-label="anchor" href="#geofi-110"></a></h2>
-<ul><li>PROJ 9.6.0 (announced here <a href="https://lists.osgeo.org/pipermail/proj/2025-March/011738.html" class="external-link uri">https://lists.osgeo.org/pipermail/proj/2025-March/011738.html</a>) added support for EUREF-FIN in Finish transformations in their new NKG transformations. This resulted in issues with on-board <code>municipality_central_localities</code> in systems where <code>sf</code> is built with PROJ-version &gt;= 9.6.0. This is now addressed so that <code>municipality_central_localities</code> is created using proj 9.6.0 and therefore ‘EUREF-FIN / TM35FIN(E,N)’ ESPG:3067. If user has PROJ version lower than 9.6.0, CRS of municipality_central_localities will be modified to <code>ETRS89/TM35FIN(E,N)</code> at package load and user is prompted accordingly. See also: <a href="https://lists.osgeo.org/pipermail/proj/2025-March/011774.html" class="external-link uri">https://lists.osgeo.org/pipermail/proj/2025-March/011774.html</a>
+<ul><li>Object <code>municipality_central_localities</code> is depracated and replaced with function <code><a href="../reference/municipality_central_localities.html">municipality_central_localities()</a></code>. Relates to changes in latest PROJ version 9.6.0 regarding added support for EUREF-FIN in Finish transformations <a href="https://lists.osgeo.org/pipermail/proj/2025-March/011738.html" class="external-link uri">https://lists.osgeo.org/pipermail/proj/2025-March/011738.html</a>
 </li>
+<li>New functions for interacting both with National Land Survey and Statistics Finland OCG API-services. See three new vignettes for examples.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.18" id="geofi-1018">geofi 1.0.18<a class="anchor" aria-label="anchor" href="#geofi-1018"></a></h2><p class="text-muted">CRAN release: 2025-02-11</p>

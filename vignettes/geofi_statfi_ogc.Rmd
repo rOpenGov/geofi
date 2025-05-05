@@ -1,10 +1,10 @@
 ---
-title: "Accessing Spatial and Population Data from Statistics Finland OGC api"
+title: "Accessing Data from Statistics Finland OGC api"
 author: "Markus Kainu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Accessing Spatial and Population Data from Statistics Finland OGC api}
+  %\VignetteIndexEntry{Accessing Data from Statistics Finland OGC api}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -31,16 +31,15 @@ The `geofi` package provides tools to access spatial data from **Statistics Finl
 * Fetch population data linked to administrative units.
 * Access population data for statistical grid cells.
 
-Unlike some other spatial data APIs, *no API key is required* to access Statistics Finland's OGC API, making it straightforward to get started. The package handles pagination, spatial filtering, and coordinate reference system (CRS) transformations, delivering data as `sf` objects compatible with the `sf` package for spatial analysis and visualization.
+The package handles pagination, spatial filtering, and coordinate reference system (CRS) transformations, delivering data as `sf` objects compatible with the `sf` package for spatial analysis and visualization.
 
 ## Package Overview
 
 The `geofi` package includes the following key functions for accessing Statistics Finland data:
 
-* `ogc_get_statfi_area()`: Retrieves administrative area polygons (e.g., municipalities, wellbeing areas) for specified years, scales, and tessellation types.
+* `ogc_get_statfi_area()`: Retrieves administrative area polygons (e.g., municipalities, wellbeing areas) for specified years and scales.
 * `ogc_get_statfi_area_pop()`: Fetches administrative area polygons with associated population data, pivoted into a wide format.
 * `ogc_get_statfi_statistical_grid()`: Retrieves population data for statistical grid cells at different resolutions (1km or 5km).
-* `fetch_ogc_api_statfi()`: An internal function that handles low-level API requests and pagination (not typically called directly by users).
 
 All functions return spatial data as `sf` objects, making it easy to integrate with spatial analysis workflows in R.
 
@@ -60,14 +59,13 @@ The `ogc_get_statfi_area()` function retrieves polygons for Finnish administrati
 Fetch all municipalities for 2022 at the 1:4,500,000 scale:
 
 ```{r}
-munis <- ogc_get_statfi_area(year = 2022, scale = 4500, tessellation = "kunta")
-print(munis)
+muni <- ogc_get_statfi_area(year = 2022, scale = 4500, tessellation = "kunta")
 ```
 
 Visualize the municipalities using `ggplot2`:
 
 ```{r}
-ggplot(munis) +
+ggplot(muni) +
   geom_sf() +
   theme_minimal() +
   labs(title = "Finnish Municipalities (2022)")
@@ -75,15 +73,15 @@ ggplot(munis) +
 
 ### Example: Spatial Filtering with a Bounding Box
 
-To retrieve municipalities within a specific area (e.g., southern Finland), use the bbox parameter. Coordinates should match the specified crs.
+To retrieve municipalities within a specific area (e.g., southern Finland), use the bbox parameter.
 
 ```{r}
-bbox <- "200000,6600000,500000,6900000"  # In EPSG:3067
-munis_south <- ogc_get_statfi_area(
+bbox_finland_south <- "18.797607,59.573288,30.476074,61.695082"
+muni_south <- ogc_get_statfi_area(
   year = 2022,
   scale = 4500,
   tessellation = "kunta",
-  bbox = bbox,
+  bbox = bbox_finland_south,
   crs = 3067
 )
 ```
@@ -91,7 +89,7 @@ munis_south <- ogc_get_statfi_area(
 Visualize the filtered results:
 
 ```{r}
-ggplot(munis_south) +
+ggplot(muni_south) +
   geom_sf() +
   theme_minimal() +
   labs(title = "Municipalities in Southern Finland (2022)")
@@ -120,21 +118,24 @@ The `ogc_get_statfi_area_pop()` function fetches administrative area polygons wi
 
 ### Example: Fetching Population Data
 
-Retrieve population data for 2021:
+Retrieve population data for 2021.
 
 ```{r}
 pop_data <- ogc_get_statfi_area_pop(year = 2021, crs = 3067)
-print(pop_data)
 ```
 
-Visualize population density (assuming a variable like `population_total` exists):
+By default, function returns the at all regional breakdown available, and it is users task to filter out the regional breakdown of interest. At the moment, that can be down using regular expressions on the prefix of variable `areaStatisticalUnit_inspireId_localId`. Following prefixes are available `"avi", "ely", "kunta", "maakunta", "seutukunta", "suuralue"` 
+
+
+Visualize the share of female population at municpality (`kunta`) level.
 
 ```{r}
-ggplot(pop_data) +
-  geom_sf(aes(fill = population_total)) +
-  scale_fill_viridis_c(option = "plasma") +
-  theme_minimal() +
-  labs(title = "Population by Administrative Area (2021)", fill = "Population")
+ggplot(data=pop_data |> 
+         filter(grepl("^kunta", areaStatisticalUnit_inspireId_localId))) +
+    geom_sf(aes(fill = female_percentage)) +
+    scale_fill_viridis_c(option = "plasma") +
+    theme_minimal() +
+    labs(title = "Population by Administrative Area (2021)", fill = "share of females (%)")
 ```
 
 ## Example: Population Data with Bounding Box
@@ -142,8 +143,12 @@ ggplot(pop_data) +
 Fetch population data within a bounding box:
 
 ```{r}
-bbox <- "200000,6600000,500000,6900000"
-pop_south <- ogc_get_statfi_area_pop(year = 2021, bbox = bbox, crs = 3067)
+pop_south <- ogc_get_statfi_area_pop(year = 2021, bbox = bbox_finland_south, crs = 4326)
+ggplot(data=pop_south |> filter(grepl("^kunta", areaStatisticalUnit_inspireId_localId))) +
+    geom_sf(aes(fill = female_percentage)) +
+    scale_fill_viridis_c(option = "plasma") +
+    theme_minimal() +
+    labs(title = "Population by Administrative Area (2021)", fill = "share of females (%)")
 ```
 
 ## Step 3: Retrieving Population Data by Statistical Grid
@@ -160,16 +165,15 @@ The `ogc_get_statfi_statistical_grid()` function retrieves population data for s
 Retrieve population data for a 5km grid in 2021:
 
 ```{r}
-grid_data <- ogc_get_statfi_statistical_grid(year = 2021, resolution = 5000)
-print(grid_data)
+grid_data <- ogc_get_statfi_statistical_grid(year = 2021, resolution = 5000, bbox = bbox_finland_south)
 ```
 
 Visualize the grid data:
 
 ```{r}
 ggplot(grid_data) +
-  geom_sf(aes(fill = population_total), color = NA) +
-  scale_fill_viridis_c(option = "magma") +
+  geom_sf(aes(fill = total_count), color = NA) +
+  scale_fill_viridis_c(option = "magma", trans='sqrt') +
   theme_minimal() +
   labs(title = "Population by 5km Grid Cells (2021)", fill = "Population")
 ```
@@ -179,12 +183,23 @@ ggplot(grid_data) +
 Fetch 1km grid data within a bounding box:
 
 ```{r}
-bbox <- "200000,6600000,500000,6900000"
-grid_south <- ogc_get_statfi_statistical_grid(
+bbox_capital_region <- "24.441147,60.102168,25.285034,60.369071"
+grid_capital <- ogc_get_statfi_statistical_grid(
   year = 2021,
   resolution = 1000,
-  bbox = bbox
+  bbox = bbox_capital_region
 )
+```
+
+
+Visualize the grid data:
+
+```{r}
+ggplot(grid_capital) +
+  geom_sf(aes(fill = total_count), color = NA) +
+  scale_fill_viridis_c(option = "magma", trans='sqrt') +
+  theme_minimal() +
+  labs(title = "Population by 1km Grid Cells (2021)", fill = "Population")
 ```
 
 ## Advanced Features
@@ -212,7 +227,7 @@ Note that `ogc_get_statfi_statistical_grid()` is fixed to EPSG:3067, as per the 
 
 ### Bounding Box Filtering
 
-The `bbox` parameter allows spatial filtering to focus on specific regions. Ensure coordinates match the specified `crs` (e.g., EPSG:3067 for grid data). Example format: "`200000`,`6600000`,`500000`,`6900000`".
+The `bbox` parameter allows spatial filtering to focus on specific regions. Bounding box coordinates in  EPSG:4326 will work with both crs EPSG:4326 and EPSG:3067. Bounding box in EPSG:3067 requires crs to be also set to EPSG:3067 with the function argument. Example format: `"18.797607,59.573288,30.476074,61.695082"`.
 
 ## Best Practices
 

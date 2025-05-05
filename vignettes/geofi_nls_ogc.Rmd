@@ -1,10 +1,10 @@
 ---
-title: "Accessing Spatial Data from NLS OGC apis with geofi"
+title: "Accessing Data from NLS OGC api"
 author: "Markus Kainu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Accessing Spatial Data from NLS OGC apis with geofi}
+  %\VignetteIndexEntry{Accessing Data from NLS OGC api}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

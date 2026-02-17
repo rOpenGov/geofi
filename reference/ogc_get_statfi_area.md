@@ -1,0 +1,77 @@
+# Retrieve Finnish Administrative Area Polygons
+
+Retrieves municipality or other administrative (multi)polygons from
+Statistics Finland's OGC API. Supports different years, scales, and
+tessellation types for Finnish administrative boundaries.
+
+## Usage
+
+``` r
+ogc_get_statfi_area(
+  year = 2022,
+  scale = 4500,
+  tessellation = NULL,
+  crs = 3067,
+  limit = NULL,
+  bbox = NULL
+)
+```
+
+## Arguments
+
+- year:
+
+  Integer. Year of the administrative borders. Options: 2020,
+  2021, 2022. Default: 2022.
+
+- scale:
+
+  Integer. Map scale/resolution. Options: 1000 (1:1,000,000), 4500
+  (1:4,500,000). Default: 4500.
+
+- tessellation:
+
+  Character or NULL. Type of administrative unit. Options: "avi", "ely",
+  "hyvinvointialue", "kunta", "maakunta", "seutukunta", "suuralue",
+  "tyossakayntialue", "vaalipiiri". If NULL, retrieves all units.
+  Default: NULL.
+
+- crs:
+
+  Integer. Coordinate Reference System (EPSG code). Options: 3067
+  (ETRS89 / TM35FIN), 4326 (WGS84). Default: 3067.
+
+- limit:
+
+  Integer or NULL. Maximum number of features to retrieve. If NULL,
+  retrieves all available features. Default: NULL.
+
+- bbox:
+
+  Character or NULL. Bounding box for spatial filtering in format
+  "xmin,ymin,xmax,ymax" (in the specified CRS). Default: NULL.
+
+## Value
+
+An `sf` object containing the requested spatial data, or NULL if no data
+is retrieved.
+
+## Author
+
+Markus Kainu <markus.kainu@kapsi.fi>
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Get all municipalities for 2020 at 1:4,500,000 scale
+munis <- ogc_get_statfi_area(year = 2020, scale = 4500, tessellation = "kunta")
+
+# Get wellbeing areas for 2022 with a limit of 10 features
+wellbeing <- ogc_get_statfi_area(year = 2022, tessellation = "hyvinvointialue", limit = 10)
+
+# Get data within a bounding box
+bbox <- "200000,6600000,500000,6900000"
+data <- ogc_get_statfi_area(year = 2021, bbox = bbox, crs = 3067)
+} # }
+```

@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2010-2015
+    COPYRIGHT HOLDER: Joona Lehtomaki, Juuso Parkkinen, Leo Lahti, Jussi Jousimo, Janne Aukia

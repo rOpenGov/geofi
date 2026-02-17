@@ -1,0 +1,60 @@
+# Retrieve Finnish Administrative Area Polygons with Population Data
+
+Retrieves municipality or other administrative (multi)polygons with
+population data from Statistics Finland's OGC API. Supports different
+years and coordinate reference systems for Finnish administrative
+boundaries at a fixed scale of 1:4,500,000.
+
+## Usage
+
+``` r
+ogc_get_statfi_area_pop(year = 2023, crs = 3067, limit = NULL, bbox = NULL)
+```
+
+## Arguments
+
+- year:
+
+  Integer. Year of the administrative borders and population data.
+  Options: 2019, 2020, 2021. Default: 2021.
+
+- crs:
+
+  Integer. Coordinate Reference System (EPSG code). Options: 3067
+  (ETRS89 / TM35FIN), 4326 (WGS84). Default: 3067.
+
+- limit:
+
+  Integer or NULL. Maximum number of features to retrieve. If NULL,
+  retrieves all available features. Default: NULL.
+
+- bbox:
+
+  Character or NULL. Bounding box for spatial filtering in format
+  "xmin,ymin,xmax,ymax" (in the specified CRS). Default: NULL.
+
+## Value
+
+An `sf` object containing spatial data and population statistics,
+pivoted to wide format with variables as columns, or NULL if no data is
+retrieved.
+
+## Author
+
+Markus Kainu <markus.kainu@kapsi.fi>
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Get population data for 2020
+pop_data <- ogc_get_statfi_area_pop(year = 2020, crs = 3067)
+
+# Get population data within a bounding box
+bbox <- "200000,6600000,500000,6900000"
+pop_data <- ogc_get_statfi_area_pop(year = 2021, bbox = bbox, crs = 3067)
+
+# Limit to 10 features
+pop_data <- ogc_get_statfi_area_pop(year = 2019, limit = 10, crs = 4326)
+} # }
+```

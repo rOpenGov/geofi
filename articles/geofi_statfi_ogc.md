@@ -1,0 +1,290 @@
+# Accessing Data from Statistics Finland OGC api
+
+## Introduction
+
+The `geofi` package provides tools to access spatial data from
+**Statistics Finland’s OGC API**, including administrative boundaries,
+population data by administrative units, and population data by
+statistical grid cells. This vignette demonstrates how to use the
+package’s core functions to:
+
+- Retrieve Finnish administrative area polygons (e.g., municipalities,
+  regions).
+- Fetch population data linked to administrative units.
+- Access population data for statistical grid cells.
+
+The package handles pagination, spatial filtering, and coordinate
+reference system (CRS) transformations, delivering data as `sf` objects
+compatible with the `sf` package for spatial analysis and visualization.
+
+## Package Overview
+
+The `geofi` package includes the following key functions for accessing
+Statistics Finland data:
+
+- [`ogc_get_statfi_area()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_area.md):
+  Retrieves administrative area polygons (e.g., municipalities,
+  wellbeing areas) for specified years and scales.
+- [`ogc_get_statfi_area_pop()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_area_pop.md):
+  Fetches administrative area polygons with associated population data,
+  pivoted into a wide format.
+- [`ogc_get_statfi_statistical_grid()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_statistical_grid.md):
+  Retrieves population data for statistical grid cells at different
+  resolutions (1km or 5km).
+
+All functions return spatial data as `sf` objects, making it easy to
+integrate with spatial analysis workflows in R.
+
+## Step 1: Retrieving Administrative Area Polygons
+
+The
+[`ogc_get_statfi_area()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_area.md)
+function retrieves polygons for Finnish administrative units, such as
+municipalities (`kunta`), wellbeing areas (`hyvinvointialue`), or
+regions (`maakunta`). You can customize the output with parameters like:
+
+- `year`: The year of the boundaries (2020–2022).
+- `scale`: Map resolution (1:1,000,000 or 1:4,500,000).
+- `tessellation`: Type of administrative unit (e.g., kunta,
+  hyvinvointialue).
+- `crs`: Coordinate reference system (EPSG:3067 or EPSG:4326).
+- `limit`: Maximum number of features (or NULL for all).
+- `bbox`: Bounding box for spatial filtering.
+
+### Example: Downloading Municipalities
+
+Fetch all municipalities for 2022 at the 1:4,500,000 scale:
+
+``` r
+muni <- ogc_get_statfi_area(year = 2022, scale = 4500, tessellation = "kunta")
+```
+
+Visualize the municipalities using `ggplot2`:
+
+``` r
+ggplot(muni) +
+  geom_sf() +
+  theme_minimal() +
+  labs(title = "Finnish Municipalities (2022)")
+```
+
+### Example: Spatial Filtering with a Bounding Box
+
+To retrieve municipalities within a specific area (e.g., southern
+Finland), use the bbox parameter.
+
+``` r
+bbox_finland_south <- "18.797607,59.573288,30.476074,61.695082"
+muni_south <- ogc_get_statfi_area(
+  year = 2022,
+  scale = 4500,
+  tessellation = "kunta",
+  bbox = bbox_finland_south,
+  crs = 3067
+)
+```
+
+Visualize the filtered results:
+
+``` r
+ggplot(muni_south) +
+  geom_sf() +
+  theme_minimal() +
+  labs(title = "Municipalities in Southern Finland (2022)")
+```
+
+### Example: Fetching Wellbeing Areas
+
+Retrieve wellbeing areas (hyvinvointialue) for 2022:
+
+``` r
+wellbeing <- ogc_get_statfi_area(
+  year = 2022,
+  tessellation = "hyvinvointialue",
+  scale = 4500
+)
+```
+
+## Step 2: Retrieving Population Data by Administrative Area
+
+The
+[`ogc_get_statfi_area_pop()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_area_pop.md)
+function fetches administrative area polygons with associated population
+data, pivoted into a wide format where each population variable is a
+column. Parameters include:
+
+- `year`: The year of the data (2019–2021).
+- `crs`: Coordinate reference system (EPSG:3067 or EPSG:4326).
+- `limit`: Maximum number of features (or `NULL` for all).
+- `bbox`: Bounding box for spatial filtering.
+
+### Example: Fetching Population Data
+
+Retrieve population data for 2021.
+
+``` r
+pop_data <- ogc_get_statfi_area_pop(year = 2021, crs = 3067)
+```
+
+By default, function returns the at all regional breakdown available,
+and it is users task to filter out the regional breakdown of interest.
+At the moment, that can be down using regular expressions on the prefix
+of variable `areaStatisticalUnit_inspireId_localId`. Following prefixes
+are available
+`"avi", "ely", "kunta", "maakunta", "seutukunta", "suuralue"`
+
+Visualize the share of female population at municpality (`kunta`) level.
+
+``` r
+ggplot(data=pop_data |> 
+         filter(grepl("^kunta", areaStatisticalUnit_inspireId_localId))) +
+    geom_sf(aes(fill = female_percentage)) +
+    scale_fill_viridis_c(option = "plasma") +
+    theme_minimal() +
+    labs(title = "Population by Administrative Area (2021)", fill = "share of females (%)")
+```
+
+## Example: Population Data with Bounding Box
+
+Fetch population data within a bounding box:
+
+``` r
+pop_south <- ogc_get_statfi_area_pop(year = 2021, bbox = bbox_finland_south, crs = 4326)
+ggplot(data=pop_south |> filter(grepl("^kunta", areaStatisticalUnit_inspireId_localId))) +
+    geom_sf(aes(fill = female_percentage)) +
+    scale_fill_viridis_c(option = "plasma") +
+    theme_minimal() +
+    labs(title = "Population by Administrative Area (2021)", fill = "share of females (%)")
+```
+
+## Step 3: Retrieving Population Data by Statistical Grid
+
+The
+[`ogc_get_statfi_statistical_grid()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_statistical_grid.md)
+function retrieves population data for statistical grid cells at 1km or
+5km resolution. Data is returned in EPSG:3067 (ETRS89 / TM35FIN).
+Parameters include:
+
+- `year`: The year of the data (2019–2021).
+- `resolution`: Grid cell size (1000m or 5000m).
+- `limit`: Maximum number of features (or `NULL` for all).
+- `bbox`: Bounding box for spatial filtering.
+
+### Example: Fetching 5km Grid Data
+
+Retrieve population data for a 5km grid in 2021:
+
+``` r
+grid_data <- ogc_get_statfi_statistical_grid(year = 2021, resolution = 5000, bbox = bbox_finland_south)
+```
+
+Visualize the grid data:
+
+``` r
+ggplot(grid_data) +
+  geom_sf(aes(fill = total_count), color = NA) +
+  scale_fill_viridis_c(option = "magma", trans='sqrt') +
+  theme_minimal() +
+  labs(title = "Population by 5km Grid Cells (2021)", fill = "Population")
+```
+
+### Example: 1km Grid with Bounding Box
+
+Fetch 1km grid data within a bounding box:
+
+``` r
+bbox_capital_region <- "24.441147,60.102168,25.285034,60.369071"
+grid_capital <- ogc_get_statfi_statistical_grid(
+  year = 2021,
+  resolution = 1000,
+  bbox = bbox_capital_region
+)
+```
+
+Visualize the grid data:
+
+``` r
+ggplot(grid_capital) +
+  geom_sf(aes(fill = total_count), color = NA) +
+  scale_fill_viridis_c(option = "magma", trans='sqrt') +
+  theme_minimal() +
+  labs(title = "Population by 1km Grid Cells (2021)", fill = "Population")
+```
+
+## Advanced Features
+
+### Pagination
+
+When `limit = NULL`, the
+[`fetch_ogc_api_statfi()`](https://ropengov.github.io/geofi/reference/fetch_ogc_api_statfi.md)
+function automatically paginates through large datasets, fetching up to
+10,000 features per request. This ensures all available data is
+retrieved, even for large administrative or grid datasets.
+
+### Error Handling
+
+The package includes robust error handling:
+
+- Validates inputs (e.g., year, scale, tessellation, CRS, bounding box
+  format).
+- Provides informative error messages for API failures or invalid
+  responses.
+- Returns `NULL` with a warning if no data is retrieved, helping users
+  diagnose issues.
+
+### Coordinate Reference Systems
+
+The functions support two CRS options:
+
+- **EPSG:3067** (ETRS89 / TM35FIN): The default for Finnish spatial
+  data, suitable for local analyses.
+- **EPSG:4326** (WGS84): Useful for global compatibility or web mapping.
+
+Note that
+[`ogc_get_statfi_statistical_grid()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_statistical_grid.md)
+is fixed to EPSG:3067, as per the API’s design.
+
+### Bounding Box Filtering
+
+The `bbox` parameter allows spatial filtering to focus on specific
+regions. Bounding box coordinates in EPSG:4326 will work with both crs
+EPSG:4326 and EPSG:3067. Bounding box in EPSG:3067 requires crs to be
+also set to EPSG:3067 with the function argument. Example format:
+`"18.797607,59.573288,30.476074,61.695082"`.
+
+## Best Practices
+
+- **Test with Limits**: For large datasets (e.g., 1km grids), start with
+  a small `limit` or `bbox` to estimate runtime before fetching all
+  features.
+- **CRS Selection**: Use `EPSG:3067` for Finnish data unless you need
+  `EPSG:4326` for compatibility with other systems.
+- *Check Tessellation Types*: Verify valid `tessellation` options
+  (`kunta`, `hyvinvointialue`, etc.) when using
+  [`ogc_get_statfi_area()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_area.md).
+- *Inspect Output*: Population data from
+  [`ogc_get_statfi_area_pop()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_area_pop.md)
+  and
+  [`ogc_get_statfi_statistical_grid()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_statistical_grid.md)
+  is pivoted into wide format. Check column names to identify available
+  variables.
+
+## Additional Resources
+
+- [Statistics Finland Geoserver](https://geo.stat.fi/inspire/):
+  Documentation for the OGC API.
+- [geofi GitHub Repository](https://github.com/rOpenGov/geofi): Source
+  code and issue tracker.
+- [sf Package Documentation](https://r-spatial.github.io/sf/): For
+  working with sf objects.
+- [ggplot2 Documentation](https://ggplot2.tidyverse.org/): For
+  visualizing spatial data.
+
+## Conclusion
+
+The `geofi` package simplifies access to Statistics Finland’s spatial
+and population data, enabling analyses of administrative boundaries,
+population distributions, and grid-based statistics. With no API key
+required, users can quickly retrieve and visualize data using `sf` and
+`ggplot2`. Try the examples above to explore Finland’s spatial and
+demographic datasets!

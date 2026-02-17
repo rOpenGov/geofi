@@ -1,0 +1,240 @@
+# Accessing Data from NLS OGC api
+
+## Introduction
+
+The `geofi` package provides tools to access spatial data from the
+**Maastotietokanta** (Topographic Database) and **Geographic Names**
+(Nimistö) datasets provided by the National Land Survey of Finland (NLS)
+via their OGC API. This vignette demonstrates how to use the package’s
+core functions to:
+
+- List available collections in the Maastotietokanta.
+- Download specific collections of spatial data.
+- Query geographic place names with flexible filtering options.
+
+The package handles API authentication, pagination, spatial filtering,
+and coordinate reference system (CRS) transformations, making it easy to
+work with Finnish spatial data in R.
+
+To use the package, you need an **API key** from the National Land
+Survey of Finland. Visit [their
+website](https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje)
+to obtain one. Once you have the key, set it in R using:
+
+``` r
+options(geofi_mml_api_key = "your_api_key_here")
+```
+
+## Package Overview
+
+The `geofi` package includes the following key functions:
+
+- [`ogc_get_maastotietokanta_collections()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta_collections.md):
+  Retrieves a list of available collections from the Maastotietokanta,
+  including their titles and descriptions.
+- [`ogc_get_maastotietokanta()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta.md):
+  Downloads a specific collection from the Maastotietokanta, with
+  options for CRS, spatial filtering, and pagination.
+- [`ogc_get_nimisto()`](https://ropengov.github.io/geofi/reference/ogc_get_nimisto.md):
+  Queries the Geographic Names dataset, allowing filtering by search
+  string, bounding box, and other parameters.
+- [`fetch_ogc_api_mml()`](https://ropengov.github.io/geofi/reference/fetch_ogc_api_mml.md):
+  An internal function that handles low-level API requests and
+  pagination (not typically called directly by users).
+
+All functions return spatial data as `sf` objects, compatible with the
+`sf` package for spatial analysis and visualization.
+
+## Step 1: Listing Available Collections
+
+To explore the datasets available in the Maastotietokanta, use
+[`ogc_get_maastotietokanta_collections()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta_collections.md).
+This function queries the OGC API and returns a data frame with
+collection IDs and descriptions.
+
+``` r
+collections <- ogc_get_maastotietokanta_collections()
+head(collections)
+```
+
+This list helps you identify the `collection` parameter needed for
+[`ogc_get_maastotietokanta()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta.md).
+
+## Step 2: Downloading a Maastotietokanta Collection
+
+The
+[`ogc_get_maastotietokanta()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta.md)
+function downloads a specific collection as an `sf` object. You can
+customize the output with parameters like:
+
+- `collection`: The name of the collection (e.g., “`hautausmaa`” for
+  cemeteries).
+- `crs`: The coordinate reference system (EPSG:3067 or EPSG:4326).
+- `limit`: Maximum number of features per request (or `NULL` to fetch
+  all).
+- `bbox`: A bounding box for spatial filtering (in EPSG:4326).
+- `max_pages`: Maximum number of pages to fetch when paginating.
+
+### Example: Downloading Cemeteries
+
+Let’s download the “`hautausmaa`” collection in the default CRS
+(EPSG:3067):
+
+``` r
+cemeteries <- ogc_get_maastotietokanta(collection = "hautausmaa", crs = 4326)
+cemeteries
+```
+
+### Example: Spatial Filtering with a Bounding Box
+
+To download cemeteries within a specific area (e.g., around Helsinki),
+use the `bbox` parameter. Coordinates must be in EPSG:4326 (WGS84).
+
+``` r
+cemeteries_helsinki <- ogc_get_maastotietokanta(
+  collection = "hautausmaa",
+  bbox = "24.5,60.1,25.5,60.5",
+  crs = 4326
+)
+```
+
+Visualize the results using `ggplot2`:
+
+``` r
+ggplot(cemeteries_helsinki) +
+  geom_sf() +
+  theme_minimal() +
+  labs(title = "Cemeteries near Helsinki")
+```
+
+### Example: Handling Large Collections
+
+For large collections like “`suo`” (bogs/marshes), you may need to
+increase `max_pages` to fetch all features:
+
+``` r
+bogs <- ogc_get_maastotietokanta(
+  collection = "suo",
+  max_pages = 15
+)
+```
+
+**Note**: Large collections may take significant time to download. If
+`max_pages` is reached, a warning will indicate that additional features
+may exist.
+
+## Step 3: Querying Geographic Names
+
+The
+[`ogc_get_nimisto()`](https://ropengov.github.io/geofi/reference/ogc_get_nimisto.md)
+function retrieves place names from the Geographic Names dataset. You
+can filter results by:
+
+- `search_string`: A case-insensitive search term (e.g., “`kainu`”).
+- `bbox`: A bounding box for spatial filtering.
+- `limit`: Maximum number of features to retrieve.
+- `crs`: Output CRS (EPSG:3067 or EPSG:4326).
+
+### Example: Searching for Place Names
+
+Search for place names containing “`kainu`”:
+
+``` r
+kainu_places <- ogc_get_nimisto(search_string = "kainu")
+print(kainu_places)
+```
+
+Visualize the results:
+
+``` r
+ggplot(kainu_places) +
+  geom_sf() +
+  geom_sf_text(aes(label = spelling), size = 3, check_overlap = TRUE) +
+  theme_minimal() +
+  labs(title = "Place Names Containing 'Kainu'")
+```
+
+### Example: Combining Search and Spatial Filtering
+
+Search for “kainu\*” (with \* wildcard) within a bounding box covering
+most part of Kainuu-region:
+
+``` r
+kainu_bbox <- ogc_get_nimisto(
+  search_string = "kainu*",
+  bbox = "27.515259,63.450509,30.531006,64.524823",
+  crs = 4326
+)
+```
+
+## Advanced Features
+
+### Pagination
+
+When `limit = NULL` in
+[`ogc_get_maastotietokanta()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta.md)
+or
+[`ogc_get_nimisto()`](https://ropengov.github.io/geofi/reference/ogc_get_nimisto.md),
+the package automatically paginates through large datasets. The
+[`fetch_ogc_api_mml()`](https://ropengov.github.io/geofi/reference/fetch_ogc_api_mml.md)
+function handles this internally, attempting to fetch all features in
+one request (`limit=-1`) or falling back to paginated requests if
+needed. Use `max_pages` to control the maximum number of pages fetched.
+
+### Error Handling
+
+The package includes robust error handling:
+
+- Validates inputs (e.g., API key, CRS, bounding box format).
+- Retries failed requests up to 3 times for transient network issues.
+- Handles HTTP 429 (rate limit) errors by respecting the Retry-After
+  header.
+- Provides informative error messages for API failures or invalid
+  responses.
+
+### Custom Parameters
+
+Function
+[`ogc_get_nimisto()`](https://ropengov.github.io/geofi/reference/ogc_get_nimisto.md)
+support `custom_params` for advanced API queries. For example:
+
+``` r
+swimming_beaches_filtered_by_municipality_number <- ogc_get_nimisto(
+  search_string = "*uimaranta*",
+  custom_params = "municipality=091"
+)
+swimming_beaches_filtered_by_municipality_number
+```
+
+Consult the [NLS OGC API
+documentation](https://www.maanmittauslaitos.fi/nimiston-kyselypalvelu-ogc-api/tekninen-kuvaus)
+for valid parameters.
+
+## Best Practices
+
+- **API Key Management**: Store your API key securely using
+  `options(geofi_mml_api_key = "your_key")` rather than hardcoding it in
+  scripts.
+- **Large Datasets**: For collections like “`suo`”, test with a small
+  `limit` or `bbox` to estimate runtime before fetching all features.
+- **CRS Selection**: Use EPSG:3067 (ETRS-TM35FIN) for Finnish data
+  unless you need WGS84 (EPSG:4326) for compatibility with other
+  systems.
+- **Check Available Collections**: Always use
+  [`ogc_get_maastotietokanta_collections()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta_collections.md)
+  to verify collection names before downloading.
+
+## Additional Resources
+
+- Maastotietokanta Product Description
+- Geographic Names Product Description
+- NLS API Key Instructions
+
+## Conclusion
+
+The `geofi` package simplifies access to the Maastotietokanta and
+Geographic Names datasets, enabling spatial analysis of Finnish
+topographic and place name data. By handling API requests, pagination,
+and CRS transformations, it allows users to focus on data analysis and
+visualization. Try the examples above and explore the datasets to
+uncover insights about Finland’s geography!

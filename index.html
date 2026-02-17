@@ -11,10 +11,10 @@
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
-<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="katex-auto.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/B612_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access Finnish Geospatial Data">
 <meta name="description" content="Designed to simplify geospatial data access from the Statistics Finland Web Feature Service API &lt;https://geo.stat.fi/geoserver/index.html&gt;, the geofi package offers researchers and analysts a set of tools to obtain and harmonize administrative spatial data for a wide range of applications, from urban planning to environmental research. The package contains annually updated time series of municipality key datasets that can be used for data aggregation and language translations.">
@@ -23,16 +23,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@rOpenGov">
 <meta name="twitter:site" content="@rOpenGov">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=B612+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Roboto+Mono:ital,wght@0,100..700;1,100..700&amp;display=swap" rel="stylesheet">
 <!-- rogtemplate style sheet --><link href="BS5/rogtemplate.min.css" rel="stylesheet">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="index.html">geofi</a>
 
@@ -101,7 +98,7 @@
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html" class="external-link">theme_set</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"Arial"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>        axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -171,7 +168,9 @@ https://github.com/rOpenGov/geofi</code></pre>
 <li><a href="https://cloud.r-project.org/package=geofi" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/rOpenGov/geofi/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/rOpenGov/geofi/issues" class="external-link">Report a bug</a></li>
-<li><a href="https://ropengov.org/" class="external-link">Part of <img src="https://raw.githubusercontent.com/rOpenGov/homepage/master/static/images/logo2020_black_orange.svg" height="20" class="d-inline-block mx-1 rog-logo"></a></li>
+<li>
+<a href="https://ropengov.org/" class="external-link">Part of<span class="mini_logo ms-2">r<img src="rog_logo.svg" height="20" alt="rOpenGov logo" class="round-logo">penGov</span></a>
+</li>
 </ul>
 </div>
 
@@ -222,11 +221,11 @@ https://github.com/rOpenGov/geofi</code></pre>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Markus Kainu, Joona Lehtomaki, Leo Lahti.</p>
+  <p>Developed by Markus Kainu, Joona Lehtomaki, Leo Lahti. <br>Part of <a href="http://ropengov.org/" class="external-link"><img src="https://ropengov.github.io/rogtemplate/logo2020_white_orange.svg" height="20" class="d-inline-block mx-1 rog-logo" alt="rOpenGov R package for open government data analytics"></a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
@@ -234,7 +233,7 @@ https://github.com/rOpenGov/geofi</code></pre>
 
 
 
-    <!-- Add ropengov logo -->
-  <script src="BS5/logo.js"></script>
-</body>
+
+
+  </body>
 </html>

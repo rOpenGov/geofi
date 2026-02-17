@@ -1,0 +1,296 @@
+# geofi - Access Finnish Geospatial Data
+
+Access Finnish Geospatial Data.
+
+## Installation and use
+
+``` r
+# install from CRAN
+install.packages("geofi")
+
+# Install development version from GitHub
+remotes::install_github("ropengov/geofi")
+```
+
+With `geofi`-package you can download geospatial data on municipalities,
+zipcodes and population and statistical grids from Statistics Finland
+[WFS-api](https://stat.fi/org/avoindata/paikkatietoaineistot_en.html).
+In addition, you have on-board municipality keys for aggregating
+municipality-level data into higher level regional distributions based
+Statistics Finland [classification
+API](https://data.stat.fi/api/classifications/v2/).
+
+Below are few examples of the data you can access using `geofi`. Please
+have a closer look at the
+[vignettes](https://ropengov.github.io/geofi/articles/index.html) for
+more comprehensive use cases.
+
+``` r
+library(geofi)
+d1 <- get_municipalities(year = 2025)
+d2 <- get_zipcodes(year = 2025)
+d3 <- get_statistical_grid(resolution = 5)
+d4 <- get_population_grid(resolution = 5)
+d5 <- municipality_central_localities()
+
+library(ggplot2)
+library(dplyr)
+theme_set(
+  theme_minimal(base_family = "Arial") +
+  theme(legend.position= "none",
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank()
+        )
+)
+p1 <- ggplot(d1, aes(fill = kunta)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "municipalities")
+p2 <- ggplot(d1 |> count(maakunta_code), aes(fill = maakunta_code)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "Aggregated municipality data \nat region (maakunta) level \n(one of many!)")
+p3 <- ggplot(d2, aes(fill = as.integer(posti_alue))) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "zipcodes")
+p4 <- ggplot(d3, aes(fill = nro)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "statistical grid")
+p5 <- ggplot(d4, aes(fill = id_nro)) + geom_sf(colour = alpha("white", 1/3)) + labs(subtitle = "population grid")
+p6 <- ggplot(d5, aes(color = as.integer(kuntatunnus))) + geom_sf() + labs(subtitle = "Central municipality localities")
+
+library(patchwork)
+wrap_plots(list(p1,p2,p3,p4,p5,p6), ncol = 3) + 
+  patchwork::plot_annotation(title = "Spatial data in geofi-package")
+```
+
+![](reference/figures/readme_map-1.png)
+
+### Contribute
+
+Contributions are very welcome:
+
+- [Use issue tracker](https://github.com/ropengov/geofi/issues) for
+  feedback and bug reports.
+- [Send pull requests](https://github.com/ropengov/geofi/)
+- [Star us on the Github page](https://github.com/ropengov/geofi/)
+
+### Acknowledgements
+
+**Kindly cite this work** as follows:
+
+``` text
+citation("geofi")
+Kindly cite the geofi R package as follows:
+
+To cite 'geofi' in publications use:
+
+  Kainu M, Lehtomaki J, Parkkinen J, Miettinen J, Kantanen P, Vesanen
+  S, Lahti L (2025). _geofi: Access Finnish Geospatial Data_.
+  doi:10.32614/CRAN.package.geofi
+  <https://doi.org/10.32614/CRAN.package.geofi>, R package version
+  1.1.0, <https://github.com/rOpenGov/geofi>.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{R-geofi,
+    title = {{geofi: Access Finnish Geospatial Data}},
+    doi = {10.32614/CRAN.package.geofi},
+    author = {Markus Kainu and Joona Lehtomaki and Juuso Parkkinen and Jani Miettinen and Pyry Kantanen and Sampo Vesanen and Leo Lahti},
+    year = {2025},
+    version = {1.1.0},
+    note = {R package version 1.1.0},
+    url = {https://github.com/rOpenGov/geofi},
+  }
+
+Many thanks for all contributors! For more info, see:
+https://github.com/rOpenGov/geofi
+```
+
+We are grateful to all
+[contributors](https://github.com/rOpenGov/geofi/graphs/contributors).
+This project is part of [rOpenGov](https://ropengov.org).
+
+# Package index
+
+## Statistics Finland API functions
+
+Functions for using Statistics Finland WFS and OGC API features services
+
+- [`get_municipalities()`](https://ropengov.github.io/geofi/reference/get_municipalities.md)
+  : Get Finnish municipality (multi)polygons for different years and/or
+  scales.
+
+- [`get_zipcodes()`](https://ropengov.github.io/geofi/reference/get_zipcodes.md)
+  : Get Finnish zip code (multi)polygons for different years.
+
+- [`get_population_grid()`](https://ropengov.github.io/geofi/reference/get_population_grid.md)
+  :
+
+  Get Finnish Population grid in two different resolutions for years
+  2010-2022 Thin wrapper around Finnish population grid data provided by
+  [Statistics
+  Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
+
+- [`get_statistical_grid()`](https://ropengov.github.io/geofi/reference/get_statistical_grid.md)
+  : Get Statistical grid data polygons at two different resolution
+
+- [`get_municipality_pop()`](https://ropengov.github.io/geofi/reference/get_municipality_pop.md)
+  : Get Number of population by Finnish municipality (multi)polygons for
+  different years.
+
+- [`ogc_get_statfi_area()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_area.md)
+  : Retrieve Finnish Administrative Area Polygons
+
+- [`ogc_get_statfi_area_pop()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_area_pop.md)
+  : Retrieve Finnish Administrative Area Polygons with Population Data
+
+- [`ogc_get_statfi_statistical_grid()`](https://ropengov.github.io/geofi/reference/ogc_get_statfi_statistical_grid.md)
+  : Retrieve Finnish Statistical Grid with Population Data
+
+## National Land Survey API functions
+
+Functions for using National Land survey OGC API features services
+
+- [`municipality_central_localities()`](https://ropengov.github.io/geofi/reference/municipality_central_localities.md)
+  : Get up-to-date municipality central locations
+- [`ogc_get_maastotietokanta_collections()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta_collections.md)
+  : Fetch Maastotietokanta Collections
+- [`ogc_get_maastotietokanta()`](https://ropengov.github.io/geofi/reference/ogc_get_maastotietokanta.md)
+  : Download a Collection from the Maastotietokanta (Topographic
+  Database)
+- [`ogc_get_nimisto()`](https://ropengov.github.io/geofi/reference/ogc_get_nimisto.md)
+  : Query Geographic Names (Nimistö) from the National Land Survey of
+  Finland
+- [`geocode()`](https://ropengov.github.io/geofi/reference/geocode.md) :
+  Geocode Finnish Place Names or Street Addresses
+- [`geocode_reverse()`](https://ropengov.github.io/geofi/reference/geocode_reverse.md)
+  : Reverse Geocode Geographic Locations into Finnish Place Names or
+  Addresses
+
+## Data
+
+geofi comes with a timeseries of built-in municipality keys that can be
+used to aggregate municipality level data (`municipality_key_*`) and
+`municipality_central_localities` data containing point locations for
+cental locality of each municipality
+
+- [`municipality_key`](https://ropengov.github.io/geofi/reference/municipality_key.md)
+  : Aggregated municipality key table for years 2013-2025
+- [`municipality_key_2025`](https://ropengov.github.io/geofi/reference/municipality_key_2025.md)
+  : Municipality key table for 2025
+- [`municipality_key_2024`](https://ropengov.github.io/geofi/reference/municipality_key_2024.md)
+  : Municipality key table for 2024
+- [`municipality_key_2023`](https://ropengov.github.io/geofi/reference/municipality_key_2023.md)
+  : Municipality key table for 2023
+- [`municipality_key_2022`](https://ropengov.github.io/geofi/reference/municipality_key_2022.md)
+  : Municipality key table for 2022
+- [`municipality_key_2021`](https://ropengov.github.io/geofi/reference/municipality_key_2021.md)
+  : Municipality key table for 2021
+- [`municipality_key_2020`](https://ropengov.github.io/geofi/reference/municipality_key_2020.md)
+  : Municipality key table for 2020
+- [`municipality_key_2019`](https://ropengov.github.io/geofi/reference/municipality_key_2019.md)
+  : Municipality key table for 2019
+- [`municipality_key_2018`](https://ropengov.github.io/geofi/reference/municipality_key_2018.md)
+  : Municipality key table for 2018
+- [`municipality_key_2017`](https://ropengov.github.io/geofi/reference/municipality_key_2017.md)
+  : municipality_key_2017
+- [`municipality_key_2016`](https://ropengov.github.io/geofi/reference/municipality_key_2016.md)
+  : municipality_key_2016
+- [`municipality_key_2015`](https://ropengov.github.io/geofi/reference/municipality_key_2015.md)
+  : municipality_key_2015
+- [`municipality_key_2014`](https://ropengov.github.io/geofi/reference/municipality_key_2014.md)
+  : municipality_key_2014
+- [`municipality_key_2013`](https://ropengov.github.io/geofi/reference/municipality_key_2013.md)
+  : municipality_key_2013
+
+## Geofacet grids
+
+geofi comes with a selection of built-in grids to used with
+geofacet-packages, a ggplot2 extension. All grids are based on the
+latest municipality breakdown
+
+- [`grid_ahvenanmaa`](https://ropengov.github.io/geofi/reference/grid_ahvenanmaa.md)
+  : custom geofacet grid for Ahvenanmaa region
+- [`grid_etela_karjala`](https://ropengov.github.io/geofi/reference/grid_etela_karjala.md)
+  : custom geofacet grid for Etelä-Karjala region as in 2020
+- [`grid_etela_pohjanmaa`](https://ropengov.github.io/geofi/reference/grid_etela_pohjanmaa.md)
+  : custom geofacet grid for Etelä-Pohjanmaa
+- [`grid_etela_savo`](https://ropengov.github.io/geofi/reference/grid_etela_savo.md)
+  : custom geofacet grid for Etelä-Savo
+- [`grid_hyvinvointialue`](https://ropengov.github.io/geofi/reference/grid_hyvinvointialue.md)
+  : custom geofacet grid for Wellbeing services counties
+- [`grid_kainuu`](https://ropengov.github.io/geofi/reference/grid_kainuu.md)
+  : custom geofacet grid for Kainuu region
+- [`grid_kanta_hame`](https://ropengov.github.io/geofi/reference/grid_kanta_hame.md)
+  : custom geofacet grid for Kanta-Häme region
+- [`grid_keski_pohjanmaa`](https://ropengov.github.io/geofi/reference/grid_keski_pohjanmaa.md)
+  : custom geofacet grid for Keski-Pohjanmaa region
+- [`grid_keski_suomi`](https://ropengov.github.io/geofi/reference/grid_keski_suomi.md)
+  : custom geofacet grid for Keski-Suomi region as in 2020
+- [`grid_kymenlaakso`](https://ropengov.github.io/geofi/reference/grid_kymenlaakso.md)
+  : custom geofacet grid for Kymenlaakso region
+- [`grid_lappi`](https://ropengov.github.io/geofi/reference/grid_lappi.md)
+  : custom geofacet grid for Lappi region as in 2020
+- [`grid_maakunta`](https://ropengov.github.io/geofi/reference/grid_maakunta.md)
+  : custom geofacet grid for regions
+- [`grid_paijat_hame`](https://ropengov.github.io/geofi/reference/grid_paijat_hame.md)
+  : custom geofacet grid for Päijät-Häme region
+- [`grid_pirkanmaa`](https://ropengov.github.io/geofi/reference/grid_pirkanmaa.md)
+  : custom geofacet grid for Pirkanmaa region
+- [`grid_pohjanmaa`](https://ropengov.github.io/geofi/reference/grid_pohjanmaa.md)
+  : custom geofacet grid for Pohjanmaa region
+- [`grid_pohjois_karjala`](https://ropengov.github.io/geofi/reference/grid_pohjois_karjala.md)
+  : custom geofacet grid for Pohjois-Karjala region
+- [`grid_pohjois_pohjanmaa`](https://ropengov.github.io/geofi/reference/grid_pohjois_pohjanmaa.md)
+  : custom geofacet grid for Pohjois-Pohjanmaa region
+- [`grid_pohjois_savo`](https://ropengov.github.io/geofi/reference/grid_pohjois_savo.md)
+  : custom geofacet grid for Pohjois-Savo region
+- [`grid_sairaanhoitop`](https://ropengov.github.io/geofi/reference/grid_sairaanhoitop.md)
+  : custom geofacet grid for health care districts
+- [`grid_satakunta`](https://ropengov.github.io/geofi/reference/grid_satakunta.md)
+  : custom geofacet grid for Satakunta region
+- [`grid_uusimaa`](https://ropengov.github.io/geofi/reference/grid_uusimaa.md)
+  : custom geofacet grid for Uusimaa region
+- [`grid_varsinais_suomi`](https://ropengov.github.io/geofi/reference/grid_varsinais_suomi.md)
+  : custom geofacet grid for Varsinais-Suomi region
+
+## Attribute data
+
+geofi comes with a three statistical datasets that are used in vignettes
+
+- [`sotkadata_population`](https://ropengov.github.io/geofi/reference/sotkadata_population.md)
+  : Municipality level population data from Sotkanet
+- [`sotkadata_swedish_speaking_pop`](https://ropengov.github.io/geofi/reference/sotkadata_swedish_speaking_pop.md)
+  : Municipality level Swedish speaking population numbers from Sotkanet
+- [`statfi_zipcode_population`](https://ropengov.github.io/geofi/reference/statfi_zipcode_population.md)
+  : Zipcode level population data from Statistics Finland
+- [`municipality_central_localities_df`](https://ropengov.github.io/geofi/reference/municipality_central_localities_df.md)
+  : A data frame containing locations of municipalities central
+  localities
+
+## Miscellaneous
+
+Support functions for API functions and spatial data transformations
+
+- [`convert_municipality_key_codes()`](https://ropengov.github.io/geofi/reference/convert_municipality_key_codes.md)
+  : Convert regional codes in on-board municipality key data sets into
+  variable length characters
+- [`check_api_access()`](https://ropengov.github.io/geofi/reference/check_api_access.md)
+  : Check Access to Statistics Finland Geoserver APIs
+- [`wfs_api()`](https://ropengov.github.io/geofi/reference/wfs_api.md) :
+  WFS API
+- [`to_sf()`](https://ropengov.github.io/geofi/reference/to_sf.md) :
+  Transform a wfs_api object into a sf object.
+
+# Articles
+
+### All vignettes
+
+- [Datasets in
+  geofi-package](https://ropengov.github.io/geofi/articles/geofi_datasets.md):
+- [Geocoding and Reverse Geocoding with the geofi
+  Package](https://ropengov.github.io/geofi/articles/geofi_geocoding.md):
+- [Joining attribute data with geofi
+  data](https://ropengov.github.io/geofi/articles/geofi_joining_attribute_data.md):
+- [Making maps using
+  geofi-package](https://ropengov.github.io/geofi/articles/geofi_making_maps.md):
+- [Accessing Data from NLS OGC
+  api](https://ropengov.github.io/geofi/articles/geofi_nls_ogc.md):
+- [Spatial data manipulation and analysis using R and
+  geofi-package](https://ropengov.github.io/geofi/articles/geofi_spatial_analysis.md):
+- [Accessing Data from Statistics Finland OGC
+  api](https://ropengov.github.io/geofi/articles/geofi_statfi_ogc.md):
+- [Publications using the geofi R
+  package](https://ropengov.github.io/geofi/articles/Publications-using-the-geofi-R-package.md):

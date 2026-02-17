@@ -11,22 +11,19 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/B612_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Datasets in geofi-package">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=B612+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Roboto+Mono:ital,wght@0,100..700;1,100..700&amp;display=swap" rel="stylesheet">
 <!-- rogtemplate style sheet --><link href="../BS5/rogtemplate.min.css" rel="stylesheet">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
@@ -74,7 +71,7 @@
                         <h4 data-toc-skip class="author">Markus Kainu,
 Leo Lahti &amp; Joona Lehtomäki</h4>
             
-            <h4 data-toc-skip class="date">2025-05-05</h4>
+            <h4 data-toc-skip class="date">2026-02-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/master/vignettes/geofi_datasets.Rmd" class="external-link"><code>vignettes/geofi_datasets.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_datasets.Rmd</code></div>
@@ -214,7 +211,7 @@ as value for <code>scale</code>-argument, respectively.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">municipalities</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_municipalities.html">get_municipalities</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2023</span>, scale <span class="op">=</span> <span class="fl">4500</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">municipalities</span><span class="op">[</span><span class="st">"municipality_name_fi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/municipality_map-1.png" width="300"></p>
+<p><img src="geofi_datasets_files/figure-html/municipality_map-1.png" class="r-plt" alt="" width="300"></p>
 </div>
 <div class="section level3">
 <h3 id="municipality-borders-with-population">Municipality borders with population<a class="anchor" aria-label="anchor" href="#municipality-borders-with-population"></a>
@@ -237,7 +234,7 @@ municipality borders) you can simply to this.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_municipality_pop.html">get_municipality_pop</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="va">miehet_p</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/muni_pop_map1-1.png" width="300"></p>
+<p><img src="geofi_datasets_files/figure-html/muni_pop_map1-1.png" class="r-plt" alt="" width="300"></p>
 <p>Aggregating the absolute population numbers is straightforward: to
 plot population at Wellbeing service county level you can do.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -246,7 +243,7 @@ plot population at Wellbeing service county level you can do.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>vaesto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">vaesto</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">vaesto</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/muni_pop_map2-1.png" width="300"></p>
+<p><img src="geofi_datasets_files/figure-html/muni_pop_map2-1.png" class="r-plt" alt="" width="300"></p>
 <p>To plot the men’s share at wellbeing service country level you have
 to add one more step</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -257,7 +254,7 @@ to add one more step</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>share <span class="op">=</span> <span class="va">miehet</span><span class="op">/</span><span class="va">vaesto</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">share</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/muni_pop_map3-1.png" width="300"></p>
+<p><img src="geofi_datasets_files/figure-html/muni_pop_map3-1.png" class="r-plt" alt="" width="300"></p>
 </div>
 <div class="section level3">
 <h3 id="zipcodes">Zipcodes<a class="anchor" aria-label="anchor" href="#zipcodes"></a>
@@ -266,7 +263,7 @@ to add one more step</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">zipcodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_zipcodes.html">get_zipcodes</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2023</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">zipcodes</span><span class="op">[</span><span class="st">"nimi"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/zipcode_map-1.png" width="300"></p>
+<p><img src="geofi_datasets_files/figure-html/zipcode_map-1.png" class="r-plt" alt="" width="300"></p>
 </div>
 <div class="section level3">
 <h3 id="statistical-grid">Statistical grid<a class="anchor" aria-label="anchor" href="#statistical-grid"></a>
@@ -280,7 +277,7 @@ nets.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stat_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_statistical_grid.html">get_statistical_grid</a></span><span class="op">(</span>resolution <span class="op">=</span> <span class="fl">5</span>, auxiliary_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">stat_grid</span><span class="op">[</span><span class="st">"euref_x"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/statisticsl_grid_data-1.png" width="300"></p>
+<p><img src="geofi_datasets_files/figure-html/statisticsl_grid_data-1.png" class="r-plt" alt="" width="300"></p>
 </div>
 <div class="section level3">
 <h3 id="population-grid">Population grid<a class="anchor" aria-label="anchor" href="#population-grid"></a>
@@ -302,7 +299,7 @@ analysis.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pop_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_population_grid.html">get_population_grid</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, resolution <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pop_grid</span><span class="op">[</span><span class="st">"kunta"</span><span class="op">]</span>, border <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/population_grid_data-1.png" width="300"></p>
+<p><img src="geofi_datasets_files/figure-html/population_grid_data-1.png" class="r-plt" alt="" width="300"></p>
 </div>
 <div class="section level3">
 <h3 id="central-localities-of-municipalities">Central localities of municipalities<a class="anchor" aria-label="anchor" href="#central-localities-of-municipalities"></a>
@@ -314,7 +311,7 @@ access the locations of central localities of each municipality in
 Finland.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/municipality_central_localities.html">municipality_central_localities</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="st">"teksti"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/central_localities-1.png" width="300"></p>
+<p><img src="geofi_datasets_files/figure-html/central_localities-1.png" class="r-plt" alt="" width="300"></p>
 </div>
 </div>
 <div class="section level2">
@@ -386,11 +383,11 @@ of geofi package as <code><a href="../reference/sotkadata_population.html">geofi
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">population</span><span class="op">/</span><span class="fl">1000</span>, group <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/geofacet/man/facet_geo.html" class="external-link">facet_geo</a></span><span class="op">(</span>facets <span class="op">=</span> <span class="op">~</span><span class="va">name</span>, grid <span class="op">=</span> <span class="va">grid_maakunta</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://hafen.github.io/geofacet/reference/facet_geo.html" class="external-link">facet_geo</a></span><span class="op">(</span>facets <span class="op">=</span> <span class="op">~</span><span class="va">name</span>, grid <span class="op">=</span> <span class="va">grid_maakunta</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_x_discrete</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq.int</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">2000</span>, to <span class="op">=</span> <span class="fl">2023</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">sotkadata</span><span class="op">$</span><span class="va">indicator.title.fi</span><span class="op">)</span>, y <span class="op">=</span> <span class="st">"%"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_datasets_files/figure-html/geofacet-1.png" width="750"></p>
+<p><img src="geofi_datasets_files/figure-html/geofacet-1.png" class="r-plt" alt="" width="750"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -399,11 +396,11 @@ of geofi package as <code><a href="../reference/sotkadata_population.html">geofi
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Markus Kainu, Joona Lehtomaki, Leo Lahti.</p>
+  <p>Developed by Markus Kainu, Joona Lehtomaki, Leo Lahti. <br>Part of <a href="http://ropengov.org/" class="external-link"><img src="https://ropengov.github.io/rogtemplate/logo2020_white_orange.svg" height="20" class="d-inline-block mx-1 rog-logo" alt="rOpenGov R package for open government data analytics"></a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
@@ -411,7 +408,7 @@ of geofi package as <code><a href="../reference/sotkadata_population.html">geofi
 
 
 
-    <!-- Add ropengov logo -->
-  <script src="../BS5/logo.js"></script>
-</body>
+
+
+  </body>
 </html>

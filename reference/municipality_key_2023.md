@@ -1,0 +1,286 @@
+# Municipality key table for 2023
+
+Table for aggregating municipality level data to various regional
+groupings
+
+## Usage
+
+``` r
+municipality_key_2023
+```
+
+## Format
+
+A data frame with 309 rows and 74 variables:
+
+- kunta:
+
+  Municipality code
+
+- municipality_name_fi:
+
+  Municipality name in Finnish
+
+- municipality_name_sv:
+
+  Municipality name in Swedish
+
+- municipality_name_en:
+
+  Municipality name in English
+
+- kuntaryhmitys_code:
+
+  Tilastollinen kuntaryhmitys (Statistical grouping) code
+
+- kuntaryhmitys_name_fi:
+
+  Tilastollinen kuntaryhmitys (Statistical grouping) name in Finnish
+
+- kuntaryhmitys_name_sv:
+
+  Tilastollinen kuntaryhmitys (Statistical grouping) name in Swedish
+
+- kuntaryhmitys_name_en:
+
+  Tilastollinen kuntaryhmitys (Statistical grouping) name in English
+
+- avi_code:
+
+  Aluehallintovirasto code (Regional State Administrative Agencies)
+
+- avi_name_fi:
+
+  Aluehallintovirasto name in Finnish (Regional State Administrative
+  Agencies)
+
+- avi_name_sv:
+
+  Aluehallintovirasto name in Finnish (Regional State Administrative
+  Agencies)
+
+- avi_name_en:
+
+  Aluehallintovirasto name in Finnish (Regional State Administrative
+  Agencies)
+
+- ely_code:
+
+  Elinkeino-, liikenne- ja ympäristökeskuksen code (Centre for Economic
+  Development, Transport and the Environment)
+
+- ely_name_fi:
+
+  Elinkeino-, liikenne- ja ympäristökeskuksen name in Finnish (Centre
+  for Economic Development, Transport and the Environment)
+
+- ely_name_sv:
+
+  Elinkeino-, liikenne- ja ympäristökeskuksen name in Swedish (Centre
+  for Economic Development, Transport and the Environment)
+
+- ely_name_en:
+
+  Elinkeino-, liikenne- ja ympäristökeskuksen name in English (Centre
+  for Economic Development, Transport and the Environment)
+
+- maakunta_code:
+
+  Maakunta code (Regions of Finland)
+
+- maakunta_name_fi:
+
+  Maakunta name in Finnish (Regions of Finland)
+
+- maakunta_name_sv:
+
+  Maakunta name in Swedish (Regions of Finland)
+
+- maakunta_name_en:
+
+  Maakunta name in English (Regions of Finland)
+
+- kielisuhde_code:
+
+  Kielisuhde code (Language distribution 2020)
+
+- kielisuhde_name_fi:
+
+  Kielisuhde name in Finnish (Language distribution 2020)
+
+- kielisuhde_name_sv:
+
+  Kielisuhde name in Swedish (Language distribution 2020)
+
+- kielisuhde_name_en:
+
+  Kielisuhde name in English (Language distribution 2020)
+
+- seutukunta_code:
+
+  Seutukunta code (Sub-regions of Finland)
+
+- seutukunta_name_fi:
+
+  Seutukunta name in Finnish (Sub-regions of Finland)
+
+- seutukunta_name_sv:
+
+  Seutukunta name in Swedish (Sub-regions of Finland)
+
+- seutukunta_name_en:
+
+  Seutukunta name in English (Sub-regions of Finland)
+
+- year:
+
+  data year
+
+- suuralue_code:
+
+  Suuralue code
+
+- suuralue_name_fi:
+
+  Suuralueen nimi in Finnish (Large Areas)
+
+- suuralue_name_sv:
+
+  Suuralueen nimi in Swedish (Large Areas)
+
+- suuralue_name_en:
+
+  Suuralueen nimi in English (Large Areas)
+
+- nuts1_code:
+
+  NUTS 2016 classification code (level 1)
+
+- nuts1_name_fi:
+
+  NUTS 2016 classification name in Finnish (level 1)
+
+- nuts1_name_sv:
+
+  NUTS 2016 classification name in Swedish (level 1)
+
+- nuts1_name_en:
+
+  NUTS 2016 classification name in English (level 1)
+
+- nuts2_code:
+
+  NUTS 2016 classification code (level 2)
+
+- nuts2_name_fi:
+
+  NUTS 2016 classification name in Finnish (level 2)
+
+- nuts2_name_sv:
+
+  NUTS 2016 classification name in Swedish (level 2)
+
+- nuts2_name_en:
+
+  nuts2_name_en
+
+- nuts3_code:
+
+  NUTS 2016 classification code (level 2)
+
+- nuts3_name_fi:
+
+  NUTS 2016 classification name in Finnish (level 3)
+
+- nuts3_name_sv:
+
+  NUTS 2016 classification name in Swedish (level 3)
+
+- nuts3_name_en:
+
+  NUTS 2016 classification name in English (level 3)
+
+- vaalipiiri_code:
+
+  Vaalipiiri code (Constituencies)
+
+- vaalipiiri_name_fi:
+
+  Vaalipiiri name in Finnish (Constituencies)
+
+- vaalipiiri_name_sv:
+
+  Vaalipiiri name in Swedish (Constituencies)
+
+- vaalipiiri_name_en:
+
+  Vaalipiiri name in English (Constituencies)
+
+- municipality_code:
+
+  Municipality code
+
+- kunta_name:
+
+  Municipality name in Finnish
+
+- name_fi:
+
+  Municipality name in Finnish
+
+- name_sv:
+
+  Municipality name in Finnish
+
+- yhteistyoalue_code:
+
+  Sosiaali- ja terveydenhuollon yhteistyöalueiden koodi (Collaborative
+  areas for healthcare and social welfare codes)
+
+- yhteistyoalue_name_fi:
+
+  Sosiaali- ja terveydenhuollon yhteistyöalueet
+
+- yhteistyoalue_name_sv:
+
+  Samarbetsområden för social- och hälsovården
+
+- yhteistyoalue_name_en:
+
+  Collaborative areas for healthcare and social welfare
+
+- tyossakayntial_code:
+
+  Työssäkäyntialue code
+
+- tyossakayntial_name_fi:
+
+  Työssäkäyntialue name in Finnish
+
+- tyossakayntial_name_sv:
+
+  Työssäkäyntialue name in Swedish
+
+- tyossakayntial_name_en:
+
+  Työssäkäyntialue name in English
+
+- hyvinvointialue_name_fi:
+
+  Hyvinvointialue name in Finnish (Wellbeing services counties)
+
+- hyvinvointialue_name_sv:
+
+  Hyvinvointialue name in Swedish (Wellbeing services counties)
+
+- hyvinvointialue_name_en:
+
+  Hyvinvointialue name in English (Wellbeing services counties)
+
+- hyvinvointialue_code:
+
+  Hyvinvointialue code (Wellbeing services counties)
+
+## Source
+
+<https://data.stat.fi/api/classifications/v2/classifications>

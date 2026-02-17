@@ -1,0 +1,55 @@
+# Get Number of population by Finnish municipality (multi)polygons for different years.
+
+Thin wrapper around Finnish zip code areas provided by [Statistics
+Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaesto_tilastointialueittain_en.html).
+
+## Usage
+
+``` r
+get_municipality_pop(year = 2022, codes_as_character = FALSE)
+```
+
+## Arguments
+
+- year:
+
+  A numeric for year of the administrative borders. Available are 2011,
+  2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 and 2022.
+
+- codes_as_character:
+
+  A logical determining if the region codes should be returned as
+  strings of equal width as originally provided by Statistics Finland
+  instead of integers.
+
+## Value
+
+sf object
+
+## Details
+
+The number of population on the last day of the reference year combined
+with municipality borders from year after. Calling the function with
+year = 2019 returns population data from 2019-12-31 with spatial data
+from 2020.
+
+The statistical variables in the data are: total population (vaesto),
+share of the total population (vaesto_p), number of men (miehet), men's
+share of the population in an area (miehet_p) and women (naiset),
+women's share (naiset_p), those aged under 15: number (ika_0_14), share
+(ika_0_14p), those aged 15 to 64: number (ika_15_64), share
+(ika_15_64p), and aged 65 or over: number (ika_65\_), share (ika_65_p).
+
+## Author
+
+Markus Kainu <markus.kainu@kela.fi>, Joona Lehtomäki
+<joona.lehtomaki@iki.fi>
+
+## Examples
+
+``` r
+ if (FALSE) { # \dontrun{
+ f <- get_municipality_pop(year=2020)
+ plot(f)
+ } # }
+```

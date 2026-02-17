@@ -11,22 +11,19 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/B612_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Spatial data manipulation and analysis using R and geofi-package">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=B612+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Roboto+Mono:ital,wght@0,100..700;1,100..700&amp;display=swap" rel="stylesheet">
 <!-- rogtemplate style sheet --><link href="../BS5/rogtemplate.min.css" rel="stylesheet">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
@@ -74,7 +71,7 @@
                         <h4 data-toc-skip class="author">Markus
 Kainu</h4>
             
-            <h4 data-toc-skip class="date">2025-05-05</h4>
+            <h4 data-toc-skip class="date">2026-02-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/master/vignettes/geofi_spatial_analysis.Rmd" class="external-link"><code>vignettes/geofi_spatial_analysis.Rmd</code></a></small>
       <div class="d-none name"><code>geofi_spatial_analysis.Rmd</code></div>
@@ -139,7 +136,7 @@ reproject the municipality data to WGS 1984 (using EPSG code equivalent
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html" class="external-link">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Map of Finland in two different CRS"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/crss-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/crss-1.png" class="r-plt" alt="" width="525"></p>
 <p>You can see the that northern Finland is larger on the right and the
 grid below is different.</p>
 </div>
@@ -159,7 +156,7 @@ them by size and plotting largest/smalles 10 can be as this.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">name_fi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"largest 10"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/largest-1.png" width="375"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/largest-1.png" class="r-plt" alt="" width="375"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># smallest</span></span>
 <span><span class="va">muni</span> <span class="op">|&gt;</span> </span>
@@ -169,7 +166,7 @@ them by size and plotting largest/smalles 10 can be as this.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">name_fi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"smallest 10"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/largest-2.png" width="375"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/largest-2.png" class="r-plt" alt="" width="375"></p>
 </div>
 <div class="section level2">
 <h2 id="subsetting">Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
@@ -193,7 +190,7 @@ municipalities.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">point</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">teksti</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></span><span class="op">(</span><span class="va">greater_helsinki</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/subsetting-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/subsetting-1.png" class="r-plt" alt="" width="525"></p>
 <div class="section level3">
 <h3 id="subsetting-using-bounding-boxes">Subsetting using bounding boxes<a class="anchor" aria-label="anchor" href="#subsetting-using-bounding-boxes"></a>
 </h3>
@@ -205,7 +202,7 @@ box</a> from greater Helsinki polygons.</p>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html" class="external-link">st_intersection</a></span><span class="op">(</span><span class="va">bounding_box_polygon</span>, <span class="va">muni</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">point</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">teksti</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></span><span class="op">(</span><span class="va">greater_helsinki</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/bb_poly-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/bb_poly-1.png" class="r-plt" alt="" width="525"></p>
 <p>Then, let’s use the point data (municipality central localities) to
 create the bounding box</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -214,7 +211,7 @@ create the bounding box</p>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html" class="external-link">st_intersection</a></span><span class="op">(</span><span class="va">bounding_box_point</span>, <span class="va">muni</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">point</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">teksti</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></span><span class="op">(</span><span class="va">greater_helsinki</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/bb_point-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/bb_point-1.png" class="r-plt" alt="" width="525"></p>
 </div>
 <div class="section level3">
 <h3 id="subsetting-neigbours">Subsetting neigbours<a class="anchor" aria-label="anchor" href="#subsetting-neigbours"></a>
@@ -230,7 +227,7 @@ Helsinki and it’s neighbors.</p>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">muni</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">municipality_code</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">neigbour_codes</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">municipality_name_fi</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/neighbours-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/neighbours-1.png" class="r-plt" alt="" width="525"></p>
 </div>
 </div>
 <div class="section level2">
@@ -250,7 +247,7 @@ size categories based on area, dissolve them and plot.</p>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html" class="external-link">st_union</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/unioin-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/unioin-1.png" class="r-plt" alt="" width="525"></p>
 <p>To union all three into same data you can use <code>group_by</code>
 and <code>summarise</code></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -259,7 +256,7 @@ and <code>summarise</code></p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">area_class</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/union2-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/union2-1.png" class="r-plt" alt="" width="525"></p>
 </div>
 <div class="section level2">
 <h2 id="centroids-buffers-grids-and-voronois">Centroids, buffers, grids and voronois<a class="anchor" aria-label="anchor" href="#centroids-buffers-grids-and-voronois"></a>
@@ -283,7 +280,7 @@ with ggplot.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">muni_centroids</span>, color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># plot also the municipality_central_localities</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="../reference/municipality_central_localities.html">municipality_central_localities</a></span><span class="op">(</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/centroids-1.png" width="375"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/centroids-1.png" class="r-plt" alt="" width="375"></p>
 </div>
 <div class="section level3">
 <h3 id="buffers">Buffers<a class="anchor" aria-label="anchor" href="#buffers"></a>
@@ -300,7 +297,7 @@ radius around polygon centroids.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">muni</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">muni_centroids_buffer</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">muni_centroids</span>, shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/buffers-1.png" width="375"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/buffers-1.png" class="r-plt" alt="" width="375"></p>
 </div>
 <div class="section level3">
 <h3 id="creating-regular-grids">Creating regular grids<a class="anchor" aria-label="anchor" href="#creating-regular-grids"></a>
@@ -340,7 +337,7 @@ number of reindeer for each grid cell if we would have the data.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">rank</span><span class="op">)</span>, color <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/alpha.html" class="external-link">alpha</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">scale_fill_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/muonio-1.png" width="375"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/muonio-1.png" class="r-plt" alt="" width="375"></p>
 </div>
 <div class="section level3">
 <h3 id="voronoi-polygons">Voronoi polygons<a class="anchor" aria-label="anchor" href="#voronoi-polygons"></a>
@@ -375,7 +372,7 @@ that are closest to each municipality central locality.</p>
 <span>        axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/voronoi-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/voronoi-1.png" class="r-plt" alt="" width="525"></p>
 </div>
 </div>
 <div class="section level2">
@@ -497,7 +494,7 @@ a bar plot of 20 municipality central localities nearest to Helsinki</p>
 <span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dist</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">destination_name</span>, <span class="va">dist</span><span class="op">)</span>, label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">dist</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Nearest 20 municipality localities to Helsinki"</span>, x <span class="op">=</span> <span class="st">"distance in meters"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/nearest-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/nearest-1.png" class="r-plt" alt="" width="525"></p>
 <p>Then, lets find the municipality central locality that is nearest to
 the center of Finland.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
@@ -529,7 +526,7 @@ the center of Finland.</p>
 <span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dist</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">destination_name</span>, <span class="va">dist</span><span class="op">)</span>, label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">dist</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Furthest 20 municipality localities \nfrom the most central locality of "</span>, <span class="va">closest_to_center</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">$</span><span class="va">teksti</span><span class="op">)</span>, x <span class="op">=</span> <span class="st">"distance in meters"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/dist1-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/dist1-1.png" class="r-plt" alt="" width="525"></p>
 <p>And at very last, we need to show those distances also on a map.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sf_lahto</span> <span class="op">&lt;-</span> <span class="va">kunta</span> <span class="op">|&gt;</span> </span>
@@ -555,7 +552,7 @@ the center of Finland.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">trips</span>, color <span class="op">=</span> <span class="st">"dim grey"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_label</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sf_lahto</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">teksti</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_text</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sf_paate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">teksti</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="geofi_spatial_analysis_files/figure-html/dist2-1.png" width="525"></p>
+<p><img src="geofi_spatial_analysis_files/figure-html/dist2-1.png" class="r-plt" alt="" width="525"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -564,11 +561,11 @@ the center of Finland.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Markus Kainu, Joona Lehtomaki, Leo Lahti.</p>
+  <p>Developed by Markus Kainu, Joona Lehtomaki, Leo Lahti. <br>Part of <a href="http://ropengov.org/" class="external-link"><img src="https://ropengov.github.io/rogtemplate/logo2020_white_orange.svg" height="20" class="d-inline-block mx-1 rog-logo" alt="rOpenGov R package for open government data analytics"></a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
@@ -576,7 +573,7 @@ the center of Finland.</p>
 
 
 
-    <!-- Add ropengov logo -->
-  <script src="../BS5/logo.js"></script>
-</body>
+
+
+  </body>
 </html>

@@ -1,9 +1,11 @@
 navbar:
-  right:
-  - icon: fa-users
-    href: https://ropengov.org
-  - icon: fab fa-github
-    href: https://github.com/rOpenGov/geofi
+  structure:
+    right: [search, users, github, lightswitch]
+  components:
+    users:
+      icon: fa-users
+      href: https://ropengov.org
+      aria-label: rOpenGov
 reference:
 - title: Statistics Finland API functions
   desc: |

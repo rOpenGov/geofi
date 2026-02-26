@@ -66,7 +66,7 @@ Joona Lehtomäki <joona.lehtomaki@iki.fi>
 #> 
 #> $response
 #> Response [https://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&layer=tilastointialueet%3Akunta4500k_2017]
-#>   Date: 2026-02-26 08:03
+#>   Date: 2026-02-26 09:28
 #>   Status: 200
 #>   Content-Type: text/xml;charset=UTF-8
 #>   Size: 450 B

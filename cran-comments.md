@@ -1,13 +1,12 @@
 ## Test environments
-* local Ubuntu 24.04.1 install, R 4.5.0
+* local Ubuntu 24.04.4 install, R 4.5.2
 * win-builder (devel)
 * r-hub.io
 
 ## Submission note
 
-+ Object `municipality_central_localities` is depracated and replaced with function `municipality_central_localities()`. Relates to changes in latest PROJ version 9.6.0 regarding added support for EUREF-FIN in Finish transformations https://lists.osgeo.org/pipermail/proj/2025-March/011738.html
-+ New functions for interacting both with National Land Survey and Statistics Finland OCG API-services.
-
++ 2026 regional classifications updated to match with latest changes in stat.fi classification API
++ all api calls to geo.stat.fi/geoserver now use https
 
 ## R CMD check results
 

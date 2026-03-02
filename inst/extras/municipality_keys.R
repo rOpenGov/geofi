@@ -1,13 +1,28 @@
 library(jsonlite)
 library(dplyr)
+library(httr2)
 
 # functions
 get_classifications <- function(class = "kunta_1_20200101", lang = "fi"){
 
   path <- paste0("https://data.stat.fi/api/classifications/v2/classifications/",class,"/classificationItems?content=data&format=json&lang=",lang,"&meta=max")
-  res <- fromJSON(path) %>%
-    as_tibble()
-  if (nrow(res) == 0) return()
+  req <- httr2::request(base_url = path)
+  resp <- req |>
+    req_error(is_error = function(resp) FALSE) |>  # Pass a function, not FALSE directly
+    req_perform()
+
+  status <- resp_status(resp)
+
+  if (status >= 500) {
+    # Handle 500 error gracefully
+    warning(paste("Server error:", status))
+    # Return NULL or default value instead of failing
+    res <- NULL
+  } else {
+    res <- resp_body_json(resp, simplifyVector = TRUE)
+  }
+
+  if (is.null(res)) return()
   dlist <- list()
   for (iv in 1:nrow(res)){
     dlist[[iv]] <- tibble(
@@ -48,13 +63,14 @@ document_data <- function(dat, neim, description = "Data is data"){
 # Municipalities
 langs <- c("fi","sv","en")
 
-# Lets loop over the years 2013-2022
+# Lets loop over the years 2013-2026
 yearlist <- list()
-yrs <- 2013:2025
+yrs <- 2013:2026
+# yrs <- 2014:2026
 for (iii in seq_along(yrs)){
 
   print(yrs[iii])
-  Sys.sleep(20)
+  Sys.sleep(2)
 
   kuntaclass <- paste0("kunta_1_",yrs[iii],"0101")
 
@@ -73,11 +89,11 @@ d_muni <- left_join(lst[[1]],lst[[2]]) %>%
 corrtbls <- fromJSON("https://data.stat.fi/api/classifications/v2/correspondenceTables?format=json") %>%
   as_tibble()
 # filter ones with kunta_1_20200101 as input key
-corrtbls_kunta <- corrtbls[grepl(paste0("/",kuntaclass,"#"), corrtbls$value),]
+corrtbls_kunta <- corrtbls[grepl(paste0("/",kuntaclass,"%23"), corrtbls$value),]
 
 # lets list the output keys
 outkeys <- sub("\\?format=json", "",
-    sub(".+#", "", corrtbls_kunta$value)
+    sub(".+%23", "", corrtbls_kunta$value)
     )
 
 outdatlist <- list()
@@ -95,6 +111,7 @@ keydat <- read.table(text = vals, sep="/") %>%
 
 lst <- list()
 for (i in seq_along(langs)){
+  Sys.sleep(1)
   tmp <- get_classifications(class = outkeys[ii], lang = langs[i])
   if (is.null(tmp)) next()
   names(tmp) <- c(paste0(keyname,"_code"), paste0(keyname,"_",langs[i]))
@@ -299,7 +316,7 @@ mutate(kela_asumistukialue_name_sv = case_when(
     kela_asumistukialue_name_fi == "III kuntaryhmä" ~ "Municipality in category III"
   )) %>%
   # Kela-spesific classifications only for latest year as there is no history available as open data
-  mutate(year = 2025)
+  mutate(year = 2026)
 
 
 # Lets rename the Finnish version of Maarianhamina

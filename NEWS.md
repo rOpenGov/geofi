@@ -1,3 +1,8 @@
+# geofi 1.2.0
+
++ 2026 regional classifications updated to match with latest changes in stat.fi classification API
++ all api calls to geo.stat.fi/geoserver now use https
+
 # geofi 1.1.0
 
 + Object `municipality_central_localities` is depracated and replaced with function `municipality_central_localities()`. Relates to changes in latest PROJ version 9.6.0 regarding added support for EUREF-FIN in Finish transformations https://lists.osgeo.org/pipermail/proj/2025-March/011738.html

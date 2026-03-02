@@ -45,7 +45,7 @@ check_api_access <- function(which_api = "statfi_wfs") {
 
   # Define API URL based on which_api
   http_url <- switch(which_api,
-                     statfi_wfs = "http://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getCapabilities",
+                     statfi_wfs = "https://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getCapabilities",
                      statfi_ogc = "https://geo.stat.fi/inspire/ogc/api/su/?f=json"
   )
 

@@ -4,7 +4,7 @@
 \alias{wfs_api}
 \title{WFS API}
 \usage{
-wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", queries)
+wfs_api(base_url = "https://geo.stat.fi/geoserver/wfs", queries)
 }
 \arguments{
 \item{base_url}{string Api base url}
@@ -35,9 +35,9 @@ are cached. If you want clear cache, use \code{\link[httpcache:cache-management]
 the cache off completely, use \code{\link[httpcache:cache-management]{httpcache::cacheOff()}}
 }
 \examples{
-  wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", 
-          queries = append(list("service" = "WFS", "version" = "1.0.0"), 
-                list(request = "getFeature", 
+  wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs",
+          queries = append(list("service" = "WFS", "version" = "1.0.0"),
+                list(request = "getFeature",
                      layer = "tilastointialueet:kunta4500k_2017")))
 
 }

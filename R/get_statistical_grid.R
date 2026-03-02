@@ -1,7 +1,7 @@
 #' Get Statistical grid data polygons at two different resolution
 #'
 #' Thin wrapper around Finnish statistical grid data provided by
-#' [Statistics Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
+#' [Statistics Finland](https://stat.fi/en/services/statistical-data-services/geographic-data/population-grid-data-1-km).
 #'
 #' @param resolution integer 1 (1km x 1km) or 5 (5km x 5km)
 #' @param auxiliary_data logical Whether to include auxiliary data containing municipality membership data. Default \code{FALSE}
@@ -46,7 +46,7 @@ Please check your connection, firewall settings and/or review your proxy setting
   }
 
   if (auxiliary_data){
-    aux_data <- utils::read.csv(paste0("http://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=tilastointialueet:hila",resolution,"km_linkki&outputFormat=csv"))
+    aux_data <- utils::read.csv(paste0("https://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=tilastointialueet:hila",resolution,"km_linkki&outputFormat=csv"))
     sf_obj <- dplyr::left_join(sf_obj, aux_data)
   }
 

@@ -5,7 +5,7 @@
 \alias{municipality_key_2020}
 \title{Municipality key table for 2020}
 \format{
-A data frame with 310 rows and 63 variables:
+A data frame with 310 rows and 67 variables:
 \describe{
 \item{kunta}{kunta}
 \item{municipality_name_fi}{municipality_name_fi}
@@ -70,6 +70,10 @@ A data frame with 310 rows and 63 variables:
 \item{hyvinvointialue_name_fi}{hyvinvointialue_name_fi}
 \item{hyvinvointialue_name_sv}{hyvinvointialue_name_sv}
 \item{hyvinvointialue_name_en}{hyvinvointialue_name_en}
+\item{erva_code}{erva_code}
+\item{erva_name_en}{erva_name_en}
+\item{erva_name_fi}{erva_name_fi}
+\item{erva_name_sv}{erva_name_sv}
 }
 }
 \source{

@@ -3,9 +3,9 @@
 \docType{data}
 \name{municipality_key}
 \alias{municipality_key}
-\title{Aggregated municipality key table for years 2013-2025}
+\title{Aggregated municipality key table for years 2013-2026}
 \format{
-A data frame with 4057 rows and 81 variables:
+A data frame with 4057 rows and 89 variables:
 \describe{
 \item{kunta}{kunta}
 \item{municipality_name_fi}{municipality_name_fi}
@@ -88,6 +88,14 @@ A data frame with 4057 rows and 81 variables:
 \item{kela_asumistukialue_code}{kela_asumistukialue_code}
 \item{kela_asumistukialue_name_sv}{kela_asumistukialue_name_sv}
 \item{kela_asumistukialue_name_en}{kela_asumistukialue_name_en}
+\item{erva_code}{erva_code}
+\item{erva_name_en}{erva_name_en}
+\item{erva_name_fi}{erva_name_fi}
+\item{erva_name_sv}{erva_name_sv}
+\item{evk_code}{evk_code}
+\item{evk_name_en}{evk_name_en}
+\item{evk_name_fi}{evk_name_fi}
+\item{evk_name_sv}{evk_name_sv}
 }
 }
 \source{

@@ -13,7 +13,7 @@
 #' are cached. If you want clear cache, use [httpcache::clearCache()]. To turn
 #' the cache off completely, use [httpcache::cacheOff()]
 #'
-#' @param base_url string Api base url 
+#' @param base_url string Api base url
 #' @param queries list List of query parameters
 #' @importFrom xml2 read_xml xml_find_all xml_text
 #'
@@ -29,13 +29,13 @@
 #' @author Joona Lehtomäki <joona.lehtomaki@@iki.fi>
 #'
 #' @examples
-#'   wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", 
-#'           queries = append(list("service" = "WFS", "version" = "1.0.0"), 
-#'                 list(request = "getFeature", 
+#'   wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs",
+#'           queries = append(list("service" = "WFS", "version" = "1.0.0"),
+#'                 list(request = "getFeature",
 #'                      layer = "tilastointialueet:kunta4500k_2017")))
 #'
-wfs_api <- function(base_url = "http://geo.stat.fi/geoserver/wfs", queries) {
-  
+wfs_api <- function(base_url = "https://geo.stat.fi/geoserver/wfs", queries) {
+
   if (!grepl("^http", base_url)) stop("Invalid base URL")
 
   # Set the user agent
@@ -43,19 +43,19 @@ wfs_api <- function(base_url = "http://geo.stat.fi/geoserver/wfs", queries) {
 
   # Construct the query URL
   url <- httr::modify_url(base_url, query = queries)
-  
+
   # Print out the URL
   message("Requesting response from: ", url)
-  
+
   # Get the response and check the response.
   resp <- httpcache::GET(url, ua)
-  
+
   # Parse the response XML content
   content <- xml2::read_xml(resp$content)
-  
+
   # Strip the namespace as it will be only trouble
   # xml2::xml_ns_strip(content)
-  
+
   if (httr::http_error(resp)) {
     status_code <- httr::status_code(resp)
     # If status code is 400, there might be more information available
@@ -84,11 +84,11 @@ wfs_api <- function(base_url = "http://geo.stat.fi/geoserver/wfs", queries) {
     ),
     class = "wfs_api"
   )
-  
+
   api_obj$content <- content
-  
+
   # Attach the nodes to the API object
   api_obj$content <- content
-  
+
   return(api_obj)
 }

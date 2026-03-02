@@ -19,7 +19,7 @@ sf object
 }
 \description{
 Thin wrapper around Finnish zip code areas provided by
-\href{https://stat.fi/org/avoindata/paikkatietoaineistot/vaesto_tilastointialueittain_en.html}{Statistics Finland}.
+\href{https://stat.fi/en/services/statistical-data-services/geographic-data/population-by-municipality-based-units}{Statistics Finland}.
 }
 \details{
 The number of population on the last day of the reference year combined with municipality borders from year after.

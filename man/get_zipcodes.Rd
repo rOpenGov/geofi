@@ -16,7 +16,7 @@ sf object
 }
 \description{
 Thin wrapper around Finnish zip code areas provided by
-\href{https://stat.fi/tup/karttaaineistot/postinumeroalueet.html}{Statistics Finland}.
+\href{https://stat.fi/fi/palvelut/tilastodatapalvelut/paikkatietoaineistot/tilastointialueet/tilastolliset-postinumeroalueet}{Statistics Finland}.
 }
 \examples{
  \dontrun{

@@ -5,7 +5,7 @@
 \alias{municipality_key_2025}
 \title{Municipality key table for 2025}
 \format{
-A data frame with 308 rows and 69 variables:
+A data frame with 308 rows and 65 variables:
 \describe{
 \item{kunta}{kunta}
 \item{municipality_name_fi}{municipality_name_fi}
@@ -23,6 +23,10 @@ A data frame with 308 rows and 69 variables:
 \item{kielisuhde_name_fi}{kielisuhde_name_fi}
 \item{kielisuhde_name_sv}{kielisuhde_name_sv}
 \item{kielisuhde_name_en}{kielisuhde_name_en}
+\item{kuntaryhmitys_code}{kuntaryhmitys_code}
+\item{kuntaryhmitys_name_fi}{kuntaryhmitys_name_fi}
+\item{kuntaryhmitys_name_sv}{kuntaryhmitys_name_sv}
+\item{kuntaryhmitys_name_en}{kuntaryhmitys_name_en}
 \item{maakunta_code}{maakunta_code}
 \item{maakunta_name_fi}{maakunta_name_fi}
 \item{maakunta_name_sv}{maakunta_name_sv}
@@ -68,14 +72,6 @@ A data frame with 308 rows and 69 variables:
 \item{kunta_name}{kunta_name}
 \item{name_fi}{name_fi}
 \item{name_sv}{name_sv}
-\item{kela_palvelualue_name_fi}{kela_palvelualue_name_fi}
-\item{kela_palvelualue_code}{kela_palvelualue_code}
-\item{kela_palvelualue_name_sv}{kela_palvelualue_name_sv}
-\item{kela_palvelualue_name_en}{kela_palvelualue_name_en}
-\item{kela_asumistukialue_name_fi}{kela_asumistukialue_name_fi}
-\item{kela_asumistukialue_code}{kela_asumistukialue_code}
-\item{kela_asumistukialue_name_sv}{kela_asumistukialue_name_sv}
-\item{kela_asumistukialue_name_en}{kela_asumistukialue_name_en}
 }
 }
 \source{

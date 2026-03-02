@@ -14,11 +14,11 @@ remotes::install_github("ropengov/geofi")
 
 With `geofi`-package you can download geospatial data on municipalities,
 zipcodes and population and statistical grids from Statistics Finland
-[WFS-api](https://stat.fi/org/avoindata/paikkatietoaineistot_en.html).
+[WFS-api](https://stat.fi/en/services/statistical-data-services/geographic-data).
 In addition, you have on-board municipality keys for aggregating
 municipality-level data into higher level regional distributions based
 Statistics Finland [classification
-API](https://data.stat.fi/api/classifications/v2/).
+API](https://data.stat.fi/api/classifications/v2/classifications).
 
 Below are few examples of the data you can access using `geofi`. Please
 have a closer look at the
@@ -77,10 +77,10 @@ Kindly cite the geofi R package as follows:
 To cite 'geofi' in publications use:
 
   Kainu M, Lehtomaki J, Parkkinen J, Miettinen J, Kantanen P, Vesanen
-  S, Lahti L (2025). _geofi: Access Finnish Geospatial Data_.
+  S, Lahti L (2026). _geofi: Access Finnish Geospatial Data_.
   doi:10.32614/CRAN.package.geofi
   <https://doi.org/10.32614/CRAN.package.geofi>, R package version
-  1.1.0, <https://github.com/rOpenGov/geofi>.
+  1.2.0, <https://github.com/rOpenGov/geofi>.
 
 A BibTeX entry for LaTeX users is
 
@@ -88,9 +88,9 @@ A BibTeX entry for LaTeX users is
     title = {{geofi: Access Finnish Geospatial Data}},
     doi = {10.32614/CRAN.package.geofi},
     author = {Markus Kainu and Joona Lehtomaki and Juuso Parkkinen and Jani Miettinen and Pyry Kantanen and Sampo Vesanen and Leo Lahti},
-    year = {2025},
-    version = {1.1.0},
-    note = {R package version 1.1.0},
+    year = {2026},
+    version = {1.2.0},
+    note = {R package version 1.2.0},
     url = {https://github.com/rOpenGov/geofi},
   }
 

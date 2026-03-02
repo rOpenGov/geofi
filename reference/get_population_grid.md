@@ -1,9 +1,9 @@
-# Get Finnish Population grid in two different resolutions for years 2010-2022 Thin wrapper around Finnish population grid data provided by [Statistics Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
+# Get Finnish Population grid in two different resolutions for years 2010-2022 Thin wrapper around Finnish population grid data provided by [Statistics Finland](https://stat.fi/en/services/statistical-data-services/geographic-data/population-grid-data-1-km).
 
 Get Finnish Population grid in two different resolutions for years
 2010-2022 Thin wrapper around Finnish population grid data provided by
 [Statistics
-Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
+Finland](https://stat.fi/en/services/statistical-data-services/geographic-data/population-grid-data-1-km).
 
 ## Usage
 

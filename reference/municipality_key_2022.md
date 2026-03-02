@@ -273,6 +273,22 @@ A data frame with 309 rows and 65 variables:
 
   name_sv
 
+- erva_code:
+
+  erva_code
+
+- erva_name_en:
+
+  erva_name_en
+
+- erva_name_fi:
+
+  erva_name_fi
+
+- erva_name_sv:
+
+  erva_name_sv
+
 ## Source
 
 <https://data.stat.fi/api/classifications/v2/classifications>

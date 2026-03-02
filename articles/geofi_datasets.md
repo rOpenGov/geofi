@@ -27,8 +27,8 @@ Each municipality belongs to a higher level regional classifications
 such as regions (maakunta) or health care districts (sairaanhoitopiiri).
 `municipality_key_`-datasets are based on Statistics Finland
 [Statistical
-classification](https://data.stat.fi/api/classifications/v2/) -api with
-few modification and provided on yearly basis.
+classification](https://data.stat.fi/api/classifications/v2/classifications)
+-api with few modification and provided on yearly basis.
 
 ``` r
 library(geofi)
@@ -37,10 +37,10 @@ d <- data(package = "geofi")
 as_tibble(d$results) |> 
   select(Item,Title) |> 
     filter(grepl("municipality_key", Item))
-#> # A tibble: 14 × 2
+#> # A tibble: 15 × 2
 #>    Item                  Title                                                
 #>    <chr>                 <chr>                                                
-#>  1 municipality_key      Aggregated municipality key table for years 2013-2025
+#>  1 municipality_key      Aggregated municipality key table for years 2013-2026
 #>  2 municipality_key_2013 municipality_key_2013                                
 #>  3 municipality_key_2014 municipality_key_2014                                
 #>  4 municipality_key_2015 municipality_key_2015                                
@@ -53,7 +53,8 @@ as_tibble(d$results) |>
 #> 11 municipality_key_2022 Municipality key table for 2022                      
 #> 12 municipality_key_2023 Municipality key table for 2023                      
 #> 13 municipality_key_2024 Municipality key table for 2024                      
-#> 14 municipality_key_2025 Municipality key table for 2025
+#> 14 municipality_key_2025 Municipality key table for 2025                      
+#> 15 municipality_key_2026 Municipality key table for 2026
 ```
 
 Looking at the names of \`municipality_key_2023\` there is 69 different
@@ -63,33 +64,33 @@ variables from each municipality.
 names(geofi::municipality_key_2023)
 #>  [1] "kunta"                   "municipality_name_fi"   
 #>  [3] "municipality_name_sv"    "municipality_name_en"   
-#>  [5] "kuntaryhmitys_code"      "kuntaryhmitys_name_fi"  
-#>  [7] "kuntaryhmitys_name_sv"   "kuntaryhmitys_name_en"  
-#>  [9] "avi_code"                "avi_name_fi"            
-#> [11] "avi_name_sv"             "avi_name_en"            
-#> [13] "ely_code"                "ely_name_fi"            
-#> [15] "ely_name_sv"             "ely_name_en"            
-#> [17] "kielisuhde_code"         "kielisuhde_name_fi"     
-#> [19] "kielisuhde_name_sv"      "kielisuhde_name_en"     
-#> [21] "tyossakayntial_code"     "tyossakayntial_name_fi" 
-#> [23] "maakunta_code"           "maakunta_name_fi"       
-#> [25] "maakunta_name_sv"        "maakunta_name_en"       
-#> [27] "seutukunta_code"         "seutukunta_name_fi"     
-#> [29] "seutukunta_name_sv"      "seutukunta_name_en"     
-#> [31] "year"                    "suuralue_code"          
-#> [33] "suuralue_name_fi"        "suuralue_name_sv"       
-#> [35] "suuralue_name_en"        "nuts1_code"             
-#> [37] "nuts1_name_fi"           "nuts1_name_sv"          
-#> [39] "nuts1_name_en"           "nuts2_code"             
-#> [41] "nuts2_name_fi"           "nuts2_name_sv"          
-#> [43] "nuts2_name_en"           "nuts3_code"             
-#> [45] "nuts3_name_fi"           "nuts3_name_sv"          
-#> [47] "nuts3_name_en"           "vaalipiiri_code"        
-#> [49] "vaalipiiri_name_fi"      "vaalipiiri_name_sv"     
-#> [51] "vaalipiiri_name_en"      "hyvinvointialue_code"   
-#> [53] "hyvinvointialue_name_fi" "hyvinvointialue_name_sv"
-#> [55] "hyvinvointialue_name_en" "tyossakayntial_name_sv" 
-#> [57] "tyossakayntial_name_en"  "yhteistyoalue_code"     
+#>  [5] "avi_code"                "avi_name_fi"            
+#>  [7] "avi_name_sv"             "avi_name_en"            
+#>  [9] "ely_code"                "ely_name_fi"            
+#> [11] "ely_name_sv"             "ely_name_en"            
+#> [13] "kielisuhde_code"         "kielisuhde_name_fi"     
+#> [15] "kielisuhde_name_sv"      "kielisuhde_name_en"     
+#> [17] "kuntaryhmitys_code"      "kuntaryhmitys_name_fi"  
+#> [19] "kuntaryhmitys_name_sv"   "kuntaryhmitys_name_en"  
+#> [21] "maakunta_code"           "maakunta_name_fi"       
+#> [23] "maakunta_name_sv"        "maakunta_name_en"       
+#> [25] "seutukunta_code"         "seutukunta_name_fi"     
+#> [27] "seutukunta_name_sv"      "seutukunta_name_en"     
+#> [29] "tyossakayntial_code"     "tyossakayntial_name_fi" 
+#> [31] "tyossakayntial_name_sv"  "tyossakayntial_name_en" 
+#> [33] "year"                    "suuralue_code"          
+#> [35] "suuralue_name_fi"        "suuralue_name_sv"       
+#> [37] "suuralue_name_en"        "nuts1_code"             
+#> [39] "nuts1_name_fi"           "nuts1_name_sv"          
+#> [41] "nuts1_name_en"           "nuts2_code"             
+#> [43] "nuts2_name_fi"           "nuts2_name_sv"          
+#> [45] "nuts2_name_en"           "nuts3_code"             
+#> [47] "nuts3_name_fi"           "nuts3_name_sv"          
+#> [49] "nuts3_name_en"           "vaalipiiri_code"        
+#> [51] "vaalipiiri_name_fi"      "vaalipiiri_name_sv"     
+#> [53] "vaalipiiri_name_en"      "hyvinvointialue_code"   
+#> [55] "hyvinvointialue_name_fi" "hyvinvointialue_name_sv"
+#> [57] "hyvinvointialue_name_en" "yhteistyoalue_code"     
 #> [59] "yhteistyoalue_name_fi"   "yhteistyoalue_name_sv"  
 #> [61] "yhteistyoalue_name_en"   "municipality_code"      
 #> [63] "kunta_name"              "name_fi"                
@@ -218,13 +219,13 @@ plot(zipcodes["nimi"], border = NA)
 ### Statistical grid
 
 [Grid net for
-statistics](https://stat.fi/org/avoindata/paikkatietoaineistot/tilastoruudukko_1km_en.html)
+statistics](https://stat.fi/en/services/statistical-data-services/geographic-data/statistical-areas/grid-net-for-statistics-1-km)
 both in 1 km x 1 km and 5 km x 5km covers whole of Finland. The grid net
 includes all grid squares in Finland.
 
 Statistics Finland [proprietary grid
-database](https://stat.fi/tup/ruututietokanta/index_en.html) provides
-the attribute statistical data for these grid nets.
+database](https://stat.fi/en/services/statistical-data-services/geographic-data/grid-database)
+provides the attribute statistical data for these grid nets.
 
 ``` r
 stat_grid <- get_statistical_grid(resolution = 5, auxiliary_data = TRUE)
@@ -245,7 +246,7 @@ Total population (`vaesto`), number of men (`miehet`) and women
 (`ika_15_64`), and aged over 65 (`ika_65_`). Only the number of
 population is reported for grids of under 10 inhabitants. See
 [Population grid
-data](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_5km_en.html).
+data](https://stat.fi/en/services/statistical-data-services/geographic-data/population-grid-data-5-km).
 
 The data describes the population distribution independent of
 administrative areas (such as municipal borders). The data is suitable

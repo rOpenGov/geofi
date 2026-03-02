@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">geofi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>WFS API</h1>
-      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/master/R/wfs_api.R" class="external-link"><code>R/wfs_api.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rOpenGov/geofi/blob/v1.2.0/R/wfs_api.R" class="external-link"><code>R/wfs_api.R</code></a></small>
       <div class="d-none name"><code>wfs_api.Rd</code></div>
     </div>
 
@@ -56,7 +56,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wfs_api</span><span class="op">(</span>base_url <span class="op">=</span> <span class="st">"http://geo.stat.fi/geoserver/wfs"</span>, <span class="va">queries</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wfs_api</span><span class="op">(</span>base_url <span class="op">=</span> <span class="st">"https://geo.stat.fi/geoserver/wfs"</span>, <span class="va">queries</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -102,9 +102,9 @@ the cache off completely, use <code><a href="https://enpiar.com/r/httpcache/refe
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu">wfs_api</span><span class="op">(</span>base_url <span class="op">=</span> <span class="st">"http://geo.stat.fi/geoserver/wfs"</span>, </span></span>
-<span class="r-in"><span>          queries <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/append.html" class="external-link">append</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"service"</span> <span class="op">=</span> <span class="st">"WFS"</span>, <span class="st">"version"</span> <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>request <span class="op">=</span> <span class="st">"getFeature"</span>, </span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu">wfs_api</span><span class="op">(</span>base_url <span class="op">=</span> <span class="st">"http://geo.stat.fi/geoserver/wfs"</span>,</span></span>
+<span class="r-in"><span>          queries <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/append.html" class="external-link">append</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"service"</span> <span class="op">=</span> <span class="st">"WFS"</span>, <span class="st">"version"</span> <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>request <span class="op">=</span> <span class="st">"getFeature"</span>,</span></span>
 <span class="r-in"><span>                     layer <span class="op">=</span> <span class="st">"tilastointialueet:kunta4500k_2017"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;layer=tilastointialueet%3Akunta4500k_2017</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $url</span>
@@ -112,7 +112,7 @@ the cache off completely, use <code><a href="https://enpiar.com/r/httpcache/refe
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $response</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Response [https://geo.stat.fi/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=getFeature&amp;layer=tilastointialueet%3Akunta4500k_2017]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Date: 2026-02-26 09:28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Date: 2026-03-02 16:51</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Status: 200</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Content-Type: text/xml;charset=UTF-8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Size: 450 B</span>

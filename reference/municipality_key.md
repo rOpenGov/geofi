@@ -1,4 +1,4 @@
-# Aggregated municipality key table for years 2013-2025
+# Aggregated municipality key table for years 2013-2026
 
 Table for aggregating municipality level data to various regional
 groupings
@@ -11,7 +11,7 @@ municipality_key
 
 ## Format
 
-A data frame with 4057 rows and 81 variables:
+A data frame with 4057 rows and 89 variables:
 
 - kunta:
 
@@ -336,6 +336,38 @@ A data frame with 4057 rows and 81 variables:
 - kela_asumistukialue_name_en:
 
   kela_asumistukialue_name_en
+
+- erva_code:
+
+  erva_code
+
+- erva_name_en:
+
+  erva_name_en
+
+- erva_name_fi:
+
+  erva_name_fi
+
+- erva_name_sv:
+
+  erva_name_sv
+
+- evk_code:
+
+  evk_code
+
+- evk_name_en:
+
+  evk_name_en
+
+- evk_name_fi:
+
+  evk_name_fi
+
+- evk_name_sv:
+
+  evk_name_sv
 
 ## Source
 

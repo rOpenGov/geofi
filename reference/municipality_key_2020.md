@@ -11,7 +11,7 @@ municipality_key_2020
 
 ## Format
 
-A data frame with 310 rows and 63 variables:
+A data frame with 310 rows and 67 variables:
 
 - kunta:
 
@@ -264,6 +264,22 @@ A data frame with 310 rows and 63 variables:
 - hyvinvointialue_name_en:
 
   hyvinvointialue_name_en
+
+- erva_code:
+
+  erva_code
+
+- erva_name_en:
+
+  erva_name_en
+
+- erva_name_fi:
+
+  erva_name_fi
+
+- erva_name_sv:
+
+  erva_name_sv
 
 ## Source
 

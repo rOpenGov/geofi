@@ -1,4 +1,4 @@
-# Municipality key table for 2025
+# Municipality key table for 2026
 
 Table for aggregating municipality level data to various regional
 groupings
@@ -6,12 +6,12 @@ groupings
 ## Usage
 
 ``` r
-municipality_key_2025
+municipality_key_2026
 ```
 
 ## Format
 
-A data frame with 308 rows and 65 variables:
+A data frame with 308 rows and 69 variables:
 
 - kunta:
 
@@ -28,38 +28,6 @@ A data frame with 308 rows and 65 variables:
 - municipality_name_en:
 
   municipality_name_en
-
-- avi_code:
-
-  avi_code
-
-- avi_name_fi:
-
-  avi_name_fi
-
-- avi_name_sv:
-
-  avi_name_sv
-
-- avi_name_en:
-
-  avi_name_en
-
-- ely_code:
-
-  ely_code
-
-- ely_name_fi:
-
-  ely_name_fi
-
-- ely_name_sv:
-
-  ely_name_sv
-
-- ely_name_en:
-
-  ely_name_en
 
 - kielisuhde_code:
 
@@ -257,6 +225,22 @@ A data frame with 308 rows and 65 variables:
 
   tyollisyysalue_name_en
 
+- evk_code:
+
+  evk_code
+
+- evk_name_fi:
+
+  evk_name_fi
+
+- evk_name_sv:
+
+  evk_name_sv
+
+- evk_name_en:
+
+  evk_name_en
+
 - municipality_code:
 
   municipality_code
@@ -272,6 +256,38 @@ A data frame with 308 rows and 65 variables:
 - name_sv:
 
   name_sv
+
+- kela_palvelualue_name_fi:
+
+  kela_palvelualue_name_fi
+
+- kela_palvelualue_code:
+
+  kela_palvelualue_code
+
+- kela_palvelualue_name_sv:
+
+  kela_palvelualue_name_sv
+
+- kela_palvelualue_name_en:
+
+  kela_palvelualue_name_en
+
+- kela_asumistukialue_name_fi:
+
+  kela_asumistukialue_name_fi
+
+- kela_asumistukialue_code:
+
+  kela_asumistukialue_code
+
+- kela_asumistukialue_name_sv:
+
+  kela_asumistukialue_name_sv
+
+- kela_asumistukialue_name_en:
+
+  kela_asumistukialue_name_en
 
 ## Source
 

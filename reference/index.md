@@ -17,7 +17,7 @@ Functions for using Statistics Finland WFS and OGC API features services
   Get Finnish Population grid in two different resolutions for years
   2010-2022 Thin wrapper around Finnish population grid data provided by
   [Statistics
-  Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaestoruutuaineisto_1km_en.html).
+  Finland](https://stat.fi/en/services/statistical-data-services/geographic-data/population-grid-data-1-km).
 
 - [`get_statistical_grid()`](https://ropengov.github.io/geofi/reference/get_statistical_grid.md)
   : Get Statistical grid data polygons at two different resolution
@@ -63,7 +63,9 @@ used to aggregate municipality level data (`municipality_key_*`) and
 cental locality of each municipality
 
 - [`municipality_key`](https://ropengov.github.io/geofi/reference/municipality_key.md)
-  : Aggregated municipality key table for years 2013-2025
+  : Aggregated municipality key table for years 2013-2026
+- [`municipality_key_2026`](https://ropengov.github.io/geofi/reference/municipality_key_2026.md)
+  : Municipality key table for 2026
 - [`municipality_key_2025`](https://ropengov.github.io/geofi/reference/municipality_key_2025.md)
   : Municipality key table for 2025
 - [`municipality_key_2024`](https://ropengov.github.io/geofi/reference/municipality_key_2024.md)

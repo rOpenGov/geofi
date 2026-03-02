@@ -1,5 +1,11 @@
 # Changelog
 
+## geofi 1.2.0
+
+- 2026 regional classifications updated to match with latest changes in
+  stat.fi classification API
+- all api calls to geo.stat.fi/geoserver now use https
+
 ## geofi 1.1.0
 
 CRAN release: 2025-04-29

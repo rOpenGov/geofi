@@ -5,7 +5,7 @@ Requests to various WFS API.
 ## Usage
 
 ``` r
-wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", queries)
+wfs_api(base_url = "https://geo.stat.fi/geoserver/wfs", queries)
 ```
 
 ## Arguments
@@ -56,9 +56,9 @@ Joona Lehtomäki <joona.lehtomaki@iki.fi>
 ## Examples
 
 ``` r
-  wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs", 
-          queries = append(list("service" = "WFS", "version" = "1.0.0"), 
-                list(request = "getFeature", 
+  wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs",
+          queries = append(list("service" = "WFS", "version" = "1.0.0"),
+                list(request = "getFeature",
                      layer = "tilastointialueet:kunta4500k_2017")))
 #> Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&layer=tilastointialueet%3Akunta4500k_2017
 #> $url
@@ -66,7 +66,7 @@ Joona Lehtomäki <joona.lehtomaki@iki.fi>
 #> 
 #> $response
 #> Response [https://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&layer=tilastointialueet%3Akunta4500k_2017]
-#>   Date: 2026-02-26 09:28
+#>   Date: 2026-03-02 16:51
 #>   Status: 200
 #>   Content-Type: text/xml;charset=UTF-8
 #>   Size: 450 B

@@ -1,7 +1,7 @@
 # Get Number of population by Finnish municipality (multi)polygons for different years.
 
 Thin wrapper around Finnish zip code areas provided by [Statistics
-Finland](https://stat.fi/org/avoindata/paikkatietoaineistot/vaesto_tilastointialueittain_en.html).
+Finland](https://stat.fi/en/services/statistical-data-services/geographic-data/population-by-municipality-based-units).
 
 ## Usage
 

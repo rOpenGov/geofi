@@ -1,7 +1,7 @@
 # Get Finnish zip code (multi)polygons for different years.
 
 Thin wrapper around Finnish zip code areas provided by [Statistics
-Finland](https://stat.fi/tup/karttaaineistot/postinumeroalueet.html).
+Finland](https://stat.fi/fi/palvelut/tilastodatapalvelut/paikkatietoaineistot/tilastointialueet/tilastolliset-postinumeroalueet).
 
 ## Usage
 

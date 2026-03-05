@@ -754,3 +754,179 @@ ogc_get_nimisto <- function(search_string = NULL,
 
   return(all_features)
 }
+
+#' Download and Cache Finnish DEM via OGC API Processes
+#'
+#' Downloads and caches a DEM raster for a specified bounding box, polygon, or map sheet ID
+#' from the National Land Survey of Finland using the OGC API Processes.
+#'
+#' @param input A character string bbox ("minx,miny,maxx,maxy"), an `sf` object (for polygon), or a character vector (map sheet ID).
+#' @param geometry_type One of: "bbox", "polygon", or "mapsheet".
+#' @param resolution DEM resolution: "2m" or "10m".
+#' @param file_format File format to request. Default is "TIFF".
+#' @param overwrite If TRUE, always re-download and replace existing cached file.
+#' @param api_key API key (default from `getOption("geofi_mml_api_key")`).
+#'
+#' @return Invisibly returns a `terra::SpatRaster` object (or file path if `terra` is unavailable).
+#' @export
+#' @import terra
+#' @importFrom httr2 request req_body_json req_perform resp_body_json
+#' @importFrom sf st_transform st_coordinates st_geometry st_bbox st_sfc st_polygon
+#' @importFrom glue glue
+#' @importFrom purrr pluck
+#' @importFrom rappdirs user_cache_dir
+#' @importFrom digest digest
+#' @examples
+#' \dontrun{
+#' # example code
+#' dem_file <- plot(ogc_get_dem("22.235421,60.446375,22.257050,60.453402",geometry_type ="bbox", resolution = "2m"))
+#' plot(dem_file)
+#' }
+#' @export
+ogc_get_dem <- function(input,
+                        geometry_type = c("bbox", "polygon", "mapsheet"),
+                        resolution = c("2m", "10m"),
+                        file_format = "TIFF",
+                        overwrite = FALSE,
+                        api_key = getOption("geofi_mml_api_key")) {
+  # Validate geometry_type and resolution arguments
+  geometry_type <- match.arg(geometry_type)
+  resolution <- match.arg(resolution)
+
+  # Check that required inputs are valid strings
+  stopifnot(
+    is.character(api_key), nchar(api_key) > 0,
+    is.character(file_format), nchar(file_format) > 0
+  )
+
+  # Generate a unique string from the input for caching purposes
+  input_key <- switch(
+    geometry_type,
+    "bbox" = if (inherits(input, "sf")) {
+      paste(as.numeric(unname(sf::st_bbox(sf::st_transform(input, 3067)))), collapse = ",")
+    } else {
+      input
+    },
+    "polygon" = paste0("poly-", digest::digest(input)),
+    "mapsheet" = paste0("map-", paste(input, collapse = "_"))
+  )
+
+  # Generate a hashed cache name
+  cache_name <- digest::digest(paste(geometry_type, resolution, input_key, sep = "_"))
+  # Define cache location and file path
+  cache_dir <- rappdirs::user_cache_dir("geofi")
+  dir.create(cache_dir, showWarnings = FALSE, recursive = TRUE)
+  destfile <- file.path(cache_dir, glue::glue("dem_{resolution}_{cache_name}.tif"))
+
+  # Use cache if available and overwrite = FALSE
+  if (file.exists(destfile) && !overwrite) {
+    message("Using cached DEM: ", destfile)
+    if (!requireNamespace("terra", quietly = TRUE)) return(invisible(destfile))
+    return(invisible(terra::rast(destfile)))
+  }
+
+  # Build process ID string for OGC API endpoint
+  process_id <- glue::glue("korkeusmalli_{resolution}_{geometry_type}")
+
+  # Construct API endpoint URL
+  url <- glue::glue(
+    "https://avoin-paikkatieto.maanmittauslaitos.fi/tiedostopalvelu/ogcproc/v1/processes/{process_id}/execution?api-key={api_key}"
+  )
+
+  # Prepare input_value depending on geometry type
+  input_value <- switch(
+    geometry_type,
+    "bbox" = {
+      if (inherits(input, "sf")) {
+        # Convert sf bbox to numeric bbox in EPSG:3067
+        as.numeric(unname(sf::st_bbox(sf::st_transform(input, 3067))))
+      } else {
+        # Convert string bbox to polygon and get bbox
+        bbox_vals <- strsplit(input, ",")[[1]] |> as.numeric()
+        if (length(bbox_vals) != 4) stop("Invalid bbox format")
+        poly <- sf::st_sfc(sf::st_polygon(list(rbind(
+          c(bbox_vals[1], bbox_vals[2]),
+          c(bbox_vals[1], bbox_vals[4]),
+          c(bbox_vals[3], bbox_vals[4]),
+          c(bbox_vals[3], bbox_vals[2]),
+          c(bbox_vals[1], bbox_vals[2])
+        ))), crs = 4326)
+        as.numeric(unname(sf::st_bbox(sf::st_transform(poly, 3067))))
+      }
+    },
+    "polygon" = {
+      # Handle wrong character input like "EPSG:4326"
+      if (is.character(input)) {
+        if (grepl("^EPSG:\\d+$", input)) {
+          stop(glue::glue("Invalid input: '{input}' looks like a CRS identifier, not a polygon.\n",
+                          "You must provide an `sf` object with polygon geometry when geometry_type = 'polygon'."))
+        } else {
+          stop("Invalid input: Expected an `sf` object for polygon input.")
+        }
+      }
+      stopifnot(inherits(input, "sf"))
+      coords <- sf::st_coordinates(sf::st_transform(sf::st_geometry(input), 3067))
+      coords_split <- split(coords[, c("X", "Y")], coords[, "L1"])
+      lapply(coords_split, matrix, ncol = 2, byrow = FALSE)
+    },
+    "mapsheet" = {
+      # Just pass character vector
+      stopifnot(is.character(input))
+      input
+    }
+  )
+
+  # Create correct input name for API body
+  input_name <- c(bbox = "boundingBoxInput", polygon = "polygonInput", mapsheet = "mapSheetInput")[geometry_type]
+
+  # Build JSON payload for the API request
+  payload <- list(
+    id = process_id,
+    inputs = c(
+      list(fileFormatInput = file_format),
+      setNames(list(input_value), input_name)
+    )
+  )
+
+  # Submit the job to OGC API
+  resp <- request(url) |> req_body_json(payload) |> req_perform()
+  job_url <- resp_body_json(resp) |> purrr::pluck("links", 1, "href")
+
+  # Poll status URL every 2 seconds up to 20 tries
+  result_info <- {
+    for (i in 1:20) {
+      Sys.sleep(2)
+      status_json <- request(glue::glue("{job_url}?api-key={api_key}")) |>
+        req_perform() |> resp_body_json()
+      if (identical(status_json$status, "successful")) break
+    }
+    if (!identical(status_json$status, "successful")) stop("Job failed or timed out")
+    status_json
+  }
+
+  # Fetch download URL of the resulting file
+  result_url <- paste0(result_info$links[[1]]$href, "?api-key=", api_key)
+  download_url <- request(result_url) |> req_perform() |> resp_body_json() |> purrr::pluck("results", 1, "path")
+
+  # Download DEM to local cache
+  download.file(download_url, destfile, mode = "wb")
+  message("DEM saved to: ", destfile)
+
+  # If terra package is not available, return the path only
+  if (!requireNamespace("terra", quietly = TRUE)) return(invisible(destfile))
+
+  # Try to load raster using terra
+  r <- tryCatch(terra::rast(destfile), error = function(e) {
+    warning("Failed to load raster with terra: ", e$message)
+    return(NULL)
+  })
+
+  # Fallback: return file path if loading raster failed
+  if (!inherits(r, "SpatRaster")) {
+    warning("DEM file could not be read as a SpatRaster. Returning file path only.")
+    return(invisible(destfile))
+  }
+  # Return raster object invisibly
+  invisible(r)
+}
+

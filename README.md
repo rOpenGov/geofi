@@ -14,8 +14,8 @@ GitHub](https://img.shields.io/github/watchers/ropengov/geofi.svg?style=social)]
 GitHub](https://img.shields.io/github/stars/ropengov/geofi.svg?style=social)](https://github.com/ropengov/geofi/stargazers/)
 [![CRAN
 published](https://www.r-pkg.org/badges/version/geofi)](https://www.r-pkg.org/pkg/geofi)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/geofi)](https://cran.r-project.org/package=geofi)
-[![Downloads](http://cranlogs.r-pkg.org/badges/geofi)](https://cran.r-project.org/package=geofi)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/geofi)](https://cran.r-project.org/package=geofi)
+[![Downloads](https://cranlogs.r-pkg.org/badges/geofi)](https://cran.r-project.org/package=geofi)
 <!-- badges: end -->
 
 # geofi - Access Finnish Geospatial Data <a href='https://ropengov.github.io/geofi/'><img src='man/figures/logo.png' align="right" height="139" /></a>

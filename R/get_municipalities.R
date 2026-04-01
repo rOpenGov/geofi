@@ -30,9 +30,9 @@
 
 get_municipalities <- function(year = 2026, scale = 4500, codes_as_character = FALSE){
 
-  # Check if you have access to http://geo.stat.fi/geoserver/wfs
+  # Check if you have access to https://geo.stat.fi/geoserver/wfs
   if (!check_api_access()) {
-    message("You have no access to http://geo.stat.fi/geoserver/wfs.
+    message("You have no access to https://geo.stat.fi/geoserver/wfs.
 Please check your connection, firewall settings and/or review your proxy settings")
   } else {
 

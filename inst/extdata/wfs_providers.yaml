@@ -1,5 +1,5 @@
 Tilastokeskus:
-  URL: http://geo.stat.fi/geoserver/wfs
+  URL: https://geo.stat.fi/geoserver/wfs
   version: 1.0.0
   layer_typename:
       get_municipalities: "tilastointialueet:kunta"
@@ -9,7 +9,7 @@ Tilastokeskus:
       get_municipality_pop: "vaestoalue:kunta_vaki"
   license: "Attribution 4.0 International (CC BY 4.0)"
 Paituli:
-  URL: http://avaa.tdata.fi/geoserver/paituli/wfs
+  URL: https://avaa.tdata.fi/geoserver/paituli/wfs
   version: 2.0.0
   layer_typename:
       get_municipalities: "paituli:mml_hallinto_2017_10k"

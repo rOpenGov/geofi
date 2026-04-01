@@ -1,4 +1,4 @@
-structure(list(url = "http://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&typename=tilastointialueet%3Akunta4500k_2019",
+structure(list(url = "https://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&typename=tilastointialueet%3Akunta4500k_2019",
     status_code = 400L, headers = structure(list(date = "Fri, 05 Feb 2021 07:36:30 GMT",
         server = "Apache-Coyote/1.1", `x-content-type-options` = "nosniff",
         `x-xss-protection` = "1; mode=block", `content-disposition` = "inline; filename=geoserver-getFeature.text",

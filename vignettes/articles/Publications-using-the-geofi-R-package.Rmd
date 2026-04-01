@@ -19,7 +19,7 @@ Lastname, F. & Lastname, F. (2020). Name of the article, *Name of the journal*, 
 
 # Articles citing the geofi package
 
--   Räsänen, T., Miettinen, A., Mustonen, J., Saarikallio-Torp, M. & Österbacka, E. (2023). Lasten yksityisen hoidon tuen kaksi vuosikymmenta, *Työpapereita 174*. Helsinki: Kela. <http://urn.fi/URN:NBN:fi-fe2022121672077>
+-   Räsänen, T., Miettinen, A., Mustonen, J., Saarikallio-Torp, M. & Österbacka, E. (2023). Lasten yksityisen hoidon tuen kaksi vuosikymmenta, *Työpapereita 174*. Helsinki: Kela. <https://urn.fi/URN:NBN:fi-fe2022121672077>
 
 -   Kokko, M., Wikman, E., Hyvärinen, A. & Reinikainen, L. (2022). Apteekkien tilinpäätösanalyysi vuosilta 2017--2020, Lääkealan turvallisuus- ja kehittämiskeskus Fimea: *Fimea kehittää, arvioi ja informoi*, 10/2022. Kuopio: Lääkealan turvallisuus- ja kehittämiskeskus Fimea. <https://urn.fi/URN:ISBN:978-952-7299-40-1>
 

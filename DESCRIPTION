@@ -1,8 +1,8 @@
 Type: Package
 Package: geofi
 Title: Access Finnish Geospatial Data
-Version: 1.2.0
-Date: 2026-03-02
+Version: 1.2.1
+Date: 2026-03-16
 Authors@R: c(
     person("Markus", "Kainu", , "markus.kainu@kapsi.fi", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1376-503X")),
@@ -34,7 +34,11 @@ Imports:
     rlang,
     sf,
     xml2 (>= 1.2.0),
-    yaml
+    yaml,
+    digest,
+    glue,
+    rappdirs,
+    terra
 Suggests: 
     covr,
     ggplot2,
@@ -57,5 +61,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-X-schema.org-isPartOf: http://ropengov.org/
+X-schema.org-isPartOf: https://ropengov.org/
 X-schema.org-keywords: ropengov

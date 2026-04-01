@@ -24,7 +24,7 @@ Requests to various WFS API.
 }
 \details{
 Make a request to the spesific WFS API. The base url is
-http://geo.stat.fi/geoserver/wfs to which other
+https://geo.stat.fi/geoserver/wfs to which other
 components defined by the arguments are appended.
 
 This is a low-level function intended to be used by other higher level
@@ -35,7 +35,7 @@ are cached. If you want clear cache, use \code{\link[httpcache:cache-management]
 the cache off completely, use \code{\link[httpcache:cache-management]{httpcache::cacheOff()}}
 }
 \examples{
-  wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs",
+  wfs_api(base_url = "https://geo.stat.fi/geoserver/wfs",
           queries = append(list("service" = "WFS", "version" = "1.0.0"),
                 list(request = "getFeature",
                      layer = "tilastointialueet:kunta4500k_2017")))

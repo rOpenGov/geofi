@@ -8,7 +8,7 @@ check_api_access(which_api = "statfi_wfs")
 }
 \arguments{
 \item{which_api}{Character. The API to check. Must be one of:
-\code{"statfi_wfs"} (checks WFS at \code{http://geo.stat.fi/geoserver/wfs})
+\code{"statfi_wfs"} (checks WFS at \code{https://geo.stat.fi/geoserver/wfs})
 or \code{"statfi_ogc"} (checks OGC API at
 \code{https://geo.stat.fi/inspire/ogc/api/su/}). Defaults to
 \code{"statfi_wfs"}.}

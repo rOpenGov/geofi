@@ -34,11 +34,7 @@ Imports:
     rlang,
     sf,
     xml2 (>= 1.2.0),
-    yaml,
-    digest,
-    glue,
-    rappdirs,
-    terra
+    yaml
 Suggests: 
     covr,
     ggplot2,

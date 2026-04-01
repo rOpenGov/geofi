@@ -1,12 +1,12 @@
 ## Test environments
-* local Ubuntu 24.04.4 install, R 4.5.2
+* local Ubuntu 24.04.4 install, R 4.5.3
 * win-builder (devel)
 * r-hub.io
 
 ## Submission note
 
-+ 2026 regional classifications updated to match with latest changes in stat.fi classification API
-+ all api calls to geo.stat.fi/geoserver now use https
++ all api calls and hyperlinks now uses https
+
 
 ## R CMD check results
 

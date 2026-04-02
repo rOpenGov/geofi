@@ -21,7 +21,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/rOpenGov/geofi/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/rOpenGov/geofi/blob/v1.2.1/inst/CITATION)
 
 Kainu M, Lehtomaki J, Parkkinen J, Miettinen J, Kantanen P, Vesanen S,
 Lahti L (2026). *geofi: Access Finnish Geospatial Data*.

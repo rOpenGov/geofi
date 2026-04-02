@@ -5,12 +5,7 @@ library(geofi)
 #> 
 #> geofi R package: tools for open GIS data for Finland.
 #> Part of rOpenGov <ropengov.org>.
-#> 
-#> **************
-#> Changes in version 1.1.0:
-#> - Object `municipality_central_localities` is depracated and replaced with function `municipality_central_localities()`. More at https://github.com/rOpenGov/geofi/blob/master/NEWS.md
-#> - New functions for interacting with both National Land Survey and Statistics Finland OCG API-services. See three new vignettes for examples.
-#> **************
+#> Version 1.2.1
 ```
 
 You can send us a note via the [issue
@@ -25,7 +20,7 @@ journal*, volume(number). Place of publication: Publisher. URL/DOI
 - Räsänen, T., Miettinen, A., Mustonen, J., Saarikallio-Torp, M. &
   Österbacka, E. (2023). Lasten yksityisen hoidon tuen kaksi
   vuosikymmenta, *Työpapereita 174*. Helsinki: Kela.
-  <http://urn.fi/URN:NBN:fi-fe2022121672077>
+  <https://urn.fi/URN:NBN:fi-fe2022121672077>
 
 - Kokko, M., Wikman, E., Hyvärinen, A. & Reinikainen, L. (2022).
   Apteekkien tilinpäätösanalyysi vuosilta 2017–2020, Lääkealan

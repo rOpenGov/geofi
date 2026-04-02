@@ -16,7 +16,7 @@ check_api_access(which_api = "statfi_wfs")
 - which_api:
 
   Character. The API to check. Must be one of: `"statfi_wfs"` (checks
-  WFS at `http://geo.stat.fi/geoserver/wfs`) or `"statfi_ogc"` (checks
+  WFS at `https://geo.stat.fi/geoserver/wfs`) or `"statfi_ogc"` (checks
   OGC API at `https://geo.stat.fi/inspire/ogc/api/su/`). Defaults to
   `"statfi_wfs"`.
 

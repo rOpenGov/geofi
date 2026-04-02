@@ -21,19 +21,19 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/rOpenGov/geofi/blob/v1.2.0/inst/CITATION)
+[`inst/CITATION`](https://github.com/rOpenGov/geofi/blob/master/inst/CITATION)
 
 Kainu M, Lehtomaki J, Parkkinen J, Miettinen J, Kantanen P, Vesanen S,
 Lahti L (2026). *geofi: Access Finnish Geospatial Data*.
 [doi:10.32614/CRAN.package.geofi](https://doi.org/10.32614/CRAN.package.geofi),
-R package version 1.2.0, <https://github.com/rOpenGov/geofi>.
+R package version 1.2.1, <https://github.com/rOpenGov/geofi>.
 
     @Manual{R-geofi,
       title = {{geofi: Access Finnish Geospatial Data}},
       doi = {10.32614/CRAN.package.geofi},
       author = {Markus Kainu and Joona Lehtomaki and Juuso Parkkinen and Jani Miettinen and Pyry Kantanen and Sampo Vesanen and Leo Lahti},
       year = {2026},
-      version = {1.2.0},
-      note = {R package version 1.2.0},
+      version = {1.2.1},
+      note = {R package version 1.2.1},
       url = {https://github.com/rOpenGov/geofi},
     }

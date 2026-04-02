@@ -37,7 +37,7 @@ wfs_api (S3) object with the following attributes:
 ## Details
 
 Make a request to the spesific WFS API. The base url is
-http://geo.stat.fi/geoserver/wfs to which other components defined by
+https://geo.stat.fi/geoserver/wfs to which other components defined by
 the arguments are appended.
 
 This is a low-level function intended to be used by other higher level
@@ -56,17 +56,17 @@ Joona Lehtomäki <joona.lehtomaki@iki.fi>
 ## Examples
 
 ``` r
-  wfs_api(base_url = "http://geo.stat.fi/geoserver/wfs",
+  wfs_api(base_url = "https://geo.stat.fi/geoserver/wfs",
           queries = append(list("service" = "WFS", "version" = "1.0.0"),
                 list(request = "getFeature",
                      layer = "tilastointialueet:kunta4500k_2017")))
-#> Requesting response from: http://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&layer=tilastointialueet%3Akunta4500k_2017
+#> Requesting response from: https://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&layer=tilastointialueet%3Akunta4500k_2017
 #> $url
-#> [1] "http://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&layer=tilastointialueet%3Akunta4500k_2017"
+#> [1] "https://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&layer=tilastointialueet%3Akunta4500k_2017"
 #> 
 #> $response
 #> Response [https://geo.stat.fi/geoserver/wfs?service=WFS&version=1.0.0&request=getFeature&layer=tilastointialueet%3Akunta4500k_2017]
-#>   Date: 2026-03-02 16:51
+#>   Date: 2026-04-02 10:30
 #>   Status: 200
 #>   Content-Type: text/xml;charset=UTF-8
 #>   Size: 450 B

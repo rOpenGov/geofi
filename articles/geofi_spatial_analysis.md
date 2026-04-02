@@ -219,8 +219,8 @@ muni |>
 ## Centroids, buffers, grids and voronois
 
 The following operations derive from [Marko
-Kallio’s](http://markokallio.fi/) course at [CSC](https://csc.fi/en/) in
-February 2020 [Spatial data analysis with
+Kallio’s](https://markokallio.fi/) course at [CSC](https://csc.fi/en/)
+in February 2020 [Spatial data analysis with
 R](https://github.com/csc-training/r-spatial-course).
 
 ### Polygon centroids

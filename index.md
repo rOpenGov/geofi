@@ -5,6 +5,7 @@ Access Finnish Geospatial Data.
 ## Installation and use
 
 ``` r
+
 # install from CRAN
 install.packages("geofi")
 
@@ -26,6 +27,7 @@ have a closer look at the
 more comprehensive use cases.
 
 ``` r
+
 library(geofi)
 d1 <- get_municipalities(year = 2025)
 d2 <- get_zipcodes(year = 2025)

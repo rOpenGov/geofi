@@ -5,6 +5,7 @@
 `geofi` can be installed from CRAN using
 
 ``` r
+
 # install from CRAN
 install.packages("geofi")
 
@@ -32,6 +33,7 @@ into `EPSG:3067`. Most of spatial data providers in Finland provide
 their data in the same CRS.
 
 ``` r
+
 library(geofi)
 library(sf)
 library(dplyr)
@@ -52,6 +54,7 @@ municipality data to WGS 1984 (using EPSG code equivalent `4326`) and
 plot it side to side with `EPSG:3067`
 
 ``` r
+
 muni_4326 <- st_transform(muni, "EPSG:4326")
 crs <- st_crs(muni_4326)
 crs$input
@@ -81,6 +84,7 @@ To compute the area of polygons (municipality in this case), ordering
 them by size and plotting largest/smalles 10 can be as this.
 
 ``` r
+
 # compute area
 muni$area <- sf::st_area(muni)
 # largest
@@ -96,6 +100,7 @@ muni |>
 ![](geofi_spatial_analysis_files/figure-html/largest-1.png)
 
 ``` r
+
   # smallest
 muni |> 
   arrange(area) |> 
@@ -121,6 +126,7 @@ Kirkkonummi, Mäntsälä, Nurmijärvi, Pornainen, Sipoo, Tuusula and Vihti.
 You can subset the data just using the names of municipalities.
 
 ``` r
+
 greater_helsinki <- c('Espoo','Helsinki','Vantaa','Hyvinkää',
                       'Järvenpää','Kauniainen','Kerava','Kirkkonummi',
                       'Mäntsälä','Nurmijärvi','Pornainen','Sipoo','Tuusula','Vihti')
@@ -141,6 +147,7 @@ box](https://en.wikipedia.org/wiki/Minimum_bounding_rectangle) from
 greater Helsinki polygons.
 
 ``` r
+
 bounding_box_polygon <- st_as_sfc(st_bbox(muni |> filter(municipality_name_fi %in% greater_helsinki)))
 
 ggplot(st_intersection(bounding_box_polygon, muni)) + 
@@ -154,6 +161,7 @@ Then, let’s use the point data (municipality central localities) to
 create the bounding box
 
 ``` r
+
 bounding_box_point <- st_as_sfc(st_bbox(point |> filter(teksti %in% toupper(greater_helsinki))))
 
 ggplot(st_intersection(bounding_box_point, muni)) + 
@@ -170,6 +178,7 @@ Neighboring or intersecting objects can be found using
 in following manner where we plot Helsinki and it’s neighbors.
 
 ``` r
+
 helsinki <- muni |>  filter(municipality_name_fi == "Helsinki")
 neigbour_codes <- st_intersection(muni,helsinki) |> 
   pull(municipality_code)
@@ -193,6 +202,7 @@ area, dissolve them and plot.
 Lets first plot the smallest category as a single multipolygon.
 
 ``` r
+
 muni$area_class <- cut_number(x = as.numeric(muni$area), n = 3)
 
 muni |> 
@@ -207,6 +217,7 @@ muni |>
 To union all three into same data you can use `group_by` and `summarise`
 
 ``` r
+
 muni |> 
   group_by(area_class) |>
   summarise() |> 
@@ -233,6 +244,7 @@ centroids of a polygon that can be computed using `st_centroid` and
 plotted with ggplot.
 
 ``` r
+
 muni_centroids <- st_centroid(muni)
 
 ggplot() +
@@ -252,6 +264,7 @@ not explained here, but we only show how to create 15km radius around
 polygon centroids.
 
 ``` r
+
 muni_centroids_buffer <- muni_centroids |>
     st_buffer(dist = 15000)
 
@@ -293,6 +306,7 @@ custom 2km\*4km grid on top of it. Afterward we could aggregate the
 number of reindeer for each grid cell if we would have the data.
 
 ``` r
+
 muonio <- muni |> filter(municipality_name_fi == "Muonio")
 
 grid_sf <- st_make_grid(muonio, cellsize = c(2000,4000), what="polygons") |>
@@ -321,6 +335,7 @@ creates a layer of polygons that are closest to each municipality
 central locality.
 
 ``` r
+
 library(geofi)
 library(sf)
 
@@ -364,6 +379,7 @@ First we need to subset the data and replace original municipality name
 column (`teksti`) with *better* from latest municipality key.
 
 ``` r
+
 kunta <- geofi::municipality_central_localities() |>  
   select(teksti,kuntatunnus) |>
   mutate(kuntatunnus = as.integer(kuntatunnus)) |>
@@ -405,6 +421,7 @@ from each municipality to all municipalities, assign each data to a list
 and finally bind the data frames into a single data.
 
 ``` r
+
 d_list <- list()
 kuntadatan_teksti_ja_kuntatunnus <- sf::st_drop_geometry(kunta) |>
   select(teksti,kuntatunnus)
@@ -434,6 +451,7 @@ Finally we can draw two plots to verify our results. First let’s draw a
 bar plot of 20 municipality central localities nearest to Helsinki
 
 ``` r
+
 ggplot(kunta_dist |>
          filter(origin_name == "Helsinki") |>
          arrange(dist) |> slice(1:20),
@@ -448,6 +466,7 @@ Then, lets find the municipality central locality that is nearest to the
 center of Finland.
 
 ``` r
+
 # We firt need the country map as a single polygon
 geofi::get_municipalities() |> 
   sf::st_union() |> 
@@ -472,6 +491,7 @@ head(closest_to_center)
 And finally lets draw a bar plot of 20 furthest localities
 
 ``` r
+
 furthest20 <- kunta_dist |>
          filter(origin_name == closest_to_center[1,]$teksti) |>
          arrange(desc(dist)) |> slice(1:20)
@@ -486,6 +506,7 @@ ggplot(furthest20,
 And at very last, we need to show those distances also on a map.
 
 ``` r
+
 sf_lahto <- kunta |> 
   filter(teksti %in% closest_to_center[1,]$teksti) |>
   select(teksti)

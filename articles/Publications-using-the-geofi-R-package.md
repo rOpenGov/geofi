@@ -1,6 +1,7 @@
 # Publications using the geofi R package
 
 ``` r
+
 library(geofi)
 #> 
 #> geofi R package: tools for open GIS data for Finland.

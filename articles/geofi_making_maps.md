@@ -5,6 +5,7 @@
 `geofi` can be installed from CRAN using
 
 ``` r
+
 # install from CRAN
 install.packages("geofi")
 
@@ -30,6 +31,7 @@ with is a *POLYGON* data and with *POINT* data of returned by
 function.
 
 ``` r
+
 library(geofi)
 polygon <- get_municipalities(year = 2021, scale = 4500)
 point <- geofi::municipality_central_localities()
@@ -51,6 +53,7 @@ deeper into cartography in R.
 **base**
 
 ``` r
+
 library(sf)
 plot(st_geometry(polygon["municipality_code"]))
 plot(polygon["municipality_code"], add = TRUE, border="white")
@@ -62,6 +65,7 @@ plot(st_geometry(point["municipality_code"]), add = TRUE, color = "black")
 **ggplot2**
 
 ``` r
+
 library(ggplot2)
 ggplot() + 
   geom_sf(data = polygon, aes(fill = municipality_code)) +
@@ -87,6 +91,7 @@ plotting for points, lines and polygons, and `geom_sf_text` and
 using the Uusimaa region in Southern Finland.
 
 ``` r
+
 library(dplyr)
 polygon_uusimaa <- polygon |> filter(maakunta_name_fi %in% "Uusimaa")
 point_uusimaa <- point |> filter(municipality_code %in% polygon_uusimaa$municipality_code)
@@ -108,6 +113,7 @@ you can solve the problem though it requires a bit of spatial data
 processing with `sf`-package.
 
 ``` r
+
 ggplot() + 
   theme_light() +
   geom_sf(data = polygon_uusimaa, alpha = .3) + 
@@ -138,6 +144,7 @@ a random data for two year titled `population` and plot the data using
 [`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)-function.
 
 ``` r
+
 pop_data <- bind_rows(
   tibble(
     municipality_code = polygon$municipality_code
@@ -168,6 +175,7 @@ pop_data
 ```
 
 ``` r
+
 pop_map <- right_join(polygon, pop_data)
 
 ggplot(pop_map, 
@@ -185,6 +193,7 @@ non-overlapping geographic region. The you may find
 example below.
 
 ``` r
+
 library(patchwork)
 p_municipalities <- ggplot(polygon, aes(fill = municipality_code)) + 
   geom_sf() + 
@@ -215,6 +224,7 @@ with that. In `ggplot2` you can use colorbrewer-palettes with
 You may want to get rid of the grid as well as axis-labels and -titles.
 
 ``` r
+
 ggplot(polygon_uusimaa, aes(fill = municipality_code)) +
   geom_sf(color = alpha("white", 1/3)) +
   scale_fill_fermenter(palette = "YlGnBu") +
@@ -245,6 +255,7 @@ also known as “Google Mercator” or “Web Mercator, and you have reproject
 your `geofi` data to plot it using leaflet.
 
 ``` r
+
 polygon_wgs84 <- sf::st_transform(x = polygon, crs = "+proj=longlat +datum=WGS84")
 point_wgs84 <- sf::st_transform(x = point, crs = "+proj=longlat +datum=WGS84")
 

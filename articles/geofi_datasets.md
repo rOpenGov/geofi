@@ -10,6 +10,7 @@ and explain their use cases. Vignette *Making maps using
 `geofi` can be installed from CRAN using
 
 ``` r
+
 # install from CRAN
 install.packages("geofi")
 
@@ -31,6 +32,7 @@ classification](https://data.stat.fi/api/classifications/v2/classifications)
 -api with few modification and provided on yearly basis.
 
 ``` r
+
 library(geofi)
 library(dplyr)
 d <- data(package = "geofi")
@@ -61,6 +63,7 @@ Looking at the names of \`municipality_key_2023\` there is 69 different
 variables from each municipality.
 
 ``` r
+
 names(geofi::municipality_key_2023)
 #>  [1] "kunta"                   "municipality_name_fi"   
 #>  [3] "municipality_name_sv"    "municipality_name_en"   
@@ -101,6 +104,7 @@ With these municipality keys you can easily aggregate municipalities for
 plotting or you can list different regional breakdowns.  
 
 ``` r
+
 geofi::municipality_key_2023 |> 
   count(maakunta_code,maakunta_name_fi,maakunta_name_sv,maakunta_name_en)
 #> # A tibble: 19 × 5
@@ -144,6 +148,7 @@ Municipality borders are provided yearly from 2013 and in two scales 1:
 `scale`-argument, respectively.
 
 ``` r
+
 municipalities <- get_municipalities(year = 2023, scale = 4500)
 plot(municipalities["municipality_name_fi"], border = NA)
 ```
@@ -170,6 +175,7 @@ To plot men’s share at the municipality level in 2020 (2021 municipality
 borders) you can simply to this.
 
 ``` r
+
 get_municipality_pop(year = 2022) |>  
   subset(select = miehet_p) |> 
   plot()
@@ -181,6 +187,7 @@ Aggregating the absolute population numbers is straightforward: to plot
 population at Wellbeing service county level you can do.
 
 ``` r
+
 get_municipality_pop(year = 2022) |>  
   group_by(hyvinvointialue_name_fi) |>  
   summarise(vaesto = sum(vaesto)) |>  
@@ -194,6 +201,7 @@ To plot the men’s share at wellbeing service country level you have to
 add one more step
 
 ``` r
+
 get_municipality_pop(year = 2022) |>  
   dplyr::group_by(hyvinvointialue_name_fi) |> 
   summarise(vaesto = sum(vaesto),
@@ -210,6 +218,7 @@ get_municipality_pop(year = 2022) |>
 Zipcodes are provided in a single resolution from 2015.
 
 ``` r
+
 zipcodes <- get_zipcodes(year = 2023) 
 plot(zipcodes["nimi"], border = NA)
 ```
@@ -228,6 +237,7 @@ database](https://stat.fi/en/services/statistical-data-services/geographic-data/
 provides the attribute statistical data for these grid nets.
 
 ``` r
+
 stat_grid <- get_statistical_grid(resolution = 5, auxiliary_data = TRUE)
 plot(stat_grid["euref_x"], border = NA)
 ```
@@ -254,6 +264,7 @@ for examination of population distribution and making various spatial
 analysis.
 
 ``` r
+
 pop_grid <- get_population_grid(year = 2018, resolution = 5)
 plot(pop_grid["kunta"], border = NA)
 ```
@@ -269,6 +280,7 @@ that contains a wide range of layers from which you can access the
 locations of central localities of each municipality in Finland.
 
 ``` r
+
 plot(municipality_central_localities()["teksti"])
 ```
 
@@ -290,6 +302,7 @@ From Ryan Hafen’s [blog](https://ryanhafen.com/blog/geofacet/):
 administrative breakdowns as listed below.
 
 ``` r
+
 d <- data(package = "geofi")
 as_tibble(d$results) |> 
   select(Item,Title) |> 
@@ -330,6 +343,7 @@ Population data is provided as part of geofi package as
 [`geofi::sotkadata_population`](https://ropengov.github.io/geofi/reference/sotkadata_population.md).
 
 ``` r
+
 # Let pull population data from THL
 sotkadata <- geofi::sotkadata_population
 

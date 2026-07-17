@@ -2,6 +2,8 @@
 
 ## geofi 1.2.1
 
+CRAN release: 2026-04-02
+
 - all api calls and hyperlinks now uses https
 
 ## geofi 1.2.0

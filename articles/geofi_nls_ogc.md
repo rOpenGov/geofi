@@ -22,6 +22,7 @@ website](https://www.maanmittauslaitos.fi/en/rajapinnat/api-avaimen-ohje)
 to obtain one. Once you have the key, set it in R using:
 
 ``` r
+
 options(geofi_mml_api_key = "your_api_key_here")
 ```
 
@@ -53,6 +54,7 @@ This function queries the OGC API and returns a data frame with
 collection IDs and descriptions.
 
 ``` r
+
 collections <- ogc_get_maastotietokanta_collections()
 head(collections)
 ```
@@ -81,6 +83,7 @@ Let’s download the “`hautausmaa`” collection in the default CRS
 (EPSG:3067):
 
 ``` r
+
 cemeteries <- ogc_get_maastotietokanta(collection = "hautausmaa", crs = 4326)
 cemeteries
 ```
@@ -91,6 +94,7 @@ To download cemeteries within a specific area (e.g., around Helsinki),
 use the `bbox` parameter. Coordinates must be in EPSG:4326 (WGS84).
 
 ``` r
+
 cemeteries_helsinki <- ogc_get_maastotietokanta(
   collection = "hautausmaa",
   bbox = "24.5,60.1,25.5,60.5",
@@ -101,6 +105,7 @@ cemeteries_helsinki <- ogc_get_maastotietokanta(
 Visualize the results using `ggplot2`:
 
 ``` r
+
 ggplot(cemeteries_helsinki) +
   geom_sf() +
   theme_minimal() +
@@ -113,6 +118,7 @@ For large collections like “`suo`” (bogs/marshes), you may need to
 increase `max_pages` to fetch all features:
 
 ``` r
+
 bogs <- ogc_get_maastotietokanta(
   collection = "suo",
   max_pages = 15
@@ -140,6 +146,7 @@ can filter results by:
 Search for place names containing “`kainu`”:
 
 ``` r
+
 kainu_places <- ogc_get_nimisto(search_string = "kainu")
 print(kainu_places)
 ```
@@ -147,6 +154,7 @@ print(kainu_places)
 Visualize the results:
 
 ``` r
+
 ggplot(kainu_places) +
   geom_sf() +
   geom_sf_text(aes(label = spelling), size = 3, check_overlap = TRUE) +
@@ -160,6 +168,7 @@ Search for “kainu\*” (with \* wildcard) within a bounding box covering
 most part of Kainuu-region:
 
 ``` r
+
 kainu_bbox <- ogc_get_nimisto(
   search_string = "kainu*",
   bbox = "27.515259,63.450509,30.531006,64.524823",
@@ -199,6 +208,7 @@ Function
 support `custom_params` for advanced API queries. For example:
 
 ``` r
+
 swimming_beaches_filtered_by_municipality_number <- ogc_get_nimisto(
   search_string = "*uimaranta*",
   custom_params = "municipality=091"

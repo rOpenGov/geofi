@@ -56,12 +56,14 @@ regions (`maakunta`). You can customize the output with parameters like:
 Fetch all municipalities for 2022 at the 1:4,500,000 scale:
 
 ``` r
+
 muni <- ogc_get_statfi_area(year = 2022, scale = 4500, tessellation = "kunta")
 ```
 
 Visualize the municipalities using `ggplot2`:
 
 ``` r
+
 ggplot(muni) +
   geom_sf() +
   theme_minimal() +
@@ -74,6 +76,7 @@ To retrieve municipalities within a specific area (e.g., southern
 Finland), use the bbox parameter.
 
 ``` r
+
 bbox_finland_south <- "18.797607,59.573288,30.476074,61.695082"
 muni_south <- ogc_get_statfi_area(
   year = 2022,
@@ -87,6 +90,7 @@ muni_south <- ogc_get_statfi_area(
 Visualize the filtered results:
 
 ``` r
+
 ggplot(muni_south) +
   geom_sf() +
   theme_minimal() +
@@ -98,6 +102,7 @@ ggplot(muni_south) +
 Retrieve wellbeing areas (hyvinvointialue) for 2022:
 
 ``` r
+
 wellbeing <- ogc_get_statfi_area(
   year = 2022,
   tessellation = "hyvinvointialue",
@@ -123,6 +128,7 @@ column. Parameters include:
 Retrieve population data for 2021.
 
 ``` r
+
 pop_data <- ogc_get_statfi_area_pop(year = 2021, crs = 3067)
 ```
 
@@ -136,6 +142,7 @@ are available
 Visualize the share of female population at municpality (`kunta`) level.
 
 ``` r
+
 ggplot(data=pop_data |> 
          filter(grepl("^kunta", areaStatisticalUnit_inspireId_localId))) +
     geom_sf(aes(fill = female_percentage)) +
@@ -149,6 +156,7 @@ ggplot(data=pop_data |>
 Fetch population data within a bounding box:
 
 ``` r
+
 pop_south <- ogc_get_statfi_area_pop(year = 2021, bbox = bbox_finland_south, crs = 4326)
 ggplot(data=pop_south |> filter(grepl("^kunta", areaStatisticalUnit_inspireId_localId))) +
     geom_sf(aes(fill = female_percentage)) +
@@ -175,12 +183,14 @@ Parameters include:
 Retrieve population data for a 5km grid in 2021:
 
 ``` r
+
 grid_data <- ogc_get_statfi_statistical_grid(year = 2021, resolution = 5000, bbox = bbox_finland_south)
 ```
 
 Visualize the grid data:
 
 ``` r
+
 ggplot(grid_data) +
   geom_sf(aes(fill = total_count), color = NA) +
   scale_fill_viridis_c(option = "magma", trans='sqrt') +
@@ -193,6 +203,7 @@ ggplot(grid_data) +
 Fetch 1km grid data within a bounding box:
 
 ``` r
+
 bbox_capital_region <- "24.441147,60.102168,25.285034,60.369071"
 grid_capital <- ogc_get_statfi_statistical_grid(
   year = 2021,
@@ -204,6 +215,7 @@ grid_capital <- ogc_get_statfi_statistical_grid(
 Visualize the grid data:
 
 ``` r
+
 ggplot(grid_capital) +
   geom_sf(aes(fill = total_count), color = NA) +
   scale_fill_viridis_c(option = "magma", trans='sqrt') +

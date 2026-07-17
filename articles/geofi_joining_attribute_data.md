@@ -11,6 +11,7 @@ area)](https://pxdata.stat.fi/PXWeb/pxweb/en/Postinumeroalueittainen_avoin_tieto
 `geofi` can be installed from CRAN using
 
 ``` r
+
 # install from CRAN
 install.packages("geofi")
 
@@ -35,6 +36,7 @@ as part of geofi package as
 [`geofi::sotkadata_swedish_speaking_pop`](https://ropengov.github.io/geofi/reference/sotkadata_swedish_speaking_pop.md).
 
 ``` r
+
 library(geofi)
 muni <- get_municipalities(year = 2023)
 
@@ -47,6 +49,7 @@ among other regional breakdowns which allows us to combine the data with
 spatial data using `municipality_name_fi`-variable.
 
 ``` r
+
 map_data <- right_join(muni, 
                        sotkadata_swedish_speaking_pop, 
                        by = c("municipality_code" = "municipality_code"))
@@ -58,6 +61,7 @@ Now we can plot a map showing
 scale.
 
 ``` r
+
 
 library(ggplot2)
 map_data |> 
@@ -80,6 +84,7 @@ part of geofi package as
 [`geofi::statfi_zipcode_population`](https://ropengov.github.io/geofi/reference/statfi_zipcode_population.md).
 
 ``` r
+
 statfi_zipcode_population <- geofi::statfi_zipcode_population
 ```
 
@@ -87,6 +92,7 @@ Before we can join the data, we must extract the numerical postal code
 from `postal_code_area`-variable.
 
 ``` r
+
 # Lets join with spatial data and plot the area of each zipcode
 zipcodes19 <- get_zipcodes(year = 2019) 
 zipcodes_map <- left_join(zipcodes19, 

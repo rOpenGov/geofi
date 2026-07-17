@@ -36,6 +36,7 @@ Survey of Finland. Follow these steps:
 Install the `geofi` package from GitHub (or CRAN, if available):
 
 ``` r
+
 # Install from GitHub
 devtools::install_github("rOpenGov/geofi")
 # Install from CRAN
@@ -45,6 +46,7 @@ install.packages("geofi")
 Load the package and required dependencies:
 
 ``` r
+
 
 library(geofi)
 library(sf)
@@ -58,6 +60,7 @@ Set your API key using the
 “`your_api_key_here`” with your actual API key:
 
 ``` r
+
 options(geofi_mml_api_key = "your_api_key_here")
 ```
 
@@ -79,6 +82,7 @@ Let’s geocode the place name “Suomenlinna,” a famous sea fortress in
 Helsinki, using the `geographic-names` source:
 
 ``` r
+
 suomenlinna <- geocode(
   search_string = "Suomenlinna",
   source = "geographic-names",
@@ -97,6 +101,7 @@ Geocode a specific street address, “*Mannerheimintie 100, Helsinki*”
 with a limit of 5 results:
 
 ``` r
+
 address <- geocode(
   search_string = "Mannerheimintie 100, Helsinki",
   source = "addresses",
@@ -114,6 +119,7 @@ Finnish spatial data analysis.
 Visualize the geocoded address on a map using `ggplot2`:
 
 ``` r
+
 ggplot(data = address) +
   geom_sf(color = "blue", size = 3) +
   labs(
@@ -132,6 +138,7 @@ You can refine the geocoding results using additional parameters:
   specific point:
 
 ``` r
+
 focused <- geocode(
   search_string = "Helsinki",
   source = "geographic-names",
@@ -153,6 +160,7 @@ Reverse geocode the coordinates of Parliament House, Helsinki
 (approximately 60.1725°N, 24.933333°E):
 
 ``` r
+
 # Create an sf point
 parliament_point <- data.frame(lon = 24.933333, lat = 60.1725) |>
   sf::st_as_sf(coords = c("lon", "lat"), crs = 4326)
@@ -173,6 +181,7 @@ EPSG:4326.
 For debugging or custom processing, return raw JSON responses:
 
 ``` r
+
 json_results <- geocode_reverse(
   point = parliament_point,
   boundary_circle_radius = 1,
@@ -186,6 +195,7 @@ print(json_results)
 Plot the reverse geocoded results alongside the input points:
 
 ``` r
+
 ggplot() +
   geom_sf(data = parliament_point, color = "red", size = 3, shape = 17) +
   geom_sf(data = places, color = "blue", size = 3) +
